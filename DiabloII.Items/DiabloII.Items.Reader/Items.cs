@@ -7,6 +7,7 @@ namespace DiabloII.Items.Reader
     {
         public string Name { get; set; }
         public int LevelRequired { get; set; }
+        // The following 3 fields should be an enum (an int) to be fast queried when it will be in a database.
         public ItemQuality Quality { get; set; }
         public ItemCategory Category { get; set; }
         public ItemSubCategory SubCategory { get; set; }
@@ -108,15 +109,19 @@ namespace DiabloII.Items.Reader
         Jewel,
         // Charm
         Charm
-        // google it
     }
 
     public class DiabloIIDatasheetReader
     {
         public IEnumerable<Item> Read(string datasheetCsv)
         {
-            // Mapper types vers un subCategory
-            // Maper subCategory vers une category
+            // TODO : 
+            // - Mapper types to a SubCategory
+            // - Read properties
+            // - Map properties to a readable format
+            // - Add scyte and news items category in subcategory
+            // - Add those data in a database : 1) front ask items for a type. 2) back service is call that ask the db those items. 3) it will be faster than generate all items each time.
+
             var types = datasheetCsv
                 .Split('\n')
                 .Skip(1)
