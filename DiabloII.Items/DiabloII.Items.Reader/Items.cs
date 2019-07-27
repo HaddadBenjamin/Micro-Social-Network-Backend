@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DiabloII.Items.Reader
@@ -10,8 +11,13 @@ namespace DiabloII.Items.Reader
 
         public string Name { get; set; }
         public int LevelRequired { get; set; }
-        // The following 4 fields should be an enum (an int) to be fast queried when it will be in a database.
         public string Quality { get; set; }
+        public string TypeValue { get { return Type.ToString().Replace('_', ' '); } }
+        public string SubCategoryValue { get { return SubCategory.ToString(); } }
+        public string CategoryValue { get { return Category.ToString(); } }
+        public IEnumerable<ItemProperty> Properties { get; set; }
+
+        // The following 3 fields should be an enum (an int) to be fast queried when it will be in a database.
         public ItemType Type
         {
             get
@@ -36,10 +42,9 @@ namespace DiabloII.Items.Reader
             }
         }
         public ItemCategory Category { get; set; }
-        public IEnumerable<ItemProperty> Properties { get; set; }
 
-      
-        
+
+
         private void UpdateCategory()
             => Category =
                     new[]
@@ -79,7 +84,7 @@ namespace DiabloII.Items.Reader
         //Dimensional_Blade,
         //Elegant_blade,
         //Falchion,
-       
+
         //Espadon,
         //Executioner_Sword,
         //Flamberge,
@@ -95,7 +100,7 @@ namespace DiabloII.Items.Reader
 
         //     Eagle_Crown,
         //Earth_spirit,
-       
+
 
         //Dragon_Shield,
         //Dream_Spirit,
@@ -180,7 +185,7 @@ namespace DiabloII.Items.Reader
                         ItemType.Crystal_Sword,
                         ItemType.Dimensional_Blade,
 
-                       
+
                     }.Contains(Type) ? ItemSubCategory.Sword :
                     new[]
                     {
@@ -224,8 +229,8 @@ namespace DiabloII.Items.Reader
                         ItemType.Bearded_Axe,
                         ItemType.Berserker_axe,
                         ItemType.Cleaver,
-             
-      
+
+
                     }.Contains(Type) ? ItemSubCategory.Axe :
                     new[]
                     {
@@ -264,7 +269,7 @@ namespace DiabloII.Items.Reader
                         ItemType.Council_Spike,
                         ItemType.Council_War_Spike,
                         ItemType.Diamon_Tip_Spear,
-                        
+
                     }.Contains(Type) ? ItemSubCategory.Lance :
                     new[]
                     {
@@ -372,7 +377,7 @@ namespace DiabloII.Items.Reader
                        ItemType.Cursed_Gloves,
                        ItemType.Demonhide_Gloves,
                        ItemType.Diamondweave_Mesh,
-       
+
                     }.Contains(Type) ? ItemSubCategory.Glove :
                     new[]
                     {
@@ -435,6 +440,7 @@ namespace DiabloII.Items.Reader
                         ItemType.Charm,
                     }.Contains(Type) ? ItemSubCategory.Charm :
                     ItemSubCategory.UNKNOWN;
+    }
 
     public enum ItemType
     {
@@ -1042,56 +1048,78 @@ namespace DiabloII.Items.Reader
 
     public class DiabloIIDatasheetReader
     {
+        private List<string> MissingItemTypes = new List<String>();
+
         public IEnumerable<Item> Read(string datasheetCsv)
         {
             // TODO : 
             // - Mapper types to a SubCategory
-            // - Read properties
-            // - Map properties to a readable format
-            // - Add scyte and news items category in subcategory
             // - Add those data in a database : 1) front ask items for a type. 2) back service is call that ask the db those items. 3) it will be faster than generate all items each time.
-            // - Create an enum for types.
             // - Trier les attributs : stat requis / damage / armure en premier / le reste trier en mode alphabétique ?
+            // to verify : 
+            //            mon update subcategories
+            //            les types que j'ai commenté 
+            //Type: Archon_soul_shard => Archon_Soul_Shard
+            //Découper eppe une main avec 2 mains, il faudra aussi qu'ascended vérifie la data
+            //découpage spear / lance
+            //demander aux users de me remonter tout les problèmes sur le discord / chanell website
+            //split between helm / tiara / druid helm
+            //shards / wand
+            //Rajouter ces différences dans le mapping des catégories.
+
 
             return datasheetCsv
                 .Split('\n')
                 .Skip(1)
                 .Select(line =>
                 {
-                    var a = line.Split(';');
-                    if (a.Length < 4)
+                    var itemData = line.Split(';');
+
+                    if (itemData.Length < 4)
                         return null;
 
-                    var type = string.IsNullOrEmpty(line) ? string.Empty : line.Split(';')[3];
+                    var type = TypeToItemType(itemData[3]);
                     var properties = new List<ItemProperty>();
 
-                    for (var i = 4; i < a.Length; i += 4)
+                    for (var index = 4; index < itemData.Length; index += 4)
                     {
-                        if (string.IsNullOrEmpty(a[i]))
+                        if (string.IsNullOrEmpty(itemData[index]))
                             continue;
 
                         properties.Add(new ItemProperty
                         {
-                            Name = a[i],
-                            Par = a[i + 1].ParseIntOrDefault(),
-                            Minimum = a[i + 2].ParseIntOrDefault(),
-                            Maximum = a[i + 3].ParseIntOrDefault(),
-                            IsPercent = a[i].Contains("%")
+                            Name = itemData[index],
+                            Par = itemData[index + 1].ParseIntOrDefault(),
+                            Minimum = itemData[index + 2].ParseIntOrDefault(),
+                            Maximum = itemData[index + 3].ParseIntOrDefault(),
+                            IsPercent = itemData[index].Contains("%")
                         });
                     }
 
-                    var x = new Item
+                    return new Item
                     {
-                        Name = a[0],
-                        LevelRequired = a[2].ParseIntOrDefault(),
+                        Name = itemData[0],
+                        LevelRequired = itemData[2].ParseIntOrDefault(),
                         Type = type,
                         Quality = "Unique",
                         Properties = properties
                     };
-
-                    return x;
                 })
                 .ToList();
+        }
+
+        private ItemType TypeToItemType(string type)
+        {
+            if (string.IsNullOrEmpty(type))
+                return ItemType.UNKNOWN;
+
+            var formattedItemType = FormatItemType(type);
+
+            if (Enum.TryParse<ItemType>(formattedItemType, out _))
+                return (ItemType)Enum.Parse(typeof(ItemType), formattedItemType);
+
+            MissingItemTypes.Add(formattedItemType);
+            return ItemType.UNKNOWN;
         }
 
         private static string GenerateItemTypes(string datasheetCsv)
@@ -1099,14 +1127,14 @@ namespace DiabloII.Items.Reader
                 datasheetCsv
                 .Split('\n')
                 .Skip(1)
-                .Select(line => ItemTypeFormat(line))
+                .Select(line => FormatItemType(line))
                 .Distinct()
                 .OrderBy(_ => _)
                 .Skip(1));
 
-        private static string ItemTypeFormat(string line)
-            => string.IsNullOrEmpty(line) ? string.Empty :
-                    line.Split(';')[3]
+        private static string FormatItemType(string type)
+            => string.IsNullOrEmpty(type) ? string.Empty :
+                        type
                         .Replace("2", "two")
                         .Replace(' ', '_')
                         .Replace('’', '_')
