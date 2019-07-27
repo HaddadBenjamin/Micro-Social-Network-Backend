@@ -15,11 +15,18 @@ namespace DiabloII.Items.Api.Controllers
         public ItemsController(IItemsService itemsService) => ItemsService = itemsService;
 
         // GET api/v1/getallhuniques
+        /// <summary>
+        /// Get all uniques items.
+        /// </summary>
+        /// <returns>A all uniques itesm/returns>
         [Route("getalluniques")]
         [HttpGet]
         public IEnumerable<Item> SearchUniques() => ItemsService.GetAllUniques();
 
-        // GET api/v1/searchuniques
+        /// <summary>
+        /// Seartch uniques items by a different filters.
+        /// </summary>
+        /// <param name="searchDto"></param>
         [Route("searchuniques")]
         [HttpGet]
         public IEnumerable<Item> SearchUniques(SearchUniquesDto searchDto = default(SearchUniquesDto))

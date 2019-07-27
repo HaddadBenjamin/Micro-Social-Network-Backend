@@ -33,6 +33,7 @@ namespace DiabloII.Items.Api
                         Url = "https://github.com/HaddadBenjamin"
                     }
                 });
+                swagger.DescribeAllEnumsAsStrings();
             });
 
             services.AddSingleton<IItemsService, ItemsService>();

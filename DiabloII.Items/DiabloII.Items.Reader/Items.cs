@@ -1064,6 +1064,7 @@ namespace DiabloII.Items.Reader
         //split between helm / tiara / druid helm
         //shards / wand
         //Rajouter ces différences dans le mapping des catégories.
+        // Il faudra que je mette à jour les énums côté API
         public IEnumerable<Item> Read(string datasheetCsv) 
             => datasheetCsv
                 .Split('\n')
