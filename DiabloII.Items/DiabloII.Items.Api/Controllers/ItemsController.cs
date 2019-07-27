@@ -31,5 +31,7 @@ namespace DiabloII.Items.Api.Controllers
         [HttpGet]
         public IEnumerable<Item> SearchUniques(SearchUniquesDto searchDto = default(SearchUniquesDto))
             => ItemsService.SearchUniques(searchDto);
+
+        // TODO : la partie description de mon API ne semble pas fonctionner, il faudra que je google ça un petit peu :)
     }
 }
