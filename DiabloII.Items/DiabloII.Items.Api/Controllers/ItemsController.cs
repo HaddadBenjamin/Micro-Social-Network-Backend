@@ -35,7 +35,6 @@ namespace DiabloII.Items.Api.Controllers
 
             public class ItemProperty
             {
-                // Maybe name should be an enum to be faster to query
                 public string Name { get; set; }
                 public int Par { get; set; }
                 public int Minimum { get; set; }
@@ -46,7 +45,6 @@ namespace DiabloII.Items.Api.Controllers
         // Todo :
         // - Swagger (swashbusckle)
         // - SearchDto
-        // - SearchResponseDto
-        // - watcher
+        // - Move models & searchdto
     }
 }
