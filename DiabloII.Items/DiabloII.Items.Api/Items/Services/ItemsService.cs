@@ -15,12 +15,12 @@ namespace DiabloII.Items.Api.Items.Services
             var uniquesAsJson = File.ReadAllText(uniquesPath);
             var uniques = JsonConvert.DeserializeObject<List<Item>>(uniquesAsJson);
 
-            return uniques;
+            return uniques.Where(unique => unique != null);
         }
 
         public IEnumerable<Item> SearchUniques(SearchUniquesDto dto)
         {
-            var uniques = GetAllUniques();
+            var uniques = GetAllUniques().ToList();
 
             if (dto is null)
                 return uniques;
@@ -28,11 +28,11 @@ namespace DiabloII.Items.Api.Items.Services
             return uniques
                 .Where(unique => string.IsNullOrEmpty(dto.Name) ? true : unique.Name.Contains(dto.Name))
                 .Where(unique => dto.LevelRequired == 0 ? true : unique.LevelRequired == dto.LevelRequired)
-                .Where(unique => string.IsNullOrEmpty(dto.Quality) ? true : unique.Name.Contains(dto.Quality))
-                .Where(unique => string.IsNullOrEmpty(dto.Category) ? true : unique.Name.Contains(dto.Category))
-                .Where(unique => string.IsNullOrEmpty(dto.SubCategory) ? true : unique.Name.Contains(dto.SubCategory))
-                .Where(unique => string.IsNullOrEmpty(dto.Type) ? true : unique.Name.Contains(dto.Type))
-                .Where(unique => !dto.PropertyNames.Any() ? true : unique.Properties.Any(property => dto.PropertyNames.Contains(property.Name)));
+                .Where(unique => string.IsNullOrEmpty(dto.Quality) ? true : unique.Quality.Contains(dto.Quality))
+                .Where(unique => string.IsNullOrEmpty(dto.Category) ? true : unique.Category.Contains(dto.Category))
+                .Where(unique => string.IsNullOrEmpty(dto.SubCategory) ? true : unique.SubCategory.Contains(dto.SubCategory))
+                .Where(unique => string.IsNullOrEmpty(dto.Type) ? true : unique.Type.Contains(dto.Type))
+                .Where(unique => dto.PropertyNames is null ||!dto.PropertyNames.Any() ? true : unique.Properties.Any(property => dto.PropertyNames.Contains(property.Name)));
         }
     }
 }
