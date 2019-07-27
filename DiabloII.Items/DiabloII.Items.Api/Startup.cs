@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using DiabloII.Items.Api.Items.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +34,8 @@ namespace DiabloII.Items.Api
                     }
                 });
             });
+
+            services.AddSingleton<IItemsService, ItemsService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
