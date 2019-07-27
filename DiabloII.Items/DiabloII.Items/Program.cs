@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using DiabloII.Items.Reader;
 using Newtonsoft.Json;
 
@@ -14,12 +8,15 @@ namespace DiabloII.Items
     {
         static void Main(string[] args)
         {
-            var datasheetContent = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.csv"));
+            var datasheetPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.csv");
+            var jsonDestination = datasheetPath.Replace("csv", "json");
+            var datasheetContent = File.ReadAllText(datasheetPath);
             var diabloIIDatasheetReader = new DiabloIIDatasheetReader();
 
-            var r = diabloIIDatasheetReader.Read(datasheetContent);
+            var items = diabloIIDatasheetReader.Read(datasheetContent);
+            var itemsAsJson = JsonConvert.SerializeObject(items);
 
-            string json = JsonConvert.SerializeObject(r);
+            File.WriteAllText(jsonDestination, itemsAsJson);
         }
     }
 }

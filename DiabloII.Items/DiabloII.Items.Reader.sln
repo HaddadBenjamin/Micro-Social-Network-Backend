@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Items.Reader", "Di
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Items", "DiabloII.Items\DiabloII.Items.csproj", "{73EA650B-03C3-4528-A3A1-D3EBA379B1B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Items.Api", "DiabloII.Items.Api\DiabloII.Items.Api.csproj", "{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{73EA650B-03C3-4528-A3A1-D3EBA379B1B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73EA650B-03C3-4528-A3A1-D3EBA379B1B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73EA650B-03C3-4528-A3A1-D3EBA379B1B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

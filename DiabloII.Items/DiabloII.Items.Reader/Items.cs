@@ -1050,25 +1050,22 @@ namespace DiabloII.Items.Reader
     {
         private List<string> MissingItemTypes = new List<String>();
 
-        public IEnumerable<Item> Read(string datasheetCsv)
-        {
-            // TODO : 
-            // - Mapper types to a SubCategory
-            // - Add those data in a database : 1) front ask items for a type. 2) back service is call that ask the db those items. 3) it will be faster than generate all items each time.
-            // - Trier les attributs : stat requis / damage / armure en premier / le reste trier en mode alphabétique ?
-            // to verify : 
-            //            mon update subcategories
-            //            les types que j'ai commenté 
-            //Type: Archon_soul_shard => Archon_Soul_Shard
-            //Découper eppe une main avec 2 mains, il faudra aussi qu'ascended vérifie la data
-            //découpage spear / lance
-            //demander aux users de me remonter tout les problèmes sur le discord / chanell website
-            //split between helm / tiara / druid helm
-            //shards / wand
-            //Rajouter ces différences dans le mapping des catégories.
-
-
-            return datasheetCsv
+        // TODO : 
+        // - Mapper types to a SubCategory
+        // - Add those data in a database : 1) front ask items for a type. 2) back service is call that ask the db those items. 3) it will be faster than generate all items each time.
+        // - Trier les attributs : stat requis / damage / armure en premier / le reste trier en mode alphabétique ?
+        // to verify : 
+        //            mon update subcategories
+        //            les types que j'ai commenté 
+        //Type: Archon_soul_shard => Archon_Soul_Shard
+        //Découper eppe une main avec 2 mains, il faudra aussi qu'ascended vérifie la data
+        //découpage spear / lance
+        //demander aux users de me remonter tout les problèmes sur le discord / chanell website
+        //split between helm / tiara / druid helm
+        //shards / wand
+        //Rajouter ces différences dans le mapping des catégories.
+        public IEnumerable<Item> Read(string datasheetCsv) 
+            => datasheetCsv
                 .Split('\n')
                 .Skip(1)
                 .Select(line =>
@@ -1106,7 +1103,6 @@ namespace DiabloII.Items.Reader
                     };
                 })
                 .ToList();
-        }
 
         private ItemType TypeToItemType(string type)
         {
