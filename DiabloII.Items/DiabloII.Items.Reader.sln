@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2037
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Items.Reader", "DiabloII.Items.Reader\DiabloII.Items.Reader.csproj", "{E8E5B8C2-59B2-4187-893E-79ED5AF0ECFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8E5B8C2-59B2-4187-893E-79ED5AF0ECFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8E5B8C2-59B2-4187-893E-79ED5AF0ECFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8E5B8C2-59B2-4187-893E-79ED5AF0ECFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8E5B8C2-59B2-4187-893E-79ED5AF0ECFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A20C1DFA-E4D1-4674-A942-0B0CBB50EB62}
+	EndGlobalSection
+EndGlobal
