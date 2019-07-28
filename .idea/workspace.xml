@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9ca436da-c12d-4218-9fc8-fcbcfb8829b0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/diablo-items/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/diablo-items/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DiabloII.Items/DiabloII.Items.Reader/DiabloIIDatasheetReader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/DiabloII.Items/DiabloII.Items.Reader/DiabloIIDatasheetReader.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/diablo-items/src/AppPage/AppPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/diablo-items/src/AppPage/AppPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diablo-items/src/diablo.png" beforeDir="false" afterPath="$PROJECT_DIR$/diablo-items/src/diablo.png" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,20 +35,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/diablo-items/src/AppPage/AppPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+            <state relative-caret-position="616">
+              <caret line="101" selection-start-line="101" selection-end-line="101" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/diablo-items/src/shot.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="286" selection-start-line="286" selection-end-line="293" />
             </state>
           </provider>
         </entry>
@@ -200,12 +190,12 @@
       <option name="presentableId" value="Default" />
       <updated>1564173196689</updated>
       <workItem from="1564173199793" duration="660000" />
-      <workItem from="1564321587115" duration="7291000" />
+      <workItem from="1564321587115" duration="8349000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7951000" />
+    <option name="totallyTimeSpent" value="9009000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -305,8 +295,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/diablo-items/src/AppPage/AppPage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+        <state relative-caret-position="616">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

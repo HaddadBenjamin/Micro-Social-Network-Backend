@@ -10,6 +10,8 @@ namespace DiabloII.Items.Reader
         private List<string> MissingItemTypes = new List<String>();
 
         // TODO : 
+        // - DEMANDER LE NOUVEAU DATASHEET A ASCENDED, IL A RAJOUTER DES COLONNES (SLOTS et chez pas quoi).
+
         // - Mapper types to a SubCategory
         // - Add those data in a database : 1) front ask items for a type. 2) back service is call that ask the db those items. 3) it will be faster than generate all items each time.
         // - Trier les attributs : stat requis / damage / armure en premier / le reste trier en mode alphabétique ?

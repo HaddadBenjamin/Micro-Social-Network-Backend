@@ -18,7 +18,6 @@ import {
     MDBAnimation
 } from "mdbreact";
 import "./AppPage.css";
-import diablo from '../diablo.gif';
 
 class AppPage extends React.Component {
     state = {
@@ -90,14 +89,16 @@ class AppPage extends React.Component {
         </MDBAnimation>
         </MDBCol>
 
+        <MDBCol md="6" xl="5" className="mt-xl-5">
+            <MDBAnimation type="fadeInRight" delay=".3s">
+                <MDBBtn outline color="white ">Search</MDBBtn>
+            </MDBAnimation>
+        </MDBCol>
+    </MDBRow>
+    </MDBContainer>
+    </MDBMask>
+    </MDBView>
 
-            </MDBRow>
-            </MDBContainer>
-            </MDBMask>
-            </MDBView>
-
-            <MDBContainer>
-        </MDBContainer>
         </div>
     );
     }
