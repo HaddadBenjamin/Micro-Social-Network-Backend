@@ -18,3 +18,4 @@ bin-release/
 # information for Eclipse / Flash Builder.
 DiabloII.Items/.vs/DiabloII.Items.Reader/v15
 DiabloII.Items/packages
+node_modules
