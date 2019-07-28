@@ -27,10 +27,10 @@ namespace DiabloII.Items.Api.Items.Services
 
             return uniques
                 .Where(unique => string.IsNullOrEmpty(dto.Name) ? true : unique.Name.Contains(dto.Name))
-                .Where(unique => dto.LevelRequired == 0 ? true : unique.LevelRequired == dto.LevelRequired)
-                .Where(unique => dto.Quality == ItemQuality.UNSET ? true : unique.Quality.Contains(dto.Quality.ToString()))
-                .Where(unique => dto.Category == ItemCategory.UNSET ? true : unique.Category.Contains(dto.Category.ToString()))
-                .Where(unique => dto.SubCategory == ItemSubCategory.UNSET ? true : unique.SubCategory.Contains(dto.SubCategory.ToString()))
+                .Where(unique => dto.LevelRequired is null ? true : unique.LevelRequired == dto.LevelRequired)
+                .Where(unique => dto.Quality is null ? true : unique.Quality.Contains(dto.Quality.ToString()))
+                .Where(unique => dto.Category is null ? true : unique.Category.Contains(dto.Category.ToString()))
+                .Where(unique => dto.SubCategory is null ? true : unique.SubCategory.Contains(dto.SubCategory.ToString()))
                 .Where(unique => string.IsNullOrEmpty(dto.Type) ? true : unique.Type.Contains(dto.Type))
                 .Where(unique => dto.PropertyNames is null ||!dto.PropertyNames.Any() ? true : unique.Properties.Any(property => dto.PropertyNames.Contains(property.Name)));
         }

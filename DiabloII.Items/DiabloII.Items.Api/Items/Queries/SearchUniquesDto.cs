@@ -14,25 +14,25 @@ namespace DiabloII.Items.Api.Items.Queries
         /// <summary>
         /// Filter items by it's required level.
         /// </summary>
-        public int LevelRequired { get; set; }
+        public int? LevelRequired { get; set; }
         /// <summary>
         /// Filter items by it's quality.
         /// </summary>
         [EnumDataType(typeof(ItemQuality))]
         [JsonConverter(typeof(StringEnumConverter))]
-        public ItemQuality Quality { get; set; }
+        public ItemQuality? Quality { get; set; }
         /// <summary>
         /// Filter items by it's category.
         /// </summary>
         [EnumDataType(typeof(ItemCategory))]
         [JsonConverter(typeof(StringEnumConverter))]
-        public ItemCategory Category { get; set; }
+        public ItemCategory? Category { get; set; }
         /// <summary>
         /// Filter items by it's sub category.
         /// </summary>
         [EnumDataType(typeof(ItemSubCategory))]
         [JsonConverter(typeof(StringEnumConverter))]
-        public ItemSubCategory SubCategory { get; set; }
+        public ItemSubCategory? SubCategory { get; set; }
         /// <summary>
         /// Filter items by it's type.
         /// </summary>
@@ -45,7 +45,6 @@ namespace DiabloII.Items.Api.Items.Queries
 
     public enum ItemQuality
     {
-        UNSET,
         Normal,
         Magical,
         Rare,
@@ -56,7 +55,6 @@ namespace DiabloII.Items.Api.Items.Queries
 
     public enum ItemCategory
     {
-        UNSET,
         Weapon,
         Armor,
         Jewelry,
@@ -65,7 +63,6 @@ namespace DiabloII.Items.Api.Items.Queries
 
     public enum ItemSubCategory
     {
-        UNSET,
         // Armor
         Armor,
         Glove,
