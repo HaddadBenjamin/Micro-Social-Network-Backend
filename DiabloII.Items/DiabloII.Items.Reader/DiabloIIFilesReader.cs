@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DiabloII.Items.Reader
 {
-    public class DiabloIIFileReader
+    public class DiabloIIFilesReader
     {
         private List<string> MissingItemTypes = new List<String>();
 
@@ -26,45 +26,47 @@ namespace DiabloII.Items.Reader
         //shards / wand
         //Rajouter ces différences dans le mapping des catégories.
         // Il faudra que je mette à jour les énums côté API
-        public IEnumerable<Item> Read(string datasheetCsv)
-            => datasheetCsv
-                .Split('\n')
-                .Skip(1)
-                .Select(line =>
-                {
-                    var itemData = line.Split(';');
-
-                    if (itemData.Length < 4)
-                        return null;
-
-                    var type = TypeToItemType(itemData[3]);
-                    var properties = new List<ItemProperty>();
-
-                    for (var index = 4; index < itemData.Length; index += 4)
+        public IEnumerable<Item> Read(string uniquesCsv, string weaponsCsv, string armorsCsv)
+        {
+            return uniquesCsv
+                    .Split('\n')
+                    .Skip(1)
+                    .Select(line =>
                     {
-                        if (string.IsNullOrEmpty(itemData[index]))
-                            continue;
+                        var itemData = line.Split(';');
 
-                        properties.Add(new ItemProperty
+                        if (itemData.Length < 4)
+                            return null;
+
+                        var type = TypeToItemType(itemData[3]);
+                        var properties = new List<ItemProperty>();
+
+                        for (var index = 4; index < itemData.Length; index += 4)
                         {
-                            Name = itemData[index],
-                            Par = itemData[index + 1].ParseIntOrDefault(),
-                            Minimum = itemData[index + 2].ParseIntOrDefault(),
-                            Maximum = itemData[index + 3].ParseIntOrDefault(),
-                            IsPercent = itemData[index].Contains("%")
-                        });
-                    }
+                            if (string.IsNullOrEmpty(itemData[index]))
+                                continue;
 
-                    return new Item
-                    {
-                        Name = itemData[0],
-                        LevelRequired = itemData[2].ParseIntOrDefault(),
-                        Type = type,
-                        Quality = "Unique",
-                        Properties = properties
-                    };
-                })
-                .ToList();
+                            properties.Add(new ItemProperty
+                            {
+                                Name = itemData[index],
+                                Par = itemData[index + 1].ParseIntOrDefault(),
+                                Minimum = itemData[index + 2].ParseIntOrDefault(),
+                                Maximum = itemData[index + 3].ParseIntOrDefault(),
+                                IsPercent = itemData[index].Contains("%")
+                            });
+                        }
+
+                        return new Item
+                        {
+                            Name = itemData[0],
+                            LevelRequired = itemData[2].ParseIntOrDefault(),
+                            Type = type,
+                            Quality = "Unique",
+                            Properties = properties
+                        };
+                    })
+                    .ToList();
+        }
 
         private ItemType TypeToItemType(string type)
         {
