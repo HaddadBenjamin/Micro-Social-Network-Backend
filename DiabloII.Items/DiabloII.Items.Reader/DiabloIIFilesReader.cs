@@ -101,4 +101,17 @@ namespace DiabloII.Items.Reader
                         .Replace('-', '_')
                         .FirstCharToUpper();
     }
+
+    public class WeaponRecord
+    {
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string Slot { get; set; }
+    }
+
+    public class ArmorReord
+    {
+        public string Name { get; set; }
+        public string Slot { get; set; }
+    }
 }
