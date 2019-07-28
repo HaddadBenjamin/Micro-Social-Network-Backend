@@ -19,28 +19,52 @@ namespace DiabloII.Items.Reader
         // to verify : 
         // Il faudra que je mette à jour les énums côté API
         public IEnumerable<Item> Read(
-            string uniquesCsv, 
-            string weaponsCsv, 
+            string uniquesCsv,
+            string weaponsCsv,
             string armorsCsv)
         {
             var weapons = ReadWeapons(weaponsCsv);
             var armors = ReadArmors(armorsCsv);
 
             var armorCategories = armors
-                .Select(armor => armor.Slot)
+                .Select(armor => armor.Slot.ToTitleCase().Replace("\r", string.Empty))
                 .Distinct()
+                .Where(armor => armor != string.Empty)
                 .ToList();
-
             var weaponCategories = weapons
+                .Where(weapon => !string.IsNullOrWhiteSpace(weapon.Type))
                 .Select(weapon =>
-                    weapon.Slot == "1h" ? weapon.Type :
-                    weapon.Slot == "2h" ? $"Two Handed {weapon.Type}" :
+                    weapon.Slot == "1h\r" ? weapon.Type :
+                    weapon.Slot == "2h\r" ? $"Two Handed {weapon.Type}" :
                     $"Two And One Handed {weapon.Type}"
                 )
+                .Select(weapon => weapon
+                    .ToTitleCase()
+                    .Replace("Scep", "Scepter")
+                    .Replace("Hamm", "Hammer")
+                    .Replace("Swor", "Sword")
+                    .Replace("Knif", "Knife")
+                    .Replace("Jave", "Javelin")
+                    .Replace("Jave", "Jave")
+                    .Replace("Spea", "Spear")
+                    .Replace("Pole", "Polearm")
+                    .Replace("Staf", "Staff")
+                    .Replace("Xbow", "Crossbow")
+                    .Replace("Tpot", "Throwing Potions")
+                    .Replace("Taxe", "Throwing Axe")
+                    .Replace("Tkni", "Thorwing knife")
+                    .Replace("Abow", "Amazon bow")
+                    .Replace("Aspe", "Amazon spear")
+                    .Replace("Ajav", "Amazon Javelin")
+                    .Replace("H2h2", "Hand To Hand Two Handed")
+                    .Replace("H2h", "Hand To Hand")
+                    .Replace("Jave", "Jave"))
                 .Distinct()
                 .ToList();
-
-
+            weaponCategories.AddRange(armorCategories);
+            weaponCategories.AddRange(new[] { "Fist", "Claw" });
+            weaponCategories = weaponCategories.OrderBy(e => e).ToList();
+            var itemsubCategory = string.Join("\n- ", weaponCategories);
             // generate items sub category
             return ReadUniques(uniquesCsv, weapons, armors);
         }
