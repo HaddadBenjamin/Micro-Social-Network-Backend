@@ -26,9 +26,13 @@ namespace DiabloII.Items.Reader
         //shards / wand
         //Rajouter ces différences dans le mapping des catégories.
         // Il faudra que je mette à jour les énums côté API
-        public IEnumerable<Item> Read(string uniquesCsv, string weaponsCsv, string armorsCsv)
+        public IEnumerable<Item> Read(
+            string uniquesCsv, 
+            string weaponsCsv, 
+            string armorsCsv)
         {
-            var weapons = ReadWeapons();
+            var weapons = ReadWeapons(weaponsCsv);
+            var armors = ReadArmors(armorsCsv);
 
             return uniquesCsv
                     .Split('\n')
@@ -70,8 +74,24 @@ namespace DiabloII.Items.Reader
                     .ToList();
         }
 
-        private List<WeaponRecord> ReadWeapons(string weaponCsv) 
-            => weaponCsv
+        private List<ArmorReord> ReadArmors(string armorsCsv)
+            => armorsCsv
+                .Split('\n')
+                .Skip(1)
+                .Select(line =>
+                {
+                    var itemData = line.Split(';');
+
+                    return new ArmorReord
+                    {
+                        Name = itemData[0],
+                        Slot = itemData[1]
+                    };
+                })
+                .ToList();
+
+        private List<WeaponRecord> ReadWeapons(string weaponsCsv) 
+            => weaponsCsv
                 .Split('\n')
                 .Skip(1)
                 .Select(line =>
