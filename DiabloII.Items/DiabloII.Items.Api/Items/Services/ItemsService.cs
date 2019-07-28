@@ -4,23 +4,24 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DiabloII.Items.Api.Items.Services
 {
     public class ItemsService : IItemsService
     {
-        public IEnumerable<Item> GetAllUniques()
+        public async Task<IEnumerable<Item>> GetAllUniques()
         {
             var uniquesPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.json");
-            var uniquesAsJson = File.ReadAllText(uniquesPath);
+            var uniquesAsJson = await File.ReadAllTextAsync(uniquesPath).ConfigureAwait(false);
             var uniques = JsonConvert.DeserializeObject<List<Item>>(uniquesAsJson);
 
             return uniques.Where(unique => unique != null);
         }
 
-        public IEnumerable<Item> SearchUniques(SearchUniquesDto dto)
+        public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto dto)
         {
-            var uniques = GetAllUniques().ToList();
+            var uniques = (await GetAllUniquesAsync().ConfigureAwait(false)).ToList();
 
             if (dto is null)
                 return uniques;
