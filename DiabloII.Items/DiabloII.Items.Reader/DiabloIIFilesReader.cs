@@ -28,6 +28,8 @@ namespace DiabloII.Items.Reader
         // Il faudra que je mette à jour les énums côté API
         public IEnumerable<Item> Read(string uniquesCsv, string weaponsCsv, string armorsCsv)
         {
+            var weapons = ReadWeapons();
+
             return uniquesCsv
                     .Split('\n')
                     .Skip(1)
@@ -67,6 +69,23 @@ namespace DiabloII.Items.Reader
                     })
                     .ToList();
         }
+
+        private List<WeaponRecord> ReadWeapons(string weaponCsv) 
+            => weaponCsv
+                .Split('\n')
+                .Skip(1)
+                .Select(line =>
+                {
+                    var itemData = line.Split(';');
+
+                    return new WeaponRecord
+                    {
+                        Name = itemData[0],
+                        Type = itemData[1],
+                        Slot = itemData[2]
+                    };
+                })
+                .ToList();
 
         private ItemType TypeToItemType(string type)
         {
