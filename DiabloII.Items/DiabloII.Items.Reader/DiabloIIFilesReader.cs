@@ -34,45 +34,51 @@ namespace DiabloII.Items.Reader
             var weapons = ReadWeapons(weaponsCsv);
             var armors = ReadArmors(armorsCsv);
 
-            return uniquesCsv
-                    .Split('\n')
-                    .Skip(1)
-                    .Select(line =>
-                    {
-                        var itemData = line.Split(';');
-
-                        if (itemData.Length < 4)
-                            return null;
-
-                        var type = TypeToItemType(itemData[3]);
-                        var properties = new List<ItemProperty>();
-
-                        for (var index = 4; index < itemData.Length; index += 4)
-                        {
-                            if (string.IsNullOrEmpty(itemData[index]))
-                                continue;
-
-                            properties.Add(new ItemProperty
-                            {
-                                Name = itemData[index],
-                                Par = itemData[index + 1].ParseIntOrDefault(),
-                                Minimum = itemData[index + 2].ParseIntOrDefault(),
-                                Maximum = itemData[index + 3].ParseIntOrDefault(),
-                                IsPercent = itemData[index].Contains("%")
-                            });
-                        }
-
-                        return new Item
-                        {
-                            Name = itemData[0],
-                            LevelRequired = itemData[2].ParseIntOrDefault(),
-                            Type = type,
-                            Quality = "Unique",
-                            Properties = properties
-                        };
-                    })
-                    .ToList();
+            return ReadUniques(uniquesCsv, weapons, armors);
         }
+
+        public IEnumerable<Item> ReadUniques(
+            string uniquesCsv,
+            List<WeaponRecord> weapons,
+            List<ArmorReord> armors)
+            => uniquesCsv
+                .Split('\n')
+                .Skip(1)
+                .Select(line =>
+                {
+                    var itemData = line.Split(';');
+
+                    if (itemData.Length < 4)
+                        return null;
+
+                    var type = TypeToItemType(itemData[3]);
+                    var properties = new List<ItemProperty>();
+
+                    for (var index = 4; index < itemData.Length; index += 4)
+                    {
+                        if (string.IsNullOrEmpty(itemData[index]))
+                            continue;
+
+                        properties.Add(new ItemProperty
+                        {
+                            Name = itemData[index],
+                            Par = itemData[index + 1].ParseIntOrDefault(),
+                            Minimum = itemData[index + 2].ParseIntOrDefault(),
+                            Maximum = itemData[index + 3].ParseIntOrDefault(),
+                            IsPercent = itemData[index].Contains("%")
+                        });
+                    }
+
+                    return new Item
+                    {
+                        Name = itemData[0],
+                        LevelRequired = itemData[2].ParseIntOrDefault(),
+                        Type = type,
+                        Quality = "Unique",
+                        Properties = properties
+                    };
+                })
+                .ToList();
 
         private List<ArmorReord> ReadArmors(string armorsCsv)
             => armorsCsv
