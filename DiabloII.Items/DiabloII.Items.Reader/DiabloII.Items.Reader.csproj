@@ -46,12 +46,12 @@
   <ItemGroup>
     <Compile Include="DiabloIIDatasheetReader.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
-    <Compile Include="ItemCategory.cs" />
-    <Compile Include="ItemProperty.cs" />
-    <Compile Include="ItemQuality.cs" />
-    <Compile Include="Items.cs" />
-    <Compile Include="ItemSubCategory.cs" />
-    <Compile Include="ItemType.cs" />
+    <Compile Include="Items\ItemCategory.cs" />
+    <Compile Include="Items\ItemProperty.cs" />
+    <Compile Include="Items\ItemQuality.cs" />
+    <Compile Include="Items\Items.cs" />
+    <Compile Include="Items\ItemSubCategory.cs" />
+    <Compile Include="Items\ItemType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
