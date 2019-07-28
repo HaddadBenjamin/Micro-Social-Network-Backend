@@ -21,7 +21,7 @@ namespace DiabloII.Items.Api.Items.Services
 
         public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto dto)
         {
-            var uniques = (await GetAllUniquesAsync().ConfigureAwait(false)).ToList();
+            var uniques = (await GetAllUniques().ConfigureAwait(false)).ToList();
 
             if (dto is null)
                 return uniques;

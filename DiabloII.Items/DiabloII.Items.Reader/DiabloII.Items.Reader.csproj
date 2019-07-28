@@ -44,7 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DiabloIIDatasheetReader.cs" />
+    <Compile Include="DiabloIIFilesReader.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Items\ItemCategory.cs" />
     <Compile Include="Items\ItemProperty.cs" />

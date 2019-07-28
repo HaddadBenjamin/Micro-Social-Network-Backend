@@ -55,10 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Files\Diablo II - Enriched Data Sheet.xlsx" />
+    <None Include="Files\Armors.csv" />
     <None Include="Files\Uniques.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Files\Weapons.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
