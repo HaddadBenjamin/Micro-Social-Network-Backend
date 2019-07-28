@@ -10,10 +10,10 @@ namespace DiabloII.Items
         {
             var datasheetPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.csv");
             var jsonDestination = datasheetPath.Replace("csv", "json");
-            var datasheetContent = File.ReadAllText(datasheetPath);
+            var uniqueDatasheetPath = File.ReadAllText(datasheetPath);
             var diabloIIDatasheetReader = new DiabloIIDatasheetReader();
 
-            var items = diabloIIDatasheetReader.Read(datasheetContent);
+            var items = diabloIIDatasheetReader.Read(uniqueDatasheetPath);
             var itemsAsJson = JsonConvert.SerializeObject(items);
 
             File.WriteAllText(jsonDestination, itemsAsJson);

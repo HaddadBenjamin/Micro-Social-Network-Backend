@@ -1,0 +1,342 @@
+﻿name;Slot
+Cap/hat;Head
+Skull Cap;Head
+Helm;Head
+Full Helm;Head
+Great Helm;Head
+Crown;Head
+Mask;Head
+Quilted Armor;Torso
+Leather Armor;Torso
+Hard Leather Armor;Torso
+Studded Leather;Torso
+Ring Mail;Torso
+Scale Mail;Torso
+Chain Mail;Torso
+Breast Plate;Torso
+Splint Mail;Torso
+Plate Mail;Torso
+Field Plate;Torso
+Gothic Plate;Torso
+Full Plate Mail;Torso
+Ancient Armor;Torso
+Light Plate;Torso
+Buckler;Offhand
+Small Shield;Offhand
+Large Shield;Offhand
+Kite Shield;Offhand
+Tower Shield;Offhand
+Gothic Shield;Offhand
+Gloves(L);Hands
+Heavy Gloves;Hands
+Bracers(M);Hands
+Light Gauntlets;Hands
+Gaunlets(H);Hands
+Leather Boots;Feet
+Heavy Boots;Feet
+Chain Boots;Feet
+Light Plate Boots;Feet
+Plate Boots;Feet
+Sash(L);Waist
+Light Belt;Waist
+Belt(M);Waist
+Heavy Belt;Waist
+Girdle(H);Waist
+Bone Helm;Head
+Bone Shield;Head
+Spiked Shield;Head
+War Hat;Head
+Sallet;Head
+Casque;Head
+Basinet;Head
+Winged Helm;Head
+Grand Crown;Head
+Death Mask;Head
+Ghost Armor;Torso
+Serpentskin Armor;Torso
+Demonhide Armor;Torso
+Trellised Armor;Torso
+Linked Mail;Torso
+Tigulated Mail;Torso
+Mesh Armor;Torso
+Cuirass;Torso
+Russet Armor;Torso
+Templar Coat;Torso
+Sharktooth Armor;Torso
+Embossed Plate;Torso
+Chaos Armor;Torso
+Ornate Armor;Torso
+Mage Plate;Torso
+Defender;Offhand
+Round Shield;Offhand
+Scutum;Offhand
+Dragon Shield;Offhand
+Pavise;Offhand
+Ancient Shield;Offhand
+Demonhide Gloves;Hands
+Sharkskin Gloves;Hands
+Heavy Bracers;Hands
+Battle Gauntlets;Hands
+War Gauntlets;Hands
+Demonhide Boots;Feet
+Sharkskin Boots;Feet
+Mesh Boots;Feet
+Battle Boots;Feet
+War Boots;Feet
+Demonhide Sash;Waist
+Sharkskin Belt;Waist
+Mesh Belt;Waist
+Battle Belt;Waist
+War Belt;Waist
+Grim Helm;Head
+Grim Shield;Offhand
+Barbed Shield;Offhand
+Expansion;
+Wolf Head;Head
+Hawk Helm;Head
+Antlers;Head
+Falcon Mask;Head
+Spirit Mask;Head
+Jawbone Cap;Head
+Fanged Helm;Head
+Horned Helm;Head
+Assault Helmet;Head
+Avenger Guard;Head
+Targe;Offhand
+Rondache;Offhand
+Heraldic Shield;Offhand
+Aerin Shield;Offhand
+Crown Shield;Offhand
+Preserved Head;Offhand
+Zombie Head;Offhand
+Unraveller Head;Offhand
+Gargoyle Head;Offhand
+Demon Head;Offhand
+Circlet;Head
+Coronet;Head
+Tiara;Head
+Diadem;Head
+Shako;Head
+Hydraskull;Head
+Armet;Head
+Giant Conch;Head
+Spired Helm;Head
+Corona;Head
+Demonhead;Head
+Dusk Shroud;Torso
+Wyrmhide;Torso
+Scarab Husk;Torso
+Wire Fleece;Torso
+Diamond Mail;Torso
+Loricated Mail;Torso
+Boneweave;Torso
+Great Hauberk;Torso
+Balrog Skin;Torso
+Hellforged Plate;Torso
+Kraken Shell;Torso
+Lacquered Plate;Torso
+Shadow Plate;Torso
+Sacred Armor;Torso
+Archon Plate;Torso
+Heater;Offhand
+Luna;Offhand
+Hyperion;Offhand
+Monarch;Offhand
+Aegis;Offhand
+Ward;Offhand
+Bramble Mitts;Hands
+Vampirebone Gloves;Hands
+Vambraces;Hands
+Crusader Gauntlets;Hands
+Ogre Gauntlets;Hands
+Wyrmhide Boots;Feet
+Scarabshell Boots;Feet
+Boneweave Boots;Feet
+Mirrored Boots;Feet
+Myrmidon Greaves;Feet
+Spiderweb Sash;Waist
+Vampirefang Belt;Waist
+Mithril Coil;Waist
+Troll Belt;Waist
+Colossus Girdle;Waist
+Bone Visage;Head
+Troll Nest;Offhand
+Blade Barrier;Offhand
+Alpha Helm;Head
+Griffon Headress;Head
+Hunter's Guise;Head
+Sacred Feathers;Head
+Totemic Mask;Head
+Jawbone Visor;Head
+Lion Helm;Head
+Rage Mask;Head
+Savage Helmet;Head
+Slayer Guard;Head
+Akaran Targe;Offhand
+Akaran Rondache;Offhand
+Protector Shield;Offhand
+Guilded Shield;Offhand
+Royal Shield;Offhand
+Mummified Trophy;Offhand
+Fetish Trophy;Offhand
+Sexton Trophy;Offhand
+Cantor Trophy;Offhand
+Heirophant Trophy;Offhand
+Blood Spirt;Head
+Sun Spirit;Head
+Earth Spirit;Head
+Sky Spirit;Head
+Dream Spirit;Head
+Carnage Helm;Head
+Fury Visor;Head
+Destroyer Helm;Head
+Conquerer Crown;Head
+Guardian Crown;Head
+Sacred Targe;Offhand
+Sacred Rondache;Offhand
+Ancient Shield;Offhand
+Zakarum Shield;Offhand
+Vortex Shield;Offhand
+Minion Skull;Offhand
+Hellspawn Skull;Offhand
+Overseer Skull;Offhand
+Succubae Skull;Offhand
+Bloodlord Skull;Offhand
+Arcanic Circlet;Head
+Amazonian Tiara;Head
+Viperskin Helm;Head
+Gemmed Cap;Head
+Plated Armet;Head
+Plated Conch;Head
+Ordos Spire;Head
+Ordos Crown;Head
+Cursed Mask;Head
+Arcanic Shroud;Torso
+Cursed Hide;Torso
+Viperskin Husk;Torso
+Demonskin Fleece;Torso
+Tristram Mail;Torso
+Lut Gholein Mail;Torso
+Diamondweave Mesh;Torso
+Lightforged Plate;Torso
+Wyrmscale;Torso
+Ordos Plate;Torso
+Amazonian Hauberk;Torso
+Dark Archon Plate;Torso
+Demon Plate;Torso
+Warforged Plate;Torso
+Amazonian Plate;Torso
+Amazonian Guard;Offhand
+Viper Guard;Offhand
+Warforged Aegis;Offhand
+Demon Ward;Hands
+Arcanic Mitts;Hands
+Cursed Gloves;Hands
+Demonskin Mitts;Hands
+Viperskin Braces;Hands
+Amazonian Braces;Hands
+Ordos Gauntlets;Hands
+Warforged Gauntlets;Hands
+Arcanic Boots;Feet
+Viperskin Boots;Feet
+Cursed Boots;Feet
+Demonskin Boots;Feet
+Amazonian Treads;Feet
+Ordos Greaves;Feet
+Warforged Greaves;Feet
+Arcanic Sash;Waist
+Cursed Belt;Waist
+Amazonian Girdle;Waist
+Demonskin Belt;Waist
+Viperskin Belt;Waist
+Ordos Buckle;Waist
+Warforged Buckle;Waist
+Cursed Visage;Head
+Skull  Guard;Offhand
+Viperfang Barrier;Offhand
+Fullmoon Visor;Head
+Druid Helm;Head
+Eagle Crown;Head
+Direwolf Helm;Head
+Harrogath Visor;Head
+Demon Visor;Head
+Warfare Crown;Head
+Ordos Defender;Offhand
+Lightforged Guard;Offhand
+Seclorum Guard;Offhand
+Balrog Skull;Offhand
+Zakarum Skull;Offhand
+Cursed Demon Skull;Offhand
+Phase Plate;Torso
+Void Circlet;Head
+Void Tiara;Head
+Void Helm;Head
+Void Cap;Head
+Void Armet;Head
+Void Conch;Head
+Void Spire;Head
+Void Crown;Head
+Void Mask;Head
+Void Shroud;Torso
+Void Hide;Torso
+Void Husk;Torso
+Void Fleece;Torso
+Void Mail;Torso
+Void Chain Mail;Torso
+Void Mesh;Torso
+Void Plate;Torso
+Void Scale;Torso
+Void Fused Plate;Torso
+Void Hauberk;Torso
+Void Archon Plate;Torso
+Void Demon Plate;Torso
+Void War Plate;Torso
+Void Hunter Plate;Torso
+Void Guard;Offhand
+Void Slither Guard;Offhand
+Void War Aegis;Offhand
+Void Demon Ward;Offhand
+Void Mitts;Hands
+Void Gloves;Hands
+Void Skin Mitts;Hands
+Void Braces;Hands
+Void Mesh Braces;Hands
+Void Gauntlets;Hands
+Void War Gauntlets;Hands
+Void Boots;Feet
+Void Skin Boots;Feet
+Void Curse Boots;Feet
+Void Demon Boots;Feet
+Void Treads;Feet
+Void Greaves;Feet
+Void War Greaves;Feet
+Void Sash;Waist
+Void Belt;Waist
+Void Girdle;Waist
+Void Skin Belt;Waist
+Void Mesh Belt;Waist
+Void Buckle;Waist
+Void War Buckle;Waist
+Void Visage;Head
+Void Skull  Guard;Offhand
+Void Barrier;Offhand
+Void Visor;Head
+Void Druid Helm;Head
+Void Eagle Crown;Head
+Void Wolf Helm;Head
+Void Sight Visor;Head
+Void Demon Visor;Head
+Void War Crown;Head
+Void Defender;Offhand
+Void Forged Guard;Offhand
+Void Shard Guard;Offhand
+Void Skull;Offhand
+Void Speaking Skull;Offhand
+Void Demon Skull;Offhand
+Poorman`s Head;Offhand
+Training Targe;Offhand
+Legendary Crown;Head
+Legendary Head;Head
+Legendary Totem;Head
+Legendary Protectorate;Offhand
+Legendary Gazer;Offhand

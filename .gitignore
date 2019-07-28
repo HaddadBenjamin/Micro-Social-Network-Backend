@@ -19,3 +19,5 @@ bin-release/
 DiabloII.Items/.vs/DiabloII.Items.Reader/v15
 DiabloII.Items/packages
 node_modules
+.idea
+.idea/workspace.xml

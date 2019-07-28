@@ -1,0 +1,504 @@
+﻿name;type;slot
+Hand Axe;axe;1h
+Axe;axe;1h
+Double Axe;axe;1h
+Military Pick;axe;1h
+War Axe;axe;1h
+Large Axe;axe;2h
+Broad Axe;axe;2h
+Battle Axe;axe;2h
+Great Axe;axe;2h
+Giant Axe;axe;2h
+Wand;wand;1h
+Yew Wand;wand;1h
+Bone Wand;wand;1h
+Grim Wand;wand;1h
+Club;club;1h
+Scepter;scep;1h
+Grand Scepter;scep;1h
+War Scepter;scep;1h
+Spiked Club;club;1h
+Mace;mace;1h
+Morning Star;mace;1h
+Flail;mace;1h
+War Hammer;hamm;1h
+Maul;hamm;2h
+Great Maul;hamm;2h
+Short Sword;swor;1h
+Scimitar;swor;1h
+Saber;swor;1h
+Falchion;swor;1h
+Crystal Sword;swor;1h
+Broad Sword;swor;1h
+Long Sword;swor;1h
+War Sword;swor;1h
+Two-Handed Sword;swor;1h/2h
+Claymore;swor;1h/2h
+Giant Sword;swor;1h/2h
+Bastard Sword;swor;1h/2h
+Flamberge;swor;1h/2h
+Great Sword;swor;1h/2h
+Dagger;knif;1h
+Dirk;knif;1h
+Kriss;knif;1h
+Blade;knif;1h
+Throwing Knife;tkni;1h
+Throwing Axe;taxe;1h
+Balanced Knife;tkni;1h
+Balanced Axe;taxe;1h
+Javelin;jave;1h
+Pilum;jave;1h
+Short Spear;jave;1h
+Glaive;jave;1h
+Throwing Spear;jave;1h
+Spear;spea;2h
+Trident;spea;2h
+Brandistock;spea;2h
+Spetum;spea;2h
+Pike;spea;2h
+Bardiche;pole;2h
+Voulge;pole;2h
+Scythe;pole;2h
+Poleaxe;pole;2h
+Halberd;pole;2h
+War Scythe;pole;2h
+Short Staff;staf;2h
+Long Staff;staf;2h
+Gnarled Staff;staf;2h
+Battle Staff;staf;2h
+War Staff;staf;2h
+Short Bow;bow;2h
+Hunter's Bow;bow;2h
+Long Bow;bow;2h
+Composite Bow;bow;2h
+Short Battle Bow;bow;2h
+Long Battle Bow;bow;2h
+Short War Bow;bow;2h
+Long War Bow;bow;2h
+Light Crossbow;xbow;2h
+Crossbow;xbow;2h
+Heavy Crossbow;xbow;2h
+Repeating Crossbow;xbow;2h
+Rancid Gas Potion;tpot;1h
+Oil Potion;tpot;1h
+Choking Gas Potion;tpot;1h
+Exploding Potion;tpot;1h
+Strangling Gas Potion;tpot;1h
+Fulminating Potion;tpot;1h
+decoy dagger;knif;1h
+Gidbinn;knif;1h
+Wirt's Leg;club;1h
+Horadric Malus;hamm;1h
+Hellforge Hammer;hamm;1h
+Horadric Staff;staf;2h
+Staff of the Kings;staf;2h
+Hatchet;axe;1h
+Cleaver;axe;1h
+Twin Axe;axe;1h
+Crowbill;axe;1h
+Naga;axe;1h
+Military Axe;axe;2h
+Bearded Axe;axe;2h
+Tabar;axe;2h
+Gothic Axe;axe;2h
+Ancient Axe;axe;2h
+Burnt Wand;wand;1h
+Petrified Wand;wand;1h
+Tomb Wand;wand;1h
+Grave Wand;wand;1h
+Cudgel;club;1h
+Rune Scepter;scep;1h
+Holy Water Sprinkler;scep;1h
+Divine Scepter;scep;1h
+Barbed Club;club;1h
+Flanged Mace;mace;1h
+Jagged Star;mace;1h
+Knout;mace;1h
+Battle Hammer;hamm;1h
+War Club;hamm;2h
+Martel de Fer;hamm;2h
+Gladius;swor;1h
+Cutlass;swor;1h
+Shamshir;swor;1h
+Tulwar;swor;1h
+Dimensional Blade;swor;1h
+Battle Sword;swor;1h
+Rune Sword;swor;1h
+Ancient Sword;swor;1h
+Espadon;swor;1h/2h
+Dacian Falx;swor;1h/2h
+Tusk Sword;swor;1h/2h
+Gothic Sword;swor;1h/2h
+Zweihander;swor;1h/2h
+Executioner Sword;swor;1h/2h
+Poignard;knif;1h
+Rondel;knif;1h
+Cinquedeas;knif;1h
+Stilleto;knif;1h
+Battle Dart;tkni;1h
+Francisca;taxe;1h
+War Dart;tkni;1h
+Hurlbat;taxe;1h
+War Javelin;jave;1h
+Great Pilum;jave;1h
+Simbilan;jave;1h
+Spiculum;jave;1h
+Harpoon;jave;1h
+War Spear;spea;2h
+Fuscina;spea;2h
+War Fork;spea;2h
+Yari;spea;2h
+Lance;spea;2h
+Lochaber Axe;pole;2h
+Bill;pole;2h
+Battle Scythe;pole;2h
+Partizan;pole;2h
+Bec-de-Corbin;pole;2h
+Grim Scythe;pole;2h
+Jo Staff;staf;2h
+Quarterstaff;staf;2h
+Cedar Staff;staf;2h
+Gothic Staff;staf;2h
+Rune Staff;staf;2h
+Edge Bow;bow;2h
+Razor Bow;bow;2h
+Cedar Bow;bow;2h
+Double Bow;bow;2h
+Short Siege Bow;bow;2h
+Long Siege Bow;bow;2h
+Rune Bow;bow;2h
+Gothic Bow;bow;2h
+Arbalest;xbow;2h
+Siege Crossbow;xbow;2h
+Balista;xbow;2h
+Chu-Ko-Nu;xbow;2h
+KhalimFlail;mace;1h
+SuperKhalimFlail;mace;1h
+Expansion;;
+Katar;h2h;1h
+Wrist Blade;h2h;1h
+Hatchet Hands;h2h;1h
+Cestus;h2h;1h
+Claws;h2h;1h
+Blade Talons;h2h;1h
+Scissors Katar;h2h;1h
+Quhab;h2h;1h
+Wrist Spike;h2h;1h
+Fascia;h2h;1h
+Hand Scythe;h2h2;1h
+Greater Claws;h2h2;1h
+Greater Talons;h2h2;1h
+Scissors Quhab;h2h2;1h
+Suwayyah;h2h2;1h
+Wrist Sword;h2h2;1h
+War Fist;h2h2;1h
+Battle Cestus;h2h2;1h
+Feral Claws;h2h2;1h
+Runic Talons;h2h2;1h
+Scissors Suwayyah;h2h2;1h
+Tomahawk;axe;1h
+Small Crescent;axe;1h
+Ettin Axe;axe;1h
+War Spike;axe;1h
+Berserker Axe;axe;1h
+Feral Axe;axe;1h
+Silver Edged Axe;axe;2h
+Decapitator;axe;2h
+Champion Axe;axe;2h
+Glorious Axe;axe;2h
+Polished Wand;wand;1h
+Ghost Wand;wand;1h
+Lich Wand;wand;1h
+Unearthed Wand;wand;1h
+Truncheon;club;1h
+Mighty Scepter;scep;1h
+Seraph Rod;scep;1h
+Caduceus;scep;1h
+Tyrant Club;club;1h
+Reinforced Mace;mace;1h
+Devil Star;mace;1h
+Scourge;mace;1h
+Legendary Mallet;hamm;1h
+Ogre Maul;hamm;1h
+Thunder Maul;hamm;1h
+Falcata;swor;1h
+Ataghan;swor;1h
+Elegant Blade;swor;1h
+Hydra Edge;swor;1h
+Phase Blade;swor;1h
+Conquest Sword;swor;1h
+Cryptic Sword;swor;1h
+Mythical Sword;swor;1h
+Legend Sword;swor;1h/2h
+Highland Blade;swor;1h/2h
+Balrog Blade;swor;1h/2h
+Champion Sword;swor;1h/2h
+Colossal Sword;swor;1h/2h
+Colossus Blade;swor;1h/2h
+Bone Knife;knif;1h
+Mithral Point;knif;1h
+Fanged Knife;knif;1h
+Legend Spike;knif;1h
+Flying Knife;tkni;1h
+Flying Axe;taxe;1h
+Winged Knife;tkni;1h
+Winged Axe;taxe;1h
+Hyperion Javelin;jave;1h
+Stygian Pilum;jave;1h
+Balrog Spear;jave;1h
+Ghost Glaive;jave;1h
+Winged Harpoon;jave;1h
+Hyperion Spear;spea;2h
+Stygian Pike;spea;2h
+Mancatcher;spea;2h
+Ghost Spear;spea;2h
+War Pike;spea;2h
+Ogre Axe;pole;2h
+Colossus Voulge;pole;2h
+Thresher;pole;2h
+Cryptic Axe;pole;2h
+Great Poleaxe;pole;2h
+Giant Thresher;pole;2h
+Walking Stick;staf;2h
+Stalagmite;staf;2h
+Elder Staff;staf;2h
+Shillelah;staf;2h
+Archon Staff;staf;2h
+Spider Bow;bow;2h
+Blade Bow;bow;2h
+Shadow Bow;bow;2h
+Great Bow;bow;2h
+Diamond Bow;bow;2h
+Crusader Bow;bow;2h
+Ward Bow;bow;2h
+Hydra Bow;bow;2h
+Pellet Bow;xbow;2h
+Gorgon Crossbow;xbow;2h
+Colossus Crossbow;xbow;2h
+Demon Crossbow;xbow;2h
+Eagle Orb;orb;1h
+Sacred Globe;orb;1h
+Smoked Sphere;orb;1h
+Clasped Orb;orb;1h
+Dragon Stone;orb;1h
+Stag Bow;abow;2h
+Reflex Bow;abow;2h
+Maiden Spear;aspe;2h
+Maiden Pike;aspe;2h
+Maiden Javelin;ajav;1h
+Glowing Orb;orb;1h
+Crystalline Globe;orb;1h
+Cloudy Sphere;orb;1h
+Sparkling Ball;orb;1h
+Swirling Crystal;orb;1h
+Ashwood Bow;abow;2h
+Ceremonial Bow;abow;2h
+Ceremonial Spear;aspe;2h
+Ceremonial Pike;aspe;2h
+Ceremonial Javelin;ajav;1h
+Heavenly Stone;orb;1h
+Eldritch Orb;orb;1h
+Demon Heart;orb;1h
+Vortex Orb;orb;1h
+Dimensional Shard;orb;1h
+Matriarchal Bow;abow;2h
+Grand Matron Bow;abow;2h
+Matriarchal Spear;aspe;2h
+Matriarchal Pike;aspe;2h
+MatriarchalJavelin;ajav;1h
+Viper Talon;h2h2;1h
+Warfare Cestus;h2h2;1h
+Wolverine Claw;h2h2;1h
+Flay Scissors;h2h2;1h
+Balanced Tomahawk;axe;1h
+Balanced Crescent;axe;1h
+Vicious Ettin Axe;axe;1h
+Council War Spike;axe;1h
+Frenzy Axe;axe;1h
+Mithril Edged Axe;axe;2h
+Sharpened Decapitator;axe;2h
+Venerator Axe;axe;2h
+Raging Venerator Axe;axe;2h
+Arcanist Stick;wand;1h
+Spiriting Shard;wand;1h
+Ceremonial Caster;wand;1h
+Dark Summoner Wand;wand;1h
+Woodfist Club;club;1h
+Blessed Scepter;scep;1h
+Seraphim Rasper;scep;1h
+Zakarum Scepter;scep;1h
+Mithril Barb Club;club;1h
+Diamond Edged Mace;mace;1h
+Zakarum Mace;mace;1h
+Vengful Flail;mace;1h
+Bonebreaker Mallet;hamm;1h
+Giant Ogre Maul;hamm;2h
+Mithril Bound Maul;hamm;2h
+Mithril Short Sword;swor;1h
+Lut Gholein Scimitar;swor;1h
+Angel Cutter;swor;1h
+Plate Cleaver;swor;1h
+Archon Edge Blade;swor;1h
+Brawler Blade;swor;1h
+Mithril Long Sword;swor;1h
+Zakarum Blade;swor;1h
+Harrogath Blade;swor;1h/2h
+Reinforced Blade;swor;1h/2h
+Ogre Blade;swor;1h/2h
+Kurast Edge;swor;1h/2h
+Barbarians Edge;swor;1h/2h
+Warforged Blade;swor;1h/2h
+Demon Bone Knife;knif;1h
+Deep Carver Point;knif;1h
+Serated Dagger;knif;1h
+Council Spike;knif;1h
+Mithril Piercer;tkni;1h
+Balanced Mithril Piercer;taxe;1h
+Zakarum Piercer;tkni;1h
+Ogre Casting Axe;taxe;1h
+Mithril Tip Javelin;jave;1h
+Demon Hook Pilum;jave;1h
+Diamon Tip Spear;jave;1h
+Zakarum Glaive;jave;1h
+Giant Ogre Glaive;jave;1h
+Ethereal Spear;spea;2h
+Demon Fork;spea;2h
+Violent Impaler;spea;2h
+Giants Spear;spea;2h
+Amazonian Striker;spea;2h
+Giant Ogre Axe;pole;2h
+Lut Gholein Voulge;pole;2h
+Reaping Thresher;pole;2h
+Warforged Axe;pole;2h
+Zakarum Halberd;pole;2h
+Endless Reaper;pole;2h
+Horadrim Staff;staf;2h
+Arcanite Stick;staf;2h
+Zakarum Staff;staf;2h
+Crystal Shillelah;staf;2h
+Dark Archon Staff;staf;2h
+Angel String Bow;bow;2h
+Double String Bow;bow;2h
+Rogue Bow;bow;2h
+Quick String Bow;bow;2h
+Elf Wood Bow;bow;2h
+Carnage Bow;bow;2h
+Warden Bow;bow;2h
+Ogre Bow;bow;2h
+Mithril Pellet Bow;xbow;2h
+Tristram Crossbow;xbow;2h
+Dark String Crossbow;xbow;2h
+Repetitive Crossbow;xbow;2h
+Acrhon Orb;orb;1h
+Zakarum Caster;orb;1h
+Archon Soul Shard;orb;1h
+Amazonian Caster;abow;2h
+Grand Amazonian Caster;abow;2h
+Amazonian Matron Spear;aspe;2h
+Amazonian Matron Pike;aspe;2h
+Amazonian Piercers;ajav;1h
+Void Talon;h2h2;1h
+Void Cestus;h2h2;1h
+Void Claw;h2h2;1h
+Void Scissors;h2h2;1h
+Void Tomahawk;axe;1h
+Void Crescent;axe;1h
+Void Ettin Axe;axe;1h
+Void War Spike;axe;1h
+Void Axe;axe;1h
+Void Edged Axe;axe;1h
+Void Decapitator;axe;1h
+Void Venerator Axe;axe;1h
+Void Rage Axe;axe;1h
+Void Arcanist Stick;wand;1h
+Void Spirit Shard;wand;1h
+Void Caster;wand;1h
+Void Summoner Wand;wand;1h
+Void Club;club;1h
+Void Scepter;scep;1h
+Void Rasper;scep;1h
+Void Lash Scepter;scep;1h
+Void Barb Club;club;1h
+Void Edged Mace;mace;1h
+Void Mace;mace;1h
+Void Flail;mace;1h
+Void Mallet;hamm;1h
+Void Ogre Maul;hamm;1h
+Void Bound Maul;hamm;1h
+Void Short Sword;swor;1h
+Void Scimitar;swor;1h
+Void Cutter;swor;1h
+Void Cleaver;swor;1h
+Void Edged Blade;swor;1h
+Void Brawl Blade;swor;1h
+Void Long Sword;swor;1h
+Void Cling Blade;swor;1h
+Void Great Blade;swor;1h/2h
+Void Force Blade;swor;1h/2h
+Void Ogre Blade;swor;1h/2h
+Void Edge;swor;1h/2h
+Void Grand Edge;swor;1h/2h
+Void Forged Blade;swor;1h/2h
+Void Bone Knife;knif;1h
+Void Point;knif;1h
+Void Dagger;knif;1h
+Void Spike;knif;1h
+Void Piercer;tkni;1h
+Void Balance Piercer;taxe;1h
+Void Razor Piercer;tkni;1h
+Void Casting Axe;taxe;1h
+Void Tip Javelin;jave;1h
+Void Pilum;jave;1h
+Void Diamond Spear;jave;1h
+Void Glaive;jave;1h
+Void Ogre Glaive;jave;1h
+Void Spear;spea;1h
+Void Fork;spea;1h
+Void Impaler;spea;1h
+Void Giants Spear;spea;1h
+Void Striker;spea;1h
+Void Ogre Axe;pole;1h
+Void Voulge;pole;1h
+Void Thresher;pole;1h
+Void War Axe;pole;1h
+Void Halberd;pole;1h
+Void Reaper;pole;1h
+Void Staff;staf;1h
+Void Stick;staf;1h
+Void Tall Staff;staf;1h
+Void Shillelah;staf;1h
+Void Dark Staff;staf;1h
+Void String Bow;bow;1h
+Void Double Bow;bow;1h
+Void Bow;bow;1h
+Void Quick Bow;bow;1h
+Void Elf Bow;bow;1h
+Void Carnage Bow;bow;1h
+Void Warden Bow;bow;1h
+Void Ogre Bow;bow;1h
+Void Pellet Bow;xbow;1h
+Void Crossbow;xbow;1h
+Void String Crossbow;xbow;1h
+Void Repeater Crossbow;xbow;1h
+Void Acrhon Orb;orb;1h
+Void Flash Caster;orb;1h
+Void Soul Shard;orb;1h
+Void Caster;abow;1h
+Void Grand Caster;abow;1h
+Void Matron Spear;aspe;1h
+Void Matron Pike;aspe;1h
+Void Strike Piercers;ajav;1h
+Barbarian Training Sword;swor;1h/2h
+Apprentice Staff;staf;1h
+Amazon Training Bow;bow;1h
+Training Scepter;scep;1h
+Acolyte Wand;wand;1h
+Training Katar;h2h;1h
+Woodcarver Polearm;pole;1h
+Bloodpit Dagger;knif;1h
+Legendary War Javelin;ajav;1h
+Legendary War Pike;aspe;1h
+Legendary War Bow;abow;1h
+Legendary War Orb;orb;1h
+Legendary Sword;swor;1h
+Legendary Claw;h2h2;1h
