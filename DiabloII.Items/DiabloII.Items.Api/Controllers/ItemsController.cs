@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using DiabloII.Items.Api.Items.Responses;
 using DiabloII.Items.Api.Items.Queries;
 using DiabloII.Items.Api.Items.Services;
+using System.Threading.Tasks;
 
 namespace DiabloII.Items.Api.Controllers
 {
@@ -21,7 +22,7 @@ namespace DiabloII.Items.Api.Controllers
         /// <returns>A all uniques itesm/returns>
         [Route("getalluniques")]
         [HttpGet]
-        public async IEnumerable<Item> SearchUniques() => await ItemsService.GetAllUniques().ConfigureAwait(false);
+        public async Task<IEnumerable<Item>> GetAllUniques() => await ItemsService.GetAllUniques().ConfigureAwait(false);
 
         /// <summary>
         /// Seartch uniques items by a different filters.
@@ -29,7 +30,7 @@ namespace DiabloII.Items.Api.Controllers
         /// <param name="searchDto"></param>
         [Route("searchuniques")]
         [HttpGet]
-        public async IEnumerable<Item> SearchUniques(SearchUniquesDto searchDto = default(SearchUniquesDto))
+        public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto searchDto = default(SearchUniquesDto))
             => await ItemsService.SearchUniques(searchDto).ConfigureAwait(false);
 
         // TODO : la partie description de mon API ne semble pas fonctionner, il faudra que je google ça un petit peu :)
