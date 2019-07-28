@@ -18,7 +18,7 @@ import {
     MDBAnimation
 } from "mdbreact";
 import "./AppPage.css";
-import diablo from '../diablo.png';
+import diablo from '../diablo.gif';
 
 class AppPage extends React.Component {
     state = {
@@ -53,32 +53,14 @@ class AppPage extends React.Component {
         >
         <MDBContainer>
         <MDBNavbarBrand>
-        <strong className="white-text">MDB</strong>
+        <strong className="white-text">Diablo II - Documentation</strong>
             </MDBNavbarBrand>
             <MDBNavbarToggler onClick={this.handleTogglerClick} />
         <MDBCollapse isOpen={this.state.collapsed} navbar>
         <MDBNavbarNav left>
         <MDBNavItem active>
-        <MDBNavLink to="#!">Home</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-            <MDBNavLink to="#!">Link</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
-            <MDBNavLink to="#!">Profile</MDBNavLink>
-            </MDBNavItem>
-            </MDBNavbarNav>
-            <MDBNavbarNav right>
-        <MDBNavItem>
+
         <MDBFormInline waves>
-        <div className="md-form my-0">
-            <input
-        className="form-control mr-sm-2"
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-            />
-            </div>
             </MDBFormInline>
             </MDBNavItem>
             </MDBNavbarNav>
@@ -108,15 +90,7 @@ class AppPage extends React.Component {
         </MDBAnimation>
         </MDBCol>
 
-        <MDBCol md="6" xl="5" className="mt-xl-5">
-            <MDBAnimation type="fadeInRight" delay=".3s">
-            <img
-        src={diablo}
-        alt=""
-        className="img-fluid"
-            />
-            </MDBAnimation>
-            </MDBCol>
+
             </MDBRow>
             </MDBContainer>
             </MDBMask>
