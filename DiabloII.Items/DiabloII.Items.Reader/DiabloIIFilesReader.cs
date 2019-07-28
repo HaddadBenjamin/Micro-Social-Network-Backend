@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace DiabloII.Items.Reader
 {
-    public class DiabloIIDatasheetReader
+    public class DiabloIIFileReader
     {
         private List<string> MissingItemTypes = new List<String>();
 

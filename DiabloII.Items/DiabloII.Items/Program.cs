@@ -8,15 +8,17 @@ namespace DiabloII.Items
     {
         static void Main(string[] args)
         {
-            var datasheetPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.csv");
-            var jsonDestination = datasheetPath.Replace("csv", "json");
-            var uniqueDatasheetPath = File.ReadAllText(datasheetPath);
-            var diabloIIDatasheetReader = new DiabloIIDatasheetReader();
+            var uniquesPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.csv");
+            var weaponsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Weapons.csv");
+            var armorsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Armors.csv");
+            var uniquesDestination = uniquesPath.Replace("csv", "json");
+            var uniquesContent = File.ReadAllText(uniquesPath);
+            var reader = new DiabloIIFilesReader();
 
-            var items = diabloIIDatasheetReader.Read(uniqueDatasheetPath);
-            var itemsAsJson = JsonConvert.SerializeObject(items);
+            var uniques = reader.Read(uniquesContent);
+            var uniquesAsJson = JsonConvert.SerializeObject(uniques);
 
-            File.WriteAllText(jsonDestination, itemsAsJson);
+            File.WriteAllText(uniquesDestination, uniquesAsJson);
         }
     }
 }
