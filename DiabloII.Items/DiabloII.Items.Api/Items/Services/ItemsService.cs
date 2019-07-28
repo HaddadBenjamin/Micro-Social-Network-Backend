@@ -16,7 +16,7 @@ namespace DiabloII.Items.Api.Items.Services
             var uniquesAsJson = await File.ReadAllTextAsync(uniquesPath).ConfigureAwait(false);
             var uniques = JsonConvert.DeserializeObject<List<Item>>(uniquesAsJson);
 
-            return uniques.Where(unique => unique != null);
+            return uniques;
         }
 
         public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto dto)

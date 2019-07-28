@@ -26,6 +26,22 @@ namespace DiabloII.Items.Reader
             var weapons = ReadWeapons(weaponsCsv);
             var armors = ReadArmors(armorsCsv);
 
+            var armorCategories = armors
+                .Select(armor => armor.Slot)
+                .Distinct()
+                .ToList();
+
+            var weaponCategories = weapons
+                .Select(weapon =>
+                    weapon.Slot == "1h" ? weapon.Type :
+                    weapon.Slot == "2h" ? $"Two Handed {weapon.Type}" :
+                    $"Two And One Handed {weapon.Type}"
+                )
+                .Distinct()
+                .ToList();
+
+
+            // generate items sub category
             return ReadUniques(uniquesCsv, weapons, armors);
         }
 
@@ -43,7 +59,6 @@ namespace DiabloII.Items.Reader
                     if (itemData.Length < 4)
                         return null;
 
-                    var type = itemData[3];
                     var properties = new List<ItemProperty>();
 
                     for (var index = 4; index < itemData.Length; index += 4)
@@ -65,11 +80,11 @@ namespace DiabloII.Items.Reader
                     {
                         Name = itemData[0],
                         LevelRequired = itemData[2].ParseIntOrDefault(),
-                        Type = type,
                         Quality = "Unique",
                         Properties = properties
                     };
                 })
+                .Where(item => item != null)
                 .ToList();
 
         private List<ArmorReord> ReadArmors(string armorsCsv)
@@ -80,12 +95,16 @@ namespace DiabloII.Items.Reader
                 {
                     var itemData = line.Split(';');
 
+                    if (itemData.Length < 2)
+                        return null;
+
                     return new ArmorReord
                     {
                         Name = itemData[0],
                         Slot = itemData[1]
                     };
                 })
+                .Where(item => item != null)
                 .ToList();
 
         private List<WeaponRecord> ReadWeapons(string weaponsCsv) 
@@ -96,6 +115,9 @@ namespace DiabloII.Items.Reader
                 {
                     var itemData = line.Split(';');
 
+                    if (itemData.Length < 3)
+                        return null;
+
                     return new WeaponRecord
                     {
                         Name = itemData[0],
@@ -103,6 +125,7 @@ namespace DiabloII.Items.Reader
                         Slot = itemData[2]
                     };
                 })
+                .Where(item => item != null)
                 .ToList();
     }
 }
