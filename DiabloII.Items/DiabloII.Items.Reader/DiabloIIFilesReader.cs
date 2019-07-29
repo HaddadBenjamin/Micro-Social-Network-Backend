@@ -27,8 +27,12 @@ namespace DiabloII.Items.Reader
             var weapons = ReadWeapons(weaponsCsv);
             var armors = ReadArmors(armorsCsv);
             var subCategories = ReadSubCategories(weapons, armors);
+            var uniques = ReadUniques(uniquesCsv, subCategories);
 
-            return ReadUniques(uniquesCsv, subCategories);
+            var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
+            var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
+
+            return uniques;
         }
 
         public IEnumerable<Item> ReadUniques(string uniquesCsv, List<ItemCategoryRecord> itemCategories)
@@ -44,7 +48,11 @@ namespace DiabloII.Items.Reader
 
                     var properties = new List<ItemProperty>();
                     var name = itemData[0];
-                    var itemCategory = itemCategories.First(x => x.Name == itemData[3]);
+                    var type = itemData[3].ToTitleCase();
+                    var itemCategory = itemCategories.FirstOrDefault(x => x.Name == type);
+
+                    if (itemCategory == null)
+                        MissingItemTypes.Add(type);
 
                     for (var index = 4; index < itemData.Length; index += 4)
                     {
@@ -67,8 +75,8 @@ namespace DiabloII.Items.Reader
                         LevelRequired = itemData[2].ParseIntOrDefault(),
                         Quality = "Unique",
                         Properties = properties,
-                        Category = itemCategory.Category,
-                        SubCategory = itemCategory.SubCategory,
+                        Category = itemCategory?.Category,
+                        SubCategory = itemCategory?.SubCategory,
                     };
                 })
                 .Where(item => item != null)
