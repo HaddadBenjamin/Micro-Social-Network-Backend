@@ -13,12 +13,42 @@ namespace DiabloII.Items.Reader
         // TODO : 
         // - DEMANDER LE NOUVEAU DATASHEET A ASCENDED, IL A RAJOUTER DES COLONNES (SLOTS et chez pas quoi).
 
-        // - Mapper types to a SubCategory
-        // - Add those data in a database : 1) front ask items for a type. 2) back service is call that ask the db those items. 3) it will be faster than generate all items each time.
+        // + Le mappign des noms est à vérifier pour ces noms la :
+        // - 2-Handed Sword
+        //- Amulet
+        //- Ancientarmor
+        //- Arrows
+        //- Battle Guantlets
+        //- Bec-De-Corbin
+        //- Belt
+        //- Blood Spirit
+        //- Bolts
+        //- Bracers
+        //- Cap
+        //- Cedarbow
+        //- Charm
+        //- Conqueror Crown
+        //- Gauntlets
+        //- Girdle
+        //- Gloves
+        //- Hammer
+        //- Hard Leather
+        //- Hunter’S Bow
+        //- Jewel
+        //- Jo Stalf
+        //- Kris
+        //- Martel De Fer
+        //- Matriarchal Javelin
+        //- Ring
+        //- Sash
+        //- Silver-Edged Axe
+        //- Skull Guard
+        //- Staff
+        //- Tresllised Armor
         // - Trier les attributs : stat requis / damage / armure en premier / le reste trier en mode alphabétique ?
         // to verify : 
         // Il faudra que je mette à jour les énums côté API
-        // Générer le 
+        // Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw aussi ?
         public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
