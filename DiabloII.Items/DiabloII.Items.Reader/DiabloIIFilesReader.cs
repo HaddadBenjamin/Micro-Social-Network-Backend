@@ -59,8 +59,9 @@ namespace DiabloII.Items.Reader
             var subCategories = ReadSubCategories(weapons, armors);
             var uniques = ReadUniques(uniquesCsv, subCategories);
 
-            var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
-            var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
+            // For sanitize purpoeses and comparaison :
+            //var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
+            //var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
 
             return uniques;
         }
@@ -78,7 +79,15 @@ namespace DiabloII.Items.Reader
 
                     var properties = new List<ItemProperty>();
                     var name = itemData[0];
-                    var type = itemData[3].ToTitleCase();
+                    var type = itemData[3]
+                        .ToTitleCase()
+                        .Replace("Ancientarmor", "Ancient Armor")
+                        .Replace("Battle Guantlets", "Battle Gauntlets")
+                        .Replace("Cedarbow", "Cedar Bow")
+                        .Replace("Hunter’S Bow", "Hunter’s Bow")
+                        .Replace("Jo Stalf", "Jo Staff")
+                        .Replace("2-Handed Sword", "Two-Handed Sword")
+                        .Replace("Tresllised Armor", "Trellised Armor");
                     var itemCategory = itemCategories.FirstOrDefault(x => x.Name == type);
 
                     if (itemCategory == null)
@@ -160,8 +169,16 @@ namespace DiabloII.Items.Reader
             var armorSubCategoriesRecord = armors
                 .Select(armor => new ItemCategoryRecord
                 {
-                    Name = armor.Name,
-                    SubCategory = armor.Slot.ToTitleCase().Replace("\r", string.Empty),
+                    Name = armor.Name
+                        .Replace("\r", string.Empty)
+                            .Replace("(M)", "")
+                            .Replace("(H)", "")
+                            .Replace("(L)", "")
+                            .Replace("Hard Leather Armor", "Hard Leather")
+                            .Replace("Gaunlets", "Gauntlets")
+                            .Replace("Cap/hat", "Cap")
+                            .Replace("Skull  Guard", "Skull Guard"),
+                    SubCategory = armor.Slot.ToTitleCase(),
                     Category = "Armor"
                 })
                 .Where(record => record.SubCategory != string.Empty)
@@ -171,7 +188,13 @@ namespace DiabloII.Items.Reader
                 .Where(weapon => !string.IsNullOrWhiteSpace(weapon.Type))
                 .Select(weapon => new ItemCategoryRecord
                 {
-                    Name = weapon.Name,
+                    Name = weapon.Name
+                        .Replace("Bec-de-Corbin", "Bec-De-Corbin")
+                        .Replace("Kriss", "Kris")
+                        .Replace("Martel de Fer", "Martel De Fer")
+                        .Replace("Blood Spirt", "Blood Spirit")
+                        .Replace("Hunter's Bow", "Hunter’s Bow")
+                        .Replace("MatriarchalJavelin", "Matriarchal Javelin"),
                     Category = "Weapon",
                     SubCategory =
                         (weapon.Slot == "1h\r" ? weapon.Type :
@@ -196,13 +219,28 @@ namespace DiabloII.Items.Reader
                             .Replace("Ajav", "Amazon Javelin")
                             .Replace("H2h2", "Hand To Hand Two Handed")
                             .Replace("H2h", "Hand To Hand")
-                            .Replace("Jave", "Jave")
+                            .Replace("Jave", "Javelin") 
                 })
                 .ToList();
 
-                weaponSubCategoriesRecord.AddRange(armorSubCategoriesRecord);
+            weaponSubCategoriesRecord.AddRange(armorSubCategoriesRecord);
+            weaponSubCategoriesRecord.AddRange(new[]
+            {
+                    new ItemCategoryRecord { Name = "Silver-Edged Axe", Category = "Weapon", SubCategory = "Two Handed Axe"},
+                    new ItemCategoryRecord { Name = "Amulet", Category = "Jewelry", SubCategory = "Amulet"},
+                    new ItemCategoryRecord { Name = "Arrows", Category = "Armor", SubCategory = "Arrows"},
+                    new ItemCategoryRecord { Name = "Bolts", Category = "Armor", SubCategory = "Bolts"},
+                    new ItemCategoryRecord { Name = "Charm", Category = "Charm", SubCategory = "Charm"},
+                    new ItemCategoryRecord { Name = "Hammer", Category = "Weapon", SubCategory = "Hammer"},
+                    new ItemCategoryRecord { Name = "Jewel", Category = "Jewelry", SubCategory = "Jewel"},
+                    new ItemCategoryRecord { Name = "Ring", Category = "Jewelry", SubCategory = "Ring"},
+                    new ItemCategoryRecord { Name = "Staff", Category = "Weapon", SubCategory = "Staff"},
+                    new ItemCategoryRecord { Name = "Conqueror Crown", Category = "Armor", SubCategory = "Barbarian Helm"},
+                    new ItemCategoryRecord { Name = "Blood Spirit", Category = "Armor", SubCategory = "Druid Helm"},
+                    new ItemCategoryRecord { Name = "Bracers", Category = "Armor", SubCategory = "Bracers"},
+            });
 
-                return weaponSubCategoriesRecord;
+            return weaponSubCategoriesRecord;
         }
     }
 }
