@@ -41,7 +41,7 @@ namespace DiabloII.Items.Api.Items.Services
                     .Replace("Chu_Ko_Nu", "Chu-Ko-Nu")
                     .Replace("Bec_De_Corbin", "Bec-De-Corbin")
                     .Replace("Silver_Edged_Axe", "Silver-Edged Axe")
-                    .Replace("_", "Hunter’s Bow")))
+                    .Replace("_", " ")))
                 .Where(unique => dto.PropertyNames is null ||!dto.PropertyNames.Any() ? true : unique.Properties.Any(property => dto.PropertyNames.Contains(property.Name)));
         }
     }
