@@ -16,6 +16,7 @@ namespace DiabloII.Items.Reader
         // Il faudra que je mette à jour les énums côté API
         // Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw aussi ?
         // Récupérer aussi le niveau de l'objet
+        // Afficher tous les attributs en distinct et les convertir un nom verbeux
         public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
