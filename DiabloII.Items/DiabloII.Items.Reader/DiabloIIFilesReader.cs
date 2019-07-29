@@ -59,7 +59,10 @@ namespace DiabloII.Items.Reader
                     var itemCategory = itemCategories.FirstOrDefault(x => x.Name == type);
 
                     if (itemCategory == null)
+                    {
                         MissingItemTypes.Add(type);
+                        return null;
+                    }
 
                     for (var index = 4; index < itemData.Length; index += 4)
                     {

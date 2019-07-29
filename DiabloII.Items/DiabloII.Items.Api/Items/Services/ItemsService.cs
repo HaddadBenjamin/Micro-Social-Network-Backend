@@ -32,7 +32,17 @@ namespace DiabloII.Items.Api.Items.Services
                 .Where(unique => dto.Level is null ? true : unique.Level == dto.Level)
                 .Where(unique => dto.Quality is null ? true : unique.Quality.Contains(dto.Quality.ToString()))
                 .Where(unique => dto.Category is null || unique.Category is null ? true : unique.Category.Contains(dto.Category.ToString()))
-                .Where(unique => dto.SubCategory is null || unique.SubCategory is null ? true : unique.SubCategory.Contains(dto.SubCategory.ToString()))
+                .Where(unique => dto.SubCategory is null ? true : unique.SubCategory.Contains(dto.SubCategory
+                    .ToString()
+                    .Replace("Two_Handed_Sword", "Two-Handed Sword")
+                    .Replace("Wirt_s_Leg", "Wirt's Leg")
+                    .Replace("Poorman_s_Head", "Poorman`s Head")
+                    .Replace("Hunter_s_Bow", "Hunter’s Bow")
+                    .Replace("Chu_Ko_Nu", "Chu-Ko-Nu")
+                    .Replace("Bec_De_Corbin", "Bec-De-Corbin")
+                    .Replace("Silver_Edged_Axe", "Silver-Edged Axe")
+                    .Replace("_", " ")
+                )
                 .Where(unique => dto.PropertyNames is null ||!dto.PropertyNames.Any() ? true : unique.Properties.Any(property => dto.PropertyNames.Contains(property.Name)));
         }
     }
