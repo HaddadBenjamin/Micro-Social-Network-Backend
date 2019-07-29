@@ -11,44 +11,11 @@ namespace DiabloII.Items.Reader
         private List<string> MissingItemTypes = new List<String>();
 
         // TODO : 
-        // - DEMANDER LE NOUVEAU DATASHEET A ASCENDED, IL A RAJOUTER DES COLONNES (SLOTS et chez pas quoi).
-
-        // + Le mappign des noms est à vérifier pour ces noms la :
-        // - 2-Handed Sword
-        //- Amulet
-        //- Ancientarmor
-        //- Arrows
-        //- Battle Guantlets
-        //- Bec-De-Corbin
-        //- Belt
-        //- Blood Spirit
-        //- Bolts
-        //- Bracers
-        //- Cap
-        //- Cedarbow
-        //- Charm
-        //- Conqueror Crown
-        //- Gauntlets
-        //- Girdle
-        //- Gloves
-        //- Hammer
-        //- Hard Leather
-        //- Hunter’S Bow
-        //- Jewel
-        //- Jo Stalf
-        //- Kris
-        //- Martel De Fer
-        //- Matriarchal Javelin
-        //- Ring
-        //- Sash
-        //- Silver-Edged Axe
-        //- Skull Guard
-        //- Staff
-        //- Tresllised Armor
         // - Trier les attributs : stat requis / damage / armure en premier / le reste trier en mode alphabétique ?
         // to verify : 
         // Il faudra que je mette à jour les énums côté API
         // Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw aussi ?
+        // Récupérer aussi le niveau de l'objet
         public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
@@ -60,8 +27,8 @@ namespace DiabloII.Items.Reader
             var uniques = ReadUniques(uniquesCsv, subCategories);
 
             // For sanitize purpoeses and comparaison :
-            //var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
-            //var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
+            var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
+            var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
 
             return uniques;
         }
@@ -112,6 +79,7 @@ namespace DiabloII.Items.Reader
                     {
                         Name = name,
                         LevelRequired = itemData[2].ParseIntOrDefault(),
+                        Level = itemData[1].ParseIntOrDefault(),
                         Quality = "Unique",
                         Properties = properties,
                         Category = itemCategory?.Category,
@@ -171,9 +139,9 @@ namespace DiabloII.Items.Reader
                 {
                     Name = armor.Name
                         .Replace("\r", string.Empty)
-                            .Replace("(M)", "")
-                            .Replace("(H)", "")
-                            .Replace("(L)", "")
+                            .Replace("(M)", "Medium")
+                            .Replace("(H)", "Heavy")
+                            .Replace("(L)", "Light")
                             .Replace("Hard Leather Armor", "Hard Leather")
                             .Replace("Gaunlets", "Gauntlets")
                             .Replace("Cap/hat", "Cap")
@@ -237,7 +205,12 @@ namespace DiabloII.Items.Reader
                     new ItemCategoryRecord { Name = "Staff", Category = "Weapon", SubCategory = "Staff"},
                     new ItemCategoryRecord { Name = "Conqueror Crown", Category = "Armor", SubCategory = "Barbarian Helm"},
                     new ItemCategoryRecord { Name = "Blood Spirit", Category = "Armor", SubCategory = "Druid Helm"},
-                    new ItemCategoryRecord { Name = "Bracers", Category = "Armor", SubCategory = "Bracers"},
+                    new ItemCategoryRecord { Name = "Bracers", Category = "Armor", SubCategory = "Hands"},
+                    new ItemCategoryRecord { Name = "Gloves", Category = "Armor", SubCategory = "Hands"},
+                    new ItemCategoryRecord { Name = "Belt", Category = "Armor", SubCategory = "Waist"},
+                    new ItemCategoryRecord { Name = "Sash", Category = "Armor", SubCategory = "Waist"},
+                    new ItemCategoryRecord { Name = "Girdle", Category = "Armor", SubCategory = "Waist"},
+                    new ItemCategoryRecord { Name = "Gauntlets", Category = "Armor", SubCategory = "Hands"},
             });
 
             return weaponSubCategoriesRecord;
