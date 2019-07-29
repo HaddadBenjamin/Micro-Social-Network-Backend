@@ -30,6 +30,7 @@ namespace DiabloII.Items.Reader
             // For sanitize purpoeses and comparaison :
             var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
             var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
+            var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
 
             return uniques;
         }
@@ -191,7 +192,7 @@ namespace DiabloII.Items.Reader
                             .Replace("Ajav", "Amazon Javelin")
                             .Replace("H2h2", "Hand To Hand Two Handed")
                             .Replace("H2h", "Hand To Hand")
-                            .Replace("Jave", "Javelin") 
+                            .ToTitleCase()
                 })
                 .ToList();
 
