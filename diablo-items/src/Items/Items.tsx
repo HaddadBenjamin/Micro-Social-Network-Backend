@@ -1,8 +1,7 @@
 import Item from './Item'
 import React, { Component, useState  } from 'react';
 import axios from 'axios';
-import map from 'lodash/map'
-
+import ItemViewer from './ItemViewer'
 interface Props {}
 interface State
 {
@@ -34,13 +33,9 @@ class Items extends Component<Props, State>
     render()
     {
         const {Items} = this.state;
-        const items = Items.map((item, key) =>
-            <li key={key}>{item.Name}</li>
-        );
 
-        return (<ul>
-            {items}
-        </ul>)
+        return (<ItemViewer Items={Items}></ItemViewer>)
+        //return (<ul>{items}</ul>)
     }
 }
 
