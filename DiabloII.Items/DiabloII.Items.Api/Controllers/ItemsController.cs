@@ -4,6 +4,7 @@ using DiabloII.Items.Api.Items.Responses;
 using DiabloII.Items.Api.Items.Queries;
 using DiabloII.Items.Api.Items.Services;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Cors;
 
 namespace DiabloII.Items.Api.Controllers
 {
@@ -22,6 +23,7 @@ namespace DiabloII.Items.Api.Controllers
         /// <returns>A all uniques itesm/returns>
         [Route("getalluniques")]
         [HttpGet]
+        [EnableCors("AllowOrigin")]
         public async Task<IEnumerable<Item>> GetAllUniques() => await ItemsService.GetAllUniques().ConfigureAwait(false);
 
         /// <summary>
@@ -30,6 +32,7 @@ namespace DiabloII.Items.Api.Controllers
         /// <param name="searchDto"></param>
         [Route("searchuniques")]
         [HttpGet]
+        [EnableCors("AllowOrigin")]
         public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto searchDto = default(SearchUniquesDto))
             => await ItemsService.SearchUniques(searchDto).ConfigureAwait(false);
 

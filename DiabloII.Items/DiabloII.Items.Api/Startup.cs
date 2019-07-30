@@ -9,6 +9,8 @@ namespace DiabloII.Items.Api
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -18,6 +20,11 @@ namespace DiabloII.Items.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin());
+            });
+
             services.AddMvc();
 
             services.AddSwaggerGen(swagger =>
@@ -52,6 +59,8 @@ namespace DiabloII.Items.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(options => options.WithOrigins("https://localhost:3000"));
 
             app.UseMvc();
         }
