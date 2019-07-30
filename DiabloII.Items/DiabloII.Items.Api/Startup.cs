@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace DiabloII.Items.Api
@@ -25,7 +26,8 @@ namespace DiabloII.Items.Api
                 options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin());
             });
 
-            services.AddMvc();
+            services.AddMvc()
+                    .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             services.AddSwaggerGen(swagger =>
             {

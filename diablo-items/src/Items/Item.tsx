@@ -19,3 +19,5 @@ interface ItemProperty
 }
 
 export default Item;
+
+// Utilisation des variables et des fichiers de configuration différents en fonction de l'environnement. (API URL par exemple) : https://serverless-stack.com/chapters/environments-in-create-react-app.html
