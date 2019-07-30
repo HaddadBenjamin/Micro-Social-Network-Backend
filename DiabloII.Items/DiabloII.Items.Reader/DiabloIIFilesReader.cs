@@ -14,7 +14,7 @@ namespace DiabloII.Items.Reader
         // - Trier les attributs : stat requis / damage / armure en premier / le reste trier en mode alphabétique ?
         // to verify : 
         // Il faudra que je mette à jour les énums côté API
-        // Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw aussi ?
+        // Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
         // Récupérer aussi le niveau de l'objet
         // Afficher tous les attributs en distinct et les convertir un nom verbeux
         public IEnumerable<Item> Read(

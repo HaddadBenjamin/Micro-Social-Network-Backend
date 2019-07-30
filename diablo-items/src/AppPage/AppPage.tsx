@@ -5,7 +5,6 @@ import {
     MDBNavbarBrand,
     MDBNavbarNav,
     MDBNavItem,
-    MDBNavLink,
     MDBNavbarToggler,
     MDBCollapse,
     MDBMask,
@@ -19,8 +18,10 @@ import {
 } from "mdbreact";
 import "./AppPage.css";
 
-class AppPage extends React.Component {
-    state = {
+class AppPage extends React.Component
+{
+    state =
+    {
         collapsed: false
     };
 
