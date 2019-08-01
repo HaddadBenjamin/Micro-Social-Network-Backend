@@ -130,13 +130,17 @@ namespace DiabloII.Items.Reader
                     if (itemData.Length < 3)
                         return null;
 
-                    return new WeaponRecord
-                    {
-                        Name = itemData[0],
-                        Type = itemData[1],
-                        Slot = itemData[2]
-                    };
-                })
+					return new WeaponRecord
+					{
+						Name = itemData[0],
+						Type = itemData[1],
+						Slot = itemData[2],
+						MinimumOneHandedDamage = itemData[3].ParseIntOrDefault(),
+						MaximumOneHandedDamage = itemData[4].ParseIntOrDefault(),
+						MinimumTwoHandedDamage = itemData[5].ParseIntOrDefault(),
+						MaximumTwoHandedDamage = itemData[6].ParseIntOrDefault(),
+					};
+				})
                 .Where(item => item != null)
                 .ToList();
 
@@ -164,48 +168,53 @@ namespace DiabloII.Items.Reader
                 .Where(record => record.SubCategory != string.Empty)
                 .ToList();
 
-            var weaponSubCategoriesRecord = weapons
-                .Where(weapon => !string.IsNullOrWhiteSpace(weapon.Type))
-                .Select(weapon => new ItemCategoryRecord
-                {
-                    Name = weapon.Name
-                        .Replace("Bec-de-Corbin", "Bec-De-Corbin")
-                        .Replace("Kriss", "Kris")
-                        .Replace("Martel de Fer", "Martel De Fer")
-                        .Replace("Blood Spirt", "Blood Spirit")
-                        .Replace("Hunter's Bow", "Hunter’s Bow")
-                        .Replace("MatriarchalJavelin", "Matriarchal Javelin"),
-                    Category = "Weapon",
-                    SubCategory =
-                        (weapon.Slot == "1h\r" ? weapon.Type :
-                         weapon.Slot == "2h\r" ? $"Two Handed {weapon.Type}" :
-                         $"Two And One Handed {weapon.Type}")
-                            .ToTitleCase()
-                            .Replace("Scep", "Scepter")
-                            .Replace("Hamm", "Hammer")
-                            .Replace("Swor", "Sword")
-                            .Replace("Knif", "Knife")
-                            .Replace("Jave", "Javelin")
-                            .Replace("Jave", "Jave")
-                            .Replace("Spea", "Spear")
-                            .Replace("Pole", "Polearm")
-                            .Replace("Staf", "Staff")
-                            .Replace("Xbow", "Crossbow")
-                            .Replace("Tpot", "Throwing Potions")
-                            .Replace("Taxe", "Throwing Axe")
-                            .Replace("Tkni", "Thorwing knife")
-                            .Replace("Abow", "Amazon bow")
-                            .Replace("Aspe", "Amazon spear")
-                            .Replace("Ajav", "Amazon Javelin")
-                            .Replace("H2h2", "Hand To Hand Two Handed")
-                            .Replace("H2h", "Hand To Hand")
-                            .ToTitleCase()
-                })
+			var weaponSubCategoriesRecord = weapons
+				.Where(weapon => !string.IsNullOrWhiteSpace(weapon.Type))
+				.Select(weapon => new ItemCategoryRecord
+				{
+					Name = weapon.Name
+						.Replace("Bec-de-Corbin", "Bec-De-Corbin")
+						.Replace("Kriss", "Kris")
+						.Replace("Martel de Fer", "Martel De Fer")
+						.Replace("Blood Spirt", "Blood Spirit")
+						.Replace("Hunter's Bow", "Hunter’s Bow")
+						.Replace("MatriarchalJavelin", "Matriarchal Javelin"),
+					Category = "Weapon",
+					SubCategory =
+						(weapon.Slot == "1h\r" ? weapon.Type :
+						 weapon.Slot == "2h\r" ? $"Two Handed {weapon.Type}" :
+						 $"Two And One Handed {weapon.Type}")
+							.ToTitleCase()
+							.Replace("Scep", "Scepter")
+							.Replace("Hamm", "Hammer")
+							.Replace("Swor", "Sword")
+							.Replace("Knif", "Knife")
+							.Replace("Jave", "Javelin")
+							.Replace("Jave", "Jave")
+							.Replace("Spea", "Spear")
+							.Replace("Pole", "Polearm")
+							.Replace("Staf", "Staff")
+							.Replace("Xbow", "Crossbow")
+							.Replace("Tpot", "Throwing Potions")
+							.Replace("Taxe", "Throwing Axe")
+							.Replace("Tkni", "Thorwing knife")
+							.Replace("Abow", "Amazon bow")
+							.Replace("Aspe", "Amazon spear")
+							.Replace("Ajav", "Amazon Javelin")
+							.Replace("H2h2", "Hand To Hand Two Handed")
+							.Replace("H2h", "Hand To Hand")
+							.ToTitleCase(),
+					MinimumOneHandedDamage = weapon.MinimumOneHandedDamage,
+					MaximumOneHandedDamage = weapon.MaximumOneHandedDamage,
+					MinimumTwoHandedDamage = weapon.MinimumTwoHandedDamage,
+					MaximumTwoHandedDamage = weapon.MaximumTwoHandedDamage
+				})
                 .ToList();
 
             weaponSubCategoriesRecord.AddRange(armorSubCategoriesRecord);
             weaponSubCategoriesRecord.AddRange(new[]
             {
+				// Manque l'armure et les dommages
                     new ItemCategoryRecord { Name = "Silver-Edged Axe", Category = "Weapon", SubCategory = "Two Handed Axe"},
                     new ItemCategoryRecord { Name = "Amulet", Category = "Jewelry", SubCategory = "Amulet"},
                     new ItemCategoryRecord { Name = "Arrows", Category = "Armor", SubCategory = "Arrows"},

@@ -12,10 +12,14 @@ namespace DiabloII.Items.Reader
         public int Level { get; set; }
         public IEnumerable<ItemProperty> Properties { get; set; }
 		
-		/// <summary>
-		/// Specific to Armor.
-		/// </summary>
+		// Specific to Armor.
 		public int? MinimumDefense { get; set; }
 		public int? MaximumDefense { get; set; }
+		
+		// Specific to Weapon.
+		public int? MinimumOneHandedDamage { get; set; }
+		public int? MaximumOneHandedDamage { get; set; }
+		public int? MinimumTwoHandedDamage { get; set; }
+		public int? MaximumTwoHandedDamage { get; set; }
 	}
 }
