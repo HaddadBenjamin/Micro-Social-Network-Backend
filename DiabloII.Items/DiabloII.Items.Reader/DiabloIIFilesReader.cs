@@ -17,6 +17,7 @@ namespace DiabloII.Items.Reader
 		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
 		// Recalculer l'attack speed.
 		// Recacluler : attack speed, dommage une à deux mains, defence, stats requis ?
+		// Utiliser le nouveau document properties de Ascended pour calculer "IsPercent" et "Description" des attributs.
 		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
@@ -31,6 +32,7 @@ namespace DiabloII.Items.Reader
             var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
             var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
             var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
+			var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
 
             return uniques;
         }
@@ -145,7 +147,7 @@ namespace DiabloII.Items.Reader
 					{
 						Name = itemData[0],
 						Type = itemData[1],
-						Slot = itemData[2],
+						Slot = itemData[2].Replace("\r", string.Empty),
 						MinimumOneHandedDamage = itemData[3].ParseIntOrDefault(),
 						MaximumOneHandedDamage = itemData[4].ParseIntOrDefault(),
 						MinimumTwoHandedDamage = itemData[5].ParseIntOrDefault(),
@@ -196,8 +198,8 @@ namespace DiabloII.Items.Reader
 						.Replace("MatriarchalJavelin", "Matriarchal Javelin"),
 					Category = "Weapon",
 					SubCategory =
-						(weapon.Slot == "1h\r" ? weapon.Type :
-						 weapon.Slot == "2h\r" ? $"Two Handed {weapon.Type}" :
+						(weapon.Slot == "1h" ? weapon.Type :
+						 weapon.Slot == "2h" ? $"Two Handed {weapon.Type}" :
 						 $"Two And One Handed {weapon.Type}")
 							.ToTitleCase()
 							.Replace("Scep", "Scepter")
