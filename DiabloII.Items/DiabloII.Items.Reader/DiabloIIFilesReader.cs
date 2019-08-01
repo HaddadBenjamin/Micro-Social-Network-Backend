@@ -16,6 +16,7 @@ namespace DiabloII.Items.Reader
 		// Récupérer les stats requis par niveau (il faudra aussi probablement les recaculer avec les attributs).
 		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
 		// Recalculer l'attack speed.
+		// Recacluler : attack speed, dommage une à deux mains, defence, stats requis ?
 		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
@@ -88,6 +89,7 @@ namespace DiabloII.Items.Reader
                         Properties = properties,
                         Category = itemCategory?.Category,
                         SubCategory = itemCategory?.SubCategory,
+						Type = type,
 						// Specific to Armor :
 						MinimumDefense = itemCategory?.MinimumDefense,
 						MaximumDefense = itemCategory?.MaximumDefense,
