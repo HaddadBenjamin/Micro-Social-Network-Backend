@@ -10,14 +10,13 @@ namespace DiabloII.Items.Reader
     {
         private List<string> MissingItemTypes = new List<String>();
 
-        // TODO : 
-        // - Trier les attributs : stat requis / damage / armure en premier / le reste trier en mode alphabétique ?
-        // to verify : 
-        // Il faudra que je mette à jour les énums côté API
-        // Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
-        // Récupérer aussi le niveau de l'objet
-        // Afficher tous les attributs en distinct et les convertir un nom verbeux
-        public IEnumerable<Item> Read(
+		// TODO : 
+		// Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
+		// Afficher tous les attributs en distinct et les convertir un nom verbeux
+		// Récupérer les stats requis par niveau (il faudra aussi probablement les recaculer avec les attributs).
+		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
+		// Recalculer l'attack speed.
+		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
             string armorsCsv)
@@ -92,6 +91,15 @@ namespace DiabloII.Items.Reader
 						// Specific to Armor :
 						MinimumDefense = itemCategory?.MinimumDefense,
 						MaximumDefense = itemCategory?.MaximumDefense,
+						// Specific to Weapon :
+						MinimumOneHandedDamage = itemCategory?.MinimumOneHandedDamage,
+						MaximumOneHandedDamage = itemCategory?.MaximumOneHandedDamage,
+						MinimumTwoHandedDamage = itemCategory?.MinimumTwoHandedDamage,
+						MaximumTwoHandedDamage = itemCategory?.MaximumTwoHandedDamage,
+						AttackSpeed = itemCategory?.AttackSpeed,
+						// Stats
+						StrengthRequired = itemCategory?.StrengthRequired,
+						DexterityRequired = itemCategory?.DexterityRequired,
 					};
                 })
                 .Where(item => item != null)
@@ -114,6 +122,7 @@ namespace DiabloII.Items.Reader
                         Slot = itemData[1],
 						MinimumDefense = itemData[2].ParseIntOrDefault(),
 						MaximumDefense = itemData[3].ParseIntOrDefault(),
+						StrengthRequired = itemData[4].ParseIntOrDefault()
                     };
                 })
                 .Where(item => item != null)
@@ -139,6 +148,9 @@ namespace DiabloII.Items.Reader
 						MaximumOneHandedDamage = itemData[4].ParseIntOrDefault(),
 						MinimumTwoHandedDamage = itemData[5].ParseIntOrDefault(),
 						MaximumTwoHandedDamage = itemData[6].ParseIntOrDefault(),
+						StrengthRequired = itemData[7].ParseIntOrDefault(),
+						DexterityRequired = itemData[8].ParseIntOrDefault(),
+						AttackSpeed = itemData[9].ParseIntOrDefault(),
 					};
 				})
                 .Where(item => item != null)
@@ -164,6 +176,7 @@ namespace DiabloII.Items.Reader
                     Category = "Armor",
 					MinimumDefense = armor.MinimumDefense,
 					MaximumDefense = armor.MaximumDefense,
+					StrengthRequired = armor.StrengthRequired,
                 })
                 .Where(record => record.SubCategory != string.Empty)
                 .ToList();
@@ -207,7 +220,10 @@ namespace DiabloII.Items.Reader
 					MinimumOneHandedDamage = weapon.MinimumOneHandedDamage,
 					MaximumOneHandedDamage = weapon.MaximumOneHandedDamage,
 					MinimumTwoHandedDamage = weapon.MinimumTwoHandedDamage,
-					MaximumTwoHandedDamage = weapon.MaximumTwoHandedDamage
+					MaximumTwoHandedDamage = weapon.MaximumTwoHandedDamage,
+					AttackSpeed = weapon.AttackSpeed,
+					StrengthRequired = weapon.StrengthRequired,
+					DexterityRequired = weapon.DexterityRequired
 				})
                 .ToList();
 

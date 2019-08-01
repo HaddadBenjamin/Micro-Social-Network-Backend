@@ -11,5 +11,20 @@ namespace DiabloII.Items.Api.Items.Responses
         public int LevelRequired { get; set; }
         public int Level { get; set; }
         public IEnumerable<ItemProperty> Properties { get; set; }
-    }
+
+		// Specific to Armor.
+		public int? MinimumDefense { get; set; }
+		public int? MaximumDefense { get; set; }
+
+		// Specific to Weapon.
+		public int? MinimumOneHandedDamage { get; set; }
+		public int? MaximumOneHandedDamage { get; set; }
+		public int? MinimumTwoHandedDamage { get; set; }
+		public int? MaximumTwoHandedDamage { get; set; }
+		public int? AttackSpeed { get; set; }
+
+		// Stat required.
+		public int? StrengthRequired { get; set; }
+		public int? DexterityRequired { get; set; }
+	}
 }
