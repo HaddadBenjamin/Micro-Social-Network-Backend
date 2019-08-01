@@ -86,6 +86,8 @@ namespace DiabloII.Items.Reader
 					var maxDamage = GetPropertyValueOrDefault(properties, "dmg-max");
 					var damagePercentMinimum = GetPropertyValueOrDefault(properties, "Damage %") + 100;
 					var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", true) + 100;
+					var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %") + 100;
+					var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", true) + 100;
 
 					return new Item
                     {
@@ -98,8 +100,10 @@ namespace DiabloII.Items.Reader
                         SubCategory = itemCategory?.SubCategory,
 						Type = type,
 						// Specific to Armor :
-						MinimumDefense = itemCategory?.MinimumDefense,
-						MaximumDefense = itemCategory?.MaximumDefense,
+						MinimumDefenseMinimum = (itemCategory?.MinimumDefense * defensePercentMinimum) / 100,
+						MaximumDefenseMinimum = (itemCategory?.MaximumDefense * defensePercentMinimum) / 100,
+						MinimumDefenseMaximum = (itemCategory?.MinimumDefense * defensePercentMaximum) / 100,
+						MaximumDefenseMaximum = (itemCategory?.MaximumDefense * defensePercentMaximum) / 100,
 						// Specific to Weapon :
 						MinimumOneHandedDamageMinimum = (itemCategory?.MinimumOneHandedDamage * damagePercentMinimum) / 100 + minDamage,
 						MaximumOneHandedDamageMinimum = (itemCategory?.MaximumOneHandedDamage * damagePercentMinimum) / 100 + maxDamage,

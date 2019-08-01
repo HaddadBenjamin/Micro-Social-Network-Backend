@@ -14,9 +14,11 @@ namespace DiabloII.Items.Reader
         public IEnumerable<ItemProperty> Properties { get; set; }
 		
 		// Specific to Armor.
-		public int? MinimumDefense { get; set; }
-		public int? MaximumDefense { get; set; }
-		
+		public int? MinimumDefenseMinimum { get; set; }
+		public int? MaximumDefenseMinimum { get; set; }
+		public int? MinimumDefenseMaximum { get; set; }
+		public int? MaximumDefenseMaximum { get; set; }
+
 		// Specific to Weapon.
 		public int? MinimumOneHandedDamageMinimum { get; set; }
 		public int? MaximumOneHandedDamageMinimum { get; set; }
