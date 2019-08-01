@@ -34,7 +34,7 @@ namespace DiabloII.Items.Reader
             var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
 			var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
 
-            return uniques;
+			return uniques;
         }
 
         public IEnumerable<Item> ReadUniques(string uniquesCsv, List<ItemCategoryRecord> itemCategories)
@@ -82,7 +82,12 @@ namespace DiabloII.Items.Reader
                         });
                     }
 
-                    return new Item
+					var minDamage = GetPropertyValueOrDefault(properties, "dmg-min");
+					var maxDamage = GetPropertyValueOrDefault(properties, "dmg-max");
+					var damagePercentMinimum = GetPropertyValueOrDefault(properties, "Damage %") + 100;
+					var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", true) + 100;
+
+					return new Item
                     {
                         Name = name,
                         LevelRequired = itemData[2].ParseIntOrDefault(),
@@ -96,10 +101,14 @@ namespace DiabloII.Items.Reader
 						MinimumDefense = itemCategory?.MinimumDefense,
 						MaximumDefense = itemCategory?.MaximumDefense,
 						// Specific to Weapon :
-						MinimumOneHandedDamage = itemCategory?.MinimumOneHandedDamage,
-						MaximumOneHandedDamage = itemCategory?.MaximumOneHandedDamage,
-						MinimumTwoHandedDamage = itemCategory?.MinimumTwoHandedDamage,
-						MaximumTwoHandedDamage = itemCategory?.MaximumTwoHandedDamage,
+						MinimumOneHandedDamageMinimum = (itemCategory?.MinimumOneHandedDamage * damagePercentMinimum) / 100 + minDamage,
+						MaximumOneHandedDamageMinimum = (itemCategory?.MaximumOneHandedDamage * damagePercentMinimum) / 100 + maxDamage,
+						MinimumTwoHandedDamageMinimum = (itemCategory?.MinimumTwoHandedDamage * damagePercentMinimum) / 100 + minDamage,
+						MaximumTwoHandedDamageMinimum = (itemCategory?.MaximumTwoHandedDamage * damagePercentMinimum) / 100 + maxDamage,
+						MinimumOneHandedDamageMaximum = (itemCategory?.MinimumOneHandedDamage * damagePercentMaximum) / 100 + minDamage,
+						MaximumOneHandedDamageMaximum = (itemCategory?.MaximumOneHandedDamage * damagePercentMaximum) / 100 + maxDamage,
+						MinimumTwoHandedDamageMaximum = (itemCategory?.MinimumTwoHandedDamage * damagePercentMaximum) / 100 + minDamage,
+						MaximumTwoHandedDamageMaximum = (itemCategory?.MaximumTwoHandedDamage * damagePercentMaximum) / 100 + maxDamage,
 						AttackSpeed = itemCategory?.AttackSpeed,
 						// Stats
 						StrengthRequired = itemCategory?.StrengthRequired,
@@ -256,5 +265,12 @@ namespace DiabloII.Items.Reader
 
             return weaponSubCategoriesRecord;
         }
-    }
+
+		private static int GetPropertyValueOrDefault(List<ItemProperty> properties, string name, bool maximum = false)
+		{
+			var property = properties.FirstOrDefault(_ => _.Name == name);
+
+			return property == null ? 0 : maximum ? property.Maximum : property.Minimum;
+		}
+	}
 }
