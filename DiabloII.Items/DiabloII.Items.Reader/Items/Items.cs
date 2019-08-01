@@ -11,5 +11,11 @@ namespace DiabloII.Items.Reader
         public int LevelRequired { get; set; }
         public int Level { get; set; }
         public IEnumerable<ItemProperty> Properties { get; set; }
-    }
+		
+		/// <summary>
+		/// Specific to Armor.
+		/// </summary>
+		public int? MinimumDefense { get; set; }
+		public int? MaximumDefense { get; set; }
+	}
 }

@@ -89,7 +89,10 @@ namespace DiabloII.Items.Reader
                         Properties = properties,
                         Category = itemCategory?.Category,
                         SubCategory = itemCategory?.SubCategory,
-                    };
+						// Specific to Armor :
+						MinimumDefense = itemCategory?.MinimumDefense,
+						MaximumDefense = itemCategory?.MaximumDefense,
+					};
                 })
                 .Where(item => item != null)
                 .ToList();
@@ -108,7 +111,9 @@ namespace DiabloII.Items.Reader
                     return new ArmorReord
                     {
                         Name = itemData[0],
-                        Slot = itemData[1]
+                        Slot = itemData[1],
+						MinimumDefense = itemData[2].ParseIntOrDefault(),
+						MaximumDefense = itemData[3].ParseIntOrDefault(),
                     };
                 })
                 .Where(item => item != null)
@@ -152,7 +157,9 @@ namespace DiabloII.Items.Reader
                             .Replace("Cap/hat", "Cap")
                             .Replace("Skull  Guard", "Skull Guard"),
                     SubCategory = armor.Slot.ToTitleCase(),
-                    Category = "Armor"
+                    Category = "Armor",
+					MinimumDefense = armor.MinimumDefense,
+					MaximumDefense = armor.MaximumDefense,
                 })
                 .Where(record => record.SubCategory != string.Empty)
                 .ToList();
