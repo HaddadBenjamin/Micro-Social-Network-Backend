@@ -87,8 +87,10 @@ namespace DiabloII.Items.Reader
 					var damagePercentMinimum = GetPropertyValueOrDefault(properties, "Damage %") + 100;
 					var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", ItemPropertyType.Maximum) + 100;
 					var damagePercentPerLevel = GetPropertyValueOrDefault(properties, "dmg%/lvl", ItemPropertyType.Par);
+
 					var defenseMinimum = GetPropertyValueOrDefault(properties, "Armor Class");
 					var defenseMaximum = GetPropertyValueOrDefault(properties, "Armor Class", ItemPropertyType.Maximum);
+					var defensePerLevel = GetPropertyValueOrDefault(properties, "ac/lvl", ItemPropertyType.Par);
 					var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %") + 100;
 					var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", ItemPropertyType.Maximum) + 100;
 
@@ -105,10 +107,10 @@ namespace DiabloII.Items.Reader
                         SubCategory = itemCategory?.SubCategory,
 						Type = type,
 						// Specific to Armor :
-						MinimumDefenseMinimum = (itemCategory?.MinimumDefense * defensePercentMinimum) / 100 + defenseMinimum,
-						MaximumDefenseMinimum = (itemCategory?.MaximumDefense * defensePercentMinimum) / 100 + defenseMinimum,
-						MinimumDefenseMaximum = (itemCategory?.MinimumDefense * defensePercentMaximum) / 100 + defenseMaximum,
-						MaximumDefenseMaximum = (itemCategory?.MaximumDefense * defensePercentMaximum) / 100 + defenseMaximum,
+						MinimumDefenseMinimum = (itemCategory?.MinimumDefense * defensePercentMinimum) / 100 + defenseMinimum + defensePerLevel / 99,
+						MaximumDefenseMinimum = (itemCategory?.MaximumDefense * defensePercentMinimum) / 100 + defenseMinimum + defensePerLevel / 99,
+						MinimumDefenseMaximum = (itemCategory?.MinimumDefense * defensePercentMaximum) / 100 + defenseMaximum + defensePerLevel,
+						MaximumDefenseMaximum = (itemCategory?.MaximumDefense * defensePercentMaximum) / 100 + defenseMaximum + defensePerLevel,
 						// Specific to Weapon :
 						MinimumOneHandedDamageMinimum = ((itemCategory?.MinimumOneHandedDamage * (damagePercentMinimum)) / 100).AddIfPositive(minimumDamage),
 						MaximumOneHandedDamageMinimum = ((itemCategory?.MaximumOneHandedDamage * (damagePercentMinimum)) / 100).AddIfPositive(minimumDamage),
