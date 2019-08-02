@@ -38,6 +38,7 @@ class ItemViewer extends React.Component {
           </div>
           <div style={{color : "white"}}>{/*revoir la couleur*/}
                 {item.MaximumDefenseMinimum > 0 ? <div>Defense : <span className="diablo-attribute">{item.MaximumDefenseMinimum}-{item.MaximumDefenseMaximum}</span></div> : ''}
+                {item.MinimumOneHandedDamageMinimum > 0 ? <div>One-Hand Damage : <span className="diablo-attribute">{item.MinimumOneHandedDamageMinimum}-{item.MaximumOneHandedDamageMinimum} to {item.MinimumOneHandedDamageMaximum}-{item.MaximumOneHandedDamageMaximum}</span></div> : ''}
                 {item.MinimumTwoHandedDamageMinimum > 0 ? <div>Two-Hand Damage : <span className="diablo-attribute">{item.MinimumTwoHandedDamageMinimum}-{item.MaximumTwoHandedDamageMinimum} to {item.MinimumTwoHandedDamageMaximum}-{item.MaximumTwoHandedDamageMaximum}</span></div> : ''}
             {/* - one-handed damage ou two-handed damage ou les deux : dommage avec le bonus de dommage compris (min damage, Max damage, pourcentage, d’image)
          - défense avec le bonus de défense (défense , defence pourcent )*/}
