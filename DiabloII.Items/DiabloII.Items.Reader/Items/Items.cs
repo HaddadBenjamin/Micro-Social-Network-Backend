@@ -28,7 +28,6 @@ namespace DiabloII.Items.Reader
 		public int? MaximumOneHandedDamageMaximum { get; set; }
 		public int? MinimumTwoHandedDamageMaximum { get; set; }
 		public int? MaximumTwoHandedDamageMaximum { get; set; }
-		public int? AttackSpeed { get; set; }
 
 		// Stat required.
 		public int? StrengthRequired { get; set; }

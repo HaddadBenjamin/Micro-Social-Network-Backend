@@ -10,7 +10,6 @@
 		public int MaximumOneHandedDamage { get; set; }
 		public int MinimumTwoHandedDamage { get; set; }
 		public int MaximumTwoHandedDamage { get; set; }
-		public int AttackSpeed { get; set; }
 
 		public int StrengthRequired { get; set; }
 		public int DexterityRequired { get; set; }
