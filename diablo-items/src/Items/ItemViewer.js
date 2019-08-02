@@ -32,7 +32,7 @@ class ItemViewer extends React.Component {
            <div className="item">
 
            OBJECT IMAGE
-            <div style={{color : "orange"}}> {/*qualité lié à la qualité e l'objet et revoit la couleur */}
+            <div className="unique"> {/*qualité lié à la qualité e l'objet et revoit la couleur */}
           {item.Name} <br/>
           {item.Type} {/* Utiliser le type de l'objet plutôt */}
           </div>
@@ -43,7 +43,7 @@ class ItemViewer extends React.Component {
             {/* - one-handed damage ou two-handed damage ou les deux : dommage avec le bonus de dommage compris (min damage, Max damage, pourcentage, d’image)
          - défense avec le bonus de défense (défense , defence pourcent )*/}
           </div>
-          <div style={{color : "red"}}>{/*  rvoir la couleur */}
+          <div className="required-attribute">{/*  rvoir la couleur */}
             {/* - stats requis, level requis en rouge */ }
                 {item.StrengthRequired > 0 ? <div>Required Strength : {item.StrengthRequired} </div> : ''}
                 {item.DexterityRequired > 0 ? <div>Required Dexterity : {item.DexterityRequired} </div> : ''}

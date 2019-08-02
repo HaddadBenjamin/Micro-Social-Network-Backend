@@ -1,3 +1,9 @@
+@font-face
+{
+    font-family: Diablo;
+    src: url(avqest.ttf);
+}
+
 .diablo-attribute
 {
     color: #4169E1;
@@ -5,12 +11,21 @@
 
 .unique
 {
-    color : rgb(123, 110, 70);
+    color : rgb(229, 150, 29);
 }
-
+.required-attribute
+{
+    color : #eb0d26;
+}
 .item
 {
-    margin : 5px;
-    background: rgba(0, 0, 0, 1);
+    padding : 10px;
+    margin : 10px;
+    background: black;
     text-align: center;
+    line-height: 16pt;
+    font-family: Diablo;
+    font-weight: 100;
+    font-size : 20px;
+
 }
