@@ -12,11 +12,8 @@ namespace DiabloII.Items.Reader
 
 		// TODO : 
 		// Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
-		// Afficher tous les attributs en distinct et les convertir un nom verbeux
-		// Récupérer les stats requis par niveau (il faudra aussi probablement les recaculer avec les attributs).
 		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
 		// Utiliser le nouveau document properties de Ascended pour calculer "IsPercent" et "Description" des attributs.
-		// Next step for tomorrow caclul attack speed / + defence / stats
 		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
