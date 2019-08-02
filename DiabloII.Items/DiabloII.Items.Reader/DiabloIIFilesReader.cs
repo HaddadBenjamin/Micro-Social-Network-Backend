@@ -74,23 +74,19 @@ namespace DiabloII.Items.Reader
                         properties.Add(new ItemProperty
                         {
                             Name = itemData[index],
-                            Par = itemData[index + 1].ParseIntOrDefault(),
+                            Par = (double)itemData[index + 1].ParseIntOrDefault() / 8,
                             Minimum = itemData[index + 2].ParseIntOrDefault(),
                             Maximum = itemData[index + 3].ParseIntOrDefault(),
                             IsPercent = itemData[index].Contains("%")
                         });
                     }
 
-					var minimumDamage = GetPropertyValueOrDefault(properties, "dmg-min");
-					var maximumDamage = GetPropertyValueOrDefault(properties, "dmg-max");
+					var minimumDamage = GetPropertyValueOrDefault(properties, "dmg-min") + GetPropertyValueOrDefault(properties, "dmg-norm");
+					var maximumDamage = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
 					var damagePerLevel = GetPropertyValueOrDefault(properties, "dmg/lvl", ItemPropertyType.Par);
-					var minimumDamagePerLevel = damagePerLevel / 8;
-					var maximumDamagePerLevel = damagePerLevel * 99 / 8;
 					var damagePercentMinimum = GetPropertyValueOrDefault(properties, "Damage %") + 100;
 					var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", ItemPropertyType.Maximum) + 100;
 					var damagePercentPerLevel = GetPropertyValueOrDefault(properties, "dmg%/lvl", ItemPropertyType.Par);
-					var minimumDamagePercentPerLevel = damagePercentPerLevel / 8;
-					var maximumDamagePercentPerLevel = damagePercentPerLevel * 99 / 8;
 					var defenseMinimum = GetPropertyValueOrDefault(properties, "Armor Class");
 					var defenseMaximum = GetPropertyValueOrDefault(properties, "Armor Class", ItemPropertyType.Maximum);
 					var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %") + 100;
@@ -114,14 +110,14 @@ namespace DiabloII.Items.Reader
 						MinimumDefenseMaximum = (itemCategory?.MinimumDefense * defensePercentMaximum) / 100 + defenseMaximum,
 						MaximumDefenseMaximum = (itemCategory?.MaximumDefense * defensePercentMaximum) / 100 + defenseMaximum,
 						// Specific to Weapon :
-						MinimumOneHandedDamageMinimum = (itemCategory?.MinimumOneHandedDamage * (damagePercentMinimum + minimumDamagePercentPerLevel)) / 100 + minimumDamage + minimumDamagePerLevel,
-						MaximumOneHandedDamageMinimum = (itemCategory?.MaximumOneHandedDamage * (damagePercentMinimum + minimumDamagePercentPerLevel)) / 100 + minimumDamage + minimumDamagePerLevel,
-						MinimumTwoHandedDamageMinimum = (itemCategory?.MinimumTwoHandedDamage * (damagePercentMinimum + minimumDamagePercentPerLevel)) / 100 + minimumDamage + minimumDamagePerLevel,
-						MaximumTwoHandedDamageMinimum = (itemCategory?.MaximumTwoHandedDamage * (damagePercentMinimum + minimumDamagePercentPerLevel)) / 100 + minimumDamage + minimumDamagePerLevel,
-						MinimumOneHandedDamageMaximum = (itemCategory?.MinimumOneHandedDamage * (damagePercentMaximum + maximumDamagePercentPerLevel)) / 100 + maximumDamage + maximumDamagePerLevel,
-						MaximumOneHandedDamageMaximum = (itemCategory?.MaximumOneHandedDamage * (damagePercentMaximum + maximumDamagePercentPerLevel)) / 100 + maximumDamage + maximumDamagePerLevel,
-						MinimumTwoHandedDamageMaximum = (itemCategory?.MinimumTwoHandedDamage * (damagePercentMaximum + maximumDamagePercentPerLevel)) / 100 + maximumDamage + maximumDamagePerLevel,
-						MaximumTwoHandedDamageMaximum = (itemCategory?.MaximumTwoHandedDamage * (damagePercentMaximum + maximumDamagePercentPerLevel)) / 100 + maximumDamage + maximumDamagePerLevel,
+						MinimumOneHandedDamageMinimum = ((itemCategory?.MinimumOneHandedDamage * (damagePercentMinimum)) / 100).AddIfPositive(minimumDamage),
+						MaximumOneHandedDamageMinimum = ((itemCategory?.MaximumOneHandedDamage * (damagePercentMinimum)) / 100).AddIfPositive(minimumDamage),
+						MinimumTwoHandedDamageMinimum = ((itemCategory?.MinimumTwoHandedDamage * (damagePercentMinimum)) / 100).AddIfPositive(minimumDamage),
+						MaximumTwoHandedDamageMinimum = ((itemCategory?.MaximumTwoHandedDamage * (damagePercentMinimum)) / 100).AddIfPositive(minimumDamage),
+						MinimumOneHandedDamageMaximum = ((itemCategory?.MinimumOneHandedDamage * (damagePercentMaximum + damagePercentPerLevel)) / 100 ).AddIfPositive(maximumDamage + damagePerLevel),
+						MaximumOneHandedDamageMaximum = ((itemCategory?.MaximumOneHandedDamage * (damagePercentMaximum + damagePercentPerLevel)) / 100).AddIfPositive(maximumDamage + damagePerLevel),
+						MinimumTwoHandedDamageMaximum = ((itemCategory?.MinimumTwoHandedDamage * (damagePercentMaximum + damagePercentPerLevel)) / 100).AddIfPositive(maximumDamage + damagePerLevel),
+						MaximumTwoHandedDamageMaximum = ((itemCategory?.MaximumTwoHandedDamage * (damagePercentMaximum + damagePercentPerLevel)) / 100).AddIfPositive(maximumDamage + damagePerLevel),
 						AttackSpeed = itemCategory?.AttackSpeed,
 						// Stats
 						StrengthRequired = (itemCategory?.StrengthRequired * requirementPercent) / 100,
@@ -286,7 +282,13 @@ namespace DiabloII.Items.Reader
 			return property == null ? 0 :
 					type == ItemPropertyType.Minimum ? property.Minimum :
 					type == ItemPropertyType.Maximum ? property.Maximum :
-													   property.Par;
+													   Convert.ToInt32(property.Par * 99);
 		}
+
+	}
+
+	public static class IntExtension
+	{
+		public static int AddIfPositive(this int? value, int toAdd) => value.Value > 0 ? value.Value + toAdd : value.Value;
 	}
 }
