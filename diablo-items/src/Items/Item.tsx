@@ -4,10 +4,33 @@ interface Item
     Quality : string,
     Category : string,
     SubCategory : string,
+    Type : string,
     LevelRequired : number,
     Level : number,
-    Properties : ItemProperty[]
+    Properties : ItemProperty[],
+
+    // Relative to defense :
+    MinimumDefenseMinimum  : number,
+    MaximumDefenseMinimum  : number,
+    MinimumDefenseMaximum  : number,
+    MaximumDefenseMaximum  : number,
+
+    // Relative to weapons :
+    MinimumOneHandedDamageMinimum  : number,
+    MaximumOneHandedDamageMinimum  : number,
+    MinimumTwoHandedDamageMinimum  : number,
+    MaximumTwoHandedDamageMinimum  : number,
+    MinimumOneHandedDamageMaximum  : number,
+    MaximumOneHandedDamageMaximum  : number,
+    MinimumTwoHandedDamageMaximum  : number,
+    MaximumTwoHandedDamageMaximum  : number,
+
+    // Stat required.
+    StrengthRequired  : number,
+    DexterityRequired : number,
 }
+
+
 
 interface ItemProperty
 {
