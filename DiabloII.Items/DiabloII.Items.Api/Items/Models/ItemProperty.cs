@@ -3,7 +3,7 @@
     public class ItemProperty
     {
         public string Name { get; set; }
-        public int Par { get; set; }
+        public double Par { get; set; }
         public int Minimum { get; set; }
         public int Maximum { get; set; }
         public bool IsPercent { get; set; }
