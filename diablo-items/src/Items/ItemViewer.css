@@ -1,6 +1,16 @@
 .diablo-attribute
 {
-    color : #4169E1;
-    background : black;
-    text-align : center;
+    color: #4169E1;
+}
+
+.unique
+{
+    color : rgb(123, 110, 70);
+}
+
+.item
+{
+    margin : 5px;
+    background: rgba(0, 0, 0, 1);
+    text-align: center;
 }
