@@ -15,9 +15,8 @@ namespace DiabloII.Items.Reader
 		// Afficher tous les attributs en distinct et les convertir un nom verbeux
 		// Récupérer les stats requis par niveau (il faudra aussi probablement les recaculer avec les attributs).
 		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
-		// Recalculer l'attack speed.
-		// Recacluler : attack speed, dommage une à deux mains, defence, stats requis ?
 		// Utiliser le nouveau document properties de Ascended pour calculer "IsPercent" et "Description" des attributs.
+		// Next step for tomorrow caclul attack speed / + defence / stats
 		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
@@ -82,12 +81,22 @@ namespace DiabloII.Items.Reader
                         });
                     }
 
-					var minDamage = GetPropertyValueOrDefault(properties, "dmg-min");
-					var maxDamage = GetPropertyValueOrDefault(properties, "dmg-max");
+					var minimumDamage = GetPropertyValueOrDefault(properties, "dmg-min");
+					var maximumDamage = GetPropertyValueOrDefault(properties, "dmg-max");
+					var damagePerLevel = GetPropertyValueOrDefault(properties, "dmg/lvl", ItemPropertyType.Par);
+					var minimumDamagePerLevel = damagePerLevel / 8;
+					var maximumDamagePerLevel = damagePerLevel * 99 / 8;
 					var damagePercentMinimum = GetPropertyValueOrDefault(properties, "Damage %") + 100;
-					var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", true) + 100;
+					var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", ItemPropertyType.Maximum) + 100;
+					var damagePercentPerLevel = GetPropertyValueOrDefault(properties, "dmg%/lvl", ItemPropertyType.Par);
+					var minimumDamagePercentPerLevel = damagePercentPerLevel / 8;
+					var maximumDamagePercentPerLevel = damagePercentPerLevel * 99 / 8;
+					var defenseMinimum = GetPropertyValueOrDefault(properties, "Armor Class");
+					var defenseMaximum = GetPropertyValueOrDefault(properties, "Armor Class", ItemPropertyType.Maximum);
 					var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %") + 100;
-					var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", true) + 100;
+					var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", ItemPropertyType.Maximum) + 100;
+
+					var requirementPercent = 100 + GetPropertyValueOrDefault(properties, "Reduce Req %");
 
 					return new Item
                     {
@@ -100,23 +109,23 @@ namespace DiabloII.Items.Reader
                         SubCategory = itemCategory?.SubCategory,
 						Type = type,
 						// Specific to Armor :
-						MinimumDefenseMinimum = (itemCategory?.MinimumDefense * defensePercentMinimum) / 100,
-						MaximumDefenseMinimum = (itemCategory?.MaximumDefense * defensePercentMinimum) / 100,
-						MinimumDefenseMaximum = (itemCategory?.MinimumDefense * defensePercentMaximum) / 100,
-						MaximumDefenseMaximum = (itemCategory?.MaximumDefense * defensePercentMaximum) / 100,
+						MinimumDefenseMinimum = (itemCategory?.MinimumDefense * defensePercentMinimum) / 100 + defenseMinimum,
+						MaximumDefenseMinimum = (itemCategory?.MaximumDefense * defensePercentMinimum) / 100 + defenseMinimum,
+						MinimumDefenseMaximum = (itemCategory?.MinimumDefense * defensePercentMaximum) / 100 + defenseMaximum,
+						MaximumDefenseMaximum = (itemCategory?.MaximumDefense * defensePercentMaximum) / 100 + defenseMaximum,
 						// Specific to Weapon :
-						MinimumOneHandedDamageMinimum = (itemCategory?.MinimumOneHandedDamage * damagePercentMinimum) / 100 + minDamage,
-						MaximumOneHandedDamageMinimum = (itemCategory?.MaximumOneHandedDamage * damagePercentMinimum) / 100 + maxDamage,
-						MinimumTwoHandedDamageMinimum = (itemCategory?.MinimumTwoHandedDamage * damagePercentMinimum) / 100 + minDamage,
-						MaximumTwoHandedDamageMinimum = (itemCategory?.MaximumTwoHandedDamage * damagePercentMinimum) / 100 + maxDamage,
-						MinimumOneHandedDamageMaximum = (itemCategory?.MinimumOneHandedDamage * damagePercentMaximum) / 100 + minDamage,
-						MaximumOneHandedDamageMaximum = (itemCategory?.MaximumOneHandedDamage * damagePercentMaximum) / 100 + maxDamage,
-						MinimumTwoHandedDamageMaximum = (itemCategory?.MinimumTwoHandedDamage * damagePercentMaximum) / 100 + minDamage,
-						MaximumTwoHandedDamageMaximum = (itemCategory?.MaximumTwoHandedDamage * damagePercentMaximum) / 100 + maxDamage,
+						MinimumOneHandedDamageMinimum = (itemCategory?.MinimumOneHandedDamage * (damagePercentMinimum + minimumDamagePercentPerLevel)) / 100 + minimumDamage + minimumDamagePerLevel,
+						MaximumOneHandedDamageMinimum = (itemCategory?.MaximumOneHandedDamage * (damagePercentMinimum + minimumDamagePercentPerLevel)) / 100 + minimumDamage + minimumDamagePerLevel,
+						MinimumTwoHandedDamageMinimum = (itemCategory?.MinimumTwoHandedDamage * (damagePercentMinimum + minimumDamagePercentPerLevel)) / 100 + minimumDamage + minimumDamagePerLevel,
+						MaximumTwoHandedDamageMinimum = (itemCategory?.MaximumTwoHandedDamage * (damagePercentMinimum + minimumDamagePercentPerLevel)) / 100 + minimumDamage + minimumDamagePerLevel,
+						MinimumOneHandedDamageMaximum = (itemCategory?.MinimumOneHandedDamage * (damagePercentMaximum + maximumDamagePercentPerLevel)) / 100 + maximumDamage + maximumDamagePerLevel,
+						MaximumOneHandedDamageMaximum = (itemCategory?.MaximumOneHandedDamage * (damagePercentMaximum + maximumDamagePercentPerLevel)) / 100 + maximumDamage + maximumDamagePerLevel,
+						MinimumTwoHandedDamageMaximum = (itemCategory?.MinimumTwoHandedDamage * (damagePercentMaximum + maximumDamagePercentPerLevel)) / 100 + maximumDamage + maximumDamagePerLevel,
+						MaximumTwoHandedDamageMaximum = (itemCategory?.MaximumTwoHandedDamage * (damagePercentMaximum + maximumDamagePercentPerLevel)) / 100 + maximumDamage + maximumDamagePerLevel,
 						AttackSpeed = itemCategory?.AttackSpeed,
 						// Stats
-						StrengthRequired = itemCategory?.StrengthRequired,
-						DexterityRequired = itemCategory?.DexterityRequired,
+						StrengthRequired = (itemCategory?.StrengthRequired * requirementPercent) / 100,
+						DexterityRequired = (itemCategory?.DexterityRequired * requirementPercent) / 100,
 					};
                 })
                 .Where(item => item != null)
@@ -270,11 +279,14 @@ namespace DiabloII.Items.Reader
             return weaponSubCategoriesRecord;
         }
 
-		private static int GetPropertyValueOrDefault(List<ItemProperty> properties, string name, bool maximum = false)
+		public int GetPropertyValueOrDefault(List<ItemProperty> properties, string name, ItemPropertyType type = ItemPropertyType.Minimum)
 		{
 			var property = properties.FirstOrDefault(_ => _.Name == name);
 
-			return property == null ? 0 : maximum ? property.Maximum : property.Minimum;
+			return property == null ? 0 :
+					type == ItemPropertyType.Minimum ? property.Minimum :
+					type == ItemPropertyType.Maximum ? property.Maximum :
+													   property.Par;
 		}
 	}
 }

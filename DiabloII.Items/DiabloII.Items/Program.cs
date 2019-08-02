@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using DiabloII.Items.Reader;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace DiabloII.Items
 {
@@ -18,9 +19,10 @@ namespace DiabloII.Items
             var reader = new DiabloIIFilesReader();
 
             var uniques = reader.Read(uniquesContent, weaponsContent, ArmorsContent);
-            var uniquesAsJson = JsonConvert.SerializeObject(uniques);
+            var uniquesAsJson = JsonConvert.SerializeObject(uniques, Formatting.Indented);
+			var uniqueTests = JsonConvert.SerializeObject(uniques.Where(e => e.Name == "Eaglehorn").Take(10), Formatting.Indented);
 
-            File.WriteAllText(uniquesDestination, uniquesAsJson);
+			File.WriteAllText(uniquesDestination, uniquesAsJson);
         }
     }
 }

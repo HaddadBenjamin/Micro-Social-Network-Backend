@@ -9,4 +9,11 @@
         public int Maximum { get; set; }
         public bool IsPercent { get; set; }
     }
+
+	public enum ItemPropertyType
+	{
+		Minimum,
+		Maximum,
+		Par
+	}
 }
