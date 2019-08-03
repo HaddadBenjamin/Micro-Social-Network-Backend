@@ -1,81 +1,33 @@
-interface SearchItem
-{
-    Name : string,
-    Quality? : ItemQuality,
-    Category? : ItemCategory,
-    SubCategory? : ItemSubCategory,
-    LevelRequired? : number,
-    Level? : number,
-    PropertyNames : string[],
-}
+import React from "react";
+import SearchItemDto from "src/Items/SearchItemDto";
 
-enum ItemCategory
-{
-    Weapon,
-    Armor,
-    Jewelry,
-    Charm,
+interface Props {
+    search : SearchItemDto,
 }
-
-enum ItemQuality
+interface State
 {
-    Normal,
-    Magical,
-    Rare,
-    Unique,
-    Set,
-    Crafted
 }
-
-enum ItemSubCategory
+class SearchItem extends React.Component<Props, State>
 {
-    Amazon_Bow,
-    Amazon_Javelin,
-    Amazon_Spear,
-    Amulet,
-    Arrows,
-    Axe,
-    Barbarian_Helm,
-    Bolts,
-    Bow,
-    Charm,
-    Club,
-    Crossbow,
-    Druid_Helm,
-    Feet,
-    Hammer,
-    Hand_To_Hand,
-    Hand_To_Hand_Two_Handed,
-    Hands,
-    Head,
-    Javelin,
-    Jewel,
-    Knife,
-    Mace,
-    Offhand,
-    Orb,
-    Polearm,
-    Ring,
-    Scepter,
-    Spear,
-    Staff,
-    Sword,
-    Thorwing_Knife,
-    Throwing_Axe,
-    Throwing_Potions,
-    Torso,
-    Two_And_One_Handed_Sword,
-    Two_Handed_Amazon_Bow,
-    Two_Handed_Amazon_Spear,
-    Two_Handed_Axe,
-    Two_Handed_Bow,
-    Two_Handed_Crossbow,
-    Two_Handed_Hammer,
-    Two_Handed_Polearm,
-    Two_Handed_Spear,
-    Two_Handed_Staff,
-    Waist,
-    Wand
+    public constructor(props : Props)
+    {
+        super(props);
+
+        this.onClickNormalUnique = this.onClickNormalUnique.bind(this);
+        this.onClickExceptionalUnique = this.onClickExceptionalUnique.bind(this);
+        this.onClickEliteUnique = this.onClickEliteUnique.bind(this);
+        this.onClickLegendaryUnique = this.onClickLegendaryUnique.bind(this);
+    }
+
+    public onClickNormalUnique = ()  => this.props.search.MaximumLevelRequired = 30;
+    public onClickExceptionalUnique = ()  => this.props.search.MaximumLevelRequired = 60;
+    public onClickEliteUnique = ()  => this.props.search.MaximumLevelRequired = 90;
+    public onClickLegendaryUnique = ()  => this.props.search.MaximumLevelRequired = Math.max();
+
+    render()
+    {
+        return ('');
+    }
 }
 
 export default SearchItem;
