@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 import SearchItemDto from "../../components/Items/SearchItemDto";
-import searchItemReducer from "item.search.reducer";
+import searchItemReducer from "./search/reducer";
 
 export interface ItemState
 {
