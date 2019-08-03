@@ -59,10 +59,26 @@ class SearchItem extends React.Component<Props, State>
     }
 
     // Item difficulty :
-   public onClickNormalUniques = ()  => this.props.search.MaximumLevelRequired = 30;
-   public onClickExceptionalUniques = ()  => this.props.search.MaximumLevelRequired = 60;
-   public onClickEliteUniques = ()  => this.props.search.MaximumLevelRequired = 90;
-   public onClickLegendaryUniques = ()  => this.props.search.MaximumLevelRequired = Math.max();
+   public onClickNormalUniques()
+   {
+       this.props.search.MinimumLevelRequired = 0;
+       this.props.search.MaximumLevelRequired = 30;
+   }
+   public onClickExceptionalUniques()
+   {
+       this.props.search.MinimumLevelRequired = 30;
+       this.props.search.MaximumLevelRequired = 60;
+   }
+   public onClickEliteUniques()
+   {
+       this.props.search.MinimumLevelRequired = 60;
+       this.props.search.MaximumLevelRequired = 90;
+   }
+   public onClickLegendaryUniques()
+   {
+       this.props.search.MinimumLevelRequired = 90;
+       this.props.search.MaximumLevelRequired = Math.max();
+   }
 
     // Armors :
     public onClickBodyArmors = ()  => this.props.search.SubCategories = [ ItemSubCategory.Torso ];
