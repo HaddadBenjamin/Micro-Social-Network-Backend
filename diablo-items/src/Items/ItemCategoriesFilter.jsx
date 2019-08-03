@@ -34,7 +34,7 @@ class ItemCategoriesFilters extends React.Component
                                 <div>Clubs</div>
                                 <div>Crossbows</div>
                                 <div>Daggers</div>
-                                <div>Javelin</div>
+                                <div>Javelins</div>
                                 <div>Masses</div>
                                 <div>Polearms</div>
                                 <div>Scepters</div>
