@@ -1,5 +1,4 @@
-import React, { FunctionComponent } from "react";
-import { MDBDataTable, MDBRow } from 'mdbreact';
+import React from "react";
 import { orderBy } from 'lodash'
 import * as style from './ItemViewer.css'
 

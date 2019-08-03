@@ -92,7 +92,7 @@ class AppPage extends React.Component
 
         <MDBCol md="6" xl="5" className="mt-xl-5">
             <MDBAnimation type="fadeInRight" delay=".3s">
-                <MDBBtn outline color="white ">Search</MDBBtn>
+            {/*<MDBBtn outline color="white ">Search</MDBBtn>*/}
             </MDBAnimation>
         </MDBCol>
     </MDBRow>

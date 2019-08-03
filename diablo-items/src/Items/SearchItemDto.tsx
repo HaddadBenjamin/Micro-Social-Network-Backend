@@ -1,6 +1,6 @@
-interface SearchItemDto
+export default interface SearchItemDto
 {
-    SubCategory? : ItemSubCategory[],
+    SubCategories? : ItemSubCategory[],
     MinimumLevelRequired? : number,
     MaximumLevelRequired? : number  ,
 }
@@ -74,4 +74,4 @@ enum ItemSubCategory
     Wand
 }
 
-export default SearchItemDto;
+export { ItemSubCategory }
