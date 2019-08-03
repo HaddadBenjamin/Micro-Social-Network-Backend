@@ -20,11 +20,12 @@ class ItemViewer extends React.Component {
                 orderBy(item.Properties, ['Minimum'],['desc'])
                 .map(property =>
                 {
-                    var value = (property.Minimum == property.Maximum ? `${property.Minimum}` :
+                    var value = property.Par > 0 ? property.Par :
+                        (property.Minimum == property.Maximum ? `${property.Minimum}` :
                         `[${property.Minimum}-${property.Maximum}]`)
                     var isPercent = (property.IsPercent ? '%' : '')
 
-                    return <div  className="diablo-attribute">+{value}{isPercent} {property.Name}</div>
+                    return <div className="diablo-attribute">+{value}{isPercent} {property.Name}</div>
                 });
 
             return(
