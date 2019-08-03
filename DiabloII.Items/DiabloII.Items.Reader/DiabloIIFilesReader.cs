@@ -15,6 +15,14 @@ namespace DiabloII.Items.Reader
 		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
 		// Utiliser le nouveau document properties de Ascended pour calculer "IsPercent" et "Description" des attributs.
 		// New category "Amazon, Assasin, Druid, Necromancer, Paladin, Sorceress"
+		//- Paladin Shield.
+		//- Sorceress Orb.
+		//- Necromancer Shield.
+		//- Necromancer Wand.
+		//- Assassin Claws.
+		//- Druid Helm.
+		//- Barbarian Helm.
+
 		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,

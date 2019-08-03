@@ -31,7 +31,6 @@ class SearchItem extends React.Component<Props, State>
 
         this.onClickStaffs = this.onClickStaffs.bind(this);
         this.onClickWands = this.onClickWands.bind(this);
-        this.onClickOrbs = this.onClickOrbs.bind(this);
 
         this.onClickSwords = this.onClickSwords.bind(this);
         this.onClickDaggers = this.onClickDaggers.bind(this);
@@ -55,7 +54,8 @@ class SearchItem extends React.Component<Props, State>
         this.onClickAmazon = this.onClickAmazon.bind(this);
         this.onClickDruid = this.onClickDruid.bind(this);
         this.onClickBarbarian = this.onClickBarbarian.bind(this);
-        this.onClickAssasins = this.onClickAssasins.bind(this);
+        this.onClickAssassin = this.onClickAssassin.bind(this);
+        this.onClickSorceress = this.onClickSorceress.bind(this);
     }
 
     // Item difficulty :
@@ -78,7 +78,6 @@ class SearchItem extends React.Component<Props, State>
     public onClickArrows = ()  => this.props.search.SubCategories = [ ItemSubCategory.Arrows, ItemSubCategory.Bolts ];
     public onClickStaffs = ()  => this.props.search.SubCategories = [ ItemSubCategory.Staff, ItemSubCategory.Two_Handed_Staff ];
     public onClickWands = ()  => this.props.search.SubCategories = [ ItemSubCategory.Wand ];
-    public onClickOrbs = ()  => this.props.search.SubCategories = [ ItemSubCategory.Orb ];
     public onClickSwords = ()  => this.props.search.SubCategories = [ ItemSubCategory.Sword, ItemSubCategory.Two_And_One_Handed_Sword ];
     public onClickDaggers = ()  => this.props.search.SubCategories = [ ItemSubCategory.Knife ];
     public onClickAxes = ()  => this.props.search.SubCategories = [ ItemSubCategory.Axe, ItemSubCategory.Two_Handed_Axe ];
@@ -100,7 +99,9 @@ class SearchItem extends React.Component<Props, State>
     public onClickAmazon = ()  => this.props.search.SubCategories = [ ItemSubCategory.Amazon_Bow, ItemSubCategory.Amazon_Javelin, ItemSubCategory.Amazon_Spear, ItemSubCategory.Two_Handed_Amazon_Bow, ItemSubCategory.Two_Handed_Amazon_Spear ];
     public onClickDruid = ()  => this.props.search.SubCategories = [ ItemSubCategory.Druid_Helm ];
     public onClickBarbarian = ()  => this.props.search.SubCategories = [ ItemSubCategory.Barbarian_Helm ];
-    public onClickAssasins = ()  => this.props.search.SubCategories = [ ItemSubCategory.Hand_To_Hand, ItemSubCategory.Hand_To_Hand_Two_Handed ];
+    public onClickAssassin = ()  => this.props.search.SubCategories = [ ItemSubCategory.Hand_To_Hand, ItemSubCategory.Hand_To_Hand_Two_Handed ];
+    public onClickSorceress = ()  => this.props.search.SubCategories = [ ItemSubCategory.Orb ];
+
 
     render()
     {

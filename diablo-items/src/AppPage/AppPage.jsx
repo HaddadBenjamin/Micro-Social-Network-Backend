@@ -17,6 +17,7 @@ import {
     MDBAnimation
 } from "mdbreact";
 import "./AppPage.css";
+import ItemCategoriesFilters from "../Items/ItemCategoriesFilter";
 
 class AppPage extends React.Component
 {
@@ -75,7 +76,7 @@ class AppPage extends React.Component
             <MDBContainer>
             <MDBRow>
             <MDBCol
-        md="6"
+        md="5"
         className="white-text text-center text-md-left mt-xl-5 mb-5"
             >
             <MDBAnimation type="fadeInLeft" delay=".3s">
@@ -90,9 +91,9 @@ class AppPage extends React.Component
         </MDBAnimation>
         </MDBCol>
 
-        <MDBCol md="6" xl="5" className="mt-xl-5">
+        <MDBCol md="5" xl="6" className="mt-xl-5 offset-md-1">
             <MDBAnimation type="fadeInRight" delay=".3s">
-            {/*<MDBBtn outline color="white ">Search</MDBBtn>*/}
+              <ItemCategoriesFilters/>
             </MDBAnimation>
         </MDBCol>
     </MDBRow>
