@@ -55,6 +55,7 @@ class SearchItem extends React.Component<Props, State>
         this.onClickAmazon = this.onClickAmazon.bind(this);
         this.onClickDruid = this.onClickDruid.bind(this);
         this.onClickBarbarian = this.onClickBarbarian.bind(this);
+        this.onClickAssasins = this.onClickAssasins.bind(this);
     }
 
     // Item difficulty :
@@ -99,6 +100,7 @@ class SearchItem extends React.Component<Props, State>
     public onClickAmazon = ()  => this.props.search.SubCategories = [ ItemSubCategory.Amazon_Bow, ItemSubCategory.Amazon_Javelin, ItemSubCategory.Amazon_Spear, ItemSubCategory.Two_Handed_Amazon_Bow, ItemSubCategory.Two_Handed_Amazon_Spear ];
     public onClickDruid = ()  => this.props.search.SubCategories = [ ItemSubCategory.Druid_Helm ];
     public onClickBarbarian = ()  => this.props.search.SubCategories = [ ItemSubCategory.Barbarian_Helm ];
+    public onClickAssasins = ()  => this.props.search.SubCategories = [ ItemSubCategory.Hand_To_Hand, ItemSubCategory.Hand_To_Hand_Two_Handed ];
 
     render()
     {
