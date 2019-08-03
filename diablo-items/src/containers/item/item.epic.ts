@@ -3,7 +3,7 @@ import { ofType } from "redux-observable";
 import { ajax } from 'rxjs/ajax';
 import { mergeMap, map } from 'rxjs/operators';
 
-const searchItems = parameters => ({ type: ItemActionName.ITEM_SEARCH, payload: parameters });
+const searchItems = searchQueryParameters => ({ type: ItemActionName.ITEM_SEARCH, payload: searchQueryParameters });
 const searchItemsCompleted = items => ({ type: ItemActionName.ITEM_SEARCH_COMPLETED, payload: items });
 
 const searchItemsEpic = action$ => action$.pipe(
