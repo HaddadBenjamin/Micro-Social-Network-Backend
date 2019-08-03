@@ -14,6 +14,7 @@ namespace DiabloII.Items.Reader
 		// Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
 		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
 		// Utiliser le nouveau document properties de Ascended pour calculer "IsPercent" et "Description" des attributs.
+		// New category "Amazon, Assasin, Druid, Necromancer, Paladin, Sorceress"
 		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,

@@ -86,7 +86,7 @@ class SearchItem extends React.Component<Props, State>
     public onClickMasses = ()  => this.props.search.SubCategories = [ ItemSubCategory.Mace, ItemSubCategory.Two_Handed_Hammer ];
     public onClickScepters = ()  => this.props.search.SubCategories = [ ItemSubCategory.Scepter ];
     public onClickClubs = ()  => this.props.search.SubCategories = [ ItemSubCategory.Club ];
-    public onClickThrowingWeapons = ()  => this.props.search.SubCategories = [ ItemSubCategory.Throwing_Axe, ItemSubCategory.Throwing_Potions ];
+    public onClickThrowingWeapons = ()  => this.props.search.SubCategories = [ ItemSubCategory.Throwing_Axe, ItemSubCategory.Throwing_Potions, ItemSubCategory.Thorwing_Knife ];
     public onClickJavelins = ()  => this.props.search.SubCategories = [ ItemSubCategory.Javelin ];
 
     // Jewelry and others :
@@ -96,7 +96,7 @@ class SearchItem extends React.Component<Props, State>
     public onClickJewels = ()  => this.props.search.SubCategories = [ ItemSubCategory.Jewel ];
 
     // Class specific :
-    public onClickAmazon = ()  => this.props.search.SubCategories = [ ItemSubCategory.Amazon_Bow, ItemSubCategory.Amazon_Javelin, ItemSubCategory.Amazon_Spear ];
+    public onClickAmazon = ()  => this.props.search.SubCategories = [ ItemSubCategory.Amazon_Bow, ItemSubCategory.Amazon_Javelin, ItemSubCategory.Amazon_Spear, ItemSubCategory.Two_Handed_Amazon_Bow, ItemSubCategory.Two_Handed_Amazon_Spear ];
     public onClickDruid = ()  => this.props.search.SubCategories = [ ItemSubCategory.Druid_Helm ];
     public onClickBarbarian = ()  => this.props.search.SubCategories = [ ItemSubCategory.Barbarian_Helm ];
 
