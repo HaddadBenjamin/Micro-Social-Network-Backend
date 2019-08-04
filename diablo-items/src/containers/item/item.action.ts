@@ -1,5 +1,0 @@
-export enum ItemActionName
-{
-    ITEM_SEARCH = "ITEM_SEARCH",
-    ITEM_SEARCH_COMPLETED = "ITEM_SEARCH_COMPLETED",
-}

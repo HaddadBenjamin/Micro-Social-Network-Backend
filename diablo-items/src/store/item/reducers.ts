@@ -6,7 +6,7 @@ const initialState: ItemSearchState =
     searchQueryParameter : "",
 }
 
-export function searchReducer(state = initialState, action: SearchActionTypes) : ItemSearchState
+export function itemReducer(state = initialState, action: SearchActionTypes) : ItemSearchState
 {
     switch (action.type) {
         case ITEM_SEARCH:
