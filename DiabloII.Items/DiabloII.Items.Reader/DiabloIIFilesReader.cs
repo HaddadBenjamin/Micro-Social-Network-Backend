@@ -22,6 +22,8 @@ namespace DiabloII.Items.Reader
 		//- Assassin Claws.
 		//- Druid Helm.
 		//- Barbarian Helm.
+		// Class Skill et Gethit-Skill (skill when touched) PAR : min max, 
+		// Gethit-Skill : 10% to trigger level 5 skill
 
 		public IEnumerable<Item> Read(
             string uniquesCsv,

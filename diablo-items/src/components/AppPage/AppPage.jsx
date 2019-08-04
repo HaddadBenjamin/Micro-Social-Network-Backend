@@ -10,14 +10,14 @@ import {
     MDBMask,
     MDBRow,
     MDBCol,
-    MDBBtn,
     MDBView,
     MDBContainer,
     MDBFormInline,
     MDBAnimation
 } from "mdbreact";
 import "./AppPage.css";
-import ItemCategoriesFilters from "../Items/ItemCategoriesFilter";
+import SearchItem from "../Items/SearchItem";
+import {DefaultSearchItemDto} from "../Items/SearchItemDto";
 
 class AppPage extends React.Component
 {
@@ -93,7 +93,7 @@ class AppPage extends React.Component
 
         <MDBCol md="5" xl="6" className="mt-xl-5 offset-md-1">
             <MDBAnimation type="fadeInRight" delay=".3s">
-              <ItemCategoriesFilters/>
+              <SearchItem search={ DefaultSearchItemDto} />
             </MDBAnimation>
         </MDBCol>
     </MDBRow>

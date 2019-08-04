@@ -20,7 +20,7 @@ namespace DiabloII.Items
 
             var uniques = reader.Read(uniquesContent, weaponsContent, ArmorsContent);
             var uniquesAsJson = JsonConvert.SerializeObject(uniques, Formatting.Indented);
-			var uniqueTests = JsonConvert.SerializeObject(uniques.Where(e => e.SubCategory == "Hand To Hand Two Handed").Take(10), Formatting.Indented);
+			var uniqueTests = JsonConvert.SerializeObject(uniques.Where(e => e.SubCategory == "Javelin").Take(10), Formatting.Indented);
 
 			File.WriteAllText(uniquesDestination, uniquesAsJson);
         }

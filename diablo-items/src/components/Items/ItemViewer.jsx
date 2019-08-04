@@ -12,7 +12,6 @@ class ItemViewer extends React.Component {
     {
         // 3) revoir l’affichage : fond sombre
         // rendu en flexbox
-        // - les propriétés de l’objet en bleu : utiliser isPercent
         return (orderBy(this.props.Items, ['Name']).map(function(item)
         {
             const attributes =
@@ -20,7 +19,7 @@ class ItemViewer extends React.Component {
                 .map(property =>
                 {
                     var value = property.Par > 0 ? property.Par :
-                        (property.Minimum == property.Maximum ? `${property.Minimum}` :
+                        (property.Minimum === property.Maximum ? `${property.Minimum}` :
                         `[${property.Minimum}-${property.Maximum}]`)
                     var isPercent = (property.IsPercent ? '%' : '')
 
@@ -29,22 +28,19 @@ class ItemViewer extends React.Component {
 
             return(
             <>
-           <div className="item">
+           <div className="item" style={style}>
 
            OBJECT IMAGE
             <div className="unique"> {/*qualité lié à la qualité e l'objet et revoit la couleur */}
           {item.Name} <br/>
-          {item.Type} {/* Utiliser le type de l'objet plutôt */}
+          {item.Type}
           </div>
-          <div style={{color : "white"}}>{/*revoir la couleur*/}
+          <div style={{color : "white"}}>
                 {item.MaximumDefenseMinimum > 0 ? <div>Defense : <span className="diablo-attribute">{item.MaximumDefenseMinimum}-{item.MaximumDefenseMaximum}</span></div> : ''}
                 {item.MinimumOneHandedDamageMinimum > 0 ? <div>One-Hand Damage : <span className="diablo-attribute">{item.MinimumOneHandedDamageMinimum}-{item.MaximumOneHandedDamageMinimum} to {item.MinimumOneHandedDamageMaximum}-{item.MaximumOneHandedDamageMaximum}</span></div> : ''}
                 {item.MinimumTwoHandedDamageMinimum > 0 ? <div>Two-Hand Damage : <span className="diablo-attribute">{item.MinimumTwoHandedDamageMinimum}-{item.MaximumTwoHandedDamageMinimum} to {item.MinimumTwoHandedDamageMaximum}-{item.MaximumTwoHandedDamageMaximum}</span></div> : ''}
-            {/* - one-handed damage ou two-handed damage ou les deux : dommage avec le bonus de dommage compris (min damage, Max damage, pourcentage, d’image)
-         - défense avec le bonus de défense (défense , defence pourcent )*/}
           </div>
-          <div className="required-attribute">{/*  rvoir la couleur */}
-            {/* - stats requis, level requis en rouge */ }
+          <div className="required-attribute">
                 {item.StrengthRequired > 0 ? <div>Required Strength : {item.StrengthRequired} </div> : ''}
                 {item.DexterityRequired > 0 ? <div>Required Dexterity : {item.DexterityRequired} </div> : ''}
                 {item.LevelRequired > 0 ? <div>Required Level : {item.LevelRequired} </div> : ''}

@@ -1,26 +1,15 @@
 export default interface SearchItemDto
 {
     SubCategories? : ItemSubCategory[],
-    MinimumLevelRequired? : number,
-    MaximumLevelRequired? : number  ,
+    MinimumLevelRequired : number,
+    MaximumLevelRequired : number,
 }
 
-enum ItemCategory
+export const DefaultSearchItemDto : SearchItemDto =
 {
-    Weapon,
-    Armor,
-    Jewelry,
-    Charm,
-}
-
-enum ItemQuality
-{
-    Normal,
-    Magical,
-    Rare,
-    Unique,
-    Set,
-    Crafted
+    SubCategories: [],
+    MinimumLevelRequired: 0,
+    MaximumLevelRequired: Math.max()
 }
 
 enum ItemSubCategory

@@ -6,10 +6,8 @@ import Items from "./components/Items/Items";
 const App: React.FC = () => {
   return (
       <>
-          <AppPage>
-          </AppPage>
-          <Items>
-          </Items>
+              <AppPage/>
+              <Items/>
       </>
   );
 }

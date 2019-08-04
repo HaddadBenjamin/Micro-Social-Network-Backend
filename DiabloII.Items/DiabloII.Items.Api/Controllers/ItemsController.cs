@@ -33,7 +33,7 @@ namespace DiabloII.Items.Api.Controllers
         [Route("searchuniques")]
         [HttpGet]
         [EnableCors("AllowOrigin")]
-        public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto searchDto = default(SearchUniquesDto))
+        public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto searchDto = default)
             => await ItemsService.SearchUniques(searchDto).ConfigureAwait(false);
 
         // TODO : la partie description de mon API ne semble pas fonctionner, il faudra que je google ça un petit peu :)
