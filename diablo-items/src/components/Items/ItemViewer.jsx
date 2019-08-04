@@ -1,7 +1,15 @@
 import React from "react";
 import { orderBy } from 'lodash'
 import * as style from './ItemViewer.css'
-import { MDBDataTable } from 'mdbreact';
+import {
+    MDBDataTable,
+    MDBContainer,
+    MDBView,
+    MDBMask,
+    MDBRow,
+    MDBCol
+} from 'mdbreact';
+import {BrowserRouter as Router} from "react-router-dom";
 
 
 class ItemViewer extends React.Component {
@@ -25,8 +33,6 @@ class ItemViewer extends React.Component {
                 {
                     label: 'Stats',
                     field: 'Stats',
-                    sort: 'asc',
-                    width: 150
                 }
             ]
         };
@@ -79,6 +85,14 @@ class ItemViewer extends React.Component {
                 }
        });
 
+        const overlay = (
+            <div
+                id="sidenav-overlay"
+                style={{ backgroundColor: "transparent" }}
+                onClick={this.handleTogglerClick}
+            />
+        );
+
         data.rows = rows.map(function(item) {
             return {
                 'Name': item.Name,
@@ -86,11 +100,27 @@ class ItemViewer extends React.Component {
             };
         });
 
-        return (<MDBDataTable className="item" style={style}
+        return (
+            <>
+                <div id="item-filter-view">
+                    <MDBView>
+                        <MDBMask className="d-flex justify-content-center align-items-center gradient">
+                            <MDBContainer>
+                                <MDBRow>
+                                    <MDBCol>
+            <MDBDataTable className="item" style={style}
             pagination={false}
             data={data}
-                              entries={3}
-        />);
+            entries={2}/>
+                                        <MDBCol/>
+                                    </MDBCol>
+                                </MDBRow>
+                            </MDBContainer>
+                        </MDBMask>
+                    </MDBView>
+                </div>
+            </>
+                );
 
     }
 }

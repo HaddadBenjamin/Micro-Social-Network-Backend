@@ -17,9 +17,10 @@
 {
     color : white !important;
 }
-th.sorting::before
+th.sorting::before, th.sorting::after
 {
     color:  red;
+    opacity : 1;
 }
 .required-attribute
 {
@@ -27,8 +28,8 @@ th.sorting::before
 }
 .item
 {
-    padding : 10px;
-    margin : 10px;
+    margin-top : -6px;
+    margin-bottom : -6px;
     background: black;
     text-align: center;
     line-height: 16pt;
@@ -37,5 +38,26 @@ th.sorting::before
     font-size : 20px;
 
 }
-*:not('.required-attribute')
+.dataTables_length, .dataTables_filter
+{
+    margin : 15px;
+    padding : 0px;
+}
 
+.thead
+{
+    display : none;
+}
+th
+{
+    border : 555px;
+    border-color: #eb0d26 !important;
+}
+
+#item-filter-view .view {
+    background-image: url('../../background2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh;
+}

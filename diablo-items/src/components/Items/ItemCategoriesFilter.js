@@ -14,7 +14,7 @@ class ItemCategoriesFilters extends React.Component
     render() {
         return (
             <>
-                <MDBFormInline className="item-category-filter" style={style}>
+                <MDBFormInline waves className="item-category-filter" style={style}>
                     <div>
                         <select className="browser-default custom-select">
                             <option onChange={() => this.props.onClickNormalUniques()}>Normal Uniques</option>
