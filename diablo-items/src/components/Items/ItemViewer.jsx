@@ -111,7 +111,7 @@ class ItemViewer extends React.Component {
             <MDBDataTable className="item" style={style}
             pagination={false}
             data={data}
-            entries={2}/>
+            entries={3}/>
                                         <MDBCol/>
                                     </MDBCol>
                                 </MDBRow>
