@@ -44,15 +44,6 @@ th.sorting::before, th.sorting::after
     padding : 0px;
 }
 
-.thead
-{
-    display : none;
-}
-th
-{
-    border : 555px;
-    border-color: #eb0d26 !important;
-}
 
 #item-filter-view .view {
     background-image: url('../../background2.jpg');
@@ -61,3 +52,42 @@ th
     background-position: center center;
     min-height: 115vh;
 }
+
+thead, .dataTables_length.bs-select
+{
+    display : none
+}
+
+tr:first-child td,
+tr:last-child td
+{
+    border-color: #eb0d26 !important;
+}
+.page-link,
+.page-item
+{
+    background-color : #eb0d26 !important;
+    margin-left : 1.5px;
+    margin-right : 1.5px;
+    padding : 0px;
+    border: 0.05em solid white;
+}
+.page-link:hover,
+.page-item.active,
+.page-item.active:hover
+{
+    background-color : #3b33e1 !important;
+    opacity: 1;
+}
+[aria-label="Previous"],
+[aria-label="Next"]
+{
+    background-color : black !important;
+
+}
+
+.pagination
+{
+   margin-right : 10px;
+}
+
