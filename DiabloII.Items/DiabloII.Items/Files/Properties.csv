@@ -1,0 +1,204 @@
+Strength;Strength;0
+Openwounds;Openwounds;1
+Crushing Blow;Crushing Blow;1
+Damage %;Damage Percentage;1
+Blind Target;Blind Target;0
+dmg-min;Minimum Damage;0
+Attack Bonus %;Attack Bonus Percentage;1
+Mana per Kill;Mana Per Kill;0
+Dmg % to Undead;Damage Percentage to Undead;1
+att-undead;Attack Rating to Undead;0
+Attack Speed %;Attack Speed Percentage;1
+Armor Class;Armor Class;0
+fire-min;Minimum Fire Damage;0
+fire-max;Maximum Fire Damage;0
+regen-mana;Regenerate Mana Percentage;1
+ltng-min;Minimum Lightning Damage;0
+ltng-max;Maximum Lightning Damage;0
+Attack Rating;Attack Rating;0
+pois-min;Minimum Poison Damage;0
+pois-max;Maximum Poison Damage;0
+pois-len;Poison Length;0
+res-pois;Poison Resistance;1
+Freeze Duration;Freeze Duration;0
+res-cold;Cold Resistance;1
+Light Radius;Light Radius;0
+dmg-max;Maximum Damage;0
+All Resists;All Resists;1
+dmg-ltng;Lightning Damage;0
+Mana Points;Mana Points;0
+Manasteal;Manasteal;1
+dmg-fire;Fire Damage;0
+Reduce Req %;Reduce Requirement Percentage;1
+Necro Skills;Necro Skills;0
+Lifesteal;Lifesteal;1
+Energy;Energy;0
+res-ltng;Lightning Resistance;1
+Cast Speed %;Cast Speed Percentage;1
+Class Skill;Class Skill;0
+Dexterity;Dexterity;0
+cold-min;Minimum Cold Damage;0
+cold-max;Maximum Cold Damage;0
+cold-len;Cold Duration;0
+howl;howl;0
+res-fire;Fire Resistance;1
+Knockback;Knockback;0
+Paladin Skills;Paladin Skills;0
+dmg-norm;Bonus Damage;0
+red-mag;Magic Damage Reduced by;0
+dmg-cold;Cold Damage;0
+Replenish Life;Replenish Life;0
+Thorns;Thorns;0
+Vitality;Vitality;0
+Slow Target %;Slow Target Percentage;1
+*enr;Energy;0
+regen-stam;Regenerate Stamina Percentage;1
+Hitpoints;Hitpoints;0
+Ignore Armor;Ignore Armor;0
+Deadly Strike;Deadly Strike;1
+Magic Find %;Magic Find Percentage;1
+Extra Durability;Extra Durability;0
+dmg-mag;Magic Damage;0
+fireskill;To Fire Skills;0
+All Skills;To All Skills;0
+res-pois-len;Reduce Poison Length;0
+Hit Recovery %;Hit Recovery Percentage;1
+dmg-pois;Poison Damage;0
+Prevent Heal;Prevent Monster Heal;0
+*hp;Hit Points;0
+Reduce Dmg;Damage Reduced by;0
+Gold Find %;Gold Find Percentage;1
+nofreeze;Cannot be Frozen;0
+res-pois-max;Resist-Poison-Maximum;1
+reduce-ac;Reduce-Armor Class;1
+res-fire-max;Resist-Fire-Maximum;1
+dmg-ac;Damage-Armor Class;0
+Sorceress Skills;Sorceress Skills;0
+magicarrow;Magic Arrow;0
+explosivearrow;Explosive Arrow;0
+pierce;Pierce;0
+pierce-cold;Cold Pierce;1
+Amazon Skills;Amazon Skills;0
+Lightning Thorns;Lightning Thorns;0
+Armor vs Missile;Armor VS Missile;0
+Armor Class %;Armor Class Percentage;1
+dmg-to-mana;Percentage Damage taken goes to mana;1
+half-freeze;Half Freeze Duration;0
+Faster Movement %;Faster Movement Percentage;1
+Stamina Points;Stamina Points;0
+stamdrain;Stamina Drain Reduce Percentage;1
+block;Block Speed;1
+res-all-max;Resist-all-Maximum;1
+Armor vs Melee;Armor vs Melee;0
+res-cold-max;Resist-Cold-Maximum;1
+Reduce Dmg %;Damage Reduced by Percentage;1
+block2;Block Chance;1
+bloody;Increased Blood;0
+Mana %;Increase Maximum Mana Percentage;1
+Hit-Skill;Hit-Skill;0
+Gethit-Skill;Gethit-Skill;1
+Indestructable;Indestructable;0
+Druid Skills;Druid Skills;0
+vit/lvl;Vitality Per Level;0
+rep-dur;Repair-Durability;0
+Charges;Charges;0
+att-und/lvl;Attack  Rating to Undead Per Level;0
+dmg-und/lvl;Percentage Damage to Undead Per Level;1
+hp/lvl;Hitpoints Per Level;0
+mana/lvl;Mana Per Level;0
+Class Skill Tab;Class Skill Tab;0
+Dmg % to Demons;Damage Percentage to Demons;1
+att-demon;Attack  Rating to Undead;0
+demon-heal;Life per Demon Kill;0
+Sockets;Sockets;0
+gold%/lvl;Increased Gold Percentage Per Level;1
+mag%/lvl;Magic Find Percentage Per Level;1
+deadly/lvl;Deadly Strike Percentage Per Level;1
+dmg/lvl;Damage Per Level;0
+res-ltng-max;Maximum Lightning Resitance;1
+abs-fire;Fire Absorb;0
+ac/lvl;Armor Class Per Level;0
+res-ltng/lvl;Lightning Resistance Per Level;0
+dmg-dem/lvl;Percentage Damage to Demons Per Level;1
+Barbarian Skills;Barbarian Skills;0
+Hitpoint % Increase;Maximum Hitpoint Percentage;1
+*hit-skill;*hit-skill;0
+*gethit-skill;*gethit-skill;0
+att/lvl;Attack Rating Per Level;0
+abs-ltng;Absorb-Lightning;0
+*charged;Charged;0
+*vit;Vitality;0
+att-dem/lvl;Attack  Rating to Demons Per Level;0
+thorns/lvl;Thorns Per Level;0
+abs-cold;Absorb-Cold;0
+*mana;Mana;0
+dex/lvl;Dexterity Per Level;0
+abs-cold/lvl;Absorb-Cold Per Level;0
+str/lvl;Strength Per Level;0
+dmg%/lvl;DamagePercentage Per Level;1
+abs-ltng%;Lightning Percentage Absorb;1
+abs-fire/lvl;Fire Absorb Per Level;0
+abs-fire%;Fire Absorb Percentage;1
+abs-cold%;Cold Absorb Percentage;1
+rep-quant;Repair Quantity;0
+stack;Increased Stack Szie;0
+Assassin Skills;Assassin Skills;0
+Life per Kill;Life per Kill;0
+reanimate;"Reanimate as "" """;0
+pierce-pois;Poison Resistance Pierce;1
+rip;Slain Monsters Rest in Peace;0
+aura;Aura;0
+all-stats;All Attributes;0
+dmg;Damage;0
+kill-skill;Chance on kill;0
+pierce-fire;Fire Resistance Pierce;1
+pierce-ltng;Lightning Resistance Pierce;1
+ethereal;Ethereal;0
+dmg-elem;Elemental Damage;0
+Other Skill;Other Skill;0
+extra-ltng;Extra Lightning;1
+extra-cold;Extra Cold;1
+extra-fire;Extra Fire;1
+death-skill;Chance on Death;0
+skill-rand;Random Skill;0
+Reduce Prices;Reduce Vendor Prices;1
+stam/lvl;Stamina Per Level;0
+Extra XP;Extra Experience;1
+extra-pois;Extra Poison;1
+levelup-skill;Chance on level up;0
+randclassskill;Random Class Skill;0
+cold-thorns;Cold-thorns;0
+Vita;Vitality;0
+rescold-max;Maximum Cold Resistance;1
+res-mag-max;Maximum Magic Resistance;1
+res-mag;Magic Resistance;1
+block1;Block Chance;1
+dmg-ltng/lvl;Lightning Damage Per Level;0
+ac%/lvl;Armor Percentage Per Level;1
+dmg-cold/lvl;Cold Damage Per Level;0
+dmg-pois/lvl;Poison Damage Per Level;0
+crush/lvl;Crushing Blow Per Level;1
+wounds/lvl;Openwounds Per Level;1
+res-cold/lvl;Cold Resistance Per Level;1
+dam-ltng;Lightning Damage;0
+swing;Attack  Speed Percentage;1
+vita;Vitality;0
+abs-ltng/lvl;Lightning Absorb Per Level;0
+dmg-fire/lvl;Fire Damage Per Level;0
+sorcs;Sorceress Skills;0
+def%;Defense Percentage;1
+abs-mag%;Magic Absorb Percentage;1
+dmg-throw;Throw Damage Bonus;0
+act-miss;Armor VS Missile;0
+barb;Barbarian Skills;0
+Str;Strength;0
+abs-mag;Magic Absorb;0
+Swing3;Attack Speed Percentage;1
+movement1;Movement Speed Percentage;1
+manaregen;Mana Regeneration;1
+kick;Kick Damage;0
+dur%;Durability Percentage;1
+enr/lvl;Energy Per Level;0
+att%/lvl;Attak Rating Percentage Per Level;1
+randclassskill1;Random Class Skill;0
+item_allskills;All Skills;0

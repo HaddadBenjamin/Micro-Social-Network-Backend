@@ -28,15 +28,17 @@ namespace DiabloII.Items.Reader
 		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
-            string armorsCsv)
+            string armorsCsv,
+			string propertiesCsv)
         {
             var weapons = ReadWeapons(weaponsCsv);
             var armors = ReadArmors(armorsCsv);
             var subCategories = ReadSubCategories(weapons, armors);
-            var uniques = ReadUniques(uniquesCsv, subCategories);
+            var properties = ReadProperties(uniquesCsv, subCategories);
+			var uniques = ReadUniques(uniquesCsv, subCategories);
 
-            // For sanitize purpoeses and comparaison :
-            var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
+			// For sanitize purpoeses and comparaison :
+			var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
             var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
             var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
 			var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
@@ -137,7 +139,27 @@ namespace DiabloII.Items.Reader
                 .Where(item => item != null)
                 .ToList();
 
-        private List<ArmorReord> ReadArmors(string armorsCsv)
+		private List<PropertyRecord> ReadPropertiies(string propertiesCsv)
+			=> propertiesCsv
+				.Split('\n')
+				.Select(line =>
+				{
+					var itemData = line.Split(';');
+
+					if (itemData.Length < 3)
+						return null;
+
+					return new PropertyRecord
+					{
+						Name = itemData[0],
+						FormattedName = itemData[1],
+						IsPercent = itemData[2].ParseIntOrDefault() == 1
+					};
+				})
+				.Where(item => item != null)
+				.ToList();
+
+		private List<ArmorReord> ReadArmors(string armorsCsv)
             => armorsCsv
                 .Split('\n')
                 .Skip(1)
