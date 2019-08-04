@@ -1,8 +1,10 @@
 import Item from './Item'
-import React, { Component, useState  } from 'react';
-import axios from 'axios';
+import React, {Component} from 'react';
 import ItemViewer from './ItemViewer'
-interface Props {}
+
+interface Props {
+
+}
 interface State
 {
     Items : Item[]
@@ -14,8 +16,7 @@ class Items extends Component<Props, State>
     {
         super(props);
 
-        this.state =
-        {
+        this.state =  {
             Items : []
         };
     }
@@ -32,11 +33,11 @@ class Items extends Component<Props, State>
         // - 
         // - Level looks bad, search why and fix it
 
-        axios.get<Item[]>('http://localhost:56205/api/v1/Items/getalluniques')
-             .then(response =>
-             {
-                 this.setState({ Items : response.data });
-             })
+        //axios.get<Item[]>('http://localhost:56205/api/v1/Items/getalluniques')
+        //     .then(response =>
+        //     {
+        //         this.setState({ Items : response.data });
+        //     })
     }
 
     render()

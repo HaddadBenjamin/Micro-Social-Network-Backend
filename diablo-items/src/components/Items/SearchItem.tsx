@@ -1,7 +1,11 @@
-import React from "react";
+import React  from 'react';
 import SearchItemDto, {ItemSubCategory} from "./SearchItemDto";
+import Item from "./Item";
+import axios from 'axios';
+import  ItemCategoriesFilters from './ItemCategoriesFilter'
 
-interface Props {
+interface Props
+{
     search : SearchItemDto,
 }
 interface State
@@ -30,7 +34,6 @@ class SearchItem extends React.Component<Props, State>
         this.onClickArrows = this.onClickArrows.bind(this);
 
         this.onClickStaffs = this.onClickStaffs.bind(this);
-        this.onClickWands = this.onClickWands.bind(this);
 
         this.onClickSwords = this.onClickSwords.bind(this);
         this.onClickDaggers = this.onClickDaggers.bind(this);
@@ -56,6 +59,10 @@ class SearchItem extends React.Component<Props, State>
         this.onClickBarbarian = this.onClickBarbarian.bind(this);
         this.onClickAssassin = this.onClickAssassin.bind(this);
         this.onClickSorceress = this.onClickSorceress.bind(this);
+
+        this.setSubCategories = this.setSubCategories.bind(this);
+
+        this.search('');
     }
 
     // Item difficulty :
@@ -63,65 +70,128 @@ class SearchItem extends React.Component<Props, State>
    {
        this.props.search.MinimumLevelRequired = 0;
        this.props.search.MaximumLevelRequired = 30;
+       alert("x");
+
    }
    public onClickExceptionalUniques()
    {
        this.props.search.MinimumLevelRequired = 30;
        this.props.search.MaximumLevelRequired = 60;
+       alert("x");
+
    }
    public onClickEliteUniques()
    {
        this.props.search.MinimumLevelRequired = 60;
        this.props.search.MaximumLevelRequired = 90;
+       alert("x");
+
    }
    public onClickLegendaryUniques()
    {
        this.props.search.MinimumLevelRequired = 90;
        this.props.search.MaximumLevelRequired = Math.max();
+       alert("x");
    }
 
     // Armors :
-    public onClickBodyArmors = ()  => this.props.search.SubCategories = [ ItemSubCategory.Torso ];
-    public onClickShields = ()  => this.props.search.SubCategories = [ ItemSubCategory.Offhand ];
-    public onClickGloves = ()  => this.props.search.SubCategories = [ ItemSubCategory.Hands ];
-    public onClickShoes = ()  => this.props.search.SubCategories = [ ItemSubCategory.Feet ];
-    public onClickHelms = ()  => this.props.search.SubCategories = [ ItemSubCategory.Head ];
-    public onClickBelts = ()  => this.props.search.SubCategories = [ ItemSubCategory.Waist ];
+    public onClickBodyArmors = ()  => this.setSubCategories([ ItemSubCategory.Torso ]);
+    public onClickShields = ()  => this.setSubCategories([ ItemSubCategory.Offhand ]);
+    public onClickGloves = ()  => this.setSubCategories([ ItemSubCategory.Hands ]);
+    public onClickShoes = ()  => this.setSubCategories([ ItemSubCategory.Feet ]);
+    public onClickHelms = ()  => this.setSubCategories([ ItemSubCategory.Head ]);
+    public onClickBelts = ()  => this.setSubCategories([ ItemSubCategory.Waist ]);
 
     // Weapons :
-    public onClickBows = ()  => this.props.search.SubCategories = [ ItemSubCategory.Bow, ItemSubCategory.Two_Handed_Bow ];
-    public onClickCrossbows = ()  => this.props.search.SubCategories = [ ItemSubCategory.Crossbow, ItemSubCategory.Two_Handed_Crossbow, ];
-    public onClickArrows = ()  => this.props.search.SubCategories = [ ItemSubCategory.Arrows, ItemSubCategory.Bolts ];
-    public onClickStaffs = ()  => this.props.search.SubCategories = [ ItemSubCategory.Staff, ItemSubCategory.Two_Handed_Staff ];
-    public onClickWands = ()  => this.props.search.SubCategories = [ ItemSubCategory.Wand ];
-    public onClickSwords = ()  => this.props.search.SubCategories = [ ItemSubCategory.Sword, ItemSubCategory.Two_And_One_Handed_Sword ];
-    public onClickDaggers = ()  => this.props.search.SubCategories = [ ItemSubCategory.Knife ];
-    public onClickAxes = ()  => this.props.search.SubCategories = [ ItemSubCategory.Axe, ItemSubCategory.Two_Handed_Axe ];
-    public onClickPolearms = ()  => this.props.search.SubCategories = [ ItemSubCategory.Polearm, ItemSubCategory.Two_Handed_Polearm ];
-    public onClickSpears = ()  => this.props.search.SubCategories = [ ItemSubCategory.Spear, ItemSubCategory.Two_Handed_Spear ];
-    public onClickMasses = ()  => this.props.search.SubCategories = [ ItemSubCategory.Mace, ItemSubCategory.Two_Handed_Hammer ];
-    public onClickScepters = ()  => this.props.search.SubCategories = [ ItemSubCategory.Scepter ];
-    public onClickClubs = ()  => this.props.search.SubCategories = [ ItemSubCategory.Club ];
-    public onClickThrowingWeapons = ()  => this.props.search.SubCategories = [ ItemSubCategory.Throwing_Axe, ItemSubCategory.Throwing_Potions, ItemSubCategory.Thorwing_Knife ];
-    public onClickJavelins = ()  => this.props.search.SubCategories = [ ItemSubCategory.Javelin ];
+    public onClickBows = ()  => this.setSubCategories([ ItemSubCategory.Bow, ItemSubCategory.Two_Handed_Bow ]);
+    public onClickCrossbows = ()  => this.setSubCategories([ ItemSubCategory.Crossbow, ItemSubCategory.Two_Handed_Crossbow, ]);
+    public onClickArrows = ()  => this.setSubCategories([ ItemSubCategory.Arrows, ItemSubCategory.Bolts ]);
+    public onClickStaffs = ()  => this.setSubCategories([ ItemSubCategory.Staff, ItemSubCategory.Two_Handed_Staff ]);
+
+    public onClickSwords = ()  => this.setSubCategories([ ItemSubCategory.Sword, ItemSubCategory.Two_And_One_Handed_Sword ]);
+    public onClickDaggers = ()  => this.setSubCategories([ ItemSubCategory.Knife ]);
+    public onClickAxes = ()  => this.setSubCategories([ ItemSubCategory.Axe, ItemSubCategory.Two_Handed_Axe ]);
+    public onClickPolearms = ()  => this.setSubCategories([ ItemSubCategory.Polearm, ItemSubCategory.Two_Handed_Polearm ]);
+    public onClickSpears = ()  => this.setSubCategories([ ItemSubCategory.Spear, ItemSubCategory.Two_Handed_Spear ]);
+    public onClickMasses = ()  => this.setSubCategories([ ItemSubCategory.Mace, ItemSubCategory.Two_Handed_Hammer ]);
+    public onClickScepters = ()  => this.setSubCategories([ ItemSubCategory.Scepter ]);
+    public onClickClubs = ()  => this.setSubCategories([ ItemSubCategory.Club ]);
+    public onClickThrowingWeapons = ()  => this.setSubCategories([ ItemSubCategory.Throwing_Axe, ItemSubCategory.Throwing_Potions, ItemSubCategory.Thorwing_Knife ]);
+    public onClickJavelins = ()  => this.setSubCategories([ ItemSubCategory.Javelin ]);
 
     // Jewelry and others :
-    public onClickAmulets = ()  => this.props.search.SubCategories = [ ItemSubCategory.Amulet ];
-    public onClickRings = ()  => this.props.search.SubCategories = [ ItemSubCategory.Ring ];
-    public onClickCharms = ()  => this.props.search.SubCategories = [ ItemSubCategory.Charm ];
-    public onClickJewels = ()  => this.props.search.SubCategories = [ ItemSubCategory.Jewel ];
+    public onClickAmulets = ()  => this.setSubCategories([ ItemSubCategory.Amulet ]);
+    public onClickRings = ()  => this.setSubCategories([ ItemSubCategory.Ring ]);
+    public onClickCharms = ()  => this.setSubCategories([ ItemSubCategory.Charm ]);
+    public onClickJewels = ()  => this.setSubCategories([ ItemSubCategory.Jewel ]);
 
     // Class specific :
-    public onClickAmazon = ()  => this.props.search.SubCategories = [ ItemSubCategory.Amazon_Bow, ItemSubCategory.Amazon_Javelin, ItemSubCategory.Amazon_Spear, ItemSubCategory.Two_Handed_Amazon_Bow, ItemSubCategory.Two_Handed_Amazon_Spear ];
-    public onClickDruid = ()  => this.props.search.SubCategories = [ ItemSubCategory.Druid_Helm ];
-    public onClickBarbarian = ()  => this.props.search.SubCategories = [ ItemSubCategory.Barbarian_Helm ];
-    public onClickAssassin = ()  => this.props.search.SubCategories = [ ItemSubCategory.Hand_To_Hand, ItemSubCategory.Hand_To_Hand_Two_Handed ];
-    public onClickSorceress = ()  => this.props.search.SubCategories = [ ItemSubCategory.Orb ];
+    public onClickAmazon = ()  => this.setSubCategories([ ItemSubCategory.Amazon_Bow, ItemSubCategory.Amazon_Javelin, ItemSubCategory.Amazon_Spear, ItemSubCategory.Two_Handed_Amazon_Bow, ItemSubCategory.Two_Handed_Amazon_Spear ]);
+    public onClickDruid = ()  => this.setSubCategories([ ItemSubCategory.Druid_Helm ]);
+    public onClickBarbarian = ()  => this.setSubCategories([ ItemSubCategory.Barbarian_Helm ]);
+    public onClickAssassin = ()  => this.setSubCategories([ ItemSubCategory.Hand_To_Hand, ItemSubCategory.Hand_To_Hand_Two_Handed ]);
+    public onClickSorceress = ()  => this.setSubCategories([ ItemSubCategory.Orb ]);
+    public onClickNecromancer = ()  => this.setSubCategories([ ItemSubCategory.Wand ]);
 
-
+    public setSubCategories(subCategories : ItemSubCategory[])
+    {
+        this.props.search.SubCategories = subCategories;
+        // generate queryparameters (peut-être i l y ades classes utilitaires)
+        this.search('');
+        alert("xx");
+    }
+    
+    public search(searchQueryParameters : string)
+    {
+        axios.get<Item[]>(`http://localhost:56205/api/v1/Items/searchuniques/${searchQueryParameters}`)
+             .then(response => response.data/* items = response.data */);
+    }
     render()
     {
-        return ('x');
+        return (
+            <>
+                <ItemCategoriesFilters
+                    onClickNormalUniques={this.onClickNormalUniques}
+                    onClickExceptionalUniques={this.onClickExceptionalUniques}
+                    onClickEliteUniques={this.onClickEliteUniques}
+                    onClickLegendaryUniques={this.onClickLegendaryUniques}
+
+                    onClickBows={this.onClickBows}
+                    onClickCrossbows={this.onClickCrossbows}
+                    onClickClubs={this.onClickClubs}
+                    onClickArrows={this.onClickArrows}
+                    onClickStaffs={this.onClickStaffs}
+                    onClickSwords={this.onClickSwords}
+                    onClickDaggers={this.onClickDaggers}
+                    onClickAxes={this.onClickAxes}
+                    onClickPolearms={this.onClickPolearms}
+                    onClickSpears={this.onClickSpears}
+                    onClickMasses={this.onClickMasses}
+                    onClickScepters={this.onClickScepters}
+                    onClickThrowingWeapons={this.onClickThrowingWeapons}
+                    onClickJavelins={this.onClickJavelins}
+
+                    onClickBodyArmors={this.onClickBodyArmors}
+                    onClickShields={this.onClickShields}
+                    onClickGloves={this.onClickGloves}
+                    onClickShoes={this.onClickShoes}
+                    onClickHelms={this.onClickHelms}
+                    onClickBelts={this.onClickBelts}
+
+                    onClickAmulets={this.onClickAmulets}
+                    onClickRings={this.onClickRings}
+                    onClickCharms={this.onClickCharms}
+                    onClickJewels={this.onClickJewels}
+
+                    onClickAmazon={this.onClickAmazon}
+                    onClickDruid={this.onClickDruid}
+                    onClickBarbarian={this.onClickBarbarian}
+                    onClickAssassin={this.onClickAssassin}
+                    onClickSorceress={this.onClickSorceress}
+                    onClickNecromancer={this.onClickNecromancer}
+                />
+            </>
+        );
     }
 }
 
