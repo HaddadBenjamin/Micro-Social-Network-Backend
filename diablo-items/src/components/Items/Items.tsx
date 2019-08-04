@@ -30,7 +30,7 @@ class Items extends Component<Props, State>
         // - Display a page only to search items by toooons of different custom filters.
         // - Display a better background transparent in order to make it looks more diablo.
         // - Display all the items in a flexbox and paginate them (flexbox generator) ou sinon utiliser mon concept d'affichge de mes projets de mon portfolio mais avec de la pagination
-        // - 
+        // - Les boutons de choix de difficultés ne sont jamais appelés
         // - Level looks bad, search why and fix it
 
         //axios.get<Item[]>('http://localhost:56205/api/v1/Items/getalluniques')

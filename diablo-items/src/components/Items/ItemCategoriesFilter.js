@@ -11,7 +11,7 @@ import * as style from './ItemCategoriesFilter.css'
 
 class ItemCategoriesFilters extends React.Component
 {
-render() {
+    render() {
         return (
             <>
                 <MDBFormInline className="item-category-filter" style={style}>

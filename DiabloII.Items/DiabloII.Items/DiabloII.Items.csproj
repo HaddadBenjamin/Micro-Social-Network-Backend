@@ -58,6 +58,9 @@
     <None Include="Files\Armors.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Files\Properties.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Files\Uniques.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

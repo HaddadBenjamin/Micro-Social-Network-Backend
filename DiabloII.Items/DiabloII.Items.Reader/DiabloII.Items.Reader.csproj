@@ -53,6 +53,7 @@
     <Compile Include="Items\Items.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Records\ArmorRecord.cs" />
+    <Compile Include="Records\PropertyRecord.cs" />
     <Compile Include="Records\WeaponRecord.cs" />
   </ItemGroup>
   <ItemGroup>

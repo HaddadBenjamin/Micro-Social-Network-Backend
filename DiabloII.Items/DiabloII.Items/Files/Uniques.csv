@@ -619,7 +619,7 @@ Frostfeather;40;31;CedarBow;Class Skill;31;3;3;Freeze Duration;;4;4;Damage %;;17
 Ironstring;43;34;Double Bow;Armor Class;;35;35;Hitpoints;;40;40;Armor vs Melee;;75;75;Class Skill;12;3;5;Damage %;;190;230;dmg-norm;;20;35;;;;;;;;;;;;;;;;;;;;;;;;
 Stone Arrow;45;36;Short Siege Bow;Hit-Skill;87;2;1;Hit Recovery %;;15;15;crush/lvl;8;;;Damage %;;160;180;Knockback;;1;1;Sockets;;1;2;;;;;;;;;;;;;;;;;;;;;;;;
 Yeti Sinew String;47;40;Long Siege Bow;Amazon Skills;;1;2;Damage %;;200;200;Mana Points;;50;50;dmg;;25;25;Hitpoints;;50;50;Attack Speed %;;25;25;att/lvl;6;;;;;;;;;;;;;;;;;;;;;;
-Charged String;49;42;Rune Bow;dmg-ltng;;15;165;res-ltng;;15;15;Class Skill;12;3;3;Attack Rating;;180;240;Dexterity;;15;15;Damage %;;140;160;Amazon Skills;;1;1;Hit-Skill;;5;38;3;;;;;;;;;;;;;;;
+Charged String;49;42;Rune Bow;dmg-ltng;;15;165;res-ltng;;15;15;Class Skill;12;3;3;Attack Rating;;180;240;Dexterity;;15;15;Damage %;;140;160;Amazon Skills;;1;1;Hit-Skill;;5;38;;;;;;;;;;;;;;;;
 Demon Piercer;52;45;Gothic Bow;Damage %;;225;275;Attack Bonus %;;100;100;Dmg % to Demons;;150;300;Attack Speed %;;50;50;Replenish Life;;10;10;att-demon;;75;150;dmg-max;;15;30;;;;;;;;;;;;;;;;;;;;
 Plunder Aim;37;30;Arbalest;Knockback;;1;1;Damage %;;190;210;Gold Find %;;60;90;Mana Points;;30;30;dmg-max;;10;30;Dmg % to Undead;;150;300;att-undead;;75;150;;;;;;;;;;;;;;;;;;;;
 Templar`s Aim;43;34;Siege Crossbow;dmg-ltng;;35;245;Hit-Skill;53;5;5;Paladin Skills;;2;2;Reduce Req %;;-25;-25;Gethit-Skill;48;5;5;Attack Speed %;;25;25;Damage %;;180;230;att/lvl;6;;;;;;;;;;;;;;;;;;

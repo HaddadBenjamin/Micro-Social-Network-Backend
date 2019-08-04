@@ -12,13 +12,15 @@ namespace DiabloII.Items
             var uniquesPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.csv");
             var weaponsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Weapons.csv");
             var armorsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Armors.csv");
+            var propertiessPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Properties.csv");
             var uniquesDestination = uniquesPath.Replace("csv", "json");
             var uniquesContent = File.ReadAllText(uniquesPath);
             var weaponsContent = File.ReadAllText(weaponsPath);
-            var ArmorsContent = File.ReadAllText(armorsPath);
+            var armorsContent = File.ReadAllText(armorsPath);
+            var propertiesContent = File.ReadAllText(propertiessPath);
             var reader = new DiabloIIFilesReader();
 
-            var uniques = reader.Read(uniquesContent, weaponsContent, ArmorsContent);
+            var uniques = reader.Read(uniquesContent, weaponsContent, armorsContent, propertiesContent);
             var uniquesAsJson = JsonConvert.SerializeObject(uniques, Formatting.Indented);
 			var uniqueTests = JsonConvert.SerializeObject(uniques.Where(e => e.SubCategory == "Javelin").Take(10), Formatting.Indented);
 

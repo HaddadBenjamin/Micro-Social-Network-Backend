@@ -78,14 +78,13 @@ class SearchItem extends React.Component<Props, State>
        this.props.search.MinimumLevelRequired = 30;
        this.props.search.MaximumLevelRequired = 60;
        alert("x");
-
    }
+
    public onClickEliteUniques()
    {
        this.props.search.MinimumLevelRequired = 60;
        this.props.search.MaximumLevelRequired = 90;
        alert("x");
-
    }
    public onClickLegendaryUniques()
    {
@@ -144,8 +143,9 @@ class SearchItem extends React.Component<Props, State>
     public search(searchQueryParameters : string)
     {
         axios.get<Item[]>(`http://localhost:56205/api/v1/Items/searchuniques/${searchQueryParameters}`)
-             .then(response => response.data/* items = response.data */);
+             .then(response => console.log(response.data)/* items = response.data */);
     }
+
     render()
     {
         return (

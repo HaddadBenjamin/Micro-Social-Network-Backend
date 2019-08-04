@@ -34,19 +34,23 @@ namespace DiabloII.Items.Reader
             var weapons = ReadWeapons(weaponsCsv);
             var armors = ReadArmors(armorsCsv);
             var subCategories = ReadSubCategories(weapons, armors);
-            var properties = ReadProperties(uniquesCsv, subCategories);
-			var uniques = ReadUniques(uniquesCsv, subCategories);
+            var properties = ReadProperties(propertiesCsv);
+			var uniques = ReadUniques(uniquesCsv, subCategories, properties);
 
 			// For sanitize purpoeses and comparaison :
 			var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
             var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
             var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
 			var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
+			var missingProps = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties.Select(p => p.Name).Where(name => properties.FirstOrDefault(s => s.Name == name) == null).Distinct()).Distinct().ToList());
 
 			return uniques;
         }
 
-        public IEnumerable<Item> ReadUniques(string uniquesCsv, List<ItemCategoryRecord> itemCategories)
+        public IEnumerable<Item> ReadUniques(
+			string uniquesCsv, 
+			List<ItemCategoryRecord> itemCategories,
+			List<PropertyRecord> propertyRecords)
             => uniquesCsv
                 .Split('\n')
                 .Skip(1)
@@ -81,14 +85,16 @@ namespace DiabloII.Items.Reader
                         if (string.IsNullOrEmpty(itemData[index]))
                             continue;
 
-                        properties.Add(new ItemProperty
+						var property = propertyRecords.FirstOrDefault(_ => _.Name == itemData[index]);
+
+						properties.Add(new ItemProperty
                         {
-                            Name = itemData[index],
+                            Name = property.FormattedName,
                             Par = (double)itemData[index + 1].ParseIntOrDefault() / 8,
                             Minimum = itemData[index + 2].ParseIntOrDefault(),
                             Maximum = itemData[index + 3].ParseIntOrDefault(),
-                            IsPercent = itemData[index].Contains("%")
-                        });
+                            IsPercent = property.IsPercent
+						});
                     }
 
 					var minimumDamage = GetPropertyValueOrDefault(properties, "dmg-min") + GetPropertyValueOrDefault(properties, "dmg-norm");
@@ -139,7 +145,7 @@ namespace DiabloII.Items.Reader
                 .Where(item => item != null)
                 .ToList();
 
-		private List<PropertyRecord> ReadPropertiies(string propertiesCsv)
+		private List<PropertyRecord> ReadProperties(string propertiesCsv)
 			=> propertiesCsv
 				.Split('\n')
 				.Select(line =>
