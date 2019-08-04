@@ -121,7 +121,7 @@ ac/lvl;Armor Class Per Level;0
 res-ltng/lvl;Lightning Resistance Per Level;1
 dmg-dem/lvl;Damage to Demons Per Level;1
 Barbarian Skills;Barbarian Skills;0
-Hitpoint % Increase;Maximum Hitpoint ;1
+Hitpoint % Increase;To Maximum Life;1
 *hit-skill;*hit-skill;0
 *gethit-skill;*gethit-skill;0
 att/lvl;Attack Rating Per Level;0

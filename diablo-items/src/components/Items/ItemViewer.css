@@ -13,6 +13,14 @@
 {
     color : rgb(229, 150, 29);
 }
+.sorting, label, td, th, a, .page-item, .dataTables_info, span, a.page-link, .sr-only
+{
+    color : white !important;
+}
+th.sorting::before
+{
+    color:  red;
+}
 .required-attribute
 {
     color : #eb0d26;
@@ -29,3 +37,5 @@
     font-size : 20px;
 
 }
+*:not('.required-attribute')
+
