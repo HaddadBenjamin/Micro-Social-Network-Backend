@@ -1,6 +1,7 @@
 import Item from './Item'
 import React, {Component} from 'react';
 import ItemViewer from './ItemViewer'
+import axios from 'axios'
 
 interface Props {
 
@@ -33,11 +34,11 @@ class Items extends Component<Props, State>
         // - Les boutons de choix de difficultés ne sont jamais appelés
         // - Level looks bad, search why and fix it
 
-        //axios.get<Item[]>('http://localhost:56205/api/v1/Items/getalluniques')
-        //     .then(response =>
-        //     {
-        //         this.setState({ Items : response.data });
-        //     })
+        axios.get<Item[]>('http://localhost:56205/api/v1/Items/getalluniques')
+             .then(response =>
+             {
+                 this.setState({ Items : response.data });
+             })
     }
 
     render()
