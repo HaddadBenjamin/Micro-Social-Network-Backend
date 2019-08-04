@@ -26,7 +26,7 @@ Light Radius;Light Radius;0
 dmg-max;Maximum Damage;0
 All Resists;All Resistances;1
 dmg-ltng;Lightning Damage;0
-Mana Points;Mana Points;0
+Mana Points;Mana;0
 Manasteal;Manasteal;1
 dmg-fire;Fire Damage;0
 Reduce Req %;Reduce Requirement;1
@@ -53,7 +53,7 @@ Vitality;Vitality;0
 Slow Target %;Slow Target ;1
 *enr;Energy;0
 regen-stam;Regenerate Stamina ;1
-Hitpoints;Hitpoints;0
+Hitpoints;To Life;0
 Ignore Armor;Ignore Armor;0
 Deadly Strike;Deadly Strike;1
 Magic Find %;Magic Find ;1
@@ -65,7 +65,7 @@ res-pois-len;Reduce Poison Length;0
 Hit Recovery %;Faster Hit Recovery ;1
 dmg-pois;Poison Damage;0
 Prevent Heal;Prevent Monster Heal;0
-*hp;Hit Points;0
+*hp;To Life;1
 Reduce Dmg;Damage Reduced;0
 Gold Find %;Gold Find ;1
 nofreeze;Cannot be Frozen;0
@@ -77,7 +77,7 @@ Sorceress Skills;Sorceress Skills;0
 magicarrow;Magic Arrow;0
 explosivearrow;Explosive Arrow;0
 pierce;Pierce;0
-pierce-cold;Cold Pierce;1
+pierce-cold;Reduce Enemy Cold Resistance;1
 Amazon Skills;Amazon Skills;0
 Lightning Thorns;Lightning Thorns;0
 Armor vs Missile;Armor VS Missile;0
@@ -85,7 +85,7 @@ Armor Class %;Defense ;1
 dmg-to-mana;Damage taken goes to mana;1
 half-freeze;Half Freeze Duration;0
 Faster Movement %;Faster Run/Walk;1
-Stamina Points;Stamina Points;0
+Stamina Points;Stamina;0
 stamdrain;Stamina Drain Reduce ;1
 block;Block Speed;1
 res-all-max;All Maximum Resistanes;0
@@ -104,7 +104,7 @@ rep-dur;Repair-Durability;0
 Charges;Charges;0
 att-und/lvl;Attack Rating to Undead Per Level;0
 dmg-und/lvl;Damage to Undead Per Level;1
-hp/lvl;Hitpoints Per Level;0
+hp/lvl;To Life Per Level;0
 mana/lvl;Mana Per Level;0
 Class Skill Tab;Class Skill Tab;0
 Dmg % to Demons;Damage to Demons;1
@@ -145,14 +145,14 @@ stack;Increased Stack Szie;0
 Assassin Skills;Assassin Skills;0
 Life per Kill;Life per Kill;0
 reanimate;"Reanimate as "" """;0
-pierce-pois;Poison Resistance Pierce;1
+pierce-pois;Reduce Enemy Poison Resistance;1
 rip;Slain Monsters Rest in Peace;0
 aura;Aura;0
 all-stats;All Attributes;0
 dmg;Damage;0
 kill-skill;Chance on kill;0
-pierce-fire;Fire Resistance Pierce;1
-pierce-ltng;Lightning Resistance Pierce;1
+pierce-fire;Reduce Enemy Fire Resistance;1
+pierce-ltng;Reduce Enemy Lightning Resistance;1
 ethereal;Ethereal;0
 dmg-elem;Elemental Damage;0
 Other Skill;Other Skill;0
