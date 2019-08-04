@@ -24,7 +24,7 @@ namespace DiabloII.Items.Reader
 		//- Barbarian Helm.
 		// Class Skill et Gethit-Skill (skill when touched) PAR : min max, 
 		// Gethit-Skill : 10% to trigger level 5 skill
-
+		// Vérifier, tester et sanitizer les propriétés sur la vraie documentation
 		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
@@ -158,7 +158,7 @@ namespace DiabloII.Items.Reader
 					return new PropertyRecord
 					{
 						Name = itemData[0],
-						FormattedName = itemData[1],
+						FormattedName = itemData[1].ToTitleCase(),
 						IsPercent = itemData[2].ParseIntOrDefault() == 1
 					};
 				})

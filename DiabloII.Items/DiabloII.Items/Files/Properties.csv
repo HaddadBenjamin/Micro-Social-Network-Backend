@@ -1,7 +1,7 @@
 Strength;Strength;0
 Openwounds;Openwounds;1
 Crushing Blow;Crushing Blow;1
-Damage %;Damage;1
+Damage %;Enhanced Damage;1
 Blind Target;Blind Target;0
 dmg-min;Minimum Damage;0
 Attack Bonus %;Attack Bonus ;1
@@ -9,7 +9,7 @@ Mana per Kill;Mana Per Kill;0
 Dmg % to Undead;Damage to Undead;1
 att-undead;Attack Rating to Undead;0
 Attack Speed %;Attack Speed ;1
-Armor Class;Armor Class;0
+Armor Class;Defense ;0
 fire-min;Minimum Fire Damage;0
 fire-max;Maximum Fire Damage;0
 regen-mana;Regenerate Mana;1
@@ -19,12 +19,12 @@ Attack Rating;Attack Rating;0
 pois-min;Minimum Poison Damage;0
 pois-max;Maximum Poison Damage;0
 pois-len;Poison Length;0
-res-pois;Poison Resistance;0
+res-pois;Poison Resistance;1
 Freeze Duration;Freeze Duration;0
-res-cold;Cold Resistance;0
+res-cold;Cold Resistance;1
 Light Radius;Light Radius;0
 dmg-max;Maximum Damage;0
-All Resists;All Resists;1
+All Resists;All Resistances;1
 dmg-ltng;Lightning Damage;0
 Mana Points;Mana Points;0
 Manasteal;Manasteal;1
@@ -33,7 +33,7 @@ Reduce Req %;Reduce Requirement;1
 Necro Skills;Necro Skills;0
 Lifesteal;Lifesteal;1
 Energy;Energy;0
-res-ltng;Lightning Resistance;0
+res-ltng;Lightning Resistance;1
 Cast Speed %;Cast Speed ;1
 Class Skill;Class Skill;0
 Dexterity;Dexterity;0
@@ -41,7 +41,7 @@ cold-min;Minimum Cold Damage;0
 cold-max;Maximum Cold Damage;0
 cold-len;Cold Duration;0
 howl;howl;0
-res-fire;Fire Resistance;0
+res-fire;Fire Resistance;1
 Knockback;Knockback;0
 Paladin Skills;Paladin Skills;0
 dmg-norm;Bonus Damage;0
@@ -62,16 +62,16 @@ dmg-mag;Magic Damage;0
 fireskill;To Fire Skills;0
 All Skills;To All Skills;0
 res-pois-len;Reduce Poison Length;0
-Hit Recovery %;Hit Recovery ;1
+Hit Recovery %;Faster Hit Recovery ;1
 dmg-pois;Poison Damage;0
 Prevent Heal;Prevent Monster Heal;0
 *hp;Hit Points;0
-Reduce Dmg;Damage Reduced by;0
+Reduce Dmg;Damage Reduced;0
 Gold Find %;Gold Find ;1
 nofreeze;Cannot be Frozen;0
-res-pois-max;Maximum Poison Resistance;0
-reduce-ac;Reduce-Armor Class;1
-res-fire-max;Maximum Fire Resistance;0
+res-pois-max;Maximum Poison Resistance;1
+reduce-ac;Reduce Defense;1
+res-fire-max;Maximum Fire Resistance;1
 dmg-ac;Damage-Armor Class;0
 Sorceress Skills;Sorceress Skills;0
 magicarrow;Magic Arrow;0
@@ -82,16 +82,16 @@ Amazon Skills;Amazon Skills;0
 Lightning Thorns;Lightning Thorns;0
 Armor vs Missile;Armor VS Missile;0
 Armor Class %;Defense ;1
-dmg-to-mana; Damage taken goes to mana;1
+dmg-to-mana;Damage taken goes to mana;1
 half-freeze;Half Freeze Duration;0
-Faster Movement %;Faster Movement ;1
+Faster Movement %;Faster Run/Walk;1
 Stamina Points;Stamina Points;0
 stamdrain;Stamina Drain Reduce ;1
 block;Block Speed;1
 res-all-max;All Maximum Resistanes;0
 Armor vs Melee;Armor vs Melee;0
-res-cold-max;Maximum Cold Resistance;0
-Reduce Dmg %;Damage Reduced by ;1
+res-cold-max;Maximum Cold Resistance;1
+Reduce Dmg %;Damage Reduced ;1
 block2;Block Chance;1
 bloody;Increased Blood;0
 Mana %;Increase Maximum Mana ;1
@@ -103,7 +103,7 @@ vit/lvl;Vitality Per Level;0
 rep-dur;Repair-Durability;0
 Charges;Charges;0
 att-und/lvl;Attack Rating to Undead Per Level;0
-dmg-und/lvl; Damage to Undead Per Level;1
+dmg-und/lvl;Damage to Undead Per Level;1
 hp/lvl;Hitpoints Per Level;0
 mana/lvl;Mana Per Level;0
 Class Skill Tab;Class Skill Tab;0
@@ -118,7 +118,7 @@ dmg/lvl;Damage Per Level;0
 res-ltng-max;Maximum Lightning Resitance;1
 abs-fire;Fire Absorb;0
 ac/lvl;Armor Class Per Level;0
-res-ltng/lvl;Lightning Resistance Per Level;0
+res-ltng/lvl;Lightning Resistance Per Level;1
 dmg-dem/lvl;Damage to Demons Per Level;1
 Barbarian Skills;Barbarian Skills;0
 Hitpoint % Increase;Maximum Hitpoint ;1
@@ -135,7 +135,7 @@ abs-cold;Absorb-Cold;0
 dex/lvl;Dexterity Per Level;0
 abs-cold/lvl;Absorb-Cold Per Level;0
 str/lvl;Strength Per Level;0
-dmg%/lvl;Damage Per Level;1
+dmg%/lvl;Enhanced Damage Per Level;1
 abs-ltng%;Lightning Absorb;1
 abs-fire/lvl;Fire Absorb Per Level;0
 abs-fire%;Fire Absorb ;1
@@ -156,22 +156,22 @@ pierce-ltng;Lightning Resistance Pierce;1
 ethereal;Ethereal;0
 dmg-elem;Elemental Damage;0
 Other Skill;Other Skill;0
-extra-ltng;Extra Lightning;1
-extra-cold;Extra Cold;1
-extra-fire;Extra Fire;1
-death-skill;Chance on Death;0
+extra-ltng;Lightning Damage;1
+extra-cold;Cold Damage;1
+extra-fire;Fire Damage;1
+death-skill;Chance to spawn a skill on Death;1
 skill-rand;Random Skill;0
 Reduce Prices;Reduce Vendor Prices;1
 stam/lvl;Stamina Per Level;0
-Extra XP;Extra Experience;1
-extra-pois;Extra Poison;1
+Extra XP;Experience;1
+extra-pois;Poison Damage;1
 levelup-skill;Chance on level up;0
 randclassskill;Random Class Skill;0
 cold-thorns;Cold-thorns;0
 Vita;Vitality;0
-rescold-max;Maximum Cold Resistance;0
-res-mag-max;Maximum Magic Resistance;0
-res-mag;Magic Resistance;0
+rescold-max;Maximum Cold Resistance;1
+res-mag-max;Maximum Magic Resistance;1
+res-mag;Magic Resistance;1
 block1;Block Chance;1
 dmg-ltng/lvl;Lightning Damage Per Level;0
 ac%/lvl;Armor Per Level;1
@@ -179,7 +179,7 @@ dmg-cold/lvl;Cold Damage Per Level;0
 dmg-pois/lvl;Poison Damage Per Level;0
 crush/lvl;Crushing Blow Per Level;1
 wounds/lvl;Openwounds Per Level;1
-res-cold/lvl;Cold Resistance Per Level;0
+res-cold/lvl;Cold Resistance Per Level;1
 dam-ltng;Lightning Damage;0
 swing;Attack Speed ;1
 vita;Vitality;0

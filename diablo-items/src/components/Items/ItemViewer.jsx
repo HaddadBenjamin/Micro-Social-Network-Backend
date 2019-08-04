@@ -19,7 +19,7 @@ class ItemViewer extends React.Component {
                 .map(property =>
                 {
                     var value = property.Par > 0 ? property.Par : (property.Minimum === property.Maximum ? `${property.Minimum}` :
-                        `[${Math.min(property.Minimum, property.Maximum)}-${Math.max(property.Minimum, property.Maximum)}]`)
+                        `${Math.min(property.Minimum, property.Maximum)}-${Math.max(property.Minimum, property.Maximum)}`)
                     var isPercent = (property.IsPercent ? '%' : '')
 
                     return <div className="diablo-attribute">+{value}{isPercent} {property.Name}</div>
