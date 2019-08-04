@@ -91,3 +91,31 @@ tr:last-child td
    margin-right : 10px;
 }
 
+#item-filter-view .gradient {
+    background: -moz-linear-gradient(
+            45deg,
+            rgba(42, 27, 161, 0.7),
+            rgba(210, 29, 133, 0.7) 100%
+    );
+    background: -webkit-linear-gradient(
+            90deg,
+            rgba(42, 27, 161, 0.7),
+            rgba(210, 29, 133, 0.7) 100%
+    );
+    background: -webkit-gradient(
+            linear,
+            90deg,
+            from(rgba(42, 27, 161, 0.7)),
+            to(rgba(210, 29, 133, 0.7))
+    );
+    background: -o-linear-gradient(
+            90deg,
+            rgba(42, 27, 161, 0.7),
+            rgba(210, 29, 133, 0.7) 100%
+    );
+    background: linear-gradient(
+            90deg,
+            rgba(42, 27, 161, 0.3),
+            rgba(210, 8, 4, 0.3) 100%
+    );
+}
