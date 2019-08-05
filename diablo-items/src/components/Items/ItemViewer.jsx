@@ -9,13 +9,11 @@ import {
     MDBRow,
     MDBCol
 } from 'mdbreact';
-import {BrowserRouter as Router} from "react-router-dom";
-
+import {connect} from "react-redux";
 
 class ItemViewer extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
     }
 
     render()
@@ -85,14 +83,6 @@ class ItemViewer extends React.Component {
                 }
        });
 
-        const overlay = (
-            <div
-                id="sidenav-overlay"
-                style={{ backgroundColor: "transparent" }}
-                onClick={this.handleTogglerClick}
-            />
-        );
-
         data.rows = rows.map(function(item) {
             return {
                 'Name': item.Name,
@@ -109,7 +99,6 @@ class ItemViewer extends React.Component {
                                 <MDBRow>
                                     <MDBCol>
             <MDBDataTable className="item" style={style}
-            pagination={false}
             data={data}
             entries={3}/>
                                         <MDBCol/>
@@ -124,4 +113,11 @@ class ItemViewer extends React.Component {
 
     }
 }
-export default ItemViewer;
+const mapStateToProps = function (state)
+{
+    return {
+        Items: state.searchItems.items
+    };
+};
+
+export default connect(mapStateToProps)(ItemViewer)

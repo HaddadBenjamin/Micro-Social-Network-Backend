@@ -9,7 +9,7 @@ import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
 import { store } from './store/store'
-import { Provider } from 'react-redux'
+import {Provider} from 'react-redux';
 
 ReactDOM.render(
     <Provider store={store}>

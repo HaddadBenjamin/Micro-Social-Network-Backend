@@ -6,7 +6,8 @@ export interface ItemState
 }
 
 export const searchItemsReducer = (state : ItemState = { items : []}, action : any) => {
-    switch (action.type) {
+    switch (action.type)
+    {
         case "SEARCH_ITEMS":
             return {
                 ...state,

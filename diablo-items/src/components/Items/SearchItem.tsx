@@ -62,8 +62,6 @@ class SearchItem extends React.Component<Props, State>
         this.onClickSorceress = this.onClickSorceress.bind(this);
 
         this.setSubCategories = this.setSubCategories.bind(this);
-
-        this.search('');
     }
 
     // Item difficulty :
@@ -138,18 +136,16 @@ class SearchItem extends React.Component<Props, State>
         this.props.search.SubCategories = subCategories;
         // generate queryparameters (peut-être i l y ades classes utilitaires)
         this.search('');
-        alert("xx");
     }
     
     public search(searchQueryParameters : string)
     {
-        axios.get<Item[]>(`http://localhost:56205/api/v1/Items/getuniques/${searchQueryParameters}`)
+        axios.get<Item[]>(`http://localhost:56205/api/v1/Items/getalluniques/${searchQueryParameters}`)
              .then(response => {
                  store.dispatch({
                      type: 'SEARCH_ITEMS',
                      payload : response.data
                  });
-                 console.log(response.data)
              }/* items = response.data */);
     }
 

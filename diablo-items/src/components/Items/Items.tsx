@@ -1,12 +1,9 @@
-import Item from './Item'
 import React, {Component} from 'react';
 import ItemViewer from './ItemViewer'
-import axios from 'axios'
-import { connect } from 'react-redux'
-import {ItemState} from "../../reducers/item.reducer";
+//import axios from 'axios'
+
 
 interface Props {
-    Items : Item[]
 }
 interface State
 {
@@ -45,21 +42,9 @@ class Items extends Component<Props, State>
 
     render()
     {
-        const {Items} = this.props;
-
-        return (<ItemViewer Items={Items}></ItemViewer>)
+        return (<ItemViewer Items={[]}></ItemViewer>)
     }
 }
 
-
-const mapStateToProps = function (state : ItemState) {
-    return {
-        items: state.items
-    };
-}
-
-
-export default connect(
-    mapStateToProps,
-)(Items)
+export default Items;
 
