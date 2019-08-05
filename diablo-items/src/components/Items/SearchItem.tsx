@@ -3,6 +3,7 @@ import SearchItemDto, {ItemSubCategory} from "./SearchItemDto";
 import Item from "./Item";
 import axios from 'axios';
 import  ItemCategoriesFilters from './ItemCategoriesFilter'
+import { store } from '../../store/store'
 
 interface Props
 {
@@ -142,8 +143,14 @@ class SearchItem extends React.Component<Props, State>
     
     public search(searchQueryParameters : string)
     {
-        axios.get<Item[]>(`http://localhost:56205/api/v1/Items/searchuniques/${searchQueryParameters}`)
-             .then(response => console.log(response.data)/* items = response.data */);
+        axios.get<Item[]>(`http://localhost:56205/api/v1/Items/getuniques/${searchQueryParameters}`)
+             .then(response => {
+                 store.dispatch({
+                     type: 'SEARCH_ITEMS',
+                     payload : response.data
+                 });
+                 console.log(response.data)
+             }/* items = response.data */);
     }
 
     render()
