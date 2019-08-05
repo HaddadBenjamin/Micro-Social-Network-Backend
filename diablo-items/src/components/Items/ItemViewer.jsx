@@ -103,7 +103,7 @@ class ItemViewer extends React.Component {
         return (
             <>
                 <div id="item-filter-view">
-                    <MDBView>
+                    <MDBView >
                         <MDBMask className="d-flex justify-content-center align-items-center gradient">
                             <MDBContainer>
                                 <MDBRow>

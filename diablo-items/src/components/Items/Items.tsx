@@ -2,13 +2,15 @@ import Item from './Item'
 import React, {Component} from 'react';
 import ItemViewer from './ItemViewer'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import {ItemState} from "../../reducers/item.reducer";
 
 interface Props {
-
+    Items : Item[]
 }
 interface State
 {
-    Items : Item[]
+//
 }
 
 class Items extends Component<Props, State>
@@ -17,9 +19,9 @@ class Items extends Component<Props, State>
     {
         super(props);
 
-        this.state =  {
-            Items : []
-        };
+        //this.state =  {
+        //    Items : []//
+        //};
     }
 
     componentDidMount()
@@ -34,19 +36,30 @@ class Items extends Component<Props, State>
         // - Les boutons de choix de difficultés ne sont jamais appelés
         // - Level looks bad, search why and fix it
 
-        axios.get<Item[]>('http://localhost:56205/api/v1/Items/getalluniques')
-             .then(response =>
-             {
-                 this.setState({ Items : response.data });
-             })
+        //axios.get<Item[]>('http://localhost:56205/api/v1/Items/getalluniques')
+        //     .then(response =>
+        //     {
+        //         this.setState({ Items : response.data });
+        //     })
     }
 
     render()
     {
-        const {Items} = this.state;
+        const {Items} = this.props;
 
         return (<ItemViewer Items={Items}></ItemViewer>)
     }
 }
 
-export default Items;
+
+const mapStateToProps = function (state : ItemState) {
+    return {
+        items: state.items
+    };
+}
+
+
+export default connect(
+    mapStateToProps,
+)(Items)
+
