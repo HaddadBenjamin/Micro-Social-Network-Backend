@@ -54,7 +54,7 @@ class ItemViewer extends React.Component {
                 var defense  = item.MaximumDefenseMinimum === item.MaximumDefenseMaximum ? item.MaximumDefenseMinimum :`${item.MaximumDefenseMinimum}-${item.MaximumDefenseMaximum}`;
 
                 var itemFormatted =   <>
-                    <div className="item" style={style}>
+                    <div className="item" style={style} key={item.Id }>
 
                         {/* OBJECT IMAGE */ }
                         <div className="unique"> {/*qualité lié à la qualité e l'objet et revoit la couleur */}

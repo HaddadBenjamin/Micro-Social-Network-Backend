@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DiabloII.Items.Reader
 {
     public class Item
     {
-        public string Name { get; set; }
+		public Guid Id { get; set; }
+		public string Name { get; set; }
         public string Quality { get; set; }
         public string Category { get; set; }
         public string SubCategory { get; set; }
