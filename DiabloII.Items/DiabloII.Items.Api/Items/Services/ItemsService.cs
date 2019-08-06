@@ -29,11 +29,12 @@ namespace DiabloII.Items.Api.Items.Services
             return uniques
                 .Where(unique => string.IsNullOrEmpty(dto.Name) ? true : unique.Name.Contains(dto.Name))
                 .Where(unique => dto.LevelRequired is null ? true : unique.LevelRequired == dto.LevelRequired)
-                .Where(unique => dto.Level is null ? true : unique.Level == dto.Level)
+                .Where(unique => dto.MinimumLevel is null ? true : unique.Level >= dto.MinimumLevel)
+                .Where(unique => dto.MaximumLevel is null ? true : unique.Level <= dto.MaximumLevel)
                 .Where(unique => dto.Quality is null ? true : unique.Quality.Contains(dto.Quality.ToString()))
                 .Where(unique => dto.Category is null || unique.Category is null ? true : unique.Category.Contains(dto.Category.ToString()))
-                .Where(unique => dto.SubCategory is null ? true : unique.SubCategory.Contains(dto.SubCategory
-                    .ToString()
+                .Where(unique => (dto.SubCategories is null || !dto.SubCategories.Any()) ? true :
+					dto.SubCategories.Select(_ => _.ToString()
                     .Replace("Two_Handed_Sword", "Two-Handed Sword")
                     .Replace("Wirt_s_Leg", "Wirt's Leg")
                     .Replace("Poorman_s_Head", "Poorman`s Head")
@@ -41,7 +42,8 @@ namespace DiabloII.Items.Api.Items.Services
                     .Replace("Chu_Ko_Nu", "Chu-Ko-Nu")
                     .Replace("Bec_De_Corbin", "Bec-De-Corbin")
                     .Replace("Silver_Edged_Axe", "Silver-Edged Axe")
-                    .Replace("_", " ")))
+                    .Replace("_", " "))
+				.Contains(unique.SubCategory))
                 .Where(unique => dto.PropertyNames is null ||!dto.PropertyNames.Any() ? true : unique.Properties.Any(property => dto.PropertyNames.Contains(property.Name)));
         }
     }

@@ -13,8 +13,9 @@ namespace DiabloII.Items
             var weaponsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Weapons.csv");
             var armorsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Armors.csv");
             var propertiessPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Properties.csv");
-			var uniquesDestination = uniquesPath.Replace("csv", "json").Replace("//", "/");
-            var uniquesContent = File.ReadAllText(uniquesPath);
+			var uniquesDestination = @"C:\Users\hadda\Desktop\Travaux\Projets\Diablo-II-Items\DiabloII.Items\DiabloII.Items.Api\Files\Uniques.json";
+
+			var uniquesContent = File.ReadAllText(uniquesPath);
             var weaponsContent = File.ReadAllText(weaponsPath);
             var armorsContent = File.ReadAllText(armorsPath);
             var propertiesContent = File.ReadAllText(propertiessPath);

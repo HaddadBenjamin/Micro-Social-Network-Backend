@@ -34,7 +34,7 @@ namespace DiabloII.Items.Api.Items.Queries
         /// </summary>
         [EnumDataType(typeof(ItemSubCategory))]
         [JsonConverter(typeof(StringEnumConverter))]
-        public ItemSubCategory? SubCategory { get; set; }
+        public ItemSubCategory[] SubCategories { get; set; }
       
         /// <summary>
         /// Filter items by it's required level.
@@ -43,9 +43,10 @@ namespace DiabloII.Items.Api.Items.Queries
 
 
         /// <summary>
-        /// Filter items by it's required level.
+        /// Filter items by it's  level.
         /// </summary>
-        public int? Level { get; set; }
+        public int? MinimumLevel { get; set; }
+        public int? MaximumLevel { get; set; }
 
         /// <summary>
         /// Filter items by it's different properties.
