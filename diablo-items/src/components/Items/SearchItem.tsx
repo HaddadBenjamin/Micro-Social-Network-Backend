@@ -157,7 +157,12 @@ class SearchItem extends React.Component<Props, State>
 
         return `?${searchQueryParameters}`;
     }
-    
+
+    // 1) This function is PURE, that's mean it should be extarnalised in another file with dedicated tests.
+    // 2) We should have 3 events : search, search done, search failed.
+    //    search should be an epic that do the search.
+    //    then (search.success(response.data))
+    //    failed (search.failed('can't search)
     public search(searchQueryParameters : string)
     {
         const api = 'http://localhost:56205/api/v1';
