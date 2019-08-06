@@ -28,13 +28,13 @@ namespace DiabloII.Items.Api.Items.Queries
         [EnumDataType(typeof(ItemCategory))]
         [JsonConverter(typeof(StringEnumConverter))]
         public ItemCategory? Category { get; set; }
-        
-        /// <summary>
-        /// Filter items by it's sub category.
-        /// </summary>
-        [EnumDataType(typeof(ItemSubCategory))]
-        [JsonConverter(typeof(StringEnumConverter))]
-        public ItemSubCategory[] SubCategories { get; set; }
+
+		/// <summary>
+		/// Filter items by it's sub category.
+		/// </summary>
+		[EnumDataType(typeof(ItemSubCategory))]
+		[JsonConverter(typeof(StringEnumConverter))]
+		public IEnumerable<string> SubCategories { get; set; }
       
         /// <summary>
         /// Filter items by it's required level.
