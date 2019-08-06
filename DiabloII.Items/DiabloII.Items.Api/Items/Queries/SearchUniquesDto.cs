@@ -30,11 +30,9 @@ namespace DiabloII.Items.Api.Items.Queries
         public ItemCategory? Category { get; set; }
 
 		/// <summary>
-		/// Filter items by it's sub category.
+		/// Filter items by it's sub category. ("A", "B", "C"), I'll have to split this.
 		/// </summary>
-		[EnumDataType(typeof(ItemSubCategory))]
-		[JsonConverter(typeof(StringEnumConverter))]
-		public IEnumerable<string> SubCategories { get; set; }
+		public string SubCategories { get; set; }
       
         /// <summary>
         /// Filter items by it's required level.
