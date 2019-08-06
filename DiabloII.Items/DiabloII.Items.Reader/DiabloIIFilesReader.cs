@@ -116,7 +116,8 @@ namespace DiabloII.Items.Reader
 
 					return new Item
                     {
-                        Name = name,
+						Id = Guid.NewGuid(),
+						Name = name,
                         LevelRequired = itemData[2].ParseIntOrDefault(),
                         Level = itemData[1].ParseIntOrDefault(),
                         Quality = "Unique",
