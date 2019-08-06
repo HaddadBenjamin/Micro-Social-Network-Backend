@@ -160,13 +160,18 @@ class SearchItem extends React.Component<Props, State>
     
     public search(searchQueryParameters : string)
     {
-        axios.get<Item[]>(`http://localhost:56205/api/v1/Items/searchuniques/${searchQueryParameters}`)
-             .then(response => {
-                 store.dispatch({
+        const api = 'http://localhost:56205/api/v1';
+        const endpoint = 'Items/searchuniques';
+
+        axios.get<Item[]>(`${api}/${endpoint}/${searchQueryParameters}`)
+             .then(response =>
+             {
+                 store.dispatch(
+                 {
                      type: 'SEARCH_ITEMS',
                      payload : response.data
                  });
-             }/* items = response.data */);
+             });
     }
 
     render()
