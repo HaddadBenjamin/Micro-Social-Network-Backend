@@ -4,6 +4,7 @@ import Item from "./Item";
 import axios from 'axios';
 import  ItemCategoriesFilters from './ItemCategoriesFilter'
 import { store } from '../../store/store'
+import { map } from 'lodash'
 
 interface Props
 {
@@ -143,9 +144,9 @@ class SearchItem extends React.Component<Props, State>
 
     public generateSearchQueryParameters() : string
     {
-        var x = this.props.search.SubCategories;
-        console.log(x);
-        return `?SubCategories=${"Axe"}`;
+        var subCategories = map(this.props.search.SubCategories, _ => ItemSubCategory[_]).join(', ');
+        console.log(subCategories);
+        return `?SubCategories=${subCategories}`;
     }
     
     public search(searchQueryParameters : string)
