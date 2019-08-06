@@ -5,6 +5,7 @@ import axios from 'axios';
 import  ItemCategoriesFilters from './ItemCategoriesFilter'
 import { store } from '../../store/store'
 import { map } from 'lodash'
+import qs from 'qs'
 
 interface Props
 {
@@ -69,28 +70,28 @@ class SearchItem extends React.Component<Props, State>
     // Item difficulty :
    public onClickNormalUniques()
    {
-       this.props.search.MinimumLevelRequired = 0;
-       this.props.search.MaximumLevelRequired = 30;
+       this.props.search.MinimumLevel = 0;
+       this.props.search.MaximumLevel = 30;
        alert("x");
 
    }
    public onClickExceptionalUniques()
    {
-       this.props.search.MinimumLevelRequired = 30;
-       this.props.search.MaximumLevelRequired = 60;
+       this.props.search.MinimumLevel = 30;
+       this.props.search.MaximumLevel = 60;
        alert("x");
    }
 
    public onClickEliteUniques()
    {
-       this.props.search.MinimumLevelRequired = 60;
-       this.props.search.MaximumLevelRequired = 90;
+       this.props.search.MinimumLevel = 60;
+       this.props.search.MaximumLevel = 90;
        alert("x");
    }
    public onClickLegendaryUniques()
    {
-       this.props.search.MinimumLevelRequired = 90;
-       this.props.search.MaximumLevelRequired = Math.max();
+       this.props.search.MinimumLevel = 90;
+       this.props.search.MaximumLevel = Math.max();
        alert("x");
    }
 
@@ -144,9 +145,16 @@ class SearchItem extends React.Component<Props, State>
 
     public generateSearchQueryParameters() : string
     {
-        var subCategories = map(this.props.search.SubCategories, _ => ItemSubCategory[_]).join(', ');
-        console.log(subCategories);
-        return `?SubCategories=${subCategories}`;
+        const { SubCategories, MinimumLevel, MaximumLevel} = this.props.search;
+        const subCategories = map(SubCategories, _ => ItemSubCategory[_]).join(', ');
+        const searchQueryParameters = qs.stringify({
+           SubCategories : subCategories,
+            MinimumLevel : MinimumLevel,
+            MaximumLevel : MaximumLevel
+        });
+        
+        console.log(searchQueryParameters);
+        return `?${searchQueryParameters}`;
     }
     
     public search(searchQueryParameters : string)
