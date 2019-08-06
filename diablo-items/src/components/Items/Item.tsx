@@ -39,6 +39,7 @@ interface ItemProperty
     Minimum : number,
     Maximum : number,
     IsPercent : boolean,
+    Id : string,
 }
 
 export default Item;

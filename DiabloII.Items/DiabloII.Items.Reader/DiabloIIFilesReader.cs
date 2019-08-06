@@ -93,7 +93,8 @@ namespace DiabloII.Items.Reader
                             Par = (double)itemData[index + 1].ParseIntOrDefault() / 8,
                             Minimum = itemData[index + 2].ParseIntOrDefault(),
                             Maximum = itemData[index + 3].ParseIntOrDefault(),
-                            IsPercent = property.IsPercent
+                            IsPercent = property.IsPercent,
+							Id = Guid.NewGuid()
 						});
                     }
 
