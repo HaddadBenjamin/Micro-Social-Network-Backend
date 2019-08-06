@@ -138,22 +138,23 @@ class SearchItem extends React.Component<Props, State>
     {
         this.props.search.SubCategories = subCategories;
 
-        var searchQueryParameters = this.generateSearchQueryParameters();
+        const searchQueryParameters = this.generateSearchQueryParameters();
 
-        this.search(searchQueryParameters );
+        this.search(searchQueryParameters);
     }
 
     public generateSearchQueryParameters() : string
     {
         const { SubCategories, MinimumLevel, MaximumLevel} = this.props.search;
-        const subCategories = map(SubCategories, _ => ItemSubCategory[_]).join(', ');
-        const searchQueryParameters = qs.stringify({
-           SubCategories : subCategories,
+        const searchQueryParameters = qs.stringify(
+        {
+            SubCategories : map(SubCategories, _ => ItemSubCategory[_]).join(', '),
             MinimumLevel : MinimumLevel,
             MaximumLevel : MaximumLevel
         });
-        
+
         console.log(searchQueryParameters);
+
         return `?${searchQueryParameters}`;
     }
     
