@@ -233,7 +233,7 @@ namespace DiabloII.Items.Reader
                             .Replace("Gaunlets", "Gauntlets")
                             .Replace("Cap/hat", "Cap")
                             .Replace("Skull  Guard", "Skull Guard"),
-                    SubCategory = armor.Slot.ToTitleCase(),
+                    SubCategory = armor.Slot.Replace("_", " ").ToTitleCase(),
                     Category = "Armor",
 					MinimumDefense = armor.MinimumDefense,
 					MaximumDefense = armor.MaximumDefense,
@@ -277,6 +277,8 @@ namespace DiabloII.Items.Reader
 							.Replace("Ajav", "Amazon Javelin")
 							.Replace("H2h2", "Hand To Hand Two Handed")
 							.Replace("H2h", "Hand To Hand")
+							.Replace("Javelinlin", "Javelin")
+							.Replace("Spearr", "Spear")
 							.ToTitleCase(),
 					MinimumOneHandedDamage = weapon.MinimumOneHandedDamage,
 					MaximumOneHandedDamage = weapon.MaximumOneHandedDamage,
