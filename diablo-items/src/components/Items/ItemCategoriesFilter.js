@@ -14,15 +14,7 @@ class ItemCategoriesFilters extends React.Component
     render() {
         return (
             <>
-                <MDBFormInline className="item-category-filter" style={style}>
-                    <div>
-                        <select className="browser-default custom-select">
-                            <option onChange={() => this.props.onClickNormalUniques()}>Normal Uniques</option>
-                            <option onChange={() => this.props.onClickExceptionalUniques()}>Exceptional Uniques</option>
-                            <option onChange={() => this.props.onClickEliteUniques()}>Elite Uniques</option>
-                            <option onChange={() => this.props.onClickLegendaryUniques()}>Legendary Uniques</option>
-                        </select>
-                    </div>
+                <MDBFormInline className="item-category-filter py-4" style={style}>
                     <MDBContainer>
                     <MDBRow>
                         <MDBCol md="3" className="font-weight-bold py-4">Weapons

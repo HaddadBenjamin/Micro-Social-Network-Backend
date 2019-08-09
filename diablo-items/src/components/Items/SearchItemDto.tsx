@@ -1,15 +1,11 @@
 export default interface SearchItemDto
 {
     SubCategories? : ItemSubCategory[],
-    MinimumLevel: number,
-    MaximumLevel : number,
 }
 
 export const DefaultSearchItemDto : SearchItemDto =
 {
     SubCategories: [],
-    MinimumLevel: 0,
-    MaximumLevel: Math.max()
 }
 
 enum ItemSubCategory

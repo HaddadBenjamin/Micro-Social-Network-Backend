@@ -20,11 +20,6 @@ class SearchItem extends React.Component<Props, State>
     {
         super(props);
 
-        this.onClickNormalUniques = this.onClickNormalUniques.bind(this);
-        this.onClickExceptionalUniques = this.onClickExceptionalUniques.bind(this);
-        this.onClickEliteUniques = this.onClickEliteUniques.bind(this);
-        this.onClickLegendaryUniques = this.onClickLegendaryUniques.bind(this);
-
         this.onClickBodyArmors = this.onClickBodyArmors.bind(this);
         this.onClickShields = this.onClickShields.bind(this);
         this.onClickGloves = this.onClickGloves.bind(this);
@@ -66,34 +61,6 @@ class SearchItem extends React.Component<Props, State>
         this.setSubCategories = this.setSubCategories.bind(this);
         this.generateSearchQueryParameters = this.generateSearchQueryParameters.bind(this);
     }
-
-    // Item difficulty :
-   public onClickNormalUniques()
-   {
-       this.props.search.MinimumLevel = 0;
-       this.props.search.MaximumLevel = 30;
-       alert("x");
-
-   }
-   public onClickExceptionalUniques()
-   {
-       this.props.search.MinimumLevel = 30;
-       this.props.search.MaximumLevel = 60;
-       alert("x");
-   }
-
-   public onClickEliteUniques()
-   {
-       this.props.search.MinimumLevel = 60;
-       this.props.search.MaximumLevel = 90;
-       alert("x");
-   }
-   public onClickLegendaryUniques()
-   {
-       this.props.search.MinimumLevel = 90;
-       this.props.search.MaximumLevel = Math.max();
-       alert("x");
-   }
 
     // Armors :
     public onClickBodyArmors = ()  => this.setSubCategories([ ItemSubCategory.Torso ]);
@@ -145,12 +112,10 @@ class SearchItem extends React.Component<Props, State>
 
     public generateSearchQueryParameters() : string
     {
-        const { SubCategories, MinimumLevel, MaximumLevel} = this.props.search;
+        const { SubCategories} = this.props.search;
         const searchQueryParameters = qs.stringify(
         {
             SubCategories : map(SubCategories, _ => ItemSubCategory[_]).join(', '),
-            MinimumLevel : MinimumLevel,
-            MaximumLevel : MaximumLevel
         });
 
         console.log(searchQueryParameters);
@@ -184,11 +149,6 @@ class SearchItem extends React.Component<Props, State>
         return (
             <>
                 <ItemCategoriesFilters
-                    onClickNormalUniques={this.onClickNormalUniques}
-                    onClickExceptionalUniques={this.onClickExceptionalUniques}
-                    onClickEliteUniques={this.onClickEliteUniques}
-                    onClickLegendaryUniques={this.onClickLegendaryUniques}
-
                     onClickBows={this.onClickBows}
                     onClickCrossbows={this.onClickCrossbows}
                     onClickClubs={this.onClickClubs}
