@@ -110,13 +110,13 @@ class SearchItem extends React.Component<Props, State>
 
     public search()
     {
-        const { SubCategories} = this.props.search;
-        const searchQueryParameters = qs.stringify(
-        {
-            SubCategories : map(SubCategories, _ => ItemSubCategory[_]).join(', '),
-        });
-
-       api.get<Item[]>('Items/searchuniques', 'SEARCH_ITEMS', searchQueryParameters);
+       api.get<Item[]>(
+           'Items/searchuniques',
+           'SEARCH_ITEMS',
+           qs.stringify(
+       {
+                   SubCategories : map(this.props.search.SubCategories, _ => ItemSubCategory[_]).join(', '),
+           }));
     }
 
     // 1) This function is PURE, that's mean it should be extarnalised in another file with dedicated tests.
