@@ -106,14 +106,14 @@ class ItemViewer extends React.Component {
                         <MDBMask className="d-flex justify-content-center align-items-center gradient">
                             <MDBContainer>
                                 <MDBRow>
-                                    <MDBCol id="ItemTable">
+                                    <MDBCol>
                                         <MDBDataTable
-                                        className="item"
-                                        style={style}
-                                        data={data}
-                                        entries={3}/>
-                                        <MDBCol/>
-                                    </MDBCol>
+                                            className="item"
+                                            style={style}
+                                            data={data}
+                                            entries={3}/>
+                                    <MDBCol/>
+                                  </MDBCol>
                                 </MDBRow>
                             </MDBContainer>
                         </MDBMask>

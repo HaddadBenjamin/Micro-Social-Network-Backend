@@ -1,12 +1,11 @@
-import React  from 'react';
+import React from 'react';
 import SearchItemDto, {ItemSubCategory} from "./SearchItemDto";
 import Item from "./Item";
-import axios from 'axios';
 import  ItemCategoriesFilters from './ItemCategoriesFilter'
-import { store } from '../../store/store'
 import { map } from 'lodash'
 import qs from 'qs'
 import api from '../../Utilities/api.tsx'
+import scrollTo from '../../Utilities/animate'
 
 interface Props
 {
@@ -117,6 +116,8 @@ class SearchItem extends React.Component<Props, State>
        {
                    SubCategories : map(this.props.search.SubCategories, _ => ItemSubCategory[_]).join(', '),
            }));
+
+        scrollTo('#item-filter-view');
     }
 
     // 1) This function is PURE, that's mean it should be extarnalised in another file with dedicated tests.

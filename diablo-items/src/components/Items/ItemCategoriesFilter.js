@@ -8,7 +8,6 @@ import
 } from "mdbreact";
 import * as style from './ItemCategoriesFilter.css'
 
-
 class ItemCategoriesFilters extends React.Component
 {
     render() {
