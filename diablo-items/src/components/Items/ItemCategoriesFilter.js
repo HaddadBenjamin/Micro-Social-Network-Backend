@@ -17,7 +17,7 @@ class ItemCategoriesFilters extends React.Component
                 <MDBFormInline className="item-category-filter py-4" style={style}>
                     <MDBContainer>
                     <MDBRow>
-                        <MDBCol md="3" className="font-weight-bold py-4">Weapons
+                        <MDBCol md="3" className="font-weight-bold py-4">WEAPONS
                             <div className="font-weight-normal item-category-link">
                                 <div onClick={() => this.props.onClickArrows()}>Arrows</div>
                                 <div onClick={() => this.props.onClickAxes()}>Axes</div>
@@ -35,7 +35,7 @@ class ItemCategoriesFilters extends React.Component
                                 <div onClick={() => this.props.onClickThrowingWeapons()}>Throwing</div>
                             </div >
                         </MDBCol>
-                        <MDBCol md="3" className="font-weight-bold py-4">Armors
+                        <MDBCol md="3" className="font-weight-bold py-4">ARMORS
                             <div className="font-weight-normal item-category-link">
                                 <div onClick={() => this.props.onClickBodyArmors()}>Armors</div>
                                 <div onClick={() => this.props.onClickBelts()}>Belts</div>
@@ -45,7 +45,7 @@ class ItemCategoriesFilters extends React.Component
                                 <div onClick={() => this.props.onClickShoes()}>Shoes</div>
                             </div >
                         </MDBCol>
-                        <MDBCol md="3" className="font-weight-bold py-4">Jewelry
+                        <MDBCol md="3" className="font-weight-bold py-4">JEWELRY
                             <div className="font-weight-normal item-category-link">
                                 <div onClick={() => this.props.onClickAmulets()}>Amulets</div>
                                 <div onClick={() => this.props.onClickCharms()}>Charms</div>
@@ -53,13 +53,14 @@ class ItemCategoriesFilters extends React.Component
                                 <div onClick={() => this.props.onClickRings()}>Rings</div>
                             </div >
                         </MDBCol>
-                        <MDBCol md="3" className="font-weight-bold py-4">Classes
+                        <MDBCol md="3" className="font-weight-bold py-4">CLASSES
                             <div className="font-weight-normal item-category-link">
                                 <div onClick={() => this.props.onClickAmazon()}>Amazon</div>
                                 <div onClick={() => this.props.onClickAssassin()}>Assassin</div>
                                 <div onClick={() => this.props.onClickBarbarian()}>Barbarian</div>
                                 <div onClick={() => this.props.onClickDruid()}>Druid</div>
-                                <div onClick={() => this.props.onClickNecromancer()}>Sorceress</div>
+                                <div onClick={() => this.props.onClickNecromancer()}>Necromancer</div>
+                                <div>Paladin</div>
                                 <div onClick={() => this.props.onClickSorceress()}>Sorceress</div>
                             </div >
                         </MDBCol>
