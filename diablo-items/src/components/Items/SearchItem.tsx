@@ -1,8 +1,8 @@
 import React from 'react';
 import SearchItemDto, {ItemSubCategory} from "./SearchItemDto";
 import Item from "./Item";
-import  ItemCategoriesFilters from './ItemCategoriesFilter'
-import { map } from 'lodash'
+import ItemCategoriesFilters from './ItemCategoriesFilter'
+import {map} from 'lodash'
 import qs from 'qs'
 import api from '../../Utilities/api.tsx'
 import scrollTo from '../../Utilities/animate'
@@ -53,9 +53,11 @@ class SearchItem extends React.Component<Props, State>
         this.onClickJewels = this.onClickJewels.bind(this);
 
         this.onClickAmazon = this.onClickAmazon.bind(this);
-        this.onClickDruid = this.onClickDruid.bind(this);
-        this.onClickBarbarian = this.onClickBarbarian.bind(this);
         this.onClickAssassin = this.onClickAssassin.bind(this);
+        this.onClickBarbarian = this.onClickBarbarian.bind(this);
+        this.onClickDruid = this.onClickDruid.bind(this);
+        this.onClickNecromancer = this.onClickNecromancer.bind(this);
+        this.onClickPaladin = this.onClickPaladin.bind(this);
         this.onClickSorceress = this.onClickSorceress.bind(this);
 
         this.setSubCategoriesAndSearch = this.setSubCategoriesAndSearch.bind(this);
@@ -80,7 +82,7 @@ class SearchItem extends React.Component<Props, State>
     public onClickAxes = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Axe, ItemSubCategory.Two_Handed_Axe ]);
     public onClickPolearms = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Polearm, ItemSubCategory.Two_Handed_Polearm ]);
     public onClickSpears = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Spear, ItemSubCategory.Two_Handed_Spear ]);
-    public onClickMasses = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Mace, ItemSubCategory.Two_Handed_Hammer ]);
+    public onClickMasses = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Mace, ItemSubCategory.Two_Handed_Hammer, ItemSubCategory.Hammer ]);
     public onClickScepters = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Scepter ]);
     public onClickClubs = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Club ]);
     public onClickThrowingWeapons = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Throwing_Axe, ItemSubCategory.Throwing_Potions, ItemSubCategory.Thorwing_Knife ]);
@@ -96,9 +98,10 @@ class SearchItem extends React.Component<Props, State>
     public onClickAmazon = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Amazon_Bow, ItemSubCategory.Amazon_Javelin, ItemSubCategory.Amazon_Spear, ItemSubCategory.Two_Handed_Amazon_Bow, ItemSubCategory.Two_Handed_Amazon_Spear ]);
     public onClickDruid = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Druid_Helm ]);
     public onClickBarbarian = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Barbarian_Helm ]);
-    public onClickAssassin = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Hand_To_Hand, ItemSubCategory.Hand_To_Hand_Two_Handed ]);
-    public onClickSorceress = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Orb ]);
-    public onClickNecromancer = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Wand ]);
+    public onClickAssassin = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Hand_To_Hand, ItemSubCategory.Hand_To_Hand_Two_Handed, ItemSubCategory.Assassin_Claw ]);
+    public onClickSorceress = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Orb, ItemSubCategory.Sorceress_Orb ]);
+    public onClickNecromancer = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Wand, ItemSubCategory.Necromancer_Shield ]);
+    public onClickPaladin= ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Paladin_Shield ]);
 
     public setSubCategoriesAndSearch(subCategories : ItemSubCategory[])
     {
@@ -160,11 +163,12 @@ class SearchItem extends React.Component<Props, State>
                     onClickJewels={this.onClickJewels}
 
                     onClickAmazon={this.onClickAmazon}
-                    onClickDruid={this.onClickDruid}
-                    onClickBarbarian={this.onClickBarbarian}
                     onClickAssassin={this.onClickAssassin}
-                    onClickSorceress={this.onClickSorceress}
+                    onClickBarbarian={this.onClickBarbarian}
+                    onClickDruid={this.onClickDruid}
+                    onClickPaladin={this.onClickPaladin}
                     onClickNecromancer={this.onClickNecromancer}
+                    onClickSorceress={this.onClickSorceress}
                 />
             </>
         );

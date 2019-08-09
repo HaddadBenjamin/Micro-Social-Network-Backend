@@ -59,9 +59,9 @@ class ItemCategoriesFilters extends React.Component
                                 <div onClick={() => this.props.onClickBarbarian()}>Barbarian</div>
                                 <div onClick={() => this.props.onClickDruid()}>Druid</div>
                                 <div onClick={() => this.props.onClickNecromancer()}>Necromancer</div>
-                                <div>Paladin</div>
+                                <div onClick={() => this.props.onClickPaladin()}>Paladin</div>
                                 <div onClick={() => this.props.onClickSorceress()}>Sorceress</div>
-                            </div >
+                            </div>
                         </MDBCol>
                     </MDBRow>
                     </MDBContainer>
