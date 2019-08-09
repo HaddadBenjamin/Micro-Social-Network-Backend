@@ -55,7 +55,7 @@ class ItemViewer extends React.Component {
                             `${Math.min(property.Minimum, property.Maximum)}-${Math.max(property.Minimum, property.Maximum)}`)
                         var isPercent = (property.IsPercent ? '%' : '')
 
-                        return <div key={property.Id} className="diablo-attribute">+{value}{isPercent} {property.Name}</div>
+                        return <div key={property.Id} className="diablo-attribute">+{value}{isPercent} {property.FormattedName}</div>
                     });
 
                 var defense  = item.MaximumDefenseMinimum === item.MaximumDefenseMaximum ? item.MaximumDefenseMinimum :`${item.MaximumDefenseMinimum}-${item.MaximumDefenseMaximum}`;

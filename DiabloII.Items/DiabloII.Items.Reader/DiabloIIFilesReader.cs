@@ -89,7 +89,8 @@ namespace DiabloII.Items.Reader
 
 						properties.Add(new ItemProperty
                         {
-                            Name = property.FormattedName,
+							Name = itemData[index],
+							FormattedName = property.FormattedName,
                             Par = (double)itemData[index + 1].ParseIntOrDefault() / 8,
                             Minimum = itemData[index + 2].ParseIntOrDefault(),
                             Maximum = itemData[index + 3].ParseIntOrDefault(),

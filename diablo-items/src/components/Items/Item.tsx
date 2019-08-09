@@ -35,6 +35,7 @@ interface Item
 interface ItemProperty
 {
     Name : string,
+    FormattedName : string,
     Par : number,
     Minimum : number,
     Maximum : number,
