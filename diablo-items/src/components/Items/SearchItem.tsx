@@ -6,6 +6,7 @@ import  ItemCategoriesFilters from './ItemCategoriesFilter'
 import { store } from '../../store/store'
 import { map } from 'lodash'
 import qs from 'qs'
+import api from '../../Utilities/api.tsx'
 
 interface Props
 {
@@ -58,59 +59,56 @@ class SearchItem extends React.Component<Props, State>
         this.onClickAssassin = this.onClickAssassin.bind(this);
         this.onClickSorceress = this.onClickSorceress.bind(this);
 
-        this.setSubCategories = this.setSubCategories.bind(this);
-        this.generateSearchQueryParameters = this.generateSearchQueryParameters.bind(this);
+        this.setSubCategoriesAndSearch = this.setSubCategoriesAndSearch.bind(this);
     }
 
     // Armors :
-    public onClickBodyArmors = ()  => this.setSubCategories([ ItemSubCategory.Torso ]);
-    public onClickShields = ()  => this.setSubCategories([ ItemSubCategory.Offhand ]);
-    public onClickGloves = ()  => this.setSubCategories([ ItemSubCategory.Hands ]);
-    public onClickShoes = ()  => this.setSubCategories([ ItemSubCategory.Feet ]);
-    public onClickHelms = ()  => this.setSubCategories([ ItemSubCategory.Head ]);
-    public onClickBelts = ()  => this.setSubCategories([ ItemSubCategory.Waist ]);
+    public onClickBodyArmors = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Torso ]);
+    public onClickShields = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Offhand ]);
+    public onClickGloves = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Hands ]);
+    public onClickShoes = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Feet ]);
+    public onClickHelms = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Head ]);
+    public onClickBelts = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Waist ]);
 
     // Weapons :
-    public onClickBows = ()  => this.setSubCategories([ ItemSubCategory.Bow, ItemSubCategory.Two_Handed_Bow ]);
-    public onClickCrossbows = ()  => this.setSubCategories([ ItemSubCategory.Crossbow, ItemSubCategory.Two_Handed_Crossbow, ]);
-    public onClickArrows = ()  => this.setSubCategories([ ItemSubCategory.Arrows, ItemSubCategory.Bolts ]);
-    public onClickStaffs = ()  => this.setSubCategories([ ItemSubCategory.Staff, ItemSubCategory.Two_Handed_Staff ]);
+    public onClickBows = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Bow, ItemSubCategory.Two_Handed_Bow ]);
+    public onClickCrossbows = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Crossbow, ItemSubCategory.Two_Handed_Crossbow, ]);
+    public onClickArrows = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Arrows, ItemSubCategory.Bolts ]);
+    public onClickStaffs = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Staff, ItemSubCategory.Two_Handed_Staff ]);
 
-    public onClickSwords = ()  => this.setSubCategories([ ItemSubCategory.Sword, ItemSubCategory.Two_And_One_Handed_Sword ]);
-    public onClickDaggers = ()  => this.setSubCategories([ ItemSubCategory.Knife ]);
-    public onClickAxes = ()  => this.setSubCategories([ ItemSubCategory.Axe, ItemSubCategory.Two_Handed_Axe ]);
-    public onClickPolearms = ()  => this.setSubCategories([ ItemSubCategory.Polearm, ItemSubCategory.Two_Handed_Polearm ]);
-    public onClickSpears = ()  => this.setSubCategories([ ItemSubCategory.Spear, ItemSubCategory.Two_Handed_Spear ]);
-    public onClickMasses = ()  => this.setSubCategories([ ItemSubCategory.Mace, ItemSubCategory.Two_Handed_Hammer ]);
-    public onClickScepters = ()  => this.setSubCategories([ ItemSubCategory.Scepter ]);
-    public onClickClubs = ()  => this.setSubCategories([ ItemSubCategory.Club ]);
-    public onClickThrowingWeapons = ()  => this.setSubCategories([ ItemSubCategory.Throwing_Axe, ItemSubCategory.Throwing_Potions, ItemSubCategory.Thorwing_Knife ]);
-    public onClickJavelins = ()  => this.setSubCategories([ ItemSubCategory.Javelin ]);
+    public onClickSwords = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Sword, ItemSubCategory.Two_And_One_Handed_Sword ]);
+    public onClickDaggers = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Knife ]);
+    public onClickAxes = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Axe, ItemSubCategory.Two_Handed_Axe ]);
+    public onClickPolearms = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Polearm, ItemSubCategory.Two_Handed_Polearm ]);
+    public onClickSpears = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Spear, ItemSubCategory.Two_Handed_Spear ]);
+    public onClickMasses = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Mace, ItemSubCategory.Two_Handed_Hammer ]);
+    public onClickScepters = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Scepter ]);
+    public onClickClubs = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Club ]);
+    public onClickThrowingWeapons = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Throwing_Axe, ItemSubCategory.Throwing_Potions, ItemSubCategory.Thorwing_Knife ]);
+    public onClickJavelins = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Javelin ]);
 
     // Jewelry and others :
-    public onClickAmulets = ()  => this.setSubCategories([ ItemSubCategory.Amulet ]);
-    public onClickRings = ()  => this.setSubCategories([ ItemSubCategory.Ring ]);
-    public onClickCharms = ()  => this.setSubCategories([ ItemSubCategory.Charm ]);
-    public onClickJewels = ()  => this.setSubCategories([ ItemSubCategory.Jewel ]);
+    public onClickAmulets = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Amulet ]);
+    public onClickRings = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Ring ]);
+    public onClickCharms = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Charm ]);
+    public onClickJewels = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Jewel ]);
 
     // Class specific :
-    public onClickAmazon = ()  => this.setSubCategories([ ItemSubCategory.Amazon_Bow, ItemSubCategory.Amazon_Javelin, ItemSubCategory.Amazon_Spear, ItemSubCategory.Two_Handed_Amazon_Bow, ItemSubCategory.Two_Handed_Amazon_Spear ]);
-    public onClickDruid = ()  => this.setSubCategories([ ItemSubCategory.Druid_Helm ]);
-    public onClickBarbarian = ()  => this.setSubCategories([ ItemSubCategory.Barbarian_Helm ]);
-    public onClickAssassin = ()  => this.setSubCategories([ ItemSubCategory.Hand_To_Hand, ItemSubCategory.Hand_To_Hand_Two_Handed ]);
-    public onClickSorceress = ()  => this.setSubCategories([ ItemSubCategory.Orb ]);
-    public onClickNecromancer = ()  => this.setSubCategories([ ItemSubCategory.Wand ]);
+    public onClickAmazon = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Amazon_Bow, ItemSubCategory.Amazon_Javelin, ItemSubCategory.Amazon_Spear, ItemSubCategory.Two_Handed_Amazon_Bow, ItemSubCategory.Two_Handed_Amazon_Spear ]);
+    public onClickDruid = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Druid_Helm ]);
+    public onClickBarbarian = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Barbarian_Helm ]);
+    public onClickAssassin = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Hand_To_Hand, ItemSubCategory.Hand_To_Hand_Two_Handed ]);
+    public onClickSorceress = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Orb ]);
+    public onClickNecromancer = ()  => this.setSubCategoriesAndSearch([ ItemSubCategory.Wand ]);
 
-    public setSubCategories(subCategories : ItemSubCategory[])
+    public setSubCategoriesAndSearch(subCategories : ItemSubCategory[])
     {
         this.props.search.SubCategories = subCategories;
 
-        const searchQueryParameters = this.generateSearchQueryParameters();
-
-        this.search(searchQueryParameters);
+        this.search();
     }
 
-    public generateSearchQueryParameters() : string
+    public search()
     {
         const { SubCategories} = this.props.search;
         const searchQueryParameters = qs.stringify(
@@ -118,9 +116,7 @@ class SearchItem extends React.Component<Props, State>
             SubCategories : map(SubCategories, _ => ItemSubCategory[_]).join(', '),
         });
 
-        console.log(searchQueryParameters);
-
-        return `?${searchQueryParameters}`;
+       new api().get<Item[]>('Items/searchuniques', 'SEARCH_ITEMS', searchQueryParameters);
     }
 
     // 1) This function is PURE, that's mean it should be extarnalised in another file with dedicated tests.
@@ -128,21 +124,7 @@ class SearchItem extends React.Component<Props, State>
     //    search should be an epic that do the search.
     //    then (search.success(response.data))
     //    failed (search.failed('can't search)
-    public search(searchQueryParameters : string)
-    {
-        const api = 'http://localhost:56205/api/v1';
-        const endpoint = 'Items/searchuniques';
 
-        axios.get<Item[]>(`${api}/${endpoint}/${searchQueryParameters}`)
-             .then(response =>
-             {
-                 store.dispatch(
-                 {
-                     type: 'SEARCH_ITEMS',
-                     payload : response.data
-                 });
-             });
-    }
 
     render()
     {
