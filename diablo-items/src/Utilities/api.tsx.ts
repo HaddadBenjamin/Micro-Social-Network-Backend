@@ -1,7 +1,7 @@
-import { store } from "../../src/store/store";
+import {store} from "../../src/store/store";
 import axios from 'axios'
 
-export default class api
+class Api
 {
     // Get from variable environment / file different by environment.
     readonly apiUrl : string = 'http://localhost:56205/api/v1';
@@ -29,3 +29,7 @@ export default class api
         return `${this.apiUrl}/${endpoint}/?${queryParameters ? '?' + queryParameters : ''}`;
     }
 }
+
+const api = new Api();
+
+export default api;
