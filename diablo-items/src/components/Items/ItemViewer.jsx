@@ -29,8 +29,15 @@ class ItemViewer extends React.Component {
                     width: 150
                 },
                 {
+                    label: 'Level Required',
+                    field: 'LevelRequired',
+                    sort: 'asc',
+                    width: 50
+                },
+                {
                     label: 'Stats',
                     field: 'Stats',
+                    sort : 'disabled'
                 }
             ]
         };
@@ -79,6 +86,7 @@ class ItemViewer extends React.Component {
 
                 return {
                     Name : item.Name,
+                    LevelRequired : item.LevelRequired,
                     Item : itemFormatted,
                 }
        });
@@ -86,6 +94,7 @@ class ItemViewer extends React.Component {
         data.rows = rows.map(function(item) {
             return {
                 'Name': item.Name,
+                'LevelRequired' : item.LevelRequired,
                 'Stats': item.Item
             };
         });
@@ -97,10 +106,12 @@ class ItemViewer extends React.Component {
                         <MDBMask className="d-flex justify-content-center align-items-center gradient">
                             <MDBContainer>
                                 <MDBRow>
-                                    <MDBCol>
-            <MDBDataTable className="item" style={style}
-            data={data}
-            entries={3}/>
+                                    <MDBCol id="ItemTable">
+                                        <MDBDataTable
+                                        className="item"
+                                        style={style}
+                                        data={data}
+                                        entries={3}/>
                                         <MDBCol/>
                                     </MDBCol>
                                 </MDBRow>

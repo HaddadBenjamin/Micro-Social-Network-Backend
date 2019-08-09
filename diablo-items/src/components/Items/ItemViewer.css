@@ -13,11 +13,16 @@
 {
     color : rgb(229, 150, 29);
 }
-.sorting, label, td, th, a, .page-item, .dataTables_info, span, a.page-link, .sr-only
+label, td, th, a, .page-item, .dataTables_info, span, a.page-link, .sr-only
 {
     color : white !important;
 }
-th.sorting::before, th.sorting::after
+th.sorting::before,
+th.sorting::after,
+th.sorting_desc::before,
+th.sorting_desc::after,
+th.sorting_asc::before,
+th.sorting_asc::after
 {
     color:  red;
     opacity : 1;
@@ -50,10 +55,10 @@ th.sorting::before, th.sorting::after
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    min-height: 115vh;
+    min-height: 135vh;
 }
 
-thead, .dataTables_length.bs-select
+.dataTables_length.bs-select
 {
     display : none
 }
