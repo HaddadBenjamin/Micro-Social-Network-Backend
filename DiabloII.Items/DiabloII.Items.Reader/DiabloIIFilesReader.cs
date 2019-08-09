@@ -292,24 +292,29 @@ namespace DiabloII.Items.Reader
             weaponSubCategoriesRecord.AddRange(armorSubCategoriesRecord);
             weaponSubCategoriesRecord.AddRange(new[]
             {
-				// Manque l'armure et les dommages
-                    new ItemCategoryRecord { Name = "Silver-Edged Axe", Category = "Weapon", SubCategory = "Two Handed Axe"},
+                    new ItemCategoryRecord { Name = "Silver-Edged Axe", Category = "Weapon", SubCategory = "Two Handed Axe", MinimumOneHandedDamage = 62, MaximumOneHandedDamage = 110 },
                     new ItemCategoryRecord { Name = "Amulet", Category = "Jewelry", SubCategory = "Amulet"},
                     new ItemCategoryRecord { Name = "Arrows", Category = "Armor", SubCategory = "Arrows"},
                     new ItemCategoryRecord { Name = "Bolts", Category = "Armor", SubCategory = "Bolts"},
                     new ItemCategoryRecord { Name = "Charm", Category = "Charm", SubCategory = "Charm"},
-                    new ItemCategoryRecord { Name = "Hammer", Category = "Weapon", SubCategory = "Hammer"},
+					// Damage ?
+					new ItemCategoryRecord { Name = "Hammer", Category = "Weapon", SubCategory = "Hammer"},
                     new ItemCategoryRecord { Name = "Jewel", Category = "Jewelry", SubCategory = "Jewel"},
                     new ItemCategoryRecord { Name = "Ring", Category = "Jewelry", SubCategory = "Ring"},
+					// Damage ?
                     new ItemCategoryRecord { Name = "Staff", Category = "Weapon", SubCategory = "Staff"},
-                    new ItemCategoryRecord { Name = "Conqueror Crown", Category = "Armor", SubCategory = "Barbarian Helm"},
-                    new ItemCategoryRecord { Name = "Blood Spirit", Category = "Armor", SubCategory = "Druid Helm"},
-                    new ItemCategoryRecord { Name = "Bracers", Category = "Armor", SubCategory = "Hands"},
+                    new ItemCategoryRecord { Name = "Conqueror Crown", Category = "Armor", SubCategory = "Barbarian Helm", MinimumDefense = 114, MaximumDefense = 159},
+                    new ItemCategoryRecord { Name = "Blood Spirit", Category = "Armor", SubCategory = "Druid Helm", MinimumDefense = 101, MaximumDefense = 145},
+					// Defence ?
+					new ItemCategoryRecord { Name = "Bracers", Category = "Armor", SubCategory = "Hands"},
+					// Defence ?
                     new ItemCategoryRecord { Name = "Gloves", Category = "Armor", SubCategory = "Hands"},
+					// Defence ?
                     new ItemCategoryRecord { Name = "Belt", Category = "Armor", SubCategory = "Waist"},
-                    new ItemCategoryRecord { Name = "Sash", Category = "Armor", SubCategory = "Waist"},
+                    new ItemCategoryRecord { Name = "Sash", Category = "Armor", SubCategory = "Waist", MinimumDefense = 2, MaximumDefense = 2},
+					// Defence ?
                     new ItemCategoryRecord { Name = "Girdle", Category = "Armor", SubCategory = "Waist"},
-                    new ItemCategoryRecord { Name = "Gauntlets", Category = "Armor", SubCategory = "Hands"},
+                    new ItemCategoryRecord { Name = "Gauntlets", Category = "Armor", SubCategory = "Hands", MinimumDefense = 12, MaximumDefense = 15},
             });
 
             return weaponSubCategoriesRecord;
