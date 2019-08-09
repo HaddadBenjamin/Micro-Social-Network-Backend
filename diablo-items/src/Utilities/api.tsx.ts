@@ -26,7 +26,7 @@ class Api
 
     private getUrl(endpoint : string, queryParameters? : string) : string
     {
-        return `${this.apiUrl}/${endpoint}/?${queryParameters ? '?' + queryParameters : ''}`;
+        return `${this.apiUrl}/${endpoint}/${queryParameters ? '?' + queryParameters : ''}`;
     }
 }
 
