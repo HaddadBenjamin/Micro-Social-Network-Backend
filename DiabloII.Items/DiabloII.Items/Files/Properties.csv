@@ -166,7 +166,7 @@ stam/lvl;Stamina Per Level;0
 Extra XP;Experience;1
 extra-pois;Poison Damage;1
 levelup-skill;Chance on level up;0
-randclassskill;Random Class Skill;0
+randclassskill;randclassskill;0
 cold-thorns;Cold-thorns;0
 Vita;Vitality;0
 rescold-max;Maximum Cold Resistance;1
