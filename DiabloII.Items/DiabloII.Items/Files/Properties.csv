@@ -7,7 +7,7 @@ dmg-min;Minimum Damage;0
 Attack Bonus %;Attack Rating ;1
 Mana per Kill;Mana Per Kill;0
 Dmg % to Undead;Damage to Undead;1
-att-undead;Attack Rating to Undead;0
+att-undead;To Attack Rating against Undead;0
 Attack Speed %;Attack Speed ;1
 Armor Class;Defense ;0
 fire-min;Minimum Fire Damage;0
@@ -102,13 +102,13 @@ Druid Skills;Druid Skills;0
 vit/lvl;Vitality Per Level;0
 rep-dur;Repair-Durability;0
 Charges;Charges;0
-att-und/lvl;Attack Rating to Undead Per Level;0
+att-und/lvl;To Attack Rating against Undead Per Level;0
 dmg-und/lvl;Damage to Undead Per Level;1
 hp/lvl;To Life Per Level;0
 mana/lvl;Mana Per Level;0
 Class Skill Tab;Class Skill Tab;0
 Dmg % to Demons;Damage to Demons;1
-att-demon;Attack Rating to Undead;0
+att-demon;To Attack Rating against Undead;0
 demon-heal;Life per Demon Kill;0
 Sockets;Sockets;0
 gold%/lvl;Increased Gold Per Level;1
@@ -128,7 +128,7 @@ att/lvl;Attack Rating Per Level;0
 abs-ltng;Absorb-Lightning;0
 *charged;Charged;0
 *vit;Vitality;0
-att-dem/lvl;Attack Rating to Demons Per Level;0
+att-dem/lvl;To Attack Rating Against Demons Per Level;0
 thorns/lvl;Attacker Takes Damage Per Level;0
 abs-cold;Absorb-Cold;0
 *mana;Mana;0
