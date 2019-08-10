@@ -1,11 +1,9 @@
 import {store} from "../../src/store/store";
 import axios from 'axios'
+import config from './config'
 
 class Api
 {
-    // Get from variable environment / file different by environment.
-    readonly apiUrl : string = 'http://localhost:56205/api/v1';
-
     public get<T>(endpoint : string, action : string, queryParameters? : string)
     {
         var url = this.getUrl(endpoint, queryParameters);
@@ -26,7 +24,7 @@ class Api
 
     private getUrl(endpoint : string, queryParameters? : string) : string
     {
-        return `${this.apiUrl}/${endpoint}/${queryParameters ? '?' + queryParameters : ''}`;
+        return `${config.apiUrl}/${endpoint}/${queryParameters ? '?' + queryParameters : ''}`;
     }
 }
 

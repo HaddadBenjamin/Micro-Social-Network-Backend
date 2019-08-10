@@ -4,7 +4,7 @@ import Item from "./Item";
 import ItemCategoriesFilters from './ItemCategoriesFilter'
 import {map} from 'lodash'
 import qs from 'qs'
-import api from '../../Utilities/api.tsx'
+import api from '../../Utilities/api'
 import scrollTo from '../../Utilities/animate'
 
 interface Props
