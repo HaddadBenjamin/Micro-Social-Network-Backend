@@ -87,11 +87,12 @@ namespace DiabloII.Items.Reader
                         if (string.IsNullOrEmpty(itemData[index]))
                             continue;
 
-						var property = propertyRecords.FirstOrDefault(_ => _.Name == itemData[index]);
+						var propertyName = itemData[index];
+						var property = propertyRecords.FirstOrDefault(_ => _.Name == propertyName);
 
 						if (property == null)
 						{
-							MissingProperties.Add((name, itemData[index]));
+							MissingProperties.Add((name, propertyName));
 							continue;
 						}
 						var propertyFormattedName = property.FormattedName;
@@ -106,7 +107,26 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = $"{skill.Name} {skill.Class}";
 							propertyPar = 0;
 						}
-						if (propertyFormattedName == "Gethit-Skill")
+						else if (propertyFormattedName == "Hit-Skill")
+						{
+							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+
+							if (skill == null)
+							{
+								propertyFormattedName = $"Level {itemData[index + 7].ParseIntOrDefault()} {itemData[index + 5]} ({itemData[index + 6].ParseIntOrDefault()} {itemData[index + 4]})";
+								propertyPar = propertyMinimum = propertyMaximum = 0;
+								index += 3;
+
+							}
+							else
+							{
+								propertyFormattedName = $"Chance To Cast Level {propertyMaximum} {skill.Name} On Striking";
+								propertyMaximum = propertyMinimum;
+								propertyPar = 0;
+								property.IsPercent = true;
+							}
+						}
+						else if (propertyFormattedName == "Gethit-Skill")
 						{
 							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
 
@@ -122,10 +142,10 @@ namespace DiabloII.Items.Reader
 
 						properties.Add(new ItemProperty
                         {
-							Name = itemData[index],
+							Name = propertyName,
 							FormattedName = propertyFormattedName,
                             Par = propertyPar,
-                            Minimum = itemData[index + 2].ParseIntOrDefault(),
+                            Minimum = propertyMinimum,
                             Maximum = propertyMaximum,
                             IsPercent = property.IsPercent,
 							Id = Guid.NewGuid()
@@ -341,6 +361,8 @@ namespace DiabloII.Items.Reader
 							.Replace("H2h", "Hand To Hand")
 							.Replace("Javelinlin", "Javelin")
 							.Replace("Spearr", "Spear")
+							.Replace("\t", string.Empty)
+							.Replace("\\", string.Empty)
 							.ToTitleCase(),
 					MinimumOneHandedDamage = weapon.MinimumOneHandedDamage,
 					MaximumOneHandedDamage = weapon.MaximumOneHandedDamage,

@@ -53,9 +53,17 @@ class ItemViewer extends React.Component {
                     {
                         var value = property.Par > 0 ? property.Par : (property.Minimum === property.Maximum ? `${property.Minimum}` :
                             `${Math.min(property.Minimum, property.Maximum)}-${Math.max(property.Minimum, property.Maximum)}`)
-                        var isPercent = (property.IsPercent ? '%' : '')
 
-                        return <div key={property.Id} className="diablo-attribute">+{value}{isPercent} {property.FormattedName}</div>
+                        if (value == '0')
+                            value = '';
+
+                        var isPercent = (property.IsPercent && value !== '' ? '%' : '');
+                        var valueDisplayed = `${value}${isPercent} `;
+
+                        if (valueDisplayed === ' ')
+                            valueDisplayed = '';
+
+                        return <div key={property.Id} className="diablo-attribute">+{valueDisplayed}{property.FormattedName}</div>
                     });
 
                 var defense  = item.MaximumDefenseMinimum === item.MaximumDefenseMaximum ? item.MaximumDefenseMinimum :`${item.MaximumDefenseMinimum}-${item.MaximumDefenseMaximum}`;
@@ -84,7 +92,7 @@ class ItemViewer extends React.Component {
                             {item.DexterityRequired > 0 ? <div>Required Dexterity : {item.DexterityRequired} </div> : ''}
                             {item.LevelRequired > 0 ? <div>Required Level : {item.LevelRequired} </div> : ''}
                         </div>
-                        <div>{/* rvoir la couleur */}
+                        <div>
                             {attributes}
                         </div>
                     </div>
