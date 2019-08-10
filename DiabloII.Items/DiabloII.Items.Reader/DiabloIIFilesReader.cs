@@ -10,7 +10,7 @@ namespace DiabloII.Items.Reader
     {
         private List<(string Name, string Type)> MissingItemTypes = new List<(string, string)>();
         private List<(string Name, double Id)> MissingSkills = new List<(string, double)>();
-        private List<(string Name, int Index)> MissingProperty = new List<(string, int)>();
+        private List<(string Name, string Property)> MissingProperties = new List<(string, string)>();
 
 		// TODO : 
 		// Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
@@ -40,7 +40,9 @@ namespace DiabloII.Items.Reader
             var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
 			var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
 			var missingProps = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties.Select(p => p.Name).Where(name => properties.FirstOrDefault(s => s.Name == name) == null).Distinct()).Distinct().ToList());
-			var errors = string.Join(Environment.NewLine, MissingItemTypes.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Type}"));
+			var missingItemsCategories = string.Join(Environment.NewLine, MissingItemTypes.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Type}"));
+			var missingProperties = string.Join(Environment.NewLine, MissingProperties.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Property}"));
+			var missingSkills = string.Join(Environment.NewLine, MissingSkills.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Id}"));
 
 			return uniques;
         }
@@ -87,7 +89,10 @@ namespace DiabloII.Items.Reader
 						var property = propertyRecords.FirstOrDefault(_ => _.Name == itemData[index]);
 
 						if (property == null)
+						{
+							MissingProperties.Add((name, itemData[index]));
 							continue;
+						}
 						var propertyFormattedName = property.FormattedName;
 						var propertyPar = (double)itemData[index + 1].ParseIntOrDefault();
 
@@ -340,18 +345,12 @@ namespace DiabloII.Items.Reader
                     new ItemCategoryRecord { Name = "Arrows", Category = "Armor", SubCategory = "Arrows"},
                     new ItemCategoryRecord { Name = "Bolts", Category = "Armor", SubCategory = "Bolts"},
                     new ItemCategoryRecord { Name = "Charm", Category = "Charm", SubCategory = "Charm"},
-					//new ItemCategoryRecord { Name = "Hammer", Category = "Weapon", SubCategory = "Hammer"},
                     new ItemCategoryRecord { Name = "Jewel", Category = "Jewelry", SubCategory = "Jewel"},
                     new ItemCategoryRecord { Name = "Ring", Category = "Jewelry", SubCategory = "Ring"},
-                    // new ItemCategoryRecord { Name = "Staff", Category = "Weapon", SubCategory = "Staff"},
                     new ItemCategoryRecord { Name = "Conqueror Crown", Category = "Armor", SubCategory = "Barbarian Helm", MinimumDefense = 114, MaximumDefense = 159, StrengthRequired = 174},
                     new ItemCategoryRecord { Name = "Blood Spirit", Category = "Armor", SubCategory = "Druid Helm", MinimumDefense = 101, MaximumDefense = 145, StrengthRequired = 80},
-					// new ItemCategoryRecord { Name = "Bracers", Category = "Armor", SubCategory = "Hands"},
-                    // new ItemCategoryRecord { Name = "Gloves", Category = "Armor", SubCategory = "Hands"},
-                    // new ItemCategoryRecord { Name = "Belt", Category = "Armor", SubCategory = "Waist"},
 					new ItemCategoryRecord { Name = "Sash", Category = "Armor", SubCategory = "Armor", MinimumDefense = 218, MaximumDefense = 233, StrengthRequired = 88},
                     new ItemCategoryRecord { Name = "Girdle", Category = "Armor", SubCategory = "Waist", MinimumDefense = 12, MaximumDefense = 15, StrengthRequired = 53},
-                    //new ItemCategoryRecord { Name = "Gauntlets", Category = "Armor", SubCategory = "Hands", MinimumDefense = 12, MaximumDefense = 15},
             });
 
             return weaponSubCategoriesRecord;
