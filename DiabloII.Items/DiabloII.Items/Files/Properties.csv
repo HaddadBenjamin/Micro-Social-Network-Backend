@@ -56,7 +56,7 @@ regen-stam;Regenerate Stamina ;1
 Hitpoints;To Life;0
 Ignore Armor;Ignore Armor;0
 Deadly Strike;Deadly Strike;1
-Magic Find %;Magic Find ;1
+Magic Find %;better chance of getting magic items;1
 Extra Durability;Extra Durability;0
 dmg-mag;Magic Damage;0
 fireskill;To Fire Skills;0
@@ -67,7 +67,7 @@ dmg-pois;Poison Damage;0
 Prevent Heal;Prevent Monster Heal;0
 *hp;To Life;1
 Reduce Dmg;Reduce Damage;0
-Gold Find %;Gold Find ;1
+Gold Find %;extra gold from monsters ;1
 nofreeze;Cannot be Frozen;0
 res-pois-max;To Maximum Poison Resistance;1
 reduce-ac;Reduce Defense;1
@@ -112,7 +112,7 @@ att-demon;Attack Rating to Undead;0
 demon-heal;Life per Demon Kill;0
 Sockets;Sockets;0
 gold%/lvl;Increased Gold Per Level;1
-mag%/lvl;Magic Find Per Level;1
+mag%/lvl;better chance of getting magic items Per Level;1
 deadly/lvl;Deadly Strike Per Level;1
 dmg/lvl;Damage Per Level;0
 res-ltng-max;To Maximum Lightning Resitance;1
