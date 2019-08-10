@@ -135,6 +135,8 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = "Ignore target's defense";
 							propertyMaximum = propertyMinimum = 0;
 						}
+						else if (propertyFormattedName == "Slain Monsters Rest In Peace")
+							propertyMaximum = propertyMinimum = 0;
 						else if (propertyFormattedName == "Other Skill")
 						{
 							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
