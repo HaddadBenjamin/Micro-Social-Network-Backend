@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="DiabloIIFilesReader.cs" />
     <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Items\SkillRecord.cs" />
     <Compile Include="Records\ItemCategoryRecord.cs" />
     <Compile Include="Items\ItemCategory.cs" />
     <Compile Include="Items\ItemProperty.cs" />

@@ -10,6 +10,6 @@ namespace DiabloII.Items.Reader.Extensions
 
         public static string ToTitleCase(this string text) => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(text);
 
-		public static string ReplaceIfEquals(this string text, string replace) => text != replace ? text : replace;
+		public static string ReplaceIfEquals(this string text, string equals, string replace) => text == equals ? replace : text;
     }
 }

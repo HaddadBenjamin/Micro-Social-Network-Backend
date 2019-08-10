@@ -17,17 +17,19 @@ namespace DiabloII.Items.Reader
 		// Class Skill et Gethit-Skill (skill when touched) PAR : min max, 
 		// Gethit-Skill : 10% to trigger level 5 skill
 		// Vérifier, tester et sanitizer les propriétés sur la vraie documentation
-		// Ascended m'aide sur la partie Errors.
+		// Ascended m'aide sur les missing category, il va me renvoyer lees documents weapon et armor txt.
 		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
             string armorsCsv,
-			string propertiesCsv)
+			string propertiesCsv,
+			string skillsCsv)
         {
             var weapons = ReadWeapons(weaponsCsv);
             var armors = ReadArmors(armorsCsv);
             var subCategories = ReadSubCategories(weapons, armors);
             var properties = ReadProperties(propertiesCsv);
+			var skills = ReadSkills(skillsCsv);
 			var uniques = ReadUniques(uniquesCsv, subCategories, properties);
 
 			// For sanitize purpoeses and comparaison :
@@ -36,7 +38,7 @@ namespace DiabloII.Items.Reader
             var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
 			var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
 			var missingProps = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties.Select(p => p.Name).Where(name => properties.FirstOrDefault(s => s.Name == name) == null).Distinct()).Distinct().ToList());
-			var errors = string.Join(Environment.NewLine, MissingItemTypes.Select(_ => $"{_.Name} : {_.Type}"));
+			var errors = string.Join(Environment.NewLine, MissingItemTypes.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Type}"));
 
 			return uniques;
         }
@@ -141,6 +143,34 @@ namespace DiabloII.Items.Reader
                 })
                 .Where(item => item != null)
                 .ToList();
+
+		private List<SkillRecord> ReadSkills(string skillsCsv)
+			=> skillsCsv
+				.Split('\n')
+					.Select(line =>
+					{
+						var itemData = line.Split(';');
+
+						if (itemData.Length < 3)
+							return null;
+
+						return new SkillRecord
+						{
+							Name = itemData[0],
+							Id = itemData[1],
+							Class = itemData[2]
+								.Replace("\r", string.Empty)
+								.ReplaceIfEquals("ama", "(Amazon Only)")
+								.ReplaceIfEquals("ass", "(Assassin Only)")
+								.ReplaceIfEquals("bar", "(Barbarian Only)")
+								.ReplaceIfEquals("dru", "(Druid Only)")
+								.ReplaceIfEquals("pal", "(Paladin Only)")
+								.ReplaceIfEquals("nec", "(Necromancer Only)")
+								.ReplaceIfEquals("sor", "(Sorceress Only)")
+						};
+					})
+					.Where(item => item != null)
+				.ToList();
 
 		private List<PropertyRecord> ReadProperties(string propertiesCsv)
 			=> propertiesCsv
