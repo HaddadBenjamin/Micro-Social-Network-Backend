@@ -9,5 +9,7 @@ namespace DiabloII.Items.Reader.Extensions
         public static string FirstCharToUpper(this string text) => string.IsNullOrEmpty(text) ? text : char.ToUpper(text[0]) + text.Substring(1);
 
         public static string ToTitleCase(this string text) => CultureInfo.CurrentCulture.TextInfo.ToTitleCase(text);
+
+		public static string ReplaceIfEquals(this string text, string replace) => text != replace ? text : replace;
     }
 }

@@ -8,23 +8,16 @@ namespace DiabloII.Items.Reader
 {
     public class DiabloIIFilesReader
     {
-        private List<string> MissingItemTypes = new List<String>();
+        private List<(string Name, string Type)> MissingItemTypes = new List<(string, string)>();
 
 		// TODO : 
 		// Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
 		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
 		// Utiliser le nouveau document properties de Ascended pour calculer "IsPercent" et "Description" des attributs.
-		// New category "Amazon, Assasin, Druid, Necromancer, Paladin, Sorceress"
-		//- Paladin Shield.
-		//- Sorceress Orb.
-		//- Necromancer Shield.
-		//- Necromancer Wand.
-		//- Assassin Claws.
-		//- Druid Helm.
-		//- Barbarian Helm.
 		// Class Skill et Gethit-Skill (skill when touched) PAR : min max, 
 		// Gethit-Skill : 10% to trigger level 5 skill
 		// Vérifier, tester et sanitizer les propriétés sur la vraie documentation
+		// Ascended m'aide sur la partie Errors.
 		public IEnumerable<Item> Read(
             string uniquesCsv,
             string weaponsCsv,
@@ -43,6 +36,7 @@ namespace DiabloII.Items.Reader
             var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
 			var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
 			var missingProps = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties.Select(p => p.Name).Where(name => properties.FirstOrDefault(s => s.Name == name) == null).Distinct()).Distinct().ToList());
+			var errors = string.Join(Environment.NewLine, MissingItemTypes.Select(_ => $"{_.Name} : {_.Type}"));
 
 			return uniques;
         }
@@ -76,7 +70,7 @@ namespace DiabloII.Items.Reader
 
                     if (itemCategory == null)
                     {
-                        MissingItemTypes.Add(type);
+						MissingItemTypes.Add((name, type));
                         return null;
                     }
 
@@ -227,9 +221,9 @@ namespace DiabloII.Items.Reader
                 {
                     Name = armor.Name
                         .Replace("\r", string.Empty)
-                            .Replace("(M)", "Medium")
-                            .Replace("(H)", "Heavy")
-                            .Replace("(L)", "Light")
+                            .Replace("(M)", " Medium")
+                            .Replace("(H)", " Heavy")
+                            .Replace("(L)", " Light")
                             .Replace("Hard Leather Armor", "Hard Leather")
                             .Replace("Gaunlets", "Gauntlets")
                             .Replace("Cap/hat", "Cap")
