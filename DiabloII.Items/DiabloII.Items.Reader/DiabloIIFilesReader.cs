@@ -25,14 +25,16 @@ namespace DiabloII.Items.Reader
             string weaponsCsv,
             string armorsCsv,
 			string propertiesCsv,
-			string skillsCsv)
+			string skillsCsv,
+			string skillTabsCsv)
         {
             var weapons = ReadWeapons(weaponsCsv);
             var armors = ReadArmors(armorsCsv);
             var subCategories = ReadSubCategories(weapons, armors);
             var properties = ReadProperties(propertiesCsv);
 			var skills = ReadSkills(skillsCsv);
-			var uniques = ReadUniques(uniquesCsv, subCategories, properties, skills);
+			var skillTabs = ReadSkillTabs(skillsTabsCsv);
+			var uniques = ReadUniques(uniquesCsv, subCategories, properties, skills, skillTabs);
 
 			// For sanitize purpoeses and comparaison :
 			var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
@@ -51,7 +53,8 @@ namespace DiabloII.Items.Reader
 			string uniquesCsv, 
 			List<ItemCategoryRecord> itemCategories,
 			List<PropertyRecord> propertyRecords,
-			List<SkillRecord> skillRecords)
+			List<SkillRecord> skillRecords,
+			List<SkillTabRecord> skillTabRecords)
             => uniquesCsv
                 .Split('\n')
                 .Skip(1)
@@ -121,6 +124,7 @@ namespace DiabloII.Items.Reader
 						{
 							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
 							propertyFormattedName = skill.Name;
+							propertyPar = 0;
 						}
 						else if (propertyFormattedName == "Hit-Skill")
 						{
@@ -239,6 +243,28 @@ namespace DiabloII.Items.Reader
 								.ReplaceIfEquals("pal", "(Paladin Only)")
 								.ReplaceIfEquals("nec", "(Necromancer Only)")
 								.ReplaceIfEquals("sor", "(Sorceress Only)")
+						};
+					})
+					.Where(item => item != null)
+				.ToList();
+
+		private List<SkillTabRecord> ReadTabSkills(string skillTabsCsv)
+			=> skillTabsCsv
+				.Split('\n')
+					.Select(line =>
+					{
+						var itemData = line.Split(';');
+
+						if (itemData.Length < 3)
+							return null;
+
+						return new SkillTabRecord
+						{
+							Id = itemData[0].ParseIntOrDefault(),
+							Name = itemData[1].ToTitleCase(),
+							Class = $"({itemData[2]} Only)"
+								.Replace("\r", string.Empty)
+								.ToTitleCase()
 						};
 					})
 					.Where(item => item != null)
@@ -428,6 +454,19 @@ namespace DiabloII.Items.Reader
 				MissingSkills.Add((name, CurrentItemName, id));
 
 			return skill;
+		}
+
+		public SkillTabRecord GetTabSkill(List<SkillTabRecord> skillTabs, double id, string name = null)
+		{
+			var skillTab = skillTabs.FirstOrDefault(_ => _.Id == Convert.ToInt32(id));
+
+			if (skillTab == null)
+				skillTab = skillTabs.FirstOrDefault(_ => _.Name == name.ToTitleCase());
+
+			if (skillTab == null)
+				MissingSkills.Add((name, CurrentItemName, id));
+
+			return skillTab;
 		}
 	}
 
