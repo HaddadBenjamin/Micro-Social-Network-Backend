@@ -9,9 +9,9 @@ namespace DiabloII.Items.Reader
     public class DiabloIIFilesReader
     {
         private List<(string Name, string Type)> MissingItemTypes = new List<(string, string)>();
-        private List<(string Name, double Id)> MissingSkills = new List<(string, double)>();
+        private List<(string Name, string ItemName, double Id)> MissingSkills = new List<(string, string, double)>();
         private List<(string Name, string Property)> MissingProperties = new List<(string, string)>();
-
+		private string CurrentItemName;
 		// TODO : 
 		// Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
 		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
@@ -42,7 +42,7 @@ namespace DiabloII.Items.Reader
 			var missingProps = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties.Select(p => p.Name).Where(name => properties.FirstOrDefault(s => s.Name == name) == null).Distinct()).Distinct().ToList());
 			var missingItemsCategories = string.Join(Environment.NewLine, MissingItemTypes.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Type}"));
 			var missingProperties = string.Join(Environment.NewLine, MissingProperties.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Property}"));
-			var missingSkills = string.Join(Environment.NewLine, MissingSkills.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Id}"));
+			var missingSkills = string.Join(Environment.NewLine, MissingSkills.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.ItemName} - {_.Name} : {_.Id}"));
 
 			return uniques;
         }
@@ -74,6 +74,7 @@ namespace DiabloII.Items.Reader
                         .Replace("2-Handed Sword", "Two-Handed Sword")
                         .Replace("Tresllised Armor", "Trellised Armor");
                     var itemCategory = itemCategories.FirstOrDefault(x => x.Name == type);
+					CurrentItemName = name;
 
                     if (itemCategory == null)
                     {
@@ -95,24 +96,37 @@ namespace DiabloII.Items.Reader
 						}
 						var propertyFormattedName = property.FormattedName;
 						var propertyPar = (double)itemData[index + 1].ParseIntOrDefault();
+						var propertyMinimum = itemData[index + 2].ParseIntOrDefault();
+						var propertyMaximum = itemData[index + 3].ParseIntOrDefault();
 
 						if (propertyFormattedName == "Class Skill")
 						{
-							propertyFormattedName = GetFormattedSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+
+							propertyFormattedName = $"{skill.Name} {skill.Class}";
 							propertyPar = 0;
+						}
+						if (propertyFormattedName == "Gethit-Skill")
+						{
+							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+
+							if (skill != null)
+							{
+								propertyFormattedName = $"Chance To Cast Level {propertyMaximum} {skill.Name} When Struck";
+								propertyMaximum = propertyMinimum;
+								propertyPar = 0;
+							}
 						}
 						else
 							propertyPar /= 8;
-						// if class skill: 
-						// Name = skill.found(par) + class
-						// par = 0
+
 						properties.Add(new ItemProperty
                         {
 							Name = itemData[index],
 							FormattedName = propertyFormattedName,
                             Par = propertyPar,
                             Minimum = itemData[index + 2].ParseIntOrDefault(),
-                            Maximum = itemData[index + 3].ParseIntOrDefault(),
+                            Maximum = propertyMaximum,
                             IsPercent = property.IsPercent,
 							Id = Guid.NewGuid()
 						});
@@ -366,19 +380,17 @@ namespace DiabloII.Items.Reader
 													   Convert.ToInt32(property.Par * 99);
 		}
 
-		public string GetFormattedSkill(List<SkillRecord> skills, double id, string name = null)
+		public SkillRecord GetSkill(List<SkillRecord> skills, double id, string name = null)
 		{
 			var skill = skills.FirstOrDefault(_ => _.Id == Convert.ToInt32(id));
+
 			if (skill == null)
 				skill = skills.FirstOrDefault(_ => _.Name == name.ToTitleCase());
 			
 			if (skill == null)
-			{
-				MissingSkills.Add((name, id));
-				return string.Empty;
-			}
+				MissingSkills.Add((name, CurrentItemName, id));
 
-			return $"{skill.Name} {skill.Class}";
+			return skill;
 		}
 	}
 
