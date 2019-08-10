@@ -350,7 +350,7 @@ Stormlash;80;76;scourge;Damage %;;240;300;Attack Speed %;;30;30;Hit-Skill;Static
 Halaberd's Reign;79;71;conqueror crown;Armor Class %;;140;170;Class Skill Tab;13;1;1;Barbarian Skills;;2;2;Hit Recovery %;;20;20;Replenish Life;;15;23;Class Skill;Battle Orders;1;2;Class Skill;Battle Command;1;2;;;;;;;;;;;;;;;;;;;;
 Spike Thorn;72;65;blade barrier;Armor Class %;;120;150;thorns/lvl;11;;;Extra Durability;;250;250;Hit Recovery %;;30;30;Reduce Dmg %;;15;20;Sockets;;1;1;;;;;;;;;;;;;;;;;;;;;;;;
 Dracul's Grasp;78;70;vampirebone gloves;Armor Class %;;90;120;Lifesteal;;7;10;Openwounds;;25;25;Hit-Skill;Life Tap;5;10;Life per Kill;;5;10;Strength;;10;15;;;;;;;;;;;;;;;;;;;;;;;;
-Frostwind;72;65;cryptic sword;Damage %;;180;230;Freeze Duration;;4;4;half-freeze;;1;1;dmg-cold;150;237;486;Attack Speed %;;25;25;abs-cold%;;7;15;Other Skill;Arctic Blast;7;14;;;;;;;;;;;;;;;;;;;;
+Frostwind;72;65;cryptic sword;Damage %;;180;230;Freeze Duration;;4;4;half-freeze;;1;1;dmg-cold;150;237;486;Attack Speed %;;25;25;abs-cold%;;7;15;Other Skill;Ice Blast;7;14;;;;;;;;;;;;;;;;;;;;
 Templar's Might;76;68;sacred armor;Armor Class %;;170;220;Hit Recovery %;;20;20;Armor vs Missile;;250;300;Stamina Points;;40;50;Strength;;10;15;Vitality;;10;15;Class Skill Tab;10;1;2;;;;;;;;;;;;;;;;;;;;
 Eschuta's temper;74;67;eldritch orb;Sorceress Skills;;1;3;Cast Speed %;;40;40;extra-fire;;10;20;extra-ltng;;10;20;Energy;;20;30;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Firelizard's Talons;69;62;feral claws;Damage %;;200;270;Attack Speed %;;15;15;Class Skill Tab;20;1;3;dmg-fire;;236;480;res-fire;;40;70;Class Skill;Wake of Fire Sentry;1;2;Class Skill;Venomous Retaliation;1;2;;;;;;;;;;;;;;;;;;;;
