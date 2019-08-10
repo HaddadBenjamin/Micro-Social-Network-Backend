@@ -107,7 +107,7 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = $"{skill.Name} {skill.Class}";
 							propertyPar = 0;
 						}
-						else if (propertyFormattedName == "Randclassskill")
+						else if (propertyFormattedName == "Randclassskill" || propertyFormattedName == "Randclassskill1")
 						{
 							propertyMinimum = propertyMaximum = propertyMaximum / 2;
 							propertyFormattedName = "To All Skills (Class Specific)";
