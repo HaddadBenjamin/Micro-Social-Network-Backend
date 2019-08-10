@@ -59,6 +59,12 @@ class ItemViewer extends React.Component {
                     });
 
                 var defense  = item.MaximumDefenseMinimum === item.MaximumDefenseMaximum ? item.MaximumDefenseMinimum :`${item.MaximumDefenseMinimum}-${item.MaximumDefenseMaximum}`;
+                var oneHandDamage = item.MinimumOneHandedDamageMinimum === item.MinimumOneHandedDamageMaximum && item.MaximumOneHandedDamageMinimum === item.MaximumOneHandedDamageMaximum ?
+                    `${item.MinimumOneHandedDamageMinimum}-${item.MaximumOneHandedDamageMinimum}` :
+                    `${item.MinimumOneHandedDamageMinimum}-${item.MaximumOneHandedDamageMinimum} to ${item.MinimumOneHandedDamageMaximum}-${item.MaximumOneHandedDamageMaximum}`;
+                var twoHandDamage = item.MinimumTwoHandedDamageMinimum === item.MinimumTwoHandedDamageMaximum && item.MaximumTwoHandedDamageMinimum === item.MaximumTwoHandedDamageMaximum ?
+                    `${item.MinimumTwoHandedDamageMinimum}-${item.MaximumTwoHandedDamageMinimum}` :
+                    `${item.MinimumTwoHandedDamageMinimum}-${item.MaximumTwoHandedDamageMinimum} to ${item.MinimumTwoHandedDamageMaximum}-${item.MaximumTwoHandedDamageMaximum}`;
 
                 var itemFormatted =   <>
                     <div className="item" style={style} key={item.Id }>
@@ -68,17 +74,17 @@ class ItemViewer extends React.Component {
                             {item.Name} <br/>
                             {item.Type}
                         </div>
-                        <div style={{color : "white"}}>
+                        <div>
                             {item.MaximumDefenseMinimum > 0 ? <div>Defense : <span className="diablo-attribute">{defense}</span></div> : ''}
-                            {item.MinimumOneHandedDamageMinimum > 0 ? <div>One-Hand Damage : <span className="diablo-attribute">{item.MinimumOneHandedDamageMinimum}-{item.MaximumOneHandedDamageMinimum} to {item.MinimumOneHandedDamageMaximum}-{item.MaximumOneHandedDamageMaximum}</span></div> : ''}
-                            {item.MinimumTwoHandedDamageMinimum > 0 ? <div>Two-Hand Damage : <span className="diablo-attribute">{item.MinimumTwoHandedDamageMinimum}-{item.MaximumTwoHandedDamageMinimum} to {item.MinimumTwoHandedDamageMaximum}-{item.MaximumTwoHandedDamageMaximum}</span></div> : ''}
+                            {item.MinimumOneHandedDamageMinimum > 0 ? <div>One-Hand Damage : <span className="diablo-attribute">{oneHandDamage}</span></div> : ''}
+                            {item.MinimumTwoHandedDamageMinimum > 0 ? <div>Two-Hand Damage : <span className="diablo-attribute">{twoHandDamage}</span></div> : ''}
                         </div>
                         <div className="required-attribute">
                             {item.StrengthRequired > 0 ? <div>Required Strength : {item.StrengthRequired} </div> : ''}
                             {item.DexterityRequired > 0 ? <div>Required Dexterity : {item.DexterityRequired} </div> : ''}
                             {item.LevelRequired > 0 ? <div>Required Level : {item.LevelRequired} </div> : ''}
                         </div>
-                        <div style={{color : "#4545a4"}}>{/* rvoir la couleur */}
+                        <div>{/* rvoir la couleur */}
                             {attributes}
                         </div>
                     </div>

@@ -6,7 +6,7 @@
 
 .diablo-attribute
 {
-    color: #4169E1;
+    color: #4169E1 !important;
 }
 
 .unique
@@ -58,7 +58,7 @@ th.sorting_asc::after
     min-height: 135vh;
 }
 
-.dataTables_length.bs-select
+.dataTables_length.bs-select, thead:last-child
 {
     display : none
 }
