@@ -9,6 +9,8 @@ namespace DiabloII.Items.Reader
     public class DiabloIIFilesReader
     {
         private List<(string Name, string Type)> MissingItemTypes = new List<(string, string)>();
+        private List<(string Name, double Id)> MissingSkills = new List<(string, double)>();
+        private List<(string Name, int Index)> MissingProperty = new List<(string, int)>();
 
 		// TODO : 
 		// Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
@@ -30,7 +32,7 @@ namespace DiabloII.Items.Reader
             var subCategories = ReadSubCategories(weapons, armors);
             var properties = ReadProperties(propertiesCsv);
 			var skills = ReadSkills(skillsCsv);
-			var uniques = ReadUniques(uniquesCsv, subCategories, properties);
+			var uniques = ReadUniques(uniquesCsv, subCategories, properties, skills);
 
 			// For sanitize purpoeses and comparaison :
 			var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
@@ -46,7 +48,8 @@ namespace DiabloII.Items.Reader
         public IEnumerable<Item> ReadUniques(
 			string uniquesCsv, 
 			List<ItemCategoryRecord> itemCategories,
-			List<PropertyRecord> propertyRecords)
+			List<PropertyRecord> propertyRecords,
+			List<SkillRecord> skillRecords)
             => uniquesCsv
                 .Split('\n')
                 .Skip(1)
@@ -83,11 +86,26 @@ namespace DiabloII.Items.Reader
 
 						var property = propertyRecords.FirstOrDefault(_ => _.Name == itemData[index]);
 
+						if (property == null)
+							continue;
+						var propertyFormattedName = property.FormattedName;
+						var propertyPar = (double)itemData[index + 1].ParseIntOrDefault();
+
+						if (propertyFormattedName == "Class Skill")
+						{
+							propertyFormattedName = GetFormattedSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+							propertyPar = 0;
+						}
+						else
+							propertyPar /= 8;
+						// if class skill: 
+						// Name = skill.found(par) + class
+						// par = 0
 						properties.Add(new ItemProperty
                         {
 							Name = itemData[index],
-							FormattedName = property.FormattedName,
-                            Par = (double)itemData[index + 1].ParseIntOrDefault() / 8,
+							FormattedName = propertyFormattedName,
+                            Par = propertyPar,
                             Minimum = itemData[index + 2].ParseIntOrDefault(),
                             Maximum = itemData[index + 3].ParseIntOrDefault(),
                             IsPercent = property.IsPercent,
@@ -156,8 +174,8 @@ namespace DiabloII.Items.Reader
 
 						return new SkillRecord
 						{
-							Name = itemData[0],
-							Id = itemData[1],
+							Name = itemData[0].ToTitleCase(),
+							Id = itemData[1].ParseIntOrDefault(),
 							Class = itemData[2]
 								.Replace("\r", string.Empty)
 								.ReplaceIfEquals("ama", "(Amazon Only)")
@@ -349,6 +367,20 @@ namespace DiabloII.Items.Reader
 													   Convert.ToInt32(property.Par * 99);
 		}
 
+		public string GetFormattedSkill(List<SkillRecord> skills, double id, string name = null)
+		{
+			var skill = skills.FirstOrDefault(_ => _.Id == Convert.ToInt32(id));
+			if (skill == null)
+				skill = skills.FirstOrDefault(_ => _.Name == name.ToTitleCase());
+			
+			if (skill == null)
+			{
+				MissingSkills.Add((name, id));
+				return string.Empty;
+			}
+
+			return $"{skill.Name} {skill.Class}";
+		}
 	}
 
 	public static class IntExtension
