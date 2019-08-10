@@ -130,6 +130,11 @@ namespace DiabloII.Items.Reader
 								propertyPar = propertyMaximum = propertyMinimum = 0;
 							}
 						}
+						else if (propertyFormattedName == "Ignore Armor")
+						{
+							propertyFormattedName = "Ignore target's defense";
+							propertyMaximum = propertyMinimum = 0;
+						}
 						else if (propertyFormattedName == "Other Skill")
 						{
 							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
