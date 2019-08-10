@@ -45,7 +45,7 @@ res-fire;Fire Resistance;1
 Knockback;Knockback;0
 Paladin Skills;Paladin Skills;0
 dmg-norm;Damage;0
-red-mag;Magic Damage Reduced;0
+red-mag;Reduce Magic Damage;0
 dmg-cold;Cold Damage;0
 Replenish Life;Replenish Life;0
 Thorns;Attacker Takes Damage;0
@@ -66,7 +66,7 @@ Hit Recovery %;Faster Hit Recovery ;1
 dmg-pois;Poison Damage;0
 Prevent Heal;Prevent Monster Heal;0
 *hp;To Life;1
-Reduce Dmg;Damage Reduced;0
+Reduce Dmg;Reduce Damage;0
 Gold Find %;Gold Find ;1
 nofreeze;Cannot be Frozen;0
 res-pois-max;Maximum Poison Resistance;1
@@ -86,7 +86,7 @@ dmg-to-mana;Damage taken goes to mana;1
 half-freeze;Half Freeze Duration;0
 Faster Movement %;Faster Run/Walk;1
 Stamina Points;Stamina;0
-stamdrain;Stamina Drain Reduce ;1
+stamdrain;Reduce Stamina Drain ;1
 block;Block Speed;1
 res-all-max;All Maximum Resistanes;0
 Armor vs Melee;Armor vs Melee;0
