@@ -36,7 +36,7 @@ Energy;Energy;0
 res-ltng;To Lightning Resistance;1
 Cast Speed %;faster cast rate;1
 Class Skill;Class Skill;0
-Dexterity;Dexterity;0
+To Dexterity;Dexterity;0
 cold-min;Minimum Cold Damage;0
 cold-max;Maximum Cold Damage;0
 cold-len;Cold Duration;0
@@ -49,9 +49,9 @@ red-mag;Reduce Magic Damage;0
 dmg-cold;Cold Damage;0
 Replenish Life;Replenish Life;0
 Thorns;Attacker Takes Damage;0
-Vitality;Vitality;0
+Vitality;To Vitality;0
 Slow Target %;Slow Target ;1
-*enr;Energy;0
+*enr;To Energy;0
 regen-stam;Regenerate Stamina ;1
 Hitpoints;To Life;0
 Ignore Armor;Ignore Armor;0
@@ -191,7 +191,7 @@ abs-mag%;Magic Absorb ;1
 dmg-throw;Throw Damage Bonus;0
 act-miss;Defense VS Missile;0
 barb;Barbarian Skills;0
-Str;Strength;0
+Str;To Strength;0
 abs-mag;Magic Absorb;0
 Swing3;Attack Speed ;1
 movement1;Movement Speed ;1
