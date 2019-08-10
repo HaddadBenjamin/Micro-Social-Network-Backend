@@ -200,5 +200,5 @@ kick;Kick Damage;0
 dur%;Durability ;1
 enr/lvl;Energy Per Level;0
 att%/lvl;Attak Rating Per Level;1
-randclassskill1;Random Class Skill;0
+randclassskill1;randclassskill1;0
 item_allskills;All Skills;0
