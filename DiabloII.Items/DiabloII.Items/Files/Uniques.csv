@@ -353,7 +353,7 @@ Dracul's Grasp;78;70;vampirebone gloves;Armor Class %;;90;120;Lifesteal;;7;10;Op
 Frostwind;72;65;cryptic sword;Damage %;;180;230;Freeze Duration;;4;4;half-freeze;;1;1;dmg-cold;150;237;486;Attack Speed %;;25;25;abs-cold%;;7;15;Other Skill;Arctic Blast;7;14;;;;;;;;;;;;;;;;;;;;
 Templar's Might;76;68;sacred armor;Armor Class %;;170;220;Hit Recovery %;;20;20;Armor vs Missile;;250;300;Stamina Points;;40;50;Strength;;10;15;Vitality;;10;15;Class Skill Tab;10;1;2;;;;;;;;;;;;;;;;;;;;
 Eschuta's temper;74;67;eldritch orb;Sorceress Skills;;1;3;Cast Speed %;;40;40;extra-fire;;10;20;extra-ltng;;10;20;Energy;;20;30;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-Firelizard's Talons;69;62;feral claws;Damage %;;200;270;Attack Speed %;;15;15;Class Skill Tab;20;1;3;dmg-fire;;236;480;res-fire;;40;70;Class Skill;Wake of Fire Sentry;1;2;Class Skill;Inferno Sentry;1;2;;;;;;;;;;;;;;;;;;;;
+Firelizard's Talons;69;62;feral claws;Damage %;;200;270;Attack Speed %;;15;15;Class Skill Tab;20;1;3;dmg-fire;;236;480;res-fire;;40;70;Class Skill;Wake of Fire Sentry;1;2;Class Skill;Venomous Retaliation;1;2;;;;;;;;;;;;;;;;;;;;
 Sandstorm Trek;67;59;scarabshell boots;Armor Class %;;140;170;Faster Movement %;;20;20;Hit Recovery %;;20;20;stam/lvl;8;;;stamdrain;;50;50;res-pois;;40;70;rep-dur;5;;;Strength;;10;15;Vitality;;10;15;;;;;;;;;;;;
 Marrowwalk;68;61;boneweave boots;Armor Class %;;170;200;Faster Movement %;;20;20;Charges;85;13;33;Charges;Life Tap;10;12;regen-stam;;10;10;regen-mana;;10;10;half-freeze;;1;1;Strength;;10;20;Dexterity;;17;17;Class Skill;Skeleton Mastery;1;2;;;;;;;;
 Heaven's Light;64;56;mighty scepter;Damage %;;250;300;Attack Speed %;;20;20;reduce-ac;;33;33;Light Radius;;3;3;demon-heal;;15;20;Crushing Blow;;33;33;Sockets;;1;3;Paladin Skills;;2;3;;;;;;;;;;;;;;;;
