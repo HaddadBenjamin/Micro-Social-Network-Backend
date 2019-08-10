@@ -1,6 +1,6 @@
 Strength;Strength;0
-Openwounds;Openwounds;1
-Crushing Blow;Crushing Blow;1
+Openwounds;Open wounds Chance;1
+Crushing Blow;Crushing Blow Chance;1
 Damage %;Enhanced Damage;1
 Blind Target;Blind Target;0
 dmg-min;Minimum Damage;0
@@ -177,8 +177,8 @@ dmg-ltng/lvl;Lightning Damage Per Level;0
 ac%/lvl;Armor Per Level;1
 dmg-cold/lvl;Cold Damage Per Level;0
 dmg-pois/lvl;Poison Damage Per Level;0
-crush/lvl;Crushing Blow Per Level;1
-wounds/lvl;Openwounds Per Level;1
+crush/lvl;Crushing Blow Chance Per Level;1
+wounds/lvl;Open wounds Chance Per Level;1
 res-cold/lvl;Cold Resistance Per Level;1
 dam-ltng;Lightning Damage;0
 swing;Attack Speed ;1
