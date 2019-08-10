@@ -103,6 +103,9 @@ namespace DiabloII.Items.Reader
 						var propertyMinimum = itemData[index + 2].ParseIntOrDefault();
 						var propertyMaximum = itemData[index + 3].ParseIntOrDefault();
 
+						if (propertyFormattedName == "Extra Durability" ||
+							propertyFormattedName == "Charged")
+							continue;
 						if (propertyFormattedName == "Class Skill")
 						{
 							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
@@ -160,10 +163,16 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = $"Magic Damage Reduced By {value}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
-						else if (propertyFormattedName == "Reduce Damage")
+						else if (propertyFormattedName == "Reduce Damage" ||
+								 propertyFormattedName == "Damage Reduced")
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"Damage Reduced By {value}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Repair-Durability")
+						{
+							propertyFormattedName = $"Repairs 1 Durability in {propertyPar * 2} seconds";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "To All Resistances")
@@ -178,12 +187,23 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = $"Regenerate Mana {value}%";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
-						else if (propertyFormattedName == "Extra Durability")
+						else if (propertyFormattedName == "To Life Per Level")
 						{
-							propertyMinimum /= 3;
-							propertyMaximum /= 3;
+							propertyFormattedName = $"{propertyMinimum}-{propertyMinimum * 99} To Life (Based on character level)";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Sockets")
+						{
+							propertyFormattedName = $"Socketed ({propertyPar})";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Fire Damage" ||
+								 propertyFormattedName == "Cold Damage" ||
+								 propertyFormattedName == "Poison Damage" ||
+								 propertyFormattedName == "Lightning Damage")
+						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Repairs Durability in {value} seconds";
+							propertyFormattedName = $"Adds {value} {propertyFormattedName}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Replenish Life")
