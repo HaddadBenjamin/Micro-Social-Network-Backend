@@ -147,9 +147,13 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName == "Cannot Be Frozen" || 
 								 propertyFormattedName == "Knockback" ||
-								 propertyFormattedName == "Slain Monsters Rest In Peace" ||
-								 propertyFormattedName == "Ethereal")
+								 propertyFormattedName == "Slain Monsters Rest In Peace")
 							propertyPar = propertyMaximum = propertyMinimum = 0;
+						else if (propertyFormattedName == "Ethereal")
+						{
+							propertyFormattedName = "Ethereal (cannot be repaired)";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
 						else if (propertyFormattedName == "Other Skill")
 						{
 							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
@@ -170,9 +174,15 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = $"Damage Reduced By {value}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
+						else if (propertyFormattedName == "Defense (based on character level)")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"{value} {propertyFormattedName}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
 						else if (propertyFormattedName == "Repair-Durability")
 						{
-							propertyFormattedName = $"Repairs 1 Durability in {propertyPar * 2} seconds";
+							propertyFormattedName = $"Repairs 1 Durability in {propertyPar} seconds";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "To All Resistances")
@@ -187,9 +197,9 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = $"Regenerate Mana {value}%";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
-						else if (propertyFormattedName == "To Life Per Level")
+						else if (propertyFormattedName == "To Life (Based On Character Level)")
 						{
-							propertyFormattedName = $"{propertyMinimum}-{propertyMinimum * 99} To Life (Based on character level)";
+							propertyFormattedName = $"{propertyPar}-{propertyPar * 99} To Life (Based on character level)";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Sockets")
