@@ -120,6 +120,16 @@ namespace DiabloII.Items.Reader
 							propertyMinimum = propertyMaximum = propertyMaximum / 2;
 							propertyFormattedName = "To All Skills (Class Specific)";
 						}
+						else if (propertyFormattedName == "Charges")
+						{
+							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+
+							if (skill != null)
+							{
+								propertyFormattedName = $"Level {propertyMaximum} {skill.Name} ({propertyMinimum}/{propertyMinimum} Charges)";
+								propertyPar = propertyMaximum = propertyMinimum = 0;
+							}
+						}
 						else if (propertyFormattedName == "Other Skill")
 						{
 							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
