@@ -64,6 +64,9 @@
     <None Include="Files\Skills.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Files\SkillTabs.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Files\Uniques.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

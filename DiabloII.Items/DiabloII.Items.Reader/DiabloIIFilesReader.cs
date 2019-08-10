@@ -33,7 +33,7 @@ namespace DiabloII.Items.Reader
             var subCategories = ReadSubCategories(weapons, armors);
             var properties = ReadProperties(propertiesCsv);
 			var skills = ReadSkills(skillsCsv);
-			var skillTabs = ReadSkillTabs(skillsTabsCsv);
+			var skillTabs = ReadSkillTabs(skillTabsCsv);
 			var uniques = ReadUniques(uniquesCsv, subCategories, properties, skills, skillTabs);
 
 			// For sanitize purpoeses and comparaison :
@@ -123,8 +123,19 @@ namespace DiabloII.Items.Reader
 						else if (propertyFormattedName == "Other Skill")
 						{
 							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+
 							propertyFormattedName = skill.Name;
 							propertyPar = 0;
+						}
+						else if (propertyFormattedName == "Class Skill Tab")
+						{
+							var skillTab = GetSkillTab(skillTabRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+
+							if (skillTab != null)
+							{
+								propertyFormattedName = $"{skillTab.Name} {skillTab.Class}";
+								propertyPar = 0;
+							}
 						}
 						else if (propertyFormattedName == "Hit-Skill")
 						{
@@ -248,7 +259,7 @@ namespace DiabloII.Items.Reader
 					.Where(item => item != null)
 				.ToList();
 
-		private List<SkillTabRecord> ReadTabSkills(string skillTabsCsv)
+		private List<SkillTabRecord> ReadSkillTabs(string skillTabsCsv)
 			=> skillTabsCsv
 				.Split('\n')
 					.Select(line =>
@@ -456,7 +467,7 @@ namespace DiabloII.Items.Reader
 			return skill;
 		}
 
-		public SkillTabRecord GetTabSkill(List<SkillTabRecord> skillTabs, double id, string name = null)
+		public SkillTabRecord GetSkillTab(List<SkillTabRecord> skillTabs, double id, string name = null)
 		{
 			var skillTab = skillTabs.FirstOrDefault(_ => _.Id == Convert.ToInt32(id));
 

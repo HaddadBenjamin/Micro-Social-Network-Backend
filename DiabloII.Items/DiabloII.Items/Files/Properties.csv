@@ -4,7 +4,7 @@ Crushing Blow;Crushing Blow;1
 Damage %;Enhanced Damage;1
 Blind Target;Blind Target;0
 dmg-min;Minimum Damage;0
-Attack Bonus %;Attack Bonus ;1
+Attack Bonus %;Attack Rating ;1
 Mana per Kill;Mana Per Kill;0
 Dmg % to Undead;Damage to Undead;1
 att-undead;Attack Rating to Undead;0
@@ -45,7 +45,7 @@ res-fire;Fire Resistance;1
 Knockback;Knockback;0
 Paladin Skills;Paladin Skills;0
 dmg-norm;Bonus Damage;0
-red-mag;Reduced Magic Damage by;0
+red-mag;Magic Damage Reduced;0
 dmg-cold;Cold Damage;0
 Replenish Life;Replenish Life;0
 Thorns;Thorns;0
