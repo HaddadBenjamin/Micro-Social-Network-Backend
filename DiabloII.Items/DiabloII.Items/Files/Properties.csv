@@ -1,5 +1,5 @@
 Strength;Strength;0
-Openwounds;Open wounds Chance;1
+Openwounds;Chance Of Open wounds;1
 Crushing Blow;Crushing Blow Chance;1
 Damage %;Enhanced Damage;1
 Blind Target;Blind Target;0
@@ -22,7 +22,7 @@ pois-len;Poison Length;0
 res-pois;To Poison Resistance;1
 Freeze Duration;Freeze Duration;0
 res-cold;To Cold Resistance;1
-Light Radius;Light Radius;0
+Light Radius;To Light Radius;0
 dmg-max;Maximum Damage;0
 All Resists;To All Resistances;0
 dmg-ltng;Lightning Damage;0
@@ -32,7 +32,7 @@ dmg-fire;Fire Damage;0
 Reduce Req %;Reduce Requirement;1
 Necro Skills;Necromancer Skills;0
 Lifesteal;Life stolen per hit;1
-Energy;Energy;0
+Energy;To Energy;0
 res-ltng;To Lightning Resistance;1
 Cast Speed %;faster cast rate;1
 Class Skill;Class Skill;0
@@ -81,7 +81,7 @@ pierce-cold;Reduce Enemy Cold Resistance;1
 Amazon Skills;Amazon Skills;0
 Lightning Thorns;Attacker Takes Lightning Damage;0
 Armor vs Missile;Defense VS Missile;0
-Armor Class %;Defense ;1
+Armor Class %;Enhanced Defense ;1
 dmg-to-mana;Damage taken goes to mana;1
 half-freeze;Half Freeze Duration;0
 Faster Movement %;Faster Run/Walk;1
@@ -181,12 +181,12 @@ crush/lvl;Crushing Blow Chance Per Level;1
 wounds/lvl;Open wounds Chance Per Level;1
 res-cold/lvl;To Cold Resistance Per Level;1
 dam-ltng;Lightning Damage;0
-swing;Attack Speed ;1
+swing;Increased Attack Speed ;1
 vita;Vitality;0
 abs-ltng/lvl;Lightning Absorb Per Level;0
 dmg-fire/lvl;Fire Damage Per Level;0
 sorcs;Sorceress Skills;0
-def%;Defense ;1
+def%;Enhanced Defense ;1
 abs-mag%;Magic Absorb ;1
 dmg-throw;Throw Damage Bonus;0
 act-miss;Defense VS Missile;0

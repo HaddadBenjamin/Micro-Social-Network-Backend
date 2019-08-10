@@ -144,7 +144,8 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName == "Cannot Be Frozen" || 
 								 propertyFormattedName == "Knockback" ||
-								 propertyFormattedName == "Slain Monsters Rest In Peace")
+								 propertyFormattedName == "Slain Monsters Rest In Peace" ||
+								 propertyFormattedName == "Ethereal")
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						else if (propertyFormattedName == "Other Skill")
 						{
@@ -155,7 +156,14 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName == "Reduce Magic Damage")
 						{
-							propertyFormattedName = $"Magic Damage Reduced By {propertyMinimum}";
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Magic Damage Reduced By {value}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Reduce Damage")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Damage Reduced By {value}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "To All Resistances")
@@ -168,6 +176,14 @@ namespace DiabloII.Items.Reader
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"Regenerate Mana {value}%";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Extra Durability")
+						{
+							propertyMinimum /= 3;
+							propertyMaximum /= 3;
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Repairs Durability in {value} seconds";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Replenish Life")
