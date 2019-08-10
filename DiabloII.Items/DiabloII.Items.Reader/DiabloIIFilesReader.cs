@@ -153,6 +153,29 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = skill.Name;
 							propertyPar = 0;
 						}
+						else if (propertyFormattedName == "Reduce Magic Damage")
+						{
+							propertyFormattedName = $"Magic Damage Reduced By {propertyMinimum}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "To All Resistances")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"All Resistances *{value}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Replenish Life")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Replenish Life *{value}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Attacker Takes Damage")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Attacker Takes Damage Of {value}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
 						else if (propertyFormattedName == "Class Skill Tab")
 						{
 							var skillTab = GetSkillTab(skillTabRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);

@@ -24,17 +24,17 @@ Freeze Duration;Freeze Duration;0
 res-cold;To Cold Resistance;1
 Light Radius;Light Radius;0
 dmg-max;Maximum Damage;0
-All Resists;To All Resistances;1
+All Resists;To All Resistances;0
 dmg-ltng;Lightning Damage;0
 Mana Points;Mana;0
-Manasteal;Manasteal;1
+Manasteal;Mana stolen per hit;1
 dmg-fire;Fire Damage;0
 Reduce Req %;Reduce Requirement;1
 Necro Skills;Necromancer Skills;0
-Lifesteal;Lifesteal;1
+Lifesteal;Life stolen per hit;1
 Energy;Energy;0
 res-ltng;To Lightning Resistance;1
-Cast Speed %;Cast Speed ;1
+Cast Speed %;faster cast rate;1
 Class Skill;Class Skill;0
 Dexterity;Dexterity;0
 cold-min;Minimum Cold Damage;0
@@ -88,7 +88,7 @@ Faster Movement %;Faster Run/Walk;1
 Stamina Points;Stamina;0
 stamdrain;Reduce Stamina Drain ;1
 block;Block Speed;1
-res-all-max;To All Maximum Resistances;0
+res-all-max;To All Maximum Resistances;1
 Armor vs Melee;Armor vs Melee;0
 res-cold-max;To Maximum Cold Resistance;1
 Reduce Dmg %;Damage Reduced ;1
