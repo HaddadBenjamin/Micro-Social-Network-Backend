@@ -11,7 +11,8 @@ namespace DiabloII.Items.Reader
         public int Minimum { get; set; }
         public int Maximum { get; set; }
         public bool IsPercent { get; set; }
-    }
+		public string FirstChararacter { get; set; }
+	}
 
 	public enum ItemPropertyType
 	{
