@@ -57,6 +57,9 @@ class ItemViewer extends React.Component {
                         if (value == '0')
                             value = '';
 
+                        if (!isNaN(parseInt(value)) && parseInt(value) < 0)
+                            property.FirstChararacter = '';
+
                         var isPercent = (property.IsPercent && value !== '' ? '%' : '');
                         var valueDisplayed = `${value}${isPercent} `;
 

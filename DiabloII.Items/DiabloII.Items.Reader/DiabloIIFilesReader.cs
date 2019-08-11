@@ -153,7 +153,8 @@ namespace DiabloII.Items.Reader
 								 propertyFormattedName == "Slain Monsters Rest In Peace" ||
 								 propertyFormattedName == "Indestructible" ||
 								 propertyFormattedName == "Prevent Monster Heal" ||
-								 propertyFormattedName == "Ignore target's defense")
+								 propertyFormattedName == "Ignore target's defense" ||
+								 propertyFormattedName == "Half Freeze Duration")
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						else if (propertyFormattedName == "Ethereal")
 						{
@@ -349,6 +350,31 @@ namespace DiabloII.Items.Reader
 							FirstChararacter = property.FirstChararacter
 						});
                     }
+
+					var stats = properties.Where(_ => new[] { "Strength", "Dexterity", "Vitality", "Energy" }.Contains(_.Name));
+
+				if (stats.Count() == 4 &&
+					stats.Select(_ => _.Minimum).Distinct().Count() == 1 &&
+					stats.Select(_ => _.Maximum).Distinct().Count() == 1)
+				{
+						var firstAttribute = stats.First();
+
+						properties.Add(new ItemProperty()
+						{
+							Name = "To All Attributes",
+							FormattedName = "To All Attributes",
+							Par = 0,
+							Minimum = firstAttribute.Minimum,
+							Maximum = firstAttribute.Maximum,
+							IsPercent = firstAttribute.IsPercent,
+							Id = Guid.NewGuid(),
+							FirstChararacter = firstAttribute.FirstChararacter
+						});
+
+						properties.RemoveAll(_ => new[] { "Strength", "Dexterity", "Vitality", "Energy" }.Contains(_.Name));
+					}
+
+
 
 					var minimumDamage = GetPropertyValueOrDefault(properties, "dmg-min") + GetPropertyValueOrDefault(properties, "dmg-norm");
 					var maximumDamage = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
