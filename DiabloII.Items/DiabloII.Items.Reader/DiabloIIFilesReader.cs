@@ -453,13 +453,13 @@ namespace DiabloII.Items.Reader
 					var requirementPercent = 100 + GetPropertyValueOrDefault(properties, "Reduce Req %");
 
 					return new Item
-                    {
+					{
 						Id = Guid.NewGuid(),
 						Name = name,
-                        LevelRequired = itemData[2].ParseIntOrDefault(),
-                        Level = itemData[1].ParseIntOrDefault(),
-                        Quality = "Unique",
-                        Properties = properties.OrderBy(_ => _.OrderIndex),
+						LevelRequired = itemData[2].ParseIntOrDefault(),
+						Level = itemData[1].ParseIntOrDefault(),
+						Quality = "Unique",
+						Properties = properties.OrderBy(_ => _.OrderIndex).ToList(),
                         Category = itemCategory?.Category,
                         SubCategory = itemCategory?.SubCategory,
 						Type = type,

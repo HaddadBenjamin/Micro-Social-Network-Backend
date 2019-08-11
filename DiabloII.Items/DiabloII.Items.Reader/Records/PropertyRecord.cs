@@ -6,6 +6,6 @@
 		public string FormattedName { get; set; }
 		public bool IsPercent { get; set; }
 		public string FirstChararacter { get; set; }
-		public int OrderIndex { get; set; }
+		public double OrderIndex { get; set; }
 	}
 }
