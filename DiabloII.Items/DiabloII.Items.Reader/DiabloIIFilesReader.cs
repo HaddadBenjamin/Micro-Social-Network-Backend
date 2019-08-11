@@ -360,7 +360,8 @@ namespace DiabloII.Items.Reader
                             Maximum = propertyMaximum,
                             IsPercent = property.IsPercent,
 							Id = Guid.NewGuid(),
-							FirstChararacter = property.FirstChararacter
+							FirstChararacter = property.FirstChararacter,
+							OrderIndex = property.OrderIndex
 						});
                     }
 
@@ -381,7 +382,7 @@ namespace DiabloII.Items.Reader
 							Maximum = firstAttribute.Maximum,
 							IsPercent = firstAttribute.IsPercent,
 							Id = Guid.NewGuid(),
-							FirstChararacter = firstAttribute.FirstChararacter
+							FirstChararacter = firstAttribute.FirstChararacter,
 						});
 
 						properties.RemoveAll(_ => new[] { "Strength", "Dexterity", "Vitality", "Energy" }.Contains(_.Name));
@@ -458,7 +459,7 @@ namespace DiabloII.Items.Reader
                         LevelRequired = itemData[2].ParseIntOrDefault(),
                         Level = itemData[1].ParseIntOrDefault(),
                         Quality = "Unique",
-                        Properties = properties,
+                        Properties = properties.OrderBy(_ => _.OrderIndex),
                         Category = itemCategory?.Category,
                         SubCategory = itemCategory?.SubCategory,
 						Type = type,
@@ -549,7 +550,8 @@ namespace DiabloII.Items.Reader
 						Name = itemData[0],
 						FormattedName = itemData[1].ToTitleCase(),
 						IsPercent = itemData[2].ParseIntOrDefault() == 1,
-						FirstChararacter = itemData[3]
+						FirstChararacter = itemData[3],
+						OrderIndex = itemData[4].ParseIntOrDefault(),
 					};
 				})
 				.Where(item => item != null)

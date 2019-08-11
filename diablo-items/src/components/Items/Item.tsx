@@ -42,6 +42,7 @@ interface ItemProperty
     IsPercent : boolean,
     Id : string,
     FirstCharacter : string,
+    OrderIndex : number,
 }
 
 export default Item;
