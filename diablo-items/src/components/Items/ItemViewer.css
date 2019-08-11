@@ -29,7 +29,7 @@ th.sorting_asc::after
 }
 .required-attribute
 {
-    color : #eb0d26;
+    color : #da3d3d;
 }
 .item
 {
@@ -63,8 +63,8 @@ th.sorting_asc::after
     display : none
 }
 
-tr:first-child td,
-tr:last-child td
+tr:last-child td,
+thead tr th
 {
     border-color: #eb0d26 !important;
 }
