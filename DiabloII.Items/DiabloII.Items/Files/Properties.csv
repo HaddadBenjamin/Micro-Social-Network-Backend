@@ -15,12 +15,12 @@ fire-max;Maximum Fire Damage;0;+
 regen-mana;Regenerate Mana;1;
 ltng-min;Minimum Lightning Damage;0;+
 ltng-max;Maximum Lightning Damage;0;+
-Attack Rating;Bonus To Attack Rating;0;+
+Attack Rating;Bonus To Attack Rating;0;
 pois-min;Minimum Poison Damage;0;+
 pois-max;Maximum Poison Damage;0;+
 pois-len;Poison Length;0;+
 res-pois;Poison Resist;1;
-Freeze Duration;Freeze Duration;0;+
+Freeze Duration;Freeze Duration;0;
 res-cold;Cold Resist;1;
 Light Radius;To Light Radius;0;+
 dmg-max;To Maximum Damage;0;+
@@ -109,7 +109,7 @@ mana/lvl;Mana (Based On Character Level);0;+
 Class Skill Tab;Class Skill Tab;0;+
 Dmg % to Demons;Damage to Demons;1;+
 att-demon;To Attack Rating against Demons;0;+
-demon-heal;Life per Demon Kill;0;+
+demon-heal;Life After Each Demon Kill;0;+
 Sockets;Sockets;0;
 gold%/lvl;Extra Gold From Monster (Based On Character Level);0;
 mag%/lvl;better chance of getting magic items (Based On Character Level);0;
@@ -202,3 +202,4 @@ enr/lvl;To Energy (Based On Character Level);0;+
 att%/lvl;Attak Rating (Based On Character Level);1;+
 randclassskill1;randclassskill1;0;+
 item_allskills;All Skills;0;+
+Attack Speed %;Increased Attack Speed ;1;+

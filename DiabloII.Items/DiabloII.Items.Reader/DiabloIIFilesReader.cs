@@ -249,6 +249,12 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = $"{value} To Monster Defense Per Hit";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
+						else if (propertyFormattedName == "Freeze Duration")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Freezes Target +{value}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
 						else if (propertyFormattedName == "Reduce Poison Length")
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
