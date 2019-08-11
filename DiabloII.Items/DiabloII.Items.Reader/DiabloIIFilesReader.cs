@@ -139,11 +139,6 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = $"{propertyFormattedName} +{value}%";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
-						else if (propertyFormattedName == "Ignore Armor")
-						{
-							propertyFormattedName = "Ignore target's defense";
-							propertyMaximum = propertyMinimum = 0;
-						}
 						else if (propertyFormattedName == "Cold Duration")
 						{
 							propertyMaximum /= 25;
@@ -154,7 +149,9 @@ namespace DiabloII.Items.Reader
 						else if (propertyFormattedName == "Cannot Be Frozen" || 
 								 propertyFormattedName == "Knockback" ||
 								 propertyFormattedName == "Slain Monsters Rest In Peace" ||
-								 propertyFormattedName == "Indestructable")
+								 propertyFormattedName == "Indestructable" ||
+								 propertyFormattedName == "Prevent Monster Heal" ||
+								 propertyFormattedName == "Ignore target's defense")
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						else if (propertyFormattedName == "Ethereal")
 						{
@@ -206,18 +203,23 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName == "Sockets")
 						{
-							propertyFormattedName = $"Socketed ({propertyPar})";
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Socketed ({value})";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Fire Damage" ||
 								 propertyFormattedName == "Cold Damage" ||
 								 propertyFormattedName == "Poison Damage" ||
-								 propertyFormattedName == "Lightning Damage")
+								 propertyFormattedName == "Lightning Damage" ||
+								 propertyFormattedName == "Magic Damage" ||
+								 propertyFormattedName == "Damage")
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"Adds {value} {propertyFormattedName}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
+						else if (propertyFormattedName == "Pierce Attack")
+							propertyPar = propertyMaximum = propertyMinimum = 0;
 						else if (propertyFormattedName == "Replenish Life")
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
@@ -228,6 +230,12 @@ namespace DiabloII.Items.Reader
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"Requirements {value}%";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Damage-Armor Class")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"{value} To Monster Defense Per Hit";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Reduce Poison Length")
@@ -246,6 +254,19 @@ namespace DiabloII.Items.Reader
 
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"{value} Poison Damage Over {propertyPar} Seconds";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Slow Target" ||
+								 propertyFormattedName == "Slow Target %")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Slows Target By {value}%";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Increase Maximum Mana")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Increase Maximum Mana {value}%";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Reduce Dmg %")
@@ -279,11 +300,11 @@ namespace DiabloII.Items.Reader
 								propertyFormattedName = $"Level {itemData[index + 7].ParseIntOrDefault()} {itemData[index + 5]} ({itemData[index + 6].ParseIntOrDefault()} {itemData[index + 4]})";
 								propertyPar = propertyMinimum = propertyMaximum = 0;
 								index += 3;
-
 							}
 							else
 							{
-								propertyFormattedName = $"Chance To Cast Level {propertyMaximum} {skill.Name} On Striking";
+								var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+								propertyFormattedName = $"Chance To Cast Level {Math.Max(propertyMinimum, propertyMaximum)} {skill.Name} On Striking";
 								propertyMaximum = propertyMinimum;
 								propertyPar = 0;
 								property.IsPercent = true;
