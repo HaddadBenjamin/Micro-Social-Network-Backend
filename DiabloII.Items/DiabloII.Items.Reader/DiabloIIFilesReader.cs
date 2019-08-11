@@ -136,7 +136,7 @@ namespace DiabloII.Items.Reader
 						else if (new[] { "Cold", "Fire", "Poison", "Lightning", "Magic" }.Select(_ => _ + " Resist").Contains(propertyFormattedName))
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"{propertyFormattedName} {value}";
+							propertyFormattedName = $"{propertyFormattedName} +{value}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Ignore Armor")
@@ -194,18 +194,13 @@ namespace DiabloII.Items.Reader
 						else if (propertyFormattedName == "To All Resistances")
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"All Resistances {value}";
+							propertyFormattedName = $"All Resistances +{value}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Regenerate Mana")
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"Regenerate Mana {value}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "To Life (Based On Character Level)")
-						{
-							propertyFormattedName = $"{propertyPar}-{propertyPar * 99} To Life (Based on character level)";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Sockets")
@@ -225,7 +220,7 @@ namespace DiabloII.Items.Reader
 						else if (propertyFormattedName == "Replenish Life")
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Replenish Life {value}";
+							propertyFormattedName = $"Replenish Life +{value}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Attacker Takes Damage")
@@ -273,6 +268,11 @@ namespace DiabloII.Items.Reader
 								propertyMaximum = propertyMinimum;
 								propertyPar = 0;
 							}
+						}
+						else if (propertyFormattedName.Contains("(Based On Character Level)") && propertyPar != 0)
+						{
+							propertyFormattedName = $"{propertyPar / 8}-{propertyPar * 99 / 8} {propertyFormattedName}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else
 							propertyPar /= 8;
