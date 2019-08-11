@@ -153,7 +153,8 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName == "Cannot Be Frozen" || 
 								 propertyFormattedName == "Knockback" ||
-								 propertyFormattedName == "Slain Monsters Rest In Peace")
+								 propertyFormattedName == "Slain Monsters Rest In Peace" ||
+								 propertyFormattedName == "Indestructable")
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						else if (propertyFormattedName == "Ethereal")
 						{
@@ -221,6 +222,36 @@ namespace DiabloII.Items.Reader
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"Replenish Life +{value}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Reduce Req %")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Requirements {value}%";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Reduce Poison Length")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Poison Length Reduced By {value}%";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Dmg-Pois")
+						{
+							propertyPar /= 25;
+							if (propertyPar == 0)
+								propertyPar = 1;
+							propertyMinimum = Convert.ToInt32(propertyMinimum / propertyPar);
+							propertyMaximum = Convert.ToInt32(propertyMaximum / propertyPar);
+
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"{value} Poison Damage Over {propertyPar} Seconds";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Reduce Dmg %")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Damage Reduced By {value}%";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Attacker Takes Damage")
