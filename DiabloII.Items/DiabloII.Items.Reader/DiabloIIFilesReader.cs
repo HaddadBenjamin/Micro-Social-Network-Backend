@@ -136,7 +136,7 @@ namespace DiabloII.Items.Reader
 						else if (new[] { "Cold", "Fire", "Poison", "Lightning", "Magic" }.Select(_ => _ + " Resist").Contains(propertyFormattedName))
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"{propertyFormattedName} +{value}";
+							propertyFormattedName = $"{propertyFormattedName} +{value}%";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Ignore Armor")
@@ -271,7 +271,7 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName.Contains("(Based On Character Level)") && propertyPar != 0)
 						{
-							propertyFormattedName = $"{propertyPar / 8}-{propertyPar * 99 / 8} {propertyFormattedName}";
+							propertyFormattedName = $"{Math.Round(propertyPar / 8)}-{Math.Round(propertyPar * 99 / 8)} {propertyFormattedName}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else
