@@ -383,7 +383,7 @@ Rainbow Facet;10;15;jewel;dmg-ltng;;1;74;pierce-ltng;;3;5;extra-ltng;;3;5;levelu
 Rainbow Facet;10;15;jewel;dmg-cold;3;24;38;pierce-cold;;3;5;extra-cold;;3;5;levelup-skill;Frost Nova;100;43;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Rainbow Facet;10;15;jewel;dmg-fire;;17;45;pierce-fire;;3;5;extra-fire;;3;5;levelup-skill;Blaze;100;29;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Rainbow Facet;10;15;jewel;dmg-pois;50;187;187;pierce-pois;;3;5;extra-pois;;3;5;levelup-skill;Venom;100;23;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-Hellfire Torch;102;69;charm;randclassskill;;0;6;all-stats;;10;20;All Resists;;10;20;Light Radius;;8;8;Hit-Skill;197;5;10;Charges;Hydra;10;30;;;;;;;;;;;;;;;;;;;;;;;;
+Hellfire Torch;102;69;charm;randclassskill;;0;6;all-stats;;10;20;All Resists;;10;20;Light Radius;;8;8;Hit-Skill;225;5;10;Charges;Hydra;10;30;;;;;;;;;;;;;;;;;;;;;;;;
 Rixots Sharp;4;3;Short Sword;dmg-max;;5;5;Attack Bonus %;;15;15;Light Radius;;1;1;Deadly Strike;;25;25;dmg-ac;;-10;-10;Damage %;;100;100;;;;;;;;;;;;;;;;;;;;;;;;
 Pelter`s Lunacy;4;3;Buckler;Armor Class;;30;30;Strength;;10;15;Vitality;;10;10;ethereal;;1;1;Armor Class %;;15;25;block;;5;10;block2;;20;20;rep-dur;10;;;;;;;;;;;;;;;;;;
 Demon Basher;4;4;Club;res-cold;;20;20;res-pois;;10;10;Knockback;;1;1;Dmg % to Demons;;25;50;att-demon;;25;50;Damage %;;50;70;;;;;;;;;;;;;;;;;;;;;;;;

@@ -138,7 +138,7 @@ namespace DiabloII.Items.Reader
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							var valueDisplayed = propertyMinimum > 0 ? $"+{value}" : $"-{value}";
 
-							propertyFormattedName = $"{propertyFormattedName} +{valueDisplayed}%";
+							propertyFormattedName = $"{propertyFormattedName} {valueDisplayed}%";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Cold Duration")
@@ -148,13 +148,15 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = $"Cold Duration : {propertyMinimum}-{propertyMaximum} Seconds";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
-						else if (propertyFormattedName == "Cannot Be Frozen" || 
+						else if (propertyFormattedName == "Cannot Be Frozen" ||
 								 propertyFormattedName == "Knockback" ||
 								 propertyFormattedName == "Slain Monsters Rest In Peace" ||
 								 propertyFormattedName == "Indestructible" ||
 								 propertyFormattedName == "Prevent Monster Heal" ||
-								 propertyFormattedName == "Ignore target's defense" ||
-								 propertyFormattedName == "Half Freeze Duration")
+								 propertyFormattedName == "Ignore Target's Defense" ||
+								 propertyFormattedName == "Half Freeze Duration" ||
+								 propertyFormattedName == "Replenishes Quantity" ||
+								 propertyFormattedName == "Increased Stack Size")
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						else if (propertyFormattedName == "Ethereal")
 						{
@@ -202,6 +204,12 @@ namespace DiabloII.Items.Reader
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"Regenerate Mana {value}%";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Howl")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Hit Causes Monster To Flee {value}%";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Sockets")
@@ -290,6 +298,12 @@ namespace DiabloII.Items.Reader
 							propertyFormattedName = $"Attacker Takes Damage Of {value}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
+						else if (propertyFormattedName == "Regenerate Stamina")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Heal Stamnia Plus {value}%";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
 						else if (propertyFormattedName == "Class Skill Tab")
 						{
 							var skillTab = GetSkillTab(skillTabRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
@@ -303,14 +317,7 @@ namespace DiabloII.Items.Reader
 						else if (propertyFormattedName == "Hit-Skill")
 						{
 							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
-
-							if (skill == null)
-							{
-								propertyFormattedName = $"Level {itemData[index + 7].ParseIntOrDefault()} {itemData[index + 5]} ({itemData[index + 6].ParseIntOrDefault()} {itemData[index + 4]})";
-								propertyPar = propertyMinimum = propertyMaximum = 0;
-								index += 3;
-							}
-							else
+							if (skill != null)
 							{
 								var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 								propertyFormattedName = $"Chance To Cast Level {Math.Max(propertyMinimum, propertyMaximum)} {skill.Name} On Striking";
@@ -351,13 +358,13 @@ namespace DiabloII.Items.Reader
 						});
                     }
 
-					var stats = properties.Where(_ => new[] { "Strength", "Dexterity", "Vitality", "Energy" }.Contains(_.Name));
+					var allStats = properties.Where(_ => new[] { "Strength", "Dexterity", "Vitality", "Energy" }.Contains(_.Name));
 
-				if (stats.Count() == 4 &&
-					stats.Select(_ => _.Minimum).Distinct().Count() == 1 &&
-					stats.Select(_ => _.Maximum).Distinct().Count() == 1)
-				{
-						var firstAttribute = stats.First();
+					if (allStats.Count() == 4 &&
+						allStats.Select(_ => _.Minimum).Distinct().Count() == 1 &&
+						allStats.Select(_ => _.Maximum).Distinct().Count() == 1)
+					{
+						var firstAttribute = allStats.First();
 
 						properties.Add(new ItemProperty()
 						{
@@ -374,7 +381,53 @@ namespace DiabloII.Items.Reader
 						properties.RemoveAll(_ => new[] { "Strength", "Dexterity", "Vitality", "Energy" }.Contains(_.Name));
 					}
 
+					new[] { "fire", "ltng", "pois", "cold", "elem" }
+					 .ToList()
+					 .ForEach(elem =>
+					 {
+						 var elemDamage = properties.Where(_ => new[] { elem + "-min", elem + "-max" }.Contains(_.Name));
+						 var elementName =
+							elem == "fire" ? "Fire" :
+							elem == "ltng" ? "Lightning" :
+							elem == "pois" ? "Poison" :
+							elem == "cold" ? "Cold" :
+							"Elemental";
 
+						 // Merge ?
+
+						 if (elemDamage.Count() == 2)
+						 {
+							 var minimum = elemDamage.First(_ => _.Name == elem + "-min").Minimum;
+							 var maximum = elemDamage.First(_ => _.Name == elem + "-max").Maximum;
+							 var value = minimum == maximum ? minimum.ToString() : $"{minimum}-{maximum}";
+							 var propertyFormattedName = $"Adds {value} {elementName} Damage";
+
+							 var propertyDamage = properties.FirstOrDefault(_ => _.Name == $"dmg-{elem}");
+
+							 if (propertyDamage == null)
+							 {
+								 properties.Add(new ItemProperty()
+								 {
+									 Name = $"dmg-{elem}",
+									 FormattedName = propertyFormattedName,
+									 Par = 0,
+									 Minimum = 0,
+									 Maximum = 0,
+									 IsPercent = false,
+									 Id = Guid.NewGuid(),
+									 FirstChararacter = string.Empty
+								 });
+							 }
+							 else
+							 {
+								 propertyDamage.Minimum += minimum;
+								 propertyDamage.Maximum += maximum;
+							 }
+
+							 properties.RemoveAll(_ => new[] { elem + "-min", elem + "-max" }.Contains(_.Name));
+	 					}
+					 });
+					
 
 					var minimumDamage = GetPropertyValueOrDefault(properties, "dmg-min") + GetPropertyValueOrDefault(properties, "dmg-norm");
 					var maximumDamage = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);

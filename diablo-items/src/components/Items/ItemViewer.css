@@ -6,12 +6,12 @@
 
 .diablo-attribute
 {
-    color: #4169E1 !important;
+    color: rgb(65 105 225) !important;
 }
 
 .unique
 {
-    color : rgb(229, 150, 29);
+    color : rgb(165, 146, 99);
 }
 label, td, th, a, .page-item, .dataTables_info, span, a.page-link, .sr-only
 {
@@ -35,7 +35,7 @@ th.sorting_asc::after
 {
     margin-top : -6px;
     margin-bottom : -6px;
-    background: black;
+    background : rgba(1, 1, 1, 0.8) !important;
     text-align: center;
     line-height: 15pt;
     font-family: Diablo;
@@ -85,7 +85,11 @@ tr:last-child td
     opacity: 1;
 }
 [aria-label="Previous"],
-[aria-label="Next"]
+[aria-label="Next"],
+tr,
+table,
+th,
+.dataTables_wrapper
 {
     background-color : black !important;
 
