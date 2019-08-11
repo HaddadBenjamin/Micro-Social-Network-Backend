@@ -136,7 +136,9 @@ namespace DiabloII.Items.Reader
 						else if (new[] { "Cold", "Fire", "Poison", "Lightning", "Magic" }.Select(_ => _ + " Resist").Contains(propertyFormattedName))
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"{propertyFormattedName} +{value}%";
+							var valueDisplayed = propertyMinimum > 0 ? $"+{value}" : $"-{value}";
+
+							propertyFormattedName = $"{propertyFormattedName} +{valueDisplayed}%";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Cold Duration")
@@ -149,7 +151,7 @@ namespace DiabloII.Items.Reader
 						else if (propertyFormattedName == "Cannot Be Frozen" || 
 								 propertyFormattedName == "Knockback" ||
 								 propertyFormattedName == "Slain Monsters Rest In Peace" ||
-								 propertyFormattedName == "Indestructable" ||
+								 propertyFormattedName == "Indestructible" ||
 								 propertyFormattedName == "Prevent Monster Heal" ||
 								 propertyFormattedName == "Ignore target's defense")
 							propertyPar = propertyMaximum = propertyMinimum = 0;
@@ -242,6 +244,12 @@ namespace DiabloII.Items.Reader
 						{
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"Poison Length Reduced By {value}%";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
+						else if (propertyFormattedName == "Hitpoint % Increase")
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"Increase Maximum Life {value}%";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else if (propertyFormattedName == "Dmg-Pois")
