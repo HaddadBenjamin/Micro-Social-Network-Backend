@@ -133,6 +133,12 @@ namespace DiabloII.Items.Reader
 								propertyPar = propertyMaximum = propertyMinimum = 0;
 							}
 						}
+						else if (new[] { "Cold", "Fire", "Poison", "Lightning", "Magic" }.Select(_ => _ + " Resist").Contains(propertyFormattedName))
+						{
+							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+							propertyFormattedName = $"{propertyFormattedName} {value}";
+							propertyPar = propertyMaximum = propertyMinimum = 0;
+						}
 						else if (propertyFormattedName == "Ignore Armor")
 						{
 							propertyFormattedName = "Ignore target's defense";
@@ -279,7 +285,8 @@ namespace DiabloII.Items.Reader
                             Minimum = propertyMinimum,
                             Maximum = propertyMaximum,
                             IsPercent = property.IsPercent,
-							Id = Guid.NewGuid()
+							Id = Guid.NewGuid(),
+							FirstChararacter = property.FirstChararacter
 						});
                     }
 
@@ -396,7 +403,8 @@ namespace DiabloII.Items.Reader
 					{
 						Name = itemData[0],
 						FormattedName = itemData[1].ToTitleCase(),
-						IsPercent = itemData[2].ParseIntOrDefault() == 1
+						IsPercent = itemData[2].ParseIntOrDefault() == 1,
+						FirstChararacter = itemData[3]
 					};
 				})
 				.Where(item => item != null)

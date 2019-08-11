@@ -11,5 +11,6 @@ namespace DiabloII.Items.Api.Items.Responses
         public int Minimum { get; set; }
         public int Maximum { get; set; }
         public bool IsPercent { get; set; }
-    }
+		public string FirstChararacter { get; set; }
+	}
 }
