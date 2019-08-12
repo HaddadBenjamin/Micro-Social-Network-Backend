@@ -14,6 +14,7 @@ namespace DiabloII.Items.Api
 
         public Startup(IConfiguration configuration)
         {
+			ItemsGenerator.Generate();
             Configuration = configuration;
         }
 
