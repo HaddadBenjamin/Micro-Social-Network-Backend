@@ -128,3 +128,17 @@ th,
             rgba(210, 8, 4, 0.3) 100%
     );
 }
+
+.item,
+th,
+tr,
+table,
+.dataTables_wrapper
+{
+    background-color : rgba(1,1 ,1,0) !important;
+}
+
+.dataTables_wrapper
+{
+    background-color : rgba(1,1 ,1,0.9) !important;
+}
