@@ -6,12 +6,12 @@
 
 .diablo-attribute
 {
-    color: rgb(65 105 225) !important;
+    color: #6f5df7 !important;
 }
 
 .unique
 {
-    color : rgb(165, 146, 99);
+    color : #c7b790ed;
 }
 label, td, th, a, .page-item, .dataTables_info, span, a.page-link, .sr-only
 {
@@ -29,7 +29,7 @@ th.sorting_asc::after
 }
 .required-attribute
 {
-    color : #da3d3d;
+    color : #ef4f4f;
 }
 .item
 {
@@ -37,7 +37,7 @@ th.sorting_asc::after
     margin-bottom : -6px;
     background : rgba(1, 1, 1, 0.8) !important;
     text-align: center;
-    line-height: 15pt;
+    line-height: 17.3pt;
     font-family: Diablo;
     font-weight: 100;
     font-size : 18px;
@@ -55,7 +55,7 @@ th.sorting_asc::after
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
-    min-height: 135vh;
+    min-height: 150vh;
 }
 
 .dataTables_length.bs-select, thead:last-child
@@ -81,7 +81,7 @@ thead tr th
 .page-item.active,
 .page-item.active:hover
 {
-    background-color : #3b33e1 !important;
+    background-color : #7079de !important;
     opacity: 1;
 }
 [aria-label="Previous"],
@@ -140,5 +140,5 @@ table,
 
 .dataTables_wrapper
 {
-    background-color : rgba(1,1 ,1,0.9) !important;
+    background-color : rgba(1,1 ,1,0.8) !important;
 }
