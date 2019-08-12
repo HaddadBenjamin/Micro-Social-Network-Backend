@@ -47,8 +47,7 @@ class ItemViewer extends React.Component {
             orderBy(this.props.Items, ['Name'])
             .map(function(item)
             {
-                const attributes =
-                    orderBy(item.Properties, ['Minimum'],['desc'])
+                const attributes = item.Properties
                     .map(property =>
                     {
                         var value = property.Par > 0 ? property.Par : (property.Minimum === property.Maximum ? `${property.Minimum}` :

@@ -551,7 +551,7 @@ namespace DiabloII.Items.Reader
 						FormattedName = itemData[1].ToTitleCase(),
 						IsPercent = itemData[2].ParseIntOrDefault() == 1,
 						FirstChararacter = itemData[3],
-						OrderIndex = itemData[4].ParseIntOrDefault(),
+						OrderIndex = itemData[4].ParseDoubleOrDefault(),
 					};
 				})
 				.Where(item => item != null)
