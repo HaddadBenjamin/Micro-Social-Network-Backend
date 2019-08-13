@@ -63,7 +63,10 @@ namespace DiabloII.Items.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(options => options.WithOrigins("https://localhost:3000", "https://stoic-agnesi-28262f.netlify.com", "https://diablo-2-documentation.netlify.com"));
+            app.UseCors(options => options.WithOrigins(
+                "https://localhost:3000", // local
+                "https://diablo-2-enriched-documentation.netlify.com/" // prod
+            ));
 
             app.UseMvc();
         }
