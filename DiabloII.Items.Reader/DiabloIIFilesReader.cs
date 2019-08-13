@@ -77,7 +77,17 @@ namespace DiabloII.Items.Reader
                         .Replace("2-Handed Sword", "Two-Handed Sword")
                         .Replace("Tresllised Armor", "Trellised Armor");
                     var itemCategory = itemCategories.FirstOrDefault(x => x.Name == type);
-					CurrentItemName = name;
+                    var minDamageNorm = 0d;
+                    var maxDamageNorm = 0d;
+                    var minDamagePercentPerLevel = 0d;
+                    var maxDamagePercentPerLevel = 0d;
+                    var minDamagePerLevel = 0d;
+                    var maxDamagePerLevel = 0d;
+                    var minDefensePercentPerLevel = 0d;
+                    var maxDefensePercentPerLevel = 0d;
+                    var minDefensePerLevel = 0d;
+                    var maxDefensePerLevel = 0d;
+                    CurrentItemName = name;
 
                     if (itemCategory == null)
                     {
@@ -99,16 +109,18 @@ namespace DiabloII.Items.Reader
 							continue;
 						}
 						var propertyFormattedName = property.FormattedName;
-						var propertyPar = (double)itemData[index + 1].ParseIntOrDefault();
-						var propertyMinimum = itemData[index + 2].ParseIntOrDefault();
-						var propertyMaximum = itemData[index + 3].ParseIntOrDefault();
+						var propertyPar = (double)itemData[index + 1].ParseDoubleOrDefault();
+						var propertyMinimum = itemData[index + 2].ParseDoubleOrDefault();
+						var propertyMaximum = itemData[index + 3].ParseDoubleOrDefault();
+
+          
 
 						if (propertyFormattedName == "Extra Durability" ||
 							propertyFormattedName == "Charged")
 							continue;
 						if (propertyFormattedName == "Class Skill")
 						{
-							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+							var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
 
 							propertyFormattedName = $"{skill.Name} {skill.Class}";
 							propertyPar = 0;
@@ -125,7 +137,7 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName == "Charges")
 						{
-							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+							var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
 
 							if (skill != null)
 							{
@@ -165,7 +177,7 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName == "Other Skill")
 						{
-							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+							var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
 
 							propertyFormattedName = skill.Name;
 							propertyPar = 0;
@@ -225,6 +237,11 @@ namespace DiabloII.Items.Reader
 								 propertyFormattedName == "Magic Damage" ||
 								 propertyFormattedName == "Damage")
 						{
+                            if (propertyName == "dmg-norm")
+                            {
+                                minDamageNorm = propertyMinimum;
+                                maxDamageNorm = propertyMaximum;
+                            }
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"Adds {value} {propertyFormattedName}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
@@ -272,8 +289,8 @@ namespace DiabloII.Items.Reader
 							propertyPar /= 25;
 							if (propertyPar == 0)
 								propertyPar = 1;
-							propertyMinimum = Convert.ToInt32(propertyMinimum / propertyPar);
-							propertyMaximum = Convert.ToInt32(propertyMaximum / propertyPar);
+							propertyMinimum = propertyMinimum / propertyPar;
+							propertyMaximum = propertyMaximum / propertyPar;
 
 							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
 							propertyFormattedName = $"{value} Poison Damage Over {propertyPar} Seconds";
@@ -312,7 +329,7 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName == "Class Skill Tab")
 						{
-							var skillTab = GetSkillTab(skillTabRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+							var skillTab = GetSkillTab(skillTabRecords, propertyPar, itemData[index + 1]);
 
 							if (skillTab != null)
 							{
@@ -322,7 +339,7 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName == "Hit-Skill")
 						{
-							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+							var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
 							if (skill != null)
 							{
 								var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
@@ -334,7 +351,7 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName == "Gethit-Skill")
 						{
-							var skill = GetSkill(skillRecords, Convert.ToInt32(propertyPar), itemData[index + 1]);
+							var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
 
 							if (skill != null)
 							{
@@ -345,7 +362,32 @@ namespace DiabloII.Items.Reader
 						}
 						else if (propertyFormattedName.Contains("(Based On Character Level)") && propertyPar != 0)
 						{
-							propertyFormattedName = $"{Math.Round(propertyPar / 8)}-{Math.Round(propertyPar * 99 / 8)} {propertyFormattedName}";
+                            var percent = property.IsPercent ? "%" : string.Empty;
+                            var min = Math.Round(propertyPar / 8);
+                            var max = Math.Round(propertyPar * 99 / 8);
+
+                            if (propertyName == "dmg%/lvl")
+                            {
+                                minDamagePercentPerLevel = min;
+                                maxDamagePercentPerLevel = max;
+                            }
+                            if (propertyName == "dmg/lvl")
+                            {
+                                minDamagePerLevel = min;
+                                maxDamagePerLevel = max;
+                            }
+                            if (propertyName == "ac%/lvl")
+                            {
+                                minDefensePercentPerLevel = min;
+                                maxDefensePercentPerLevel = max;
+                            }
+                            if (propertyName == "ac/lvl")
+                            {
+                                minDefensePerLevel = min;
+                                maxDefensePerLevel = max;
+                            }
+
+                            propertyFormattedName = $"{min}-{max}{percent} {propertyFormattedName}";
 							propertyPar = propertyMaximum = propertyMinimum = 0;
 						}
 						else
@@ -438,48 +480,44 @@ namespace DiabloII.Items.Reader
 
 					var minimumDamage = GetPropertyValueOrDefault(properties, "dmg-min") + GetPropertyValueOrDefault(properties, "dmg-norm");
 					var maximumDamage = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
-					var damagePerLevel = GetPropertyValueOrDefault(properties, "dmg/lvl", ItemPropertyType.Par);
-					var damagePercentMinimum = GetPropertyValueOrDefault(properties, "Damage %") + 100;
-					var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", ItemPropertyType.Maximum) + 100;
-					var damagePercentPerLevel = GetPropertyValueOrDefault(properties, "dmg%/lvl", ItemPropertyType.Par);
+					var damagePercentMinimum = GetPropertyValueOrDefault(properties, "Damage %");
+					var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", ItemPropertyType.Maximum);
 
-					var defenseMinimum = GetPropertyValueOrDefault(properties, "Armor Class");
+                    var defenseMinimum = GetPropertyValueOrDefault(properties, "Armor Class");
 					var defenseMaximum = GetPropertyValueOrDefault(properties, "Armor Class", ItemPropertyType.Maximum);
-					var defensePerLevel = GetPropertyValueOrDefault(properties, "ac/lvl", ItemPropertyType.Par);
-					var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %") + 100;
-					var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", ItemPropertyType.Maximum) + 100;
-					var defensePercentPerLevel = GetPropertyValueOrDefault(properties, "ac%/lvl", ItemPropertyType.Par);
+					var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %");
+					var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", ItemPropertyType.Maximum);
 
-					var requirementPercent = 100 + GetPropertyValueOrDefault(properties, "Reduce Req %");
+					var requirementPercent = GetPropertyValueOrDefault(properties, "Reduce Req %");
 
 					return new Item
 					{
 						Id = Guid.NewGuid(),
 						Name = name,
-						LevelRequired = itemData[2].ParseIntOrDefault(),
-						Level = itemData[1].ParseIntOrDefault(),
+						LevelRequired = itemData[2].ParseDoubleOrDefault(),
+						Level = itemData[1].ParseDoubleOrDefault(),
 						Quality = "Unique",
 						Properties = properties.OrderBy(_ => _.OrderIndex).ToList(),
                         Category = itemCategory?.Category,
                         SubCategory = itemCategory?.SubCategory,
 						Type = type,
 						// Specific to Armor :
-						MinimumDefenseMinimum = (itemCategory?.MinimumDefense * defensePercentMinimum) / 100 + defenseMinimum + defensePerLevel / 99,
-						MaximumDefenseMinimum = (itemCategory?.MaximumDefense * defensePercentMinimum) / 100 + defenseMinimum + defensePerLevel / 99,
-						MinimumDefenseMaximum = (itemCategory?.MinimumDefense * defensePercentMaximum + defensePercentPerLevel) / 100 + defenseMaximum + defensePerLevel,
-						MaximumDefenseMaximum = (itemCategory?.MaximumDefense * defensePercentMaximum + defensePercentPerLevel) / 100 + defenseMaximum + defensePerLevel,
+						MinimumDefenseMinimum = (int)(itemCategory?.MinimumDefense * (defensePercentMinimum + minDefensePercentPerLevel + 100)) / 100 + defenseMinimum + minDefensePerLevel,
+						MaximumDefenseMinimum = (int)(itemCategory?.MaximumDefense * (defensePercentMinimum + minDefensePercentPerLevel + 100)) / 100 + defenseMinimum + minDefensePerLevel,
+						MinimumDefenseMaximum = (int)(itemCategory?.MinimumDefense * (defensePercentMaximum + maxDefensePercentPerLevel + 100)) / 100 + defenseMaximum + maxDefensePerLevel,
+						MaximumDefenseMaximum = (int)(itemCategory?.MaximumDefense * (defensePercentMaximum + maxDefensePercentPerLevel + 100)) / 100 + defenseMaximum + maxDefensePerLevel,
 						// Specific to Weapon :
-						MinimumOneHandedDamageMinimum = ((itemCategory?.MinimumOneHandedDamage * (damagePercentMinimum)) / 100).AddIfPositive(minimumDamage),
-						MaximumOneHandedDamageMinimum = ((itemCategory?.MaximumOneHandedDamage * (damagePercentMinimum)) / 100).AddIfPositive(minimumDamage),
-						MinimumTwoHandedDamageMinimum = ((itemCategory?.MinimumTwoHandedDamage * (damagePercentMinimum)) / 100).AddIfPositive(minimumDamage),
-						MaximumTwoHandedDamageMinimum = ((itemCategory?.MaximumTwoHandedDamage * (damagePercentMinimum)) / 100).AddIfPositive(minimumDamage + damagePerLevel / 99),
-						MinimumOneHandedDamageMaximum = ((itemCategory?.MinimumOneHandedDamage * (damagePercentMaximum + damagePercentPerLevel)) / 100 ).AddIfPositive(maximumDamage + damagePerLevel),
-						MaximumOneHandedDamageMaximum = ((itemCategory?.MaximumOneHandedDamage * (damagePercentMaximum + damagePercentPerLevel)) / 100).AddIfPositive(maximumDamage + damagePerLevel),
-						MinimumTwoHandedDamageMaximum = ((itemCategory?.MinimumTwoHandedDamage * (damagePercentMaximum + damagePercentPerLevel)) / 100).AddIfPositive(maximumDamage + damagePerLevel),
-						MaximumTwoHandedDamageMaximum = ((itemCategory?.MaximumTwoHandedDamage * (damagePercentMaximum + damagePercentPerLevel)) / 100).AddIfPositive(maximumDamage + damagePerLevel),
+						MinimumOneHandedDamageMinimum = Math.Round(((itemCategory?.MinimumOneHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
+						MaximumOneHandedDamageMinimum = Math.Round(((itemCategory?.MaximumOneHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
+						MinimumTwoHandedDamageMinimum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
+						MaximumTwoHandedDamageMinimum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
+						MinimumOneHandedDamageMaximum = Math.Round(((itemCategory?.MinimumOneHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
+						MaximumOneHandedDamageMaximum = Math.Round(((itemCategory?.MaximumOneHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
+						MinimumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
+						MaximumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
 						// Stats
-						StrengthRequired = (itemCategory?.StrengthRequired * requirementPercent) / 100,
-						DexterityRequired = (itemCategory?.DexterityRequired * requirementPercent) / 100,
+						StrengthRequired = (itemCategory?.StrengthRequired * requirementPercent + 100) / 100,
+						DexterityRequired = (itemCategory?.DexterityRequired * requirementPercent + 100) / 100,
 					};
                 })
                 .Where(item => item != null)
@@ -572,9 +610,9 @@ namespace DiabloII.Items.Reader
                     {
                         Name = itemData[0],
                         Slot = itemData[1],
-						MinimumDefense = itemData[2].ParseIntOrDefault(),
-						MaximumDefense = itemData[3].ParseIntOrDefault(),
-						StrengthRequired = itemData[4].ParseIntOrDefault()
+						MinimumDefense = itemData[2].ParseDoubleOrDefault(),
+						MaximumDefense = itemData[3].ParseDoubleOrDefault(),
+						StrengthRequired = itemData[4].ParseDoubleOrDefault()
                     };
                 })
                 .Where(item => item != null)
@@ -596,12 +634,12 @@ namespace DiabloII.Items.Reader
 						Name = itemData[0],
 						Type = itemData[1],
 						Slot = itemData[2].Replace("\r", string.Empty),
-						MinimumOneHandedDamage = itemData[3].ParseIntOrDefault(),
-						MaximumOneHandedDamage = itemData[4].ParseIntOrDefault(),
-						MinimumTwoHandedDamage = itemData[5].ParseIntOrDefault(),
-						MaximumTwoHandedDamage = itemData[6].ParseIntOrDefault(),
-						StrengthRequired = itemData[7].ParseIntOrDefault(),
-						DexterityRequired = itemData[8].ParseIntOrDefault(),
+						MinimumOneHandedDamage = itemData[3].ParseDoubleOrDefault(),
+						MaximumOneHandedDamage = itemData[4].ParseDoubleOrDefault(),
+						MinimumTwoHandedDamage = itemData[5].ParseDoubleOrDefault(),
+						MaximumTwoHandedDamage = itemData[6].ParseDoubleOrDefault(),
+						StrengthRequired = itemData[7].ParseDoubleOrDefault(),
+						DexterityRequired = itemData[8].ParseDoubleOrDefault(),
 					};
 				})
                 .Where(item => item != null)
@@ -700,14 +738,14 @@ namespace DiabloII.Items.Reader
             return weaponSubCategoriesRecord;
         }
 
-		public int GetPropertyValueOrDefault(List<ItemProperty> properties, string name, ItemPropertyType type = ItemPropertyType.Minimum)
+		public double GetPropertyValueOrDefault(List<ItemProperty> properties, string name, ItemPropertyType type = ItemPropertyType.Minimum)
 		{
 			var property = properties.FirstOrDefault(_ => _.Name == name);
 
-			return property == null ? 0 :
-					type == ItemPropertyType.Minimum ? property.Minimum :
-					type == ItemPropertyType.Maximum ? property.Maximum :
-													   Convert.ToInt32(property.Par * 99);
+            return property == null ? 0 :
+                    type == ItemPropertyType.Minimum ? property.Minimum :
+                    type == ItemPropertyType.Maximum ? property.Maximum :
+                                                       property.Par * 99;
 		}
 
 		public SkillRecord GetSkill(List<SkillRecord> skills, double id, string name = null)
@@ -737,8 +775,9 @@ namespace DiabloII.Items.Reader
 		}
 	}
 
-	public static class IntExtension
+	public static class DoubleExtensions
 	{
-		public static int AddIfPositive(this int? value, int toAdd) => value.Value > 0 ? value.Value + toAdd : value.Value;
+		public static double AddIfPositive(this double? value, double toAdd) => value.Value > 0 ? value.Value + toAdd : value.Value;
+		public static double AddIfPositive(this double value, double toAdd) => value > 0 ? value + toAdd : value;
 	}
 }

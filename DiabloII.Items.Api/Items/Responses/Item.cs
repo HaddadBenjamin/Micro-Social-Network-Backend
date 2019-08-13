@@ -11,28 +11,28 @@ namespace DiabloII.Items.Api.Items.Responses
 		public string Category { get; set; }
 		public string SubCategory { get; set; }
 		public string Type { get; set; }
-		public int LevelRequired { get; set; }
-		public int Level { get; set; }
+		public double LevelRequired { get; set; }
+		public double Level { get; set; }
 		public IEnumerable<ItemProperty> Properties { get; set; }
 
 		// Specific to Armor.
-		public int MinimumDefenseMinimum { get; set; }
-		public int MaximumDefenseMinimum { get; set; }
-		public int MinimumDefenseMaximum { get; set; }
-		public int MaximumDefenseMaximum { get; set; }
+		public double MinimumDefenseMinimum { get; set; }
+		public double MaximumDefenseMinimum { get; set; }
+		public double MinimumDefenseMaximum { get; set; }
+		public double MaximumDefenseMaximum { get; set; }
 
 		// Specific to Weapon.
-		public int MinimumOneHandedDamageMinimum { get; set; }
-		public int MaximumOneHandedDamageMinimum { get; set; }
-		public int MinimumTwoHandedDamageMinimum { get; set; }
-		public int MaximumTwoHandedDamageMinimum { get; set; }
-		public int MinimumOneHandedDamageMaximum { get; set; }
-		public int MaximumOneHandedDamageMaximum { get; set; }
-		public int MinimumTwoHandedDamageMaximum { get; set; }
-		public int MaximumTwoHandedDamageMaximum { get; set; }
+		public double MinimumOneHandedDamageMinimum { get; set; }
+		public double MaximumOneHandedDamageMinimum { get; set; }
+		public double MinimumTwoHandedDamageMinimum { get; set; }
+		public double MaximumTwoHandedDamageMinimum { get; set; }
+		public double MinimumOneHandedDamageMaximum { get; set; }
+		public double MaximumOneHandedDamageMaximum { get; set; }
+		public double MinimumTwoHandedDamageMaximum { get; set; }
+		public double MaximumTwoHandedDamageMaximum { get; set; }
 
 		// Stat required.
-		public int StrengthRequired { get; set; }
-		public int DexterityRequired { get; set; }
+		public double StrengthRequired { get; set; }
+		public double DexterityRequired { get; set; }
 	}
 }

@@ -7,17 +7,17 @@
         public string Category { get; set; }
 
 		// Specific to Armor.
-		public int MinimumDefense { get; set; }
-		public int MaximumDefense { get; set; }
+		public double MinimumDefense { get; set; }
+		public double MaximumDefense { get; set; }
 
 		// Specific to Weapon
-		public int MinimumOneHandedDamage { get; set; }
-		public int MaximumOneHandedDamage { get; set; }
-		public int MinimumTwoHandedDamage { get; set; }
-		public int MaximumTwoHandedDamage { get; set; }
+		public double MinimumOneHandedDamage { get; set; }
+		public double MaximumOneHandedDamage { get; set; }
+		public double MinimumTwoHandedDamage { get; set; }
+		public double MaximumTwoHandedDamage { get; set; }
 
 		// Stat required
-		public int StrengthRequired { get; set; }
-		public int DexterityRequired { get; set; }
+		public double StrengthRequired { get; set; }
+		public double DexterityRequired { get; set; }
 	}
 }

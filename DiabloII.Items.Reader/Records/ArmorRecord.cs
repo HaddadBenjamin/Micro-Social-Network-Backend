@@ -5,9 +5,8 @@
         public string Name { get; set; }
         public string Slot { get; set; }
 
-        public int MinimumDefense { get; set; }
-        public int MaximumDefense { get; set; }
-
-		public int StrengthRequired { get; set; }
+        public double MinimumDefense { get; set; }
+        public double MaximumDefense { get; set; }
+		public double StrengthRequired { get; set; }
 	}
 }
