@@ -41,12 +41,18 @@ namespace DiabloII.Items.Reader
             var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
             var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
 			var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
-			var missingProps = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties.Select(p => p.Name).Where(name => properties.FirstOrDefault(s => s.Name == name) == null).Distinct()).Distinct().ToList());
-			var missingItemsCategories = string.Join(Environment.NewLine, MissingItemTypes.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Type}"));
-			var missingProperties = string.Join(Environment.NewLine, MissingProperties.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Property}"));
-			var missingSkills = string.Join(Environment.NewLine, MissingSkills.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.ItemName} - {_.Name} : {_.Id}"));
+			var missingProps = string.Join("\n- ", uniques.SelectMany(_ => _.Properties.Select(p => p.Name).Where(name => properties.FirstOrDefault(s => s.Name == name) == null).Distinct()).Distinct().ToList());
+			var missingItemsCategories = string.Join("\n- ", MissingItemTypes.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Type}"));
+            var missingProperties = string.Join("\n- ", MissingProperties.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Property}").Where(_ => !string.IsNullOrWhiteSpace(_)));
+			var missingSkills = string.Join("\n- ", MissingSkills.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.ItemName} - {_.Name} : {_.Id}").Where(_ => !string.IsNullOrWhiteSpace(_)));
 
-			return uniques;
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Missing Properties.txt"), missingProperties);
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Missing Skills.txt"), missingSkills);
+            File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Missing Categories.txt"), missingItemsCategories);
+
+
+
+            return uniques;
         }
 
         public IEnumerable<Item> ReadUniques(
