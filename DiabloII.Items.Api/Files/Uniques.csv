@@ -602,7 +602,7 @@ Frostfeather;40;31;CedarBow;Class Skill;31;3;3;Freeze Duration;;4;4;Damage %;;17
 Ironstring;43;34;Double Bow;Armor Class;;35;35;Hitpoints;;40;40;Armor vs Melee;;75;75;Class Skill;12;3;5;Damage %;;190;230;dmg-norm;;20;35;;;;;;;;;;;;;;;;;;;;;;;;;
 Stone Arrow;45;36;Short Siege Bow;Hit-Skill;87;2;1;Hit Recovery %;;15;15;crush/lvl;8;;;Damage %;;160;180;Knockback;;1;1;Sockets;;1;2;;;;;;;;;;;;;;;;;;;;;;;;;
 Yeti Sinew String;47;40;Long Siege Bow;Amazon Skills;;1;2;Damage %;;200;200;Mana Points;;50;50;dmg;;25;25;Hitpoints;;50;50;Attack Speed %;;25;25;att/lvl;6;;;;;;;;;;;;;;;;;;;;;;;
-Charged String;49;42;Rune Bow;dmg-ltng;;15;165;res-ltng;;15;15;Class Skill;12;3;3;Attack Rating;;180;240;Dexterity;;15;15;Damage %;;140;160;Amazon Skills;;1;1;Hit-Skill;;5;38;;;;;;;;;;;;;;;;;
+Charged String;49;42;Rune Bow;dmg-ltng;;15;165;res-ltng;;15;15;Class Skill;12;3;3;Attack Rating;;180;240;Dexterity;;15;15;Damage %;;140;160;Amazon Skills;;1;1;Hit-Skill;38;5;15;;;;;;;;;;;;;;;;;
 Demon Piercer;52;45;Gothic Bow;Damage %;;225;275;Attack Bonus %;;100;100;Dmg % to Demons;;150;300;Attack Speed %;;50;50;Replenish Life;;10;10;att-demon;;75;150;dmg-max;;15;30;;;;;;;;;;;;;;;;;;;;;
 Plunder Aim;37;30;Arbalest;Knockback;;1;1;Damage %;;190;210;Gold Find %;;60;90;Mana Points;;30;30;dmg-max;;10;30;Dmg % to Undead;;150;300;att-undead;;75;150;;;;;;;;;;;;;;;;;;;;;
 Templar`s Aim;43;34;Siege Crossbow;dmg-ltng;;35;245;Hit-Skill;53;5;5;Paladin Skills;;2;2;Reduce Req %;;-25;-25;Gethit-Skill;48;5;5;Attack Speed %;;25;25;Damage %;;180;230;att/lvl;6;;;;;;;;;;;;;;;;;;;
@@ -769,11 +769,11 @@ Korlic`s Visor;76;74;fury visor;Armor Class %;;140;160;Class Skill Tab;12;2;3;St
 Diana`s Tracer;72;64;ward;Armor Class %;;140;160;All Resists;;30;40;Faster Block %;;20;20;Increased Block %;;20;20;Gethit-Skill;Fade;5;5;pois-len;;25;25;extra-pois;;5;8;pierce-pois;;5;8;Class Skill;25;1;6;;;;;;;;;;;;;
 Bloodraven`s Sight;79;72;tiara;Armor Class;;80;120;All Resists;;40;40;Attack Speed %;;20;20;Hit Recovery %;;20;20;res-all-max;;10;10;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Hydra Robe;77;69;dusk shroud;Armor Class;;40;50;Cast Speed %;;20;20;extra-fire;;10;15;Class Skill;62;2;6;Class Skill;47;2;4;regen-mana;;10;15;abs-fire%;;5;5;;;;;;;;;;;;;;;;;;;;;
-Frrenzy Crown;79;71;conqueror crown;Armor Class %;;150;180;Class Skill Tab;133;1;3;Barbarian Skills;;2;2;Hit Recovery %;;20;20;Replenish Life;;20;20;Class Skill;128;1;3;Class Skill;138;1;3;Attack Speed %;;20;20;;;;;;;;;;;;;;;;;
+Frrenzy Crown;79;71;conqueror crown;Armor Class %;;150;180;Class Skill Tab;12;1;3;Barbarian Skills;;2;2;Hit Recovery %;;20;20;Replenish Life;;20;20;Class Skill;128;1;3;Class Skill;138;1;3;Attack Speed %;;20;20;;;;;;;;;;;;;;;;;
 Quick Razor Bastion;72;65;blade barrier;Armor Class %;;50;80;thorns/lvl;12;;;Extra Durability;;250;250;Hit Recovery %;;20;20;Reduce Dmg %;;10;10;Openwounds;;75;75;Attack Speed %;;15;15;Thorns;;35;50;;;;;;;;;;;;;;;;;
 Bone Grasp;78;70;vampirebone gloves;Armor Class %;;100;120;Lifesteal;;6;8;Hit-Skill;91;5;8;dmg-mag;;65;95;Life per Kill;;6;8;Strength;;10;15;Dexterity;;10;15;Gethit-Skill;68;5;5;;;;;;;;;;;;;;;;;
 Blaze Blade;72;65;cryptic sword;Damage %;;190;240;Deadly Strike;;10;10;half-freeze;;1;1;dmg-fire;190;324;486;Attack Speed %;;30;30;abs-fire%;;8;15;Hit-Skill;47;5;15;pierce-fire;;5;10;;;;;;;;;;;;;;;;;
-Carnage Plate;78;70;sacred armor;Armor Class %;;180;240;Hit Recovery %;;10;10;Faster Movement %;;10;10;Stamina Points;;35;50;Strength;;20;25;Vitality;;20;25;Class Skill Tab;148;1;2;Sockets;;1;2;;;;;;;;;;;;;;;;;
+Carnage Plate;78;70;sacred armor;Armor Class %;;180;240;Hit Recovery %;;10;10;Faster Movement %;;10;10;Stamina Points;;35;50;Strength;;20;25;Vitality;;20;25;Class Skill Tab;12;1;2;Sockets;;1;2;;;;;;;;;;;;;;;;;
 Charged Orb;74;67;eldritch orb;Sorceress Skills;;1;2;Cast Speed %;;35;35;extra-cold;;10;15;extra-ltng;;10;15;Energy;;20;30;Charges;117;20;1;Life per Kill;;15;15;;;;;;;;;;;;;;;;;;;;;
 Storm Eagle`s Talon;72;64;feral claws;Damage %;;200;280;Attack Speed %;;20;20;Class Skill Tab;18;1;3;dmg-ltng;;25;195;res-ltng;;40;70;Class Skill;271;1;2;Class Skill;261;1;2;pierce-ltng;;5;7;;;;;;;;;;;;;;;;;
 Chaser Treks;67;59;scarabshell boots;Armor Class %;;140;160;Faster Movement %;;40;40;Hit Recovery %;;20;20;dex/lvl;6;;;stamdrain;;50;50;rep-dur;5;;;Strength;;15;15;Vitality;;15;15;Armor Class;;35;50;;;;;;;;;;;;;
@@ -1458,7 +1458,7 @@ Assault Crusher;72;70;Giant Ogre Maul;Damage %;;340;370;Strength;;15;25;Dexterit
 Deaths Unearther;83;81;Mithril Bound Maul;Damage %;;375;425;reanimate;1;15;15;Replenish Life;;-25;-25;Armor Class;;-350;-350;Other Skill;69;10;15;Other Skill;70;10;15;Life per Kill;;15;25;All Skills;;1;2;;;;;;;;;;;;;;;;;
 Talic`s Redeemer;58;56;Mithril Short Sword;Damage %;;350;400;Strength;;10;15;Vitality;;10;20;Attack Speed %;;25;25;dmg-fire;;375;525;Increased Block %;;25;25;Hit Recovery %;;25;25;Other Skill;151;3;5;res-fire;;33;33;;;;;;;;;;;;;
 Snakebite Slayer;63;61;Lut Gholein Scimitar;Damage %;;320;340;Dexterity;;10;15;Hit-Skill;278;5;10;Gethit-Skill;278;2;15;Gethit-Skill;267;1;10;Attack Speed %;;25;25;dmg-pois;200;720;720;res-pois;;33;33;res-pois-len;;25;25;;;;;;;;;;;;;
-Tyrials`s Waistblade;65;63;Angel Cutter;Damage %;;330;360;all-stats;;10;15;Attack Speed %;;15;15;Hit-Skill;121;10;15;Gethit-Skill;Gethit-Skill;10;15;dmg-ltng;;1;301;pierce-ltng;;10;15;abs-ltng%;;3;5;dmg-dem/lvl;4;;;;;;;;;;;;;;;
+Tyrials`s Waistblade;65;63;Angel Cutter;Damage %;;330;360;all-stats;;10;15;Attack Speed %;;15;15;Hit-Skill;121;10;15;Gethit-Skill;121;10;15;dmg-ltng;;1;301;pierce-ltng;;10;15;abs-ltng%;;3;5;dmg-dem/lvl;4;;;;;;;;;;;;;;;
 Butchers Hack;72;70;Plate Cleaver;Damage %;;320;340;wounds/lvl;4;;;str/lvl;3;;;Attack Speed %;;20;20;dmg-norm;;120;180;Armor vs Melee;;250;350;Hitpoint % Increase;;3;5;;;;;;;;;;;;;;;;;;;;;
 Twisted Archonian Blade;76;74;Archon Edge Blade;Damage %;;350;400;Sockets;;3;6;Attack Speed %;;30;30;dmg-norm;;175;200;aura;113;3;5;att/lvl;16;;;deadly/lvl;6;;;Strength;;10;20;Dexterity;;10;20;;;;;;;;;;;;;
 Golden Guardian`s Edge;79;77;Brawler Blade;Damage %;;330;350;Sockets;;2;4;Attack Speed %;;20;20;mag%/lvl;6;;;item_allskills;;1;2;Gold Find %;;75;75;Reduce Prices;;5;10;ac%/lvl;3;;;;;;;;;;;;;;;;;;;
@@ -1527,7 +1527,7 @@ Hermes Faceguard;68;66;Plated Armet;Armor Class %;;100;140;str/lvl;4;;;Other Ski
 Helm of the Dead;54;52;Plated Conch;Armor Class %;;120;140;Other Skill;69;10;20;Other Skill;70;10;20;Replenish Life;;-15;-15;enr/lvl;3;;;Sockets;;1;2;Hit Recovery %;;15;15;;;;;;;;;;;;;;;;;;;;;
 Spireguard;79;77;Ordos Spire;Armor Class %;;125;150;Armor Class;;150;200;Strength;;20;25;Dexterity;;20;25;Replenish Life;;20;25;All Resists;;20;25;Vitality;;20;25;Energy;;20;25;;;;;;;;;;;;;;;;;
 Crown of the Grand Crusader;79;77;Ordos Crown;Armor Class %;;125;150;Paladin Skills;;1;3;str/lvl;5;;;Class Skill;122;1;3;Faster Block %;;5;10;Increased Block %;;5;10;Hit Recovery %;;15;15;All Resists;;10;15;Class Skill;117;1;3;Reduce Dmg %;;3;5;Replenish Life;;10;15;;;;;
-Faceless Manipulator;74;72;Cursed Mask;Armor Class %;;90;120;Other Skill;86;2;3;Other Skill;81;2;3;Gethit-Skill;Delerium;1;70;str/lvl;4;;;dex/lvl;4;;;Replenish Life;;35;35;;;;;;;;;;;;;;;;;;;;;
+Faceless Manipulator;74;72;Cursed Mask;Armor Class %;;90;120;Other Skill;86;2;3;Other Skill;81;2;3;Gethit-Skill;350;1;70;str/lvl;4;;;dex/lvl;4;;;Replenish Life;;35;35;;;;;;;;;;;;;;;;;;;;;
 All Father;65;63;Arcanic Shroud;Armor Class %;;160;220;Sorceress Skills;;2;4;Class Skill;41;3;6;dmg-to-mana;;15;20;enr/lvl;4;;;Gethit-Skill;56;5;20;Magic Find %;;30;50;Cast Speed %;;25;25;Hit Recovery %;;20;20;Faster Movement %;;10;10;;;;;;;;;
 Venomhide;67;65;Cursed Hide;Armor Class %;;170;230;Necro Skills;;2;4;Class Skill;81;3;6;dmg-to-mana;;15;20;enr/lvl;4;;;Gethit-Skill;92;5;20;Magic Find %;;30;50;Cast Speed %;;25;25;Hit Recovery %;;20;20;Faster Movement %;;10;10;;;;;;;;;
 Nightstalker;68;66;Viperskin Husk;Armor Class %;;180;240;Assassin Skills;;2;4;Class Skill;265;3;6;Reduce Dmg %;;5;10;dex/lvl;5;;;Gethit-Skill;273;5;20;Magic Find %;;30;50;Attack Speed %;;20;20;Hit Recovery %;;20;20;Faster Movement %;;10;10;;;;;;;;;
@@ -1813,7 +1813,7 @@ Bolt Repeater;96;84;Void Repeater Crossbow;Damage %;;400;450;Attack Speed %;;80;
 Elements Master;90;79;Void Acrhon Orb;Armor Class;;375;450;Sorceress Skills;;2;4;Class Skill;48;4;8;Class Skill;44;4;8;Energy;;20;30;Vitality;;-15;-25;Class Skill;61;2;4;Class Skill;63;2;4;Class Skill;65;2;4;dmg-to-mana;;15;15;red-dmg;;5;15;Cast Speed %;;35;35;0
 Freeze Spinner;92;81;Void Flash Caster;Armor Class;;400;450;Sorceress Skills;;4;8;Class Skill;64;4;8;gethit-skill;44;10;20;gethit-skill;59;10;20;Energy;;-20;-30;dmg-to-mana;;10;10;Regenerate Mana %;;10;20;Faster Movement %;;10;10;Cast Speed %;;25;25;Other Skill;114;5;10;;;;;0
 Grandmage Soulorb;96;84;Void Soul Shard;Armor Class;;375;450;Sorceress Skills;;8;12;All Resists;;40;60;Vitality;;-20;-40;Energy;;20;40;Cast Speed %;;50;50;red-Damage %;;10;15;Replenish Life;;20;40;aura;120;8;12;Strength;;15;25;Dexterity;;15;25;mag%/lvl;3;;;0
-Aeon;98;87;Void Caster;Damage %;;375;425;Attack Speed %;;75;75;Amazon Skills;;3;6;Class Skill;;3;6;dmg-norm;;200;300;ignore-ac;;1;1;aura;122;10;20;Dexterity;;40;60;Strength;;-20;-40;Damage %/lvl;16;;;Replenish Life;;-25;-25;deadly/lvl;6;;;0
+Aeon;98;87;Void Caster;Damage %;;375;425;Attack Speed %;;75;75;Amazon Skills;;3;6;Class Skill;26;3;6;dmg-norm;;200;300;ignore-ac;;1;1;aura;122;10;20;Dexterity;;40;60;Strength;;-20;-40;Damage %/lvl;16;;;Replenish Life;;-25;-25;deadly/lvl;6;;;0
 Apocylapstar;90;79;Void Grand Caster;Damage %;;350;400;Attack Speed %;;35;35;Amazon Skills;;4;8;Class Skill;6;4;8;Class Skill;27;4;8;Class Skill;31;4;8;dex/lvl;5;;;Vitality;;-20;-30;Replenish Life;;35;35;dmg-to-mana;;15;15;All Resists;;15;30;Hit Recovery %;;25;25;0
 World Impaler;92;81;Void Matron Spear;Damage %;;375;425;Attack Speed %;;20;20;Amazon Skills;;3;6;Class Skill;19;3;6;Class Skill;32;3;6;dex/lvl;5;;;Damage %/lvl;16;;;Strength;;40;60;Vitality;;-20;-30;Hit Recovery %;;25;25;Other Skill;136;5;10;red-Damage %;;10;15;0
 Blinkpike;94;84;Void Matron Pike;Damage %;;375;450;Attack Speed %;;35;35;Amazon Skills;;4;8;Class Skill;14;4;8;Class Skill;24;4;8;dex/lvl;7;;;ignore-ac;;1;1;dmg-norm;;250;500;aura;113;8;12;Hit Recovery %;;40;40;Other Skill;54;5;10;gethit-skill;154;20;20;0
@@ -2070,31 +2070,31 @@ Amazonian Arrows;95;50;Arrows;Amazon Skills;;1;2;to all Attributes;;5;10;All Res
 Crusader Arrows;95;50;Arrows;Paladin Skills;;1;2;to all Attributes;;5;10;All Resists;;5;10;dex/lvl;2;;;Sockets;;1;1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
 Amazonian Bolts;95;50;Bolts;Amazon Skills;;1;2;to all Attributes;;5;10;All Resists;;5;10;dex/lvl;2;;;Sockets;;1;1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
 Crusader Bolts;95;50;Bolts;Paladin Skills;;1;2;to all Attributes;;5;10;All Resists;;5;10;dex/lvl;2;;;Sockets;;1;1;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Askari War Pike;105;50;ama leg;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;1;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Zann Esu War Orb;105;50;sor leg;Armor Class %;;50;100;Sorceress Skills;;6;10;Class Skill Tab;3;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Shadow War Sword;105;50;ass leg;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;18;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Phoenician War Claw;105;50;ass leg;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;18;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Arreat War Crown;105;50;bar leg;Damage %;;100;300;Barbarian Skills;;6;10;Class Skill Tab;12;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Henknoc War Mask;105;50;dru leg;Damage %;;100;300;Druid Skills;;6;10;Class Skill Tab;15;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Caoi Dulra War Totem;105;50;dru leg;Armor Class %;;100;300;Druid Skills;;6;10;Class Skill Tab;15;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Rakkis War Protectorate;105;50;pal leg;Damage %;;100;300;Paladin Skills;;6;10;Class Skill Tab;9;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Rathma War Gazer;105;50;nec leg;Armor Class %;;100;300;Necromancer Skills;;6;10;Class Skill Tab;6;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Askari War Pike;105;50;ama leg;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;2;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Askari War Bow;105;50;ama leg;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;0;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Zann Esu War Orb;105;50;sor leg;Armor Class %;;50;100;Sorceress Skills;;6;10;Class Skill Tab;4;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Shadow War Sword;105;50;ass leg;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;19;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Phoenician War Claw;105;50;ass leg;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;19;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Arreat War Crown;105;50;bar leg;Damage %;;100;300;Barbarian Skills;;6;10;Class Skill Tab;13;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Henknoc War Mask;105;50;dru leg;Damage %;;100;300;Druid Skills;;6;10;Class Skill Tab;16;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Rakkis War Protectorate;105;50;pal leg;Damage %;;100;300;Paladin Skills;;6;10;Class Skill Tab;10;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Rathma War Gazer;105;50;nec leg;Armor Class %;;100;300;Necromancer Skills;;6;10;Class Skill Tab;7;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Askari War Javelin;105;50;ama leg;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;1;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Askari War Javelin;105;50;ama leg;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;2;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Askari War Bow;105;50;ama leg;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;1;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Zann Esu War Orb;105;50;sor leg;Armor Class %;;50;100;Sorceress Skills;;6;10;Class Skill Tab;5;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Shadow War Sword;105;50;ass leg;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;20;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Phoenician War Claw;105;50;ass leg;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;20;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Arreat War Crown;105;50;bar leg;Damage %;;100;300;Barbarian Skills;;6;10;Class Skill Tab;14;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Caoi Dulra War Totem;105;50;dru leg;Armor Class %;;100;300;Druid Skills;;6;10;Class Skill Tab;17;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Rakkis War Protectorate;105;50;pal leg;Damage %;;100;300;Paladin Skills;;6;10;Class Skill Tab;11;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
-Rathma War Gazer;105;50;nec leg;Armor Class %;;100;300;Necromancer Skills;;6;10;Class Skill Tab;8;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Askari War Pike;105;50;Legendary War Pike;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;1;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Zann Esu War Orb;105;50;Legendary War Orb;Armor Class %;;50;100;Sorceress Skills;;6;10;Class Skill Tab;3;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Shadow War Sword;105;50;Legendary Sword;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;18;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Phoenician War Claw;105;50;Legendary Claw;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;18;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Arreat War Crown;105;50;Legendary Crown;Damage %;;100;300;Barbarian Skills;;6;10;Class Skill Tab;12;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Henknoc War Mask;105;50;Legendary Head;Damage %;;100;300;Druid Skills;;6;10;Class Skill Tab;15;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Caoi Dulra War Totem;105;50;Legendary Totem;Armor Class %;;100;300;Druid Skills;;6;10;Class Skill Tab;15;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Rakkis War Protectorate;105;50;Legendary Protectorate;Damage %;;100;300;Paladin Skills;;6;10;Class Skill Tab;9;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Rathma War Gazer;105;50;Legendary Gazer;Armor Class %;;100;300;Necromancer Skills;;6;10;Class Skill Tab;6;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Askari War Pike;105;50;Legendary War Pike;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;2;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Askari War Bow;105;50;Legendary War Bow;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;0;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Zann Esu War Orb;105;50;Legendary War Orb;Armor Class %;;50;100;Sorceress Skills;;6;10;Class Skill Tab;4;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Shadow War Sword;105;50;Legendary Sword;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;19;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Phoenician War Claw;105;50;Legendary Claw;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;19;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Arreat War Crown;105;50;Legendary Crown;Damage %;;100;300;Barbarian Skills;;6;10;Class Skill Tab;13;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Henknoc War Mask;105;50;Legendary Head;Damage %;;100;300;Druid Skills;;6;10;Class Skill Tab;16;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Rakkis War Protectorate;105;50;Legendary Protectorate;Damage %;;100;300;Paladin Skills;;6;10;Class Skill Tab;10;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Rathma War Gazer;105;50;Legendary Gazer;Armor Class %;;100;300;Necromancer Skills;;6;10;Class Skill Tab;7;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Askari War Javelin;105;50;Legendary War Javelin;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;1;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Askari War Javelin;105;50;Legendary War Javelin;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;2;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Askari War Bow;105;50;Legendary War Bow;Damage %;;400;600;Amazon Skills;;6;10;Class Skill Tab;1;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Zann Esu War Orb;105;50;Legendary War Orb;Armor Class %;;50;100;Sorceress Skills;;6;10;Class Skill Tab;5;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Shadow War Sword;105;50;Legendary Sword;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;20;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Phoenician War Claw;105;50;Legendary Claw;Damage %;;500;500;Assassin Skills;;6;10;Class Skill Tab;20;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Arreat War Crown;105;50;Legendary Crown;Damage %;;100;300;Barbarian Skills;;6;10;Class Skill Tab;14;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Caoi Dulra War Totem;105;50;Legendary Totem;Armor Class %;;100;300;Druid Skills;;6;10;Class Skill Tab;17;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Rakkis War Protectorate;105;50;Legendary Protectorate;Damage %;;100;300;Paladin Skills;;6;10;Class Skill Tab;11;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
+Rathma War Gazer;105;50;Legendary Gazer;Armor Class %;;100;300;Necromancer Skills;;6;10;Class Skill Tab;8;4;10;Sockets;;1;6;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;0
