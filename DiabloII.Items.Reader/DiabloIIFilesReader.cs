@@ -157,7 +157,7 @@ namespace DiabloII.Items.Reader
                         }
                         else if (new[] { "Cold", "Fire", "Poison", "Lightning", "Magic" }.Select(_ => _ + " Resist").Contains(propertyFormattedName))
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             var valueDisplayed = propertyMinimum > 0 ? $"+{value}" : $"-{value}";
 
                             propertyFormattedName = $"{propertyFormattedName} {valueDisplayed}%";
@@ -194,20 +194,20 @@ namespace DiabloII.Items.Reader
                         }
                         else if (propertyFormattedName == "Reduce Magic Damage")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Magic Damage Reduced By {value}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Reduce Damage" ||
                                  propertyFormattedName == "Damage Reduced")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Damage Reduced By {value}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Defense (based on character level)")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"{value} {propertyFormattedName}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
@@ -218,25 +218,25 @@ namespace DiabloII.Items.Reader
                         }
                         else if (propertyFormattedName == "To All Resistances")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"All Resistances +{value}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Regenerate Mana")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Regenerate Mana {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Howl")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Hit Causes Monster To Flee {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Sockets")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Socketed ({value})";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
@@ -252,7 +252,7 @@ namespace DiabloII.Items.Reader
                                 minDamageNorm = propertyMinimum;
                                 maxDamageNorm = propertyMaximum;
                             }
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Adds {value} {propertyFormattedName}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
@@ -260,37 +260,37 @@ namespace DiabloII.Items.Reader
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         else if (propertyFormattedName == "Replenish Life")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Replenish Life +{value}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Reduce Req %")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Requirements {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Damage-Armor Class")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"{value} To Monster Defense Per Hit";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Freeze Duration")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Freezes Target +{value}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Reduce Poison Length")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Poison Length Reduced By {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Hitpoint % Increase")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Increase Maximum Life {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
@@ -302,38 +302,38 @@ namespace DiabloII.Items.Reader
                             propertyMinimum = propertyMinimum / propertyPar;
                             propertyMaximum = propertyMaximum / propertyPar;
 
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"{value} Poison Damage Over {propertyPar} Seconds";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Slow Target" ||
                                  propertyFormattedName == "Slow Target %")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Slows Target By {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Increase Maximum Mana")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Increase Maximum Mana {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Reduce Dmg %")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Damage Reduced By {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Attacker Takes Damage")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Attacker Takes Damage Of {value}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Regenerate Stamina")
                         {
-                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Heal Stamnia Plus {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
@@ -352,7 +352,7 @@ namespace DiabloII.Items.Reader
                             var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
                             if (skill != null)
                             {
-                                var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                                var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                                 propertyFormattedName = $"Chance To Cast Level {Math.Max(propertyMinimum, propertyMaximum)} {skill.Name} On Striking";
                                 propertyMaximum = propertyMinimum;
                                 propertyPar = 0;
