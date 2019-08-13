@@ -609,7 +609,7 @@ namespace DiabloII.Items.Reader
 		private List<ArmorReord> ReadArmors(string armorsCsv)
             => armorsCsv
                 .Split('\n')
-                .Skip(1)
+                .Skip(23)
                 .Select(line =>
                 {
                     var itemData = line.Split(';');
