@@ -516,8 +516,8 @@ namespace DiabloII.Items.Reader
 						MinimumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
 						MaximumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
 						// Stats
-						StrengthRequired = (itemCategory?.StrengthRequired * requirementPercent + 100) / 100,
-						DexterityRequired = (itemCategory?.DexterityRequired * requirementPercent + 100) / 100,
+						StrengthRequired = (itemCategory?.StrengthRequired * (requirementPercent + 100)) / 100,
+						DexterityRequired = (itemCategory?.DexterityRequired * (requirementPercent + 100)) / 100,
 					};
                 })
                 .Where(item => item != null)
