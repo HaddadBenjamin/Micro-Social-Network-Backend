@@ -500,34 +500,35 @@ namespace DiabloII.Items.Reader
 
 					var requirementPercent = GetPropertyValueOrDefault(properties, "Reduce Req %");
 
-					return new Item
-					{
-						Id = Guid.NewGuid(),
-						Name = name,
-						LevelRequired = itemData[2].ParseDoubleOrDefault(),
-						Level = itemData[1].ParseDoubleOrDefault(),
-						Quality = "Unique",
-						Properties = properties.OrderBy(_ => _.OrderIndex).ToList(),
+                    return new Item
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = name,
+                        LevelRequired = itemData[2].ParseDoubleOrDefault(),
+                        Level = itemData[1].ParseDoubleOrDefault(),
+                        Quality = "Unique",
+                        Properties = properties.OrderBy(_ => _.OrderIndex).ToList(),
                         Category = itemCategory?.Category,
                         SubCategory = itemCategory?.SubCategory,
-						Type = type,
-						// Specific to Armor :
-						MinimumDefenseMinimum = (int)(itemCategory?.MinimumDefense * (defensePercentMinimum + minDefensePercentPerLevel + 100)) / 100 + defenseMinimum + minDefensePerLevel,
-						MaximumDefenseMinimum = (int)(itemCategory?.MaximumDefense * (defensePercentMinimum + minDefensePercentPerLevel + 100)) / 100 + defenseMinimum + minDefensePerLevel,
-						MinimumDefenseMaximum = (int)(itemCategory?.MinimumDefense * (defensePercentMaximum + maxDefensePercentPerLevel + 100)) / 100 + defenseMaximum + maxDefensePerLevel,
-						MaximumDefenseMaximum = (int)(itemCategory?.MaximumDefense * (defensePercentMaximum + maxDefensePercentPerLevel + 100)) / 100 + defenseMaximum + maxDefensePerLevel,
-						// Specific to Weapon :
-						MinimumOneHandedDamageMinimum = Math.Round(((itemCategory?.MinimumOneHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
-						MaximumOneHandedDamageMinimum = Math.Round(((itemCategory?.MaximumOneHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
-						MinimumTwoHandedDamageMinimum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
-						MaximumTwoHandedDamageMinimum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
-						MinimumOneHandedDamageMaximum = Math.Round(((itemCategory?.MinimumOneHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
-						MaximumOneHandedDamageMaximum = Math.Round(((itemCategory?.MaximumOneHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
-						MinimumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
-						MaximumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
-						// Stats
-						StrengthRequired = (itemCategory?.StrengthRequired * (requirementPercent + 100)) / 100,
-						DexterityRequired = (itemCategory?.DexterityRequired * (requirementPercent + 100)) / 100,
+                        Type = type,
+                        // Specific to Armor :
+                        MinimumDefenseMinimum = (int)(itemCategory?.MinimumDefense * (defensePercentMinimum + minDefensePercentPerLevel + 100)) / 100 + defenseMinimum + minDefensePerLevel,
+                        MaximumDefenseMinimum = (int)(itemCategory?.MaximumDefense * (defensePercentMinimum + minDefensePercentPerLevel + 100)) / 100 + defenseMinimum + minDefensePerLevel,
+                        MinimumDefenseMaximum = (int)(itemCategory?.MinimumDefense * (defensePercentMaximum + maxDefensePercentPerLevel + 100)) / 100 + defenseMaximum + maxDefensePerLevel,
+                        MaximumDefenseMaximum = (int)(itemCategory?.MaximumDefense * (defensePercentMaximum + maxDefensePercentPerLevel + 100)) / 100 + defenseMaximum + maxDefensePerLevel,
+                        // Specific to Weapon :
+                        MinimumOneHandedDamageMinimum = Math.Round(((itemCategory?.MinimumOneHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
+                        MaximumOneHandedDamageMinimum = Math.Round(((itemCategory?.MaximumOneHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
+                        MinimumTwoHandedDamageMinimum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
+                        MaximumTwoHandedDamageMinimum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
+                        MinimumOneHandedDamageMaximum = Math.Round(((itemCategory?.MinimumOneHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
+                        MaximumOneHandedDamageMaximum = Math.Round(((itemCategory?.MaximumOneHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
+                        MinimumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
+                        MaximumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
+                        // Stats
+                        StrengthRequired = (itemCategory?.StrengthRequired * (requirementPercent + 100)) / 100,
+                        DexterityRequired = (itemCategory?.DexterityRequired * (requirementPercent + 100)) / 100,
+                        ImageName = itemCategory?.ImageName
 					};
                 })
                 .Where(item => item != null)
@@ -624,7 +625,8 @@ namespace DiabloII.Items.Reader
                             .Replace("\\", string.Empty),
 						MinimumDefense = itemData[2].ParseDoubleOrDefault(),
 						MaximumDefense = itemData[3].ParseDoubleOrDefault(),
-						StrengthRequired = itemData[4].ParseDoubleOrDefault()
+						StrengthRequired = itemData[4].ParseDoubleOrDefault(),
+                        ImageName = itemData[7]
                     };
                 })
                 .Where(item => item != null)
@@ -683,6 +685,7 @@ namespace DiabloII.Items.Reader
 					MinimumDefense = armor.MinimumDefense,
 					MaximumDefense = armor.MaximumDefense,
 					StrengthRequired = armor.StrengthRequired,
+                    ImageName = armor.ImageName
                 })
                 .Where(record => record.SubCategory != string.Empty)
                 .ToList();

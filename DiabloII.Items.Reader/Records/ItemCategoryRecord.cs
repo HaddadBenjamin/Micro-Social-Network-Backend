@@ -5,9 +5,10 @@
         public string Name { get; set; }
         public string SubCategory { get; set; }
         public string Category { get; set; }
+        public string ImageName { get; set; }
 
-		// Specific to Armor.
-		public double MinimumDefense { get; set; }
+        // Specific to Armor.
+        public double MinimumDefense { get; set; }
 		public double MaximumDefense { get; set; }
 
 		// Specific to Weapon

@@ -14,9 +14,10 @@ namespace DiabloII.Items.Api.Items.Responses
 		public double LevelRequired { get; set; }
 		public double Level { get; set; }
 		public IEnumerable<ItemProperty> Properties { get; set; }
+        public string ImageName { get; set; }
 
-		// Specific to Armor.
-		public double MinimumDefenseMinimum { get; set; }
+        // Specific to Armor.
+        public double MinimumDefenseMinimum { get; set; }
 		public double MaximumDefenseMinimum { get; set; }
 		public double MinimumDefenseMaximum { get; set; }
 		public double MaximumDefenseMaximum { get; set; }
