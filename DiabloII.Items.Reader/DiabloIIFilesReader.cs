@@ -619,7 +619,9 @@ namespace DiabloII.Items.Reader
                     return new ArmorReord
                     {
                         Name = itemData[0],
-                        Slot = itemData[1],
+                        Slot = itemData[1]
+                            .Replace("\t", string.Empty)
+                            .Replace("\\", string.Empty),
 						MinimumDefense = itemData[2].ParseDoubleOrDefault(),
 						MaximumDefense = itemData[3].ParseDoubleOrDefault(),
 						StrengthRequired = itemData[4].ParseDoubleOrDefault()
@@ -671,7 +673,12 @@ namespace DiabloII.Items.Reader
                             .Replace("Gaunlets", "Gauntlets")
                             .Replace("Cap/hat", "Cap")
                             .Replace("Skull  Guard", "Skull Guard"),
-                    SubCategory = armor.Slot.Replace("_", " ").ToTitleCase(),
+                    SubCategory = armor.Slot
+                    .Replace("_", " ")
+                    .Replace("\t", string.Empty)
+                    .Replace("\"", string.Empty)
+                    .Replace("\\", string.Empty)
+                    .ToTitleCase(),
                     Category = "Armor",
 					MinimumDefense = armor.MinimumDefense,
 					MaximumDefense = armor.MaximumDefense,
