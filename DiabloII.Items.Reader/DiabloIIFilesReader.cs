@@ -2,6 +2,7 @@
 using DiabloII.Items.Reader.Records;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace DiabloII.Items.Reader
@@ -124,250 +125,253 @@ namespace DiabloII.Items.Reader
 						if (propertyFormattedName == "Extra Durability" ||
 							propertyFormattedName == "Charged")
 							continue;
-						if (propertyFormattedName == "Class Skill")
-						{
-							var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
+                        if (propertyFormattedName == "Class Skill")
+                        {
+                            var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
 
-							propertyFormattedName = $"{skill.Name} {skill.Class}";
-							propertyPar = 0;
-						}
-						else if (propertyFormattedName == "Randclassskill1")
-						{
-							propertyMinimum = propertyMaximum = propertyMaximum / 6;
-							propertyFormattedName = "To All Skills (Class Specific)";
-						}
-						else if (propertyFormattedName == "Randclassskill" || propertyFormattedName == "Randclassskill1")
-						{
-							propertyMinimum = propertyMaximum = propertyMaximum / 2;
-							propertyFormattedName = "To All Skills (Class Specific)";
-						}
-						else if (propertyFormattedName == "Charges")
-						{
-							var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
+                            if (skill != null)
+                            {
+                                propertyFormattedName = $"{skill.Name} {skill.Class}";
+                                propertyPar = 0;
+                            }
+                        }
+                        else if (propertyFormattedName == "Randclassskill1")
+                        {
+                            propertyMinimum = propertyMaximum = propertyMaximum / 6;
+                            propertyFormattedName = "To All Skills (Class Specific)";
+                        }
+                        else if (propertyFormattedName == "Randclassskill" || propertyFormattedName == "Randclassskill1")
+                        {
+                            propertyMinimum = propertyMaximum = propertyMaximum / 2;
+                            propertyFormattedName = "To All Skills (Class Specific)";
+                        }
+                        else if (propertyFormattedName == "Charges")
+                        {
+                            var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
 
-							if (skill != null)
-							{
-								propertyFormattedName = $"Level {propertyMaximum} {skill.Name} ({propertyMinimum}/{propertyMinimum} Charges)";
-								propertyPar = propertyMaximum = propertyMinimum = 0;
-							}
-						}
-						else if (new[] { "Cold", "Fire", "Poison", "Lightning", "Magic" }.Select(_ => _ + " Resist").Contains(propertyFormattedName))
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							var valueDisplayed = propertyMinimum > 0 ? $"+{value}" : $"-{value}";
+                            if (skill != null)
+                            {
+                                propertyFormattedName = $"Level {propertyMaximum} {skill.Name} ({propertyMinimum}/{propertyMinimum} Charges)";
+                                propertyPar = propertyMaximum = propertyMinimum = 0;
+                            }
+                        }
+                        else if (new[] { "Cold", "Fire", "Poison", "Lightning", "Magic" }.Select(_ => _ + " Resist").Contains(propertyFormattedName))
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            var valueDisplayed = propertyMinimum > 0 ? $"+{value}" : $"-{value}";
 
-							propertyFormattedName = $"{propertyFormattedName} {valueDisplayed}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Cold Duration")
-						{
-							propertyMaximum /= 25;
-							propertyMinimum /= 25;
-							propertyFormattedName = $"Cold Duration : {propertyMinimum}-{propertyMaximum} Seconds";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Cannot Be Frozen" ||
-								 propertyFormattedName == "Knockback" ||
-								 propertyFormattedName == "Slain Monsters Rest In Peace" ||
-								 propertyFormattedName == "Indestructible" ||
-								 propertyFormattedName == "Prevent Monster Heal" ||
-								 propertyFormattedName == "Ignore Target's Defense" ||
-								 propertyFormattedName == "Half Freeze Duration" ||
-								 propertyFormattedName == "Replenishes Quantity" ||
-								 propertyFormattedName == "Increased Stack Size")
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						else if (propertyFormattedName == "Ethereal")
-						{
-							propertyFormattedName = "Ethereal (cannot be repaired)";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Other Skill")
-						{
-							var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
+                            propertyFormattedName = $"{propertyFormattedName} {valueDisplayed}%";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Cold Duration")
+                        {
+                            propertyMaximum /= 25;
+                            propertyMinimum /= 25;
+                            propertyFormattedName = $"Cold Duration : {propertyMinimum}-{propertyMaximum} Seconds";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Cannot Be Frozen" ||
+                                 propertyFormattedName == "Knockback" ||
+                                 propertyFormattedName == "Slain Monsters Rest In Peace" ||
+                                 propertyFormattedName == "Indestructible" ||
+                                 propertyFormattedName == "Prevent Monster Heal" ||
+                                 propertyFormattedName == "Ignore Target's Defense" ||
+                                 propertyFormattedName == "Half Freeze Duration" ||
+                                 propertyFormattedName == "Replenishes Quantity" ||
+                                 propertyFormattedName == "Increased Stack Size")
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        else if (propertyFormattedName == "Ethereal")
+                        {
+                            propertyFormattedName = "Ethereal (cannot be repaired)";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Other Skill")
+                        {
+                            var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
 
-							propertyFormattedName = skill.Name;
-							propertyPar = 0;
-						}
-						else if (propertyFormattedName == "Reduce Magic Damage")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Magic Damage Reduced By {value}";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Reduce Damage" ||
-								 propertyFormattedName == "Damage Reduced")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Damage Reduced By {value}";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Defense (based on character level)")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"{value} {propertyFormattedName}";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Repair-Durability")
-						{
-							propertyFormattedName = $"Repairs 1 Durability in {propertyPar} seconds";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "To All Resistances")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"All Resistances +{value}";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Regenerate Mana")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Regenerate Mana {value}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Howl")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Hit Causes Monster To Flee {value}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Sockets")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Socketed ({value})";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Fire Damage" ||
-								 propertyFormattedName == "Cold Damage" ||
-								 propertyFormattedName == "Poison Damage" ||
-								 propertyFormattedName == "Lightning Damage" ||
-								 propertyFormattedName == "Magic Damage" ||
-								 propertyFormattedName == "Damage")
-						{
+                            propertyFormattedName = skill.Name;
+                            propertyPar = 0;
+                        }
+                        else if (propertyFormattedName == "Reduce Magic Damage")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Magic Damage Reduced By {value}";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Reduce Damage" ||
+                                 propertyFormattedName == "Damage Reduced")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Damage Reduced By {value}";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Defense (based on character level)")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"{value} {propertyFormattedName}";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Repair-Durability")
+                        {
+                            propertyFormattedName = $"Repairs 1 Durability in {propertyPar} seconds";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "To All Resistances")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"All Resistances +{value}";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Regenerate Mana")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Regenerate Mana {value}%";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Howl")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Hit Causes Monster To Flee {value}%";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Sockets")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Socketed ({value})";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Fire Damage" ||
+                                 propertyFormattedName == "Cold Damage" ||
+                                 propertyFormattedName == "Poison Damage" ||
+                                 propertyFormattedName == "Lightning Damage" ||
+                                 propertyFormattedName == "Magic Damage" ||
+                                 propertyFormattedName == "Damage")
+                        {
                             if (propertyName == "dmg-norm")
                             {
                                 minDamageNorm = propertyMinimum;
                                 maxDamageNorm = propertyMaximum;
                             }
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Adds {value} {propertyFormattedName}";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Pierce Attack")
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						else if (propertyFormattedName == "Replenish Life")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Replenish Life +{value}";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Reduce Req %")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Requirements {value}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Damage-Armor Class")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"{value} To Monster Defense Per Hit";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Freeze Duration")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Freezes Target +{value}";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Reduce Poison Length")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Poison Length Reduced By {value}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Hitpoint % Increase")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Increase Maximum Life {value}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Dmg-Pois")
-						{
-							propertyPar /= 25;
-							if (propertyPar == 0)
-								propertyPar = 1;
-							propertyMinimum = propertyMinimum / propertyPar;
-							propertyMaximum = propertyMaximum / propertyPar;
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Adds {value} {propertyFormattedName}";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Pierce Attack")
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        else if (propertyFormattedName == "Replenish Life")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Replenish Life +{value}";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Reduce Req %")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Requirements {value}%";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Damage-Armor Class")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"{value} To Monster Defense Per Hit";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Freeze Duration")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Freezes Target +{value}";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Reduce Poison Length")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Poison Length Reduced By {value}%";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Hitpoint % Increase")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Increase Maximum Life {value}%";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Dmg-Pois")
+                        {
+                            propertyPar /= 25;
+                            if (propertyPar == 0)
+                                propertyPar = 1;
+                            propertyMinimum = propertyMinimum / propertyPar;
+                            propertyMaximum = propertyMaximum / propertyPar;
 
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"{value} Poison Damage Over {propertyPar} Seconds";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Slow Target" ||
-								 propertyFormattedName == "Slow Target %")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Slows Target By {value}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Increase Maximum Mana")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Increase Maximum Mana {value}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Reduce Dmg %")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Damage Reduced By {value}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Attacker Takes Damage")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Attacker Takes Damage Of {value}";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Regenerate Stamina")
-						{
-							var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-							propertyFormattedName = $"Heal Stamnia Plus {value}%";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else if (propertyFormattedName == "Class Skill Tab")
-						{
-							var skillTab = GetSkillTab(skillTabRecords, propertyPar, itemData[index + 1]);
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"{value} Poison Damage Over {propertyPar} Seconds";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Slow Target" ||
+                                 propertyFormattedName == "Slow Target %")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Slows Target By {value}%";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Increase Maximum Mana")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Increase Maximum Mana {value}%";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Reduce Dmg %")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Damage Reduced By {value}%";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Attacker Takes Damage")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Attacker Takes Damage Of {value}";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Regenerate Stamina")
+                        {
+                            var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                            propertyFormattedName = $"Heal Stamnia Plus {value}%";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyFormattedName == "Class Skill Tab")
+                        {
+                            var skillTab = GetSkillTab(skillTabRecords, propertyPar, itemData[index + 1]);
 
-							if (skillTab != null)
-							{
-								propertyFormattedName = $"{skillTab.Name} {skillTab.Class}";
-								propertyPar = 0;
-							}
-						}
-						else if (propertyFormattedName == "Hit-Skill")
-						{
-							var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
-							if (skill != null)
-							{
-								var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
-								propertyFormattedName = $"Chance To Cast Level {Math.Max(propertyMinimum, propertyMaximum)} {skill.Name} On Striking";
-								propertyMaximum = propertyMinimum;
-								propertyPar = 0;
-								property.IsPercent = true;
-							}
-						}
-						else if (propertyFormattedName == "Gethit-Skill")
-						{
-							var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
+                            if (skillTab != null)
+                            {
+                                propertyFormattedName = $"{skillTab.Name} {skillTab.Class}";
+                                propertyPar = 0;
+                            }
+                        }
+                        else if (propertyFormattedName == "Hit-Skill")
+                        {
+                            var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
+                            if (skill != null)
+                            {
+                                var value = propertyMinimum == propertyMaximum ? propertyMinimum.ToString() : $"{propertyMinimum}-{propertyMaximum}";
+                                propertyFormattedName = $"Chance To Cast Level {Math.Max(propertyMinimum, propertyMaximum)} {skill.Name} On Striking";
+                                propertyMaximum = propertyMinimum;
+                                propertyPar = 0;
+                                property.IsPercent = true;
+                            }
+                        }
+                        else if (propertyFormattedName == "Gethit-Skill")
+                        {
+                            var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
 
-							if (skill != null)
-							{
-								propertyFormattedName = $"Chance To Cast Level {propertyMaximum} {skill.Name} When Struck";
-								propertyMaximum = propertyMinimum;
-								propertyPar = 0;
-							}
-						}
-						else if (propertyFormattedName.Contains("(Based On Character Level)") && propertyPar != 0)
-						{
+                            if (skill != null)
+                            {
+                                propertyFormattedName = $"Chance To Cast Level {propertyMaximum} {skill.Name} When Struck";
+                                propertyMaximum = propertyMinimum;
+                                propertyPar = 0;
+                            }
+                        }
+                        else if (propertyFormattedName.Contains("(Based On Character Level)") && propertyPar != 0)
+                        {
                             var percent = property.IsPercent ? "%" : string.Empty;
                             var min = Math.Round(propertyPar / 8);
                             var max = Math.Round(propertyPar * 99 / 8);
@@ -394,10 +398,10 @@ namespace DiabloII.Items.Reader
                             }
 
                             propertyFormattedName = $"{min}-{max}{percent} {propertyFormattedName}";
-							propertyPar = propertyMaximum = propertyMinimum = 0;
-						}
-						else
-							propertyPar /= 8;
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else
+                            propertyPar /= 8;
 
 						properties.Add(new ItemProperty
                         {
