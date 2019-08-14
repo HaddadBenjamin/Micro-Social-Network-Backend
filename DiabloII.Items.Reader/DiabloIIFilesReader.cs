@@ -94,6 +94,7 @@ namespace DiabloII.Items.Reader
                     var maxDefensePercentPerLevel = 0d;
                     var minDefensePerLevel = 0d;
                     var maxDefensePerLevel = 0d;
+                    var requirementPercent = 0d;
                     CurrentItemName = name;
 
                     if (itemCategory == null)
@@ -268,6 +269,7 @@ namespace DiabloII.Items.Reader
                         {
                             var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
                             propertyFormattedName = $"Requirements {value}%";
+                            requirementPercent = Math.Min(propertyMinimum, propertyMaximum);
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Damage-Armor Class")
@@ -507,8 +509,6 @@ namespace DiabloII.Items.Reader
 					var defenseMaximum = GetPropertyValueOrDefault(properties, "Armor Class", ItemPropertyType.Maximum);
 					var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %");
 					var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", ItemPropertyType.Maximum);
-
-					var requirementPercent = GetPropertyValueOrDefault(properties, "Reduce Req %");
 
                     return new Item
                     {
