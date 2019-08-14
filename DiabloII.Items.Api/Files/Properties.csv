@@ -70,7 +70,7 @@ Reduce Dmg;Reduce Damage;0;;0
 Gold Find %;extra gold from monsters ;1;;0
 nofreeze;Cannot be Frozen;0;;0
 res-pois-max;To Maximum Poison Resist;1;+;0
-reduce-ac;Target Defense;1;;0
+reduce-ac;Targets Defense;1;-;0
 res-fire-max;To Maximum Fire Resist;1;+;0
 dmg-ac;Damage-Armor Class;0;;0
 Sorceress Skills;To Sorceress Skill Levels;0;+;0

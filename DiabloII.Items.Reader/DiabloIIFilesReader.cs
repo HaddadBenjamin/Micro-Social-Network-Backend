@@ -348,6 +348,14 @@ namespace DiabloII.Items.Reader
                             propertyFormattedName = $"Heal Stamnia Plus {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
+                        else if (propertyFormattedName == "Aura")
+                        {
+                            var value = NormalizeMinMax(propertyMinimum, propertyMaximum, string.Empty, " To ");
+                            var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
+
+                            propertyFormattedName = $"Level {value} {skill.Name} Aura When Equipped";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
                         else if (propertyFormattedName == "Class Skill Tab")
                         {
                             var skillTab = GetSkillTab(skillTabRecords, propertyPar, itemData[index + 1]);
@@ -380,6 +388,8 @@ namespace DiabloII.Items.Reader
                                 propertyMaximum = propertyMinimum;
                                 propertyPar = 0;
                             }
+                            else
+                                propertyFormattedName = $"Chance To Cast Level {propertyMaximum} UNDEFINED_SKILL When Struck";
                         }
                         else if (propertyFormattedName.Contains("(Based On Character Level)") && propertyPar != 0)
                         {
@@ -803,7 +813,11 @@ namespace DiabloII.Items.Reader
 			return skillTab;
 		}
 
-        private string NormalizeMinMax(double mini, double maxi, string firstChar = "+")
+        private string NormalizeMinMax(
+            double mini, 
+            double maxi, 
+            string firstChar = "+",
+            string separator = "-")
         {
             var value = string.Empty;
             var min = Math.Round(Math.Min(mini, maxi));
@@ -816,7 +830,7 @@ namespace DiabloII.Items.Reader
             else if (max < 0)
                 value = $"{min.ToString()} To {max.ToString()}";
             else
-                value = $"{min.ToString()}-{max.ToString()}";
+                value = $"{min.ToString()}{separator}{max.ToString()}";
 
             if (min < 0)
                 firstChar = string.Empty;
