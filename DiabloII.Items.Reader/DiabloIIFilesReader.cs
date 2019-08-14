@@ -319,6 +319,14 @@ namespace DiabloII.Items.Reader
                             propertyFormattedName = $"Increase Maximum Mana {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
+                        else if (propertyFormattedName == "Random Skill")
+                        {
+                            propertyFormattedName =
+                                propertyMinimum == 36 && propertyMaximum == 64 ? $"{propertyPar} bonus to a random Sorceress skill (Sorceress Only)" :
+                                $"{propertyPar} Bonus To A Random Skill";
+
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
                         else if (propertyFormattedName == "Reduce Dmg %")
                         {
                             var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
@@ -743,12 +751,12 @@ namespace DiabloII.Items.Reader
             weaponSubCategoriesRecord.AddRange(new[]
             {
 					new ItemCategoryRecord { Name = "Silver-Edged Axe", Category = "Weapon", SubCategory = "Two Handed Axe", MinimumTwoHandedDamage = 23, MaximumTwoHandedDamage= 41, StrengthRequired = 154 },
-                    new ItemCategoryRecord { Name = "Amulet", Category = "Jewelry", SubCategory = "Amulet"},
+                    new ItemCategoryRecord { Name = "Amulet", Category = "Jewelry", SubCategory = "Amulet", ImageName = "amu1"},
                     new ItemCategoryRecord { Name = "Arrows", Category = "Armor", SubCategory = "Arrows"},
                     new ItemCategoryRecord { Name = "Bolts", Category = "Armor", SubCategory = "Bolts"},
                     new ItemCategoryRecord { Name = "Charm", Category = "Charm", SubCategory = "Charm"},
                     new ItemCategoryRecord { Name = "Jewel", Category = "Jewelry", SubCategory = "Jewel"},
-                    new ItemCategoryRecord { Name = "Ring", Category = "Jewelry", SubCategory = "Ring"},
+                    new ItemCategoryRecord { Name = "Ring", Category = "Jewelry", SubCategory = "Ring", ImageName ="ring1", },
                     new ItemCategoryRecord { Name = "Conqueror Crown", Category = "Armor", SubCategory = "Barbarian Helm", MinimumDefense = 114, MaximumDefense = 159, StrengthRequired = 174},
                     new ItemCategoryRecord { Name = "Blood Spirit", Category = "Armor", SubCategory = "Druid Helm", MinimumDefense = 101, MaximumDefense = 145, StrengthRequired = 80},
 					new ItemCategoryRecord { Name = "Sash", Category = "Armor", SubCategory = "Armor", MinimumDefense = 218, MaximumDefense = 233, StrengthRequired = 88},
