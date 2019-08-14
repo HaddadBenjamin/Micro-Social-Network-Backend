@@ -121,8 +121,6 @@ namespace DiabloII.Items.Reader
 						var propertyMinimum = itemData[index + 2].ParseDoubleOrDefault();
 						var propertyMaximum = itemData[index + 3].ParseDoubleOrDefault();
 
-          
-
 						if (propertyFormattedName == "Extra Durability" ||
 							propertyFormattedName == "Charged")
 							continue;
@@ -158,10 +156,9 @@ namespace DiabloII.Items.Reader
                         }
                         else if (new[] { "Cold", "Fire", "Poison", "Lightning", "Magic" }.Select(_ => _ + " Resist").Contains(propertyFormattedName))
                         {
-                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
-                            var valueDisplayed = propertyMinimum > 0 ? $"+{value}" : $"{value}";
+                            var value = NormalizeMinMax(propertyMinimum, propertyMaximum);
 
-                            propertyFormattedName = $"{propertyFormattedName} {valueDisplayed}%";
+                            propertyFormattedName = $"{propertyFormattedName} {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Cold Duration")
@@ -219,8 +216,8 @@ namespace DiabloII.Items.Reader
                         }
                         else if (propertyFormattedName == "To All Resistances")
                         {
-                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
-                            propertyFormattedName = $"All Resistances +{value}";
+                            var value = NormalizeMinMax(propertyMinimum, propertyMaximum);
+                            propertyFormattedName = $"All Resistances {value}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Regenerate Mana")
@@ -261,8 +258,7 @@ namespace DiabloII.Items.Reader
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         else if (propertyFormattedName == "Replenish Life")
                         {
-                            var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
-                            if (Math.Round(propertyMinimum) > 0) value = "+" + value; else value = "-" + value;
+                            var value = NormalizeMinMax(propertyMinimum, propertyMaximum);
 
                             propertyFormattedName = $"Replenish Life {value}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
@@ -298,7 +294,8 @@ namespace DiabloII.Items.Reader
                             propertyFormattedName = $"Increase Maximum Life {value}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
-                        else if (propertyFormattedName == "Dmg-Pois")
+                        else if (propertyFormattedName == "Dmg-Pois" ||
+                                 propertyFormattedName == "Poison Length")
                         {
                             propertyPar /= 25;
                             if (propertyPar == 0)
@@ -805,6 +802,27 @@ namespace DiabloII.Items.Reader
 
 			return skillTab;
 		}
+
+        private string NormalizeMinMax(double mini, double maxi, string firstChar = "+")
+        {
+            var value = string.Empty;
+            var min = Math.Round(Math.Min(mini, maxi));
+            var max = Math.Round(Math.Max(mini, maxi));
+
+            if (min == max)
+                value = min.ToString();
+            else if (min < 0 && max < 0)
+                value = $"{max.ToString()} To {min.ToString()}";
+            else if (max < 0)
+                value = $"{min.ToString()} To {max.ToString()}";
+            else
+                value = $"{min.ToString()}-{max.ToString()}";
+
+            if (min < 0)
+                firstChar = string.Empty;
+
+            return $"{firstChar}{value}";
+        }
 	}
 
 	public static class DoubleExtensions
