@@ -322,11 +322,13 @@ namespace DiabloII.Items.Reader
                         else if (propertyFormattedName == "Random Skill")
                         {
                             propertyFormattedName =
-                                (int)propertyMinimum == 36 && (int)propertyMaximum == 64 ? $"{propertyPar} bonus to a random Sorceress skill (Sorceress Only)" :
+                                (int)propertyMinimum == 36 && (int)propertyMaximum == 60 ? $"{propertyPar} bonus to a random Sorceress skill (Sorceress Only)" :
                                 $"{propertyPar} Bonus To A Random Skill";
 
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
+                        else if (propertyFormattedName == "Reanimate As: Returned")
+                            propertyPar = 0;
                         else if (propertyFormattedName == "Reduce Dmg %")
                         {
                             var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";

@@ -144,7 +144,7 @@ rep-quant;Replenishes Quantity;0;;0
 stack;Increased Stack Size;0;;0
 Assassin Skills;To Assassin Skill Levels;0;+;0
 Life per Kill;To Life After Each Kill;0;+;0
-reanimate;Reanimate As: Returned;0;+;0
+reanimate;Reanimate As: Returned;1;;0
 pierce-pois;To Enemy Poison Resistance;1;-;0
 rip;Slain Monsters Rest in Peace;0;;0
 aura;Aura;0;+;0
