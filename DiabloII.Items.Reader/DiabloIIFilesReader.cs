@@ -322,7 +322,7 @@ namespace DiabloII.Items.Reader
                         else if (propertyFormattedName == "Random Skill")
                         {
                             propertyFormattedName =
-                                propertyMinimum == 36 && propertyMaximum == 64 ? $"{propertyPar} bonus to a random Sorceress skill (Sorceress Only)" :
+                                (int)propertyMinimum == 36 && (int)propertyMaximum == 64 ? $"{propertyPar} bonus to a random Sorceress skill (Sorceress Only)" :
                                 $"{propertyPar} Bonus To A Random Skill";
 
                             propertyPar = propertyMaximum = propertyMinimum = 0;
