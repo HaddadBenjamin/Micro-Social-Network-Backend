@@ -147,7 +147,7 @@ Life per Kill;To Life After Each Kill;0;+;0
 reanimate;Reanimate As: Returned;1;;0
 pierce-pois;To Enemy Poison Resistance;1;-;0
 rip;Slain Monsters Rest in Peace;0;;0
-aura;Aura;0;+;0
+aura;Aura;0;;0
 all-stats;All Attributes;0;+;0
 dmg;Damage;0;+;0
 kill-skill;Chance on kill;0;;0
