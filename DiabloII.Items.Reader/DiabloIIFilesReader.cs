@@ -159,7 +159,7 @@ namespace DiabloII.Items.Reader
                         else if (new[] { "Cold", "Fire", "Poison", "Lightning", "Magic" }.Select(_ => _ + " Resist").Contains(propertyFormattedName))
                         {
                             var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
-                            var valueDisplayed = propertyMinimum > 0 ? $"+{value}" : $"-{value}";
+                            var valueDisplayed = propertyMinimum > 0 ? $"+{value}" : $"{value}";
 
                             propertyFormattedName = $"{propertyFormattedName} {valueDisplayed}%";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
@@ -262,7 +262,9 @@ namespace DiabloII.Items.Reader
                         else if (propertyFormattedName == "Replenish Life")
                         {
                             var value = propertyMinimum == propertyMaximum ? Math.Round(propertyMinimum).ToString() : $"{Math.Round(propertyMinimum)}-{Math.Round(propertyMaximum)}";
-                            propertyFormattedName = $"Replenish Life +{value}";
+                            if (Math.Round(propertyMinimum) > 0) value = "+" + value; else value = "-" + value;
+
+                            propertyFormattedName = $"Replenish Life {value}";
                             propertyPar = propertyMaximum = propertyMinimum = 0;
                         }
                         else if (propertyFormattedName == "Reduce Req %")
