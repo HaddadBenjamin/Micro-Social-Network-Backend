@@ -673,6 +673,7 @@ namespace DiabloII.Items.Reader
 						MaximumTwoHandedDamage = itemData[6].ParseDoubleOrDefault(),
 						StrengthRequired = itemData[7].ParseDoubleOrDefault(),
 						DexterityRequired = itemData[8].ParseDoubleOrDefault(),
+                        ImageName = itemData[9]
 					};
 				})
                 .Where(item => item != null)
