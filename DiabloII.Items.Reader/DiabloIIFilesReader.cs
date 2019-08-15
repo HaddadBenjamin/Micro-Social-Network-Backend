@@ -755,7 +755,8 @@ namespace DiabloII.Items.Reader
 					MinimumTwoHandedDamage = weapon.MinimumTwoHandedDamage,
 					MaximumTwoHandedDamage = weapon.MaximumTwoHandedDamage,
 					StrengthRequired = weapon.StrengthRequired,
-					DexterityRequired = weapon.DexterityRequired
+					DexterityRequired = weapon.DexterityRequired,
+                    ImageName = weapon.ImageName
 				})
                 .ToList();
 
