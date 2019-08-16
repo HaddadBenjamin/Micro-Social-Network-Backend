@@ -509,8 +509,10 @@ namespace DiabloII.Items.Reader
 					 });
 					
 
-					var minimumDamage = GetPropertyValueOrDefault(properties, "dmg-min") + GetPropertyValueOrDefault(properties, "dmg-norm");
-					var maximumDamage = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
+					var minimumDamageMin = GetPropertyValueOrDefault(properties, "dmg-min") + GetPropertyValueOrDefault(properties, "dmg-norm");
+					var maximumDamageMax = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
+					var maximumDamageMin = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm");
+					//var maximumDamage = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
 					var damagePercentMinimum = GetPropertyValueOrDefault(properties, "Damage %");
 					var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", ItemPropertyType.Maximum);
 
@@ -519,7 +521,7 @@ namespace DiabloII.Items.Reader
 					var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %");
 					var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", ItemPropertyType.Maximum);
 
-                    return new Item
+                        return new Item
                     {
                         Id = Guid.NewGuid(),
                         Name = name,
@@ -536,14 +538,14 @@ namespace DiabloII.Items.Reader
                         MinimumDefenseMaximum = (int)(itemCategory?.MinimumDefense * (defensePercentMaximum + maxDefensePercentPerLevel + 100)) / 100 + defenseMaximum + maxDefensePerLevel,
                         MaximumDefenseMaximum = (int)(itemCategory?.MaximumDefense * (defensePercentMaximum + maxDefensePercentPerLevel + 100)) / 100 + defenseMaximum + maxDefensePerLevel,
                         // Specific to Weapon :
-                        MinimumOneHandedDamageMinimum = Math.Round(((itemCategory?.MinimumOneHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
-                        MaximumOneHandedDamageMinimum = Math.Round(((itemCategory?.MaximumOneHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
-                        MinimumTwoHandedDamageMinimum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
-                        MaximumTwoHandedDamageMinimum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamage + minDamagePerLevel + minDamageNorm)),
-                        MinimumOneHandedDamageMaximum = Math.Round(((itemCategory?.MinimumOneHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
-                        MaximumOneHandedDamageMaximum = Math.Round(((itemCategory?.MaximumOneHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
-                        MinimumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
-                        MaximumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamage + maxDamagePerLevel + maxDamageNorm)),
+                        MinimumOneHandedDamageMinimum = Math.Round(((itemCategory?.MinimumOneHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamageMin + minDamagePerLevel + minDamageNorm)),
+                        MaximumOneHandedDamageMinimum = Math.Round(((itemCategory?.MaximumOneHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamageMin + minDamagePerLevel + minDamageNorm)),
+                        MinimumTwoHandedDamageMinimum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamageMin + minDamagePerLevel + minDamageNorm)),
+                        MaximumTwoHandedDamageMinimum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMinimum + minDamagePercentPerLevel + 100)) / 100).AddIfPositive(minimumDamageMin + minDamagePerLevel + minDamageNorm)),
+                        MinimumOneHandedDamageMaximum = Math.Round(((itemCategory?.MinimumOneHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamageMin + minDamagePerLevel + maxDamageNorm)),
+                        MaximumOneHandedDamageMaximum = Math.Round(((itemCategory?.MaximumOneHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamageMax + maxDamagePerLevel + maxDamageNorm)),
+                        MinimumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MinimumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamageMin + minDamagePerLevel + maxDamageNorm)),
+                        MaximumTwoHandedDamageMaximum = Math.Round(((itemCategory?.MaximumTwoHandedDamage * (damagePercentMaximum + maxDamagePercentPerLevel + 100)) / 100).AddIfPositive(maximumDamageMax + maxDamagePerLevel + maxDamageNorm)),
                         // Stats
                         StrengthRequired = (itemCategory?.StrengthRequired * (requirementPercent + 100)) / 100,
                         DexterityRequired = (itemCategory?.DexterityRequired * (requirementPercent + 100)) / 100,
