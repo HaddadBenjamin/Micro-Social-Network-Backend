@@ -378,6 +378,18 @@ namespace DiabloII.Items.Reader
                                 property.IsPercent = true;
                             }
                         }
+                        else if (propertyName == "death-skill")
+                        {
+                            var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
+                            propertyFormattedName = $"{propertyMinimum}% Chance To Cast Level {propertyMaximum} {skill.Name} On Death";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
+                        else if (propertyName == "levelup-skill")
+                        {
+                            var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
+                            propertyFormattedName = $"{propertyMinimum}% Chance To Cast Level {propertyMaximum} {skill.Name} When You Level Up";
+                            propertyPar = propertyMaximum = propertyMinimum = 0;
+                        }
                         else if (propertyFormattedName == "Gethit-Skill")
                         {
                             var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
