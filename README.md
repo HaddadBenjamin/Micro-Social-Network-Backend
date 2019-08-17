@@ -2,7 +2,7 @@
 
 Il s'agit d'une petite documentation qui permet de rechercher une liste d’objets pour le jeu Diablo II.
 
-Le code est à vomir 🤮 mais pas d'inquiétude c'était voulu, le clean code n'était pas une descontraintes que je m'étais fixé par contre il fallait qu'il fasse bien ce qu'on lui demande et bien sûr cela aussi vite que possible 🙂
+Le code est à vomir 🤮 mais pas d'inquiétude c'était voulu, le clean code n'était pas une des contraintes que je m'étais fixé par contre il fallait qu'il fasse bien ce qu'on lui demande et bien sûr cela aussi vite que possible 🙂
 
 ![Image of Yaktocat](https://imgur.com/NE1abk7.png)
 ![Image of Yaktocat](https://imgur.com/7kI6k3n.png)
