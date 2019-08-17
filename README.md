@@ -2,6 +2,8 @@
 
 Il s'agit d'une petite documentation qui permet de rechercher une liste d’objets pour le jeu Diablo II.
 
+Le code est à vomir mais pas d'inquiétude c'était voulu, il fait bien ce qu'on lui demande 🙂
+
 ![Image of Yaktocat](https://imgur.com/NE1abk7.png)
 ![Image of Yaktocat](https://imgur.com/7kI6k3n.png)
 ![Image of Yaktocat](https://imgur.com/pMHsPg0.png)
