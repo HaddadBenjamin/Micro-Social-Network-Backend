@@ -2,6 +2,8 @@
 
 Il s'agit d'une petite documentation qui permet de rechercher une liste d’objets pour le jeu Diablo II.
 
+Vous pouvez tester l'application si vous le souhaitez https://diablo-2-enriched-documentation.netlify.com/
+
 Le code est à vomir 🤮 mais pas d'inquiétude c'était voulu, le clean code n'était pas une des contraintes que je m'étais fixées par contre il fallait qu'il fasse bien ce qu'on lui demande et bien sûr cela aussi vite que possible 🙂
 
 ![Image of Yaktocat](https://imgur.com/NE1abk7.png)
