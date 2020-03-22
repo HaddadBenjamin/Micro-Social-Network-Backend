@@ -15,9 +15,9 @@ namespace DiabloII.Items.Api.Services.Suggestions
             if (string.IsNullOrWhiteSpace(createSugestion.Content))
                 throw new BadRequestException(nameof(createSugestion.Content), "should not be empty");
 
-            var suggestionContentIsUnique = dbContext.Suggestions.Any(suggestion => suggestion.Content == createSugestion.Content);
+            var suggestionContentIsNotUnique = dbContext.Suggestions.Any(suggestion => suggestion.Content == createSugestion.Content);
 
-            if (suggestionContentIsUnique)
+            if (suggestionContentIsNotUnique)
                 throw new BadRequestException(nameof(createSugestion.Content), "should be unique");
         }
 
@@ -36,13 +36,13 @@ namespace DiabloII.Items.Api.Services.Suggestions
             var suggestionExists = dbContext.Suggestions.Any(suggestion => suggestion.Id == suggestionVoteDto.SuggestionId);
 
             if (!suggestionExists)
-                throw new BadRequestException(nameof(suggestionVoteDto.SuggestionId), "not exists");
+                throw new BadRequestException(nameof(suggestionVoteDto.SuggestionId), "does not exists");
 
-            var suggestionVoteIsUniqueByIpAndSuggestionId = dbContext.SuggestionVotes.Any(suggestionVote =>
+            var suggestionVoteIsNotUniqueByIpAndSuggestionId = dbContext.SuggestionVotes.Any(suggestionVote =>
                 suggestionVote.SuggestionId == suggestionVoteDto.SuggestionId &&
                 suggestionVote.Ip == suggestionVoteDto.Ip);
 
-            if (suggestionVoteIsUniqueByIpAndSuggestionId)
+            if (suggestionVoteIsNotUniqueByIpAndSuggestionId)
                 throw new BadRequestException($"{nameof(suggestionVoteDto.SuggestionId)} and {nameof(suggestionVoteDto.Ip)}", "should be unique together");
         }
     }
