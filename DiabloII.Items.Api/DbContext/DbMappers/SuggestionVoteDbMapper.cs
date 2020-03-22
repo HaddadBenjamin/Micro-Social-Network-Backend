@@ -12,17 +12,21 @@ namespace DiabloII.Items.Api.DbContext.DbMappers
             var suggestionVoteBuilder = modelBuilder.Entity<SuggestionVote>();
             
             suggestionVoteBuilder.HasKey(suggestionVote => suggestionVote.Id);
+            suggestionVoteBuilder
+                .Property(suggestionVote => suggestionVote.Id)
+                .ValueGeneratedOnAdd();
+
             suggestionVoteBuilder.HasKey(suggestionVote => new { suggestionVote.SuggestionId, suggestionVote.Ip});
             
             suggestionVoteBuilder
                 .HasOne(suggestionVote => suggestionVote.Suggestion)
                 .WithMany(suggestionVote => suggestionVote.Votes)
                 .HasForeignKey(suggestionVote => suggestionVote.SuggestionId);
+
+            suggestionVoteBuilder.Ignore(suggestionVote => suggestionVote.Suggestion);
             
             suggestionVoteBuilder
                 .Property(suggestionVote => suggestionVote.Ip)
-                .IsRequired()
-                .HasColumnType("varchar")
                 .IsRequired()
                 .HasMaxLength(IPV4_LENGTH);
         }

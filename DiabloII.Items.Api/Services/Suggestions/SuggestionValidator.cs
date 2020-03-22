@@ -17,7 +17,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
             var suggestionContentIsUnique = dbContext.Suggestions.Any(suggestion => suggestion.Content == createSugestion.Content);
 
-            if (!suggestionContentIsUnique)
+            if (suggestionContentIsUnique)
                 throw new BadRequestException(nameof(createSugestion.Content), "should be unique");
         }
 
@@ -42,7 +42,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
                 suggestionVote.SuggestionId == suggestionVoteDto.SuggestionId &&
                 suggestionVote.Ip == suggestionVoteDto.Ip);
 
-            if (!suggestionVoteIsUniqueByIpAndSuggestionId)
+            if (suggestionVoteIsUniqueByIpAndSuggestionId)
                 throw new BadRequestException($"{nameof(suggestionVoteDto.SuggestionId)} and {nameof(suggestionVoteDto.Ip)}", "should be unique together");
         }
     }

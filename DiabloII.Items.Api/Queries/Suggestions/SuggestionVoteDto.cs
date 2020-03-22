@@ -4,7 +4,7 @@ namespace DiabloII.Items.Api.Queries.Suggestions
 {
     public class SuggestionVoteDto
     {
-        public Guid SuggestionId { get; set; }
+        public int SuggestionId { get; set; }
         
         public bool IsPositive { get; set; }
         

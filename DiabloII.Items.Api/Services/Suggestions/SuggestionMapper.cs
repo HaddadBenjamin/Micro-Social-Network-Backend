@@ -18,13 +18,11 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         public static Suggestion ToSuggestion(CreateSuggestionDto createSuggestionDto) => new Suggestion
         {
-            Id = Guid.NewGuid(),
             Content = createSuggestionDto.Content,
         };
 
         public static SuggestionVote ToSuggestionVote(SuggestionVoteDto suggestionVoteDto) => new SuggestionVote
         {
-            Id = Guid.NewGuid(),
             SuggestionId = suggestionVoteDto.SuggestionId,
             IsPositive = suggestionVoteDto.IsPositive,
             Ip = suggestionVoteDto.Ip

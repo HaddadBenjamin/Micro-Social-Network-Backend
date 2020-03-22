@@ -24,7 +24,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
             SuggestionValidator.Validate(suggestionVoteDto, dbContext);
 
             var suggestion = dbContext.Suggestions.First(vote => vote.Id == suggestionVoteDto.SuggestionId);
-            var suggestionVote = dbContext.SuggestionVotes.First(vote => vote.Ip == suggestionVoteDto.Ip);
+            var suggestionVote = dbContext.SuggestionVotes.FirstOrDefault(vote => vote.Ip == suggestionVoteDto.Ip);
             var suggestionVoteExists = suggestionVote != null;
             
             if (suggestionVoteExists)
