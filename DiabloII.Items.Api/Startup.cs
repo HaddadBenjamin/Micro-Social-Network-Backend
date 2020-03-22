@@ -1,6 +1,9 @@
-﻿using DiabloII.Items.Api.Items.Services;
+﻿using DiabloII.Items.Api.DbContext;
+using DiabloII.Items.Api.Services.Items;
+using DiabloII.Items.Api.Services.Suggestions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
@@ -20,10 +23,14 @@ namespace DiabloII.Items.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = @"Server=(localdb)\DiabloIIDocumentation;Database=Documentation;Trusted_Connection=True;";
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin());
             });
+            services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddMvc()
                     .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
@@ -33,8 +40,8 @@ namespace DiabloII.Items.Api
                 swagger.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "Diablo II - Items API",
-                    Description = "Allow to search Diablo II items",
+                    Title = "Diablo II - items and suggestions API",
+                    Description = "Allow to search Diablo II items and crud suggestions and votes",
                     Contact = new Contact
                     {
                         Name = "Un passionné dans la foule (alias Firefouks)",
@@ -45,10 +52,17 @@ namespace DiabloII.Items.Api
             });
 
             services.AddSingleton<IItemsService, ItemsService>();
+            services.AddSingleton<ISuggestionsService, SuggestionsService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                context.Database.Migrate();
+            }
+
             app.UseSwagger();
             app.UseSwaggerUI(swagger =>
             {
