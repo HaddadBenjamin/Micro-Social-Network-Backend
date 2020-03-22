@@ -32,7 +32,7 @@ namespace DiabloII.Items.Api
             });
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddMvc()
+            services.AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
                     .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
             services.AddSwaggerGen(swagger =>
