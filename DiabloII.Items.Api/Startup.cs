@@ -26,9 +26,8 @@ namespace DiabloII.Items.Api
         {
             var dbPassword = Configuration["connectionstrings:documentation:password"];
             var dbConnection = Configuration.GetConnectionString("Documentation");
-            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbConnection);
+            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbConnection) { Password = dbPassword };
            
-            sqlConnectionStringBuilder.Password = dbPassword;
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(sqlConnectionStringBuilder.ConnectionString));
 
             services.AddCors(options =>
