@@ -1,4 +1,5 @@
-﻿using DiabloII.Items.Api.DbContext;
+﻿using System.Data.SqlClient;
+using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Services.Items;
 using DiabloII.Items.Api.Services.Suggestions;
 using Microsoft.AspNetCore.Builder;
@@ -15,7 +16,7 @@ namespace DiabloII.Items.Api
     {
         public Startup(IConfiguration configuration)
         {
-			ItemsGenerator.Generate();
+			//ItemsGenerator.Generate();
             Configuration = configuration;
         }
 
@@ -23,8 +24,12 @@ namespace DiabloII.Items.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = Configuration.GetConnectionString("Documentation");
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
+            var dbPassword = Configuration["connectionstrings:documentation:password"];
+            var dbConnection = Configuration.GetConnectionString("Documentation");
+            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbConnection);
+           
+            sqlConnectionStringBuilder.Password = dbPassword;
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(sqlConnectionStringBuilder.ConnectionString));
 
             services.AddCors(options =>
             {
