@@ -12,6 +12,7 @@ namespace DiabloII.Items.Api.DbContext.DbMappers
             var suggestionVoteBuilder = modelBuilder.Entity<SuggestionVote>();
             
             suggestionVoteBuilder.HasKey(suggestionVote => suggestionVote.Id);
+            suggestionVoteBuilder.HasKey(suggestionVote => new { suggestionVote.SuggestionId, suggestionVote.Ip});
             
             suggestionVoteBuilder
                 .HasOne(suggestionVote => suggestionVote.Suggestion)

@@ -23,7 +23,7 @@ namespace DiabloII.Items.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Server=(localdb)\DiabloIIDocumentation;Database=Documentation;Trusted_Connection=True;";
+            var connection = Configuration.GetConnectionString("Documentation");
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connection));
 
             services.AddCors(options =>

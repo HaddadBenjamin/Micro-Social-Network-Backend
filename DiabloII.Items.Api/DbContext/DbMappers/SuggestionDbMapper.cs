@@ -10,8 +10,10 @@ namespace DiabloII.Items.Api.DbContext.DbMappers
             var suggestionBuilder = modelBuilder.Entity<Suggestion>();
 
             suggestionBuilder.HasKey(suggestion => suggestion.Id);
-            suggestionBuilder.HasIndex(suggestion => suggestion.Content);
-            
+            suggestionBuilder
+                .HasIndex(suggestion => suggestion.Content)
+                .IsUnique();
+
             suggestionBuilder
                 .HasMany(suggestion => suggestion.Votes)
                 .WithOne(suggestion => suggestion.Suggestion)

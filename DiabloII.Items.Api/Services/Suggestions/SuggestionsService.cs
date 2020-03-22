@@ -11,6 +11,8 @@ namespace DiabloII.Items.Api.Services.Suggestions
     {
         public void Create(CreateSuggestionDto createSugestion, ApplicationDbContext dbContext)
         {
+            SuggestionValidator.Validate(createSugestion, dbContext);
+           
             var suggestion = SuggestionMapper.ToSuggestion(createSugestion);
 
             dbContext.Suggestions.Add(suggestion);
@@ -19,9 +21,12 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         public SuggestionDto Vote(SuggestionVoteDto suggestionVoteDto, ApplicationDbContext dbContext)
         {
+            SuggestionValidator.Validate(suggestionVoteDto, dbContext);
+
+            var suggestion = dbContext.Suggestions.First(vote => vote.Id == suggestionVoteDto.SuggestionId);
             var suggestionVote = dbContext.SuggestionVotes.First(vote => vote.Ip == suggestionVoteDto.Ip);
             var suggestionVoteExists = suggestionVote != null;
-
+            
             if (suggestionVoteExists)
                 suggestionVote.IsPositive = suggestionVoteDto.IsPositive;
             else
@@ -32,8 +37,6 @@ namespace DiabloII.Items.Api.Services.Suggestions
             }
 
             dbContext.SaveChanges();
-
-            var suggestion = dbContext.Suggestions.First(vote => vote.Id == suggestionVote.SuggestionId);
 
             return SuggestionMapper.ToSuggestionDto(suggestion);
         }
