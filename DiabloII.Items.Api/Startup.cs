@@ -1,4 +1,6 @@
-﻿using System.Data.SqlClient;
+﻿//using DiabloII.Items.Api.Items.Services;
+
+using System.Data.SqlClient;
 using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Services.Items;
 using DiabloII.Items.Api.Services.Suggestions;
@@ -16,7 +18,7 @@ namespace DiabloII.Items.Api
     {
         public Startup(IConfiguration configuration)
         {
-			//ItemsGenerator.Generate();
+			ItemsGenerator.Generate();
             Configuration = configuration;
         }
 
@@ -26,9 +28,9 @@ namespace DiabloII.Items.Api
         {
             var dbPassword = Configuration["connectionstrings:documentation:password"];
             var dbConnection = Configuration.GetConnectionString("Documentation");
-            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbConnection) { Password = dbPassword };
+            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbConnection);// { Password = dbPassword };
            
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(sqlConnectionStringBuilder.ConnectionString));
+            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(sqlConnectionStringBuilder.ConnectionString));
 
             services.AddCors(options =>
             {
@@ -56,16 +58,16 @@ namespace DiabloII.Items.Api
             });
 
             services.AddSingleton<IItemsService, ItemsService>();
-            services.AddSingleton<ISuggestionsService, SuggestionsService>();
+            //services.AddSingleton<ISuggestionsService, SuggestionsService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                context.Database.Migrate();
-            }
+            //using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            //{
+            //    var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            //    context.Database.Migrate();
+            //}
 
             app.UseSwagger();
             app.UseSwaggerUI(swagger =>

@@ -18,15 +18,14 @@ namespace DiabloII.Items.Api
             WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) =>
                 {
-                    var keyVaultEndpoint = "https://benjaminvault.vault.azure.net/";
-                    var azureServiceTokenProvider = new AzureServiceTokenProvider();
-                    var defaultKeyVaultSecretManager = new DefaultKeyVaultSecretManager();
-                    var authentificationCallback = new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback);
-                    var keyVaultClient = new KeyVaultClient(authentificationCallback);
+                    //var keyVaultEndpoint = "https://benjaminvault.vault.azure.net/";
+                    //var azureServiceTokenProvider = new AzureServiceTokenProvider();
+                    //var defaultKeyVaultSecretManager = new DefaultKeyVaultSecretManager();
+                    //var authentificationCallback = new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback);
+                    //var keyVaultClient = new KeyVaultClient(authentificationCallback);
                      
-                    configurationBuilder.AddAzureKeyVault(keyVaultEndpoint, keyVaultClient, defaultKeyVaultSecretManager);
+                    //configurationBuilder.AddAzureKeyVault(keyVaultEndpoint, keyVaultClient, defaultKeyVaultSecretManager);
                 })
-                .UseSetting(WebHostDefaults.DetailedErrorsKey, "true")
                 .UseStartup<Startup>()
                 .Build();
     }
