@@ -44,9 +44,10 @@ namespace DiabloII.Items.Api.Services.Items
 						.Replace("Bec_De_Corbin", "Bec-De-Corbin")
 						.Replace("Silver_Edged_Axe", "Silver-Edged Axe")
 						.Replace("_", " "))
-					.Contains(unique.SubCategory)));
-			//            .Where(unique => dto.PropertyNames is null ||!dto.PropertyNames.Any() ? true : unique.Properties.Any(property => dto.PropertyNames.Contains(property.Name)));
-			return x;
+					.Contains(unique.SubCategory)))
+			    // .Where(unique => dto.PropertyNames is null ||!dto.PropertyNames.Any() ? true : unique.Properties.Any(property => dto.PropertyNames.Contains(property.Name)));
+                .ToList();
+            return x;
         }
     }
 }

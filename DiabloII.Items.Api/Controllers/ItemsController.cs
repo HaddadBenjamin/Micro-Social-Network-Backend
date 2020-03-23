@@ -18,13 +18,11 @@ namespace DiabloII.Items.Api.Controllers
 
         [Route("getalluniques")]
         [HttpGet]
-        [EnableCors("AllowOrigin")]
         public async Task<IEnumerable<Item>> GetAllUniques() => await ItemsService.GetAllUniques().ConfigureAwait(false);
 
         [Route("searchuniques")]
         [HttpGet]
-        [EnableCors("AllowOrigin")]
-        public async Task<IEnumerable<Item>> SearchUniques([FromBody] SearchUniquesDto searchDto = default)
+        public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto searchDto = default)
             => await ItemsService.SearchUniques(searchDto).ConfigureAwait(false);
     }
 }

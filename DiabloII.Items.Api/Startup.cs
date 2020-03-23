@@ -6,6 +6,8 @@ using DiabloII.Items.Api.Services.Items;
 using DiabloII.Items.Api.Services.Suggestions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,18 +31,13 @@ namespace DiabloII.Items.Api
             var dbPassword = Configuration["connectionstrings:documentation:password"];
             var dbConnection = Configuration.GetConnectionString("Documentation");
             var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbConnection);// { Password = dbPassword };
-           
+
             //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(sqlConnectionStringBuilder.ConnectionString));
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowOrigin", builder => builder.AllowAnyOrigin());
-            });
-            services.AddRouting(options => options.LowercaseUrls = true);
-
+            services.AddCors(); // AddCors doit-être au dessus de AddMvc.
             services.AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
                     .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-
+    
             services.AddSwaggerGen(swagger =>
             {
                 swagger.SwaggerDoc("v1", new Info
@@ -56,6 +53,8 @@ namespace DiabloII.Items.Api
                 });
                 swagger.DescribeAllEnumsAsStrings();
             });
+            
+            services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddSingleton<IItemsService, ItemsService>();
             //services.AddSingleton<ISuggestionsService, SuggestionsService>();
@@ -77,16 +76,20 @@ namespace DiabloII.Items.Api
             });
 
             if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
-            }
 
-            app.UseCors(options => options.WithOrigins(
-                "https://localhost:3000", // local
-                "https://diablo-2-enriched-documentation.netlify.com/" // prod
-            ));
-
+           
+            app.UseCors(builder => builder  // UseCors doit être au dessus de UseMvc;
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
             app.UseMvc();
+            //app.UseCors(options => options.WithOrigins(
+            //    "https://localhost:3000", // local
+            //    "https://diablo-2-enriched-documentation.netlify.com/" // prod
+            //).AllowAnyMethod());
+
         }
     }
 }
