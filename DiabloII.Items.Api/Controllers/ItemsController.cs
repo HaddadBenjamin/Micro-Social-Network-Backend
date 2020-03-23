@@ -10,7 +10,6 @@ namespace DiabloII.Items.Api.Controllers
 {
     // Remember : dotnet run watch.
     [Route("api/v1/[controller]")]
-    [EnableCors("AllowOrigin")]
     public class ItemsController : Controller
     {
         private readonly IItemsService ItemsService;
@@ -19,10 +18,12 @@ namespace DiabloII.Items.Api.Controllers
 
         [Route("getalluniques")]
         [HttpGet]
+        [EnableCors("AllowOrigin")]
         public async Task<IEnumerable<Item>> GetAllUniques() => await ItemsService.GetAllUniques().ConfigureAwait(false);
 
         [Route("searchuniques")]
         [HttpGet]
+        [EnableCors("AllowOrigin")]
         public async Task<IEnumerable<Item>> SearchUniques([FromBody] SearchUniquesDto searchDto = default)
             => await ItemsService.SearchUniques(searchDto).ConfigureAwait(false);
     }
