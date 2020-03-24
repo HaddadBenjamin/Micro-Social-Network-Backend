@@ -12,8 +12,6 @@ namespace DiabloII.Items.Api.DbContext
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         
-        public ApplicationDbContext() { }
-        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             SuggestionDbMapper.Map(modelBuilder);

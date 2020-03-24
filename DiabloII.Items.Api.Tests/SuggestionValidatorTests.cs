@@ -23,6 +23,7 @@ namespace DiabloII.Items.Api.Tests
                 .Options;
 
             DbContext =  new ApplicationDbContext(options);
+            DbContext.Database.EnsureDeleted();
         }
 
         [Test]
