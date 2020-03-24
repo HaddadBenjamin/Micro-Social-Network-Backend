@@ -1,5 +1,7 @@
 # Diablo II - Items Documentation - API
 
+[![Build status](https://dev.azure.com/BenjaminHaddad/MyProject/_apis/build/status/diablo-2-enriched-documentation%20-%20CI)](https://dev.azure.com/BenjaminHaddad/MyProject/_build/latest?definitionId=1)
+
 Il s'agit d'une petite documentation qui permet de rechercher une liste d’objets pour le jeu Diablo II.
 
 Vous pouvez tester l'application si vous le souhaitez https://diablo-2-enriched-documentation.netlify.com/
