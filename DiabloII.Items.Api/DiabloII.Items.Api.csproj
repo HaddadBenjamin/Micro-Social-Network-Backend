@@ -27,12 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Files\Uniques.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DiabloII.Items\DiabloII.Items.Generator.csproj" />
   </ItemGroup>
 

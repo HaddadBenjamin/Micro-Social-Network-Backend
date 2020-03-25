@@ -20,7 +20,7 @@ namespace DiabloII.Items.Api
     {
         public Startup(IConfiguration configuration)
         {
-			//ItemsGenerator.Generate();
+			ItemsGenerator.Generate();
             Configuration = configuration;
         }
 
@@ -67,11 +67,6 @@ namespace DiabloII.Items.Api
             //    var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             //    context.Database.Migrate();
             //}
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            {
-                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-                context.Database.Migrate();
-            }
 
             app.UseSwagger();
             app.UseSwaggerUI(swagger =>
@@ -85,15 +80,16 @@ namespace DiabloII.Items.Api
 
            
             app.UseCors(builder => builder  // UseCors doit être au dessus de UseMvc;
-                .WithOrigins
-                (
-                    "http://localhost:3000", // Local
-                    "https://diablo-2-enriched-documentation.netlify.com/" // Production
-                )
+                .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
             app.UseMvc();
+            //app.UseCors(options => options.WithOrigins(
+            //    "https://localhost:3000", // local
+            //    "https://diablo-2-enriched-documentation.netlify.com/" // prod
+            //).AllowAnyMethod());
+
         }
     }
 }
