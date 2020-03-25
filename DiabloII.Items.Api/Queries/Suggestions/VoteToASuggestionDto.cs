@@ -2,7 +2,7 @@
 
 namespace DiabloII.Items.Api.Queries.Suggestions
 {
-    public class SuggestionVoteDto
+    public class VoteToASuggestionDto
     {
         public int SuggestionId { get; set; }
         

@@ -1,4 +1,4 @@
-﻿namespace DiabloII.Items.Reader
+﻿namespace DiabloII.Items.Reader.Records
 {
 	public class SkillRecord
 	{

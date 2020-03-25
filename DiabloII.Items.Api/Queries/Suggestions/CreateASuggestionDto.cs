@@ -3,7 +3,7 @@ using System;
 
 namespace DiabloII.Items.Api.Queries.Suggestions
 {
-    public class CreateSuggestionDto
+    public class CreateASuggestionDto
     {
         public string Content { get; set; }
     }

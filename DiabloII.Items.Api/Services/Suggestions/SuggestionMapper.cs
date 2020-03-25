@@ -16,16 +16,16 @@ namespace DiabloII.Items.Api.Services.Suggestions
             NegativeVoteCount = suggestion.Votes.Count(vote => !vote.IsPositive),
         };
 
-        public static Suggestion ToSuggestion(CreateSuggestionDto createSuggestionDto) => new Suggestion
+        public static Suggestion ToSuggestion(CreateASuggestionDto createASuggestionDto) => new Suggestion
         {
-            Content = createSuggestionDto.Content,
+            Content = createASuggestionDto.Content,
         };
 
-        public static SuggestionVote ToSuggestionVote(SuggestionVoteDto suggestionVoteDto) => new SuggestionVote
+        public static SuggestionVote ToSuggestionVote(VoteToASuggestionDto voteToASuggestionDto) => new SuggestionVote
         {
-            SuggestionId = suggestionVoteDto.SuggestionId,
-            IsPositive = suggestionVoteDto.IsPositive,
-            Ip = suggestionVoteDto.Ip
+            SuggestionId = voteToASuggestionDto.SuggestionId,
+            IsPositive = voteToASuggestionDto.IsPositive,
+            Ip = voteToASuggestionDto.Ip
         };
     }
 }

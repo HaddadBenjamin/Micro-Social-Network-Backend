@@ -24,11 +24,11 @@ namespace DiabloII.Items.Api.Controllers
 
         [Route("create")]
         [HttpPost]
-        public void Create(CreateSuggestionDto createSuggestion) => SuggestionsService.Create(createSuggestion, ApplicationDbContext);
+        public void Create(CreateASuggestionDto createASuggestion) => SuggestionsService.Create(createASuggestion, ApplicationDbContext);
 
         [Route("vote")]
         [HttpPost]
-        public SuggestionDto Vote(SuggestionVoteDto suggestionVote) => SuggestionsService.Vote(suggestionVote, ApplicationDbContext);
+        public SuggestionDto Vote(VoteToASuggestionDto voteToASuggestion) => SuggestionsService.Vote(voteToASuggestion, ApplicationDbContext);
 
         [Route("getall")]
         [HttpGet]

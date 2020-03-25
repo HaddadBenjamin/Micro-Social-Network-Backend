@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DiabloII.Items.Reader
+namespace DiabloII.Items.Reader.Items
 {
     public class Item
     {

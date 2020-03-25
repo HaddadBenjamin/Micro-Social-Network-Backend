@@ -7,9 +7,9 @@ namespace DiabloII.Items.Api.Services.Suggestions
 {
     public interface ISuggestionsService
     {
-        void Create(CreateSuggestionDto createSugestion, ApplicationDbContext applicationDbContext);
+        void Create(CreateASuggestionDto createASugestion, ApplicationDbContext applicationDbContext);
 
-        SuggestionDto Vote(SuggestionVoteDto voteSuggestion, ApplicationDbContext applicationDbContext);
+        SuggestionDto Vote(VoteToASuggestionDto voteToASuggestion, ApplicationDbContext applicationDbContext);
 
         IReadOnlyCollection<SuggestionDto> GetAll(ApplicationDbContext applicationDbContext);
     }

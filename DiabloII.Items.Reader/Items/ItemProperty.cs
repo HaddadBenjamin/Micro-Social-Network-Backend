@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiabloII.Items.Reader
+namespace DiabloII.Items.Reader.Items
 {
     public class ItemProperty
     {

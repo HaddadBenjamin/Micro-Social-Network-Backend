@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DiabloII.Items.Reader.Items;
 
 namespace DiabloII.Items.Reader
 {

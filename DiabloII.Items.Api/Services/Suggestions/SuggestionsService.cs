@@ -3,35 +3,44 @@ using System.Linq;
 using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Queries.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
+using DiabloII.Items.Api.Validators.Suggestions;
+using DiabloII.Items.Api.Validators.Suggestions.Create;
+using DiabloII.Items.Api.Validators.Suggestions.Vote;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Items.Api.Services.Suggestions
 {
     public class SuggestionsService : ISuggestionsService
     {
-        public void Create(CreateSuggestionDto createSugestion, ApplicationDbContext dbContext)
+        public void Create(CreateASuggestionDto createASugestion, ApplicationDbContext dbContext)
         {
-            SuggestionValidator.Validate(createSugestion, dbContext);
+            var validationContext = new CreateASuggestionValidatorContext(createASugestion, dbContext);
+            var validator = new CreateASuggestionValidator();
+
+            validator.Validate(validationContext);
            
-            var suggestion = SuggestionMapper.ToSuggestion(createSugestion);
+            var suggestion = SuggestionMapper.ToSuggestion(createASugestion);
 
             dbContext.Suggestions.Add(suggestion);
             dbContext.SaveChanges();
         }
 
-        public SuggestionDto Vote(SuggestionVoteDto suggestionVoteDto, ApplicationDbContext dbContext)
+        public SuggestionDto Vote(VoteToASuggestionDto voteToASuggestionDto, ApplicationDbContext dbContext)
         {
-            SuggestionValidator.Validate(suggestionVoteDto, dbContext);
+            var validationContext = new VoteToASuggestionValidatorContext(voteToASuggestionDto, dbContext);
+            var validator = new VoteToASuggestionValidator();
 
-            var suggestion = dbContext.Suggestions.First(vote => vote.Id == suggestionVoteDto.SuggestionId);
-            var suggestionVote = dbContext.SuggestionVotes.FirstOrDefault(vote => vote.Ip == suggestionVoteDto.Ip);
+            validator.Validate(validationContext);
+
+            var suggestion = dbContext.Suggestions.First(vote => vote.Id == voteToASuggestionDto.SuggestionId);
+            var suggestionVote = dbContext.SuggestionVotes.FirstOrDefault(vote => vote.Ip == voteToASuggestionDto.Ip);
             var suggestionVoteExists = suggestionVote != null;
             
             if (suggestionVoteExists)
-                suggestionVote.IsPositive = suggestionVoteDto.IsPositive;
+                suggestionVote.IsPositive = voteToASuggestionDto.IsPositive;
             else
             {
-                suggestionVote = SuggestionMapper.ToSuggestionVote(suggestionVoteDto);
+                suggestionVote = SuggestionMapper.ToSuggestionVote(voteToASuggestionDto);
 
                 dbContext.SuggestionVotes.Add(suggestionVote);
             }

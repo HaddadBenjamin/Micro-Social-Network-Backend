@@ -2,7 +2,7 @@
 using DiabloII.Items.Reader;
 using Newtonsoft.Json;
 
-namespace DiabloII.Items
+namespace DiabloII.Items.Generator
 {
 	public static class ItemsGenerator
 	{

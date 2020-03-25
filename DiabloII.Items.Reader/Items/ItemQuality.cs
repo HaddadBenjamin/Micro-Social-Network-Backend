@@ -1,4 +1,4 @@
-﻿namespace DiabloII.Items.Reader
+﻿namespace DiabloII.Items.Reader.Items
 {
     public enum ItemQuality
     {

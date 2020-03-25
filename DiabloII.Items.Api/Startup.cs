@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Services.Items;
 using DiabloII.Items.Api.Services.Suggestions;
+using DiabloII.Items.Generator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
