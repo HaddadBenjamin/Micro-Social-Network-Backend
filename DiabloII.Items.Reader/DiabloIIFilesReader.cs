@@ -22,14 +22,22 @@ namespace DiabloII.Items.Reader
 		// Gethit-Skill : 10% to trigger level 5 skill
 		// Vérifier, tester et sanitizer les propriétés sur la vraie documentation
 		// Ascended m'aide sur les missing category, il va me renvoyer lees documents weapon et armor txt.
-		public IEnumerable<Item> Read(
-            string uniquesCsv,
-            string weaponsCsv,
-            string armorsCsv,
-			string propertiesCsv,
-			string skillsCsv,
-			string skillTabsCsv)
+		public IEnumerable<Item> Read()
         {
+            var uniquesPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.csv");
+            var weaponsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Weapons.csv");
+            var armorsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Armors.csv");
+            var propertiessPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Properties.csv");
+            var skillsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Skills.csv");
+            var skillTabsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/SkillTabs.csv");
+
+            var uniquesCsv = File.ReadAllText(uniquesPath);
+            var weaponsCsv = File.ReadAllText(weaponsPath);
+            var armorsCsv = File.ReadAllText(armorsPath);
+            var propertiesCsv = File.ReadAllText(propertiessPath);
+            var skillsCsv = File.ReadAllText(skillsPath);
+            var skillTabsCsv = File.ReadAllText(skillTabsPath);
+
             var weapons = ReadWeapons(weaponsCsv);
             var armors = ReadArmors(armorsCsv);
             var subCategories = ReadSubCategories(weapons, armors);
@@ -51,8 +59,6 @@ namespace DiabloII.Items.Reader
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Missing Properties.txt"), missingProperties);
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Missing Skills.txt"), missingSkills);
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Missing Categories.txt"), missingItemsCategories);
-
-
 
             return uniques;
         }
