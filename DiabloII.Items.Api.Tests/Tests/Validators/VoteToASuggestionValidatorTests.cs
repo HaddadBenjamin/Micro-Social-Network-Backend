@@ -26,7 +26,7 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators
         }
 
         [Test]
-        public void ShouldThrowABadRequestException_WhenUserIpIsNull()
+        public void WhenUserIpIsNull_ShouldThrowABadRequestException()
         {
             ValidatorContext.Dto = new VoteToASuggestionDto { Ip = null };
 
@@ -34,7 +34,7 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators
         }
 
         [Test]
-        public void ShouldThrowABadRequestException_WhenUserIpIsEmpty()
+        public void WhenUserIpIsEmpty_ShouldThrowABadRequestException()
         {
             ValidatorContext.Dto = new VoteToASuggestionDto { Ip = string.Empty };
 
@@ -42,15 +42,15 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators
         }
 
         [Test]
-        public void ShouldThrowABadRequestException_WhenUserIpIsNotAnIp()
+        public void WhenUserIpIsNotAnIp_ShouldThrowABadRequestException()
         {
-            ValidatorContext.Dto = new VoteToASuggestionDto { Ip = "not an Ip" };
+            ValidatorContext.Dto = new VoteToASuggestionDto { Ip = "999.0.0.0" };
 
             Should.Throw<BadRequestException>(() => Validator.Validate(ValidatorContext));
         }
 
         [Test]
-        public void ShouldThrowABadRequestException_WhenSuggestionDoesNotExists()
+        public void WhenSuggestionDoesNotExists_ShouldThrowABadRequestException()
         {
             var suggestionIdThatDontExists = int.MaxValue;
 
@@ -64,7 +64,7 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators
         }
 
         [Test]
-        public void ShouldThrowABadRequestException_WhenSuggestionVoteIsNotUniqueByIpAndSuggestionId()
+        public void WhenSuggestionVoteIsNotUniqueByIpAndSuggestionId_ShouldThrowABadRequestException()
         {
             var userIp = "193.43.55.67";
 

@@ -27,7 +27,7 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators
         }
 
         [Test]
-        public void ShouldThrowABadRequestException_WhenContentIsNull()
+        public void WhenContentIsNull_ShouldThrowABadRequestException()
         {
             ValidatorContext.Dto = new CreateASuggestionDto { Content = null };
 
@@ -35,7 +35,7 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators
         }
 
         [Test]
-        public void ValidateCreateSuggestionDto_ShouldThrowABadRequestException_WhenContentIsEmpty()
+        public void WhenContentIsEmpty_ShouldThrowABadRequestException()
         {
             ValidatorContext.Dto = new CreateASuggestionDto { Content = string.Empty };
 
@@ -43,7 +43,7 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators
         }
 
         [Test]
-        public void ValidateCreateSuggestionDto_ShouldThrowABadRequestException_WhenContentIsNotUnique()
+        public void WhenContentIsNotUnique_ShouldThrowABadRequestException()
         {
             var suggestionContent = "any value";
 
