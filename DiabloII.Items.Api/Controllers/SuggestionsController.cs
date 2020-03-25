@@ -14,24 +14,22 @@ namespace DiabloII.Items.Api.Controllers
     public class SuggestionsController : Controller
     {
         private readonly ISuggestionsService SuggestionsService;
-        private readonly ApplicationDbContext ApplicationDbContext;
 
-        public SuggestionsController(ISuggestionsService suggestionsService, ApplicationDbContext applicationDbContext)
+        public SuggestionsController(ISuggestionsService suggestionsService)
         {
-            ApplicationDbContext = applicationDbContext;
             SuggestionsService = suggestionsService;
         } 
 
         [Route("create")]
         [HttpPost]
-        public void Create(CreateASuggestionDto createASuggestion) => SuggestionsService.Create(createASuggestion, ApplicationDbContext);
+        public void Create(CreateASuggestionDto createASuggestion) => SuggestionsService.Create(createASuggestion);
 
         [Route("vote")]
         [HttpPost]
-        public SuggestionDto Vote(VoteToASuggestionDto voteToASuggestion) => SuggestionsService.Vote(voteToASuggestion, ApplicationDbContext);
+        public SuggestionDto Vote(VoteToASuggestionDto voteToASuggestion) => SuggestionsService.Vote(voteToASuggestion);
 
         [Route("getall")]
         [HttpGet]
-        public IReadOnlyCollection<SuggestionDto> GetAll() => SuggestionsService.GetAll(ApplicationDbContext);
+        public IReadOnlyCollection<SuggestionDto> GetAll() => SuggestionsService.GetAll();
     }
 }

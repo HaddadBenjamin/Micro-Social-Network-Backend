@@ -8,7 +8,6 @@ using DiabloII.Items.Generator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -57,8 +56,8 @@ namespace DiabloII.Items.Api
             
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddSingleton<IItemsService, ItemsService>();
-            //services.AddSingleton<ISuggestionsService, SuggestionsService>();
+            services.AddTransient<IItemsService, ItemsService>();
+            //services.AddTransient<ISuggestionsService, SuggestionsService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

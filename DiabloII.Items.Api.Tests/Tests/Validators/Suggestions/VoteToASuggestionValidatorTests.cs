@@ -7,7 +7,7 @@ using DiabloII.Items.Api.Validators.Suggestions.Vote;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DiabloII.Items.Api.Tests.Tests.Validators
+namespace DiabloII.Items.Api.Tests.Tests.Validators.Suggestions
 {
     [TestFixture]
     public class VoteToASuggestionValidatorTests

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using DiabloII.Items.Api.DbContext.Suggestions;
 using DiabloII.Items.Api.Queries.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
 
-namespace DiabloII.Items.Api.Services.Suggestions
+namespace DiabloII.Items.Api.Mappers.Suggestions
 {
     public static class SuggestionMapper
     {
