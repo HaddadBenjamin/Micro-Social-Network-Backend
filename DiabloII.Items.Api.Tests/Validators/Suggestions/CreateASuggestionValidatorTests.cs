@@ -2,13 +2,11 @@ using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Suggestions;
 using DiabloII.Items.Api.Exceptions;
 using DiabloII.Items.Api.Queries.Suggestions;
-using DiabloII.Items.Api.Tests.Helpers;
-using DiabloII.Items.Api.Validators.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Create;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DiabloII.Items.Api.Tests.Tests.Validators.Suggestions
+namespace DiabloII.Items.Api.Tests.Validators.Suggestions
 {
     [TestFixture]
     public class CreateASuggestionValidatorTests

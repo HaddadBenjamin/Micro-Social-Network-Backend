@@ -1,18 +1,17 @@
-﻿//using DiabloII.Items.Api.Items.Services;
-
-using System.Data.SqlClient;
-using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.Services.Items;
+﻿using DiabloII.Items.Api.Services.Items;
 using DiabloII.Items.Api.Services.Suggestions;
-using DiabloII.Items.Generator;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Data.SqlClient;
+using System.Threading;
+using System.Threading.Tasks;
+using DiabloII.Items.Api.DbContext;
+using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Items.Api
 {
@@ -28,11 +27,17 @@ namespace DiabloII.Items.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var dbUsername = Configuration["connectionstrings:documentation:username"];
             var dbPassword = Configuration["connectionstrings:documentation:password"];
             var dbConnection = Configuration.GetConnectionString("Documentation");
-            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbConnection);// { Password = dbPassword };
+            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbConnection)
+            {
+                UserID = dbUsername,
+                Password = dbPassword,
+                ApplicationName = "Diablo II Documentation",
+            };
 
-            //services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(sqlConnectionStringBuilder.ConnectionString));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(sqlConnectionStringBuilder.ConnectionString));
 
             services.AddCors(); // AddCors doit-être au dessus de AddMvc.
             services.AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
@@ -57,16 +62,16 @@ namespace DiabloII.Items.Api
             services.AddRouting(options => options.LowercaseUrls = true);
 
             services.AddScoped<IItemsService, ItemsService>();
-            //services.AddScoped<ISuggestionsService, SuggestionsService>();
+            services.AddScoped<ISuggestionsService, SuggestionsService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            //using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
-            //{
-            //    var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            //    context.Database.Migrate();
-            //}
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                context.Database.Migrate();
+            }
 
             app.UseSwagger();
             app.UseSwaggerUI(swagger =>
