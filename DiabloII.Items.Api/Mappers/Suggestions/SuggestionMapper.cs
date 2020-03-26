@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DiabloII.Items.Api.DbContext.Suggestions;
 using DiabloII.Items.Api.Queries.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
@@ -17,11 +18,13 @@ namespace DiabloII.Items.Api.Mappers.Suggestions
 
         public static Suggestion ToSuggestion(CreateASuggestionDto createASuggestionDto) => new Suggestion
         {
+            Id = Guid.NewGuid(),
             Content = createASuggestionDto.Content,
         };
 
         public static SuggestionVote ToSuggestionVote(VoteToASuggestionDto voteToASuggestionDto) => new SuggestionVote
         {
+            Id = Guid.NewGuid(),
             SuggestionId = voteToASuggestionDto.SuggestionId,
             IsPositive = voteToASuggestionDto.IsPositive,
             Ip = voteToASuggestionDto.Ip

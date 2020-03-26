@@ -11,9 +11,9 @@ namespace DiabloII.Items.Api.DbContext.DbMappers
 
             suggestionBuilder.HasKey(suggestion => suggestion.Id);
             suggestionBuilder
-                .Property(suggestion => suggestion.Id)
-                .ValueGeneratedOnAdd(); 
-            
+                .HasIndex(suggestion => suggestion.Content)
+                .IsUnique();
+
             suggestionBuilder
                 .HasIndex(suggestion => suggestion.Content)
                 .IsUnique();

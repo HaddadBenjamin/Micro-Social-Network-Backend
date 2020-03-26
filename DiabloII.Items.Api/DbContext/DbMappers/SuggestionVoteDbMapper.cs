@@ -13,8 +13,8 @@ namespace DiabloII.Items.Api.DbContext.DbMappers
             
             suggestionVoteBuilder.HasKey(suggestionVote => suggestionVote.Id);
             suggestionVoteBuilder
-                .Property(suggestionVote => suggestionVote.Id)
-                .ValueGeneratedOnAdd();
+                .HasIndex(suggestion => suggestion.Id)
+                .IsUnique();
 
             suggestionVoteBuilder.HasKey(suggestionVote => new { suggestionVote.SuggestionId, suggestionVote.Ip});
             

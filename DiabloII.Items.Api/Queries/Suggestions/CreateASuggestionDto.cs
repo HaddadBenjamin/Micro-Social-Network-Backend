@@ -1,5 +1,4 @@
-﻿
-namespace DiabloII.Items.Api.Queries.Suggestions
+﻿namespace DiabloII.Items.Api.Queries.Suggestions
 {
     public class CreateASuggestionDto
     {

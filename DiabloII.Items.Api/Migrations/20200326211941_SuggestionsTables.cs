@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DiabloII.Items.Api.Migrations
 {
@@ -10,8 +11,7 @@ namespace DiabloII.Items.Api.Migrations
                 name: "Suggestions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(nullable: false),
                     Content = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
@@ -23,21 +23,22 @@ namespace DiabloII.Items.Api.Migrations
                 name: "SuggestionVotes",
                 columns: table => new
                 {
-                    SuggestionId = table.Column<int>(nullable: false),
+                    SuggestionId = table.Column<Guid>(nullable: false),
                     Ip = table.Column<string>(maxLength: 15, nullable: false),
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsPositive = table.Column<bool>(nullable: false)
+                    Id = table.Column<Guid>(nullable: false),
+                    IsPositive = table.Column<bool>(nullable: false),
+                    SuggestionId1 = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SuggestionVotes", x => new { x.SuggestionId, x.Ip });
+                    table.UniqueConstraint("AK_SuggestionVotes_Id", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SuggestionVotes_Suggestions_SuggestionId",
-                        column: x => x.SuggestionId,
+                        name: "FK_SuggestionVotes_Suggestions_SuggestionId1",
+                        column: x => x.SuggestionId1,
                         principalTable: "Suggestions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -45,6 +46,17 @@ namespace DiabloII.Items.Api.Migrations
                 table: "Suggestions",
                 column: "Content",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SuggestionVotes_Id",
+                table: "SuggestionVotes",
+                column: "Id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SuggestionVotes_SuggestionId1",
+                table: "SuggestionVotes",
+                column: "SuggestionId1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

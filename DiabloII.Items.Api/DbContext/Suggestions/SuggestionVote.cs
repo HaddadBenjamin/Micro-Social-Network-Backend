@@ -1,12 +1,14 @@
-﻿namespace DiabloII.Items.Api.DbContext.Suggestions
+﻿using System;
+
+namespace DiabloII.Items.Api.DbContext.Suggestions
 {
     public class SuggestionVote
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public Suggestion Suggestion { get; set; }
         
-        public int SuggestionId { get; set; }
+        public Guid SuggestionId { get; set; }
         
         public bool IsPositive { get; set; }
 

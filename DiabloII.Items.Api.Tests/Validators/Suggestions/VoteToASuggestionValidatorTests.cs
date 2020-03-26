@@ -1,3 +1,4 @@
+using System;
 using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Suggestions;
 using DiabloII.Items.Api.Exceptions;
@@ -52,7 +53,7 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         [Test]
         public void WhenSuggestionDoesNotExists_ShouldThrowABadRequestException()
         {
-            var suggestionIdThatDontExists = int.MaxValue;
+            var suggestionIdThatDontExists = Guid.NewGuid();
 
             _validatorContext.Dto = new VoteToASuggestionDto
             {
@@ -66,17 +67,18 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         [Test]
         public void WhenSuggestionVoteIsNotUniqueByIpAndSuggestionId_ShouldThrowABadRequestException()
         {
+            var suggestionId = Guid.NewGuid();
             var userIp = "193.43.55.67";
 
             _validatorContext.Dto = new VoteToASuggestionDto
 
             {
                 Ip = userIp,
-                SuggestionId = 1
+                SuggestionId = suggestionId
             };
 
-            _dbContext.Suggestions.Add(new Suggestion { Id = 1, Content = "any content" });
-            _dbContext.SuggestionVotes.Add(new SuggestionVote { Id = 2, SuggestionId = 1, Ip = userIp });
+            _dbContext.Suggestions.Add(new Suggestion { Id = suggestionId, Content = "any content" });
+            _dbContext.SuggestionVotes.Add(new SuggestionVote { Id = Guid.NewGuid(), SuggestionId = suggestionId, Ip = userIp });
             _dbContext.SaveChanges();
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));

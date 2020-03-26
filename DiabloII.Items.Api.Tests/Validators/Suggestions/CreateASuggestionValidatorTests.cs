@@ -1,3 +1,4 @@
+using System;
 using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Suggestions;
 using DiabloII.Items.Api.Exceptions;
@@ -48,7 +49,7 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
 
             _validatorContext.Dto = new CreateASuggestionDto { Content = suggestionContent };
 
-            _dbContext.Suggestions.Add(new Suggestion { Id = 1, Content = suggestionContent });
+            _dbContext.Suggestions.Add(new Suggestion { Id = Guid.NewGuid(), Content = suggestionContent });
             _dbContext.SaveChanges();
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));

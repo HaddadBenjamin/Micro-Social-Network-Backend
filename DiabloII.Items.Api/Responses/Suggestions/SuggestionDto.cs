@@ -1,8 +1,10 @@
-﻿namespace DiabloII.Items.Api.Responses.Suggestions
+﻿using System;
+
+namespace DiabloII.Items.Api.Responses.Suggestions
 {
     public class SuggestionDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         
         public string Content { get; set; }
         
