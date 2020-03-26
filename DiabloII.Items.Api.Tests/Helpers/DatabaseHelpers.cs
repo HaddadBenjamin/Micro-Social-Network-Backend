@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Items.Api.Tests.Helpers
 {
-    public static class DatabaseHelper
+    public static class DatabaseHelpers
     {
-        public static ApplicationDbContext CreateATestDatabase()
+        public static ApplicationDbContext CreateATestDatabase(string databaseName = "TestDatabase")
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseInMemoryDatabase(databaseName: "DocumentationTest")
+                .UseInMemoryDatabase(databaseName: databaseName)
                 .Options;
 
             var dbContext = new ApplicationDbContext(options);
