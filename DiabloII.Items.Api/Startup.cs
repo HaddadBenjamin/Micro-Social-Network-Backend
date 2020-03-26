@@ -10,33 +10,26 @@ using System.Data.SqlClient;
 using System.Threading;
 using System.Threading.Tasks;
 using DiabloII.Items.Api.DbContext;
+using DiabloII.Items.Api.Helpers;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Items.Api
 {
     public class Startup
     {
+        private readonly IConfiguration _configuration;
+      
         public Startup(IConfiguration configuration)
         {
-			//ItemsGenerator.Generate();
-            Configuration = configuration;
+            //ItemsGenerator.Generate();
+            _configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var dbUsername = Configuration["connectionstrings:documentation:username"];
-            var dbPassword = Configuration["connectionstrings:documentation:password"];
-            var dbConnection = Configuration.GetConnectionString("Documentation");
-            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder(dbConnection)
-            {
-                UserID = dbUsername,
-                Password = dbPassword,
-                ApplicationName = "Diablo II Documentation",
-            };
+            var connectionString = DatabaseHelpers.GetApplicationDbContextConnectionString(_configuration);
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(sqlConnectionStringBuilder.ConnectionString));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 
             services.AddCors(); // AddCors doit-être au dessus de AddMvc.
             services.AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
