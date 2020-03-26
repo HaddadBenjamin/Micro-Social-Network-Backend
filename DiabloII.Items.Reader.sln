@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{5BEA0391-98B4-4A55-B28F-C63FF1C10981}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Items.Reader", "DiabloII.Items.Reader\DiabloII.Items.Reader.csproj", "{E8E5B8C2-59B2-4187-893E-79ED5AF0ECFA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Items.Generator", "DiabloII.Items\DiabloII.Items.Generator.csproj", "{73EA650B-03C3-4528-A3A1-D3EBA379B1B7}"
