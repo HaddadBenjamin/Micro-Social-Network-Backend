@@ -22,7 +22,7 @@ namespace DiabloII.Items.Api.Controllers
 
         [Route("searchuniques")]
         [HttpGet]
-        public async Task<IEnumerable<Item>> SearchUniques([FromBody] SearchUniquesDto searchDto = default)
+        public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto searchDto = default)
             => await _itemsService.SearchUniques(searchDto).ConfigureAwait(false);
     }
 }
