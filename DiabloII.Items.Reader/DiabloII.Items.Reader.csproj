@@ -59,7 +59,7 @@
     <Compile Include="Records\WeaponRecord.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="paket.references" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

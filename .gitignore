@@ -1,7 +1,3 @@
-#Paket dependency manager
-.paket/
-paket-files/
-
 # Build and Release Folders
 bin-debug/
 bin-release/
@@ -18,13 +14,22 @@ packages/
 *.ipa
 *.apk
 
-.idea
-.idea/workspace.xml
-
-DiabloII.Items/.vs
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.
 DiabloII.Items/.vs/DiabloII.Items.Reader/v15
 DiabloII.Items/packages
-
+node_modules
+.idea
+.idea/workspace.xml
+DiabloII.Items/.vs
+.idea
+DiabloII.Items/DiabloII.Items/Files/~$Diablo II - Enriched Data Sheet.xlsx
+.idea
+.idea/workspace.xml
+.idea/workspace.xml
+.idea
 .vs/DiabloII.Items.Reader/v16
 .vs/DiabloII.Items.Reader/DesignTimeBuild
+packages
 .vs/DiabloII.Items.Reader/config/applicationhost.config
