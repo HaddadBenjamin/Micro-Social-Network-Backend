@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Items.Generator", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Items.Api", "DiabloII.Items.Api\DiabloII.Items.Api.csproj", "{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Items.Api.Tests", "DiabloII.Items.Api.Tests\DiabloII.Items.Api.Tests.csproj", "{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Items.Api.Tests", "DiabloII.Items.Api.Tests\DiabloII.Items.Api.Tests.csproj", "{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
