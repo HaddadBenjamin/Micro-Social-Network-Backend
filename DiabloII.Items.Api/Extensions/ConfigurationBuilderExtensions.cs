@@ -7,7 +7,7 @@ namespace DiabloII.Items.Api.Extensions
 {
     public static class ConfigurationBuilderExtensions
     {
-        public static void AddAzureKeyVault(this IConfigurationBuilder configurationBuilder)
+        public static IConfigurationBuilder AddAzureKeyVault(this IConfigurationBuilder configurationBuilder)
         {
             var vaultEndpoint = "https://benjamintestvault.vault.azure.net/";
             var azureServiceTokenProvider = new AzureServiceTokenProvider();
@@ -15,7 +15,7 @@ namespace DiabloII.Items.Api.Extensions
             var authentificationCallback = new KeyVaultClient.AuthenticationCallback(azureServiceTokenProvider.KeyVaultTokenCallback);
             var keyVaultClient = new KeyVaultClient(authentificationCallback);
 
-            configurationBuilder.AddAzureKeyVault(vaultEndpoint, keyVaultClient, defaultKeyVaultSecretManager);
+            return configurationBuilder.AddAzureKeyVault(vaultEndpoint, keyVaultClient, defaultKeyVaultSecretManager);
         }
     }
 }
