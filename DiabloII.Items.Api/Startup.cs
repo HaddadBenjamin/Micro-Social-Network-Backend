@@ -56,8 +56,8 @@ namespace DiabloII.Items.Api
             
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddTransient<IItemsService, ItemsService>();
-            //services.AddTransient<ISuggestionsService, SuggestionsService>();
+            services.AddScoped<IItemsService, ItemsService>();
+            //services.AddScoped<ISuggestionsService, SuggestionsService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
