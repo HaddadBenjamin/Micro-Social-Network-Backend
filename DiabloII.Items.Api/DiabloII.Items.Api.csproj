@@ -33,10 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DiabloII.Items\DiabloII.Items.Generator.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="Files\Uniques.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

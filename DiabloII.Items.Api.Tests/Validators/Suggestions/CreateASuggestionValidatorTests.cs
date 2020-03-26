@@ -1,6 +1,7 @@
 using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Suggestions;
 using DiabloII.Items.Api.Exceptions;
+using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Api.Queries.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Create;
 using NUnit.Framework;
