@@ -4,7 +4,6 @@ using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Mappers.Suggestions;
 using DiabloII.Items.Api.Queries.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
-using DiabloII.Items.Api.Validators.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Create;
 using DiabloII.Items.Api.Validators.Suggestions.Vote;
 using Microsoft.EntityFrameworkCore;

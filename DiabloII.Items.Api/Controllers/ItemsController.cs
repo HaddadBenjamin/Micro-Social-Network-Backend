@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using DiabloII.Items.Api.Queries.Items;
 using DiabloII.Items.Api.Responses.Items;
 using DiabloII.Items.Api.Services.Items;
-using Microsoft.AspNetCore.Cors;
 
 namespace DiabloII.Items.Api.Controllers
 {

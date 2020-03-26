@@ -1,6 +1,4 @@
 ﻿
-using System;
-
 namespace DiabloII.Items.Api.Queries.Suggestions
 {
     public class CreateASuggestionDto

@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace DiabloII.Items.Api.DbContext.Suggestions
+﻿namespace DiabloII.Items.Api.DbContext.Suggestions
 {
     public class SuggestionVote
     {

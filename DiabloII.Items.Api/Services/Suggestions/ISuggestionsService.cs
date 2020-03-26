@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Queries.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
 

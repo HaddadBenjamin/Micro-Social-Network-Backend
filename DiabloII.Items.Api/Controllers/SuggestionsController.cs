@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using DiabloII.Items.Api.DbContext;
+﻿using System.Collections.Generic;
 using DiabloII.Items.Api.Queries.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
 using DiabloII.Items.Api.Services.Suggestions;
