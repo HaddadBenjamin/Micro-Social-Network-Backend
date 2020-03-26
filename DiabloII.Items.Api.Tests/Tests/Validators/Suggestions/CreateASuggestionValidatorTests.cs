@@ -13,33 +13,33 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators.Suggestions
     [TestFixture]
     public class CreateASuggestionValidatorTests
     {
-        private ApplicationDbContext DbContext;
-        private CreateASuggestionValidator Validator;
-        private CreateASuggestionValidatorContext ValidatorContext;
+        private ApplicationDbContext _dbContext;
+        private CreateASuggestionValidator _validator;
+        private CreateASuggestionValidatorContext _validatorContext;
 
         [SetUp]
         public void Setup()
         {
-            DbContext = DatabaseHelper.CreateATestDatabase();
+            _dbContext = DatabaseHelper.CreateATestDatabase();
 
-            Validator = new CreateASuggestionValidator();
-            ValidatorContext = new CreateASuggestionValidatorContext(null, DbContext);
+            _validator = new CreateASuggestionValidator();
+            _validatorContext = new CreateASuggestionValidatorContext(null, _dbContext);
         }
 
         [Test]
         public void WhenContentIsNull_ShouldThrowABadRequestException()
         {
-            ValidatorContext.Dto = new CreateASuggestionDto { Content = null };
+            _validatorContext.Dto = new CreateASuggestionDto { Content = null };
 
-            Should.Throw<BadRequestException>(() => Validator.Validate(ValidatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
         }
 
         [Test]
         public void WhenContentIsEmpty_ShouldThrowABadRequestException()
         {
-            ValidatorContext.Dto = new CreateASuggestionDto { Content = string.Empty };
+            _validatorContext.Dto = new CreateASuggestionDto { Content = string.Empty };
 
-            Should.Throw<BadRequestException>(() => Validator.Validate(ValidatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
         }
 
         [Test]
@@ -47,12 +47,12 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators.Suggestions
         {
             var suggestionContent = "any value";
 
-            ValidatorContext.Dto = new CreateASuggestionDto { Content = suggestionContent };
+            _validatorContext.Dto = new CreateASuggestionDto { Content = suggestionContent };
 
-            DbContext.Suggestions.Add(new Suggestion { Id = 1, Content = suggestionContent });
-            DbContext.SaveChanges();
+            _dbContext.Suggestions.Add(new Suggestion { Id = 1, Content = suggestionContent });
+            _dbContext.SaveChanges();
 
-            Should.Throw<BadRequestException>(() => Validator.Validate(ValidatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
         }
     }
 }

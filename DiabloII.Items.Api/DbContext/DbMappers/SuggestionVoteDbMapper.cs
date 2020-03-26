@@ -5,7 +5,7 @@ namespace DiabloII.Items.Api.DbContext.DbMappers
 {
     public static class SuggestionVoteDbMapper
     {
-        private static readonly int IPV4_LENGTH = 15;
+        private static readonly int Ipv4Length = 15;
 
         public static void Map(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,7 @@ namespace DiabloII.Items.Api.DbContext.DbMappers
             suggestionVoteBuilder
                 .Property(suggestionVote => suggestionVote.Ip)
                 .IsRequired()
-                .HasMaxLength(IPV4_LENGTH);
+                .HasMaxLength(Ipv4Length);
         }
     }
 }

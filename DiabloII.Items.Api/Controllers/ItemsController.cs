@@ -12,17 +12,17 @@ namespace DiabloII.Items.Api.Controllers
     [Route("api/v1/[controller]")]
     public class ItemsController : Controller
     {
-        private readonly IItemsService ItemsService;
+        private readonly IItemsService _itemsService;
 
-        public ItemsController(IItemsService itemsService) => ItemsService = itemsService;
+        public ItemsController(IItemsService itemsService) => _itemsService = itemsService;
 
         [Route("getalluniques")]
         [HttpGet]
-        public async Task<IEnumerable<Item>> GetAllUniques() => await ItemsService.GetAllUniques().ConfigureAwait(false);
+        public async Task<IEnumerable<Item>> GetAllUniques() => await _itemsService.GetAllUniques().ConfigureAwait(false);
 
         [Route("searchuniques")]
         [HttpGet]
-        public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto searchDto = default)
-            => await ItemsService.SearchUniques(searchDto).ConfigureAwait(false);
+        public async Task<IEnumerable<Item>> SearchUniques([FromBody] SearchUniquesDto searchDto = default)
+            => await _itemsService.SearchUniques(searchDto).ConfigureAwait(false);
     }
 }

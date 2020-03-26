@@ -9,7 +9,7 @@ namespace DiabloII.Items.Api
 {
     public class ErrorHandlingFilter : ExceptionFilterAttribute
     {
-        private static Dictionary<string, HttpStatusCode?> ExceptionTypeNameToHttpStatusMapper = new Dictionary<string, HttpStatusCode?>()
+        private static Dictionary<string, HttpStatusCode?> _exceptionTypeNameToHttpStatusMapper = new Dictionary<string, HttpStatusCode?>()
         {
             { nameof(BadRequestException), HttpStatusCode.BadRequest }
         };
@@ -18,7 +18,7 @@ namespace DiabloII.Items.Api
         {
             var exception = context.Exception;
             var exceptionTypeName = exception.GetType().Name;
-            var evaluatedHttpStatus = ExceptionTypeNameToHttpStatusMapper.GetValueOrDefault(exceptionTypeName);
+            var evaluatedHttpStatus = _exceptionTypeNameToHttpStatusMapper.GetValueOrDefault(exceptionTypeName);
             var httpStatus = evaluatedHttpStatus ?? HttpStatusCode.InternalServerError;
 
             SetExceptionResult(context, exception, httpStatus);

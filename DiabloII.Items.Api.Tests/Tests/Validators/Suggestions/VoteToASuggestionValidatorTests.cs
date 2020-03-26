@@ -12,41 +12,41 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators.Suggestions
     [TestFixture]
     public class VoteToASuggestionValidatorTests
     {
-        private ApplicationDbContext DbContext;
-        private VoteToASuggestionValidator Validator;
-        private VoteToASuggestionValidatorContext ValidatorContext;
+        private ApplicationDbContext _dbContext;
+        private VoteToASuggestionValidator _validator;
+        private VoteToASuggestionValidatorContext _validatorContext;
 
         [SetUp]
         public void Setup()
         {
-            DbContext = DatabaseHelper.CreateATestDatabase();
+            _dbContext = DatabaseHelper.CreateATestDatabase();
 
-            Validator = new VoteToASuggestionValidator();
-            ValidatorContext = new VoteToASuggestionValidatorContext(null, DbContext);
+            _validator = new VoteToASuggestionValidator();
+            _validatorContext = new VoteToASuggestionValidatorContext(null, _dbContext);
         }
 
         [Test]
         public void WhenUserIpIsNull_ShouldThrowABadRequestException()
         {
-            ValidatorContext.Dto = new VoteToASuggestionDto { Ip = null };
+            _validatorContext.Dto = new VoteToASuggestionDto { Ip = null };
 
-            Should.Throw<BadRequestException>(() => Validator.Validate(ValidatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
         }
 
         [Test]
         public void WhenUserIpIsEmpty_ShouldThrowABadRequestException()
         {
-            ValidatorContext.Dto = new VoteToASuggestionDto { Ip = string.Empty };
+            _validatorContext.Dto = new VoteToASuggestionDto { Ip = string.Empty };
 
-            Should.Throw<BadRequestException>(() => Validator.Validate(ValidatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
         }
 
         [Test]
         public void WhenUserIpIsNotAnIp_ShouldThrowABadRequestException()
         {
-            ValidatorContext.Dto = new VoteToASuggestionDto { Ip = "999.0.0.0" };
+            _validatorContext.Dto = new VoteToASuggestionDto { Ip = "999.0.0.0" };
 
-            Should.Throw<BadRequestException>(() => Validator.Validate(ValidatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
         }
 
         [Test]
@@ -54,13 +54,13 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators.Suggestions
         {
             var suggestionIdThatDontExists = int.MaxValue;
 
-            ValidatorContext.Dto = new VoteToASuggestionDto
+            _validatorContext.Dto = new VoteToASuggestionDto
             {
                 Ip = "193.43.55.67",
                 SuggestionId = suggestionIdThatDontExists
             };
 
-            Should.Throw<BadRequestException>(() => Validator.Validate(ValidatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
         }
 
         [Test]
@@ -68,18 +68,18 @@ namespace DiabloII.Items.Api.Tests.Tests.Validators.Suggestions
         {
             var userIp = "193.43.55.67";
 
-            ValidatorContext.Dto = new VoteToASuggestionDto
+            _validatorContext.Dto = new VoteToASuggestionDto
 
             {
                 Ip = userIp,
                 SuggestionId = 1
             };
 
-            DbContext.Suggestions.Add(new Suggestion { Id = 1, Content = "any content" });
-            DbContext.SuggestionVotes.Add(new SuggestionVote { Id = 2, SuggestionId = 1, Ip = userIp });
-            DbContext.SaveChanges();
+            _dbContext.Suggestions.Add(new Suggestion { Id = 1, Content = "any content" });
+            _dbContext.SuggestionVotes.Add(new SuggestionVote { Id = 2, SuggestionId = 1, Ip = userIp });
+            _dbContext.SaveChanges();
 
-            Should.Throw<BadRequestException>(() => Validator.Validate(ValidatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
         }
     }
 }

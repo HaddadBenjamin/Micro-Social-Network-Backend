@@ -13,23 +13,23 @@ namespace DiabloII.Items.Api.Controllers
     [EnableCors("AllowOrigin")]
     public class SuggestionsController : Controller
     {
-        private readonly ISuggestionsService SuggestionsService;
+        private readonly ISuggestionsService _suggestionsService;
 
         public SuggestionsController(ISuggestionsService suggestionsService)
         {
-            SuggestionsService = suggestionsService;
+            _suggestionsService = suggestionsService;
         } 
 
         [Route("create")]
         [HttpPost]
-        public void Create(CreateASuggestionDto createASuggestion) => SuggestionsService.Create(createASuggestion);
+        public void Create(CreateASuggestionDto createASuggestion) => _suggestionsService.Create(createASuggestion);
 
         [Route("vote")]
         [HttpPost]
-        public SuggestionDto Vote(VoteToASuggestionDto voteToASuggestion) => SuggestionsService.Vote(voteToASuggestion);
+        public SuggestionDto Vote(VoteToASuggestionDto voteToASuggestion) => _suggestionsService.Vote(voteToASuggestion);
 
         [Route("getall")]
         [HttpGet]
-        public IReadOnlyCollection<SuggestionDto> GetAll() => SuggestionsService.GetAll();
+        public IReadOnlyCollection<SuggestionDto> GetAll() => _suggestionsService.GetAll();
     }
 }

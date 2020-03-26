@@ -10,10 +10,10 @@ namespace DiabloII.Items.Reader
 {
     public class DiabloIIFilesReader
     {
-        private List<(string Name, string Type)> MissingItemTypes = new List<(string, string)>();
-        private List<(string Name, string ItemName, double Id)> MissingSkills = new List<(string, string, double)>();
-        private List<(string Name, string Property)> MissingProperties = new List<(string, string)>();
-		private string CurrentItemName;
+        private List<(string Name, string Type)> _missingItemTypes = new List<(string, string)>();
+        private List<(string Name, string ItemName, double Id)> _missingSkills = new List<(string, string, double)>();
+        private List<(string Name, string Property)> _missingProperties = new List<(string, string)>();
+		private string _currentItemName;
 		// TODO : 
 		// Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
 		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
@@ -48,13 +48,13 @@ namespace DiabloII.Items.Reader
 
 			// For sanitize purpoeses and comparaison :
 			var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
-            var uni = string.Join("\n- ", MissingItemTypes.Distinct().OrderBy(x => x));
+            var uni = string.Join("\n- ", _missingItemTypes.Distinct().OrderBy(x => x));
             var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
 			var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
 			var missingProps = string.Join("\n- ", uniques.SelectMany(_ => _.Properties.Select(p => p.Name).Where(name => properties.FirstOrDefault(s => s.Name == name) == null).Distinct()).Distinct().ToList());
-			var missingItemsCategories = string.Join("\n- ", MissingItemTypes.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Type}"));
-            var missingProperties = string.Join("\n- ", MissingProperties.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Property}").Where(_ => !string.IsNullOrWhiteSpace(_)));
-			var missingSkills = string.Join("\n- ", MissingSkills.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.ItemName} - {_.Name} : {_.Id}").Where(_ => !string.IsNullOrWhiteSpace(_)));
+			var missingItemsCategories = string.Join("\n- ", _missingItemTypes.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Type}"));
+            var missingProperties = string.Join("\n- ", _missingProperties.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Property}").Where(_ => !string.IsNullOrWhiteSpace(_)));
+			var missingSkills = string.Join("\n- ", _missingSkills.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.ItemName} - {_.Name} : {_.Id}").Where(_ => !string.IsNullOrWhiteSpace(_)));
 
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Missing Properties.txt"), missingProperties);
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Missing Skills.txt"), missingSkills);
@@ -102,11 +102,11 @@ namespace DiabloII.Items.Reader
                     var minDefensePerLevel = 0d;
                     var maxDefensePerLevel = 0d;
                     var requirementPercent = 0d;
-                    CurrentItemName = name;
+                    _currentItemName = name;
 
                     if (itemCategory == null)
                     {
-						MissingItemTypes.Add((name, type));
+						_missingItemTypes.Add((name, type));
                         return null;
                     }
 
@@ -120,7 +120,7 @@ namespace DiabloII.Items.Reader
 
 						if (property == null)
 						{
-							MissingProperties.Add((name, propertyName));
+							_missingProperties.Add((name, propertyName));
 							continue;
 						}
 						var propertyFormattedName = property.FormattedName;
@@ -818,7 +818,7 @@ namespace DiabloII.Items.Reader
 				skill = skills.FirstOrDefault(_ => _.Name == name.ToTitleCase());
 			
 			if (skill == null)
-				MissingSkills.Add((name, CurrentItemName, id));
+				_missingSkills.Add((name, _currentItemName, id));
 
 			return skill;
 		}
@@ -831,7 +831,7 @@ namespace DiabloII.Items.Reader
 				skillTab = skillTabs.FirstOrDefault(_ => _.Name == name.ToTitleCase());
 
 			if (skillTab == null)
-				MissingSkills.Add((name, CurrentItemName, id));
+				_missingSkills.Add((name, _currentItemName, id));
 
 			return skillTab;
 		}
