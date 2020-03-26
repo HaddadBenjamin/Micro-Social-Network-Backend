@@ -38,5 +38,16 @@ namespace DiabloII.Items.Api.Helpers
 
             return dbContext;
         }
+
+        public static ApplicationDbContext GetTheDatabase(string connectionString)
+        {
+            var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+                .UseSqlServer(connectionString)
+                .Options;
+
+            var dbContext = new ApplicationDbContext(options);
+
+            return dbContext;
+        }
     }
 }
