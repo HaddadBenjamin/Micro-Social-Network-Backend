@@ -9,7 +9,7 @@ using Shouldly;
 namespace DiabloII.Items.Api.Tests.Healthchecks
 {
     [TestFixture]
-    public class ProductionHealthchecksTests
+    public class ProductionHealthCheckTests
     {
         private IConfiguration _configuration;
 
@@ -45,9 +45,9 @@ namespace DiabloII.Items.Api.Tests.Healthchecks
             {
                 dbContext.Database.SetCommandTimeout(5);
 
-                var canConnect = dbContext.Database.CanConnect();
+                var canConnectToTheDatabase = dbContext.Database.CanConnect();
                     
-                canConnect.ShouldBe(true, "The production database don't respond.");
+                canConnectToTheDatabase.ShouldBe(true, "The production database don't respond.");
             }
         }
     }
