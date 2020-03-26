@@ -11,7 +11,7 @@ namespace DiabloII.Items.Api.Helpers
 {
     public static class DatabaseHelpers
     {
-        public static string GetApplicationDbContextConnectionString(IConfiguration configuration, string applicationName = "Diablo II Documentation")
+        public static string GetTheDbContextConnectionString(IConfiguration configuration, string applicationName = "Diablo II Documentation")
         {
             var dbUsername = configuration["connectionstrings:documentation:username"];
             var dbPassword = configuration["connectionstrings:documentation:password"];
@@ -26,7 +26,7 @@ namespace DiabloII.Items.Api.Helpers
             return sqlConnectionStringBuilder.ConnectionString;
         }
 
-        public static ApplicationDbContext CreateATestDatabase(string databaseName = "TestDatabase")
+        public static ApplicationDbContext CreateATestDbContext(string databaseName = "TestDatabase")
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseInMemoryDatabase(databaseName: databaseName)
@@ -39,7 +39,7 @@ namespace DiabloII.Items.Api.Helpers
             return dbContext;
         }
 
-        public static ApplicationDbContext GetTheDatabase(string connectionString)
+        public static ApplicationDbContext GetTheDbContext(string connectionString)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
                 .UseSqlServer(connectionString)

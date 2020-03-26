@@ -19,7 +19,7 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         [SetUp]
         public void Setup()
         {
-            _dbContext = DatabaseHelpers.CreateATestDatabase();
+            _dbContext = DatabaseHelpers.CreateATestDbContext();
 
             _validator = new CreateASuggestionValidator();
             _validatorContext = new CreateASuggestionValidatorContext(null, _dbContext);

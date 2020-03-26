@@ -27,7 +27,7 @@ namespace DiabloII.Items.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = DatabaseHelpers.GetApplicationDbContextConnectionString(_configuration);
+            var connectionString = DatabaseHelpers.GetTheDbContextConnectionString(_configuration);
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 

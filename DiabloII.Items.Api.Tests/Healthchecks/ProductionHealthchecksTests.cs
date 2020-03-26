@@ -39,9 +39,9 @@ namespace DiabloII.Items.Api.Tests.Healthchecks
         [Test]
         public void Database_ShouldResponse()
         {
-            var connectionString = DatabaseHelpers.GetApplicationDbContextConnectionString(_configuration, "Diablo II Documentation - Tests");
+            var connectionString = DatabaseHelpers.GetTheDbContextConnectionString(_configuration, "Diablo II Documentation - Tests");
 
-            using (var dbContext = DatabaseHelpers.GetTheDatabase(connectionString))
+            using (var dbContext = DatabaseHelpers.GetTheDbContext(connectionString))
             {
                 dbContext.Database.SetCommandTimeout(5);
 
