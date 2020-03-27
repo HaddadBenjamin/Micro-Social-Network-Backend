@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Items.Api", "Diabl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Items.Api.Tests", "DiabloII.Items.Api.Tests\DiabloII.Items.Api.Tests.csproj", "{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Items.Reader.V2", "DiabloII.Items.Reader.V2\DiabloII.Items.Reader.V2.csproj", "{528314C9-45A9-4EF4-84FE-FA0A9525C10A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Items.Reader", "DiabloII.Items.Reader\DiabloII.Items.Reader.csproj", "{C5EC9316-DC4D-46BF-BA89-CE92E955FD97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Items.Generator.V2", "DiabloII.Items.Generator.V2\DiabloII.Items.Generator.V2.csproj", "{AE03C914-7E37-4A76-A91F-8BA7DD031427}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Items.Generator", "DiabloII.Items.Generator\DiabloII.Items.Generator.csproj", "{16C2452A-3B25-4B68-99E1-9E403EE2B835}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,14 @@ Global
 		{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}.Release|Any CPU.Build.0 = Release|Any CPU
-		{528314C9-45A9-4EF4-84FE-FA0A9525C10A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{528314C9-45A9-4EF4-84FE-FA0A9525C10A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{528314C9-45A9-4EF4-84FE-FA0A9525C10A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{528314C9-45A9-4EF4-84FE-FA0A9525C10A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE03C914-7E37-4A76-A91F-8BA7DD031427}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE03C914-7E37-4A76-A91F-8BA7DD031427}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE03C914-7E37-4A76-A91F-8BA7DD031427}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE03C914-7E37-4A76-A91F-8BA7DD031427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5EC9316-DC4D-46BF-BA89-CE92E955FD97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5EC9316-DC4D-46BF-BA89-CE92E955FD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5EC9316-DC4D-46BF-BA89-CE92E955FD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5EC9316-DC4D-46BF-BA89-CE92E955FD97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16C2452A-3B25-4B68-99E1-9E403EE2B835}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16C2452A-3B25-4B68-99E1-9E403EE2B835}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16C2452A-3B25-4B68-99E1-9E403EE2B835}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16C2452A-3B25-4B68-99E1-9E403EE2B835}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

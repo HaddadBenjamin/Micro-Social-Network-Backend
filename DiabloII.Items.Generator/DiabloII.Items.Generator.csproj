@@ -10,7 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DiabloII.Items.Reader.V2\DiabloII.Items.Reader.V2.csproj" />
+    <ProjectReference Include="..\DiabloII.Items.Reader\DiabloII.Items.Reader.csproj" />
   </ItemGroup>
 
 </Project>
