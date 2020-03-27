@@ -8,6 +8,7 @@ using Shouldly;
 
 namespace DiabloII.Items.Api.Tests.Healthchecks
 {
+    [Ignore("Those tests can't run before the deploy process.")]
     [TestFixture]
     public class ProductionHealthCheckTests
     {
@@ -16,7 +17,7 @@ namespace DiabloII.Items.Api.Tests.Healthchecks
         [OneTimeSetUp]
         public void OneTimeSetup() =>
             _configuration = new ConfigurationBuilder()
-                .AddAzureKeyVault()
+                .AddAMyAzureKeyVault()
                 .AddJsonFile("appsettings.Production.json")
                 .Build();
 
@@ -39,7 +40,7 @@ namespace DiabloII.Items.Api.Tests.Healthchecks
         [Test]
         public void Database_ShouldResponse()
         {
-            var connectionString = DatabaseHelpers.GetTheDbContextConnectionString(_configuration, "Diablo II Documentation - Tests");
+            var connectionString = DatabaseHelpers.GetTheConnectionString(_configuration, "Diablo II Documentation - Tests");
 
             using (var dbContext = DatabaseHelpers.GetTheDbContext(connectionString))
             {

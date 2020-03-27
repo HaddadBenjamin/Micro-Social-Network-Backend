@@ -7,7 +7,7 @@ namespace DiabloII.Items.Api.Helpers
 {
     public static class DatabaseHelpers
     {
-        public static string GetTheDbContextConnectionString(IConfiguration configuration, string applicationName = "Diablo II Documentation")
+        public static string GetTheConnectionString(IConfiguration configuration, string applicationName = "Diablo II Documentation")
         {
             var dbUsername = configuration["connectionstrings:documentation:username"];
             var dbPassword = configuration["connectionstrings:documentation:password"];
