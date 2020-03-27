@@ -10,6 +10,8 @@ namespace DiabloII.Items.Api.DbContext
 
         public DbSet<SuggestionVote> SuggestionVotes { get; set; }
 
+        public DbSet<ApplicationLog> Logs { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
