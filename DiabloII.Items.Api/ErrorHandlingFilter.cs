@@ -7,54 +7,61 @@ using System.Net;
 using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Suggestions;
 using DiabloII.Items.Api.Exceptions;
-using Microsoft.ApplicationInsights.AspNetCore.Extensions;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace DiabloII.Items.Api
 {
     public class ErrorHandlingFilter : ExceptionFilterAttribute
     {
-        private static Dictionary<string, HttpStatusCode?> _exceptionTypeNameToHttpStatusMapper = new Dictionary<string, HttpStatusCode?>()
+        private static readonly Dictionary<string, HttpStatusCode?> _exceptionTypeNameToHttpStatusMapper = new Dictionary<string, HttpStatusCode?>()
         {
             {nameof(BadRequestException), HttpStatusCode.BadRequest}
         };
 
-        public override void OnException(ExceptionContext context)
+        public override void OnException(ExceptionContext exceptionContext)
         {
-            var exception = context.Exception;
+            var exception = exceptionContext.Exception;
             var exceptionTypeName = exception.GetType().Name;
-            var evaluatedHttpStatus = _exceptionTypeNameToHttpStatusMapper.GetValueOrDefault(exceptionTypeName);
-            var httpStatus = evaluatedHttpStatus ?? HttpStatusCode.InternalServerError;
+            var evaluatedResponseHttpStatus = _exceptionTypeNameToHttpStatusMapper.GetValueOrDefault(exceptionTypeName);
+            var responseHttpStatus = evaluatedResponseHttpStatus ?? HttpStatusCode.InternalServerError;
 
-            SetExceptionResult(context, exception, httpStatus);
+            SetExceptionResult(exceptionContext, exception, responseHttpStatus);
 
-            context.ExceptionHandled = true;
+            exceptionContext.ExceptionHandled = true;
 
-            LogExceptionInDatabase(context);
+            var errorLogService = (IErrorLogService)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogService));
+            var errorLogCreator = new ErrorLoggerCreator(exceptionContext, responseHttpStatus);
+            var errorLog = errorLogCreator.Create();
+
+            errorLogService.Log(errorLog);
         }
 
-        private static void SetExceptionResult(ExceptionContext context, Exception exception, HttpStatusCode code) =>
-            context.Result = new JsonResult(exception)
-            {
-                StatusCode = (int)code
-            };
-
-        private void LogExceptionInDatabase(ExceptionContext context)
+        private static void SetExceptionResult(ExceptionContext exceptionContext, Exception exception, HttpStatusCode code) =>
+        exceptionContext.Result = new JsonResult(exception)
         {
-            var errorLog = CreateTheErrorLog(context);
-            var dbContext = (ApplicationDbContext)context.HttpContext.RequestServices.GetService(typeof(ApplicationDbContext));
+            StatusCode = (int)code
+        };
+    }
 
-            dbContext.ErrorLogs.Add(errorLog);
-            dbContext.SaveChanges();
+    public class ErrorLoggerCreator
+    {
+
+        private readonly ExceptionContext _exceptionContext;
+
+        private readonly HttpStatusCode _httpResponseStatus;
+
+        public ErrorLoggerCreator(ExceptionContext exceptionContext, HttpStatusCode httpResponseStatus)
+        {
+            _exceptionContext = exceptionContext;
+            _httpResponseStatus = httpResponseStatus;
         }
 
-        private ErrorLog CreateTheErrorLog(ExceptionContext exceptionContext)
+        public ErrorLog Create()
         {
-            var errorLogContentObject = CreateTheErrorLogContentObject(exceptionContext);
+            var errorLogContentObject = CreateTheErrorLogContentObject();
             var errorLogContent = JsonConvert.SerializeObject(errorLogContentObject, Formatting.Indented);
 
             return new ErrorLog
@@ -65,15 +72,15 @@ namespace DiabloII.Items.Api
             };
         }
 
-        private static dynamic CreateTheErrorLogContentObject(ExceptionContext exceptionContext) => new
+        private dynamic CreateTheErrorLogContentObject() => new
         {
-            Exception = CreateTheExceptionObject(exceptionContext),
-            Request = CreateTheRequestObject(exceptionContext)
+            Exception = CreateTheExceptionObject(),
+            Request = CreateTheHttpObject()
         };
 
-        private static dynamic CreateTheExceptionObject(ExceptionContext exceptionContext)
+        private dynamic CreateTheExceptionObject()
         {
-            var exception = exceptionContext.Exception.Demystify();
+            var exception = _exceptionContext.Exception.Demystify();
             var innerException = exception.InnerException;
             var innerExceptionObject = innerException != null ? new
             {
@@ -93,9 +100,20 @@ namespace DiabloII.Items.Api
             };
         }
 
-        private static dynamic CreateTheRequestObject(ExceptionContext exceptionContext)
+        private dynamic CreateTheHttpObject() => new
         {
-            var httpRequest = exceptionContext.HttpContext.Request;
+            Request = CreateTheHttpRequestObject(),
+            Response = CreateTheHttpResponseObject()
+        };
+
+        private dynamic CreateTheHttpResponseObject() => new
+        {
+            HttpStatus = _httpResponseStatus
+        };
+
+        private dynamic CreateTheHttpRequestObject()
+        {
+            var httpRequest = _exceptionContext.HttpContext.Request;
             using (var streamReader = new StreamReader(httpRequest.Body))
             {
                 var requestBody = streamReader.ReadToEnd();
@@ -111,7 +129,7 @@ namespace DiabloII.Items.Api
                 {
                     RequestUrl = requestUrl,
                     RequestBody = requestBody,
-                    RequestHeaders = requestHeaders
+                    RequestHeaders = requestHeaders,
                 };
             }
         }

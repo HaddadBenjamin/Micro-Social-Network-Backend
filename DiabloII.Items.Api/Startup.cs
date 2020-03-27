@@ -67,7 +67,8 @@ namespace DiabloII.Items.Api
             services
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString))
                 .AddTransient<IItemsService, ItemsService>()
-                .AddTransient<ISuggestionsService, SuggestionsService>();
+                .AddTransient<ISuggestionsService, SuggestionsService>()
+                .AddTransient<IErrorLogService, ErrorLogService>();
         }
     }
 
