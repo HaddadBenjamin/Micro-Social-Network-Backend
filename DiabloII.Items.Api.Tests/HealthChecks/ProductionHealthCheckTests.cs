@@ -1,12 +1,12 @@
 ﻿using System.Net;
-using Microsoft.Extensions.Configuration;
 using DiabloII.Items.Api.Extensions;
 using DiabloII.Items.Api.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DiabloII.Items.Api.Tests.Healthchecks
+namespace DiabloII.Items.Api.Tests.HealthChecks
 {
     [Ignore("Those tests can't run before the deploy process.")]
     [TestFixture]

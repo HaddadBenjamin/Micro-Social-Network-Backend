@@ -1,6 +1,6 @@
 using System;
 using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.DbContext.Suggestions;
+using DiabloII.Items.Api.DbContext.Suggestions.Models;
 using DiabloII.Items.Api.Exceptions;
 using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Api.Queries.Suggestions;
