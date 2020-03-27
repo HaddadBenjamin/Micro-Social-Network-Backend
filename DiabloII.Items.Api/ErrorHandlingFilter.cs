@@ -32,7 +32,7 @@ namespace DiabloII.Items.Api
 
             exceptionContext.ExceptionHandled = true;
 
-            var errorLogService = (IErrorLogService)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogService));
+            var errorLogService = (IErrorLogsService)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogsService));
             var errorLogCreator = new ErrorLoggerCreator(exceptionContext, responseHttpStatus);
             var errorLog = errorLogCreator.Create();
 

@@ -1,14 +1,15 @@
-﻿using DiabloII.Items.Api.Services.Items;
+﻿using DiabloII.Items.Api.DbContext;
+using DiabloII.Items.Api.Helpers;
+using DiabloII.Items.Api.Services.Items;
 using DiabloII.Items.Api.Services.Suggestions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
-using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.Helpers;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Items.Api
 {
@@ -60,6 +61,7 @@ namespace DiabloII.Items.Api
 
             return services;
         }
+
         public static void RegisterMyDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = DatabaseHelpers.GetTheConnectionString(configuration);
@@ -68,7 +70,7 @@ namespace DiabloII.Items.Api
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString))
                 .AddTransient<IItemsService, ItemsService>()
                 .AddTransient<ISuggestionsService, SuggestionsService>()
-                .AddTransient<IErrorLogService, ErrorLogService>();
+                .AddTransient<IErrorLogsService, ErrorLogsService>();
         }
     }
 
@@ -79,7 +81,7 @@ namespace DiabloII.Items.Api
         {
             if (environment.IsDevelopment())
                 applicationBuilder.UseDeveloperExceptionPage();
-          
+
             return applicationBuilder;
         }
 
@@ -95,7 +97,7 @@ namespace DiabloII.Items.Api
         }
 
         public static IApplicationBuilder UseMyCors(this IApplicationBuilder applicationBuilder) => applicationBuilder
-            .UseCors(policyBuilder => policyBuilder 
+            .UseCors(policyBuilder => policyBuilder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
