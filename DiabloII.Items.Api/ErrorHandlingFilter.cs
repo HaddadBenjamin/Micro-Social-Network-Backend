@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using DiabloII.Items.Api.DbContext;
@@ -19,7 +20,7 @@ namespace DiabloII.Items.Api
     {
         private static Dictionary<string, HttpStatusCode?> _exceptionTypeNameToHttpStatusMapper = new Dictionary<string, HttpStatusCode?>()
         {
-            { nameof(BadRequestException), HttpStatusCode.BadRequest }
+            {nameof(BadRequestException), HttpStatusCode.BadRequest}
         };
 
         public override void OnException(ExceptionContext context)
@@ -36,39 +37,83 @@ namespace DiabloII.Items.Api
             LogExceptionInDatabase(context);
         }
 
-        private static void SetExceptionResult(ExceptionContext context, Exception exception, HttpStatusCode code) => context.Result = new JsonResult(exception)
-        {
-            StatusCode = (int)code
-        };
+        private static void SetExceptionResult(ExceptionContext context, Exception exception, HttpStatusCode code) =>
+            context.Result = new JsonResult(exception)
+            {
+                StatusCode = (int)code
+            };
 
         private void LogExceptionInDatabase(ExceptionContext context)
         {
-            var applicationLog = CreateApplicationLog(context);
+            var errorLog = CreateTheErrorLog(context);
             var dbContext = (ApplicationDbContext)context.HttpContext.RequestServices.GetService(typeof(ApplicationDbContext));
 
-            dbContext.Logs.Add(applicationLog);
+            dbContext.ErrorLogs.Add(errorLog);
             dbContext.SaveChanges();
         }
 
-        private ApplicationLog CreateApplicationLog(ExceptionContext context)
+        private ErrorLog CreateTheErrorLog(ExceptionContext exceptionContext)
         {
-            var endpointUrl = context.HttpContext.Request.GetDisplayUrl();
-            var requestHeaders = context.HttpContext.Request.Headers.Select(header => new { header.Key, header.Value });
-            var exceptionDemystified = context.Exception.Demystify();
-            var logMessage = JsonConvert.SerializeObject(new
+            var errorLogContentObject = CreateTheErrorLogContentObject(exceptionContext);
+            var errorLogContent = JsonConvert.SerializeObject(errorLogContentObject, Formatting.Indented);
+
+            return new ErrorLog
             {
                 Id = Guid.NewGuid(),
-                Exception = exceptionDemystified,
-                EndpointUrl = endpointUrl,
-                RequestHeaders = requestHeaders,
-            }, Formatting.Indented);
-           
-            return new ApplicationLog
-            {
                 CreationDateUtc = DateTime.UtcNow,
-                Level = LogLevel.Error,
-                Message = logMessage
+                Content = errorLogContent
             };
+        }
+
+        private static dynamic CreateTheErrorLogContentObject(ExceptionContext exceptionContext) => new
+        {
+            Exception = CreateTheExceptionObject(exceptionContext),
+            Request = CreateTheRequestObject(exceptionContext)
+        };
+
+        private static dynamic CreateTheExceptionObject(ExceptionContext exceptionContext)
+        {
+            var exception = exceptionContext.Exception.Demystify();
+            var innerException = exception.InnerException;
+            var innerExceptionObject = innerException != null ? new
+            {
+                Message = exception.Message,
+                Source = exception.Source,
+                Data = exception.Data,
+                StackTrace = exception.StackTrace.Split(Environment.NewLine),
+            } : null;
+
+            return new
+            {
+                Message = exception.Message,
+                Source = exception.Source,
+                Data = exception.Data,
+                StackTrace = exception.StackTrace.Split(Environment.NewLine),
+                InnerException = innerExceptionObject
+            };
+        }
+
+        private static dynamic CreateTheRequestObject(ExceptionContext exceptionContext)
+        {
+            var httpRequest = exceptionContext.HttpContext.Request;
+            using (var streamReader = new StreamReader(httpRequest.Body))
+            {
+                var requestBody = streamReader.ReadToEnd();
+                var requestUrl = httpRequest.GetDisplayUrl();
+                var requestHeaders = httpRequest.Headers.Select(header =>
+                {
+                    var headerValue = string.Join(',', header.Value);
+
+                    return $"{header.Key} : {headerValue}";
+                });
+
+                return new
+                {
+                    RequestUrl = requestUrl,
+                    RequestBody = requestBody,
+                    RequestHeaders = requestHeaders
+                };
+            }
         }
     }
 }

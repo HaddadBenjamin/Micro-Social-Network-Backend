@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiabloII.Items.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200327161222_ApplicationLog")]
-    partial class ApplicationLog
+    [Migration("20200327165439_ErrorLogs")]
+    partial class ErrorLogs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,20 +21,18 @@ namespace DiabloII.Items.Api.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DiabloII.Items.Api.DbContext.Suggestions.ApplicationLog", b =>
+            modelBuilder.Entity("DiabloII.Items.Api.DbContext.Suggestions.ErrorLog", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Content");
+
                     b.Property<DateTime>("CreationDateUtc");
-
-                    b.Property<int>("Level");
-
-                    b.Property<string>("Message");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Logs");
+                    b.ToTable("ErrorLogs");
                 });
 
             modelBuilder.Entity("DiabloII.Items.Api.DbContext.Suggestions.Suggestion", b =>

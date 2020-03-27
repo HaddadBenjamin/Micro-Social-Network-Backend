@@ -1,16 +1,12 @@
 ﻿using System;
-using Microsoft.Extensions.Logging;
-
 namespace DiabloII.Items.Api.DbContext.Suggestions
 {
-    public class ApplicationLog
+    public class ErrorLog
     {
         public Guid Id { get; set; }
 
         public DateTime CreationDateUtc { get; set; }
        
-        public LogLevel Level { get; set; }
-
-        public string Message { get; set; }
+        public string Content { get; set; }
     }
 }
