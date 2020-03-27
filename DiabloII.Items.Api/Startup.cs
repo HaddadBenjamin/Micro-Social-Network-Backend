@@ -24,14 +24,6 @@ namespace DiabloII.Items.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = DatabaseHelpers.GetTheDbContextConnectionString(_configuration);
-
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-
-            services.AddCors(); // AddCors doit-être au dessus de AddMvc.
-            services.AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
-                    .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-    
             services.AddSwaggerGen(swagger =>
             {
                 swagger.SwaggerDoc("v1", new Info
@@ -47,20 +39,38 @@ namespace DiabloII.Items.Api
                 });
                 swagger.DescribeAllEnumsAsStrings();
             });
-            
+
+            services.AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            services.AddCors();
+
             services.AddRouting(options => options.LowercaseUrls = true);
 
-            services.AddScoped<IItemsService, ItemsService>();
-            services.AddScoped<ISuggestionsService, SuggestionsService>();
+
+            var connectionString = DatabaseHelpers.GetTheDbContextConnectionString(_configuration);
+          
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddTransient<IItemsService, ItemsService>();
+            services.AddTransient<ISuggestionsService, SuggestionsService>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+
             using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 context.Database.Migrate();
             }
+
+            app.UseCors(builder => builder  // UseCors doit être au dessus de UseMvc;
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+            app.UseMvc(); 
 
             app.UseSwagger();
             app.UseSwaggerUI(swagger =>
@@ -68,17 +78,6 @@ namespace DiabloII.Items.Api
                 swagger.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 swagger.RoutePrefix = string.Empty;
             });
-
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-
-           
-            app.UseCors(builder => builder  // UseCors doit être au dessus de UseMvc;
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
-            app.UseMvc();
         }
     }
 }
