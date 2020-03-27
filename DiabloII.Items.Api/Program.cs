@@ -8,10 +8,10 @@ namespace DiabloII.Items.Api
     {
         public static void Main(string[] arguments) => BuildWebHost(arguments).Run();
 
-        public static IWebHost BuildWebHost(string[] arguments) =>
-            WebHost.CreateDefaultBuilder(arguments)
-                .ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) => configurationBuilder.AddAMyAzureKeyVault())
-                .UseStartup<Startup>()
-                .Build();
+        public static IWebHost BuildWebHost(string[] arguments) => WebHost
+            .CreateDefaultBuilder(arguments)
+            .ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) => configurationBuilder.AddAMyAzureKeyVault())
+            .UseStartup<Startup>()
+            .Build();
     }
 }

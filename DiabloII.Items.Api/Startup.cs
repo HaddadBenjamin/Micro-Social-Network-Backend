@@ -65,7 +65,7 @@ namespace DiabloII.Items.Api
             var connectionString = DatabaseHelpers.GetTheConnectionString(configuration);
 
             services
-                .AddDbContext<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString))
+                .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString))
                 .AddTransient<IItemsService, ItemsService>()
                 .AddTransient<ISuggestionsService, SuggestionsService>();
         }
