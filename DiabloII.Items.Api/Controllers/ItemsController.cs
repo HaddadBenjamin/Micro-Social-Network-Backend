@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using DiabloII.Items.Api.DbContext.Items;
+using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Queries.Items;
 using DiabloII.Items.Api.Services.Items;
 

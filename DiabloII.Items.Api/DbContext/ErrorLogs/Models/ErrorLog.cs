@@ -1,5 +1,6 @@
 ﻿using System;
-namespace DiabloII.Items.Api.DbContext.Suggestions
+
+namespace DiabloII.Items.Api.DbContext.ErrorLogs.Models
 {
     public class ErrorLog
     {

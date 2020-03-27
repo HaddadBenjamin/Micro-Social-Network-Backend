@@ -1,4 +1,4 @@
-﻿namespace DiabloII.Items.Api.DbContext.Items
+﻿namespace DiabloII.Items.Api.DbContext.Items.Models
 {
     public enum ItemCategory
     {

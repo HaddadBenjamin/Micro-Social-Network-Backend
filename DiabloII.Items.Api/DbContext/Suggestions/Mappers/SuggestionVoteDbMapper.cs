@@ -1,7 +1,7 @@
-﻿using DiabloII.Items.Api.DbContext.Suggestions;
+﻿using DiabloII.Items.Api.DbContext.Suggestions.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiabloII.Items.Api.DbContext.DbMappers
+namespace DiabloII.Items.Api.DbContext.Suggestions.Mappers
 {
     public static class SuggestionVoteDbMapper
     {

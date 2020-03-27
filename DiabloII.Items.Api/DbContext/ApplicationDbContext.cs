@@ -1,6 +1,9 @@
-﻿using DiabloII.Items.Api.DbContext.DbMappers;
+﻿using DiabloII.Items.Api.DbContext.ErrorLogs.Models;
 using DiabloII.Items.Api.DbContext.Items;
-using DiabloII.Items.Api.DbContext.Suggestions;
+using DiabloII.Items.Api.DbContext.Items.Mappers;
+using DiabloII.Items.Api.DbContext.Items.Models;
+using DiabloII.Items.Api.DbContext.Suggestions.Mappers;
+using DiabloII.Items.Api.DbContext.Suggestions.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Items.Api.DbContext
@@ -21,6 +24,9 @@ namespace DiabloII.Items.Api.DbContext
         {
             SuggestionDbMapper.Map(modelBuilder);
             SuggestionVoteDbMapper.Map(modelBuilder);
+
+            ItemDbMapper.Map(modelBuilder);
+            ItemPropertyDbMapper.Map(modelBuilder);
         }
     }
 }

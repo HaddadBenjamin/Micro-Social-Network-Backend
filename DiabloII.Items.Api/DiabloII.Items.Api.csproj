@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DbContext\Items\Mappers\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DiabloII.Items.Api.DbContext.Suggestions
+namespace DiabloII.Items.Api.DbContext.Suggestions.Models
 {
     public class Suggestion
     {

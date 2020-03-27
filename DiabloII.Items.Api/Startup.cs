@@ -1,5 +1,6 @@
 ﻿using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Helpers;
+using DiabloII.Items.Api.Services.ErrorLogs;
 using DiabloII.Items.Api.Services.Items;
 using DiabloII.Items.Api.Services.Suggestions;
 using Microsoft.AspNetCore.Builder;

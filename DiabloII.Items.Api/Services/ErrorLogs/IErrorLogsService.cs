@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using DiabloII.Items.Api.DbContext.Suggestions;
+using DiabloII.Items.Api.DbContext.ErrorLogs.Models;
 
-namespace DiabloII.Items.Api
+namespace DiabloII.Items.Api.Services.ErrorLogs
 {
     public interface IErrorLogsService
     {

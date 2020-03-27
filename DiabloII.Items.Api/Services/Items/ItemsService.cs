@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloII.Items.Api.DbContext.Items;
+using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Queries.Items;
 using Newtonsoft.Json;
 
