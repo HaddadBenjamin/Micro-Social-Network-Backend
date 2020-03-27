@@ -15,16 +15,28 @@ namespace DiabloII.Items.Api
     public class Startup
     {
         private readonly IConfiguration _configuration;
-      
-        public Startup(IConfiguration configuration)
-        {
-            //ItemsGenerator.Generate();
-            _configuration = configuration;
-        }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddSwaggerGen(swagger =>
+        public Startup(IConfiguration configuration) => _configuration = configuration;
+
+        public void ConfigureServices(IServiceCollection services) => services
+            .AddMySwagger()
+            .AddMyMvc()
+            .AddCors()
+            .AddRouting(options => options.LowercaseUrls = true)
+            .RegisterMyDependencies(_configuration);
+
+        public void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment environment) => applicationBuilder
+            .UseMyExceptionPages(environment)
+            .PlayAllTheDatabaseMigrations()
+            .UseMyCors()
+            .UseMvc()
+            .UseMySwagger();
+    }
+
+    public static class ServiceCollectionsExtensions
+    {
+        public static IServiceCollection AddMySwagger(this IServiceCollection services) => services
+            .AddSwaggerGen(swagger =>
             {
                 swagger.SwaggerDoc("v1", new Info
                 {
@@ -40,44 +52,60 @@ namespace DiabloII.Items.Api
                 swagger.DescribeAllEnumsAsStrings();
             });
 
-            services.AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
+        public static IServiceCollection AddMyMvc(this IServiceCollection services)
+        {
+            services
+                .AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
                 .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-            services.AddCors();
 
-            services.AddRouting(options => options.LowercaseUrls = true);
+            return services;
+        }
+        public static void RegisterMyDependencies(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = DatabaseHelpers.GetTheDbContextConnectionString(configuration);
 
+            services
+                .AddDbContext<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString))
+                .AddTransient<IItemsService, ItemsService>()
+                .AddTransient<ISuggestionsService, SuggestionsService>();
+        }
+    }
 
-            var connectionString = DatabaseHelpers.GetTheDbContextConnectionString(_configuration);
+    public static class ApplicationBuilderExtensions
+    {
+
+        public static IApplicationBuilder UseMyExceptionPages(this IApplicationBuilder applicationBuilder, IHostingEnvironment environment)
+        {
+            if (environment.IsDevelopment())
+                applicationBuilder.UseDeveloperExceptionPage();
           
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
-            services.AddTransient<IItemsService, ItemsService>();
-            services.AddTransient<ISuggestionsService, SuggestionsService>();
+            return applicationBuilder;
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public static IApplicationBuilder PlayAllTheDatabaseMigrations(this IApplicationBuilder applicationBuilder)
         {
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-
-            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            using (var serviceScope = applicationBuilder.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                 context.Database.Migrate();
             }
 
-            app.UseCors(builder => builder  // UseCors doit être au dessus de UseMvc;
+            return applicationBuilder;
+        }
+
+        public static IApplicationBuilder UseMyCors(this IApplicationBuilder applicationBuilder) => applicationBuilder
+            .UseCors(policyBuilder => policyBuilder 
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
-            app.UseMvc(); 
 
-            app.UseSwagger();
-            app.UseSwaggerUI(swagger =>
+        public static IApplicationBuilder UseMySwagger(this IApplicationBuilder applicationBuilder) => applicationBuilder
+            .UseSwagger()
+            .UseSwaggerUI(options =>
             {
-                swagger.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                swagger.RoutePrefix = string.Empty;
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                options.RoutePrefix = string.Empty;
             });
-        }
     }
 }
