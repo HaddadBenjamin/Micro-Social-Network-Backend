@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using DiabloII.Items.Api.DbContext.Items;
 using DiabloII.Items.Api.Queries.Items;
-using DiabloII.Items.Api.Responses.Items;
 using DiabloII.Items.Api.Services.Items;
 
 namespace DiabloII.Items.Api.Controllers

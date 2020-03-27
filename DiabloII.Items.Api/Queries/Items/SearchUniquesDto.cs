@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using DiabloII.Items.Api.Responses.Items;
+using DiabloII.Items.Api.DbContext.Items;
+using DiabloII.Items.Api.DbContext.Items.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 

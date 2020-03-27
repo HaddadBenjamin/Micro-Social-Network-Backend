@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DiabloII.Items.Api.Responses.Items
+namespace DiabloII.Items.Api.DbContext.Items
 {
     public class Item
     {
@@ -13,7 +13,7 @@ namespace DiabloII.Items.Api.Responses.Items
 		public string Type { get; set; }
 		public double LevelRequired { get; set; }
 		public double Level { get; set; }
-		public IEnumerable<ItemProperty> Properties { get; set; }
+		public ICollection<ItemProperty> Properties { get; set; }
         public string ImageName { get; set; }
 
         // Specific to Armor.

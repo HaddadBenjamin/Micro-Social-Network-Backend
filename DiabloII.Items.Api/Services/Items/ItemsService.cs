@@ -2,8 +2,8 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DiabloII.Items.Api.DbContext.Items;
 using DiabloII.Items.Api.Queries.Items;
-using DiabloII.Items.Api.Responses.Items;
 using Newtonsoft.Json;
 
 namespace DiabloII.Items.Api.Services.Items

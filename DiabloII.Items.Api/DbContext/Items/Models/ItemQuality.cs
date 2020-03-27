@@ -1,4 +1,4 @@
-﻿namespace DiabloII.Items.Api.Responses.Items
+﻿namespace DiabloII.Items.Api.DbContext.Items
 {
     public enum ItemQuality
     {

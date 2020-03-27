@@ -1,4 +1,5 @@
 ﻿using DiabloII.Items.Api.DbContext.DbMappers;
+using DiabloII.Items.Api.DbContext.Items;
 using DiabloII.Items.Api.DbContext.Suggestions;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,8 @@ namespace DiabloII.Items.Api.DbContext
         public DbSet<SuggestionVote> SuggestionVotes { get; set; }
 
         public DbSet<ErrorLog> ErrorLogs { get; set; }
+
+        public DbSet<Item> Items{ get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         
