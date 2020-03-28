@@ -19,17 +19,20 @@ namespace DiabloII.Items.Api.Services.Items
             .Include(unique => unique.Properties)
             .Where(unique => unique.Quality == ItemQuality.Unique); 
         
-        public void ResetTheItems(IList<Item> items)
+        public void ResetTheItems(IList<Item> items, IList<ItemProperty> itemProperties)
         {
-            _dbContext.BulkDelete(items);
+            _dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE ItemProperties");
+            _dbContext.Database.ExecuteSqlCommand("DELETE FROM Items");
+           
             _dbContext.BulkInsert(items);
+            _dbContext.BulkInsert(itemProperties);
 
             _dbContext.SaveChanges();
         }
 
-        public IEnumerable<Item> GetAllUniques() => UniqueItems.ToList();
+        public IReadOnlyCollection<Item> GetAllUniques() => UniqueItems.ToList();
 
-        public IEnumerable<Item> SearchUniques(SearchUniquesQuery query) => UniqueItems
+        public IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query) => UniqueItems
             .Where(unique => 
                 (query.MinimumLevel == null || unique.Level >= query.MinimumLevel) &&
                 (query.MaximumLevel == null || unique.Level >= query.MaximumLevel) &&

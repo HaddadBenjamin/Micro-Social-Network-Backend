@@ -12,6 +12,8 @@ namespace DiabloII.Items.Generator
 {
     public static class ItemsGenerator
     {
+        private static readonly int CommandTimeout = 600;
+
         public static void Generate()
         {
             var diabloFilesReader = new DiabloIIFilesReader();
@@ -76,6 +78,9 @@ namespace DiabloII.Items.Generator
                         }).ToList()
                 };
             }).ToList();
+            var itemProperties = items
+                .SelectMany(item => item.Properties)
+                .ToList();
             var configurationFilePaths = new[] { "appsettings.Development.json", "appsettings.Production.json" };
 
             foreach (var configurationFilePath in configurationFilePaths)
@@ -85,9 +90,10 @@ namespace DiabloII.Items.Generator
 
                 using (var dbContext = DatabaseHelpers.GetMyDbContext(connectionString))
                 {
+                    dbContext.Database.SetCommandTimeout(CommandTimeout);
                     dbContext.Database.Migrate();
 
-                    new ItemsService(dbContext).ResetTheItems(items);
+                    new ItemsService(dbContext).ResetTheItems(items, itemProperties);
                 }
             }
         }

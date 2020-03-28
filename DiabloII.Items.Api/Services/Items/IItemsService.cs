@@ -6,10 +6,10 @@ namespace DiabloII.Items.Api.Services.Items
 {
     public interface IItemsService
     {
-        void ResetTheItems(IList<Item> items);
+        void ResetTheItems(IList<Item> items, IList<ItemProperty> itemProperties);
 
-        IEnumerable<Item> GetAllUniques();
+        IReadOnlyCollection<Item> GetAllUniques();
 
-        IEnumerable<Item> SearchUniques(SearchUniquesQuery query);
+        IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query);
     }
 }
