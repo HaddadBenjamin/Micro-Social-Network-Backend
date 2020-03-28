@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace DiabloII.Items.Reader.Extensions
+namespace DiabloII.Items.Generator.Extensions
 {
     public static class StringExtension
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using DiabloII.Items.Api.DbContext.Suggestions.Models;
-using DiabloII.Items.Api.Queries.Suggestions;
+using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
 
 namespace DiabloII.Items.Api.Mappers.Suggestions

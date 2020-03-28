@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using DiabloII.Items.Api.DbContext.Items;
-using DiabloII.Items.Api.DbContext.Items.Models;
-using DiabloII.Items.Api.Queries.Items;
+﻿using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Services.Items;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using DiabloII.Items.Api.Queries;
+using DiabloII.Items.Api.Requests.Items;
 
 namespace DiabloII.Items.Api.Controllers
 {
@@ -18,11 +17,10 @@ namespace DiabloII.Items.Api.Controllers
 
         [Route("getalluniques")]
         [HttpGet]
-        public async Task<IEnumerable<Item>> GetAllUniques() => await _itemsService.GetAllUniques().ConfigureAwait(false);
+        public IReadOnlyCollection<Item> GetAllUniques() => _itemsService.GetAllUniques();
 
         [Route("searchuniques")]
         [HttpGet]
-        public async Task<IEnumerable<Item>> SearchUniques(SearchUniquesDto searchDto = default)
-            => await _itemsService.SearchUniques(searchDto).ConfigureAwait(false);
+        public IReadOnlyCollection<Item> SearchUniques(SearchUniquesDto searchDto) => _itemsService.SearchUniques(new SearchUniquesQuery(searchDto));
     }
 }

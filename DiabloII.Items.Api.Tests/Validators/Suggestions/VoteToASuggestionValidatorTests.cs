@@ -3,7 +3,7 @@ using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Suggestions.Models;
 using DiabloII.Items.Api.Exceptions;
 using DiabloII.Items.Api.Helpers;
-using DiabloII.Items.Api.Queries.Suggestions;
+using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Vote;
 using NUnit.Framework;
 using Shouldly;

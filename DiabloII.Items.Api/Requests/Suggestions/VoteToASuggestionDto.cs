@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiabloII.Items.Api.Queries.Suggestions
+namespace DiabloII.Items.Api.Requests.Suggestions
 {
     public class VoteToASuggestionDto
     {

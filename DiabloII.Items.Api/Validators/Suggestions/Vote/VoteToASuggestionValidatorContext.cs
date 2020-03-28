@@ -1,5 +1,5 @@
 ﻿using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.Queries.Suggestions;
+using DiabloII.Items.Api.Requests.Suggestions;
 
 namespace DiabloII.Items.Api.Validators.Suggestions.Vote
 {

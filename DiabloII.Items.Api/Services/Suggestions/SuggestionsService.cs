@@ -2,7 +2,7 @@
 using System.Linq;
 using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Mappers.Suggestions;
-using DiabloII.Items.Api.Queries.Suggestions;
+using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Create;
 using DiabloII.Items.Api.Validators.Suggestions.Vote;

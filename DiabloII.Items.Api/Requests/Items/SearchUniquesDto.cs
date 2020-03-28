@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using DiabloII.Items.Api.DbContext.Items;
+﻿using System.ComponentModel.DataAnnotations;
 using DiabloII.Items.Api.DbContext.Items.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace DiabloII.Items.Api.Queries.Items
+namespace DiabloII.Items.Api.Requests.Items
 {
     public class SearchUniquesDto
     {
@@ -19,6 +17,7 @@ namespace DiabloII.Items.Api.Queries.Items
 		public string SubCategories { get; set; }
 
         public int? MinimumLevel { get; set; }
+       
         public int? MaximumLevel { get; set; }
     }
 }

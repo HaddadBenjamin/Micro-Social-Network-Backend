@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DiabloII.Items.Api.Queries.Suggestions;
+using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
 
 namespace DiabloII.Items.Api.Services.Suggestions

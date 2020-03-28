@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiabloII.Items.Reader.Items
+namespace DiabloII.Items.Generator.Items
 {
     public class ItemProperty
     {
