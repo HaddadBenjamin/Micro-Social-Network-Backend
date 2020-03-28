@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using DiabloII.Items.Api.DbContext.Items;
 using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Queries.Items;
 using Newtonsoft.Json;
@@ -28,12 +27,8 @@ namespace DiabloII.Items.Api.Services.Items
                 return uniques;
 
 			var x = uniques
-				//.Where(unique => string.IsNullOrEmpty(dto.Name) ? true : unique.Name.Contains(dto.Name))
-				//.Where(unique => dto.LevelRequired is null ? true : unique.LevelRequired == dto.LevelRequired)
 				.Where(unique => dto.MinimumLevel is null ? true : unique.Level >= dto.MinimumLevel)
 				.Where(unique => dto.MaximumLevel is null ? true : unique.Level <= dto.MaximumLevel)
-				//.Where(unique => dto.Quality is null ? true : unique.Quality.Contains(dto.Quality.ToString()))
-				//.Where(unique => dto.Category is null || unique.Category is null ? true : unique.Category.Contains(dto.Category.ToString()))
 				.Where(unique => (dto.SubCategories is null || string.IsNullOrEmpty(dto.SubCategories) ? true :
 					dto.SubCategories.Split(", ")
 					.Select (_ => _
@@ -46,7 +41,6 @@ namespace DiabloII.Items.Api.Services.Items
 						.Replace("Silver_Edged_Axe", "Silver-Edged Axe")
 						.Replace("_", " "))
 					.Contains(unique.SubCategory)))
-			    // .Where(unique => dto.PropertyNames is null ||!dto.PropertyNames.Any() ? true : unique.Properties.Any(property => dto.PropertyNames.Contains(property.Name)));
                 .ToList();
             return x;
         }
