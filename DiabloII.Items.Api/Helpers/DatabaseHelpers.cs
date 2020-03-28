@@ -2,6 +2,7 @@
 using DiabloII.Items.Api.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace DiabloII.Items.Api.Helpers
 {
@@ -38,7 +39,7 @@ namespace DiabloII.Items.Api.Helpers
         public static ApplicationDbContext GetMyDbContext(string connectionString)
         {
             var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-                .UseSqlServer(connectionString)
+                .UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions.EnableRetryOnFailure())
                 .Options;
 
             var dbContext = new ApplicationDbContext(options);
