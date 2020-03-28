@@ -17,6 +17,8 @@ namespace DiabloII.Items.Api.DbContext
         public DbSet<ErrorLog> ErrorLogs { get; set; }
 
         public DbSet<Item> Items{ get; set; }
+        
+        public DbSet<ItemProperty> ItemProperties{ get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         
@@ -25,8 +27,8 @@ namespace DiabloII.Items.Api.DbContext
             SuggestionDbMapper.Map(modelBuilder);
             SuggestionVoteDbMapper.Map(modelBuilder);
 
-            ItemDbMapper.Map(modelBuilder);
-            ItemPropertyDbMapper.Map(modelBuilder);
+            ItemMapper.Map(modelBuilder);
+            ItemPropertyMapper.Map(modelBuilder);
         }
     }
 }

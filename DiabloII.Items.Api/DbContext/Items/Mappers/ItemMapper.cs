@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Items.Api.DbContext.Items.Mappers
 {
-    public static class ItemDbMapper
+    public static class ItemMapper
     {
         public static void Map(ModelBuilder modelBuilder)
         {
@@ -15,9 +15,9 @@ namespace DiabloII.Items.Api.DbContext.Items.Mappers
                 .HasIndex(item => item.Id)
                 .IsUnique();
           
-            itemBuilder
-                .HasIndex(item => item.Name)
-                .IsUnique();
+            //itemBuilder
+            //    .HasIndex(item => item.Name)
+            //    .IsUnique();
 
             itemBuilder
                 .HasMany(item => item.Properties)

@@ -65,7 +65,7 @@ namespace DiabloII.Items.Api
 
         public static void RegisterMyDependencies(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = DatabaseHelpers.GetTheConnectionString(configuration);
+            var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
 
             services
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString))

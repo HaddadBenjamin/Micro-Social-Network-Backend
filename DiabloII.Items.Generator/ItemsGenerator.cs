@@ -1,13 +1,10 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using DiabloII.Items.Api.DbContext.Items.Models;
-using DiabloII.Items.Api.Extensions;
+﻿using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Reader;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace DiabloII.Items.Generator
 {
@@ -15,7 +12,6 @@ namespace DiabloII.Items.Generator
     {
         public static void Generate()
         {
-            var uniqueItemDestinationPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.json");
             var diabloFilesReader = new DiabloIIFilesReader();
 
             var uniqueItems = diabloFilesReader.Read();
@@ -74,21 +70,20 @@ namespace DiabloII.Items.Generator
 
             foreach (var configurationFilePath in configurationFilePaths)
             {
-                var configuration = new ConfigurationBuilder()
-                    .AddAMyAzureKeyVault()
-                    .AddJsonFile(configurationFilePath)
-                    .Build();
-                var connectionString =
-                    DatabaseHelpers.GetTheConnectionString(configuration, "Diablo II Documentation - Tests");
+                var configuration = ConfigurationHelpers.GetMyConfiguration(configurationFilePath);
+                var connectionString = DatabaseHelpers.GetMyConnectionString(configuration, "DiabloII.Items.Generator");
 
-                using (var dbContext = DatabaseHelpers.GetTheDbContext(connectionString))
+                using (var dbContext = DatabaseHelpers.GetMyDbContext(connectionString))
                 {
-                    dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [Items]");
+                    dbContext.Database.Migrate();
+                    dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [ItemProperties]");
+                    dbContext.Database.ExecuteSqlCommand("DELETE FROM [Items]");
 
                     dbContext.Items.AddRange(dbItems);
                     dbContext.SaveChanges();
                 }
             }
+            //var uniqueItemDestinationPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.json");
             //var uniqueItemsAsJson = JsonConvert.SerializeObject(uniqueItems, Formatting.Indented);
 
             //File.WriteAllText(uniqueItemDestinationPath, uniqueItemsAsJson);

@@ -15,11 +15,7 @@ namespace DiabloII.Items.Api.Tests.HealthChecks
         private IConfiguration _configuration;
 
         [OneTimeSetUp]
-        public void OneTimeSetup() =>
-            _configuration = new ConfigurationBuilder()
-                .AddAMyAzureKeyVault()
-                .AddJsonFile("appsettings.Production.json")
-                .Build();
+        public void OneTimeSetup() => _configuration = ConfigurationHelpers.GetMyConfiguration("appsettings.Production.json");
 
         [Test]
         public void AzureWebApp_ShouldRespond()
@@ -40,9 +36,9 @@ namespace DiabloII.Items.Api.Tests.HealthChecks
         [Test]
         public void Database_ShouldResponse()
         {
-            var connectionString = DatabaseHelpers.GetTheConnectionString(_configuration, "Diablo II Documentation - Tests");
+            var connectionString = DatabaseHelpers.GetMyConnectionString(_configuration, "Diablo II Documentation - Tests");
 
-            using (var dbContext = DatabaseHelpers.GetTheDbContext(connectionString))
+            using (var dbContext = DatabaseHelpers.GetMyDbContext(connectionString))
             {
                 dbContext.Database.SetCommandTimeout(5);
 

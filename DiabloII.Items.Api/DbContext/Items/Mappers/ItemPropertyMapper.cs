@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Items.Api.DbContext.Items.Mappers
 {
-    public static class ItemPropertyDbMapper
+    public static class ItemPropertyMapper
     {
         public static void Map(ModelBuilder modelBuilder)
         {

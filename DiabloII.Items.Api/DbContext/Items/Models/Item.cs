@@ -21,8 +21,8 @@ namespace DiabloII.Items.Api.DbContext.Items.Models
 		
         public double Level { get; set; }
 		
-        public ICollection<ItemProperty> Properties { get; set; }
-      
+        public virtual ICollection<ItemProperty> Properties { get; set; } = new List<ItemProperty>();
+
         public string ImageName { get; set; }
 
         // Specific to Armor.
