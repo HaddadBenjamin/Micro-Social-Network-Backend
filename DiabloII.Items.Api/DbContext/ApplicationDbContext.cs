@@ -1,5 +1,4 @@
 ﻿using DiabloII.Items.Api.DbContext.ErrorLogs.Models;
-using DiabloII.Items.Api.DbContext.Items;
 using DiabloII.Items.Api.DbContext.Items.Mappers;
 using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.DbContext.Suggestions.Mappers;

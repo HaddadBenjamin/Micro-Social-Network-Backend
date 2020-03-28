@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Api.Queries;
+using EFCore.BulkExtensions;
 
 namespace DiabloII.Items.Api.Services.Items
 {
@@ -14,24 +15,22 @@ namespace DiabloII.Items.Api.Services.Items
 
         public ItemsService(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
-        public void ResetTheItems(IEnumerable<Item> items)
+        private IEnumerable<Item> UniqueItems => _dbContext.Items
+            .Include(unique => unique.Properties)
+            .Where(unique => unique.Quality == ItemQuality.Unique); 
+        
+        public void ResetTheItems(IList<Item> items)
         {
-            _dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [ItemProperties]");
-            _dbContext.Database.ExecuteSqlCommand("DELETE FROM [Items]");
+            _dbContext.BulkDelete(items);
+            _dbContext.BulkInsert(items);
 
-            _dbContext.Items.AddRange(items);
             _dbContext.SaveChanges();
         }
 
-        public IReadOnlyCollection<Item> GetAllUniques() => _dbContext.Items
-            .Include(unique => unique.Properties)
-            .Where(unique => unique.Quality == ItemQuality.Unique)
-            .ToList();
+        public IEnumerable<Item> GetAllUniques() => UniqueItems.ToList();
 
-        public IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query) => _dbContext.Items
-            .Include(unique => unique.Properties)
+        public IEnumerable<Item> SearchUniques(SearchUniquesQuery query) => UniqueItems
             .Where(unique => 
-                unique.Quality == ItemQuality.Unique &&
                 (query.MinimumLevel == null || unique.Level >= query.MinimumLevel) &&
                 (query.MaximumLevel == null || unique.Level >= query.MaximumLevel) &&
                 (EnumerableHelpers.IsNullOrEmpty(query.SubCategories) || query.SubCategories.Contains(unique.SubCategory)))

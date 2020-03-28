@@ -1,9 +1,11 @@
-﻿using DiabloII.Items.Api.DbContext.Items.Models;
-using DiabloII.Items.Api.Services.Items;
+﻿using DiabloII.Items.Api.Services.Items;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
+using DiabloII.Items.Api.Mappers.ItemDtoMapper;
 using DiabloII.Items.Api.Queries;
 using DiabloII.Items.Api.Requests.Items;
+using DiabloII.Items.Api.Responses.Items;
 
 namespace DiabloII.Items.Api.Controllers
 {
@@ -17,10 +19,16 @@ namespace DiabloII.Items.Api.Controllers
 
         [Route("getalluniques")]
         [HttpGet]
-        public IReadOnlyCollection<Item> GetAllUniques() => _itemsService.GetAllUniques();
+        public IReadOnlyCollection<ItemDto> GetAllUniques() => _itemsService
+            .GetAllUniques()
+            .Select(ItemDtoMapper.ToItemDto)
+            .ToList();
 
         [Route("searchuniques")]
         [HttpGet]
-        public IReadOnlyCollection<Item> SearchUniques(SearchUniquesDto searchDto) => _itemsService.SearchUniques(new SearchUniquesQuery(searchDto));
+        public IReadOnlyCollection<ItemDto> SearchUniques(SearchUniquesDto searchDto) => _itemsService
+            .SearchUniques(new SearchUniquesQuery(searchDto))
+            .Select(ItemDtoMapper.ToItemDto)
+            .ToList();
     }
 }

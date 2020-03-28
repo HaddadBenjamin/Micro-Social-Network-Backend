@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Queries;
 
@@ -7,10 +6,10 @@ namespace DiabloII.Items.Api.Services.Items
 {
     public interface IItemsService
     {
-        void ResetTheItems(IEnumerable<Item> items);
+        void ResetTheItems(IList<Item> items);
 
-        IReadOnlyCollection<Item> GetAllUniques();
+        IEnumerable<Item> GetAllUniques();
 
-        IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query);
+        IEnumerable<Item> SearchUniques(SearchUniquesQuery query);
     }
 }

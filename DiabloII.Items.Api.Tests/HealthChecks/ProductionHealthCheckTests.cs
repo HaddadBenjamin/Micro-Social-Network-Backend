@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using DiabloII.Items.Api.Extensions;
 using DiabloII.Items.Api.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

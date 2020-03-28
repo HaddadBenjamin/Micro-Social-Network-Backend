@@ -3,7 +3,6 @@ using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Reader;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using DiabloII.Items.Api.Services.Items;
@@ -33,6 +32,7 @@ namespace DiabloII.Items.Generator
                 {
                     Id = itemId,
                     Name = item.Name,
+                    Quality = Enum.Parse<ItemQuality>(item.Quality),
                     Category = Enum.Parse<ItemCategory>(item.Category),
                     SubCategory = item.SubCategory,
                     Type = item.Type,
@@ -75,7 +75,7 @@ namespace DiabloII.Items.Generator
                             OrderIndex = itemProperty.OrderIndex,
                         }).ToList()
                 };
-            });
+            }).ToList();
             var configurationFilePaths = new[] { "appsettings.Development.json", "appsettings.Production.json" };
 
             foreach (var configurationFilePath in configurationFilePaths)

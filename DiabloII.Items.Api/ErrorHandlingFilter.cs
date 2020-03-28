@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.ErrorLogs.Models;
 using DiabloII.Items.Api.Exceptions;
 using DiabloII.Items.Api.Services.ErrorLogs;
