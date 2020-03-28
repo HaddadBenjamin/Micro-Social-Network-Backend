@@ -2,14 +2,29 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Queries.Items;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace DiabloII.Items.Api.Services.Items
 {
     public class ItemsService : IItemsService
     {
+        private readonly ApplicationDbContext _dbContext;
+
+        public ItemsService(ApplicationDbContext dbContext) => _dbContext = dbContext;
+
+        public void ResetTheItems(IEnumerable<Item> items)
+        {
+            _dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [ItemProperties]");
+            _dbContext.Database.ExecuteSqlCommand("DELETE FROM [Items]");
+
+            _dbContext.Items.AddRange(items);
+            _dbContext.SaveChanges();
+        }
+
         public async Task<IEnumerable<Item>> GetAllUniques()
         {
             var uniquesPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.json");

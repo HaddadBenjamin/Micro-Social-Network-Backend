@@ -3,8 +3,11 @@ using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Reader;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DiabloII.Items.Api.Services.Items;
+using Newtonsoft.Json;
 
 namespace DiabloII.Items.Generator
 {
@@ -13,9 +16,16 @@ namespace DiabloII.Items.Generator
         public static void Generate()
         {
             var diabloFilesReader = new DiabloIIFilesReader();
-
             var uniqueItems = diabloFilesReader.Read();
-            var dbItems = uniqueItems.Select(item =>
+
+            // create the unique items file
+            var uniqueItemDestinationPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.json");
+            var uniqueItemsAsJson = JsonConvert.SerializeObject(uniqueItems, Formatting.Indented);
+
+            File.WriteAllText(uniqueItemDestinationPath, uniqueItemsAsJson);
+
+            // Empty and fill all the item tables in all the environments.
+            var items = uniqueItems.Select(item =>
             {
                 var itemId = Guid.NewGuid();
 
@@ -76,17 +86,10 @@ namespace DiabloII.Items.Generator
                 using (var dbContext = DatabaseHelpers.GetMyDbContext(connectionString))
                 {
                     dbContext.Database.Migrate();
-                    dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE [ItemProperties]");
-                    dbContext.Database.ExecuteSqlCommand("DELETE FROM [Items]");
 
-                    dbContext.Items.AddRange(dbItems);
-                    dbContext.SaveChanges();
+                    new ItemsService(dbContext).ResetTheItems(items);
                 }
             }
-            //var uniqueItemDestinationPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.json");
-            //var uniqueItemsAsJson = JsonConvert.SerializeObject(uniqueItems, Formatting.Indented);
-
-            //File.WriteAllText(uniqueItemDestinationPath, uniqueItemsAsJson);
         }
     }
 }
