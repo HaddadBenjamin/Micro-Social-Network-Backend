@@ -575,7 +575,7 @@ namespace DiabloII.Items.Reader
                         ImageName = itemCategory?.ImageName ?? GetItemImageName(type, name)
                     };
                 })
-                .Where(item => item != null)
+                .Where(ItemFilter)
                 .ToList();
 
         private List<SkillRecord> ReadSkills(string skillsCsv)
@@ -904,6 +904,11 @@ namespace DiabloII.Items.Reader
             return itemTypeToSubCategory.GetValueOrDefault(itemType);
         }
 
+        private static bool ItemFilter(Item item)
+        {
+            var itemNamesToRemove = new[] {"Darkfear", "Dawn Warden", "Thousand Screams" };
+
+            return item != null && !itemNamesToRemove.Contains(item.Name);
         }
     }
 
