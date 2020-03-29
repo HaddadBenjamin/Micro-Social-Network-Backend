@@ -553,7 +553,7 @@ namespace DiabloII.Items.Reader
                         Quality = "Unique",
                         Properties = properties.OrderBy(_ => _.OrderIndex).ToList(),
                         Category = itemCategory?.Category,
-                        SubCategory = itemCategory?.SubCategory,
+                        SubCategory = GetItemSubCategory(name) ?? itemCategory?.SubCategory,
                         Type = type,
                         // Specific to Armor :
                         MinimumDefenseMinimum = (int)(itemCategory?.MinimumDefense * (defensePercentMinimum + minDefensePercentPerLevel + 100)) / 100 + defenseMinimum + minDefensePerLevel,
@@ -891,6 +891,17 @@ namespace DiabloII.Items.Reader
 
             return itemTypeToItemImageName.GetValueOrDefault(itemType) ??
                    itemNameToItemImageName.GetValueOrDefault(itemName);
+        }
+
+        private static string GetItemSubCategory(string itemName)
+        {
+            var itemNameToSubCategory = new Dictionary<string, string>
+            {
+                {"Swordback Hold", "Offhand"},
+                {"Bladed Ward", "Offhand"},
+            };
+
+            return itemNameToSubCategory.GetValueOrDefault(itemName);
         }
     }
 
