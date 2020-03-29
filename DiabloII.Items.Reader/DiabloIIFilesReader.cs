@@ -4,25 +4,29 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using DiabloII.Items.Reader.Items;
 
 namespace DiabloII.Items.Reader
 {
-    public class DiabloIIFilesReader
+    /// <summary>
+    /// !!!! SHIT CODE HERE !!!!
+    /// </summary>
+                    public class DiabloIIFilesReader
     {
         private List<(string Name, string Type)> _missingItemTypes = new List<(string, string)>();
         private List<(string Name, string ItemName, double Id)> _missingSkills = new List<(string, string, double)>();
         private List<(string Name, string Property)> _missingProperties = new List<(string, string)>();
-		private string _currentItemName;
-		// TODO : 
-		// Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
-		// La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
-		// Utiliser le nouveau document properties de Ascended pour calculer "IsPercent" et "Description" des attributs.
-		// Class Skill et Gethit-Skill (skill when touched) PAR : min max, 
-		// Gethit-Skill : 10% to trigger level 5 skill
-		// Vérifier, tester et sanitizer les propriétés sur la vraie documentation
-		// Ascended m'aide sur les missing category, il va me renvoyer lees documents weapon et armor txt.
-		public IEnumerable<Item> Read()
+        private string _currentItemName;
+        // TODO : 
+        // Les types h2h et 2h2 ne sont pas mapper, il semble manquer des Claw / Druid helm / barb helm/ necor shield / etc..
+        // La partie avec  weaponSubCategoriesRecord.AddRange(new[]) : ne contient pas encore l'armure et les dommages et les stats requis, attack speed
+        // Utiliser le nouveau document properties de Ascended pour calculer "IsPercent" et "Description" des attributs.
+        // Class Skill et Gethit-Skill (skill when touched) PAR : min max, 
+        // Gethit-Skill : 10% to trigger level 5 skill
+        // Vérifier, tester et sanitizer les propriétés sur la vraie documentation
+        // Ascended m'aide sur les missing category, il va me renvoyer lees documents weapon et armor txt.
+        public IEnumerable<Item> Read()
         {
             var uniquesPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.csv");
             var weaponsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Weapons.csv");
@@ -42,19 +46,19 @@ namespace DiabloII.Items.Reader
             var armors = ReadArmors(armorsCsv);
             var subCategories = ReadSubCategories(weapons, armors);
             var properties = ReadProperties(propertiesCsv);
-			var skills = ReadSkills(skillsCsv);
-			var skillTabs = ReadSkillTabs(skillTabsCsv);
-			var uniques = ReadUniques(uniquesCsv, subCategories, properties, skills, skillTabs);
+            var skills = ReadSkills(skillsCsv);
+            var skillTabs = ReadSkillTabs(skillTabsCsv);
+            var uniques = ReadUniques(uniquesCsv, subCategories, properties, skills, skillTabs);
 
-			// For sanitize purpoeses and comparaison :
-			var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
+            // For sanitize purpoeses and comparaison :
+            var sub = string.Join("\n- ", subCategories.Select(s => s.Name).OrderBy(x => x));
             var uni = string.Join("\n- ", _missingItemTypes.Distinct().OrderBy(x => x));
             var subCategoriesEnums = string.Join(",\n", subCategories.Select(s => s.SubCategory.Replace(" ", "_")).OrderBy(x => x).Distinct());
-			var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
-			var missingProps = string.Join("\n- ", uniques.SelectMany(_ => _.Properties.Select(p => p.Name).Where(name => properties.FirstOrDefault(s => s.Name == name) == null).Distinct()).Distinct().ToList());
-			var missingItemsCategories = string.Join("\n- ", _missingItemTypes.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Type}"));
+            var allProperties = string.Join(Environment.NewLine, uniques.SelectMany(_ => _.Properties).Select(_ => _.Name).Distinct().ToList());
+            var missingProps = string.Join("\n- ", uniques.SelectMany(_ => _.Properties.Select(p => p.Name).Where(name => properties.FirstOrDefault(s => s.Name == name) == null).Distinct()).Distinct().ToList());
+            var missingItemsCategories = string.Join("\n- ", _missingItemTypes.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Type}"));
             var missingProperties = string.Join("\n- ", _missingProperties.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.Name} : {_.Property}").Where(_ => !string.IsNullOrWhiteSpace(_)));
-			var missingSkills = string.Join("\n- ", _missingSkills.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.ItemName} - {_.Name} : {_.Id}").Where(_ => !string.IsNullOrWhiteSpace(_)));
+            var missingSkills = string.Join("\n- ", _missingSkills.OrderBy(_ => _.Name).Distinct().Select(_ => $"{_.ItemName} - {_.Name} : {_.Id}").Where(_ => !string.IsNullOrWhiteSpace(_)));
 
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Missing Properties.txt"), missingProperties);
             File.WriteAllText(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Missing Skills.txt"), missingSkills);
@@ -64,11 +68,11 @@ namespace DiabloII.Items.Reader
         }
 
         public IEnumerable<Item> ReadUniques(
-			string uniquesCsv, 
-			List<ItemCategoryRecord> itemCategories,
-			List<PropertyRecord> propertyRecords,
-			List<SkillRecord> skillRecords,
-			List<SkillTabRecord> skillTabRecords)
+            string uniquesCsv, 
+            List<ItemCategoryRecord> itemCategories,
+            List<PropertyRecord> propertyRecords,
+            List<SkillRecord> skillRecords,
+            List<SkillTabRecord> skillTabRecords)
             => uniquesCsv
                 .Split('\n')
                 .Skip(1)
@@ -106,7 +110,7 @@ namespace DiabloII.Items.Reader
 
                     if (itemCategory == null)
                     {
-						_missingItemTypes.Add((name, type));
+                        _missingItemTypes.Add((name, type));
                         return null;
                     }
 
@@ -115,22 +119,22 @@ namespace DiabloII.Items.Reader
                         if (string.IsNullOrEmpty(itemData[index]))
                             continue;
 
-						var propertyName = itemData[index];
-						var property = propertyRecords.FirstOrDefault(_ => _.Name == propertyName);
+                        var propertyName = itemData[index];
+                        var property = propertyRecords.FirstOrDefault(_ => _.Name == propertyName);
 
-						if (property == null)
-						{
-							_missingProperties.Add((name, propertyName));
-							continue;
-						}
-						var propertyFormattedName = property.FormattedName;
-						var propertyPar = (double)itemData[index + 1].ParseDoubleOrDefault();
-						var propertyMinimum = itemData[index + 2].ParseDoubleOrDefault();
-						var propertyMaximum = itemData[index + 3].ParseDoubleOrDefault();
+                        if (property == null)
+                        {
+                            _missingProperties.Add((name, propertyName));
+                            continue;
+                        }
+                        var propertyFormattedName = property.FormattedName;
+                        var propertyPar = (double)itemData[index + 1].ParseDoubleOrDefault();
+                        var propertyMinimum = itemData[index + 2].ParseDoubleOrDefault();
+                        var propertyMaximum = itemData[index + 3].ParseDoubleOrDefault();
 
-						if (propertyFormattedName == "Extra Durability" ||
-							propertyFormattedName == "Charged")
-							continue;
+                        if (propertyFormattedName == "Extra Durability" ||
+                            propertyFormattedName == "Charged")
+                            continue;
                         if (propertyFormattedName == "Class Skill")
                         {
                             var skill = GetSkill(skillRecords, propertyPar, itemData[index + 1]);
@@ -443,102 +447,102 @@ namespace DiabloII.Items.Reader
                         else
                             propertyPar /= 8;
 
-						properties.Add(new ItemProperty
+                        properties.Add(new ItemProperty
                         {
-							Name = propertyName,
-							FormattedName = propertyFormattedName,
+                            Name = propertyName,
+                            FormattedName = propertyFormattedName,
                             Par = propertyPar,
                             Minimum = propertyMinimum,
                             Maximum = propertyMaximum,
                             IsPercent = property.IsPercent,
-							Id = Guid.NewGuid(),
-							FirstChararacter = property.FirstChararacter,
-							OrderIndex = property.OrderIndex
-						});
+                            Id = Guid.NewGuid(),
+                            FirstChararacter = property.FirstChararacter,
+                            OrderIndex = property.OrderIndex
+                        });
                     }
 
-					var allStats = properties.Where(_ => new[] { "Strength", "Dexterity", "Vitality", "Energy" }.Contains(_.Name));
+                    var allStats = properties.Where(_ => new[] { "Strength", "Dexterity", "Vitality", "Energy" }.Contains(_.Name));
 
-					if (allStats.Count() == 4 &&
-						allStats.Select(_ => _.Minimum).Distinct().Count() == 1 &&
-						allStats.Select(_ => _.Maximum).Distinct().Count() == 1)
-					{
-						var firstAttribute = allStats.First();
+                    if (allStats.Count() == 4 &&
+                        allStats.Select(_ => _.Minimum).Distinct().Count() == 1 &&
+                        allStats.Select(_ => _.Maximum).Distinct().Count() == 1)
+                    {
+                        var firstAttribute = allStats.First();
 
-						properties.Add(new ItemProperty()
-						{
-							Name = "To All Attributes",
-							FormattedName = "To All Attributes",
-							Par = 0,
-							Minimum = firstAttribute.Minimum,
-							Maximum = firstAttribute.Maximum,
-							IsPercent = firstAttribute.IsPercent,
-							Id = Guid.NewGuid(),
-							FirstChararacter = firstAttribute.FirstChararacter,
-						});
+                        properties.Add(new ItemProperty()
+                        {
+                            Name = "To All Attributes",
+                            FormattedName = "To All Attributes",
+                            Par = 0,
+                            Minimum = firstAttribute.Minimum,
+                            Maximum = firstAttribute.Maximum,
+                            IsPercent = firstAttribute.IsPercent,
+                            Id = Guid.NewGuid(),
+                            FirstChararacter = firstAttribute.FirstChararacter,
+                        });
 
-						properties.RemoveAll(_ => new[] { "Strength", "Dexterity", "Vitality", "Energy" }.Contains(_.Name));
-					}
+                        properties.RemoveAll(_ => new[] { "Strength", "Dexterity", "Vitality", "Energy" }.Contains(_.Name));
+                    }
 
-					new[] { "fire", "ltng", "pois", "cold", "elem" }
-					 .ToList()
-					 .ForEach(elem =>
-					 {
-						 var elemDamage = properties.Where(_ => new[] { elem + "-min", elem + "-max" }.Contains(_.Name));
-						 var elementName =
-							elem == "fire" ? "Fire" :
-							elem == "ltng" ? "Lightning" :
-							elem == "pois" ? "Poison" :
-							elem == "cold" ? "Cold" :
-							"Elemental";
+                    new[] { "fire", "ltng", "pois", "cold", "elem" }
+                     .ToList()
+                     .ForEach(elem =>
+                     {
+                         var elemDamage = properties.Where(_ => new[] { elem + "-min", elem + "-max" }.Contains(_.Name));
+                         var elementName =
+                            elem == "fire" ? "Fire" :
+                            elem == "ltng" ? "Lightning" :
+                            elem == "pois" ? "Poison" :
+                            elem == "cold" ? "Cold" :
+                            "Elemental";
 
-						 // Merge ?
+                         // Merge ?
 
-						 if (elemDamage.Count() == 2)
-						 {
-							 var minimum = elemDamage.First(_ => _.Name == elem + "-min").Minimum;
-							 var maximum = elemDamage.First(_ => _.Name == elem + "-max").Maximum;
-							 var value = minimum == maximum ? minimum.ToString() : $"{minimum}-{maximum}";
-							 var propertyFormattedName = $"Adds {value} {elementName} Damage";
+                         if (elemDamage.Count() == 2)
+                         {
+                             var minimum = elemDamage.First(_ => _.Name == elem + "-min").Minimum;
+                             var maximum = elemDamage.First(_ => _.Name == elem + "-max").Maximum;
+                             var value = minimum == maximum ? minimum.ToString() : $"{minimum}-{maximum}";
+                             var propertyFormattedName = $"Adds {value} {elementName} Damage";
 
-							 var propertyDamage = properties.FirstOrDefault(_ => _.Name == $"dmg-{elem}");
+                             var propertyDamage = properties.FirstOrDefault(_ => _.Name == $"dmg-{elem}");
 
-							 if (propertyDamage == null)
-							 {
-								 properties.Add(new ItemProperty()
-								 {
-									 Name = $"dmg-{elem}",
-									 FormattedName = propertyFormattedName,
-									 Par = 0,
-									 Minimum = 0,
-									 Maximum = 0,
-									 IsPercent = false,
-									 Id = Guid.NewGuid(),
-									 FirstChararacter = string.Empty
-								 });
-							 }
-							 else
-							 {
-								 propertyDamage.Minimum += minimum;
-								 propertyDamage.Maximum += maximum;
-							 }
+                             if (propertyDamage == null)
+                             {
+                                 properties.Add(new ItemProperty()
+                                 {
+                                     Name = $"dmg-{elem}",
+                                     FormattedName = propertyFormattedName,
+                                     Par = 0,
+                                     Minimum = 0,
+                                     Maximum = 0,
+                                     IsPercent = false,
+                                     Id = Guid.NewGuid(),
+                                     FirstChararacter = string.Empty
+                                 });
+                             }
+                             else
+                             {
+                                 propertyDamage.Minimum += minimum;
+                                 propertyDamage.Maximum += maximum;
+                             }
 
-							 properties.RemoveAll(_ => new[] { elem + "-min", elem + "-max" }.Contains(_.Name));
-	 					}
-					 });
-					
+                             properties.RemoveAll(_ => new[] { elem + "-min", elem + "-max" }.Contains(_.Name));
+                        }
+                     });
+                    
 
-					var minimumDamageMin = GetPropertyValueOrDefault(properties, "dmg-min") + GetPropertyValueOrDefault(properties, "dmg-norm");
-					var maximumDamageMax = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
-					var maximumDamageMin = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm");
-					//var maximumDamage = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
-					var damagePercentMinimum = GetPropertyValueOrDefault(properties, "Damage %");
-					var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", ItemPropertyType.Maximum);
+                    var minimumDamageMin = GetPropertyValueOrDefault(properties, "dmg-min") + GetPropertyValueOrDefault(properties, "dmg-norm");
+                    var maximumDamageMax = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
+                    var maximumDamageMin = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm");
+                    //var maximumDamage = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
+                    var damagePercentMinimum = GetPropertyValueOrDefault(properties, "Damage %");
+                    var damagePercentMaximum = GetPropertyValueOrDefault(properties, "Damage %", ItemPropertyType.Maximum);
 
                     var defenseMinimum = GetPropertyValueOrDefault(properties, "Armor Class");
-					var defenseMaximum = GetPropertyValueOrDefault(properties, "Armor Class", ItemPropertyType.Maximum);
-					var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %");
-					var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", ItemPropertyType.Maximum);
+                    var defenseMaximum = GetPropertyValueOrDefault(properties, "Armor Class", ItemPropertyType.Maximum);
+                    var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %");
+                    var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", ItemPropertyType.Maximum);
 
                         return new Item
                     {
@@ -568,85 +572,85 @@ namespace DiabloII.Items.Reader
                         // Stats
                         StrengthRequired = (itemCategory?.StrengthRequired * (requirementPercent + 100)) / 100,
                         DexterityRequired = (itemCategory?.DexterityRequired * (requirementPercent + 100)) / 100,
-                        ImageName = itemCategory?.ImageName
-					};
+                        ImageName = itemCategory?.ImageName ?? GetItemImageName(type, name)
+                    };
                 })
                 .Where(item => item != null)
                 .ToList();
 
-		private List<SkillRecord> ReadSkills(string skillsCsv)
-			=> skillsCsv
-				.Split('\n')
-					.Select(line =>
-					{
-						var itemData = line.Split(';');
+        private List<SkillRecord> ReadSkills(string skillsCsv)
+            => skillsCsv
+                .Split('\n')
+                    .Select(line =>
+                    {
+                        var itemData = line.Split(';');
 
-						if (itemData.Length < 3)
-							return null;
+                        if (itemData.Length < 3)
+                            return null;
 
-						return new SkillRecord
-						{
-							Name = itemData[0].ToTitleCase(),
-							Id = itemData[1].ParseIntOrDefault(),
-							Class = itemData[2]
-								.Replace("\r", string.Empty)
-								.ReplaceIfEquals("ama", "(Amazon Only)")
-								.ReplaceIfEquals("ass", "(Assassin Only)")
-								.ReplaceIfEquals("bar", "(Barbarian Only)")
-								.ReplaceIfEquals("dru", "(Druid Only)")
-								.ReplaceIfEquals("pal", "(Paladin Only)")
-								.ReplaceIfEquals("nec", "(Necromancer Only)")
-								.ReplaceIfEquals("sor", "(Sorceress Only)")
-						};
-					})
-					.Where(item => item != null)
-				.ToList();
+                        return new SkillRecord
+                        {
+                            Name = itemData[0].ToTitleCase(),
+                            Id = itemData[1].ParseIntOrDefault(),
+                            Class = itemData[2]
+                                .Replace("\r", string.Empty)
+                                .ReplaceIfEquals("ama", "(Amazon Only)")
+                                .ReplaceIfEquals("ass", "(Assassin Only)")
+                                .ReplaceIfEquals("bar", "(Barbarian Only)")
+                                .ReplaceIfEquals("dru", "(Druid Only)")
+                                .ReplaceIfEquals("pal", "(Paladin Only)")
+                                .ReplaceIfEquals("nec", "(Necromancer Only)")
+                                .ReplaceIfEquals("sor", "(Sorceress Only)")
+                        };
+                    })
+                    .Where(item => item != null)
+                .ToList();
 
-		private List<SkillTabRecord> ReadSkillTabs(string skillTabsCsv)
-			=> skillTabsCsv
-				.Split('\n')
-					.Select(line =>
-					{
-						var itemData = line.Split(';');
+        private List<SkillTabRecord> ReadSkillTabs(string skillTabsCsv)
+            => skillTabsCsv
+                .Split('\n')
+                    .Select(line =>
+                    {
+                        var itemData = line.Split(';');
 
-						if (itemData.Length < 3)
-							return null;
+                        if (itemData.Length < 3)
+                            return null;
 
-						return new SkillTabRecord
-						{
-							Id = itemData[0].ParseIntOrDefault(),
-							Name = itemData[1].ToTitleCase(),
-							Class = $"({itemData[2]} Only)"
-								.Replace("\r", string.Empty)
-								.ToTitleCase()
-						};
-					})
-					.Where(item => item != null)
-				.ToList();
+                        return new SkillTabRecord
+                        {
+                            Id = itemData[0].ParseIntOrDefault(),
+                            Name = itemData[1].ToTitleCase(),
+                            Class = $"({itemData[2]} Only)"
+                                .Replace("\r", string.Empty)
+                                .ToTitleCase()
+                        };
+                    })
+                    .Where(item => item != null)
+                .ToList();
 
-		private List<PropertyRecord> ReadProperties(string propertiesCsv)
-			=> propertiesCsv
-				.Split('\n')
-				.Select(line =>
-				{
-					var itemData = line.Split(';');
+        private List<PropertyRecord> ReadProperties(string propertiesCsv)
+            => propertiesCsv
+                .Split('\n')
+                .Select(line =>
+                {
+                    var itemData = line.Split(';');
 
-					if (itemData.Length < 3)
-						return null;
+                    if (itemData.Length < 3)
+                        return null;
 
-					return new PropertyRecord
-					{
-						Name = itemData[0],
-						FormattedName = itemData[1].ToTitleCase(),
-						IsPercent = itemData[2].ParseIntOrDefault() == 1,
-						FirstChararacter = itemData[3],
-						OrderIndex = itemData[4].ParseDoubleOrDefault(),
-					};
-				})
-				.Where(item => item != null)
-				.ToList();
+                    return new PropertyRecord
+                    {
+                        Name = itemData[0],
+                        FormattedName = itemData[1].ToTitleCase(),
+                        IsPercent = itemData[2].ParseIntOrDefault() == 1,
+                        FirstChararacter = itemData[3],
+                        OrderIndex = itemData[4].ParseDoubleOrDefault(),
+                    };
+                })
+                .Where(item => item != null)
+                .ToList();
 
-		private List<ArmorReord> ReadArmors(string armorsCsv)
+        private List<ArmorReord> ReadArmors(string armorsCsv)
             => armorsCsv
                 .Split('\n')
                 .Skip(23)
@@ -663,9 +667,9 @@ namespace DiabloII.Items.Reader
                         Slot = itemData[1]
                             .Replace("\t", string.Empty)
                             .Replace("\\", string.Empty),
-						MinimumDefense = itemData[2].ParseDoubleOrDefault(),
-						MaximumDefense = itemData[3].ParseDoubleOrDefault(),
-						StrengthRequired = itemData[4].ParseDoubleOrDefault(),
+                        MinimumDefense = itemData[2].ParseDoubleOrDefault(),
+                        MaximumDefense = itemData[3].ParseDoubleOrDefault(),
+                        StrengthRequired = itemData[4].ParseDoubleOrDefault(),
                         ImageName = itemData[7]
                     };
                 })
@@ -683,20 +687,20 @@ namespace DiabloII.Items.Reader
                     if (itemData.Length < 3)
                         return null;
 
-					return new WeaponRecord
-					{
-						Name = itemData[0],
-						Type = itemData[1],
-						Slot = itemData[2].Replace("\r", string.Empty),
-						MinimumOneHandedDamage = itemData[3].ParseDoubleOrDefault(),
-						MaximumOneHandedDamage = itemData[4].ParseDoubleOrDefault(),
-						MinimumTwoHandedDamage = itemData[5].ParseDoubleOrDefault(),
-						MaximumTwoHandedDamage = itemData[6].ParseDoubleOrDefault(),
-						StrengthRequired = itemData[7].ParseDoubleOrDefault(),
-						DexterityRequired = itemData[8].ParseDoubleOrDefault(),
+                    return new WeaponRecord
+                    {
+                        Name = itemData[0],
+                        Type = itemData[1],
+                        Slot = itemData[2].Replace("\r", string.Empty),
+                        MinimumOneHandedDamage = itemData[3].ParseDoubleOrDefault(),
+                        MaximumOneHandedDamage = itemData[4].ParseDoubleOrDefault(),
+                        MinimumTwoHandedDamage = itemData[5].ParseDoubleOrDefault(),
+                        MaximumTwoHandedDamage = itemData[6].ParseDoubleOrDefault(),
+                        StrengthRequired = itemData[7].ParseDoubleOrDefault(),
+                        DexterityRequired = itemData[8].ParseDoubleOrDefault(),
                         ImageName = itemData[9]
-					};
-				})
+                    };
+                })
                 .Where(item => item != null)
                 .ToList();
 
@@ -723,68 +727,68 @@ namespace DiabloII.Items.Reader
                     .Replace("\\", string.Empty)
                     .ToTitleCase(),
                     Category = "Armor",
-					MinimumDefense = armor.MinimumDefense,
-					MaximumDefense = armor.MaximumDefense,
-					StrengthRequired = armor.StrengthRequired,
+                    MinimumDefense = armor.MinimumDefense,
+                    MaximumDefense = armor.MaximumDefense,
+                    StrengthRequired = armor.StrengthRequired,
                     ImageName = armor.ImageName
                 })
                 .Where(record => record.SubCategory != string.Empty)
                 .ToList();
 
-			var weaponSubCategoriesRecord = weapons
-				.Where(weapon => !string.IsNullOrWhiteSpace(weapon.Type))
-				.Select(weapon => new ItemCategoryRecord
-				{
-					Name = weapon.Name
-						.Replace("Bec-de-Corbin", "Bec-De-Corbin")
-						.Replace("Kriss", "Kris")
-						.Replace("Martel de Fer", "Martel De Fer")
-						.Replace("Blood Spirt", "Blood Spirit")
-						.Replace("Hunter's Bow", "Hunter’s Bow")
-						.Replace("MatriarchalJavelin", "Matriarchal Javelin"),
-					Category = "Weapon",
-					SubCategory =
-						(weapon.Slot == "1h" ? weapon.Type :
-						 weapon.Slot == "2h" ? $"Two Handed {weapon.Type}" :
-						 $"Two And One Handed {weapon.Type}")
-							.ToTitleCase()
-							.Replace("Scep", "Scepter")
-							.Replace("Hamm", "Hammer")
-							.Replace("Swor", "Sword")
-							.Replace("Knif", "Knife")
-							.Replace("Jave", "Javelin")
-							.Replace("Jave", "Jave")
-							.Replace("Spea", "Spear")
-							.Replace("Pole", "Polearm")
-							.Replace("Staf", "Staff")
-							.Replace("Xbow", "Crossbow")
-							.Replace("Tpot", "Throwing Potions")
-							.Replace("Taxe", "Throwing Axe")
-							.Replace("Tkni", "Thorwing knife")
-							.Replace("Abow", "Amazon bow")
-							.Replace("Aspe", "Amazon spear")
-							.Replace("Ajav", "Amazon Javelin")
-							.Replace("H2h2", "Hand To Hand Two Handed")
-							.Replace("H2h", "Hand To Hand")
-							.Replace("Javelinlin", "Javelin")
-							.Replace("Spearr", "Spear")
-							.Replace("\t", string.Empty)
-							.Replace("\\", string.Empty)
-							.ToTitleCase(),
-					MinimumOneHandedDamage = weapon.MinimumOneHandedDamage,
-					MaximumOneHandedDamage = weapon.MaximumOneHandedDamage,
-					MinimumTwoHandedDamage = weapon.MinimumTwoHandedDamage,
-					MaximumTwoHandedDamage = weapon.MaximumTwoHandedDamage,
-					StrengthRequired = weapon.StrengthRequired,
-					DexterityRequired = weapon.DexterityRequired,
+            var weaponSubCategoriesRecord = weapons
+                .Where(weapon => !string.IsNullOrWhiteSpace(weapon.Type))
+                .Select(weapon => new ItemCategoryRecord
+                {
+                    Name = weapon.Name
+                        .Replace("Bec-de-Corbin", "Bec-De-Corbin")
+                        .Replace("Kriss", "Kris")
+                        .Replace("Martel de Fer", "Martel De Fer")
+                        .Replace("Blood Spirt", "Blood Spirit")
+                        .Replace("Hunter's Bow", "Hunter’s Bow")
+                        .Replace("MatriarchalJavelin", "Matriarchal Javelin"),
+                    Category = "Weapon",
+                    SubCategory =
+                        (weapon.Slot == "1h" ? weapon.Type :
+                         weapon.Slot == "2h" ? $"Two Handed {weapon.Type}" :
+                         $"Two And One Handed {weapon.Type}")
+                            .ToTitleCase()
+                            .Replace("Scep", "Scepter")
+                            .Replace("Hamm", "Hammer")
+                            .Replace("Swor", "Sword")
+                            .Replace("Knif", "Knife")
+                            .Replace("Jave", "Javelin")
+                            .Replace("Jave", "Jave")
+                            .Replace("Spea", "Spear")
+                            .Replace("Pole", "Polearm")
+                            .Replace("Staf", "Staff")
+                            .Replace("Xbow", "Crossbow")
+                            .Replace("Tpot", "Throwing Potions")
+                            .Replace("Taxe", "Throwing Axe")
+                            .Replace("Tkni", "Thorwing knife")
+                            .Replace("Abow", "Amazon bow")
+                            .Replace("Aspe", "Amazon spear")
+                            .Replace("Ajav", "Amazon Javelin")
+                            .Replace("H2h2", "Hand To Hand Two Handed")
+                            .Replace("H2h", "Hand To Hand")
+                            .Replace("Javelinlin", "Javelin")
+                            .Replace("Spearr", "Spear")
+                            .Replace("\t", string.Empty)
+                            .Replace("\\", string.Empty)
+                            .ToTitleCase(),
+                    MinimumOneHandedDamage = weapon.MinimumOneHandedDamage,
+                    MaximumOneHandedDamage = weapon.MaximumOneHandedDamage,
+                    MinimumTwoHandedDamage = weapon.MinimumTwoHandedDamage,
+                    MaximumTwoHandedDamage = weapon.MaximumTwoHandedDamage,
+                    StrengthRequired = weapon.StrengthRequired,
+                    DexterityRequired = weapon.DexterityRequired,
                     ImageName = weapon.ImageName
-				})
+                })
                 .ToList();
 
             weaponSubCategoriesRecord.AddRange(armorSubCategoriesRecord);
             weaponSubCategoriesRecord.AddRange(new[]
             {
-					new ItemCategoryRecord { Name = "Silver-Edged Axe", Category = "Weapon", SubCategory = "Two Handed Axe", MinimumTwoHandedDamage = 23, MaximumTwoHandedDamage= 41, StrengthRequired = 154 },
+                    new ItemCategoryRecord { Name = "Silver-Edged Axe", Category = "Weapon", SubCategory = "Two Handed Axe", MinimumTwoHandedDamage = 23, MaximumTwoHandedDamage= 41, StrengthRequired = 154 },
                     new ItemCategoryRecord { Name = "Amulet", Category = "Jewelry", SubCategory = "Amulet", ImageName = "amu1"},
                     new ItemCategoryRecord { Name = "Arrows", Category = "Armor", SubCategory = "Arrows"},
                     new ItemCategoryRecord { Name = "Bolts", Category = "Armor", SubCategory = "Bolts"},
@@ -793,48 +797,48 @@ namespace DiabloII.Items.Reader
                     new ItemCategoryRecord { Name = "Ring", Category = "Jewelry", SubCategory = "Ring", ImageName ="ring1", },
                     new ItemCategoryRecord { Name = "Conqueror Crown", Category = "Armor", SubCategory = "Barbarian Helm", MinimumDefense = 114, MaximumDefense = 159, StrengthRequired = 174},
                     new ItemCategoryRecord { Name = "Blood Spirit", Category = "Armor", SubCategory = "Druid Helm", MinimumDefense = 101, MaximumDefense = 145, StrengthRequired = 80},
-					new ItemCategoryRecord { Name = "Sash", Category = "Armor", SubCategory = "Armor", MinimumDefense = 218, MaximumDefense = 233, StrengthRequired = 88},
+                    new ItemCategoryRecord { Name = "Sash", Category = "Armor", SubCategory = "Armor", MinimumDefense = 218, MaximumDefense = 233, StrengthRequired = 88},
                     new ItemCategoryRecord { Name = "Girdle", Category = "Armor", SubCategory = "Waist", MinimumDefense = 12, MaximumDefense = 15, StrengthRequired = 53},
             });
 
             return weaponSubCategoriesRecord;
         }
 
-		public double GetPropertyValueOrDefault(List<ItemProperty> properties, string name, ItemPropertyType type = ItemPropertyType.Minimum)
-		{
-			var property = properties.FirstOrDefault(_ => _.Name == name);
+        public double GetPropertyValueOrDefault(List<ItemProperty> properties, string name, ItemPropertyType type = ItemPropertyType.Minimum)
+        {
+            var property = properties.FirstOrDefault(_ => _.Name == name);
 
             return property == null ? 0 :
                     type == ItemPropertyType.Minimum ? property.Minimum :
                     type == ItemPropertyType.Maximum ? property.Maximum :
                                                        property.Par * 99;
-		}
+        }
 
-		public SkillRecord GetSkill(List<SkillRecord> skills, double id, string name = null)
-		{
-			var skill = skills.FirstOrDefault(_ => _.Id == Convert.ToInt32(id));
+        public SkillRecord GetSkill(List<SkillRecord> skills, double id, string name = null)
+        {
+            var skill = skills.FirstOrDefault(_ => _.Id == Convert.ToInt32(id));
 
-			if (skill == null)
-				skill = skills.FirstOrDefault(_ => _.Name == name.ToTitleCase());
-			
-			if (skill == null)
-				_missingSkills.Add((name, _currentItemName, id));
+            if (skill == null)
+                skill = skills.FirstOrDefault(_ => _.Name == name.ToTitleCase());
+            
+            if (skill == null)
+                _missingSkills.Add((name, _currentItemName, id));
 
-			return skill;
-		}
+            return skill;
+        }
 
-		public SkillTabRecord GetSkillTab(List<SkillTabRecord> skillTabs, double id, string name = null)
-		{
-			var skillTab = skillTabs.FirstOrDefault(_ => _.Id == Convert.ToInt32(id));
+        public SkillTabRecord GetSkillTab(List<SkillTabRecord> skillTabs, double id, string name = null)
+        {
+            var skillTab = skillTabs.FirstOrDefault(_ => _.Id == Convert.ToInt32(id));
 
-			if (skillTab == null)
-				skillTab = skillTabs.FirstOrDefault(_ => _.Name == name.ToTitleCase());
+            if (skillTab == null)
+                skillTab = skillTabs.FirstOrDefault(_ => _.Name == name.ToTitleCase());
 
-			if (skillTab == null)
-				_missingSkills.Add((name, _currentItemName, id));
+            if (skillTab == null)
+                _missingSkills.Add((name, _currentItemName, id));
 
-			return skillTab;
-		}
+            return skillTab;
+        }
 
         private string NormalizeMinMax(
             double mini, 
@@ -860,11 +864,41 @@ namespace DiabloII.Items.Reader
 
             return $"{firstChar}{value}";
         }
-	}
 
-	public static class DoubleExtensions
-	{
-		public static double AddIfPositive(this double? value, double toAdd) => value.Value > 0 ? value.Value + toAdd : value.Value;
-		public static double AddIfPositive(this double value, double toAdd) => value > 0 ? value + toAdd : value;
-	}
+        private static string GetItemImageName(string itemType, string itemName)
+        {
+            var itemTypeToItemImageName = new Dictionary<string, string>
+            {
+                {"Arrows", "arrows"},
+                {"Bolts", "bolts"},
+                {"Jewel", "jewel"}
+            };
+            var itemNameToItemImageName = new Dictionary<string, string>
+            {
+                {"Annihilus", "bluecharm"},
+                {"Cerebus", "spiritmask"},
+                {"Durak`s Might", "hawkhelm"},
+                {"Ethereal Edge", "broadaxe"},
+                {"Ethereal Stone Edge", "broadaxe"},
+                {"Frrenzy Crown", "hornedhelm"},
+                {"Halaberd's Reign", "hornedhelm"},
+                {"Gheed's Fortune", "largecharm"},
+                {"Tyrael's Absolution", "largecharm"},
+                {"Hellfire Torch", "hellfiretorch"},
+                {"Victor`s Torch", "hellfiretorch"},
+                {"Kharon of Hades", "bluecharm"},
+            };
+
+            return itemTypeToItemImageName.GetValueOrDefault(itemType) ??
+                   itemNameToItemImageName.GetValueOrDefault(itemName);
+        }
+    }
+
+    public static class DoubleExtensions
+    {
+        public static double AddIfPositive(this double? value, double toAdd) => value.Value > 0 ? value.Value + toAdd : value.Value;
+        public static double AddIfPositive(this double value, double toAdd) => value > 0 ? value + toAdd : value;
+    }
+
+
 }

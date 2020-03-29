@@ -32,12 +32,11 @@ namespace DiabloII.Items.Api.Services.Items
 
         public IReadOnlyCollection<Item> GetAllUniques() => UniqueItems.ToList();
 
-        public IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query) =>UniqueItems
+        public IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query) => UniqueItems
             .Where(unique =>
                 (query.MinimumLevel == null || unique.Level >= query.MinimumLevel) &&
                 (query.MaximumLevel == null || unique.Level >= query.MaximumLevel) &&
-                (EnumerableHelpers.IsNullOrEmpty(query.SubCategories) ||
-                 query.SubCategories.Contains(unique.SubCategory)))
+                (EnumerableHelpers.IsNullOrEmpty(query.SubCategories) || query.SubCategories.Contains(unique.SubCategory)))
             .ToList();
     }
 }
