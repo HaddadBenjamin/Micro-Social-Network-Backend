@@ -3,21 +3,21 @@ using System.Collections.Generic;
 
 namespace DiabloII.Items.Reader.Items
 {
-    public class Item
-    {
+	public class Item
+	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }
-        public string Quality { get; set; }
-        public string Category { get; set; }
-        public string SubCategory { get; set; }
-        public string Type { get; set; }
+		public string Quality { get; set; }
+		public string Category { get; set; }
+		public string SubCategory { get; set; }
+		public string Type { get; set; }
 		public double LevelRequired { get; set; }
-        public double Level { get; set; }
-        public IEnumerable<ItemProperty> Properties { get; set; }
+		public double Level { get; set; }
+		public IEnumerable<ItemProperty> Properties { get; set; }
 		public string ImageName { get; set; }
 
-        // Specific to Armor.
-        public double? MinimumDefenseMinimum { get; set; }
+		// Specific to Armor.
+		public double? MinimumDefenseMinimum { get; set; }
 		public double? MaximumDefenseMinimum { get; set; }
 		public double? MinimumDefenseMaximum { get; set; }
 		public double? MaximumDefenseMaximum { get; set; }
