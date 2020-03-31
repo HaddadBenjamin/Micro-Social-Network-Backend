@@ -869,24 +869,24 @@ namespace DiabloII.Items.Reader
         {
             var itemTypeToItemImageName = new Dictionary<string, string>
             {
-                {"Arrows", "arrows"},
-                {"Bolts", "bolts"},
-                {"Jewel", "jewel"}
+                {"Arrows", "arrows.gif"},
+                {"Bolts", "bolts.gif"},
+                {"Jewel", "jewel.gif"}
             };
             var itemNameToItemImageName = new Dictionary<string, string>
             {
-                {"Annihilus", "bluecharm"},
-                {"Cerebus", "spiritmask"},
-                {"Durak`s Might", "hawkhelm"},
-                {"Ethereal Edge", "broadaxe"},
-                {"Ethereal Stone Edge", "broadaxe"},
-                {"Frrenzy Crown", "hornedhelm"},
-                {"Halaberd's Reign", "hornedhelm"},
-                {"Gheed's Fortune", "largecharm"},
-                {"Tyrael's Absolution", "largecharm"},
-                {"Hellfire Torch", "hellfiretorch"},
-                {"Victor`s Torch", "hellfiretorch"},
-                {"Kharon of Hades", "bluecharm"},
+                {"Annihilus", "bluecharm.gif"},
+                {"Cerebus", "spiritmask.gif"},
+                {"Durak`s Might", "hawkhelm.gif"},
+                {"Ethereal Edge", "broadaxe.gif"},
+                {"Ethereal Stone Edge", "broadaxe.gif"},
+                {"Frrenzy Crown", "hornedhelm.gif"},
+                {"Halaberd's Reign", "hornedhelm.gif"},
+                {"Gheed's Fortune", "largecharm.gif"},
+                {"Tyrael's Absolution", "largecharm.gif"},
+                {"Hellfire Torch", "hellfiretorch.gif"},
+                {"Victor`s Torch", "hellfiretorch.gif"},
+                {"Kharon of Hades", "bluecharm.gif"},
             };
 
             return itemTypeToItemImageName.GetValueOrDefault(itemType) ??
