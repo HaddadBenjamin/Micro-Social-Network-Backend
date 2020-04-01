@@ -59,10 +59,9 @@ namespace DiabloII.Items.Api.Services.Suggestions
             return SuggestionMapper.ToSuggestionDto(suggestion);
         }
 
-        public IReadOnlyCollection<SuggestionDto> GetAll()
-            => _dbContext.Suggestions
-                .Include(suggestion => suggestion.Votes)
-                .Select(SuggestionMapper.ToSuggestionDto)
-                .ToList();
+        public IReadOnlyCollection<SuggestionDto> GetAll() => _dbContext.Suggestions
+            .Include(suggestion => suggestion.Votes)
+            .Select(SuggestionMapper.ToSuggestionDto)
+            .ToList();
     }
 }
