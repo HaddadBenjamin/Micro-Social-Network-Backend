@@ -10,7 +10,8 @@ namespace DiabloII.Items.Generator
 
             var generationEnvironments = new[]
             {
-                GenerationEnvironment.Development
+                GenerationEnvironment.Development,
+                GenerationEnvironment.Production,
             };
             ItemsGenerator.Generate(generationEnvironments);
 
