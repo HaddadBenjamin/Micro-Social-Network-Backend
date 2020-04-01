@@ -8,7 +8,11 @@ namespace DiabloII.Items.Generator
         {
             Console.WriteLine("Item generation in progres...");
 
-            ItemsGenerator.Generate();
+            var generationEnvironments = new[]
+            {
+                GenerationEnvironment.Development
+            };
+            ItemsGenerator.Generate(generationEnvironments);
 
             Console.WriteLine("Item generation is done");
         }

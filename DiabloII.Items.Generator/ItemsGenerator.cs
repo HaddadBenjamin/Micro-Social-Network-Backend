@@ -14,7 +14,7 @@ namespace DiabloII.Items.Generator
     {
         private static readonly int CommandTimeout = 600;
 
-        public static void Generate()
+        public static void Generate(GenerationEnvironment[] environments)
         {
             var diabloFilesReader = new DiabloIIFilesReader();
             var uniqueItems = diabloFilesReader.Read();
@@ -81,7 +81,7 @@ namespace DiabloII.Items.Generator
             var itemProperties = items
                 .SelectMany(item => item.Properties)
                 .ToList();
-            var configurationFilePaths = new[] { "appsettings.Development.json", "appsettings.Production.json" };
+            var configurationFilePaths = environments.Select(environment => $"appsettings.{environment.ToString()}.json");
 
             foreach (var configurationFilePath in configurationFilePaths)
             {
