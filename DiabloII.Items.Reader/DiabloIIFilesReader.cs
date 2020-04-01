@@ -572,8 +572,8 @@ namespace DiabloII.Items.Reader
                         // Stats
                         StrengthRequired = (itemCategory?.StrengthRequired * (requirementPercent + 100)) / 100,
                         DexterityRequired = (itemCategory?.DexterityRequired * (requirementPercent + 100)) / 100,
-                        ImageName = GetItemImageName(type, name, itemCategory, itemData)
-                    };
+                        ImageName = itemCategory?.ImageName ?? GetItemImageName(type, name)
+                        };
                 })
                 .Where(ItemFilter)
                 .ToList();
@@ -865,10 +865,13 @@ namespace DiabloII.Items.Reader
             return $"{firstChar}{value}";
         }
 
-        private static string GetItemImageName(string itemType, string itemName, ItemCategoryRecord itemCategory, string[] itemData)
+        private static string GetItemImageName(string itemType, string itemName)
         {
             var itemTypeToItemImageName = new Dictionary<string, string>
             {
+                {"Arrows", "arrows"},
+                {"Bolts", "bolts"},
+                {"Jewel", "jewel"}
             };
             var itemNameToItemImageName = new Dictionary<string, string>
             {
@@ -886,13 +889,8 @@ namespace DiabloII.Items.Reader
                 {"Kharon of Hades", "bluecharm"},
             };
 
-            var uniqueImage = itemData[52]?.Replace("\r", string.Empty);
-            uniqueImage = uniqueImage != string.Empty ||uniqueImage == "0" ? uniqueImage : null;
-
-            return  uniqueImage ??
-                    itemCategory?.ImageName ??
-                    itemTypeToItemImageName.GetValueOrDefault(itemType) ??
-                    itemNameToItemImageName.GetValueOrDefault(itemName);
+            return itemTypeToItemImageName.GetValueOrDefault(itemType) ??
+                   itemNameToItemImageName.GetValueOrDefault(itemName);
         }
 
         private static string GetItemSubCategory(string itemType)

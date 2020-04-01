@@ -6,7 +6,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
 {
     public interface ISuggestionsService
     {
-        void Create(CreateASuggestionDto createASugestion);
+        SuggestionDto Create(CreateASuggestionDto createASugestion);
 
         SuggestionDto Vote(VoteToASuggestionDto voteToASuggestion);
 

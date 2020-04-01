@@ -15,7 +15,7 @@ namespace DiabloII.Items.Api.Controllers
 
         [Route("create")]
         [HttpPost]
-        public void Create(CreateASuggestionDto createASuggestion) => _suggestionsService.Create(createASuggestion);
+        public SuggestionDto Create(CreateASuggestionDto createASuggestion) => _suggestionsService.Create(createASuggestion);
 
         [Route("vote")]
         [HttpPost]

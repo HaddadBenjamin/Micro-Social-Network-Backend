@@ -19,7 +19,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
             _dbContext = dbContext;
         }
 
-        public void Create(CreateASuggestionDto createASugestion)
+        public SuggestionDto Create(CreateASuggestionDto createASugestion)
         {
             var validationContext = new CreateASuggestionValidatorContext(createASugestion, _dbContext);
             var validator = new CreateASuggestionValidator();
@@ -30,6 +30,8 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
             _dbContext.Suggestions.Add(suggestion);
             _dbContext.SaveChanges();
+
+            return SuggestionMapper.ToSuggestionDto(suggestion);
         }
 
         public SuggestionDto Vote(VoteToASuggestionDto voteToASuggestionDto)
