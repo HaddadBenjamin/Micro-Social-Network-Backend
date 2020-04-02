@@ -15,11 +15,11 @@ namespace DiabloII.Items.Api.Controllers
 
         [Route("create")]
         [HttpPost]
-        public SuggestionDto Create(CreateASuggestionDto createASuggestion) => _suggestionsService.Create(createASuggestion);
+        public SuggestionDto Create([FromBody] CreateASuggestionDto createASuggestion) => _suggestionsService.Create(createASuggestion);
 
         [Route("vote")]
         [HttpPost]
-        public SuggestionDto Vote(VoteToASuggestionDto voteToASuggestion) => _suggestionsService.Vote(voteToASuggestion);
+        public SuggestionDto Vote([FromBody] VoteToASuggestionDto voteToASuggestion) => _suggestionsService.Vote(voteToASuggestion);
 
         [Route("getall")]
         [HttpGet]

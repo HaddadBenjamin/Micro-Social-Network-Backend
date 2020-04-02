@@ -286,7 +286,7 @@ Stormeye;27;20;War Scepter;dmg-ltng;;1;6;dmg-cold;75;3;5;Replenish Life;;10;10;D
 Stormguild;15;11;Large Shield;red-mag;;1;1;res-ltng;;25;25;Armor Class;;30;30;dmg-ltng;;1;6;Armor Class %;;50;60;Faster Block %;;30;30;Lightning Thorns;;3;3;Extra Durability;;10;15;;;;;;;;;;;;;;;;;stormguild
 Stormlash;80;76;scourge;Damage %;;240;300;Attack Speed %;;30;30;Hit-Skill;Static Field;15;10;Hit-Skill;Tornado;20;18;dmg-ltng;;1;473;Lightning Thorns;;30;30;Crushing Blow;;33;33;abs-ltng;;3;9;;;;;;;;;;;;;;;;;stormlash
 Stormrider;45;38;Tabar;Hit-Skill;53;5;10;Hit-Skill;38;10;0;dmg-ltng;;1;200;dmg-norm;;35;75;Damage %;;100;100;Extra Durability;;50;50;Lightning Thorns;;15;15;Gethit-Skill;38;15;5;;;;;;;;;;;;;;;;;stormrider
-Stormspike;45;38;Stilleto;dmg-ltng;;1;120;Lightning Thorns;;20;20;Gethit-Skill;38;25;3;Damage %;;150;150;res-ltng/lvl;8;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Stormspike
+Stormspike;45;38;Stilleto;dmg-ltng;;1;120;Lightning Thorns;;20;20;Gethit-Skill;38;25;3;Damage %;;150;150;res-ltng/lvl;8;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;stormspike
 Stormspire;72;65;Giant Thresher;res-ltng;;50;50;Gethit-Skill;53;5;5;Damage %;;150;250;Strength;;10;10;Gethit-Skill;38;2;0;Attack Speed %;;30;30;Indestructable;;1;1;dmg-ltng;;1;237;Lightning Thorns;;27;27;*enr;;-10;-10;;;;;;;;;stormspire
 Stormstrike;30;22;Short Battle Bow;dmg-ltng;;1;30;Strength;;8;8;Attack Rating;;28;28;pierce;;25;25;res-ltng;;25;25;Damage %;;70;90;;;;;;;;;;;;;;;;;;;;;;;;;stormstrike
 Suicide Branch;38;29;Burnt Wand;Thorns;;25;25;Cast Speed %;;50;50;All Resists;;10;10;Mana %;;10;10;Hitpoints;;40;40;All Skills;;1;1;;;;;;;;;;;;;;;;;;;;;;;;;suicidebranch
