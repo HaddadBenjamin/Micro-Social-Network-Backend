@@ -41,7 +41,9 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
             validator.Validate(validationContext);
 
-            var suggestion = _dbContext.Suggestions.First(vote => vote.Id == voteToASuggestionDto.SuggestionId);
+            var suggestion = _dbContext.Suggestions
+                .Include(suggestionModel => suggestionModel.Votes)
+                .First(vote => vote.Id == voteToASuggestionDto.SuggestionId);
             var suggestionVote = _dbContext.SuggestionVotes.FirstOrDefault(vote => vote.Ip == voteToASuggestionDto.Ip);
             var suggestionVoteExists = suggestionVote != null;
             
@@ -50,7 +52,8 @@ namespace DiabloII.Items.Api.Services.Suggestions
             else
             {
                 suggestionVote = SuggestionMapper.ToSuggestionVote(voteToASuggestionDto);
-
+             
+                suggestion.Votes.Add(suggestionVote);
                 _dbContext.SuggestionVotes.Add(suggestionVote);
             }
 
