@@ -44,9 +44,10 @@ namespace DiabloII.Items.Api.Services.Suggestions
             var suggestion = _dbContext.Suggestions
                 .Include(suggestionModel => suggestionModel.Votes)
                 .First(vote => vote.Id == voteToASuggestionDto.SuggestionId);
-            var suggestionVote = _dbContext.SuggestionVotes.FirstOrDefault(vote => vote.Ip == voteToASuggestionDto.Ip);
+            var suggestionVote = suggestion.Votes.FirstOrDefault(vote => vote.Ip == voteToASuggestionDto.Ip && 
+                                                                                    vote.SuggestionId == voteToASuggestionDto.SuggestionId);
             var suggestionVoteExists = suggestionVote != null;
-            
+
             if (suggestionVoteExists)
                 suggestionVote.IsPositive = voteToASuggestionDto.IsPositive;
             else
