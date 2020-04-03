@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DiabloII.Items.Api.DbContext;
+using DiabloII.Items.Api.Exceptions;
 using DiabloII.Items.Api.Mappers.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
@@ -71,6 +72,8 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         public SuggestionDto Comment(CommentASuggestionDto commentASuggestion)
         {
+            if (string.IsNullOrEmpty(commentASuggestion.Comment))
+                throw new BadRequestException("Your comment is null or empty");
             var suggestion = _dbContext
                 .GetSuggestions()
                 .First(comment => comment.Id == commentASuggestion.SuggestionId);
