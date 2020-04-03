@@ -17,6 +17,6 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         Guid Delete(DeleteASuggestionDto deleteASuggestion);
 
-        DeletedSuggestionCommentDto DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment);
+        SuggestionDto DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment);
     }
 }

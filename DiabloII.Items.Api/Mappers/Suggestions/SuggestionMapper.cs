@@ -52,11 +52,5 @@ namespace DiabloII.Items.Api.Mappers.Suggestions
             Comment = commentASuggestionDto.Comment,
             Ip = commentASuggestionDto.Ip
         };
-
-        public static DeletedSuggestionCommentDto ToDeletedSuggestionCommentDto(DeleteASuggestionCommentDto deleteASuggestionComment) => new DeletedSuggestionCommentDto
-        {
-            Id = deleteASuggestionComment.Id,
-            SuggestionId = deleteASuggestionComment.SuggestionId
-        };
     }
 }

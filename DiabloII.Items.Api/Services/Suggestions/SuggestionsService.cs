@@ -105,7 +105,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
             return deleteASuggestion.Id;
         }
 
-        public DeletedSuggestionCommentDto DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment)
+        public SuggestionDto DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment)
         {
             var validationContext = new DeleteASuggestionCommentValidatorContext(deleteASuggestionComment, _dbContext);
             var validator = new DeleteASuggestionCommentValidator();
@@ -121,7 +121,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
             _dbContext.SuggestionComments.Remove(suggestionCommentToDelete);
             _dbContext.SaveChanges();
 
-            return SuggestionMapper.ToDeletedSuggestionCommentDto(deleteASuggestionComment);
+            return SuggestionMapper.ToSuggestionDto(suggestion);
         }
     }
 }
