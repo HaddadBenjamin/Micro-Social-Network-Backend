@@ -49,7 +49,10 @@ namespace DiabloII.Items.Api.Services.Suggestions
             var suggestionVoteExists = suggestionVote != null;
 
             if (suggestionVoteExists)
-                suggestionVote.IsPositive = voteToASuggestionDto.IsPositive;
+            {
+                suggestion.Votes.Remove(suggestionVote);
+                _dbContext.SuggestionVotes.Remove(suggestionVote);
+            }
             else
             {
                 suggestionVote = SuggestionMapper.ToSuggestionVote(voteToASuggestionDto);
