@@ -25,6 +25,7 @@ namespace DiabloII.Items.Api.Mappers.Suggestions
         public static Suggestion ToSuggestion(CreateASuggestionDto createASuggestionDto) => new Suggestion
         {
             Id = Guid.NewGuid(),
+            Ip = createASuggestionDto.Ip,
             Content = createASuggestionDto.Content,
         };
 
