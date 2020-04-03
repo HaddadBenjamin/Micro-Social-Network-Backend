@@ -71,14 +71,17 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
             var userIp = "193.43.55.67";
 
             _validatorContext.Dto = new VoteToASuggestionDto
-
             {
                 Ip = userIp,
                 SuggestionId = suggestionId
             };
+            var suggestion = new Suggestion {Id = suggestionId, Content = "any content"};
+            var vote = new SuggestionVote {Id = Guid.NewGuid(), Ip = userIp};
 
-            _dbContext.Suggestions.Add(new Suggestion { Id = suggestionId, Content = "any content" });
-            _dbContext.SuggestionVotes.Add(new SuggestionVote { Id = Guid.NewGuid(), SuggestionId = suggestionId, Ip = userIp });
+            suggestion.Votes.Add(vote);
+
+            _dbContext.Suggestions.Add(suggestion);
+            _dbContext.SuggestionVotes.Add(vote);
             _dbContext.SaveChanges();
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));

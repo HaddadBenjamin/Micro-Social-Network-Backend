@@ -16,5 +16,8 @@ namespace DiabloII.Items.Api.Responses.Suggestions
         public int NegativeVoteCount { get; set; }
 
         public IReadOnlyCollection<SuggestionVoteDto> Votes { get; set; }
+
+        public IReadOnlyCollection<SuggestionCommentDto> Comments { get; set; }
+
     }
 }

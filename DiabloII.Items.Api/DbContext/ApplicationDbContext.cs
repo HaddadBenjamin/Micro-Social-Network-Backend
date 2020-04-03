@@ -1,9 +1,11 @@
-﻿using DiabloII.Items.Api.DbContext.ErrorLogs.Models;
+﻿using System.Collections.Generic;
+using DiabloII.Items.Api.DbContext.ErrorLogs.Models;
 using DiabloII.Items.Api.DbContext.Items.Mappers;
 using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.DbContext.Suggestions.Mappers;
 using DiabloII.Items.Api.DbContext.Suggestions.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace DiabloII.Items.Api.DbContext
 {
@@ -25,9 +27,14 @@ namespace DiabloII.Items.Api.DbContext
         {
             SuggestionDbMapper.Map(modelBuilder);
             SuggestionVoteDbMapper.Map(modelBuilder);
+            SuggestionCommentDbMapper.Map(modelBuilder);
 
             ItemMapper.Map(modelBuilder);
             ItemPropertyMapper.Map(modelBuilder);
         }
+
+        public IIncludableQueryable<Suggestion, ICollection<SuggestionComment>> GetSuggestions() => Suggestions
+            .Include(suggestion => suggestion.Votes)
+            .Include(suggestion => suggestion.Comments);
     }
 }

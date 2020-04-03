@@ -2,14 +2,14 @@
 
 namespace DiabloII.Items.Api.DbContext.Suggestions.Models
 {
-    public class SuggestionVote
+    public class SuggestionComment
     {
         public Guid Id { get; set; }
 
         public Suggestion Suggestion { get; set; }
 
-        public bool IsPositive { get; set; }
-
         public string Ip { get; set; }
+
+        public string Comment { get; set; }
     }
 }

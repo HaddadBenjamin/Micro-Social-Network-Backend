@@ -22,7 +22,12 @@ namespace DiabloII.Items.Api.DbContext.Suggestions.Mappers
                 .HasMany(suggestion => suggestion.Votes)
                 .WithOne(suggestion => suggestion.Suggestion)
                 .IsRequired();
-            
+
+            suggestionBuilder
+                .HasMany(suggestion => suggestion.Comments)
+                .WithOne(suggestion => suggestion.Suggestion)
+                .IsRequired();
+
             suggestionBuilder.Property(suggestion => suggestion.Content).IsRequired();
         }
     }

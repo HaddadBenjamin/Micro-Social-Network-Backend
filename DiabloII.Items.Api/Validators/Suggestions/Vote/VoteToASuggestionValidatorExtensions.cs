@@ -24,7 +24,7 @@ namespace DiabloII.Items.Api.Validators.Suggestions.Vote
 
         public static void SuggestionShouldUniqueByIpAndId<T>(this IRuleBuilder<T, VoteToASuggestionValidatorContext> ruleBuilder) => ruleBuilder
             .Must(context => !context.DbContext.SuggestionVotes.Any(suggestionVote =>
-                suggestionVote.SuggestionId == context.Dto.SuggestionId &&
+                suggestionVote.Suggestion.Id == context.Dto.SuggestionId &&
                 suggestionVote.Ip == context.Dto.Ip))
             .OnFailure(context => throw new BadRequestException("Suggestion is not unique"));
     }

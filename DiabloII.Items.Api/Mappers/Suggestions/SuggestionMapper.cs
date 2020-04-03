@@ -15,12 +15,15 @@ namespace DiabloII.Items.Api.Mappers.Suggestions
             Content = suggestion.Content,
             PositiveVoteCount = suggestion.Votes.Count(vote => vote.IsPositive),
             NegativeVoteCount = suggestion.Votes.Count(vote => !vote.IsPositive),
-            Votes = suggestion.Votes.Select(vote => new SuggestionVoteDto
-            {
-                Ip = vote.Ip,
-                IsPositive = vote.IsPositive
-            }).ToList()
+            Votes = suggestion.Votes.Select(ToSugugestionVoteDto).ToList(),
+            Comments = suggestion.Comments.Select(ToSuggestionCommentDto).ToList()
         };
+
+        private static SuggestionCommentDto ToSuggestionCommentDto(SuggestionComment comment)
+            => new SuggestionCommentDto {Ip = comment.Ip, Comment = comment.Comment};
+
+        private static SuggestionVoteDto ToSugugestionVoteDto(SuggestionVote vote)
+            => new SuggestionVoteDto {Ip = vote.Ip, IsPositive = vote.IsPositive};
 
         public static Suggestion ToSuggestion(CreateASuggestionDto createASuggestionDto) => new Suggestion
         {
@@ -32,9 +35,15 @@ namespace DiabloII.Items.Api.Mappers.Suggestions
         public static SuggestionVote ToSuggestionVote(VoteToASuggestionDto voteToASuggestionDto) => new SuggestionVote
         {
             Id = Guid.NewGuid(),
-            SuggestionId = voteToASuggestionDto.SuggestionId,
             IsPositive = voteToASuggestionDto.IsPositive,
             Ip = voteToASuggestionDto.Ip
+        };
+
+        public static SuggestionComment ToSuggestionComment(CommentASuggestionDto commentASuggestionDto) => new SuggestionComment
+        {
+            Id = Guid.NewGuid(),
+            Comment = commentASuggestionDto.Comment,
+            Ip = commentASuggestionDto.Ip
         };
     }
 }

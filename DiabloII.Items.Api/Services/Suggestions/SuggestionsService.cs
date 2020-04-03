@@ -43,11 +43,12 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
             validator.Validate(validationContext);
 
-            var suggestion = _dbContext.Suggestions
-                .Include(suggestionModel => suggestionModel.Votes)
+            var suggestion = _dbContext
+                .GetSuggestions()
                 .First(vote => vote.Id == voteToASuggestionDto.SuggestionId);
-            var suggestionVote = suggestion.Votes.FirstOrDefault(vote => vote.Ip == voteToASuggestionDto.Ip && 
-                                                                                    vote.SuggestionId == voteToASuggestionDto.SuggestionId);
+            var suggestionVote = suggestion.Votes.FirstOrDefault(vote => 
+                vote.Ip == voteToASuggestionDto.Ip && 
+                vote.Suggestion.Id == voteToASuggestionDto.SuggestionId);
             var suggestionVoteExists = suggestionVote != null;
 
             if (suggestionVoteExists)
@@ -68,8 +69,22 @@ namespace DiabloII.Items.Api.Services.Suggestions
             return SuggestionMapper.ToSuggestionDto(suggestion);
         }
 
-        public IReadOnlyCollection<SuggestionDto> GetAll() => _dbContext.Suggestions
-            .Include(suggestion => suggestion.Votes)
+        public SuggestionDto Comment(CommentASuggestionDto commentASuggestion)
+        {
+            var suggestion = _dbContext
+                .GetSuggestions()
+                .First(comment => comment.Id == commentASuggestion.SuggestionId);
+            var suggestionComment = SuggestionMapper.ToSuggestionComment(commentASuggestion);
+
+            suggestion.Comments.Add(suggestionComment);
+            _dbContext.SuggestionComments.Add(suggestionComment);
+            _dbContext.SaveChanges();
+
+            return SuggestionMapper.ToSuggestionDto(suggestion);
+        }
+
+        public IReadOnlyCollection<SuggestionDto> GetAll() => _dbContext
+            .GetSuggestions()
             .Select(SuggestionMapper.ToSuggestionDto)
             .ToList();
 

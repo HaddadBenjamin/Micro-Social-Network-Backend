@@ -11,6 +11,8 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         SuggestionDto Vote(VoteToASuggestionDto voteToASuggestion);
 
+        SuggestionDto Comment(CommentASuggestionDto commentASuggestion);
+
         IReadOnlyCollection<SuggestionDto> GetAll();
 
         Guid Delete(DeleteASuggestionDto deleteASuggestion);

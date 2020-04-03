@@ -10,4 +10,13 @@ namespace DiabloII.Items.Api.Requests.Suggestions
         
         public string Ip { get; set; }
     }
+
+    public class CommentASuggestionDto
+    {
+        public Guid SuggestionId { get; set; }
+
+        public string Comment { get; set; }
+
+        public string Ip { get; set; }
+    }
 }

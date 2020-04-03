@@ -22,6 +22,10 @@ namespace DiabloII.Items.Api.Controllers
         [HttpPost]
         public SuggestionDto Vote([FromBody] VoteToASuggestionDto voteToASuggestion) => _suggestionsService.Vote(voteToASuggestion);
 
+        [Route("comment")]
+        [HttpPost]
+        public SuggestionDto Comment([FromBody] CommentASuggestionDto commentASuggestion) => _suggestionsService.Comment(commentASuggestion);
+        
         [Route("getall")]
         [HttpGet]
         public IReadOnlyCollection<SuggestionDto> GetAll() => _suggestionsService.GetAll();
