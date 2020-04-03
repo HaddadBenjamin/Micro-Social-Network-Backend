@@ -7,6 +7,7 @@ using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Create;
 using DiabloII.Items.Api.Validators.Suggestions.Delete;
+using DiabloII.Items.Api.Validators.Suggestions.DeleteAComment;
 using DiabloII.Items.Api.Validators.Suggestions.Vote;
 
 namespace DiabloII.Items.Api.Services.Suggestions
@@ -102,6 +103,25 @@ namespace DiabloII.Items.Api.Services.Suggestions
             _dbContext.SaveChanges();
 
             return deleteASuggestion.Id;
+        }
+
+        public DeletedSuggestionCommentDto DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment)
+        {
+            var validationContext = new DeleteASuggestionCommentValidatorContext(deleteASuggestionComment, _dbContext);
+            var validator = new DeleteASuggestionCommentValidator();
+
+            validator.Validate(validationContext);
+
+            var suggestion = _dbContext.GetSuggestions().First(suggestionModel => suggestionModel.Id == deleteASuggestionComment.SuggestionId);
+            var suggestionCommentToDelete = suggestion.Comments.First(comment =>
+                comment.Ip == deleteASuggestionComment.Ip &&
+                comment.Id == deleteASuggestionComment.Id);
+
+            suggestion.Comments.Remove(suggestionCommentToDelete);
+            _dbContext.SuggestionComments.Remove(suggestionCommentToDelete);
+            _dbContext.SaveChanges();
+
+            return SuggestionMapper.ToDeletedSuggestionCommentDto(deleteASuggestionComment);
         }
     }
 }

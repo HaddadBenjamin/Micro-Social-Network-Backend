@@ -33,5 +33,9 @@ namespace DiabloII.Items.Api.Controllers
         [Route("delete")]
         [HttpDelete]
         public Guid Delete([FromBody] DeleteASuggestionDto deleteASuggestion) => _suggestionsService.Delete(deleteASuggestion);
+
+        [Route("deletecomment")]
+        [HttpDelete]
+        public DeletedSuggestionCommentDto Delete([FromBody] DeleteASuggestionCommentDto deleteASuggestionComment) => _suggestionsService.DeleteAComment(deleteASuggestionComment);
     }
 }

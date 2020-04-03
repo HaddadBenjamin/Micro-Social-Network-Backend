@@ -16,5 +16,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
         IReadOnlyCollection<SuggestionDto> GetAll();
 
         Guid Delete(DeleteASuggestionDto deleteASuggestion);
+
+        DeletedSuggestionCommentDto DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment);
     }
 }

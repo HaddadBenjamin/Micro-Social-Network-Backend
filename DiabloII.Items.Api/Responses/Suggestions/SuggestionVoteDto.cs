@@ -6,11 +6,4 @@
 
         public bool IsPositive { get; set; }
     }
-
-    public class SuggestionCommentDto
-    {
-        public string Ip { get; set; }
-        
-        public string Comment { get; set; }
-    }
 }

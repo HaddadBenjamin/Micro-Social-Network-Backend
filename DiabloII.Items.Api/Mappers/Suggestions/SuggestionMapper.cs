@@ -19,11 +19,18 @@ namespace DiabloII.Items.Api.Mappers.Suggestions
             Comments = suggestion.Comments.Select(ToSuggestionCommentDto).ToList()
         };
 
-        private static SuggestionCommentDto ToSuggestionCommentDto(SuggestionComment comment)
-            => new SuggestionCommentDto {Ip = comment.Ip, Comment = comment.Comment};
+        private static SuggestionCommentDto ToSuggestionCommentDto(SuggestionComment comment) => new SuggestionCommentDto
+        {
+            Id = comment.Id,
+            Ip = comment.Ip, 
+            Comment = comment.Comment
+        };
 
-        private static SuggestionVoteDto ToSugugestionVoteDto(SuggestionVote vote)
-            => new SuggestionVoteDto {Ip = vote.Ip, IsPositive = vote.IsPositive};
+        private static SuggestionVoteDto ToSugugestionVoteDto(SuggestionVote vote) => new SuggestionVoteDto
+        {
+            Ip = vote.Ip,
+            IsPositive = vote.IsPositive
+        };
 
         public static Suggestion ToSuggestion(CreateASuggestionDto createASuggestionDto) => new Suggestion
         {
@@ -44,6 +51,12 @@ namespace DiabloII.Items.Api.Mappers.Suggestions
             Id = Guid.NewGuid(),
             Comment = commentASuggestionDto.Comment,
             Ip = commentASuggestionDto.Ip
+        };
+
+        public static DeletedSuggestionCommentDto ToDeletedSuggestionCommentDto(DeleteASuggestionCommentDto deleteASuggestionComment) => new DeletedSuggestionCommentDto
+        {
+            Id = deleteASuggestionComment.Id,
+            SuggestionId = deleteASuggestionComment.SuggestionId
         };
     }
 }
