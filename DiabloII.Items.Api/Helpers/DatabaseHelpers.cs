@@ -2,7 +2,6 @@
 using DiabloII.Items.Api.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
 namespace DiabloII.Items.Api.Helpers
 {

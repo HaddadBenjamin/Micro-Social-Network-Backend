@@ -8,7 +8,6 @@ using DiabloII.Items.Api.Responses.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Create;
 using DiabloII.Items.Api.Validators.Suggestions.Delete;
 using DiabloII.Items.Api.Validators.Suggestions.Vote;
-using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Items.Api.Services.Suggestions
 {

@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata.Ecma335;
 using DiabloII.Items.Reader.Items;
 
 namespace DiabloII.Items.Reader
