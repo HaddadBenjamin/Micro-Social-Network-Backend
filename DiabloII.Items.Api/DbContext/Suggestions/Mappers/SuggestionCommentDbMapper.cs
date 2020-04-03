@@ -19,7 +19,7 @@ namespace DiabloII.Items.Api.DbContext.Suggestions.Mappers
             suggestionVoteBuilder
                 .HasOne(suggestionComment => suggestionComment.Suggestion)
                 .WithMany(suggestion => suggestion.Comments)
-                .HasForeignKey(suggestionComment => suggestionComment.Suggestion.Id);
+                .HasForeignKey(suggestionComment => suggestionComment.SuggestionId);
 
             suggestionVoteBuilder.Ignore(suggestionComment => suggestionComment.Suggestion);
 

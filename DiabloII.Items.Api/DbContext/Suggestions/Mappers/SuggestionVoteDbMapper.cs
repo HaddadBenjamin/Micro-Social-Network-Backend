@@ -16,12 +16,10 @@ namespace DiabloII.Items.Api.DbContext.Suggestions.Mappers
                 .HasIndex(suggestion => suggestion.Id)
                 .IsUnique();
 
-            suggestionVoteBuilder.HasKey(suggestionVote => new { suggestionVote.Suggestion.Id, suggestionVote.Ip});
-            
             suggestionVoteBuilder
                 .HasOne(suggestionVote => suggestionVote.Suggestion)
                 .WithMany(suggestionVote => suggestionVote.Votes)
-                .HasForeignKey(suggestionVote => suggestionVote.Suggestion.Id);
+                .HasForeignKey(suggestionVote => suggestionVote.SuggestionId);
 
             suggestionVoteBuilder.Ignore(suggestionVote => suggestionVote.Suggestion);
             

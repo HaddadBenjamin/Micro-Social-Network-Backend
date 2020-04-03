@@ -48,7 +48,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
                 .First(vote => vote.Id == voteToASuggestionDto.SuggestionId);
             var suggestionVote = suggestion.Votes.FirstOrDefault(vote => 
                 vote.Ip == voteToASuggestionDto.Ip && 
-                vote.Suggestion.Id == voteToASuggestionDto.SuggestionId);
+                vote.SuggestionId == voteToASuggestionDto.SuggestionId);
             var suggestionVoteExists = suggestionVote != null;
 
             if (suggestionVoteExists)

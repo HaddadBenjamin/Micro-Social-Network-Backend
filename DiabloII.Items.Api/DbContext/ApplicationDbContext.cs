@@ -15,6 +15,8 @@ namespace DiabloII.Items.Api.DbContext
 
         public DbSet<SuggestionVote> SuggestionVotes { get; set; }
 
+        public DbSet<SuggestionComment> SuggestionComments { get; set; }
+
         public DbSet<ErrorLog> ErrorLogs { get; set; }
 
         public DbSet<Item> Items{ get; set; }

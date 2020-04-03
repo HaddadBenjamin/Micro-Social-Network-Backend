@@ -6,7 +6,9 @@ namespace DiabloII.Items.Api.DbContext.Suggestions.Models
     {
         public Guid Id { get; set; }
 
-        public Suggestion Suggestion { get; set; }
+        public Guid SuggestionId { get; set; }
+
+        public virtual Suggestion Suggestion { get; set; }
 
         public string Ip { get; set; }
 
