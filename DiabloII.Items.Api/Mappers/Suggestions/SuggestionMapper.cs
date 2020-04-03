@@ -14,6 +14,11 @@ namespace DiabloII.Items.Api.Mappers.Suggestions
             Content = suggestion.Content,
             PositiveVoteCount = suggestion.Votes.Count(vote => vote.IsPositive),
             NegativeVoteCount = suggestion.Votes.Count(vote => !vote.IsPositive),
+            Votes = suggestion.Votes.Select(vote => new SuggestionVoteDto
+            {
+                Ip = vote.Ip,
+                IsNegative = vote.IsPositive
+            }).ToList()
         };
 
         public static Suggestion ToSuggestion(CreateASuggestionDto createASuggestionDto) => new Suggestion

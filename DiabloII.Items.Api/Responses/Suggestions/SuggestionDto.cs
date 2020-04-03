@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace DiabloII.Items.Api.Responses.Suggestions
 {
@@ -11,5 +12,7 @@ namespace DiabloII.Items.Api.Responses.Suggestions
         public int PositiveVoteCount { get; set; }
        
         public int NegativeVoteCount { get; set; }
+
+        public IReadOnlyCollection<SuggestionVoteDto> Votes { get; set; }
     }
 }
