@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
 using DiabloII.Items.Api.Services.Suggestions;
@@ -24,5 +25,9 @@ namespace DiabloII.Items.Api.Controllers
         [Route("getall")]
         [HttpGet]
         public IReadOnlyCollection<SuggestionDto> GetAll() => _suggestionsService.GetAll();
+
+        [Route("delete")]
+        [HttpDelete]
+        public Guid Delete([FromBody] DeleteASuggestionDto deleteASuggestion) => _suggestionsService.Delete(deleteASuggestion);
     }
 }

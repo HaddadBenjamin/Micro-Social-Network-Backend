@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Mappers.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Create;
+using DiabloII.Items.Api.Validators.Suggestions.Delete;
 using DiabloII.Items.Api.Validators.Suggestions.Vote;
 using Microsoft.EntityFrameworkCore;
 
@@ -70,5 +72,22 @@ namespace DiabloII.Items.Api.Services.Suggestions
             .Include(suggestion => suggestion.Votes)
             .Select(SuggestionMapper.ToSuggestionDto)
             .ToList();
+
+        public Guid Delete(DeleteASuggestionDto deleteASuggestion)
+        {
+            var validationContext = new DeleteASuggestionValidatorContext(deleteASuggestion, _dbContext);
+            var validator = new DeleteASuggestionValidator();
+
+            validator.Validate(validationContext);
+
+            var suggestionToDelete = _dbContext.Suggestions.FirstOrDefault(suggestion => 
+                suggestion.Ip == deleteASuggestion.Ip &&
+                suggestion.Id == deleteASuggestion.Id);
+
+            _dbContext.Remove(suggestionToDelete);
+            _dbContext.SaveChanges();
+
+            return deleteASuggestion.Id;
+        }
     }
 }
