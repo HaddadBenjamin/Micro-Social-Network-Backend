@@ -11,6 +11,7 @@ namespace DiabloII.Items.Api.Mappers.Suggestions
         public static SuggestionDto ToSuggestionDto(Suggestion suggestion) => new SuggestionDto
         {
             Id = suggestion.Id,
+            Ip = suggestion.Ip,
             Content = suggestion.Content,
             PositiveVoteCount = suggestion.Votes.Count(vote => vote.IsPositive),
             NegativeVoteCount = suggestion.Votes.Count(vote => !vote.IsPositive),

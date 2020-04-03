@@ -8,7 +8,9 @@ namespace DiabloII.Items.Api.Responses.Suggestions
         public Guid Id { get; set; }
         
         public string Content { get; set; }
-        
+
+        public string Ip { get; set; }
+
         public int PositiveVoteCount { get; set; }
        
         public int NegativeVoteCount { get; set; }
