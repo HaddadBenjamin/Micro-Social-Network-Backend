@@ -17,7 +17,7 @@ namespace DiabloII.Items.Api.Mappers.Suggestions
             Votes = suggestion.Votes.Select(vote => new SuggestionVoteDto
             {
                 Ip = vote.Ip,
-                IsNegative = vote.IsPositive
+                IsPositive = vote.IsPositive
             }).ToList()
         };
 

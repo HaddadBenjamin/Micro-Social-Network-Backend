@@ -4,6 +4,6 @@
     {
         public string Ip { get; set; }
 
-        public bool IsNegative { get; set; }
+        public bool IsPositive { get; set; }
     }
 }
