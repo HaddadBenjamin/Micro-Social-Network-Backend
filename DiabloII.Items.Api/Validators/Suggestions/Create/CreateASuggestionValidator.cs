@@ -6,7 +6,9 @@ namespace DiabloII.Items.Api.Validators.Suggestions.Create
     {
         public CreateASuggestionValidator()
         {
-            RuleFor(context => context.Dto.Content).ShouldNotBeNullOrEmpty("Content");
+            RuleFor(context => context.Dto.Content)
+                .ShouldNotBeNullOrEmpty("Content")
+                .ShouldBeShorterThan("Content");
             RuleFor(context => context.Dto.Ip).ShouldBeAValidIp();
             RuleFor(context => context.DbContextValidatorContext).SuggestionContentShouldBeUnique();
         }
