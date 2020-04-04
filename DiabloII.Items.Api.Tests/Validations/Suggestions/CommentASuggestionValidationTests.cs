@@ -5,7 +5,7 @@ using DiabloII.Items.Api.Exceptions;
 using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Api.Repositories.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
-using DiabloII.Items.Api.Vallidations.Suggestions.Comment;
+using DiabloII.Items.Api.Validations.Suggestions.Comment;
 using NUnit.Framework;
 using Shouldly;
 

@@ -1,7 +1,7 @@
 ﻿using DiabloII.Items.Api.Exceptions;
 using FluentValidation;
 
-namespace DiabloII.Items.Api.Vallidations.Suggestions.DeleteAComment
+namespace DiabloII.Items.Api.Validations.Suggestions.DeleteAComment
 {
     public static class DeleteASuggestionCommentValidationRules
     {
