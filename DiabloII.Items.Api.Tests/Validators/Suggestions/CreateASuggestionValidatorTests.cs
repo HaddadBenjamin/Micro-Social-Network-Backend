@@ -97,5 +97,8 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
+
+        [Test]
+        public void WhenDtoIsValid_ShouldSuccess() => Should.NotThrow(() => _validator.Validate(_validationContext));
     }
 }

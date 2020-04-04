@@ -18,76 +18,67 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         private VoteToASuggestionValidator _validator;
         private VoteToASuggestionValidationContext _validationContext;
         private ISuggestionRepository _repository;
+        private Guid _validSuggestionId;
 
         [SetUp]
         public void Setup()
         {
+            _validSuggestionId = Guid.NewGuid();
+
+            var validDto = new VoteToASuggestionDto
+            {
+                Ip = "213.91.163.4",
+                IsPositive = true,
+                SuggestionId = _validSuggestionId
+            };
+
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
             _repository = new SuggestionRepository(_dbContext);
           
             _validator = new VoteToASuggestionValidator();
-            _validationContext = new VoteToASuggestionValidationContext(null, _repository);
+            _validationContext = new VoteToASuggestionValidationContext(validDto, _repository);
         }
 
         [Test]
-        public void WhenUserIpIsNull_ShouldThrowABadRequestException()
+        public void WhenIpIsNull_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto = new VoteToASuggestionDto { Ip = null };
+            _validationContext.Dto.Ip = null;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
-        public void WhenUserIpIsEmpty_ShouldThrowABadRequestException()
+        public void WhenIpIsEmpty_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto = new VoteToASuggestionDto { Ip = string.Empty };
+            _validationContext.Dto.Ip = string.Empty;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
-        public void WhenUserIpIsNotAnIp_ShouldThrowABadRequestException()
+        public void WhenIpIsNotAnIpV4_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto = new VoteToASuggestionDto { Ip = "999.0.0.0" };
+            _validationContext.Dto.Ip = "213.91.163.4444";
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
-        public void WhenSuggestionDoesNotExists_ShouldThrowABadRequestException()
-        {
-            var suggestionIdThatDontExists = Guid.NewGuid();
+        public void WhenSuggestionDoesNotExists_ShouldThrowABadRequestException() => 
+            Should.Throw<NotFoundException>(() => _validator.Validate(_validationContext));
 
-            _validationContext.Dto = new VoteToASuggestionDto
+        [Test]
+        public void WhenDtoIsValid_ShouldSuccess()
+        {
+            var suggestion = new Suggestion
             {
-                Ip = "193.43.55.67",
-                SuggestionId = suggestionIdThatDontExists
+                Id = _validSuggestionId
             };
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
-
-        [Test]
-        public void WhenSuggestionVoteIsNotUniqueByIpAndSuggestionId_ShouldThrowABadRequestException()
-        {
-            var suggestionId = Guid.NewGuid();
-            var userIp = "193.43.55.67";
-
-            _validationContext.Dto = new VoteToASuggestionDto
-            {
-                Ip = userIp,
-                SuggestionId = suggestionId
-            };
-            var suggestion = new Suggestion {Id = suggestionId, Content = "any content"};
-            var vote = new SuggestionVote {Id = Guid.NewGuid(), Ip = userIp};
-
-            suggestion.Votes.Add(vote);
 
             _dbContext.Suggestions.Add(suggestion);
-            _dbContext.SuggestionVotes.Add(vote);
             _dbContext.SaveChanges();
 
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
+            Should.NotThrow(() => _validator.Validate(_validationContext));
         }
     }
 }
