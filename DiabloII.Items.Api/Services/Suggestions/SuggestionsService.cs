@@ -24,7 +24,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         public SuggestionDto Create(CreateASuggestionDto createASugestion)
         {
-            var validationContext = new CreateASuggestionValidatorContext(createASugestion, _dbContext);
+            var validationContext = new CreateASuggestionValidationContext(createASugestion, _dbContext);
             var validator = new CreateASuggestionValidator();
 
             validator.Validate(validationContext);
@@ -39,7 +39,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         public SuggestionDto Vote(VoteToASuggestionDto voteToASuggestionDto)
         {
-            var validationContext = new VoteToASuggestionValidatorContext(voteToASuggestionDto, _dbContext);
+            var validationContext = new VoteToASuggestionValidationContext(voteToASuggestionDto, _dbContext);
             var validator = new VoteToASuggestionValidator();
 
             validator.Validate(validationContext);
@@ -72,7 +72,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         public SuggestionDto Comment(CommentASuggestionDto commentASuggestion)
         {
-            var validationContext = new CommentASuggestionValidatorContext(commentASuggestion, _dbContext);
+            var validationContext = new CommentASuggestionValidationContext(commentASuggestion, _dbContext);
             var validator = new CommentASuggestionValidator();
 
             validator.Validate(validationContext);
@@ -96,7 +96,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         public Guid Delete(DeleteASuggestionDto deleteASuggestion)
         {
-            var validationContext = new DeleteASuggestionValidatorContext(deleteASuggestion, _dbContext);
+            var validationContext = new DeleteASuggestionValidationContext(deleteASuggestion, _dbContext);
             var validator = new DeleteASuggestionValidator();
 
             validator.Validate(validationContext);
@@ -113,7 +113,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         public SuggestionDto DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment)
         {
-            var validationContext = new DeleteASuggestionCommentValidatorContext(deleteASuggestionComment, _dbContext);
+            var validationContext = new DeleteASuggestionCommentValidationContext(deleteASuggestionComment, _dbContext);
             var validator = new DeleteASuggestionCommentValidator();
 
             validator.Validate(validationContext);

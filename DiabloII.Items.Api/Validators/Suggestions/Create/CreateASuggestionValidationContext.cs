@@ -3,19 +3,19 @@ using DiabloII.Items.Api.Requests.Suggestions;
 
 namespace DiabloII.Items.Api.Validators.Suggestions.Create
 {
-    public class CreateASuggestionValidatorContext
+    public class CreateASuggestionValidationContext
     {
         public CreateASuggestionDto Dto { get; set; }
       
         public ApplicationDbContext DbContext { get; }
 
-        public SuggestionDbContextValidatorContext DbContextValidatorContext { get; }
+        public SuggestionDbContextValidationContext DbContextValidationContext { get; }
 
-        public CreateASuggestionValidatorContext(CreateASuggestionDto dto, ApplicationDbContext dbContext)
+        public CreateASuggestionValidationContext(CreateASuggestionDto dto, ApplicationDbContext dbContext)
         {
             Dto = dto;
             DbContext = dbContext;
-            DbContextValidatorContext = new SuggestionDbContextValidatorContext(dbContext)
+            DbContextValidationContext = new SuggestionDbContextValidationContext(dbContext)
             {
                 Content = dto.Content
             };

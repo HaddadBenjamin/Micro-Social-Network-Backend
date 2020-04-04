@@ -2,7 +2,7 @@
 
 namespace DiabloII.Items.Api.Validators.Suggestions.Create
 {
-    public class CreateASuggestionValidator : AbstractValidator<CreateASuggestionValidatorContext>
+    public class CreateASuggestionValidator : AbstractValidator<CreateASuggestionValidationContext>
     {
         public CreateASuggestionValidator()
         {
@@ -10,7 +10,7 @@ namespace DiabloII.Items.Api.Validators.Suggestions.Create
                 .ShouldNotBeNullOrEmpty("Content")
                 .ShouldBeShorterThan("Content");
             RuleFor(context => context.Dto.Ip).ShouldBeAValidIp();
-            RuleFor(context => context.DbContextValidatorContext).SuggestionContentShouldBeUnique();
+            RuleFor(context => context.DbContextValidationContext).SuggestionContentShouldBeUnique();
         }
     }
 }

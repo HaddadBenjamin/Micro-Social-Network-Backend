@@ -2,7 +2,7 @@
 
 namespace DiabloII.Items.Api.Validators.Suggestions.Comment
 {
-    public class CommentASuggestionValidator : AbstractValidator<CommentASuggestionValidatorContext>
+    public class CommentASuggestionValidator : AbstractValidator<CommentASuggestionValidationContext>
     {
         public CommentASuggestionValidator()
         {
@@ -10,7 +10,7 @@ namespace DiabloII.Items.Api.Validators.Suggestions.Comment
                 .ShouldNotBeNullOrEmpty("Comment")
                 .ShouldBeShorterThan("Comment");
             RuleFor(context => context.Dto.Ip).ShouldBeAValidIp();
-            RuleFor(context => context.DbContextValidatorContext).SuggestionShouldExists();
+            RuleFor(context => context.DbContextValidationContext).SuggestionShouldExists();
         }
     }
 }

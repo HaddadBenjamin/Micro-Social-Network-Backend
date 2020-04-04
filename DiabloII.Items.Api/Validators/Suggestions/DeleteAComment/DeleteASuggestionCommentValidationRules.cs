@@ -6,7 +6,7 @@ namespace DiabloII.Items.Api.Validators.Suggestions.DeleteAComment
 {
     public static class DeleteASuggestionCommentValidationRules
     {
-        public static void SuggestionAndCommentShouldExistsAndBeRelatedToTheUserIp<T>(this IRuleBuilder<T, DeleteASuggestionCommentValidatorContext> ruleBuilder) => ruleBuilder
+        public static void SuggestionAndCommentShouldExistsAndBeRelatedToTheUserIp<T>(this IRuleBuilder<T, DeleteASuggestionCommentValidationContext> ruleBuilder) => ruleBuilder
             .Must(context => context.DbContext
                 .GetSuggestions()
                 .Any(suggestion => suggestion.Id == context.Dto.SuggestionId && 

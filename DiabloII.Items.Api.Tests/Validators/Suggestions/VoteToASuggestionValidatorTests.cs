@@ -15,7 +15,7 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
     {
         private ApplicationDbContext _dbContext;
         private VoteToASuggestionValidator _validator;
-        private VoteToASuggestionValidatorContext _validatorContext;
+        private VoteToASuggestionValidationContext _validationContext;
 
         [SetUp]
         public void Setup()
@@ -23,31 +23,31 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
 
             _validator = new VoteToASuggestionValidator();
-            _validatorContext = new VoteToASuggestionValidatorContext(null, _dbContext);
+            _validationContext = new VoteToASuggestionValidationContext(null, _dbContext);
         }
 
         [Test]
         public void WhenUserIpIsNull_ShouldThrowABadRequestException()
         {
-            _validatorContext.Dto = new VoteToASuggestionDto { Ip = null };
+            _validationContext.Dto = new VoteToASuggestionDto { Ip = null };
 
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
         public void WhenUserIpIsEmpty_ShouldThrowABadRequestException()
         {
-            _validatorContext.Dto = new VoteToASuggestionDto { Ip = string.Empty };
+            _validationContext.Dto = new VoteToASuggestionDto { Ip = string.Empty };
 
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
         public void WhenUserIpIsNotAnIp_ShouldThrowABadRequestException()
         {
-            _validatorContext.Dto = new VoteToASuggestionDto { Ip = "999.0.0.0" };
+            _validationContext.Dto = new VoteToASuggestionDto { Ip = "999.0.0.0" };
 
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
@@ -55,13 +55,13 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         {
             var suggestionIdThatDontExists = Guid.NewGuid();
 
-            _validatorContext.Dto = new VoteToASuggestionDto
+            _validationContext.Dto = new VoteToASuggestionDto
             {
                 Ip = "193.43.55.67",
                 SuggestionId = suggestionIdThatDontExists
             };
 
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
@@ -70,7 +70,7 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
             var suggestionId = Guid.NewGuid();
             var userIp = "193.43.55.67";
 
-            _validatorContext.Dto = new VoteToASuggestionDto
+            _validationContext.Dto = new VoteToASuggestionDto
             {
                 Ip = userIp,
                 SuggestionId = suggestionId
@@ -84,7 +84,7 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
             _dbContext.SuggestionVotes.Add(vote);
             _dbContext.SaveChanges();
 
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validatorContext));
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
     }
 }

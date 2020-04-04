@@ -3,19 +3,19 @@ using DiabloII.Items.Api.Requests.Suggestions;
 
 namespace DiabloII.Items.Api.Validators.Suggestions.Delete
 {
-    public class DeleteASuggestionValidatorContext
+    public class DeleteASuggestionValidationContext
     {
         public DeleteASuggestionDto Dto { get; set; }
 
         public ApplicationDbContext DbContext { get; }
 
-        public SuggestionDbContextValidatorContext DbContextValidatorContext { get; set; }
+        public SuggestionDbContextValidationContext DbContextValidationContext { get; set; }
 
-        public DeleteASuggestionValidatorContext(DeleteASuggestionDto dto, ApplicationDbContext dbContext)
+        public DeleteASuggestionValidationContext(DeleteASuggestionDto dto, ApplicationDbContext dbContext)
         {
             Dto = dto;
             DbContext = dbContext;
-            DbContextValidatorContext = new SuggestionDbContextValidatorContext(dbContext, dto.Id)
+            DbContextValidationContext = new SuggestionDbContextValidationContext(dbContext, dto.Id)
             {
                 Ip = dto.Ip
             };
