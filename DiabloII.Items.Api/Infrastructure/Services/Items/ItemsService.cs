@@ -1,10 +1,10 @@
-﻿using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.DbContext.Items.Models;
-using System.Collections.Generic;
-using DiabloII.Items.Api.Queries.Items;
-using DiabloII.Items.Api.Repositories.Items;
+﻿using System.Collections.Generic;
+using DiabloII.Items.Api.Domain.Models.Items;
+using DiabloII.Items.Api.Infrastructure.DbContext;
+using DiabloII.Items.Api.Infrastructure.Queries.Items;
+using DiabloII.Items.Api.Infrastructure.Repositories.Items;
 
-namespace DiabloII.Items.Api.Services.Items
+namespace DiabloII.Items.Api.Infrastructure.Services.Items
 {
     public class ItemsService : IItemsService
     {

@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using DiabloII.Items.Api.DbContext.Items.Models;
-using DiabloII.Items.Api.Responses.Items;
+using DiabloII.Items.Api.Application.Responses.Items;
+using DiabloII.Items.Api.Domain.Models.Items;
 
-namespace DiabloII.Items.Api.Mappers.Items
+namespace DiabloII.Items.Api.Application.Mappers.Items
 {
     public static class ItemMapper
     {

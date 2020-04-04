@@ -1,5 +1,6 @@
 ﻿using System;
-namespace DiabloII.Items.Api.Exceptions
+
+namespace DiabloII.Items.Api.Domain.Exceptions
 {
     public class BadRequestException : Exception
     {

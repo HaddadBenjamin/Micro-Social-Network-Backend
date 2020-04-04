@@ -1,7 +1,7 @@
-﻿using DiabloII.Items.Api.Repositories.Suggestions;
-using DiabloII.Items.Api.Requests.Suggestions;
+﻿using DiabloII.Items.Api.Application.Requests.Suggestions;
+using DiabloII.Items.Api.Infrastructure.Repositories.Suggestions;
 
-namespace DiabloII.Items.Api.Validations.Suggestions.Create
+namespace DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Create
 {
     public class CreateASuggestionValidationContext
     {

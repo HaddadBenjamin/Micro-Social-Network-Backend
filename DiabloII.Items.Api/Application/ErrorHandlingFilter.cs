@@ -4,15 +4,15 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using DiabloII.Items.Api.DbContext.ErrorLogs.Models;
-using DiabloII.Items.Api.Exceptions;
-using DiabloII.Items.Api.Services.ErrorLogs;
+using DiabloII.Items.Api.Domain.Exceptions;
+using DiabloII.Items.Api.Domain.Models.ErrorLogs;
+using DiabloII.Items.Api.Infrastructure.Services.ErrorLogs;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 
-namespace DiabloII.Items.Api
+namespace DiabloII.Items.Api.Application
 {
     public class ErrorHandlingFilter : ExceptionFilterAttribute
     {

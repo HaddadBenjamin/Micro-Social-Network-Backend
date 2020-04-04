@@ -1,7 +1,7 @@
-﻿using DiabloII.Items.Api.DbContext.ErrorLogs.Models;
-using DiabloII.Items.Api.Responses.ErrorLogs;
+﻿using DiabloII.Items.Api.Application.Responses.ErrorLogs;
+using DiabloII.Items.Api.Domain.Models.ErrorLogs;
 
-namespace DiabloII.Items.Api.Mappers.ErrorLogs
+namespace DiabloII.Items.Api.Application.Mappers.ErrorLogs
 {
     public static class ErrorLogMapper
     {

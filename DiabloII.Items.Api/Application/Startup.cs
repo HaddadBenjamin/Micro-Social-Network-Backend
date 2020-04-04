@@ -1,11 +1,11 @@
-﻿using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.Helpers;
-using DiabloII.Items.Api.Repositories.ErrorLogs;
-using DiabloII.Items.Api.Repositories.Items;
-using DiabloII.Items.Api.Repositories.Suggestions;
-using DiabloII.Items.Api.Services.ErrorLogs;
-using DiabloII.Items.Api.Services.Items;
-using DiabloII.Items.Api.Services.Suggestions;
+﻿using DiabloII.Items.Api.Infrastructure.DbContext;
+using DiabloII.Items.Api.Infrastructure.Helpers;
+using DiabloII.Items.Api.Infrastructure.Repositories.ErrorLogs;
+using DiabloII.Items.Api.Infrastructure.Repositories.Items;
+using DiabloII.Items.Api.Infrastructure.Repositories.Suggestions;
+using DiabloII.Items.Api.Infrastructure.Services.ErrorLogs;
+using DiabloII.Items.Api.Infrastructure.Services.Items;
+using DiabloII.Items.Api.Infrastructure.Services.Suggestions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 
-namespace DiabloII.Items.Api
+namespace DiabloII.Items.Api.Application
 {
     public class Startup
     {

@@ -1,13 +1,13 @@
-﻿using DiabloII.Items.Api.Services.Items;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using DiabloII.Items.Api.Mappers.Items;
-using DiabloII.Items.Api.Queries.Items;
-using DiabloII.Items.Api.Requests.Items;
-using DiabloII.Items.Api.Responses.Items;
+using DiabloII.Items.Api.Application.Mappers.Items;
+using DiabloII.Items.Api.Application.Requests.Items;
+using DiabloII.Items.Api.Application.Responses.Items;
+using DiabloII.Items.Api.Infrastructure.Queries.Items;
+using DiabloII.Items.Api.Infrastructure.Services.Items;
+using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Items.Api.Controllers
+namespace DiabloII.Items.Api.Application.Controllers
 {
     // Remember : dotnet run watch.
     [Route("api/v1/[controller]")]

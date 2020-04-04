@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DiabloII.Items.Api.Responses.Items
+namespace DiabloII.Items.Api.Application.Responses.Items
 {
     public class ItemDto
     {

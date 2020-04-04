@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.DbContext.ErrorLogs.Models;
-using DiabloII.Items.Api.Repositories.ErrorLogs;
+using DiabloII.Items.Api.Domain.Models.ErrorLogs;
+using DiabloII.Items.Api.Infrastructure.DbContext;
+using DiabloII.Items.Api.Infrastructure.Repositories.ErrorLogs;
 
-namespace DiabloII.Items.Api.Services.ErrorLogs
+namespace DiabloII.Items.Api.Infrastructure.Services.ErrorLogs
 {
     public class ErrorLogsService : IErrorLogsService
     {

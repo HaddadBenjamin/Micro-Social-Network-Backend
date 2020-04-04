@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using DiabloII.Items.Api.DbContext.Suggestions.Models;
-using DiabloII.Items.Api.Requests.Suggestions;
+using DiabloII.Items.Api.Application.Requests.Suggestions;
+using DiabloII.Items.Api.Domain.Models.Suggestions;
 
-namespace DiabloII.Items.Api.Services.Suggestions
+namespace DiabloII.Items.Api.Infrastructure.Services.Suggestions
 {
     public interface ISuggestionsService
     {

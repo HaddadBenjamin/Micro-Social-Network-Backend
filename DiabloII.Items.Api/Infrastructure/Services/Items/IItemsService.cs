@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using DiabloII.Items.Api.DbContext.Items.Models;
-using DiabloII.Items.Api.Queries.Items;
+using DiabloII.Items.Api.Domain.Models.Items;
+using DiabloII.Items.Api.Infrastructure.Queries.Items;
 
-namespace DiabloII.Items.Api.Services.Items
+namespace DiabloII.Items.Api.Infrastructure.Services.Items
 {
     public interface IItemsService
     {

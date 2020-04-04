@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using DiabloII.Items.Api.DbContext.Items.Models;
+using DiabloII.Items.Api.Domain.Models.Items;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace DiabloII.Items.Api.Requests.Items
+namespace DiabloII.Items.Api.Application.Requests.Items
 {
     public class SearchUniquesDto
     {

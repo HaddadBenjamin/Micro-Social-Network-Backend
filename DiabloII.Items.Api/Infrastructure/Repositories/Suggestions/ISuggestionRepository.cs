@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using DiabloII.Items.Api.DbContext.Suggestions.Models;
+using DiabloII.Items.Api.Domain.Models.Suggestions;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace DiabloII.Items.Api.Repositories.Suggestions
+namespace DiabloII.Items.Api.Infrastructure.Repositories.Suggestions
 {
     public interface ISuggestionRepository
     {

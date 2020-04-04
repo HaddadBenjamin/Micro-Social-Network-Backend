@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiabloII.Items.Api.Requests.Suggestions
+namespace DiabloII.Items.Api.Application.Requests.Suggestions
 {
     public class CommentASuggestionDto
     {

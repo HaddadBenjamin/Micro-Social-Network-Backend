@@ -1,8 +1,8 @@
-﻿using DiabloII.Items.Api.Extensions;
+﻿using DiabloII.Items.Api.Infrastructure.Extensions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace DiabloII.Items.Api
+namespace DiabloII.Items.Api.Application
 {
     public class Program
     {

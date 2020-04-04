@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DiabloII.Items.Api.Mappers.ErrorLogs;
-using DiabloII.Items.Api.Responses.ErrorLogs;
-using DiabloII.Items.Api.Services.ErrorLogs;
+using DiabloII.Items.Api.Application.Mappers.ErrorLogs;
+using DiabloII.Items.Api.Application.Responses.ErrorLogs;
+using DiabloII.Items.Api.Infrastructure.Services.ErrorLogs;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Items.Api.Controllers
+namespace DiabloII.Items.Api.Application.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiExplorerSettings(IgnoreApi = true)]

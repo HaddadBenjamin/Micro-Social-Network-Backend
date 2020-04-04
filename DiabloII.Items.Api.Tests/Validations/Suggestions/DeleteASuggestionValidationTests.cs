@@ -1,11 +1,11 @@
 using System;
-using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.DbContext.Suggestions.Models;
-using DiabloII.Items.Api.Exceptions;
-using DiabloII.Items.Api.Helpers;
-using DiabloII.Items.Api.Repositories.Suggestions;
-using DiabloII.Items.Api.Requests.Suggestions;
-using DiabloII.Items.Api.Validations.Suggestions.Delete;
+using DiabloII.Items.Api.Application.Requests.Suggestions;
+using DiabloII.Items.Api.Domain.Exceptions;
+using DiabloII.Items.Api.Domain.Models.Suggestions;
+using DiabloII.Items.Api.Infrastructure.DbContext;
+using DiabloII.Items.Api.Infrastructure.Helpers;
+using DiabloII.Items.Api.Infrastructure.Repositories.Suggestions;
+using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Delete;
 using NUnit.Framework;
 using Shouldly;
 

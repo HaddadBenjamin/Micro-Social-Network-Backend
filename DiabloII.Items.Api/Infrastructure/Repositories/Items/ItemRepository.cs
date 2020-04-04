@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.DbContext.Items.Models;
-using DiabloII.Items.Api.Helpers;
-using DiabloII.Items.Api.Queries.Items;
+using DiabloII.Items.Api.Domain.Helpers;
+using DiabloII.Items.Api.Domain.Models.Items;
+using DiabloII.Items.Api.Infrastructure.DbContext;
+using DiabloII.Items.Api.Infrastructure.Queries.Items;
 using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiabloII.Items.Api.Repositories.Items
+namespace DiabloII.Items.Api.Infrastructure.Repositories.Items
 {
     public class ItemRepository : IItemRepository
     {

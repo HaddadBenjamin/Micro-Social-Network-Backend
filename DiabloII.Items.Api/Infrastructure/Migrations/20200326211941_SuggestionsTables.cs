@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DiabloII.Items.Api.Migrations
+namespace DiabloII.Items.Api.Infrastructure.Migrations
 {
     public partial class SuggestionsTables : Migration
     {
