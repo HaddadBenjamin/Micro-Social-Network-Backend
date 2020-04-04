@@ -70,6 +70,7 @@ namespace DiabloII.Items.Api
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()))
                 .AddTransient<IItemsService, ItemsService>()
                 .AddTransient<ISuggestionRepository, SuggestionRepository>()
+                .AddTransient<IItemRepository, ItemRepository>()
                 .AddTransient<ISuggestionsService, SuggestionsService>()
                 .AddTransient<IErrorLogsService, ErrorLogsService>();
         }
