@@ -2,7 +2,7 @@
 using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Queries;
 
-namespace DiabloII.Items.Api.Services.Suggestions
+namespace DiabloII.Items.Api.Repositories.Items
 {
     public interface IItemRepository
     {

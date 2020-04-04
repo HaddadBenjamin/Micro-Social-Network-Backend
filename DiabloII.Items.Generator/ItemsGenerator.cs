@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using System.Linq;
+using DiabloII.Items.Api.Repositories.Items;
 using DiabloII.Items.Api.Services.Items;
-using DiabloII.Items.Api.Services.Suggestions;
 using Newtonsoft.Json;
 
 namespace DiabloII.Items.Generator

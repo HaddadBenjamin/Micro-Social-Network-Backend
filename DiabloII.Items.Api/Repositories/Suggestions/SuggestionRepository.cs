@@ -6,7 +6,7 @@ using DiabloII.Items.Api.DbContext.Suggestions.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace DiabloII.Items.Api.Services.Suggestions
+namespace DiabloII.Items.Api.Repositories.Suggestions
 {
     public class SuggestionRepository : ISuggestionRepository
     {

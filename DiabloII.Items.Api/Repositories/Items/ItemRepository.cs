@@ -7,7 +7,7 @@ using DiabloII.Items.Api.Queries;
 using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiabloII.Items.Api.Services.Suggestions
+namespace DiabloII.Items.Api.Repositories.Items
 {
     public class ItemRepository : IItemRepository
     {

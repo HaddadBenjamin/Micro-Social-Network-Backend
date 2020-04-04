@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Suggestions.Models;
 using DiabloII.Items.Api.Mappers.Suggestions;
+using DiabloII.Items.Api.Repositories.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Comment;
 using DiabloII.Items.Api.Validators.Suggestions.Create;

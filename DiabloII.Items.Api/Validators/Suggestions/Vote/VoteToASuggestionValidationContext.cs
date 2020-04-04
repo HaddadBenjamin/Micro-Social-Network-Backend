@@ -1,5 +1,5 @@
-﻿using DiabloII.Items.Api.Requests.Suggestions;
-using DiabloII.Items.Api.Services.Suggestions;
+﻿using DiabloII.Items.Api.Repositories.Suggestions;
+using DiabloII.Items.Api.Requests.Suggestions;
 
 namespace DiabloII.Items.Api.Validators.Suggestions.Vote
 {

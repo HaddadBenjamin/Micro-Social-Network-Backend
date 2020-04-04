@@ -1,42 +1,35 @@
 ﻿using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Items.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
-using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Api.Queries;
-using EFCore.BulkExtensions;
+using DiabloII.Items.Api.Repositories.Items;
 
 namespace DiabloII.Items.Api.Services.Items
 {
     public class ItemsService : IItemsService
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IItemRepository _repository;
 
-        public ItemsService(ApplicationDbContext dbContext) => _dbContext = dbContext;
+        public ItemsService(ApplicationDbContext dbContext, IItemRepository repository)
+        {
+            _dbContext = dbContext;
+            _repository = repository;
+        }
 
-        private IQueryable<Item> UniqueItems => _dbContext.Items
-            .Include(unique => unique.Properties)
-            .Where(unique => unique.Quality == ItemQuality.Unique); 
-        
+        #region Read
+        public IReadOnlyCollection<Item> GetAllUniques() => _repository.GetAllUniques();
+
+        public IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query) => _repository.SearchUniques(query);
+        #endregion
+
+        #region Write
         public void ResetTheItems(IList<Item> items, IList<ItemProperty> itemProperties)
         {
-            _dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE ItemProperties");
-            _dbContext.Database.ExecuteSqlCommand("DELETE FROM Items");
-           
-            _dbContext.BulkInsert(items);
-            _dbContext.BulkInsert(itemProperties);
+            _repository.ResetTheItems(items, itemProperties);
 
             _dbContext.SaveChanges();
         }
-
-        public IReadOnlyCollection<Item> GetAllUniques() => UniqueItems.ToList();
-
-        public IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query) => UniqueItems
-            .Where(unique =>
-                (query.MinimumLevel == null || unique.Level >= query.MinimumLevel) &&
-                (query.MaximumLevel == null || unique.Level >= query.MaximumLevel) &&
-                (EnumerableHelpers.IsNullOrEmpty(query.SubCategories) || query.SubCategories.Contains(unique.SubCategory)))
-            .ToList();
+        #endregion
     }
 }

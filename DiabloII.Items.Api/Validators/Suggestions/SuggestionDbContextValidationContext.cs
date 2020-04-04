@@ -1,5 +1,5 @@
 ﻿using System;
-using DiabloII.Items.Api.Services.Suggestions;
+using DiabloII.Items.Api.Repositories.Suggestions;
 
 namespace DiabloII.Items.Api.Validators.Suggestions
 {
