@@ -2,7 +2,7 @@
 using DiabloII.Items.Api.Exceptions;
 using FluentValidation;
 
-namespace DiabloII.Items.Api.Validators
+namespace DiabloII.Items.Api.Validations
 {
     public static class CommonValidationRules
     {

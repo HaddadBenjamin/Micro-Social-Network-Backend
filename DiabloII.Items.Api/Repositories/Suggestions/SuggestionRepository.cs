@@ -41,12 +41,15 @@ namespace DiabloII.Items.Api.Repositories.Suggestions
         public bool DoesSuggestionExists(Guid suggestionId, string userIp) =>
             _dbContext.Suggestions.Any(suggestion => suggestion.Id == suggestionId && suggestion.Ip == userIp);
 
-        public bool DoesSuggestionContentIsUnique(string suggestionContent) =>
-            _dbContext.Suggestions.All(suggestion => suggestion.Content != suggestionContent);
+        public bool DoesCommentExists(Guid commentId) =>
+            _dbContext.SuggestionComments.Any(comment => comment.Id == commentId);
 
         public bool DoesUserCommentExists(Guid suggestionId, Guid commentId, string userIp) => _dbContext.Suggestions
             .Any(suggestion => suggestion.Id == suggestionId &&
                                suggestion.Comments.Any(comment => comment.Id == commentId && comment.Ip == userIp));
+
+        public bool DoesSuggestionContentIsUnique(string suggestionContent) =>
+            _dbContext.Suggestions.All(suggestion => suggestion.Content != suggestionContent);
         #endregion
 
         #region Write

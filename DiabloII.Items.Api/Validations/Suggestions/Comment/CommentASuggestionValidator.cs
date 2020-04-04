@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace DiabloII.Items.Api.Validators.Suggestions.Comment
+namespace DiabloII.Items.Api.Validations.Suggestions.Comment
 {
     public class CommentASuggestionValidator : AbstractValidator<CommentASuggestionValidationContext>
     {

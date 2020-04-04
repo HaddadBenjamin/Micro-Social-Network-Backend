@@ -24,9 +24,11 @@ namespace DiabloII.Items.Api.Repositories.Suggestions
 
         bool DoesSuggestionExists(Guid suggestionId, string userIp);
 
-        bool DoesSuggestionContentIsUnique(string suggestionContent);
+        bool DoesCommentExists(Guid commentId);
 
         bool DoesUserCommentExists(Guid suggestionId, Guid commentId, string userIp);
+
+        bool DoesSuggestionContentIsUnique(string suggestionContent);
         #endregion
 
         #region Write

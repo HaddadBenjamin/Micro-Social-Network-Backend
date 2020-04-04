@@ -1,7 +1,7 @@
 ﻿using DiabloII.Items.Api.Repositories.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
 
-namespace DiabloII.Items.Api.Validators.Suggestions.DeleteAComment
+namespace DiabloII.Items.Api.Validations.Suggestions.DeleteAComment
 {
     public class DeleteASuggestionCommentValidationContext
     {
@@ -16,6 +16,7 @@ namespace DiabloII.Items.Api.Validators.Suggestions.DeleteAComment
             Dto = dto;
             Repository = repository;
             DbContextValidationContext = new SuggestionDbContextValidationContext(repository, dto.SuggestionId);
+            DbContextValidationContext.CommentId = Dto.Id;
         }
     }
 }

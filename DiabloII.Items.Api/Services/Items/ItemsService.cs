@@ -1,7 +1,6 @@
 ﻿using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Items.Models;
 using System.Collections.Generic;
-using DiabloII.Items.Api.Queries;
 using DiabloII.Items.Api.Queries.Items;
 using DiabloII.Items.Api.Repositories.Items;
 
