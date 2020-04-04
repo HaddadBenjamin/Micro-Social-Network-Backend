@@ -44,7 +44,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
             validator.Validate(validationContext);
 
-            //ISuggestionRepository.GetFirstWhereSuggestionIdEqualTo
+            //ISuggestionRepository.GetMyVote(suggestionId, userIp);
             var suggestion = _dbContext
                 .GetSuggestions()
                 .First(vote => vote.Id == voteToASuggestionDto.SuggestionId);
@@ -105,6 +105,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
             validator.Validate(validationContext);
 
+            //ISuggestionRepository.GetMySuggestion(suggestionId, userIp);
             var suggestionToDelete = _dbContext.Suggestions.FirstOrDefault(suggestion => 
                 suggestion.Ip == deleteASuggestion.Ip &&
                 suggestion.Id == deleteASuggestion.Id);
@@ -122,9 +123,8 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
             validator.Validate(validationContext);
 
-            //ISuggestionRepository.GetFirstWhereSuggestionIdEqualTo
+            //ISugestionRepository.GetMyComment(suggestionId, userIp, commentId)
             var suggestion = _dbContext.GetSuggestions().First(suggestionModel => suggestionModel.Id == deleteASuggestionComment.SuggestionId);
-            //ISugestionRepository.GetMyComment(ip, id)
             var suggestionCommentToDelete = suggestion.Comments.First(comment =>
                 comment.Ip == deleteASuggestionComment.Ip &&
                 comment.Id == deleteASuggestionComment.Id);
