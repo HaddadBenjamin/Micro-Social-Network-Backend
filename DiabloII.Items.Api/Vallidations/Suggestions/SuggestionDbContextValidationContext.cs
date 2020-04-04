@@ -8,6 +8,8 @@ namespace DiabloII.Items.Api.Vallidations.Suggestions
         public ISuggestionRepository Repository { get; }
       
         public Guid Id { get; set; }
+        
+        public Guid CommentId { get; set; }
 
         public string Content { get; set; }
 

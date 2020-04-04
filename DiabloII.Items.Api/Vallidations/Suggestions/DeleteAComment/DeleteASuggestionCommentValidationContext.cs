@@ -16,6 +16,7 @@ namespace DiabloII.Items.Api.Vallidations.Suggestions.DeleteAComment
             Dto = dto;
             Repository = repository;
             DbContextValidationContext = new SuggestionDbContextValidationContext(repository, dto.SuggestionId);
+            DbContextValidationContext.CommentId = Dto.Id;
         }
     }
 }
