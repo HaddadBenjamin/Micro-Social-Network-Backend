@@ -5,31 +5,28 @@ using DiabloII.Items.Api.Exceptions;
 using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Api.Repositories.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
-using DiabloII.Items.Api.Validators.Suggestions.Vote;
+using DiabloII.Items.Api.Vallidations.Suggestions.Vote;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DiabloII.Items.Api.Tests.Validators.Suggestions
+namespace DiabloII.Items.Api.Tests.Validations.Suggestions
 {
     [TestFixture]
-    public class VoteToASuggestionValidatorTests
+    public class VoteToASuggestionValidationTests
     {
         private ApplicationDbContext _dbContext;
         private VoteToASuggestionValidator _validator;
         private VoteToASuggestionValidationContext _validationContext;
         private ISuggestionRepository _repository;
-        private Guid _validSuggestionId;
 
         [SetUp]
         public void Setup()
         {
-            _validSuggestionId = Guid.NewGuid();
-
             var validDto = new VoteToASuggestionDto
             {
                 Ip = "213.91.163.4",
                 IsPositive = true,
-                SuggestionId = _validSuggestionId
+                SuggestionId = Guid.NewGuid()
             };
 
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
@@ -64,7 +61,7 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         }
 
         [Test]
-        public void WhenSuggestionDoesNotExists_ShouldThrowABadRequestException() => 
+        public void WhenSuggestionDoesNotExists_ShouldThrowANotFoundException() => 
             Should.Throw<NotFoundException>(() => _validator.Validate(_validationContext));
 
         [Test]
@@ -72,7 +69,7 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         {
             var suggestion = new Suggestion
             {
-                Id = _validSuggestionId
+                Id = _validationContext.Dto.SuggestionId
             };
 
             _dbContext.Suggestions.Add(suggestion);

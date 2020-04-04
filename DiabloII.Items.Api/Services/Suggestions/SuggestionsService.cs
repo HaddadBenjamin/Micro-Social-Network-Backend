@@ -5,11 +5,11 @@ using DiabloII.Items.Api.DbContext.Suggestions.Models;
 using DiabloII.Items.Api.Mappers.Suggestions;
 using DiabloII.Items.Api.Repositories.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
-using DiabloII.Items.Api.Validators.Suggestions.Comment;
-using DiabloII.Items.Api.Validators.Suggestions.Create;
-using DiabloII.Items.Api.Validators.Suggestions.Delete;
-using DiabloII.Items.Api.Validators.Suggestions.DeleteAComment;
-using DiabloII.Items.Api.Validators.Suggestions.Vote;
+using DiabloII.Items.Api.Vallidations.Suggestions.Comment;
+using DiabloII.Items.Api.Vallidations.Suggestions.Create;
+using DiabloII.Items.Api.Vallidations.Suggestions.Delete;
+using DiabloII.Items.Api.Vallidations.Suggestions.DeleteAComment;
+using DiabloII.Items.Api.Vallidations.Suggestions.Vote;
 
 namespace DiabloII.Items.Api.Services.Suggestions
 {

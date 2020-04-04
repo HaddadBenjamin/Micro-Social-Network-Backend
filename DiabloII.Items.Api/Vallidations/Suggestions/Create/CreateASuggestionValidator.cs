@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace DiabloII.Items.Api.Validators.Suggestions.Create
+namespace DiabloII.Items.Api.Vallidations.Suggestions.Create
 {
     public class CreateASuggestionValidator : AbstractValidator<CreateASuggestionValidationContext>
     {

@@ -1,7 +1,7 @@
 ﻿using DiabloII.Items.Api.Exceptions;
 using FluentValidation;
 
-namespace DiabloII.Items.Api.Validators.Suggestions
+namespace DiabloII.Items.Api.Vallidations.Suggestions
 {
     public static class CommonSuggestionValidationRules
     {

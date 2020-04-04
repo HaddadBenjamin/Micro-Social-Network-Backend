@@ -1,7 +1,7 @@
 ﻿using System;
 using DiabloII.Items.Api.Repositories.Suggestions;
 
-namespace DiabloII.Items.Api.Validators.Suggestions
+namespace DiabloII.Items.Api.Vallidations.Suggestions
 {
     public class SuggestionDbContextValidationContext
     {
