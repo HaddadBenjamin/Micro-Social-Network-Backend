@@ -12,10 +12,7 @@ namespace DiabloII.Items.Api.Repositories.Suggestions
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public SuggestionRepository(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        public SuggestionRepository(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
         #region Read
         public IIncludableQueryable<Suggestion, ICollection<SuggestionComment>> GetQueryableSuggestions() => _dbContext.Suggestions

@@ -13,10 +13,7 @@ namespace DiabloII.Items.Api.Repositories.Items
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public ItemRepository(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        public ItemRepository(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
         public void ResetTheItems(IList<Item> items, IList<ItemProperty> itemProperties)
         {
