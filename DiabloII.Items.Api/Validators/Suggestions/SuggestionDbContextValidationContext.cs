@@ -1,11 +1,11 @@
 ﻿using System;
-using DiabloII.Items.Api.DbContext;
+using DiabloII.Items.Api.Services.Suggestions;
 
 namespace DiabloII.Items.Api.Validators.Suggestions
 {
     public class SuggestionDbContextValidationContext
     {
-        public ApplicationDbContext DbContext { get; }
+        public ISuggestionRepository Repository { get; }
       
         public Guid Id { get; }
 
@@ -13,12 +13,12 @@ namespace DiabloII.Items.Api.Validators.Suggestions
 
         public string Ip { get; set; }
 
-        public SuggestionDbContextValidationContext(ApplicationDbContext dbContext) => DbContext = dbContext;
+        public SuggestionDbContextValidationContext(ISuggestionRepository repository) => Repository = repository;
 
-        public SuggestionDbContextValidationContext(ApplicationDbContext dbContext, Guid id)
+        public SuggestionDbContextValidationContext(ISuggestionRepository repository, Guid id)
         {
             Id = id;
-            DbContext = dbContext;
+            Repository = repository;
         }
     }
 }

@@ -4,6 +4,7 @@ using DiabloII.Items.Api.DbContext.Suggestions.Models;
 using DiabloII.Items.Api.Exceptions;
 using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Api.Requests.Suggestions;
+using DiabloII.Items.Api.Services.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Vote;
 using NUnit.Framework;
 using Shouldly;
@@ -16,14 +17,16 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         private ApplicationDbContext _dbContext;
         private VoteToASuggestionValidator _validator;
         private VoteToASuggestionValidationContext _validationContext;
+        private ISuggestionRepository _repository;
 
         [SetUp]
         public void Setup()
         {
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
-
+            _repository = new SuggestionRepository(_dbContext);
+          
             _validator = new VoteToASuggestionValidator();
-            _validationContext = new VoteToASuggestionValidationContext(null, _dbContext);
+            _validationContext = new VoteToASuggestionValidationContext(null, _repository);
         }
 
         [Test]

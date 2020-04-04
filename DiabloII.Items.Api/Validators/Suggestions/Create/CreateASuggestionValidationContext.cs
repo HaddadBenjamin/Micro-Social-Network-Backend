@@ -1,5 +1,5 @@
-﻿using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.Requests.Suggestions;
+﻿using DiabloII.Items.Api.Requests.Suggestions;
+using DiabloII.Items.Api.Services.Suggestions;
 
 namespace DiabloII.Items.Api.Validators.Suggestions.Create
 {
@@ -7,15 +7,12 @@ namespace DiabloII.Items.Api.Validators.Suggestions.Create
     {
         public CreateASuggestionDto Dto { get; set; }
       
-        public ApplicationDbContext DbContext { get; }
-
         public SuggestionDbContextValidationContext DbContextValidationContext { get; }
 
-        public CreateASuggestionValidationContext(CreateASuggestionDto dto, ApplicationDbContext dbContext)
+        public CreateASuggestionValidationContext(CreateASuggestionDto dto, ISuggestionRepository repository)
         {
             Dto = dto;
-            DbContext = dbContext;
-            DbContextValidationContext = new SuggestionDbContextValidationContext(dbContext)
+            DbContextValidationContext = new SuggestionDbContextValidationContext(repository)
             {
                 Content = dto.Content
             };
