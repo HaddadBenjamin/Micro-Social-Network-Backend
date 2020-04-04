@@ -7,7 +7,7 @@ namespace DiabloII.Items.Api.Validators.Suggestions
     {
         public ISuggestionRepository Repository { get; }
       
-        public Guid Id { get; }
+        public Guid Id { get; set; }
 
         public string Content { get; set; }
 

@@ -8,6 +8,8 @@ using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Create;
 using NUnit.Framework;
 using Shouldly;
+using FluentValidation.TestHelper;
+using NUnit.Framework.Internal;
 
 namespace DiabloII.Items.Api.Tests.Validators.Suggestions
 {
@@ -22,17 +24,23 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         [SetUp]
         public void Setup()
         {
+            var validDto = new CreateASuggestionDto
+            {
+                Content = "any value",
+                Ip = "213.91.163.4"
+            };
+
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
             _repository = new SuggestionRepository(_dbContext);
 
             _validator = new CreateASuggestionValidator();
-            _validationContext = new CreateASuggestionValidationContext(null, _repository);
+            _validationContext = new CreateASuggestionValidationContext(validDto, _repository);
         }
 
         [Test]
         public void WhenContentIsNull_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto = new CreateASuggestionDto { Content = null };
+            _validationContext.Dto.Content = null;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -40,7 +48,15 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         [Test]
         public void WhenContentIsEmpty_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto = new CreateASuggestionDto { Content = string.Empty };
+            _validationContext.Dto.Content = string.Empty;
+
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
+        }
+
+        [Test]
+        public void WhenContentIsLongerThan500Characters_ShouldThrowABadRequestException()
+        {
+            _validationContext.Dto.Content = new String('x', 1000);
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
