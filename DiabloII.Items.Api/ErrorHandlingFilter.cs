@@ -18,7 +18,10 @@ namespace DiabloII.Items.Api
     {
         private static readonly Dictionary<string, HttpStatusCode?> _exceptionTypeNameToHttpStatusMapper = new Dictionary<string, HttpStatusCode?>()
         {
-            {nameof(BadRequestException), HttpStatusCode.BadRequest}
+            {nameof(BadRequestException), HttpStatusCode.BadRequest},
+            {nameof(NotFoundException), HttpStatusCode.NotFound},
+            {nameof(UnauthorizedException), HttpStatusCode.Unauthorized}
+
         };
 
         public override void OnException(ExceptionContext exceptionContext)

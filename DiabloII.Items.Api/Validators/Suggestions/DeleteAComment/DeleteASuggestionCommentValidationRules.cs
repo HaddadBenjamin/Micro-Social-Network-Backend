@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace DiabloII.Items.Api.Validators.Suggestions.DeleteAComment
 {
-    public static class DeleteASuggestionCommentValidatorExtensions
+    public static class DeleteASuggestionCommentValidationRules
     {
         public static void SuggestionAndCommentShouldExistsAndBeRelatedToTheUserIp<T>(this IRuleBuilder<T, DeleteASuggestionCommentValidatorContext> ruleBuilder) => ruleBuilder
             .Must(context => context.DbContext

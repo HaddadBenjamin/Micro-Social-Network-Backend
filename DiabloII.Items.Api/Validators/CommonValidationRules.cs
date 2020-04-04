@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace DiabloII.Items.Api.Validators
 {
-    public static class CommonSuggestionValidatorExtensions
+    public static class CommonValidationRules
     {
         private static readonly string IpV4Regex = @"\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b";
       

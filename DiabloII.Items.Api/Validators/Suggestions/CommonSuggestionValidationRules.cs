@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace DiabloII.Items.Api.Validators.Suggestions
 {
-    public static class CommonSuggestionExtensions
+    public static class CommonSuggestionValidationRules
     {
         public static IRuleBuilder<T, SuggestionDbContextValidatorContext> SuggestionShouldExists<T>(this IRuleBuilder<T, SuggestionDbContextValidatorContext> ruleBuilder) => ruleBuilder
             .Must(context => context.DbContext.Suggestions.Any(suggestion => suggestion.Id == context.Id))
