@@ -5,56 +5,57 @@ using DiabloII.Items.Api.Exceptions;
 using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Api.Repositories.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
-using DiabloII.Items.Api.Vallidations.Suggestions.Create;
+using DiabloII.Items.Api.Vallidations.Suggestions.Comment;
 using NUnit.Framework;
 using Shouldly;
 
 namespace DiabloII.Items.Api.Tests.Validations.Suggestions
 {
     [TestFixture]
-    public class CreateASuggestionValidationTests
+    public class CommentASuggestionValidationTests
     {
         private ApplicationDbContext _dbContext;
-        private CreateASuggestionValidator _validator;
-        private CreateASuggestionValidationContext _validationContext;
+        private CommentASuggestionValidator _validator;
+        private CommentASuggestionValidationContext _validationContext;
         private ISuggestionRepository _repository;
 
         [SetUp]
         public void Setup()
         {
-            var validDto = new CreateASuggestionDto
+            var validDto = new CommentASuggestionDto
             {
-                Content = "any value",
-                Ip = "213.91.163.4"
+                SuggestionId = Guid.NewGuid(),
+                Ip = "213.91.163.4",
+                Comment = "any comment"
             };
 
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
             _repository = new SuggestionRepository(_dbContext);
 
-            _validator = new CreateASuggestionValidator();
-            _validationContext = new CreateASuggestionValidationContext(validDto, _repository);
+            _validator = new CommentASuggestionValidator();
+            _validationContext = new CommentASuggestionValidationContext(validDto, _repository);
         }
 
         [Test]
-        public void WhenContentIsNull_ShouldThrowABadRequestException()
+        public void WhenCommentIsNull_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Content = null;
+            _validationContext.Dto.Comment = null;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
-        public void WhenContentIsEmpty_ShouldThrowABadRequestException()
+        public void WhenCommentIsEmpty_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Content = string.Empty;
+            _validationContext.Dto.Comment = string.Empty;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
-        public void WhenContentIsLongerThan500Characters_ShouldThrowABadRequestException()
+        public void WhenCommentIsLongerThan500Characters_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Content = new String('x', 501);
+            _validationContext.Dto.Comment = new String('x', 501);
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -84,19 +85,27 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenContentIsNotUnique_ShouldThrowABadRequestException()
-        {
-            var suggestionContent = "any value";
-
-            _validationContext.Dto.Content = suggestionContent;
-
-            _dbContext.Suggestions.Add(new Suggestion { Id = Guid.NewGuid(), Content = suggestionContent });
-            _dbContext.SaveChanges();
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenSuggestionDoesNotExists_ShouldThrowANotFoundException() =>
+            Should.Throw<NotFoundException>(() => _validator.Validate(_validationContext));
 
         [Test]
-        public void WhenDtoIsValid_ShouldSuccess() => Should.NotThrow(() => _validator.Validate(_validationContext));
+        public void WhenDtoIsValid_ShouldSuccess()
+        {
+            AddTheValidSuggestion();
+
+            Should.NotThrow(() => _validator.Validate(_validationContext));
+        }
+
+        private void AddTheValidSuggestion()
+        {
+            var suggestion = new Suggestion
+            {
+                Id = _validationContext.Dto.SuggestionId,
+                Ip = _validationContext.Dto.Ip
+            };
+
+            _dbContext.Suggestions.Add(suggestion);
+            _dbContext.SaveChanges();
+        }
     }
 }
