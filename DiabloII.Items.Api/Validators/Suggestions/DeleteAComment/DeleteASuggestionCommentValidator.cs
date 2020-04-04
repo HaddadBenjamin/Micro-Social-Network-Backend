@@ -7,6 +7,7 @@ namespace DiabloII.Items.Api.Validators.Suggestions.DeleteAComment
         public DeleteASuggestionCommentValidator()
         {
             RuleFor(context => context.Dto.Ip).ShouldBeAValidIp();
+            RuleFor(context => context.DbContextValidatorContext).SuggestionShouldExists();
             RuleFor(context => context).SuggestionAndCommentShouldExistsAndBeRelatedToTheUserIp();
         }
     }
