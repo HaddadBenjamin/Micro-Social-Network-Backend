@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DiabloII.Items.Api.Mappers.Items;
 using DiabloII.Items.Api.Queries;
+using DiabloII.Items.Api.Queries.Items;
 using DiabloII.Items.Api.Requests.Items;
 using DiabloII.Items.Api.Responses.Items;
 

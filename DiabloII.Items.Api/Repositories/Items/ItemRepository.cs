@@ -4,6 +4,7 @@ using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Helpers;
 using DiabloII.Items.Api.Queries;
+using DiabloII.Items.Api.Queries.Items;
 using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 
