@@ -9,11 +9,11 @@ namespace DiabloII.Items.Api.Services.Suggestions
     {
         Suggestion Create(CreateASuggestionDto createASugestion);
 
+        IReadOnlyCollection<Suggestion> GetAll();
+     
         Suggestion Vote(VoteToASuggestionDto voteToASuggestion);
 
         Suggestion Comment(CommentASuggestionDto commentASuggestion);
-
-        IReadOnlyCollection<Suggestion> GetAll();
 
         Guid Delete(DeleteASuggestionDto deleteASuggestion);
 

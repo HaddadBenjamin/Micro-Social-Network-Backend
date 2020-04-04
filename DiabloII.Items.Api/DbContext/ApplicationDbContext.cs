@@ -35,6 +35,7 @@ namespace DiabloII.Items.Api.DbContext
             ItemPropertyMapper.Map(modelBuilder);
         }
 
+        //ISuggestionRepository.GetQueryableSuggestions()
         public IIncludableQueryable<Suggestion, ICollection<SuggestionComment>> GetSuggestions() => Suggestions
             .Include(suggestion => suggestion.Votes)
             .Include(suggestion => suggestion.Comments);
