@@ -21,7 +21,6 @@ namespace DiabloII.Items.Api
             {nameof(BadRequestException), HttpStatusCode.BadRequest},
             {nameof(NotFoundException), HttpStatusCode.NotFound},
             {nameof(UnauthorizedException), HttpStatusCode.Unauthorized}
-
         };
 
         public override void OnException(ExceptionContext exceptionContext)
