@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using DiabloII.Items.Api.DbContext;
-using DiabloII.Items.Api.Exceptions;
 using DiabloII.Items.Api.Mappers.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
+using DiabloII.Items.Api.Validators.Suggestions.Comment;
 using DiabloII.Items.Api.Validators.Suggestions.Create;
 using DiabloII.Items.Api.Validators.Suggestions.Delete;
 using DiabloII.Items.Api.Validators.Suggestions.DeleteAComment;
@@ -72,8 +72,11 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
         public SuggestionDto Comment(CommentASuggestionDto commentASuggestion)
         {
-            if (string.IsNullOrEmpty(commentASuggestion.Comment))
-                throw new BadRequestException("Your comment is null or empty");
+            var validationContext = new CommentASuggestionValidatorContext(commentASuggestion, _dbContext);
+            var validator = new CommentASuggestionValidator();
+
+            validator.Validate(validationContext);
+
             var suggestion = _dbContext
                 .GetSuggestions()
                 .First(comment => comment.Id == commentASuggestion.SuggestionId);

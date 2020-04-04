@@ -6,13 +6,8 @@ namespace DiabloII.Items.Api.Validators.Suggestions.Vote
     {
         public VoteToASuggestionValidator()
         {
-            RuleFor(context => context.Dto.Ip)
-                .SuggestionIpShouldNotBeNullOrEmpty()
-                .SuggestionIpShouldBeAnIpV4();
-
-            RuleFor(context => context)
-                .SuggestionShouldExists();
-            //.SuggestionShouldUniqueByIpAndId();
+            RuleFor(context => context.Dto.Ip).ShouldBeAValidIp();
+            RuleFor(context => context.DbContextValidatorContext).SuggestionShouldExists();
         }
     }
 }

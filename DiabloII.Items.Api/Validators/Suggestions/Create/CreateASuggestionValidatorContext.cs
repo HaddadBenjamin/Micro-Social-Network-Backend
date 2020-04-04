@@ -9,10 +9,16 @@ namespace DiabloII.Items.Api.Validators.Suggestions.Create
       
         public ApplicationDbContext DbContext { get; }
 
+        public SuggestionDbContextValidatorContext DbContextValidatorContext { get; }
+
         public CreateASuggestionValidatorContext(CreateASuggestionDto dto, ApplicationDbContext dbContext)
         {
             Dto = dto;
             DbContext = dbContext;
+            DbContextValidatorContext = new SuggestionDbContextValidatorContext(dbContext)
+            {
+                Content = dto.Content
+            };
         }
     }
 }

@@ -1,17 +1,17 @@
 ﻿using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Requests.Suggestions;
 
-namespace DiabloII.Items.Api.Validators.Suggestions.Vote
+namespace DiabloII.Items.Api.Validators.Suggestions.Comment
 {
-    public class VoteToASuggestionValidatorContext
+    public class CommentASuggestionValidatorContext
     {
-        public VoteToASuggestionDto Dto { get; set; }
-       
+        public CommentASuggestionDto Dto { get; set; }
+
         public ApplicationDbContext DbContext { get; }
 
         public SuggestionDbContextValidatorContext DbContextValidatorContext { get; }
 
-        public VoteToASuggestionValidatorContext(VoteToASuggestionDto dto, ApplicationDbContext dbContext)
+        public CommentASuggestionValidatorContext(CommentASuggestionDto dto, ApplicationDbContext dbContext)
         {
             Dto = dto;
             DbContext = dbContext;

@@ -9,10 +9,16 @@ namespace DiabloII.Items.Api.Validators.Suggestions.Delete
 
         public ApplicationDbContext DbContext { get; }
 
+        public SuggestionDbContextValidatorContext DbContextValidatorContext { get; set; }
+
         public DeleteASuggestionValidatorContext(DeleteASuggestionDto dto, ApplicationDbContext dbContext)
         {
             Dto = dto;
             DbContext = dbContext;
+            DbContextValidatorContext = new SuggestionDbContextValidatorContext(dbContext, dto.Id)
+            {
+                Ip = dto.Ip
+            };
         }
     }
 }
