@@ -95,10 +95,8 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
                 Ip = "213.91.163.1"
             };
 
-            _dbContext.SuggestionComments.Remove(comment);
-            _dbContext.SuggestionComments.Add(newComment);
-            suggestion.Comments.Remove(comment);
-            suggestion.Comments.Add(newComment);
+            _repository.RemoveComment(suggestion.Id, comment.Id, comment.Ip);
+            _repository.AddComment(suggestion.Id, newComment);
             _dbContext.SaveChanges();
 
             Should.Throw<UnauthorizedException>(() => _validator.Validate(_validationContext));
