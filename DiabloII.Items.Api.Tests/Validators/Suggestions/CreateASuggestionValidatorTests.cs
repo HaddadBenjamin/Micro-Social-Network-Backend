@@ -62,11 +62,35 @@ namespace DiabloII.Items.Api.Tests.Validators.Suggestions
         }
 
         [Test]
+        public void WhenIpIsNull_ShouldThrowABadRequestException()
+        {
+            _validationContext.Dto.Ip = null;
+
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
+        }
+
+        [Test]
+        public void WhenIpIsEmpty_ShouldThrowABadRequestException()
+        {
+            _validationContext.Dto.Ip = string.Empty;
+
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
+        }
+
+        [Test]
+        public void WhenIpIsNotAnIpV4_ShouldThrowABadRequestException()
+        {
+            _validationContext.Dto.Ip = "213.91.163.4444";
+
+            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
+        }
+
+        [Test]
         public void WhenContentIsNotUnique_ShouldThrowABadRequestException()
         {
             var suggestionContent = "any value";
 
-            _validationContext.Dto = new CreateASuggestionDto { Content = suggestionContent };
+            _validationContext.Dto.Content = suggestionContent;
 
             _dbContext.Suggestions.Add(new Suggestion { Id = Guid.NewGuid(), Content = suggestionContent });
             _dbContext.SaveChanges();
