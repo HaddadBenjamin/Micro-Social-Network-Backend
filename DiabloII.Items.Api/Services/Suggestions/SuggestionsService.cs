@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using DiabloII.Items.Api.DbContext;
+using DiabloII.Items.Api.DbContext.Suggestions.Models;
 using DiabloII.Items.Api.Mappers.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
-using DiabloII.Items.Api.Responses.Suggestions;
 using DiabloII.Items.Api.Validators.Suggestions.Comment;
 using DiabloII.Items.Api.Validators.Suggestions.Create;
 using DiabloII.Items.Api.Validators.Suggestions.Delete;
@@ -22,7 +22,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
             _dbContext = dbContext;
         }
 
-        public SuggestionDto Create(CreateASuggestionDto createASugestion)
+        public Suggestion Create(CreateASuggestionDto createASugestion)
         {
             var validationContext = new CreateASuggestionValidationContext(createASugestion, _dbContext);
             var validator = new CreateASuggestionValidator();
@@ -34,16 +34,17 @@ namespace DiabloII.Items.Api.Services.Suggestions
             _dbContext.Suggestions.Add(suggestion);
             _dbContext.SaveChanges();
 
-            return SuggestionMapper.ToSuggestionDto(suggestion);
+            return suggestion;
         }
 
-        public SuggestionDto Vote(VoteToASuggestionDto voteToASuggestionDto)
+        public Suggestion Vote(VoteToASuggestionDto voteToASuggestionDto)
         {
             var validationContext = new VoteToASuggestionValidationContext(voteToASuggestionDto, _dbContext);
             var validator = new VoteToASuggestionValidator();
 
             validator.Validate(validationContext);
 
+            //ISuggestionRepository.GetFirstWhereSuggestionIdEqualTo
             var suggestion = _dbContext
                 .GetSuggestions()
                 .First(vote => vote.Id == voteToASuggestionDto.SuggestionId);
@@ -54,6 +55,7 @@ namespace DiabloII.Items.Api.Services.Suggestions
 
             if (suggestionVoteExists)
             {
+                //ISuggestionRepository.RemoveVote
                 suggestion.Votes.Remove(suggestionVote);
                 _dbContext.SuggestionVotes.Remove(suggestionVote);
             }
@@ -61,37 +63,39 @@ namespace DiabloII.Items.Api.Services.Suggestions
             {
                 suggestionVote = SuggestionMapper.ToSuggestionVote(voteToASuggestionDto);
              
+                //ISuggestionRepoistory.AddVote
                 suggestion.Votes.Add(suggestionVote);
                 _dbContext.SuggestionVotes.Add(suggestionVote);
             }
 
             _dbContext.SaveChanges();
 
-            return SuggestionMapper.ToSuggestionDto(suggestion);
+            return suggestion;
         }
 
-        public SuggestionDto Comment(CommentASuggestionDto commentASuggestion)
+        public Suggestion Comment(CommentASuggestionDto commentASuggestion)
         {
             var validationContext = new CommentASuggestionValidationContext(commentASuggestion, _dbContext);
             var validator = new CommentASuggestionValidator();
 
             validator.Validate(validationContext);
 
+            // ISuggestionRepository.GetFirstWhereSuggestionIdEqualTo
             var suggestion = _dbContext
                 .GetSuggestions()
                 .First(comment => comment.Id == commentASuggestion.SuggestionId);
             var suggestionComment = SuggestionMapper.ToSuggestionComment(commentASuggestion);
 
+            //ISuggestionRepository.AddComment
             suggestion.Comments.Add(suggestionComment);
             _dbContext.SuggestionComments.Add(suggestionComment);
             _dbContext.SaveChanges();
 
-            return SuggestionMapper.ToSuggestionDto(suggestion);
+            return suggestion;
         }
 
-        public IReadOnlyCollection<SuggestionDto> GetAll() => _dbContext
+        public IReadOnlyCollection<Suggestion> GetAll() => _dbContext
             .GetSuggestions()
-            .Select(SuggestionMapper.ToSuggestionDto)
             .ToList();
 
         public Guid Delete(DeleteASuggestionDto deleteASuggestion)
@@ -111,23 +115,26 @@ namespace DiabloII.Items.Api.Services.Suggestions
             return deleteASuggestion.Id;
         }
 
-        public SuggestionDto DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment)
+        public Suggestion DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment)
         {
             var validationContext = new DeleteASuggestionCommentValidationContext(deleteASuggestionComment, _dbContext);
             var validator = new DeleteASuggestionCommentValidator();
 
             validator.Validate(validationContext);
 
+            //ISuggestionRepository.GetFirstWhereSuggestionIdEqualTo
             var suggestion = _dbContext.GetSuggestions().First(suggestionModel => suggestionModel.Id == deleteASuggestionComment.SuggestionId);
+            //ISugestionRepository.GetMyComment(ip, id)
             var suggestionCommentToDelete = suggestion.Comments.First(comment =>
                 comment.Ip == deleteASuggestionComment.Ip &&
                 comment.Id == deleteASuggestionComment.Id);
 
+            //ISuggestionRepository.RemoveComment
             suggestion.Comments.Remove(suggestionCommentToDelete);
             _dbContext.SuggestionComments.Remove(suggestionCommentToDelete);
             _dbContext.SaveChanges();
 
-            return SuggestionMapper.ToSuggestionDto(suggestion);
+            return suggestion;
         }
     }
 }
