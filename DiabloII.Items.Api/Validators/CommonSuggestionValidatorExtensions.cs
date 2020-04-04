@@ -20,6 +20,5 @@ namespace DiabloII.Items.Api.Validators
         public static IRuleBuilder<T, string> ShouldBeAValidIp<T>(this IRuleBuilder<T, string> ruleBuilder, string fieldName = "Ip") => ruleBuilder
             .ShouldNotBeNullOrEmpty(fieldName)
             .ShouldBeAnIpV4();
-
     }
 }

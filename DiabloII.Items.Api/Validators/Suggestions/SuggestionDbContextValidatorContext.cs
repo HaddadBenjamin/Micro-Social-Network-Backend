@@ -7,13 +7,13 @@ namespace DiabloII.Items.Api.Validators.Suggestions
     {
         public ApplicationDbContext DbContext { get; }
       
-        public Guid Id { get; set; }
+        public Guid Id { get; }
 
         public string Content { get; set; }
 
         public string Ip { get; set; }
 
-        public SuggestionDbContextValidatorContext(ApplicationDbContext dbContext) => dbContext = DbContext;
+        public SuggestionDbContextValidatorContext(ApplicationDbContext dbContext) => DbContext = dbContext;
 
         public SuggestionDbContextValidatorContext(ApplicationDbContext dbContext, Guid id)
         {
