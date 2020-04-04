@@ -3,7 +3,7 @@ using System.Linq;
 using DiabloII.Items.Api.Application.Mappers.Items;
 using DiabloII.Items.Api.Application.Requests.Items;
 using DiabloII.Items.Api.Application.Responses.Items;
-using DiabloII.Items.Api.Infrastructure.Queries.Items;
+using DiabloII.Items.Api.Domain.Queries.Items;
 using DiabloII.Items.Api.Infrastructure.Services.Items;
 using Microsoft.AspNetCore.Mvc;
 
