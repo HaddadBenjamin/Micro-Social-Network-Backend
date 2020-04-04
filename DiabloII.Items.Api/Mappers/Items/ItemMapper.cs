@@ -2,9 +2,9 @@
 using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Responses.Items;
 
-namespace DiabloII.Items.Api.Mappers.ItemDtoMapper
+namespace DiabloII.Items.Api.Mappers.Items
 {
-    public static class ItemDtoMapper
+    public static class ItemMapper
     {
         public static ItemDto ToItemDto(Item item) => new ItemDto
         {

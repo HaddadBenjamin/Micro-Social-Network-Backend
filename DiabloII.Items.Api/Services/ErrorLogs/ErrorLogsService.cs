@@ -13,15 +13,19 @@ namespace DiabloII.Items.Api.Services.ErrorLogs
         public ErrorLogsService(ApplicationDbContext dbContext, IErrorLogRepository repository)
         {
             _dbContext = dbContext;
-            _repository = _repository;
+            _repository = repository;
         }
 
+        #region Read
+        public IReadOnlyCollection<ErrorLog> GetAll() => _repository.GetAll();
+        #endregion
+
+        #region Write
         public void Log(ErrorLog errorLog)
         {
             _dbContext.ErrorLogs.Add(errorLog);
             _dbContext.SaveChanges();
         }
-
-        public IReadOnlyCollection<ErrorLog> GetAll() => _repository.GetAll();
+        #endregion
     }
 }
