@@ -2,7 +2,7 @@
 using DiabloII.Items.Api.Domain.Models.Items;
 using DiabloII.Items.Api.Domain.Queries.Items;
 
-namespace DiabloII.Items.Api.Infrastructure.Services.Items
+namespace DiabloII.Items.Api.Application.Services.Items
 {
     public interface IItemsService
     {

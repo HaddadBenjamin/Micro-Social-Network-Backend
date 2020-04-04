@@ -3,7 +3,7 @@ using DiabloII.Items.Api.Domain.Models.ErrorLogs;
 using DiabloII.Items.Api.Infrastructure.DbContext;
 using DiabloII.Items.Api.Infrastructure.Repositories.ErrorLogs;
 
-namespace DiabloII.Items.Api.Infrastructure.Services.ErrorLogs
+namespace DiabloII.Items.Api.Application.Services.ErrorLogs
 {
     public class ErrorLogsService : IErrorLogsService
     {

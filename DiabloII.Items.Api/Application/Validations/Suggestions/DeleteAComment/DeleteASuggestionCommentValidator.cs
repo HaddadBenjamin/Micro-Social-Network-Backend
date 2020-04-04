@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace DiabloII.Items.Api.Infrastructure.Validations.Suggestions.DeleteAComment
+namespace DiabloII.Items.Api.Application.Validations.Suggestions.DeleteAComment
 {
     public class DeleteASuggestionCommentValidator : AbstractValidator<DeleteASuggestionCommentValidationContext>
     {

@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using DiabloII.Items.Api.Application.Mappers.Suggestions;
 using DiabloII.Items.Api.Application.Requests.Suggestions;
+using DiabloII.Items.Api.Application.Validations.Suggestions.Comment;
+using DiabloII.Items.Api.Application.Validations.Suggestions.Create;
+using DiabloII.Items.Api.Application.Validations.Suggestions.Delete;
+using DiabloII.Items.Api.Application.Validations.Suggestions.DeleteAComment;
+using DiabloII.Items.Api.Application.Validations.Suggestions.Vote;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 using DiabloII.Items.Api.Infrastructure.DbContext;
 using DiabloII.Items.Api.Infrastructure.Repositories.Suggestions;
-using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Comment;
-using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Create;
-using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Delete;
-using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.DeleteAComment;
-using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Vote;
 
-namespace DiabloII.Items.Api.Infrastructure.Services.Suggestions
+namespace DiabloII.Items.Api.Application.Services.Suggestions
 {
     public class SuggestionsService : ISuggestionsService
     {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq;
-using DiabloII.Items.Api.Application.Requests.Suggestions;
+﻿using System.Linq;
 using DiabloII.Items.Api.Application.Responses.Suggestions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 
@@ -30,27 +28,6 @@ namespace DiabloII.Items.Api.Application.Mappers.Suggestions
         {
             Ip = vote.Ip,
             IsPositive = vote.IsPositive
-        };
-
-        public static Suggestion ToSuggestion(CreateASuggestionDto createASuggestionDto) => new Suggestion
-        {
-            Id = Guid.NewGuid(),
-            Ip = createASuggestionDto.Ip,
-            Content = createASuggestionDto.Content,
-        };
-
-        public static SuggestionVote ToSuggestionVote(VoteToASuggestionDto voteToASuggestionDto) => new SuggestionVote
-        {
-            Id = Guid.NewGuid(),
-            IsPositive = voteToASuggestionDto.IsPositive,
-            Ip = voteToASuggestionDto.Ip
-        };
-
-        public static SuggestionComment ToSuggestionComment(CommentASuggestionDto commentASuggestionDto) => new SuggestionComment
-        {
-            Id = Guid.NewGuid(),
-            Comment = commentASuggestionDto.Comment,
-            Ip = commentASuggestionDto.Ip
         };
     }
 }

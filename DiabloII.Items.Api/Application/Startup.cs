@@ -1,11 +1,11 @@
-﻿using DiabloII.Items.Api.Infrastructure.DbContext;
+﻿using DiabloII.Items.Api.Application.Services.ErrorLogs;
+using DiabloII.Items.Api.Application.Services.Items;
+using DiabloII.Items.Api.Application.Services.Suggestions;
+using DiabloII.Items.Api.Infrastructure.DbContext;
 using DiabloII.Items.Api.Infrastructure.Helpers;
 using DiabloII.Items.Api.Infrastructure.Repositories.ErrorLogs;
 using DiabloII.Items.Api.Infrastructure.Repositories.Items;
 using DiabloII.Items.Api.Infrastructure.Repositories.Suggestions;
-using DiabloII.Items.Api.Infrastructure.Services.ErrorLogs;
-using DiabloII.Items.Api.Infrastructure.Services.Items;
-using DiabloII.Items.Api.Infrastructure.Services.Suggestions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

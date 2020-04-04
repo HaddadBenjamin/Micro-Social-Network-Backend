@@ -1,11 +1,11 @@
 using System;
 using DiabloII.Items.Api.Application.Requests.Suggestions;
+using DiabloII.Items.Api.Application.Validations.Suggestions.Create;
 using DiabloII.Items.Api.Domain.Exceptions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 using DiabloII.Items.Api.Infrastructure.DbContext;
 using DiabloII.Items.Api.Infrastructure.Helpers;
 using DiabloII.Items.Api.Infrastructure.Repositories.Suggestions;
-using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Create;
 using NUnit.Framework;
 using Shouldly;
 

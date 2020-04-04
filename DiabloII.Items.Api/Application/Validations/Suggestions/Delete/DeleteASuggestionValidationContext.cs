@@ -1,7 +1,7 @@
 ﻿using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Infrastructure.Repositories.Suggestions;
 
-namespace DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Delete
+namespace DiabloII.Items.Api.Application.Validations.Suggestions.Delete
 {
     public class DeleteASuggestionValidationContext
     {

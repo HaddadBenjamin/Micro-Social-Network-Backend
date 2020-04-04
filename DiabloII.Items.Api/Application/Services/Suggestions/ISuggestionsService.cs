@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 
-namespace DiabloII.Items.Api.Infrastructure.Services.Suggestions
+namespace DiabloII.Items.Api.Application.Services.Suggestions
 {
     public interface ISuggestionsService
     {

@@ -2,7 +2,7 @@
 using System.Linq;
 using DiabloII.Items.Api.Application.Mappers.ErrorLogs;
 using DiabloII.Items.Api.Application.Responses.ErrorLogs;
-using DiabloII.Items.Api.Infrastructure.Services.ErrorLogs;
+using DiabloII.Items.Api.Application.Services.ErrorLogs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Items.Api.Application.Controllers
