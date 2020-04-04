@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20200322065452_testconnectionstring.cs" />
-    <Compile Remove="Migrations\20200322065452_testconnectionstring.Designer.cs" />
+    <Compile Remove="Infrastructure\Migrations\20200322065452_testconnectionstring.cs" />
+    <Compile Remove="Infrastructure\Migrations\20200322065452_testconnectionstring.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
