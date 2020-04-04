@@ -15,7 +15,7 @@ namespace DiabloII.Items.Api.Validators
 
         public static IRuleBuilder<T, string> ShouldBeShorterThan<T>(this IRuleBuilder<T,string> ruleBuilder, string fieldName, int maxLength = 500) => ruleBuilder
             .MaximumLength(maxLength)
-            .OnFailure(context => throw new BadRequestException($"{fieldName} should be shorter than {maxLength}"));
+            .OnFailure(context => throw new BadRequestException($"{fieldName} should be shorter than {maxLength} characters"));
 
         public static IRuleBuilder<T, string> ShouldBeAnIpV4<T>(this IRuleBuilder<T, string> ruleBuilder, string fieldName = "Ip") => ruleBuilder
             .Must(ip => Regex.Match(ip, IpV4Regex).Success)
