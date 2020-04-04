@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using DiabloII.Items.Api.Mappers.Suggestions;
 using DiabloII.Items.Api.Requests.Suggestions;
 using DiabloII.Items.Api.Responses.Suggestions;
 using DiabloII.Items.Api.Services.Suggestions;
@@ -16,19 +18,25 @@ namespace DiabloII.Items.Api.Controllers
 
         [Route("create")]
         [HttpPost]
-        public SuggestionDto Create([FromBody] CreateASuggestionDto createASuggestion) => _suggestionsService.Create(createASuggestion);
+        public SuggestionDto Create([FromBody] CreateASuggestionDto createASuggestion) =>
+            SuggestionMapper.ToSuggestionDto(_suggestionsService.Create(createASuggestion));
 
         [Route("vote")]
         [HttpPost]
-        public SuggestionDto Vote([FromBody] VoteToASuggestionDto voteToASuggestion) => _suggestionsService.Vote(voteToASuggestion);
+        public SuggestionDto Vote([FromBody] VoteToASuggestionDto voteToASuggestion) =>
+            SuggestionMapper.ToSuggestionDto(_suggestionsService.Vote(voteToASuggestion));
 
         [Route("comment")]
         [HttpPost]
-        public SuggestionDto Comment([FromBody] CommentASuggestionDto commentASuggestion) => _suggestionsService.Comment(commentASuggestion);
-        
+        public SuggestionDto Comment([FromBody] CommentASuggestionDto commentASuggestion) =>
+            SuggestionMapper.ToSuggestionDto(_suggestionsService.Comment(commentASuggestion));
+
         [Route("getall")]
         [HttpGet]
-        public IReadOnlyCollection<SuggestionDto> GetAll() => _suggestionsService.GetAll();
+        public IReadOnlyCollection<SuggestionDto> GetAll() => _suggestionsService
+            .GetAll()
+            .Select(SuggestionMapper.ToSuggestionDto)
+            .ToList();
 
         [Route("delete")]
         [HttpDelete]
@@ -36,6 +44,7 @@ namespace DiabloII.Items.Api.Controllers
 
         [Route("deletecomment")]
         [HttpDelete]
-        public SuggestionDto DeleteComment([FromBody] DeleteASuggestionCommentDto deleteASuggestionComment) => _suggestionsService.DeleteAComment(deleteASuggestionComment);
+        public SuggestionDto DeleteComment([FromBody] DeleteASuggestionCommentDto deleteASuggestionComment) =>
+            SuggestionMapper.ToSuggestionDto(_suggestionsService.DeleteAComment(deleteASuggestionComment));
     }
 }

@@ -3,14 +3,18 @@ using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Queries;
 using DiabloII.Items.Api.Queries.Items;
 
-namespace DiabloII.Items.Api.Services.Items
+namespace DiabloII.Items.Api.Repositories.Items
 {
-    public interface IItemsService
+    public interface IItemRepository
     {
-        void ResetTheItems(IList<Item> items, IList<ItemProperty> itemProperties);
-
+        #region Read
         IReadOnlyCollection<Item> GetAllUniques();
 
         IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query);
+        #endregion
+
+        #region Write
+        void ResetTheItems(IList<Item> items, IList<ItemProperty> itemProperties);
+        #endregion
     }
 }

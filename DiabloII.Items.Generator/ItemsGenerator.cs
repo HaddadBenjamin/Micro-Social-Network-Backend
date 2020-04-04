@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using System.Linq;
+using DiabloII.Items.Api.Repositories.Items;
 using DiabloII.Items.Api.Services.Items;
 using Newtonsoft.Json;
 
@@ -93,7 +94,9 @@ namespace DiabloII.Items.Generator
                     dbContext.Database.SetCommandTimeout(CommandTimeout);
                     dbContext.Database.Migrate();
 
-                    new ItemsService(dbContext).ResetTheItems(items, itemProperties);
+                    var itemRepository = new ItemRepository(dbContext);
+
+                    new ItemsService(dbContext, itemRepository).ResetTheItems(items, itemProperties);
                 }
             }
         }

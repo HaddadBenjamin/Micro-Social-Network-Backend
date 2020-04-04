@@ -3,7 +3,7 @@ using System.Linq;
 using DiabloII.Items.Api.DbContext.Items.Models;
 using DiabloII.Items.Api.Requests.Items;
 
-namespace DiabloII.Items.Api.Queries
+namespace DiabloII.Items.Api.Queries.Items
 {
     public class SearchUniquesQuery
     {

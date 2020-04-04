@@ -1,18 +1,14 @@
-﻿using DiabloII.Items.Api.Validators.Suggestions.Vote;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace DiabloII.Items.Api.Validators.Suggestions.DeleteAComment
 {
-    public class DeleteASuggestionCommentValidator : AbstractValidator<DeleteASuggestionCommentValidatorContext>
+    public class DeleteASuggestionCommentValidator : AbstractValidator<DeleteASuggestionCommentValidationContext>
     {
         public DeleteASuggestionCommentValidator()
         {
-            RuleFor(context => context.Dto.Ip)
-                .SuggestionIpShouldNotBeNullOrEmpty()
-                .SuggestionIpShouldBeAnIpV4();
-
-            RuleFor(context => context)
-                .SuggestionAndCommentShouldExistsAndBeRelatedToTheUserIp();
+            RuleFor(context => context.Dto.Ip).ShouldBeAValidIp();
+            RuleFor(context => context.DbContextValidationContext).SuggestionShouldExists();
+            RuleFor(context => context).SuggestionAndCommentShouldExistsAndBeRelatedToTheUserIp();
         }
     }
 }

@@ -1,5 +1,8 @@
 ﻿using DiabloII.Items.Api.DbContext;
 using DiabloII.Items.Api.Helpers;
+using DiabloII.Items.Api.Repositories.ErrorLogs;
+using DiabloII.Items.Api.Repositories.Items;
+using DiabloII.Items.Api.Repositories.Suggestions;
 using DiabloII.Items.Api.Services.ErrorLogs;
 using DiabloII.Items.Api.Services.Items;
 using DiabloII.Items.Api.Services.Suggestions;
@@ -69,6 +72,9 @@ namespace DiabloII.Items.Api
             services
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()))
                 .AddTransient<IItemsService, ItemsService>()
+                .AddTransient<ISuggestionRepository, SuggestionRepository>()
+                .AddTransient<IErrorLogRepository, ErrorLogRepository>()
+                .AddTransient<IItemRepository, ItemRepository>()
                 .AddTransient<ISuggestionsService, SuggestionsService>()
                 .AddTransient<IErrorLogsService, ErrorLogsService>();
         }

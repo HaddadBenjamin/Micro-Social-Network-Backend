@@ -15,10 +15,6 @@ namespace DiabloII.Items.Api.DbContext.Items.Mappers
                 .HasIndex(item => item.Id)
                 .IsUnique();
           
-            //itemBuilder
-            //    .HasIndex(item => item.Name)
-            //    .IsUnique();
-
             itemBuilder
                 .HasMany(item => item.Properties)
                 .WithOne(item => item.Item)

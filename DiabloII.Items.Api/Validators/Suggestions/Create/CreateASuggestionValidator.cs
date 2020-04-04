@@ -1,17 +1,16 @@
-﻿using DiabloII.Items.Api.Validators.Suggestions.Vote;
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace DiabloII.Items.Api.Validators.Suggestions.Create
 {
-    public class CreateASuggestionValidator : AbstractValidator<CreateASuggestionValidatorContext>
+    public class CreateASuggestionValidator : AbstractValidator<CreateASuggestionValidationContext>
     {
         public CreateASuggestionValidator()
         {
-            RuleFor(context => context.Dto.Content).SuggestionContentShouldNotBeNullOrEmpty();
-            RuleFor(context => context.Dto.Ip)
-                .SuggestionIpShouldNotBeNullOrEmpty()
-                .SuggestionIpShouldBeAnIpV4();
-            RuleFor(context => context).SuggestionContentShouldBeUnique();
+            RuleFor(context => context.Dto.Content)
+                .ShouldNotBeNullOrEmpty("Content")
+                .ShouldBeShorterThan("Content");
+            RuleFor(context => context.Dto.Ip).ShouldBeAValidIp();
+            RuleFor(context => context.DbContextValidationContext).SuggestionContentShouldBeUnique();
         }
     }
 }
