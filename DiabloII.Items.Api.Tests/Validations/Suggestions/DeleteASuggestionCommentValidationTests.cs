@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Application.Validations.Suggestions.DeleteAComment;
+using DiabloII.Items.Api.Domain.Commands.Suggestions;
 using DiabloII.Items.Api.Domain.Exceptions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 using DiabloII.Items.Api.Infrastructure.DbContext;
@@ -24,7 +24,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         [SetUp]
         public void Setup()
         {
-            var validDto = new DeleteASuggestionCommentDto
+            var validCommand = new DeleteASuggestionCommentCommand
             {
                 Id = Guid.NewGuid(),
                 SuggestionId = Guid.NewGuid(),
@@ -35,13 +35,13 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
             _repository = new SuggestionRepository(_dbContext);
 
             _validator = new DeleteASuggestionCommentValidator();
-            _validationContext = new DeleteASuggestionCommentValidationContext(validDto, _repository);
+            _validationContext = new DeleteASuggestionCommentValidationContext(validCommand, _repository);
         }
 
         [Test]
         public void WhenIpIsNull_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Ip = null;
+            _validationContext.Command.Ip = null;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -49,7 +49,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         [Test]
         public void WhenIpIsEmpty_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Ip = string.Empty;
+            _validationContext.Command.Ip = string.Empty;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -57,7 +57,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         [Test]
         public void WhenIpIsNotAnIpV4_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Ip = "213.91.163.4444";
+            _validationContext.Command.Ip = "213.91.163.4444";
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -103,7 +103,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenDtoIsValid_ShouldSuccess()
+        public void WhenCommandIsValid_ShouldSuccess()
         {
             AddTheValidSuggestion();
 
@@ -114,14 +114,14 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         {
             var suggestion = new Suggestion
             {
-                Id = _validationContext.Dto.SuggestionId,
-                Ip = _validationContext.Dto.Ip,
+                Id = _validationContext.Command.SuggestionId,
+                Ip = _validationContext.Command.Ip,
                 Comments = new List<SuggestionComment>
                 {
                     new SuggestionComment
                     {
-                        Id = _validationContext.Dto.Id,
-                        Ip = _validationContext.Dto.Ip
+                        Id = _validationContext.Command.Id,
+                        Ip = _validationContext.Command.Ip
                     }
                 }
             };

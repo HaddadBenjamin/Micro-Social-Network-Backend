@@ -1,22 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using DiabloII.Items.Api.Application.Requests.Suggestions;
+using DiabloII.Items.Api.Domain.Commands.Suggestions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 
 namespace DiabloII.Items.Api.Application.Services.Suggestions
 {
     public interface ISuggestionsService
     {
-        Suggestion Create(CreateASuggestionDto createASugestion);
+        Suggestion Create(CreateASuggestionCommand createASugestion);
 
         IReadOnlyCollection<Suggestion> GetAll();
      
-        Suggestion Vote(VoteToASuggestionDto voteToASuggestion);
+        Suggestion Vote(VoteToASuggestionCommand voteToASuggestion);
 
-        Suggestion Comment(CommentASuggestionDto commentASuggestion);
+        Suggestion Comment(CommentASuggestionCommand commentASuggestion);
 
-        Guid Delete(DeleteASuggestionDto deleteASuggestion);
+        Guid Delete(DeleteASuggestionCommand deleteASuggestion);
 
-        Suggestion DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment);
+        Suggestion DeleteAComment(DeleteASuggestionCommentCommand deleteASuggestionComment);
     }
 }

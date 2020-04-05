@@ -1,6 +1,6 @@
 using System;
-using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Application.Validations.Suggestions.Create;
+using DiabloII.Items.Api.Domain.Commands.Suggestions;
 using DiabloII.Items.Api.Domain.Exceptions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 using DiabloII.Items.Api.Infrastructure.DbContext;
@@ -22,7 +22,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         [SetUp]
         public void Setup()
         {
-            var validDto = new CreateASuggestionDto
+            var validCommand = new CreateASuggestionCommand
             {
                 Content = "any value",
                 Ip = "213.91.163.4"
@@ -32,13 +32,13 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
             _repository = new SuggestionRepository(_dbContext);
 
             _validator = new CreateASuggestionValidator();
-            _validationContext = new CreateASuggestionValidationContext(validDto, _repository);
+            _validationContext = new CreateASuggestionValidationContext(validCommand, _repository);
         }
 
         [Test]
         public void WhenContentIsNull_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Content = null;
+            _validationContext.Command.Content = null;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -46,7 +46,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         [Test]
         public void WhenContentIsEmpty_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Content = string.Empty;
+            _validationContext.Command.Content = string.Empty;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -54,7 +54,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         [Test]
         public void WhenContentIsLongerThan500Characters_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Content = new String('x', 501);
+            _validationContext.Command.Content = new String('x', 501);
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -62,7 +62,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         [Test]
         public void WhenIpIsNull_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Ip = null;
+            _validationContext.Command.Ip = null;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -70,7 +70,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         [Test]
         public void WhenIpIsEmpty_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Ip = string.Empty;
+            _validationContext.Command.Ip = string.Empty;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -78,7 +78,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         [Test]
         public void WhenIpIsNotAnIpV4_ShouldThrowABadRequestException()
         {
-            _validationContext.Dto.Ip = "213.91.163.4444";
+            _validationContext.Command.Ip = "213.91.163.4444";
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -88,7 +88,7 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         {
             var suggestionContent = "any value";
 
-            _validationContext.Dto.Content = suggestionContent;
+            _validationContext.Command.Content = suggestionContent;
 
             _dbContext.Suggestions.Add(new Suggestion { Id = Guid.NewGuid(), Content = suggestionContent });
             _dbContext.SaveChanges();
@@ -97,6 +97,6 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenDtoIsValid_ShouldSuccess() => Should.NotThrow(() => _validator.Validate(_validationContext));
+        public void WhenCommandIsValid_ShouldSuccess() => Should.NotThrow(() => _validator.Validate(_validationContext));
     }
 }

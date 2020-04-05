@@ -6,10 +6,10 @@ namespace DiabloII.Items.Api.Application.Validations.Suggestions.Create
     {
         public CreateASuggestionValidator()
         {
-            RuleFor(context => context.Dto.Content)
+            RuleFor(context => context.Command.Content)
                 .ShouldNotBeNullOrEmpty("Content")
                 .ShouldBeShorterThan("Content");
-            RuleFor(context => context.Dto.Ip).ShouldBeAValidIp();
+            RuleFor(context => context.Command.Ip).ShouldBeAValidIp();
             RuleFor(context => context.DbContextValidationContext).SuggestionContentShouldBeUnique();
         }
     }

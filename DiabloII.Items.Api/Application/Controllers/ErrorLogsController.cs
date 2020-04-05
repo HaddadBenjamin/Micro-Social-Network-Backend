@@ -20,11 +20,13 @@ namespace DiabloII.Items.Api.Application.Controllers
             _mapper = mapper;
         }
 
+        #region Read
         [Route("getall")]
         [HttpGet]
         public IReadOnlyCollection<ErrorLogDto> GetAll() => _errorLogsService
             .GetAll()
             .Select(_mapper.Map<ErrorLogDto>)
             .ToList();
+        #endregion
     }
 }

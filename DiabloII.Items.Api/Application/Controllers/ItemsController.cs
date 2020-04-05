@@ -22,6 +22,7 @@ namespace DiabloII.Items.Api.Application.Controllers
             _mapper = mapper;
         }
 
+        #region Read
         [Route("getalluniques")]
         [HttpGet]
         public IReadOnlyCollection<ItemDto> GetAllUniques() => _itemsService
@@ -35,5 +36,6 @@ namespace DiabloII.Items.Api.Application.Controllers
             .SearchUniques(_mapper.Map<SearchUniquesQuery>(searchDto))
             .Select(_mapper.Map<ItemDto>)
             .ToList();
+        #endregion
     }
 }

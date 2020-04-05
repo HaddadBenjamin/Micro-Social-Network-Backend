@@ -6,10 +6,10 @@ namespace DiabloII.Items.Api.Application.Validations.Suggestions.Comment
     {
         public CommentASuggestionValidator()
         {
-            RuleFor(context => context.Dto.Comment)
+            RuleFor(context => context.Command.Comment)
                 .ShouldNotBeNullOrEmpty("Comment")
                 .ShouldBeShorterThan("Comment");
-            RuleFor(context => context.Dto.Ip).ShouldBeAValidIp();
+            RuleFor(context => context.Command.Ip).ShouldBeAValidIp();
             RuleFor(context => context.DbContextValidationContext).SuggestionShouldExists();
         }
     }

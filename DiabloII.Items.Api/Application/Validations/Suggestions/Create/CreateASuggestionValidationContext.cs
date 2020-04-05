@@ -1,20 +1,20 @@
-﻿using DiabloII.Items.Api.Application.Requests.Suggestions;
+﻿using DiabloII.Items.Api.Domain.Commands.Suggestions;
 using DiabloII.Items.Api.Infrastructure.Repositories.Suggestions;
 
 namespace DiabloII.Items.Api.Application.Validations.Suggestions.Create
 {
     public class CreateASuggestionValidationContext
     {
-        public CreateASuggestionDto Dto { get; set; }
+        public CreateASuggestionCommand Command { get; set; }
       
         public SuggestionDbContextValidationContext DbContextValidationContext { get; }
 
-        public CreateASuggestionValidationContext(CreateASuggestionDto dto, ISuggestionRepository repository)
+        public CreateASuggestionValidationContext(CreateASuggestionCommand command, ISuggestionRepository repository)
         {
-            Dto = dto;
+            Command = command;
             DbContextValidationContext = new SuggestionDbContextValidationContext(repository)
             {
-                Content = dto.Content
+                Content = Command.Content
             };
         }
     }

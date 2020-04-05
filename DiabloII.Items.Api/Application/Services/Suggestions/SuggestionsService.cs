@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using AutoMapper;
-using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Application.Validations.Suggestions.Comment;
 using DiabloII.Items.Api.Application.Validations.Suggestions.Create;
 using DiabloII.Items.Api.Application.Validations.Suggestions.Delete;
 using DiabloII.Items.Api.Application.Validations.Suggestions.DeleteAComment;
 using DiabloII.Items.Api.Application.Validations.Suggestions.Vote;
+using DiabloII.Items.Api.Domain.Commands.Suggestions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 using DiabloII.Items.Api.Infrastructure.DbContext;
 using DiabloII.Items.Api.Infrastructure.Repositories.Suggestions;
@@ -31,7 +31,7 @@ namespace DiabloII.Items.Api.Application.Services.Suggestions
         #endregion
 
         #region Write
-        public Suggestion Create(CreateASuggestionDto createASugestion)
+        public Suggestion Create(CreateASuggestionCommand createASugestion)
         {
             var validationContext = new CreateASuggestionValidationContext(createASugestion, _repository);
             var validator = new CreateASuggestionValidator();
@@ -46,22 +46,22 @@ namespace DiabloII.Items.Api.Application.Services.Suggestions
             return suggestion;
         }
 
-        public Suggestion Vote(VoteToASuggestionDto voteToASuggestionDto)
+        public Suggestion Vote(VoteToASuggestionCommand voteToASuggestionCommand)
         {
-            var validationContext = new VoteToASuggestionValidationContext(voteToASuggestionDto, _repository);
+            var validationContext = new VoteToASuggestionValidationContext(voteToASuggestionCommand, _repository);
             var validator = new VoteToASuggestionValidator();
 
             validator.Validate(validationContext);
 
-            var suggestion = _repository.GetFirstSuggestion(voteToASuggestionDto.SuggestionId);
-            var suggestionVote = _repository.GetUserVoteOrDefault(suggestion, voteToASuggestionDto.Ip);
+            var suggestion = _repository.GetFirstSuggestion(voteToASuggestionCommand.SuggestionId);
+            var suggestionVote = _repository.GetUserVoteOrDefault(suggestion, voteToASuggestionCommand.Ip);
             var suggestionVoteExists = suggestionVote != null;
 
             if (suggestionVoteExists)
                 _repository.RemoveVote(suggestion, suggestionVote);
             else
             {
-                suggestionVote = _mapper.Map<SuggestionVote>(voteToASuggestionDto);
+                suggestionVote = _mapper.Map<SuggestionVote>(voteToASuggestionCommand);
              
                 _repository.AddVote(suggestion, suggestionVote);
             }
@@ -71,7 +71,7 @@ namespace DiabloII.Items.Api.Application.Services.Suggestions
             return suggestion;
         }
 
-        public Suggestion Comment(CommentASuggestionDto commentASuggestion)
+        public Suggestion Comment(CommentASuggestionCommand commentASuggestion)
         {
             var validationContext = new CommentASuggestionValidationContext(commentASuggestion, _repository);
             var validator = new CommentASuggestionValidator();
@@ -86,7 +86,7 @@ namespace DiabloII.Items.Api.Application.Services.Suggestions
             return suggestion;
         }
 
-        public Guid Delete(DeleteASuggestionDto deleteASuggestion)
+        public Guid Delete(DeleteASuggestionCommand deleteASuggestion)
         {
             var validationContext = new DeleteASuggestionValidationContext(deleteASuggestion, _repository);
             var validator = new DeleteASuggestionValidator();
@@ -99,7 +99,7 @@ namespace DiabloII.Items.Api.Application.Services.Suggestions
             return deleteASuggestion.Id;
         }
 
-        public Suggestion DeleteAComment(DeleteASuggestionCommentDto deleteASuggestionComment)
+        public Suggestion DeleteAComment(DeleteASuggestionCommentCommand deleteASuggestionComment)
         {
             var validationContext = new DeleteASuggestionCommentValidationContext(deleteASuggestionComment, _repository);
             var validator = new DeleteASuggestionCommentValidator();

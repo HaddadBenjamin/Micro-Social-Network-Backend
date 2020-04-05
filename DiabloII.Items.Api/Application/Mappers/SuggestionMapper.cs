@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Application.Responses.Suggestions;
+using DiabloII.Items.Api.Domain.Commands.Suggestions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 
 namespace DiabloII.Items.Api.Application.Mappers
@@ -26,6 +27,13 @@ namespace DiabloII.Items.Api.Application.Mappers
             CreateMap<CreateASuggestionDto, Suggestion>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
             CreateMap<VoteToASuggestionDto, SuggestionVote>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
             CreateMap<CommentASuggestionDto, SuggestionComment>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
+
+            // DTO layer to query layer
+            CreateMap<CreateASuggestionDto, CreateASuggestionCommand>();
+            CreateMap<CommentASuggestionDto, CommentASuggestionCommand>();
+            CreateMap<VoteToASuggestionDto, VoteToASuggestionCommand>();
+            CreateMap<DeleteASuggestionDto, DeleteASuggestionCommand>();
+            CreateMap<DeleteASuggestionCommentDto, DeleteASuggestionCommentCommand>();
         }
     }
 }

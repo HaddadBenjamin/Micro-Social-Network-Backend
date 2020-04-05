@@ -6,7 +6,7 @@ namespace DiabloII.Items.Api.Application.Validations.Suggestions.Vote
     {
         public VoteToASuggestionValidator()
         {
-            RuleFor(context => context.Dto.Ip).ShouldBeAValidIp();
+            RuleFor(context => context.Command.Ip).ShouldBeAValidIp();
             RuleFor(context => context.DbContextValidationContext).SuggestionShouldExists();
         }
     }
