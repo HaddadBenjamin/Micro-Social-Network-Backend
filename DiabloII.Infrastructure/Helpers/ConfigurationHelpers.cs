@@ -1,7 +1,7 @@
 ﻿using DiabloII.Infrastructure.Extensions;
 using Microsoft.Extensions.Configuration;
 
-namespace DiabloII.Application.Helpers
+namespace DiabloII.Infrastructure.Helpers
 {
     public static class ConfigurationHelpers
     {

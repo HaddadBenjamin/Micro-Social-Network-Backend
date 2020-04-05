@@ -2,7 +2,6 @@
 using System;
 using System.IO;
 using System.Linq;
-using DiabloII.Application.Helpers;
 using DiabloII.Domain.Models.Items;
 using DiabloII.Infrastructure.Helpers;
 using DiabloII.Infrastructure.Readers;
