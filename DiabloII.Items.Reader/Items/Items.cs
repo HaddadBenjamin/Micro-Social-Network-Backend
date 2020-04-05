@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DiabloII.Items.Reader.Items
 {
-	public class Item
+	public class ItemFromFile
 	{
 		public Guid Id { get; set; }
 		public string Name { get; set; }
@@ -13,7 +13,7 @@ namespace DiabloII.Items.Reader.Items
 		public string Type { get; set; }
 		public double LevelRequired { get; set; }
 		public double Level { get; set; }
-		public IEnumerable<ItemProperty> Properties { get; set; }
+		public IEnumerable<ItemPropertyFromFile> Properties { get; set; }
 		public string ImageName { get; set; }
 
 		// Specific to Armor.
