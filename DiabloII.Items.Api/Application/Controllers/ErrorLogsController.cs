@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DiabloII.Items.Api.Application.Mappers.ErrorLogs;
+using AutoMapper;
 using DiabloII.Items.Api.Application.Responses.ErrorLogs;
 using DiabloII.Items.Api.Application.Services.ErrorLogs;
 using Microsoft.AspNetCore.Mvc;
@@ -12,14 +12,19 @@ namespace DiabloII.Items.Api.Application.Controllers
     public class ErrorLogsController : Controller
     {
         private readonly IErrorLogsService _errorLogsService;
+        private readonly IMapper _mapper;
 
-        public ErrorLogsController(IErrorLogsService errorLogsService) => _errorLogsService = errorLogsService;
+        public ErrorLogsController(IErrorLogsService errorLogsService, IMapper mapper)
+        {
+            _errorLogsService = errorLogsService;
+            _mapper = mapper;
+        }
 
         [Route("getall")]
         [HttpGet]
         public IReadOnlyCollection<ErrorLogDto> GetAll() => _errorLogsService
             .GetAll()
-            .Select(ErrorLogMapper.ToErrorLogDto)
+            .Select(_mapper.Map<ErrorLogDto>)
             .ToList();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using DiabloII.Items.Api.Application.Mappers.Suggestions;
+using AutoMapper;
 using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Application.Validations.Suggestions.Comment;
 using DiabloII.Items.Api.Application.Validations.Suggestions.Create;
@@ -17,11 +17,13 @@ namespace DiabloII.Items.Api.Application.Services.Suggestions
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ISuggestionRepository _repository;
+        private readonly IMapper _mapper;
 
-        public SuggestionsService(ApplicationDbContext dbContext, ISuggestionRepository repository)
+        public SuggestionsService(ApplicationDbContext dbContext, ISuggestionRepository repository, IMapper mapper)
         {
             _dbContext = dbContext;
             _repository = repository;
+            _mapper = mapper;
         }
 
         #region Read
@@ -36,7 +38,7 @@ namespace DiabloII.Items.Api.Application.Services.Suggestions
 
             validator.Validate(validationContext);
            
-            var suggestion = SuggestionMapper.ToSuggestion(createASugestion);
+            var suggestion = _mapper.Map<Suggestion>(createASugestion);
 
             _dbContext.Suggestions.Add(suggestion);
             _dbContext.SaveChanges();
@@ -59,7 +61,7 @@ namespace DiabloII.Items.Api.Application.Services.Suggestions
                 _repository.RemoveVote(suggestion, suggestionVote);
             else
             {
-                suggestionVote = SuggestionMapper.ToSuggestionVote(voteToASuggestionDto);
+                suggestionVote = _mapper.Map<SuggestionVote>(voteToASuggestionDto);
              
                 _repository.AddVote(suggestion, suggestionVote);
             }
@@ -76,7 +78,7 @@ namespace DiabloII.Items.Api.Application.Services.Suggestions
 
             validator.Validate(validationContext);
 
-            var suggestionComment = SuggestionMapper.ToSuggestionComment(commentASuggestion);
+            var suggestionComment = _mapper.Map<SuggestionComment>(commentASuggestion);
             var suggestion = _repository.AddComment(commentASuggestion.SuggestionId, suggestionComment);
             
             _dbContext.SaveChanges();

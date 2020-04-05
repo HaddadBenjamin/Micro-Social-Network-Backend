@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Ben.Demystifier" Version="0.1.6" />
     <PackageReference Include="EFCore.BulkExtensions" Version="2.6.4" />
     <PackageReference Include="FluentValidation" Version="8.6.2" />

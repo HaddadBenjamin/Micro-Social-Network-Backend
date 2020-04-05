@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using DiabloII.Items.Api.Application.Mappers.Suggestions;
+using AutoMapper;
 using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Application.Responses.Suggestions;
 using DiabloII.Items.Api.Application.Services.Suggestions;
@@ -13,29 +13,34 @@ namespace DiabloII.Items.Api.Application.Controllers
     public class SuggestionsController : Controller
     {
         private readonly ISuggestionsService _suggestionsService;
+        private readonly IMapper _mapper;
 
-        public SuggestionsController(ISuggestionsService suggestionsService) => _suggestionsService = suggestionsService;
+        public SuggestionsController(ISuggestionsService suggestionsService, IMapper mapper)
+        {
+            _suggestionsService = suggestionsService;
+            _mapper = mapper;
+        }
 
         [Route("create")]
         [HttpPost]
         public SuggestionDto Create([FromBody] CreateASuggestionDto createASuggestion) =>
-            SuggestionDtoMapper.ToSuggestionDto(_suggestionsService.Create(createASuggestion));
+            _mapper.Map<SuggestionDto>(_suggestionsService.Create(createASuggestion));
 
         [Route("vote")]
         [HttpPost]
         public SuggestionDto Vote([FromBody] VoteToASuggestionDto voteToASuggestion) =>
-            SuggestionDtoMapper.ToSuggestionDto(_suggestionsService.Vote(voteToASuggestion));
+            _mapper.Map<SuggestionDto>(_suggestionsService.Vote(voteToASuggestion));
 
         [Route("comment")]
         [HttpPost]
         public SuggestionDto Comment([FromBody] CommentASuggestionDto commentASuggestion) =>
-            SuggestionDtoMapper.ToSuggestionDto(_suggestionsService.Comment(commentASuggestion));
+            _mapper.Map<SuggestionDto>(_suggestionsService.Comment(commentASuggestion));
 
         [Route("getall")]
         [HttpGet]
         public IReadOnlyCollection<SuggestionDto> GetAll() => _suggestionsService
             .GetAll()
-            .Select(SuggestionDtoMapper.ToSuggestionDto)
+            .Select(_mapper.Map<SuggestionDto>)
             .ToList();
 
         [Route("delete")]
@@ -45,6 +50,6 @@ namespace DiabloII.Items.Api.Application.Controllers
         [Route("deletecomment")]
         [HttpDelete]
         public SuggestionDto DeleteComment([FromBody] DeleteASuggestionCommentDto deleteASuggestionComment) =>
-            SuggestionDtoMapper.ToSuggestionDto(_suggestionsService.DeleteAComment(deleteASuggestionComment));
+            _mapper.Map<SuggestionDto>(_suggestionsService.DeleteAComment(deleteASuggestionComment));
     }
 }

@@ -1,4 +1,5 @@
-﻿using DiabloII.Items.Api.Application.Services.ErrorLogs;
+﻿using AutoMapper;
+using DiabloII.Items.Api.Application.Services.ErrorLogs;
 using DiabloII.Items.Api.Application.Services.Items;
 using DiabloII.Items.Api.Application.Services.Suggestions;
 using DiabloII.Items.Api.Infrastructure.DbContext;
@@ -23,6 +24,7 @@ namespace DiabloII.Items.Api.Application
         public Startup(IConfiguration configuration) => _configuration = configuration;
 
         public void ConfigureServices(IServiceCollection services) => services
+            .AddAutoMapper(typeof(Startup))
             .AddMySwagger()
             .AddMyMvc()
             .AddCors()
