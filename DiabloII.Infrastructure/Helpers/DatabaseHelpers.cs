@@ -1,5 +1,5 @@
-﻿using System.Data.SqlClient;
-using DiabloII.Infrastructure.DbContext;
+﻿using DiabloII.Infrastructure.DbContext;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

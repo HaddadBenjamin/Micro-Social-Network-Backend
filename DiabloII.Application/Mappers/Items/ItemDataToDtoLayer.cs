@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using DiabloII.Application.Responses.Items;
 using DiabloII.Domain.Models.Items;
 

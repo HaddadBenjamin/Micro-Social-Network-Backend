@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text.Json;
 using AutoMapper;
 using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Mappers.Suggestions;
@@ -22,7 +21,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Newtonsoft.Json.Serialization;
 
 namespace DiabloII.Application
 {
