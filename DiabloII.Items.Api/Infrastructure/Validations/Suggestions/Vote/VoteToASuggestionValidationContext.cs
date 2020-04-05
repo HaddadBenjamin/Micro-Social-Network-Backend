@@ -1,0 +1,18 @@
+﻿using DiabloII.Items.Api.Domain.Commands.Suggestions;
+using DiabloII.Items.Api.Domain.Repositories;
+
+namespace DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Vote
+{
+    public class VoteToASuggestionValidationContext
+    {
+        public VoteToASuggestionCommand Command { get; set; }
+
+        public SuggestionDbContextValidationContext DbContextValidationContext { get; }
+
+        public VoteToASuggestionValidationContext(VoteToASuggestionCommand command, ISuggestionRepository repository)
+        {
+            Command = command;
+            DbContextValidationContext = new SuggestionDbContextValidationContext(repository, Command.SuggestionId);
+        }
+    }
+}

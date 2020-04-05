@@ -4,8 +4,8 @@ using System.Linq;
 using AutoMapper;
 using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Application.Responses.Suggestions;
-using DiabloII.Items.Api.Application.Services.Suggestions;
 using DiabloII.Items.Api.Domain.Commands.Suggestions;
+using DiabloII.Items.Api.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Items.Api.Application.Controllers

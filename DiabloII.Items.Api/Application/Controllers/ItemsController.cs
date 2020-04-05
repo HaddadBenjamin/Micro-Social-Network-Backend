@@ -3,8 +3,8 @@ using System.Linq;
 using AutoMapper;
 using DiabloII.Items.Api.Application.Requests.Items;
 using DiabloII.Items.Api.Application.Responses.Items;
-using DiabloII.Items.Api.Application.Services.Items;
 using DiabloII.Items.Api.Domain.Queries.Items;
+using DiabloII.Items.Api.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Items.Api.Application.Controllers

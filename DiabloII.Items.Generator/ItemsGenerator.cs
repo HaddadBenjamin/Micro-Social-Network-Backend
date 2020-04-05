@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using System.Linq;
-using DiabloII.Items.Api.Application.Services.Items;
+using DiabloII.Items.Api.Application.Services;
 using DiabloII.Items.Api.Domain.Models.Items;
 using DiabloII.Items.Api.Infrastructure.Helpers;
-using DiabloII.Items.Api.Infrastructure.Repositories.Items;
+using DiabloII.Items.Api.Infrastructure.Repositories;
 using Newtonsoft.Json;
 
 namespace DiabloII.Items.Generator
