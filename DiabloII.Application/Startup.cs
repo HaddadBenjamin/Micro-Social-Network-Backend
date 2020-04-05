@@ -1,0 +1,124 @@
+﻿using AutoMapper;
+using DiabloII.Domain.Handlers;
+using DiabloII.Domain.Mappers.Suggestions;
+using DiabloII.Domain.Readers;
+using DiabloII.Domain.Repositories;
+using DiabloII.Infrastructure.DbContext;
+using DiabloII.Infrastructure.Handlers;
+using DiabloII.Infrastructure.Helpers;
+using DiabloII.Infrastructure.Readers;
+using DiabloII.Infrastructure.Repositories;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json.Serialization;
+using Swashbuckle.AspNetCore.Swagger;
+
+namespace DiabloII.Application
+{
+    public class Startup
+    {
+        private readonly IConfiguration _configuration;
+
+        public Startup(IConfiguration configuration) => _configuration = configuration;
+
+        public void ConfigureServices(IServiceCollection services) => services
+            .AddAutoMapper(typeof(Startup), typeof(SuggestionCommandToDataLayer))
+            .AddMySwagger()
+            .AddMyMvc()
+            .AddCors()
+            .AddRouting(options => options.LowercaseUrls = true)
+            .RegisterMyDependencies(_configuration);
+
+        public void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment environment) => applicationBuilder
+            .UseMyExceptionPages(environment)
+            .PlayAllTheDatabaseMigrations()
+            .UseMyCors()
+            .UseMvc()
+            .UseMySwagger();
+    }
+
+    public static class ServiceCollectionsExtensions
+    {
+        public static IServiceCollection AddMySwagger(this IServiceCollection services) => services
+            .AddSwaggerGen(swagger =>
+            {
+                swagger.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Diablo II - items and suggestions API",
+                    Description = "Allow to search Diablo II items and crud suggestions and votes",
+                    Contact = new Contact
+                    {
+                        Name = "Un passionné dans la foule (alias Firefouks)",
+                        Url = "https://github.com/HaddadBenjamin"
+                    }
+                });
+                swagger.DescribeAllEnumsAsStrings();
+            });
+
+        public static IServiceCollection AddMyMvc(this IServiceCollection services)
+        {
+            services
+                .AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+
+            return services;
+        }
+
+        public static void RegisterMyDependencies(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
+
+            services
+                .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()))
+                .AddTransient<IItemReader, ItemReader>()
+                .AddTransient<ISuggestionRepository, SuggestionRepository>()
+                .AddTransient<IErrorLogRepository, ErrorLogRepository>()
+                .AddTransient<IItemRepository, ItemRepository>()
+                .AddTransient<ISuggestionReader, SuggestionReader>()
+                .AddTransient<IErrorLogReader, ErrorLogReader>()
+                .AddTransient<ISuggestionCommandHandler, SuggestionCommandHandler>();
+        }
+    }
+
+    public static class ApplicationBuilderExtensions
+    {
+
+        public static IApplicationBuilder UseMyExceptionPages(this IApplicationBuilder applicationBuilder, IHostingEnvironment environment)
+        {
+            if (environment.IsDevelopment())
+                applicationBuilder.UseDeveloperExceptionPage();
+
+            return applicationBuilder;
+        }
+
+        public static IApplicationBuilder PlayAllTheDatabaseMigrations(this IApplicationBuilder applicationBuilder)
+        {
+            using (var serviceScope = applicationBuilder.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                context.Database.Migrate();
+            }
+
+            return applicationBuilder;
+        }
+
+        public static IApplicationBuilder UseMyCors(this IApplicationBuilder applicationBuilder) => applicationBuilder
+            .UseCors(policyBuilder => policyBuilder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
+        public static IApplicationBuilder UseMySwagger(this IApplicationBuilder applicationBuilder) => applicationBuilder
+            .UseSwagger()
+            .UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                options.RoutePrefix = string.Empty;
+            });
+    }
+}

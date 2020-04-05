@@ -1,12 +1,12 @@
-﻿using DiabloII.Items.Api.DbContext.Items.Models;
-using DiabloII.Items.Api.Helpers;
-using DiabloII.Items.Reader;
-using Microsoft.EntityFrameworkCore;
+﻿using DiabloII.Items.Reader;
 using System;
 using System.IO;
 using System.Linq;
-using DiabloII.Items.Api.Repositories.Items;
-using DiabloII.Items.Api.Services.Items;
+using DiabloII.Domain.Models.Items;
+using DiabloII.Infrastructure.Helpers;
+using DiabloII.Infrastructure.Readers;
+using DiabloII.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace DiabloII.Items.Generator
@@ -96,7 +96,7 @@ namespace DiabloII.Items.Generator
 
                     var itemRepository = new ItemRepository(dbContext);
 
-                    new ItemsService(dbContext, itemRepository).ResetTheItems(items, itemProperties);
+                    new ItemReader(dbContext, itemRepository).ResetTheItems(items, itemProperties);
                 }
             }
         }
