@@ -34,27 +34,56 @@ namespace DiabloII.Application.Controllers
 
         [Route("create")]
         [HttpPost]
-        public SuggestionDto Create([FromBody] CreateASuggestionDto createASuggestion) =>
-            _mapper.Map<SuggestionDto>(_handler.Create(_mapper.Map<CreateASuggestionCommand>(createASuggestion)));
+        public SuggestionDto Create([FromBody] CreateASuggestionDto createASuggestion)
+        {
+            var command = _mapper.Map<CreateASuggestionCommand>(createASuggestion);
+            var model = _handler.Create(command);
+            var responseDto = _mapper.Map<SuggestionDto>(model);
+
+            return responseDto;
+        }
 
         [Route("vote")]
         [HttpPost]
-        public SuggestionDto Vote([FromBody] VoteToASuggestionDto voteToASuggestion) =>
-            _mapper.Map<SuggestionDto>(_handler.Vote(_mapper.Map<VoteToASuggestionCommand>(voteToASuggestion)));
+        public SuggestionDto Vote([FromBody] VoteToASuggestionDto voteToASuggestion)
+        {
+            var command = _mapper.Map<VoteToASuggestionCommand>(voteToASuggestion);
+            var model = _handler.Vote(command);
+            var responseDto = _mapper.Map<SuggestionDto>(model);
+
+            return responseDto;
+        }
 
         [Route("comment")]
         [HttpPost]
-        public SuggestionDto Comment([FromBody] CommentASuggestionDto commentASuggestion) =>
-            _mapper.Map<SuggestionDto>(_handler.Comment(_mapper.Map<CommentASuggestionCommand>(commentASuggestion)));
+        public SuggestionDto Comment([FromBody] CommentASuggestionDto commentASuggestion)
+        {
+            var command = _mapper.Map<CommentASuggestionCommand>(commentASuggestion);
+            var model = _handler.Comment(command);
+            var responseDto = _mapper.Map<SuggestionDto>(model);
+
+            return responseDto;
+        }
 
         [Route("delete")]
         [HttpDelete]
-        public Guid Delete([FromBody] DeleteASuggestionDto deleteASuggestion) =>
-            _handler.Delete(_mapper.Map<DeleteASuggestionCommand>(deleteASuggestion));
+        public Guid Delete([FromBody] DeleteASuggestionDto deleteASuggestion)
+        {
+            var command = _mapper.Map<DeleteASuggestionCommand>(deleteASuggestion);
+            var response = _handler.Delete(command);
+
+            return response;
+        }
 
         [Route("deletecomment")]
         [HttpDelete]
-        public SuggestionDto DeleteComment([FromBody] DeleteASuggestionCommentDto deleteASuggestionComment) =>
-            _mapper.Map<SuggestionDto>(_handler.DeleteAComment(_mapper.Map<DeleteASuggestionCommentCommand>(deleteASuggestionComment)));
+        public SuggestionDto DeleteComment([FromBody] DeleteASuggestionCommentDto deleteASuggestionComment)
+        {
+            var command = _mapper.Map<DeleteASuggestionCommentCommand>(deleteASuggestionComment);
+            var model = _handler.DeleteAComment(command);
+            var responseDto = _mapper.Map<SuggestionDto>(model);
+
+            return responseDto;
+        }
     }
 }

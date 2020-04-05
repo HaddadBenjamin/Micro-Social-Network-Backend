@@ -1,13 +1,20 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Mappers.Suggestions;
 using DiabloII.Domain.Readers;
 using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Validations.Suggestions.Comment;
+using DiabloII.Domain.Validations.Suggestions.Create;
+using DiabloII.Domain.Validations.Suggestions.Delete;
+using DiabloII.Domain.Validations.Suggestions.DeleteAComment;
+using DiabloII.Domain.Validations.Suggestions.Vote;
 using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Handlers;
 using DiabloII.Infrastructure.Helpers;
 using DiabloII.Infrastructure.Readers;
 using DiabloII.Infrastructure.Repositories;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -63,7 +70,8 @@ namespace DiabloII.Application
         {
             services
                 .AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
-                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+                .AddFluentValidation();
 
             return services;
         }
@@ -73,14 +81,21 @@ namespace DiabloII.Application
             var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
 
             services
-                .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()))
-                .AddTransient<IItemReader, ItemReader>()
-                .AddTransient<ISuggestionRepository, SuggestionRepository>()
-                .AddTransient<IErrorLogRepository, ErrorLogRepository>()
-                .AddTransient<IItemRepository, ItemRepository>()
-                .AddTransient<ISuggestionReader, SuggestionReader>()
-                .AddTransient<IErrorLogReader, ErrorLogReader>()
-                .AddTransient<ISuggestionCommandHandler, SuggestionCommandHandler>();
+                .AddDbContextPool<ApplicationDbContext>(optionsBuilder =>
+                    optionsBuilder.UseSqlServer(connectionString,
+                        sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()))
+                .AddScoped<IItemReader, ItemReader>()
+                .AddScoped<ISuggestionRepository, SuggestionRepository>()
+                .AddScoped<IErrorLogRepository, ErrorLogRepository>()
+                .AddScoped<IItemRepository, ItemRepository>()
+                .AddScoped<ISuggestionReader, SuggestionReader>()
+                .AddScoped<IErrorLogReader, ErrorLogReader>()
+                .AddScoped<ISuggestionCommandHandler, SuggestionCommandHandler>()
+                .AddScoped<CreateASuggestionValidator>()
+                .AddScoped<VoteToASuggestionValidator>()
+                .AddScoped<CommentASuggestionValidator>()
+                .AddScoped<DeleteASuggestionValidator>()
+                .AddScoped<DeleteASuggestionCommentValidator>();
         }
     }
 
