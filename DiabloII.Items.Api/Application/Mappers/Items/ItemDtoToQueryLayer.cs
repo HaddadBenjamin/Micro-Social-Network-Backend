@@ -1,27 +1,14 @@
 ﻿using System.Linq;
 using AutoMapper;
 using DiabloII.Items.Api.Application.Requests.Items;
-using DiabloII.Items.Api.Application.Responses.Items;
-using DiabloII.Items.Api.Domain.Models.Items;
 using DiabloII.Items.Api.Domain.Queries.Items;
 
-namespace DiabloII.Items.Api.Application.Mappers
+namespace DiabloII.Items.Api.Application.Mappers.Items
 {
-    public class ItemMapper : Profile
+    public class ItemDtoToQueryLayer : Profile
     {
-        public ItemMapper()
+        public ItemDtoToQueryLayer()
         {
-            // Data layer to DTO layer.
-            CreateMap<Item, ItemDto>()
-                .AfterMap((dataModel, dto) =>
-                {
-                    dto.Quality = dataModel.Quality.ToString();
-                    dto.Category = dataModel.Category.ToString();
-                });
-          
-            CreateMap<ItemProperty, ItemPropertyDto>();
-
-            // DTO layer to query layer.
             CreateMap<SearchUniquesDto, SearchUniquesQuery>()
                 .AfterMap((dto, query) =>
                 {

@@ -5,7 +5,7 @@ using DiabloII.Items.Api.Domain.Repositories;
 using DiabloII.Items.Api.Domain.Services;
 using DiabloII.Items.Api.Infrastructure.DbContext;
 
-namespace DiabloII.Items.Api.Application.Services
+namespace DiabloII.Items.Api.Infrastructure.Services
 {
     public class ItemsService : IItemsService
     {

@@ -12,7 +12,7 @@ using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Delete;
 using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.DeleteAComment;
 using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.Vote;
 
-namespace DiabloII.Items.Api.Application.Services
+namespace DiabloII.Items.Api.Infrastructure.Services
 {
     public class SuggestionsService : ISuggestionsService
     {
