@@ -1,13 +1,18 @@
 ﻿using DiabloII.Items.Reader;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using AutoMapper;
 using DiabloII.Domain.Models.Items;
 using DiabloII.Infrastructure.Helpers;
 using DiabloII.Infrastructure.Readers;
 using DiabloII.Infrastructure.Repositories;
+using DiabloII.Items.Reader.Items;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using ItemCategory = DiabloII.Domain.Models.Items.ItemCategory;
+using ItemQuality = DiabloII.Domain.Models.Items.ItemQuality;
 
 namespace DiabloII.Items.Generator
 {
@@ -17,71 +22,25 @@ namespace DiabloII.Items.Generator
 
         public static void Generate(GenerationEnvironment[] environments)
         {
-            var diabloFilesReader = new DiabloIIFilesReader();
-            var uniqueItems = diabloFilesReader.Read();
+            var uniqueItems = new DiabloIIFilesReader().Read();
 
-            // create the unique items file
+            CreateTheUniqueItemsJsonFile(uniqueItems);
+            UpdateTheItemsFromDatabase(environments, uniqueItems);
+        }
+
+        private static void CreateTheUniqueItemsJsonFile(IEnumerable<ItemFromFile> uniqueItems)
+        {
             var uniqueItemDestinationPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.json");
             var uniqueItemsAsJson = JsonConvert.SerializeObject(uniqueItems, Formatting.Indented);
 
             File.WriteAllText(uniqueItemDestinationPath, uniqueItemsAsJson);
+        }
 
-            // Empty and fill all the item tables in all the environments.
-            var items = uniqueItems.Select(item =>
-            {
-                var itemId = Guid.NewGuid();
-
-                return new Item
-                {
-                    Id = itemId,
-                    Name = item.Name,
-                    Quality = Enum.Parse<ItemQuality>(item.Quality),
-                    Category = Enum.Parse<ItemCategory>(item.Category),
-                    SubCategory = item.SubCategory,
-                    Type = item.Type,
-                    ImageName = item.ImageName,
-
-                    Level = item.Level,
-                    LevelRequired = item.LevelRequired,
-
-                    MinimumDefenseMinimum = item.MinimumDefenseMinimum.GetValueOrDefault(),
-                    MaximumDefenseMinimum = item.MaximumDefenseMinimum.GetValueOrDefault(),
-                    MinimumDefenseMaximum = item.MinimumDefenseMaximum.GetValueOrDefault(),
-                    MaximumDefenseMaximum = item.MaximumDefenseMaximum.GetValueOrDefault(),
-
-                    MinimumOneHandedDamageMinimum = item.MinimumOneHandedDamageMinimum.GetValueOrDefault(),
-                    MaximumOneHandedDamageMinimum = item.MaximumOneHandedDamageMinimum.GetValueOrDefault(),
-                    MinimumTwoHandedDamageMinimum = item.MinimumTwoHandedDamageMinimum.GetValueOrDefault(),
-                    MaximumTwoHandedDamageMinimum = item.MaximumTwoHandedDamageMinimum.GetValueOrDefault(),
-                    MinimumOneHandedDamageMaximum = item.MinimumOneHandedDamageMaximum.GetValueOrDefault(),
-                    MaximumOneHandedDamageMaximum = item.MaximumOneHandedDamageMaximum.GetValueOrDefault(),
-                    MinimumTwoHandedDamageMaximum = item.MinimumTwoHandedDamageMaximum.GetValueOrDefault(),
-                    MaximumTwoHandedDamageMaximum = item.MaximumTwoHandedDamageMaximum.GetValueOrDefault(),
-
-                    DexterityRequired = item.DexterityRequired.GetValueOrDefault(),
-                    StrengthRequired = item.StrengthRequired.GetValueOrDefault(),
-
-                    Properties = item.Properties
-                        .Select(itemProperty => new ItemProperty
-                        {
-                            Id = Guid.NewGuid(),
-                            ItemId = itemId,
-
-                            FormattedName = itemProperty.FormattedName,
-                            Name = itemProperty.Name,
-
-                            Par = itemProperty.Par,
-                            Minimum = itemProperty.Minimum,
-                            Maximum = itemProperty.Maximum,
-                            IsPercent = itemProperty.IsPercent,
-                            FirstChararacter = itemProperty.FirstChararacter,
-                            OrderIndex = itemProperty.OrderIndex,
-                        }).ToList()
-                };
-            }).ToList();
-            var itemProperties = items
-                .SelectMany(item => item.Properties)
-                .ToList();
+        private static void UpdateTheItemsFromDatabase(GenerationEnvironment[] environments, IEnumerable<ItemFromFile> uniqueItems)
+        {
+            var mapper = GetMapper();
+            var items = uniqueItems.Select(item => mapper.Map<Item>(item)).ToList();
+            var itemProperties = items.SelectMany(item => item.Properties).ToList();
             var configurationFilePaths = environments.Select(environment => $"appsettings.{environment.ToString()}.json");
 
             foreach (var configurationFilePath in configurationFilePaths)
@@ -99,6 +58,32 @@ namespace DiabloII.Items.Generator
                     new ItemReader(dbContext, itemRepository).ResetTheItems(items, itemProperties);
                 }
             }
+        }
+
+        private static IMapper GetMapper()
+        {
+            var mapperConfiguration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Reader.Items.ItemFromFile, Item>()
+                    .AfterMap((source, destination) =>
+                    {
+                        destination.Id = Guid.NewGuid();
+                        destination.Quality = Enum.Parse<ItemQuality>(source.Quality);
+                        destination.Category = Enum.Parse<ItemCategory>(source.Category);
+
+                        destination.Properties = destination.Properties.Select(_ =>
+                        {
+                            _.ItemId = destination.Id;
+
+                            return _;
+                        }).ToList();
+                    });
+                cfg.CreateMap<Reader.Items.ItemPropertyFromFile, ItemProperty>()
+                    .AfterMap((source, destination) => destination.Id = Guid.NewGuid());
+            });
+            var mapper = mapperConfiguration.CreateMapper();
+
+            return mapper;
         }
     }
 }

@@ -34,11 +34,11 @@ namespace DiabloII.Application
 
             exceptionContext.ExceptionHandled = true;
 
-            var errorLogService = (IErrorLogReader)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogReader));
+            var errorLogReader = (IErrorLogReader)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogReader));
             var errorLogCreator = new ErrorLoggerCreator(exceptionContext, responseHttpStatus);
             var errorLog = errorLogCreator.Create();
 
-            errorLogService.Log(errorLog);
+            errorLogReader.Log(errorLog);
         }
 
         private static void SetExceptionResult(ExceptionContext exceptionContext, Exception exception, HttpStatusCode code) =>

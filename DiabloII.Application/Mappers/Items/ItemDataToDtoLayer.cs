@@ -14,7 +14,7 @@ namespace DiabloII.Application.Mappers.Items
                     dto.Quality = dataModel.Quality.ToString();
                     dto.Category = dataModel.Category.ToString();
                 });
-          
+
             CreateMap<ItemProperty, ItemPropertyDto>();
         }
     }

@@ -2,7 +2,7 @@
 
 namespace DiabloII.Items.Reader.Items
 {
-    public class ItemProperty
+    public class ItemPropertyFromFile
     {
 		public Guid	Id { get; set; }
 		public string FormattedName { get; set; }

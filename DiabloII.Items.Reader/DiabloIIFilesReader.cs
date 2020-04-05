@@ -25,7 +25,7 @@ namespace DiabloII.Items.Reader
         // Gethit-Skill : 10% to trigger level 5 skill
         // Vérifier, tester et sanitizer les propriétés sur la vraie documentation
         // Ascended m'aide sur les missing category, il va me renvoyer lees documents weapon et armor txt.
-        public IEnumerable<Item> Read()
+        public IEnumerable<ItemFromFile> Read()
         {
             var uniquesPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.csv");
             var weaponsPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Weapons.csv");
@@ -66,7 +66,7 @@ namespace DiabloII.Items.Reader
             return uniques;
         }
 
-        public IEnumerable<Item> ReadUniques(
+        public IEnumerable<ItemFromFile> ReadUniques(
             string uniquesCsv, 
             List<ItemCategoryRecord> itemCategories,
             List<PropertyRecord> propertyRecords,
@@ -82,7 +82,7 @@ namespace DiabloII.Items.Reader
                     if (itemData.Length < 4)
                         return null;
 
-                    var properties = new List<ItemProperty>();
+                    var properties = new List<ItemPropertyFromFile>();
                     var name = itemData[0];
                     var type = itemData[3]
                         .ToTitleCase()
@@ -446,7 +446,7 @@ namespace DiabloII.Items.Reader
                         else
                             propertyPar /= 8;
 
-                        properties.Add(new ItemProperty
+                        properties.Add(new ItemPropertyFromFile
                         {
                             Name = propertyName,
                             FormattedName = propertyFormattedName,
@@ -468,7 +468,7 @@ namespace DiabloII.Items.Reader
                     {
                         var firstAttribute = allStats.First();
 
-                        properties.Add(new ItemProperty()
+                        properties.Add(new ItemPropertyFromFile()
                         {
                             Name = "To All Attributes",
                             FormattedName = "To All Attributes",
@@ -508,7 +508,7 @@ namespace DiabloII.Items.Reader
 
                              if (propertyDamage == null)
                              {
-                                 properties.Add(new ItemProperty()
+                                 properties.Add(new ItemPropertyFromFile()
                                  {
                                      Name = $"dmg-{elem}",
                                      FormattedName = propertyFormattedName,
@@ -543,7 +543,7 @@ namespace DiabloII.Items.Reader
                     var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %");
                     var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", ItemPropertyType.Maximum);
 
-                        return new Item
+                        return new ItemFromFile
                     {
                         Id = Guid.NewGuid(),
                         Name = name,
@@ -803,7 +803,7 @@ namespace DiabloII.Items.Reader
             return weaponSubCategoriesRecord;
         }
 
-        public double GetPropertyValueOrDefault(List<ItemProperty> properties, string name, ItemPropertyType type = ItemPropertyType.Minimum)
+        public double GetPropertyValueOrDefault(List<ItemPropertyFromFile> properties, string name, ItemPropertyType type = ItemPropertyType.Minimum)
         {
             var property = properties.FirstOrDefault(_ => _.Name == name);
 
@@ -910,11 +910,11 @@ namespace DiabloII.Items.Reader
             return itemTypeToSubCategory.GetValueOrDefault(itemType);
         }
 
-        private static bool ItemFilter(Item item)
+        private static bool ItemFilter(ItemFromFile itemFromFile)
         {
             var itemNamesToRemove = new[] {"Darkfear", "Dawn Warden", "Thousand Screams" };
 
-            return item != null && !itemNamesToRemove.Contains(item.Name);
+            return itemFromFile != null && !itemNamesToRemove.Contains(itemFromFile.Name);
         }
     }
 
