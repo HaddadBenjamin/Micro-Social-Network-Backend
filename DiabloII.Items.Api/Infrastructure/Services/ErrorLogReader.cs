@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Items.Api.Domain.Models.ErrorLogs;
+using DiabloII.Items.Api.Domain.Readers;
 using DiabloII.Items.Api.Domain.Repositories;
-using DiabloII.Items.Api.Domain.Services;
 using DiabloII.Items.Api.Infrastructure.DbContext;
 
 namespace DiabloII.Items.Api.Infrastructure.Services
 {
-    public class ErrorLogsService : IErrorLogsService
+    public class ErrorLogReader : IErrorLogReader
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IErrorLogRepository _repository;
 
-        public ErrorLogsService(ApplicationDbContext dbContext, IErrorLogRepository repository)
+        public ErrorLogReader(ApplicationDbContext dbContext, IErrorLogRepository repository)
         {
             _dbContext = dbContext;
             _repository = repository;

@@ -4,7 +4,7 @@ using DiabloII.Items.Api.Domain.Models.ErrorLogs;
 using DiabloII.Items.Api.Domain.Repositories;
 using DiabloII.Items.Api.Infrastructure.DbContext;
 
-namespace DiabloII.Items.Api.Infrastructure.Repositories
+namespace DiabloII.Items.Api.Infrastructure.Readers
 {
     public class ErrorLogRepository : IErrorLogRepository
     {

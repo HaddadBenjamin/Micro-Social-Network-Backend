@@ -1,18 +1,18 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Items.Api.Domain.Models.Items;
 using DiabloII.Items.Api.Domain.Queries.Items;
+using DiabloII.Items.Api.Domain.Readers;
 using DiabloII.Items.Api.Domain.Repositories;
-using DiabloII.Items.Api.Domain.Services;
 using DiabloII.Items.Api.Infrastructure.DbContext;
 
 namespace DiabloII.Items.Api.Infrastructure.Services
 {
-    public class ItemsService : IItemsService
+    public class ItemReader : IItemReader
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IItemRepository _repository;
 
-        public ItemsService(ApplicationDbContext dbContext, IItemRepository repository)
+        public ItemReader(ApplicationDbContext dbContext, IItemRepository repository)
         {
             _dbContext = dbContext;
             _repository = repository;

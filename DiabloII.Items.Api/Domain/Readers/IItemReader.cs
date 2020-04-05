@@ -2,9 +2,9 @@
 using DiabloII.Items.Api.Domain.Models.Items;
 using DiabloII.Items.Api.Domain.Queries.Items;
 
-namespace DiabloII.Items.Api.Domain.Services
+namespace DiabloII.Items.Api.Domain.Readers
 {
-    public interface IItemsService
+    public interface IItemReader
     {
         void ResetTheItems(IList<Item> items, IList<ItemProperty> itemProperties);
 

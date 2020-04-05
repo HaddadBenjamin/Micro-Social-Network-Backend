@@ -8,7 +8,7 @@ using DiabloII.Items.Api.Infrastructure.DbContext;
 using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiabloII.Items.Api.Infrastructure.Repositories
+namespace DiabloII.Items.Api.Infrastructure.Readers
 {
     public class ItemRepository : IItemRepository
     {

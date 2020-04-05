@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using DiabloII.Items.Api.Domain.Handlers;
+using DiabloII.Items.Api.Domain.Readers;
 using DiabloII.Items.Api.Domain.Repositories;
-using DiabloII.Items.Api.Domain.Services;
 using DiabloII.Items.Api.Infrastructure.DbContext;
+using DiabloII.Items.Api.Infrastructure.Handlers;
 using DiabloII.Items.Api.Infrastructure.Helpers;
-using DiabloII.Items.Api.Infrastructure.Repositories;
+using DiabloII.Items.Api.Infrastructure.Readers;
 using DiabloII.Items.Api.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -71,12 +73,13 @@ namespace DiabloII.Items.Api.Application
 
             services
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()))
-                .AddTransient<IItemsService, ItemsService>()
+                .AddTransient<IItemReader, ItemReader>()
                 .AddTransient<ISuggestionRepository, SuggestionRepository>()
                 .AddTransient<IErrorLogRepository, ErrorLogRepository>()
                 .AddTransient<IItemRepository, ItemRepository>()
-                .AddTransient<ISuggestionsService, SuggestionsService>()
-                .AddTransient<IErrorLogsService, ErrorLogsService>();
+                .AddTransient<ISuggestionReader, SuggestionReader>()
+                .AddTransient<IErrorLogReader, ErrorLogReader>()
+                .AddTransient<ISuggestionCommandHandler, SuggestionCommandHandler>();
         }
     }
 

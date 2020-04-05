@@ -2,7 +2,7 @@
 using System.Linq;
 using AutoMapper;
 using DiabloII.Items.Api.Application.Responses.ErrorLogs;
-using DiabloII.Items.Api.Domain.Services;
+using DiabloII.Items.Api.Domain.Readers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Items.Api.Application.Controllers
@@ -11,22 +11,20 @@ namespace DiabloII.Items.Api.Application.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ErrorLogsController : Controller
     {
-        private readonly IErrorLogsService _errorLogsService;
+        private readonly IErrorLogReader _reader;
         private readonly IMapper _mapper;
 
-        public ErrorLogsController(IErrorLogsService errorLogsService, IMapper mapper)
+        public ErrorLogsController(IErrorLogReader reader, IMapper mapper)
         {
-            _errorLogsService = errorLogsService;
+            _reader = reader;
             _mapper = mapper;
         }
 
-        #region Read
         [Route("getall")]
         [HttpGet]
-        public IReadOnlyCollection<ErrorLogDto> GetAll() => _errorLogsService
+        public IReadOnlyCollection<ErrorLogDto> GetAll() => _reader
             .GetAll()
             .Select(_mapper.Map<ErrorLogDto>)
             .ToList();
-        #endregion
     }
 }

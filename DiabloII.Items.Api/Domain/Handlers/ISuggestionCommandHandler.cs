@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using DiabloII.Items.Api.Domain.Commands.Suggestions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 
-namespace DiabloII.Items.Api.Domain.Services
+namespace DiabloII.Items.Api.Domain.Handlers
 {
-    public interface ISuggestionsService
+    public interface ISuggestionCommandHandler
     {
         Suggestion Create(CreateASuggestionCommand createASugestion);
 
-        IReadOnlyCollection<Suggestion> GetAll();
-     
         Suggestion Vote(VoteToASuggestionCommand voteToASuggestion);
 
         Suggestion Comment(CommentASuggestionCommand commentASuggestion);

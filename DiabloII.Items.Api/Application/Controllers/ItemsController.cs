@@ -4,7 +4,7 @@ using AutoMapper;
 using DiabloII.Items.Api.Application.Requests.Items;
 using DiabloII.Items.Api.Application.Responses.Items;
 using DiabloII.Items.Api.Domain.Queries.Items;
-using DiabloII.Items.Api.Domain.Services;
+using DiabloII.Items.Api.Domain.Readers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Items.Api.Application.Controllers
@@ -13,29 +13,27 @@ namespace DiabloII.Items.Api.Application.Controllers
     [Route("api/v1/[controller]")]
     public class ItemsController : Controller
     {
-        private readonly IItemsService _itemsService;
+        private readonly IItemReader _reader;
         private readonly IMapper _mapper;
 
-        public ItemsController(IItemsService itemsService, IMapper mapper)
+        public ItemsController(IItemReader reader, IMapper mapper)
         {
-            _itemsService = itemsService;
+            _reader = reader;
             _mapper = mapper;
         }
 
-        #region Read
         [Route("getalluniques")]
         [HttpGet]
-        public IReadOnlyCollection<ItemDto> GetAllUniques() => _itemsService
+        public IReadOnlyCollection<ItemDto> GetAllUniques() => _reader
             .GetAllUniques()
             .Select(_mapper.Map<ItemDto>)
             .ToList();
 
         [Route("searchuniques")]
         [HttpGet]
-        public IReadOnlyCollection<ItemDto> SearchUniques(SearchUniquesDto searchDto) => _itemsService
+        public IReadOnlyCollection<ItemDto> SearchUniques(SearchUniquesDto searchDto) => _reader
             .SearchUniques(_mapper.Map<SearchUniquesQuery>(searchDto))
             .Select(_mapper.Map<ItemDto>)
             .ToList();
-        #endregion
     }
 }

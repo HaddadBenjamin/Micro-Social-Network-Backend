@@ -7,7 +7,7 @@ using DiabloII.Items.Api.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 
-namespace DiabloII.Items.Api.Infrastructure.Repositories
+namespace DiabloII.Items.Api.Infrastructure.Readers
 {
     public class SuggestionRepository : ISuggestionRepository
     {

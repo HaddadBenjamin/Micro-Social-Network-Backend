@@ -3,7 +3,7 @@ using AutoMapper;
 using DiabloII.Items.Api.Domain.Commands.Suggestions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 
-namespace DiabloII.Items.Api.Infrastructure.Mappers.Suggestions
+namespace DiabloII.Items.Api.Domain.Mappers.Suggestions
 {
     public class SuggestionCommandToDataLayer : Profile
     {

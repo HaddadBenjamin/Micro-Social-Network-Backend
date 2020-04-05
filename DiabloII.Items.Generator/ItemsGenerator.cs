@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using DiabloII.Items.Api.Domain.Models.Items;
 using DiabloII.Items.Api.Infrastructure.Helpers;
-using DiabloII.Items.Api.Infrastructure.Repositories;
+using DiabloII.Items.Api.Infrastructure.Readers;
 using DiabloII.Items.Api.Infrastructure.Services;
 using Newtonsoft.Json;
 
@@ -96,7 +96,7 @@ namespace DiabloII.Items.Generator
 
                     var itemRepository = new ItemRepository(dbContext);
 
-                    new ItemsService(dbContext, itemRepository).ResetTheItems(items, itemProperties);
+                    new ItemReader(dbContext, itemRepository).ResetTheItems(items, itemProperties);
                 }
             }
         }

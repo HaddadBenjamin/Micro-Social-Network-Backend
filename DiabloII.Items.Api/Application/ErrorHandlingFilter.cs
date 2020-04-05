@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using DiabloII.Items.Api.Domain.Exceptions;
 using DiabloII.Items.Api.Domain.Models.ErrorLogs;
-using DiabloII.Items.Api.Domain.Services;
+using DiabloII.Items.Api.Domain.Readers;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -34,7 +34,7 @@ namespace DiabloII.Items.Api.Application
 
             exceptionContext.ExceptionHandled = true;
 
-            var errorLogService = (IErrorLogsService)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogsService));
+            var errorLogService = (IErrorLogReader)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogReader));
             var errorLogCreator = new ErrorLoggerCreator(exceptionContext, responseHttpStatus);
             var errorLog = errorLogCreator.Create();
 

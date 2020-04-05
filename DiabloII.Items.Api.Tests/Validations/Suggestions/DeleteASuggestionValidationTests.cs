@@ -6,7 +6,7 @@ using DiabloII.Items.Api.Domain.Repositories;
 using DiabloII.Items.Api.Domain.Validations.Suggestions.Delete;
 using DiabloII.Items.Api.Infrastructure.DbContext;
 using DiabloII.Items.Api.Infrastructure.Helpers;
-using DiabloII.Items.Api.Infrastructure.Repositories;
+using DiabloII.Items.Api.Infrastructure.Readers;
 using NUnit.Framework;
 using Shouldly;
 
