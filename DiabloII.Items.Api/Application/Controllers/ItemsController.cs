@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DiabloII.Items.Api.Application.Mappers.Items;
+using AutoMapper;
 using DiabloII.Items.Api.Application.Requests.Items;
 using DiabloII.Items.Api.Application.Responses.Items;
 using DiabloII.Items.Api.Application.Services.Items;
@@ -14,21 +14,26 @@ namespace DiabloII.Items.Api.Application.Controllers
     public class ItemsController : Controller
     {
         private readonly IItemsService _itemsService;
+        private readonly IMapper _mapper;
 
-        public ItemsController(IItemsService itemsService) => _itemsService = itemsService;
+        public ItemsController(IItemsService itemsService, IMapper mapper)
+        {
+            _itemsService = itemsService;
+            _mapper = mapper;
+        }
 
         [Route("getalluniques")]
         [HttpGet]
         public IReadOnlyCollection<ItemDto> GetAllUniques() => _itemsService
             .GetAllUniques()
-            .Select(ItemMapper.ToItemDto)
+            .Select(_mapper.Map<ItemDto>)
             .ToList();
 
         [Route("searchuniques")]
         [HttpGet]
         public IReadOnlyCollection<ItemDto> SearchUniques(SearchUniquesDto searchDto) => _itemsService
             .SearchUniques(new SearchUniquesQuery(searchDto))
-            .Select(ItemMapper.ToItemDto)
+            .Select(_mapper.Map<ItemDto>)
             .ToList();
     }
 }

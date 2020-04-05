@@ -5,7 +5,7 @@ using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Application.Responses.Suggestions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 
-namespace DiabloII.Items.Api.Application.Profiles
+namespace DiabloII.Items.Api.Application.MappingConfigurations
 {
     public class SuggestionMappingConfiguration : Profile
     {
