@@ -32,7 +32,7 @@ namespace DiabloII.Items.Api.Application.Controllers
         [Route("searchuniques")]
         [HttpGet]
         public IReadOnlyCollection<ItemDto> SearchUniques(SearchUniquesDto searchDto) => _itemsService
-            .SearchUniques(new SearchUniquesQuery(searchDto))
+            .SearchUniques(_mapper.Map<SearchUniquesQuery>(searchDto))
             .Select(_mapper.Map<ItemDto>)
             .ToList();
     }
