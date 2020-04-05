@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
+using System.Text.Json;
 using AutoMapper;
-using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Mappers.Suggestions;
 using DiabloII.Domain.Readers;
@@ -26,8 +21,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json.Serialization;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace DiabloII.Application
 {
@@ -55,22 +50,18 @@ namespace DiabloII.Application
 
     public static class ServiceCollectionsExtensions
     {
-        private static readonly Type assemblyTypeFromApplication = typeof(Startup);
-        private static readonly Type assemblyTypeFromInfrastructure = typeof(CommentASuggestionCommand);
-        private static readonly Type assemblyTypeFromDomain = typeof(ApplicationDbContext);
-
         public static IServiceCollection AddMySwagger(this IServiceCollection services) => services
             .AddSwaggerGen(swagger =>
             {
-                swagger.SwaggerDoc("v1", new Info
+                swagger.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "Diablo II - items and suggestions API",
                     Description = "Allow to search Diablo II items and crud suggestions and votes",
-                    Contact = new Contact
+                    Contact = new OpenApiContact
                     {
                         Name = "Un passionné dans la foule (alias Firefouks)",
-                        Url = "https://github.com/HaddadBenjamin"
+                        Url = new Uri("https://github.com/HaddadBenjamin")
                     }
                 });
                 swagger.DescribeAllEnumsAsStrings();
@@ -79,8 +70,13 @@ namespace DiabloII.Application
         public static IServiceCollection AddMyMvc(this IServiceCollection services)
         {
             services
-                .AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
-                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+                .AddMvc(options =>
+                {
+                    options.EnableEndpointRouting = false;
+                    options.Filters.Add(new ErrorHandlingFilter());
+                })
+                .AddNewtonsoftJson()
+                //.AddJsonOptions(options => options.JsonSerializerOptions = new DefaultContractResolver())
                 .AddFluentValidation();
 
             return services;
@@ -149,8 +145,7 @@ namespace DiabloII.Application
             .UseCors(policyBuilder => policyBuilder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
+                .AllowAnyHeader());
 
         public static IApplicationBuilder UseMySwagger(this IApplicationBuilder applicationBuilder) => applicationBuilder
             .UseSwagger()

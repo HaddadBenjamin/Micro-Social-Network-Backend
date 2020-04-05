@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Linq;
+using AutoMapper;
 using DiabloII.Application.Responses.Items;
 using DiabloII.Domain.Models.Items;
 
@@ -14,7 +15,7 @@ namespace DiabloII.Application.Mappers.Items
                     dto.Quality = dataModel.Quality.ToString();
                     dto.Category = dataModel.Category.ToString();
                 });
-          
+
             CreateMap<ItemProperty, ItemPropertyDto>();
         }
     }

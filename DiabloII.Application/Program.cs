@@ -1,5 +1,4 @@
-﻿using Autofac.Extensions.DependencyInjection;
-using DiabloII.Infrastructure.Extensions;
+﻿using DiabloII.Infrastructure.Extensions;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -11,7 +10,6 @@ namespace DiabloII.Application
 
         public static IWebHost BuildWebHost(string[] arguments) => WebHost
             .CreateDefaultBuilder(arguments)
-            .ConfigureServices(services => services.AddAutofac())
             .ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) => configurationBuilder.AddAMyAzureKeyVault())
             .UseStartup<Startup>()
             .Build();
