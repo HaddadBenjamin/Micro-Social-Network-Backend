@@ -1,8 +1,14 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Mappers.Suggestions;
 using DiabloII.Domain.Readers;
 using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Validations.Suggestions.Comment;
+using DiabloII.Domain.Validations.Suggestions.Create;
+using DiabloII.Domain.Validations.Suggestions.Delete;
+using DiabloII.Domain.Validations.Suggestions.DeleteAComment;
+using DiabloII.Domain.Validations.Suggestions.Vote;
 using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Handlers;
 using DiabloII.Infrastructure.Helpers;
@@ -75,14 +81,21 @@ namespace DiabloII.Application
             var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
 
             services
-                .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()))
+                .AddDbContextPool<ApplicationDbContext>(optionsBuilder =>
+                    optionsBuilder.UseSqlServer(connectionString,
+                        sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()))
                 .AddScoped<IItemReader, ItemReader>()
                 .AddScoped<ISuggestionRepository, SuggestionRepository>()
                 .AddScoped<IErrorLogRepository, ErrorLogRepository>()
                 .AddScoped<IItemRepository, ItemRepository>()
                 .AddScoped<ISuggestionReader, SuggestionReader>()
                 .AddScoped<IErrorLogReader, ErrorLogReader>()
-                .AddScoped<ISuggestionCommandHandler, SuggestionCommandHandler>();
+                .AddScoped<ISuggestionCommandHandler, SuggestionCommandHandler>()
+                .AddScoped<CreateASuggestionValidator>()
+                .AddScoped<VoteToASuggestionValidator>()
+                .AddScoped<CommentASuggestionValidator>()
+                .AddScoped<DeleteASuggestionValidator>()
+                .AddScoped<DeleteASuggestionCommentValidator>();
         }
     }
 
