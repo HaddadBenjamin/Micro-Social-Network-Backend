@@ -87,7 +87,11 @@ namespace DiabloII.Application
             services
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder =>
                     optionsBuilder.UseSqlServer(connectionString,
-                        sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()))
+                        sqlServerOptions =>
+                        {
+                            sqlServerOptions.MigrationsAssembly("DiabloII.Application");
+                            sqlServerOptions.EnableRetryOnFailure();
+                        }))
                 .AddScoped<IItemReader, ItemReader>()
                 .AddScoped<ISuggestionRepository, SuggestionRepository>()
                 .AddScoped<IErrorLogRepository, ErrorLogRepository>()
