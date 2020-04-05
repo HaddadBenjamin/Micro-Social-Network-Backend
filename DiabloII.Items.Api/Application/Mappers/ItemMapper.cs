@@ -2,12 +2,13 @@
 using DiabloII.Items.Api.Application.Responses.Items;
 using DiabloII.Items.Api.Domain.Models.Items;
 
-namespace DiabloII.Items.Api.Application.MappingConfigurations
+namespace DiabloII.Items.Api.Application.Mappers
 {
-    public class ItemMappingConfiguration : Profile
+    public class ItemMapper : Profile
     {
-        public ItemMappingConfiguration()
+        public ItemMapper()
         {
+            // Data model to DTO.
             CreateMap<Item, ItemDto>()
                 .AfterMap((dataModel, dto) =>
                 {

@@ -5,12 +5,13 @@ using DiabloII.Items.Api.Application.Requests.Suggestions;
 using DiabloII.Items.Api.Application.Responses.Suggestions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 
-namespace DiabloII.Items.Api.Application.MappingConfigurations
+namespace DiabloII.Items.Api.Application.Mappers
 {
-    public class SuggestionMappingConfiguration : Profile
+    public class SuggestionMapper : Profile
     {
-        public SuggestionMappingConfiguration()
+        public SuggestionMapper()
         {
+            // Data model to DTO.
             CreateMap<Suggestion, SuggestionDto>()
                 .AfterMap((dataModel, dto) =>
                 {
@@ -21,7 +22,7 @@ namespace DiabloII.Items.Api.Application.MappingConfigurations
             CreateMap<SuggestionVote, SuggestionVoteDto>();
             CreateMap<SuggestionComment, SuggestionCommentDto>();
 
-
+            // DTO to data model.
             CreateMap<CreateASuggestionDto, Suggestion>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
             CreateMap<VoteToASuggestionDto, SuggestionVote>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
             CreateMap<CommentASuggestionDto, SuggestionComment>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());

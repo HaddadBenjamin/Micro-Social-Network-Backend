@@ -2,13 +2,13 @@
 using DiabloII.Items.Api.Application.Responses.ErrorLogs;
 using DiabloII.Items.Api.Domain.Models.ErrorLogs;
 
-namespace DiabloII.Items.Api.Application.MappingConfigurations
+namespace DiabloII.Items.Api.Application.Mappers
 {
-    public class ErrorLogMappingConfiguration : Profile
+    public class ErrorLogMapper : Profile
     {
-        public ErrorLogMappingConfiguration()
+        public ErrorLogMapper()
         {
-
+            // Data model to DTO.
             CreateMap<ErrorLog, ErrorLogDto>();
         }
     }
