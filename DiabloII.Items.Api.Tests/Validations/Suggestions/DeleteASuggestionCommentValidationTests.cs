@@ -5,10 +5,10 @@ using DiabloII.Items.Api.Domain.Commands.Suggestions;
 using DiabloII.Items.Api.Domain.Exceptions;
 using DiabloII.Items.Api.Domain.Models.Suggestions;
 using DiabloII.Items.Api.Domain.Repositories;
+using DiabloII.Items.Api.Domain.Validations.Suggestions.DeleteAComment;
 using DiabloII.Items.Api.Infrastructure.DbContext;
 using DiabloII.Items.Api.Infrastructure.Helpers;
 using DiabloII.Items.Api.Infrastructure.Repositories;
-using DiabloII.Items.Api.Infrastructure.Validations.Suggestions.DeleteAComment;
 using NUnit.Framework;
 using Shouldly;
 
