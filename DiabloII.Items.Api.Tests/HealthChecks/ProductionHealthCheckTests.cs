@@ -1,5 +1,6 @@
 ﻿using System.Net;
-using DiabloII.Items.Api.Infrastructure.Helpers;
+using DiabloII.Application.Helpers;
+using DiabloII.Infrastructure.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;

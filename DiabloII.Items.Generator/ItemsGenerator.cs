@@ -1,12 +1,13 @@
 ﻿using DiabloII.Items.Reader;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.IO;
 using System.Linq;
-using DiabloII.Items.Api.Domain.Models.Items;
-using DiabloII.Items.Api.Infrastructure.Helpers;
-using DiabloII.Items.Api.Infrastructure.Readers;
-using DiabloII.Items.Api.Infrastructure.Services;
+using DiabloII.Application.Helpers;
+using DiabloII.Domain.Models.Items;
+using DiabloII.Infrastructure.Helpers;
+using DiabloII.Infrastructure.Readers;
+using DiabloII.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace DiabloII.Items.Generator

@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DiabloII.Items.Api\DiabloII.Items.Api.csproj" />
+    <ProjectReference Include="..\DiabloII.Items.Api\DiabloII.Application.csproj" />
     <ProjectReference Include="..\DiabloII.Items.Reader\DiabloII.Items.Reader.csproj" />
   </ItemGroup>
 
