@@ -11,9 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Domain", "DiabloII.Domain\DiabloII.Domain.csproj", "{392C0857-28A4-49F1-BE68-B07FAFE0FEBC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Application", "DiabloII.Application\DiabloII.Application.csproj", "{D91DF170-6641-4E01-879C-C301FECDDC99}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Infrastructure.Tests", "DiabloII.Infrastructure.Tests\DiabloII.Infrastructure.Tests.csproj", "{03715705-7FBD-4ECF-A156-69711393CD83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.ApplicationV2", "DiabloII.ApplicationV2\DiabloII.ApplicationV2.csproj", "{D76F2049-7642-4131-BDA8-71374523210C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,14 +37,14 @@ Global
 		{392C0857-28A4-49F1-BE68-B07FAFE0FEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{392C0857-28A4-49F1-BE68-B07FAFE0FEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{392C0857-28A4-49F1-BE68-B07FAFE0FEBC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D91DF170-6641-4E01-879C-C301FECDDC99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D91DF170-6641-4E01-879C-C301FECDDC99}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D91DF170-6641-4E01-879C-C301FECDDC99}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D91DF170-6641-4E01-879C-C301FECDDC99}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03715705-7FBD-4ECF-A156-69711393CD83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{03715705-7FBD-4ECF-A156-69711393CD83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03715705-7FBD-4ECF-A156-69711393CD83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03715705-7FBD-4ECF-A156-69711393CD83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D76F2049-7642-4131-BDA8-71374523210C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D76F2049-7642-4131-BDA8-71374523210C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D76F2049-7642-4131-BDA8-71374523210C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D76F2049-7642-4131-BDA8-71374523210C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
