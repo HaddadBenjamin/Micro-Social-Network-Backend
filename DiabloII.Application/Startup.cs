@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using AutoMapper;
 using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Mappers.Suggestions;
@@ -91,20 +93,18 @@ namespace DiabloII.Application
                         {
                             sqlServerOptions.MigrationsAssembly("DiabloII.Application");
                             sqlServerOptions.EnableRetryOnFailure();
-                        }))
-                .AddScoped<IItemReader, ItemReader>()
-                .AddScoped<ISuggestionRepository, SuggestionRepository>()
-                .AddScoped<IErrorLogRepository, ErrorLogRepository>()
-                .AddScoped<IItemRepository, ItemRepository>()
-                .AddScoped<ISuggestionReader, SuggestionReader>()
-                .AddScoped<IErrorLogReader, ErrorLogReader>()
-                .AddScoped<ISuggestionCommandHandler, SuggestionCommandHandler>()
-                .AddScoped<CreateASuggestionValidator>()
-                .AddScoped<VoteToASuggestionValidator>()
-                .AddScoped<CommentASuggestionValidator>()
-                .AddScoped<DeleteASuggestionValidator>()
-                .AddScoped<DeleteASuggestionCommentValidator>();
+                        }));
 
+          
+            var assemblies = new [] { typeof(Startup), typeof(ISuggestionRepository), typeof(SuggestionRepository) }.Select(_ => Assembly.GetAssembly(_));
+            services.Scan(scan =>
+                {
+                    scan.FromAssemblies(assemblies)
+                        .AddClasses()
+                        .AsMatchingInterface()
+                        .AsSelf()
+                        .WithScopedLifetime();
+            });
             //var builder = new ContainerBuilder();
             //builder.Populate(services);
 
