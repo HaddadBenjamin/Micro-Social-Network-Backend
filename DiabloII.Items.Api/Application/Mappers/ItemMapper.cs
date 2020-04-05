@@ -21,7 +21,7 @@ namespace DiabloII.Items.Api.Application.Mappers
           
             CreateMap<ItemProperty, ItemPropertyDto>();
 
-            // DTO layer to queries layer.
+            // DTO layer to query layer.
             CreateMap<SearchUniquesDto, SearchUniquesQuery>()
                 .AfterMap((dto, query) =>
                 {
