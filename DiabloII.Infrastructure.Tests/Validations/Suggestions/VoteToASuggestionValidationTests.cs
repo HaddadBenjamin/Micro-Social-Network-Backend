@@ -3,37 +3,38 @@ using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories;
-using DiabloII.Domain.Validations.Suggestions.Delete;
+using DiabloII.Domain.Validations.Suggestions.Vote;
 using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Repositories;
-using DiabloII.Items.Api.Tests.Helpers;
+using DiabloII.Infrastructure.Tests.Helpers;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DiabloII.Items.Api.Tests.Validations.Suggestions
+namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
 {
     [TestFixture]
-    public class DeleteASuggestionValidationTests
+    public class VoteToASuggestionValidationTests
     {
         private ApplicationDbContext _dbContext;
-        private DeleteASuggestionValidator _validator;
-        private DeleteASuggestionValidationContext _validationContext;
+        private VoteToASuggestionValidator _validator;
+        private VoteToASuggestionValidationContext _validationContext;
         private ISuggestionRepository _repository;
 
         [SetUp]
         public void Setup()
         {
-            var validCommand = new DeleteASuggestionCommand
+            var validCommand = new VoteToASuggestionCommand
             {
                 Ip = "213.91.163.4",
-                Id = Guid.NewGuid()
+                IsPositive = true,
+                SuggestionId = Guid.NewGuid()
             };
 
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
             _repository = new SuggestionRepository(_dbContext);
-
-            _validator = new DeleteASuggestionValidator();
-            _validationContext = new DeleteASuggestionValidationContext(validCommand, _repository);
+          
+            _validator = new VoteToASuggestionValidator();
+            _validationContext = new VoteToASuggestionValidationContext(validCommand, _repository);
         }
 
         [Test]
@@ -61,37 +62,21 @@ namespace DiabloII.Items.Api.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenSuggestionDoesNotExists_ShouldThrowANotFoundException() =>
+        public void WhenSuggestionDoesNotExists_ShouldThrowANotFoundException() => 
             Should.Throw<NotFoundException>(() => _validator.Validate(_validationContext));
-
-        [Test]
-        public void WhenUserIsNotTheOwnerOsTheSuggestion_ShouldThrowAUnauthorizedException()
-        {
-            _validationContext.Command.Ip = "213.91.163.2";
-
-            AddTheValidSuggestion();
-          
-            Should.Throw<UnauthorizedException>(() => _validator.Validate(_validationContext));
-        }
 
         [Test]
         public void WhenCommandIsValid_ShouldSuccess()
         {
-            AddTheValidSuggestion();
-
-            Should.NotThrow(() => _validator.Validate(_validationContext));
-        }
-
-        private void AddTheValidSuggestion()
-        {
             var suggestion = new Suggestion
             {
-                Id = _validationContext.Command.Id,
-                Ip = _validationContext.Command.Ip
+                Id = _validationContext.Command.SuggestionId
             };
 
             _dbContext.Suggestions.Add(suggestion);
             _dbContext.SaveChanges();
+
+            Should.NotThrow(() => _validator.Validate(_validationContext));
         }
     }
 }

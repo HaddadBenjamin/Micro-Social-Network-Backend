@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DiabloII.Items.Api.Tests.HealthChecks
+namespace DiabloII.Infrastructure.Tests.HealthChecks
 {
     [Ignore("Those tests can't run before the deploy process.")]
     [TestFixture]

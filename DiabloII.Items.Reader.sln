@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29123.88
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Application", "DiabloII.Items.Api\DiabloII.Application.csproj", "{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Items.Api.Tests", "DiabloII.Items.Api.Tests\DiabloII.Items.Api.Tests.csproj", "{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Items.Reader", "DiabloII.Items.Reader\DiabloII.Items.Reader.csproj", "{C5EC9316-DC4D-46BF-BA89-CE92E955FD97}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Items.Generator", "DiabloII.Items.Generator\DiabloII.Items.Generator.csproj", "{16C2452A-3B25-4B68-99E1-9E403EE2B835}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Infrastructure", "DiabloII.Infrastructure\DiabloII.Infrastructure.csproj", "{5B0C8F0F-1798-4FD7-A42D-5D731A5A0008}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Infrastructure", "DiabloII.Infrastructure\DiabloII.Infrastructure.csproj", "{5B0C8F0F-1798-4FD7-A42D-5D731A5A0008}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Domain", "DiabloII.Domain\DiabloII.Domain.csproj", "{392C0857-28A4-49F1-BE68-B07FAFE0FEBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Domain", "DiabloII.Domain\DiabloII.Domain.csproj", "{392C0857-28A4-49F1-BE68-B07FAFE0FEBC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Application", "DiabloII.Application\DiabloII.Application.csproj", "{D91DF170-6641-4E01-879C-C301FECDDC99}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Infrastructure.Tests", "DiabloII.Infrastructure.Tests\DiabloII.Infrastructure.Tests.csproj", "{03715705-7FBD-4ECF-A156-69711393CD83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F2C55776-17A1-4CCA-91A3-DBED9FD2AA03}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F9DB1E21-096E-4DDF-AA6F-EA6C7377BD48}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C5EC9316-DC4D-46BF-BA89-CE92E955FD97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C5EC9316-DC4D-46BF-BA89-CE92E955FD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5EC9316-DC4D-46BF-BA89-CE92E955FD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -45,6 +37,14 @@ Global
 		{392C0857-28A4-49F1-BE68-B07FAFE0FEBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{392C0857-28A4-49F1-BE68-B07FAFE0FEBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{392C0857-28A4-49F1-BE68-B07FAFE0FEBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D91DF170-6641-4E01-879C-C301FECDDC99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D91DF170-6641-4E01-879C-C301FECDDC99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D91DF170-6641-4E01-879C-C301FECDDC99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D91DF170-6641-4E01-879C-C301FECDDC99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03715705-7FBD-4ECF-A156-69711393CD83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03715705-7FBD-4ECF-A156-69711393CD83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03715705-7FBD-4ECF-A156-69711393CD83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03715705-7FBD-4ECF-A156-69711393CD83}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

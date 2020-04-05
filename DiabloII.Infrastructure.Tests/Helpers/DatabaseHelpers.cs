@@ -1,7 +1,7 @@
 ﻿using DiabloII.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 
-namespace DiabloII.Items.Api.Tests.Helpers
+namespace DiabloII.Infrastructure.Tests.Helpers
 {
     public static class DatabaseHelpers
     {

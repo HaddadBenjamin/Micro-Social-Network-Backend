@@ -6,11 +6,11 @@ using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Validations.Suggestions.Comment;
 using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Repositories;
-using DiabloII.Items.Api.Tests.Helpers;
+using DiabloII.Infrastructure.Tests.Helpers;
 using NUnit.Framework;
 using Shouldly;
 
-namespace DiabloII.Items.Api.Tests.Validations.Suggestions
+namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
 {
     [TestFixture]
     public class CommentASuggestionValidationTests
