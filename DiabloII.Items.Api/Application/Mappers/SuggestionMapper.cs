@@ -23,12 +23,13 @@ namespace DiabloII.Items.Api.Application.Mappers
             CreateMap<SuggestionVote, SuggestionVoteDto>();
             CreateMap<SuggestionComment, SuggestionCommentDto>();
 
-            // DTO layer to data layer.
-            CreateMap<CreateASuggestionDto, Suggestion>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
-            CreateMap<VoteToASuggestionDto, SuggestionVote>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
-            CreateMap<CommentASuggestionDto, SuggestionComment>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
+            // Command layer to data layer.
+            CreateMap<CreateASuggestionCommand, Suggestion>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
+            CreateMap<VoteToASuggestionCommand, SuggestionVote>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
+            CreateMap<CommentASuggestionCommand, SuggestionComment>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
 
-            // DTO layer to query layer
+
+            // DTO layer to command layer
             CreateMap<CreateASuggestionDto, CreateASuggestionCommand>();
             CreateMap<CommentASuggestionDto, CommentASuggestionCommand>();
             CreateMap<VoteToASuggestionDto, VoteToASuggestionCommand>();
