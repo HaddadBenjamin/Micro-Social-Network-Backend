@@ -21,6 +21,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json.Serialization;
 
 namespace DiabloII.Application
 {
@@ -73,8 +74,7 @@ namespace DiabloII.Application
                     options.EnableEndpointRouting = false;
                     options.Filters.Add(new ErrorHandlingFilter());
                 })
-                .AddNewtonsoftJson()
-                //.AddJsonOptions(options => options.JsonSerializerOptions = new DefaultContractResolver())
+                .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
                 .AddFluentValidation();
 
             return services;
