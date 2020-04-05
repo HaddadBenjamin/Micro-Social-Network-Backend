@@ -8,7 +8,7 @@ namespace DiabloII.Items.Api.Application.Mappers
     {
         public ItemMapper()
         {
-            // Data model to DTO.
+            // Data layer to DTO layer.
             CreateMap<Item, ItemDto>()
                 .AfterMap((dataModel, dto) =>
                 {

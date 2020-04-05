@@ -8,7 +8,7 @@ namespace DiabloII.Items.Api.Application.Mappers
     {
         public ErrorLogMapper()
         {
-            // Data model to DTO.
+            // Data layer to DTO layer.
             CreateMap<ErrorLog, ErrorLogDto>();
         }
     }

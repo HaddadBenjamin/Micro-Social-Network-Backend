@@ -11,7 +11,7 @@ namespace DiabloII.Items.Api.Application.Mappers
     {
         public SuggestionMapper()
         {
-            // Data model to DTO.
+            // Data layer to DTO layer.
             CreateMap<Suggestion, SuggestionDto>()
                 .AfterMap((dataModel, dto) =>
                 {
@@ -22,7 +22,7 @@ namespace DiabloII.Items.Api.Application.Mappers
             CreateMap<SuggestionVote, SuggestionVoteDto>();
             CreateMap<SuggestionComment, SuggestionCommentDto>();
 
-            // DTO to data model.
+            // DTO layer to data layer.
             CreateMap<CreateASuggestionDto, Suggestion>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
             CreateMap<VoteToASuggestionDto, SuggestionVote>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
             CreateMap<CommentASuggestionDto, SuggestionComment>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
