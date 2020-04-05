@@ -8,6 +8,7 @@ using DiabloII.Infrastructure.Handlers;
 using DiabloII.Infrastructure.Helpers;
 using DiabloII.Infrastructure.Readers;
 using DiabloII.Infrastructure.Repositories;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -63,7 +64,8 @@ namespace DiabloII.Application
         {
             services
                 .AddMvc(options => options.Filters.Add(new ErrorHandlingFilter()))
-                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
+                .AddFluentValidation();
 
             return services;
         }
@@ -74,13 +76,13 @@ namespace DiabloII.Application
 
             services
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseSqlServer(connectionString, sqlServerOptions => sqlServerOptions.EnableRetryOnFailure()))
-                .AddTransient<IItemReader, ItemReader>()
-                .AddTransient<ISuggestionRepository, SuggestionRepository>()
-                .AddTransient<IErrorLogRepository, ErrorLogRepository>()
-                .AddTransient<IItemRepository, ItemRepository>()
-                .AddTransient<ISuggestionReader, SuggestionReader>()
-                .AddTransient<IErrorLogReader, ErrorLogReader>()
-                .AddTransient<ISuggestionCommandHandler, SuggestionCommandHandler>();
+                .AddScoped<IItemReader, ItemReader>()
+                .AddScoped<ISuggestionRepository, SuggestionRepository>()
+                .AddScoped<IErrorLogRepository, ErrorLogRepository>()
+                .AddScoped<IItemRepository, ItemRepository>()
+                .AddScoped<ISuggestionReader, SuggestionReader>()
+                .AddScoped<IErrorLogReader, ErrorLogReader>()
+                .AddScoped<ISuggestionCommandHandler, SuggestionCommandHandler>();
         }
     }
 
