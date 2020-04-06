@@ -12,7 +12,6 @@ namespace DiabloII.Application
 {
     public class Startup
     {
-        public static readonly Type[] AssemblyTypes = new[] { ApplicationType, InfrastructureType, DomainType };
         internal static readonly Type ApplicationType = typeof(Startup);
         internal static readonly Type InfrastructureType = typeof(ErrorLogRepository);
         internal static readonly Type DomainType = typeof(IErrorLogRepository);
@@ -22,7 +21,7 @@ namespace DiabloII.Application
         public Startup(IConfiguration configuration) => _configuration = configuration;
 
         public void ConfigureServices(IServiceCollection services) => services
-            .AddAutoMapper(AssemblyTypes)
+            .AddAutoMapper(ApplicationType, DomainType)
             .AddMySwagger()
             .AddMyMvc()
             .AddCors()

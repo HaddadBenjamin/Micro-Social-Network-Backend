@@ -48,7 +48,8 @@ namespace DiabloII.Application.Extensions
 
         public static void RegisterMyDependencies(this IServiceCollection services, IConfiguration configuration)
         {
-            var assemblies = Startup.AssemblyTypes.Select(Assembly.GetAssembly);
+            var assemblyTypes = new[] {Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType};
+            var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
             var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
 
             services
