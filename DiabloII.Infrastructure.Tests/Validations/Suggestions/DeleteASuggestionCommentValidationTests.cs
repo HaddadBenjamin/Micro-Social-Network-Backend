@@ -65,11 +65,9 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             AddTheValidSuggestion();
 
             var suggestion = _dbContext.Suggestions.First();
-            var comments = suggestion.Comments;
+            var comment = suggestion.Comments.First();
 
-            comments = comments.Select(comment => new SuggestionComment {Id = Guid.NewGuid()}).ToList();
-            suggestion.Comments = comments;
-
+            _repository.RemoveComment(suggestion.Id, comment.Id, comment.CreatedBy);
             _dbContext.SaveChanges();
 
             Should.Throw<NotFoundException>(() => _validator.Validate(_validationContext));
