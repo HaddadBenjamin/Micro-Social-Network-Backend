@@ -78,17 +78,29 @@ namespace DiabloII.Application.Filters.ErrorHandling
         private dynamic CreateTheHttpRequestObject()
         {
             var httpRequest = _exceptionContext.HttpContext.Request;
-            using (var streamReader = new StreamReader(httpRequest.Body))
+            var requestUrl = httpRequest.GetDisplayUrl();
+            var requestHeaders = httpRequest.Headers.Select(header =>
             {
-                var requestBody = streamReader.ReadToEnd();
-                var requestUrl = httpRequest.GetDisplayUrl();
-                var requestHeaders = httpRequest.Headers.Select(header =>
+                var headerValue = string.Join(',', header.Value);
+
+                return $"{header.Key} : {headerValue}";
+            });
+            var requestBody = string.Empty;
+
+            try
+            {
+                using (var streamReader = new StreamReader(httpRequest.Body))
+                    requestBody = streamReader.ReadToEnd();
+
+                return new
                 {
-                    var headerValue = string.Join(',', header.Value);
-
-                    return $"{header.Key} : {headerValue}";
-                });
-
+                    RequestUrl = requestUrl,
+                    RequestBody = requestBody,
+                    RequestHeaders = requestHeaders,
+                };
+            }
+            catch (Exception)
+            {
                 return new
                 {
                     RequestUrl = requestUrl,

@@ -67,7 +67,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             var suggestion = _dbContext.Suggestions.First();
             var comment = suggestion.Comments.First();
 
-            _repository.RemoveComment(suggestion.Id, comment.Id, comment.CreatedBy);
+            _repository.RemoveUserComment(suggestion.Id, comment.Id, comment.CreatedBy);
             _dbContext.SaveChanges();
 
             Should.Throw<NotFoundException>(() => _validator.Validate(_validationContext));
@@ -86,7 +86,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
                 CreatedBy = "other user id"
             };
 
-            _repository.RemoveComment(suggestion.Id, comment.Id, comment.CreatedBy);
+            _repository.RemoveUserComment(suggestion.Id, comment.Id, comment.CreatedBy);
             _repository.AddComment(suggestion.Id, newComment);
             _dbContext.SaveChanges();
 

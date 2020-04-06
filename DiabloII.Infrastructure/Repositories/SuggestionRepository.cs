@@ -39,13 +39,12 @@ namespace DiabloII.Infrastructure.Repositories
         public bool DoesSuggestionExists(Guid suggestionId) =>
             _dbContext.Suggestions.Any(suggestion => suggestion.Id == suggestionId);
        
-        public bool DoesSuggestionExists(Guid suggestionId, string userId) =>
-            _dbContext.Suggestions.Any(suggestion => suggestion.Id == suggestionId && suggestion.CreatedBy == userId);
+        public bool IsOwnerOfTheSuggestion(Guid suggestionId, string userId) => _dbContext.Suggestions.Any(suggestion => suggestion.Id == suggestionId && suggestion.CreatedBy == userId);
 
         public bool DoesCommentExists(Guid commentId) =>
             _dbContext.SuggestionComments.Any(comment => comment.Id == commentId);
 
-        public bool DoesUserCommentExists(Guid suggestionId, Guid commentId, string userId) => _dbContext.Suggestions
+        public bool IsOwnerOfTheComment(Guid suggestionId, Guid commentId, string userId) => _dbContext.Suggestions
             .Any(suggestion => suggestion.Id == suggestionId &&
                                suggestion.Comments.Any(comment => comment.Id == commentId && comment.CreatedBy == userId));
 
@@ -70,7 +69,7 @@ namespace DiabloII.Infrastructure.Repositories
             return suggestion;
         }
 
-        public void RemoveSuggestion(Guid suggestionId, string userId)
+        public void RemoveUserSuggestion(Guid suggestionId, string userId)
         {
             var userSuggestion = GetUserSuggestion(suggestionId, userId);
 
@@ -83,7 +82,7 @@ namespace DiabloII.Infrastructure.Repositories
             _dbContext.SuggestionVotes.Remove(suggestionVote);
         }
 
-        public Suggestion RemoveComment(Guid suggestionId, Guid commentId, string userId)
+        public Suggestion RemoveUserComment(Guid suggestionId, Guid commentId, string userId)
         {
             var suggestion = GetFirstSuggestion(suggestionId);
             var userComment = GetUserComment(suggestion, commentId, userId);
