@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DiabloII.Application.Controllers
 {
     // Remember : dotnet run watch.
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/")]
     public class ItemsController : Controller
     {
         private readonly IItemReader _reader;
@@ -22,14 +22,14 @@ namespace DiabloII.Application.Controllers
             _mapper = mapper;
         }
 
-        [Route("getalluniques")]
+        [Route("items")]
         [HttpGet]
         public IReadOnlyCollection<ItemDto> GetAllUniques() => _reader
             .GetAllUniques()
             .Select(_mapper.Map<ItemDto>)
             .ToList();
 
-        [Route("searchuniques")]
+        [Route("items/search")]
         [HttpGet]
         public IReadOnlyCollection<ItemDto> SearchUniques(SearchUniquesDto searchDto) => _reader
             .SearchUniques(_mapper.Map<SearchUniquesQuery>(searchDto))
