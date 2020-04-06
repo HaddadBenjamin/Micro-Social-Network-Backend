@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Application.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/")]
     [ApiExplorerSettings(IgnoreApi = true)]
     public class ErrorLogsController : Controller
     {
@@ -20,7 +20,7 @@ namespace DiabloII.Application.Controllers
             _mapper = mapper;
         }
 
-        [Route("getall")]
+        [Route("errorlogs")]
         [HttpGet]
         public IReadOnlyCollection<ErrorLogDto> GetAll() => _reader
             .GetAll()
