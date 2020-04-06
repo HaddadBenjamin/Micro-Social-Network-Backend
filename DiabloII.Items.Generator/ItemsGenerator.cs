@@ -24,13 +24,13 @@ namespace DiabloII.Items.Generator
         {
             var uniqueItems = new DiabloIIFilesReader().Read();
 
-            CreateTheUniqueItemsJsonFile(uniqueItems);
+            InsertTheUniqueItemsInAJsonFile(uniqueItems);
             UpdateTheItemsFromDatabase(environments, uniqueItems);
         }
 
-        private static void CreateTheUniqueItemsJsonFile(IEnumerable<ItemFromFile> uniqueItems)
+        private static void InsertTheUniqueItemsInAJsonFile(IEnumerable<ItemFromFile> uniqueItems)
         {
-            var uniqueItemDestinationPath = Path.Combine(Directory.GetCurrentDirectory(), "Files/Uniques.json");
+            var uniqueItemDestinationPath = Path.Combine(Directory.GetCurrentDirectory(), "Files", "Uniques.json");
             var uniqueItemsAsJson = JsonConvert.SerializeObject(uniqueItems, Formatting.Indented);
 
             File.WriteAllText(uniqueItemDestinationPath, uniqueItemsAsJson);
@@ -46,7 +46,7 @@ namespace DiabloII.Items.Generator
             foreach (var configurationFilePath in configurationFilePaths)
             {
                 var configuration = ConfigurationHelpers.GetMyConfiguration(configurationFilePath);
-                var connectionString = DatabaseHelpers.GetMyConnectionString(configuration, "DiabloII.Items.Generator");
+                var connectionString = DatabaseHelpers.GetMyConnectionString(configuration, nameof(DiabloII.Items.Generator));
 
                 using (var dbContext = DatabaseHelpers.GetMyDbContext(connectionString))
                 {
@@ -62,9 +62,9 @@ namespace DiabloII.Items.Generator
 
         private static IMapper GetMapper()
         {
-            var mapperConfiguration = new MapperConfiguration(cfg =>
+            var mapperConfiguration = new MapperConfiguration(configuration =>
             {
-                cfg.CreateMap<Reader.Items.ItemFromFile, Item>()
+                configuration.CreateMap<Reader.Items.ItemFromFile, Item>()
                     .AfterMap((source, destination) =>
                     {
                         destination.Id = Guid.NewGuid();
@@ -78,7 +78,8 @@ namespace DiabloII.Items.Generator
                             return _;
                         }).ToList();
                     });
-                cfg.CreateMap<Reader.Items.ItemPropertyFromFile, ItemProperty>()
+
+                configuration.CreateMap<Reader.Items.ItemPropertyFromFile, ItemProperty>()
                     .AfterMap((source, destination) => destination.Id = Guid.NewGuid());
             });
             var mapper = mapperConfiguration.CreateMapper();

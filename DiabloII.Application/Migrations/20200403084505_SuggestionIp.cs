@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DiabloII.Infrastructure.Migrations
+namespace DiabloII.Application.Migrations
 {
     public partial class SuggestionIp : Migration
     {

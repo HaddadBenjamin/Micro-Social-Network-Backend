@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DiabloII.Infrastructure.Migrations
+namespace DiabloII.Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20200326211941_SuggestionsTables")]

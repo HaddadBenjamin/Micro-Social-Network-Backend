@@ -4,10 +4,10 @@ using System;
 using DiabloII.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DiabloII.Infrastructure.Migrations
+namespace DiabloII.Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20200403133517_SuggestionComment")]

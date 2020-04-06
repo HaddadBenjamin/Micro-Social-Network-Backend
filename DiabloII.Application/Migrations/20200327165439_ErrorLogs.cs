@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DiabloII.Infrastructure.Migrations
+namespace DiabloII.Application.Migrations
 {
     public partial class ErrorLogs : Migration
     {
