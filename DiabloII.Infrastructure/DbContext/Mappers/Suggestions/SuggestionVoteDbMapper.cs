@@ -22,11 +22,10 @@ namespace DiabloII.Infrastructure.DbContext.Mappers.Suggestions
                 .HasForeignKey(suggestionVote => suggestionVote.SuggestionId);
 
             suggestionVoteBuilder.Ignore(suggestionVote => suggestionVote.Suggestion);
-            
+
             suggestionVoteBuilder
-                .Property(suggestionVote => suggestionVote.Ip)
-                .IsRequired()
-                .HasMaxLength(Ipv4Length);
+                .Property(suggestionVote => suggestionVote.CreatedBy)
+                .IsRequired();
         }
     }
 }

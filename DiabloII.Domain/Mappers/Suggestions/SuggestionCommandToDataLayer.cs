@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using DiabloII.Domain.Commands.Suggestions;
+using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Suggestions;
 
 namespace DiabloII.Domain.Mappers.Suggestions
@@ -9,9 +10,21 @@ namespace DiabloII.Domain.Mappers.Suggestions
     {
         public SuggestionCommandToDataLayer()
         {
-            CreateMap<CreateASuggestionCommand, Suggestion>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
-            CreateMap<VoteToASuggestionCommand, SuggestionVote>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
-            CreateMap<CommentASuggestionCommand, SuggestionComment>().AfterMap((dataModel, dto) => dto.Id = Guid.NewGuid());
+            CreateMap<CreateASuggestionCommand, Suggestion>().AfterMap((command, dataModel) =>
+            {
+                dataModel.Id = Guid.NewGuid();
+                dataModel.CreatedBy = command.UserId;
+            });
+            CreateMap<VoteToASuggestionCommand, SuggestionVote>().AfterMap((command, dataModel) =>
+            {
+                dataModel.Id = Guid.NewGuid();
+                dataModel.CreatedBy = command.UserId;
+            });
+            CreateMap<CommentASuggestionCommand, SuggestionComment>().AfterMap((command, dataModel) =>
+            {
+                dataModel.Id = Guid.NewGuid();
+                dataModel.CreatedBy = command.UserId;
+            });
         }
     }
 }

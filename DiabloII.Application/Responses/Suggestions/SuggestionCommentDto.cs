@@ -6,7 +6,7 @@ namespace DiabloII.Application.Responses.Suggestions
     {
         public Guid Id { get; set; }
 
-        public string Ip { get; set; }
+        public string CreatedBy { get; set; }
         
         public string Comment { get; set; }
     }

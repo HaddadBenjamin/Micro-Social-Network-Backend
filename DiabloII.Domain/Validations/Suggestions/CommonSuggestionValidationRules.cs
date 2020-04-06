@@ -18,7 +18,7 @@ namespace DiabloII.Domain.Validations.Suggestions
             .OnFailure(context => throw new BadRequestException("Content should be unique"));
       
         public static IRuleBuilder<T, SuggestionDbContextValidationContext> SuggestionShouldBeRelatedToTheUserIp<T>(this IRuleBuilder<T, SuggestionDbContextValidationContext> ruleBuilder) => ruleBuilder
-            .Must(context => context.Repository.DoesSuggestionExists(context.Id, context.Ip))
+            .Must(context => context.Repository.DoesSuggestionExists(context.Id, context.UserId))
             .OnFailure(context => throw new UnauthorizedException("Suggestion"));
     }
 }

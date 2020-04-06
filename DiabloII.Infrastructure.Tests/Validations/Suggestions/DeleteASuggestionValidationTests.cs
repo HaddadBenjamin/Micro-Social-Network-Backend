@@ -1,6 +1,7 @@
 using System;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Exceptions;
+using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Validations.Suggestions.Delete;
@@ -25,7 +26,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         {
             var validCommand = new DeleteASuggestionCommand
             {
-                Ip = "213.91.163.4",
+                UserId = "213.91.163.4",
                 Id = Guid.NewGuid()
             };
 
@@ -39,7 +40,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         [Test]
         public void WhenIpIsNull_ShouldThrowABadRequestException()
         {
-            _validationContext.Command.Ip = null;
+            _validationContext.Command.UserId = null;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -47,7 +48,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         [Test]
         public void WhenIpIsEmpty_ShouldThrowABadRequestException()
         {
-            _validationContext.Command.Ip = string.Empty;
+            _validationContext.Command.UserId = string.Empty;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -55,7 +56,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         [Test]
         public void WhenIpIsNotAnIpV4_ShouldThrowABadRequestException()
         {
-            _validationContext.Command.Ip = "213.91.163.4444";
+            _validationContext.Command.UserId = "213.91.163.4444";
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -67,7 +68,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         [Test]
         public void WhenUserIsNotTheOwnerOsTheSuggestion_ShouldThrowAUnauthorizedException()
         {
-            _validationContext.Command.Ip = "213.91.163.2";
+            _validationContext.Command.UserId = "213.91.163.2";
 
             AddTheValidSuggestion();
           
@@ -87,7 +88,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             var suggestion = new Suggestion
             {
                 Id = _validationContext.Command.Id,
-                Ip = _validationContext.Command.Ip
+                CreatedBy = _validationContext.Command.UserId
             };
 
             _dbContext.Suggestions.Add(suggestion);

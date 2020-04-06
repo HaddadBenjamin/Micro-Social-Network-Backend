@@ -29,6 +29,10 @@ namespace DiabloII.Infrastructure.DbContext.Mappers.Suggestions
                 .IsRequired();
 
             suggestionBuilder.Property(suggestion => suggestion.Content).IsRequired();
+
+            suggestionBuilder
+                .Property(suggestion => suggestion.CreatedBy)
+                .IsRequired();
         }
     }
 }

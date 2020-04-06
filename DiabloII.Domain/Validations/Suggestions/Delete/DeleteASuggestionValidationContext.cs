@@ -14,7 +14,7 @@ namespace DiabloII.Domain.Validations.Suggestions.Delete
             Command = command;
             DbContextValidationContext = new SuggestionDbContextValidationContext(repository, Command.Id)
             {
-                Ip = Command.Ip
+                UserId = Command.UserId
             };
         }
     }

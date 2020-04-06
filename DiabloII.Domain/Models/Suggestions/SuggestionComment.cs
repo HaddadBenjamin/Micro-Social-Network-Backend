@@ -10,7 +10,7 @@ namespace DiabloII.Domain.Models.Suggestions
 
         public virtual Suggestion Suggestion { get; set; }
 
-        public string Ip { get; set; }
+        public string CreatedBy { get; set; }
 
         public string Comment { get; set; }
     }

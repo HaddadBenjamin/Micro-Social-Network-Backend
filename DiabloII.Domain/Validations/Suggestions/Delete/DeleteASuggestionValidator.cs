@@ -6,7 +6,8 @@ namespace DiabloII.Domain.Validations.Suggestions.Delete
     {
         public DeleteASuggestionValidator()
         {
-            RuleFor(context => context.Command.Ip).ShouldBeAValidIp();
+            RuleFor(context => context.Command.UserId).ShouldNotBeNullOrEmpty("UserId");
+            
             RuleFor(context => context.DbContextValidationContext)
                 .SuggestionShouldExists()
                 .SuggestionShouldBeRelatedToTheUserIp();
