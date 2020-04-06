@@ -2,10 +2,8 @@
 using System.Linq;
 using System.Reflection;
 using DiabloII.Application.Filters.ErrorHandling;
-using DiabloII.Domain.Repositories;
 using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Helpers;
-using DiabloII.Infrastructure.Repositories;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -50,11 +48,7 @@ namespace DiabloII.Application.Extensions
 
         public static void RegisterMyDependencies(this IServiceCollection services, IConfiguration configuration)
         {
-            var applicationType = typeof(Startup);
-            var infrastructureType = typeof(ErrorLogRepository);
-            var domainType = typeof(IErrorLogRepository);
-            var assemblyTypes = new [] { applicationType, infrastructureType, domainType };
-            var assemblies = assemblyTypes.Select(assemblyType => Assembly.GetAssembly(assemblyType));
+            var assemblies = Startup.AssemblyTypes.Select(Assembly.GetAssembly);
             var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
 
             services
