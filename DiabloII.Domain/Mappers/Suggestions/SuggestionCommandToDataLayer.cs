@@ -1,7 +1,6 @@
 ﻿using System;
 using AutoMapper;
 using DiabloII.Domain.Commands.Suggestions;
-using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Suggestions;
 
 namespace DiabloII.Domain.Mappers.Suggestions

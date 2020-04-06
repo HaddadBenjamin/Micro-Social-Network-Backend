@@ -26,7 +26,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             var validCommand = new CreateASuggestionCommand
             {
                 Content = "any value",
-                UserId = "213.91.163.4"
+                UserId = "any value"
             };
 
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
@@ -61,7 +61,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenIpIsNull_ShouldThrowABadRequestException()
+        public void WhenUserIdIsNull_ShouldThrowABadRequestException()
         {
             _validationContext.Command.UserId = null;
 
@@ -69,17 +69,9 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenIpIsEmpty_ShouldThrowABadRequestException()
+        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException()
         {
             _validationContext.Command.UserId = string.Empty;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
-
-        [Test]
-        public void WhenIpIsNotAnIpV4_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.UserId = "213.91.163.4444";
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }

@@ -2,7 +2,6 @@
 using AutoMapper;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Handlers;
-using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Validations.Suggestions.Comment;

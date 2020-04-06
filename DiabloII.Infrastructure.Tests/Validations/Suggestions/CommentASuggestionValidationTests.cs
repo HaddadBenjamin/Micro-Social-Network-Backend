@@ -1,7 +1,6 @@
 using System;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Exceptions;
-using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Validations.Suggestions.Comment;
@@ -27,8 +26,8 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             var validCommand = new CommentASuggestionCommand
             {
                 SuggestionId = Guid.NewGuid(),
-                UserId = "213.91.163.4",
-                Comment = "any comment"
+                UserId = "valid user id",
+                Comment = "any value"
             };
 
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
@@ -63,7 +62,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenIpIsNull_ShouldThrowABadRequestException()
+        public void WhenUserIdIsNull_ShouldThrowABadRequestException()
         {
             _validationContext.Command.UserId = null;
 
@@ -71,20 +70,13 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenIpIsEmpty_ShouldThrowABadRequestException()
+        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException()
         {
             _validationContext.Command.UserId = string.Empty;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
-        [Test]
-        public void WhenIpIsNotAnIpV4_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.UserId = "213.91.163.4444";
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
 
         [Test]
         public void WhenSuggestionDoesNotExists_ShouldThrowANotFoundException() =>

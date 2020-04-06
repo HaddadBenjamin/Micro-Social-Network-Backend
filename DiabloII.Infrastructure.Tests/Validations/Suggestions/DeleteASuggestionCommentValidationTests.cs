@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Exceptions;
-using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Validations.Suggestions.DeleteAComment;
@@ -30,7 +29,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             {
                 Id = Guid.NewGuid(),
                 SuggestionId = Guid.NewGuid(),
-                UserId = "213.91.163.4"
+                UserId = "any value"
             };
 
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
@@ -41,7 +40,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenIpIsNull_ShouldThrowABadRequestException()
+        public void WhenUserIdIsNull_ShouldThrowABadRequestException()
         {
             _validationContext.Command.UserId = null;
 
@@ -49,17 +48,9 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenIpIsEmpty_ShouldThrowABadRequestException()
+        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException()
         {
             _validationContext.Command.UserId = string.Empty;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
-
-        [Test]
-        public void WhenIpIsNotAnIpV4_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.UserId = "213.91.163.4444";
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
@@ -94,7 +85,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             var newComment = new SuggestionComment
             {
                 Id = comment.Id,
-                CreatedBy = "213.91.163.1"
+                CreatedBy = "other user id"
             };
 
             _repository.RemoveComment(suggestion.Id, comment.Id, comment.CreatedBy);
