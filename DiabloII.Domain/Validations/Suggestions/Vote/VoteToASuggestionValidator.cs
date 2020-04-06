@@ -7,7 +7,9 @@ namespace DiabloII.Domain.Validations.Suggestions.Vote
         public VoteToASuggestionValidator()
         {
             RuleFor(context => context.Command.UserId).ShouldNotBeNullOrEmpty("UserId");
-            RuleFor(context => context.RepositoryValidationContext).SuggestionShouldExists();
+            RuleFor(context => context.RepositoryValidationContext)
+                .SuggestionShouldExists()
+                .ShouldNotBeOwnerOfTheSuggestion();
         }
     }
 }

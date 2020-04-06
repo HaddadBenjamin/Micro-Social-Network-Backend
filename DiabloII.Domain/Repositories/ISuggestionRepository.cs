@@ -19,11 +19,11 @@ namespace DiabloII.Domain.Repositories
 
         bool DoesSuggestionExists(Guid suggestionId);
 
-        bool DoesSuggestionExists(Guid suggestionId, string userId);
+        bool IsOwnerOfTheSuggestion(Guid suggestionId, string userId);
 
         bool DoesCommentExists(Guid commentId);
 
-        bool DoesUserCommentExists(Guid suggestionId, Guid commentId, string userId);
+        bool IsOwnerOfTheComment(Guid suggestionId, Guid commentId, string userId);
 
         bool DoesSuggestionContentIsUnique(string suggestionContent);
         #endregion
@@ -33,11 +33,11 @@ namespace DiabloII.Domain.Repositories
 
         Suggestion AddComment(Guid suggestionId, SuggestionComment suggestionComment);
 
-        void RemoveSuggestion(Guid suggestionId, string userId);
+        void RemoveUserSuggestion(Guid suggestionId, string userId);
 
         void RemoveVote(Suggestion suggestion, SuggestionVote suggestionVote);
 
-        Suggestion RemoveComment(Guid suggestionId, Guid commentId, string userId);
+        Suggestion RemoveUserComment(Guid suggestionId, Guid commentId, string userId);
 
         void RemoveComment(Suggestion suggestion, SuggestionComment suggestionComment);
         #endregion

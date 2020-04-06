@@ -12,7 +12,7 @@ namespace DiabloII.Domain.Validations.Suggestions.DeleteAComment
                 .SuggestionShouldExists()
                 .SuggestionCommentShouldExists();
           
-            RuleFor(context => context).SuggestionAndCommentShouldExistsAndBeRelatedToTheUserIp();
+            RuleFor(context => context).ShouldBeOwnerOfTheSuggestionAndTheComment();
         }
     }
 }

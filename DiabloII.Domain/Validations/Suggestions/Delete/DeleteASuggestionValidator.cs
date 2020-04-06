@@ -10,7 +10,7 @@ namespace DiabloII.Domain.Validations.Suggestions.Delete
             
             RuleFor(context => context.RepositoryValidationContext)
                 .SuggestionShouldExists()
-                .SuggestionShouldBeRelatedToTheUserIp();
+                .ShouldBeOwnerOfTheSuggestion();
         }
     }
 }

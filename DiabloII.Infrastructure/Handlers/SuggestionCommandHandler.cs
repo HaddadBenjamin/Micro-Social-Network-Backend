@@ -104,7 +104,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             _deleteASuggestionValidator.Validate(validationContext);
 
-            _repository.RemoveSuggestion(deleteASuggestion.Id, deleteASuggestion.UserId);
+            _repository.RemoveUserSuggestion(deleteASuggestion.Id, deleteASuggestion.UserId);
             _dbContext.SaveChanges();
 
             return deleteASuggestion.Id;
@@ -116,7 +116,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             _deleteASuggestionCommentValidator.Validate(validationContext);
 
-            var suggestion = _repository.RemoveComment(deleteASuggestionComment.SuggestionId, deleteASuggestionComment.Id, deleteASuggestionComment.UserId);
+            var suggestion = _repository.RemoveUserComment(deleteASuggestionComment.SuggestionId, deleteASuggestionComment.Id, deleteASuggestionComment.UserId);
 
             _dbContext.SaveChanges();
 

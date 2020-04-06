@@ -13,6 +13,7 @@ namespace DiabloII.Domain.Validations.Suggestions.Vote
         {
             Command = command;
             RepositoryValidationContext = new CommonSuggestionRepositoryValidationContext(repository, Command.SuggestionId);
+            RepositoryValidationContext.UserId = command.UserId;
         }
     }
 }

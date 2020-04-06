@@ -19,6 +19,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         private VoteToASuggestionValidator _validator;
         private VoteToASuggestionValidationContext _validationContext;
         private ISuggestionRepository _repository;
+        private static readonly string _suggestionUserId = "any user id";
 
         [SetUp]
         public void Setup()
@@ -58,17 +59,33 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             Should.Throw<NotFoundException>(() => _validator.Validate(_validationContext));
 
         [Test]
+        public void WhenUserIsOwnerOfTheSuggestion_ShouldThrowAUnauthorizedException()
+        {
+            _validationContext.RepositoryValidationContext.UserId = _suggestionUserId;
+
+            AddTheSuggestion();
+
+            Should.Throw<UnauthorizedException>(() => _validator.Validate(_validationContext));
+        }
+
+        [Test]
         public void WhenCommandIsValid_ShouldSuccess()
+        {
+            AddTheSuggestion();
+
+            Should.NotThrow(() => _validator.Validate(_validationContext));
+        }
+
+        private void AddTheSuggestion()
         {
             var suggestion = new Suggestion
             {
-                Id = _validationContext.Command.SuggestionId
+                Id = _validationContext.Command.SuggestionId,
+                CreatedBy = _suggestionUserId
             };
 
             _dbContext.Suggestions.Add(suggestion);
             _dbContext.SaveChanges();
-
-            Should.NotThrow(() => _validator.Validate(_validationContext));
         }
     }
 }
