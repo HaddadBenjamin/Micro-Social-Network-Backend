@@ -25,7 +25,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         {
             var validCommand = new VoteToASuggestionCommand
             {
-                Ip = "213.91.163.4",
+                UserId = "any value",
                 IsPositive = true,
                 SuggestionId = Guid.NewGuid()
             };
@@ -38,25 +38,17 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenIpIsNull_ShouldThrowABadRequestException()
+        public void WhenUserIdIsNull_ShouldThrowABadRequestException()
         {
-            _validationContext.Command.Ip = null;
+            _validationContext.Command.UserId = null;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
-        public void WhenIpIsEmpty_ShouldThrowABadRequestException()
+        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException()
         {
-            _validationContext.Command.Ip = string.Empty;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
-
-        [Test]
-        public void WhenIpIsNotAnIpV4_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Ip = "213.91.163.4444";
+            _validationContext.Command.UserId = string.Empty;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }

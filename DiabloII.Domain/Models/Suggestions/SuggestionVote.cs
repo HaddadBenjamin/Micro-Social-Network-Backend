@@ -12,6 +12,6 @@ namespace DiabloII.Domain.Models.Suggestions
 
         public bool IsPositive { get; set; }
 
-        public string Ip { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

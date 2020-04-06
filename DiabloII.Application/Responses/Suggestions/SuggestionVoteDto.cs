@@ -2,7 +2,7 @@
 {
     public class SuggestionVoteDto
     {
-        public string Ip { get; set; }
+        public string CreatedBy { get; set; }
 
         public bool IsPositive { get; set; }
     }

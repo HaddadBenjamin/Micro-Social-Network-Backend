@@ -6,8 +6,8 @@ namespace DiabloII.Domain.Validations.Suggestions.Vote
     {
         public VoteToASuggestionValidator()
         {
-            RuleFor(context => context.Command.Ip).ShouldBeAValidIp();
-            RuleFor(context => context.DbContextValidationContext).SuggestionShouldExists();
+            RuleFor(context => context.Command.UserId).ShouldNotBeNullOrEmpty("UserId");
+            RuleFor(context => context.RepositoryValidationContext).SuggestionShouldExists();
         }
     }
 }

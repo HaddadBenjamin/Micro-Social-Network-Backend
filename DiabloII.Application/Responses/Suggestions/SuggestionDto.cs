@@ -9,7 +9,7 @@ namespace DiabloII.Application.Responses.Suggestions
         
         public string Content { get; set; }
 
-        public string Ip { get; set; }
+        public string CreatedBy { get; set; }
 
         public int PositiveVoteCount { get; set; }
        

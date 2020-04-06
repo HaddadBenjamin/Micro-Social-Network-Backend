@@ -9,14 +9,14 @@ namespace DiabloII.Domain.Validations.Suggestions.DeleteAComment
 
         public ISuggestionRepository Repository { get; }
 
-        public SuggestionDbContextValidationContext DbContextValidationContext { get; set; }
+        public CommonSuggestionRepositoryValidationContext RepositoryValidationContext { get; set; }
 
         public DeleteASuggestionCommentValidationContext(DeleteASuggestionCommentCommand command, ISuggestionRepository repository)
         {
             Command = command;
             Repository = repository;
-            DbContextValidationContext = new SuggestionDbContextValidationContext(repository, Command.SuggestionId);
-            DbContextValidationContext.CommentId = Command.Id;
+            RepositoryValidationContext = new CommonSuggestionRepositoryValidationContext(repository, Command.SuggestionId);
+            RepositoryValidationContext.CommentId = Command.Id;
         }
     }
 }

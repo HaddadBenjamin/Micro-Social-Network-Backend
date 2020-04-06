@@ -7,12 +7,12 @@ namespace DiabloII.Domain.Validations.Suggestions.Comment
     {
         public CommentASuggestionCommand Command { get; set; }
 
-        public SuggestionDbContextValidationContext DbContextValidationContext { get; }
+        public CommonSuggestionRepositoryValidationContext RepositoryValidationContext { get; }
 
         public CommentASuggestionValidationContext(CommentASuggestionCommand command, ISuggestionRepository repository)
         {
             Command = command;
-            DbContextValidationContext = new SuggestionDbContextValidationContext(repository, Command.SuggestionId);
+            RepositoryValidationContext = new CommonSuggestionRepositoryValidationContext(repository, Command.SuggestionId);
         }
     }
 }

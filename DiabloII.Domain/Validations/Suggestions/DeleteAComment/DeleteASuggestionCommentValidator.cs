@@ -6,10 +6,12 @@ namespace DiabloII.Domain.Validations.Suggestions.DeleteAComment
     {
         public DeleteASuggestionCommentValidator()
         {
-            RuleFor(context => context.Command.Ip).ShouldBeAValidIp();
-            RuleFor(context => context.DbContextValidationContext)
+            RuleFor(context => context.Command.UserId).ShouldNotBeNullOrEmpty("UserId");
+            
+            RuleFor(context => context.RepositoryValidationContext)
                 .SuggestionShouldExists()
                 .SuggestionCommentShouldExists();
+          
             RuleFor(context => context).SuggestionAndCommentShouldExistsAndBeRelatedToTheUserIp();
         }
     }

@@ -5,8 +5,6 @@ namespace DiabloII.Infrastructure.DbContext.Mappers.Suggestions
 {
     public static class SuggestionCommentDbMapper
     {
-        private static readonly int Ipv4Length = 15;
-
         public static void Map(ModelBuilder modelBuilder)
         {
             var suggestionVoteBuilder = modelBuilder.Entity<SuggestionComment>();
@@ -24,9 +22,8 @@ namespace DiabloII.Infrastructure.DbContext.Mappers.Suggestions
             suggestionVoteBuilder.Ignore(suggestionComment => suggestionComment.Suggestion);
 
             suggestionVoteBuilder
-                .Property(suggestionComment => suggestionComment.Ip)
-                .IsRequired()
-                .HasMaxLength(Ipv4Length);
+                .Property(suggestionComment => suggestionComment.CreatedBy)
+                .IsRequired();
 
             suggestionVoteBuilder.Property(suggestionComment => suggestionComment.Comment)
                 .IsRequired();

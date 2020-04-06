@@ -26,8 +26,8 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             var validCommand = new CommentASuggestionCommand
             {
                 SuggestionId = Guid.NewGuid(),
-                Ip = "213.91.163.4",
-                Comment = "any comment"
+                UserId = "valid user id",
+                Comment = "any value"
             };
 
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
@@ -62,28 +62,21 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
         }
 
         [Test]
-        public void WhenIpIsNull_ShouldThrowABadRequestException()
+        public void WhenUserIdIsNull_ShouldThrowABadRequestException()
         {
-            _validationContext.Command.Ip = null;
+            _validationContext.Command.UserId = null;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
-        public void WhenIpIsEmpty_ShouldThrowABadRequestException()
+        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException()
         {
-            _validationContext.Command.Ip = string.Empty;
+            _validationContext.Command.UserId = string.Empty;
 
             Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
         }
 
-        [Test]
-        public void WhenIpIsNotAnIpV4_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Ip = "213.91.163.4444";
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
 
         [Test]
         public void WhenSuggestionDoesNotExists_ShouldThrowANotFoundException() =>
@@ -102,7 +95,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             var suggestion = new Suggestion
             {
                 Id = _validationContext.Command.SuggestionId,
-                Ip = _validationContext.Command.Ip
+                CreatedBy = _validationContext.RepositoryValidationContext.UserId
             };
 
             _dbContext.Suggestions.Add(suggestion);

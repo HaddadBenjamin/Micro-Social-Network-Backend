@@ -11,19 +11,19 @@ namespace DiabloII.Domain.Repositories
 
         Suggestion GetFirstSuggestion(Guid suggestionId);
 
-        Suggestion GetUserSuggestion(Guid suggestionId, string userIp);
+        Suggestion GetUserSuggestion(Guid suggestionId, string userId);
 
-        SuggestionVote GetUserVoteOrDefault(Suggestion suggestion, string userIp);
+        SuggestionVote GetUserVoteOrDefault(Suggestion suggestion, string userId);
 
-        SuggestionComment GetUserComment(Suggestion suggestion, Guid commentId, string userIp);
+        SuggestionComment GetUserComment(Suggestion suggestion, Guid commentId, string userId);
 
         bool DoesSuggestionExists(Guid suggestionId);
 
-        bool DoesSuggestionExists(Guid suggestionId, string userIp);
+        bool DoesSuggestionExists(Guid suggestionId, string userId);
 
         bool DoesCommentExists(Guid commentId);
 
-        bool DoesUserCommentExists(Guid suggestionId, Guid commentId, string userIp);
+        bool DoesUserCommentExists(Guid suggestionId, Guid commentId, string userId);
 
         bool DoesSuggestionContentIsUnique(string suggestionContent);
         #endregion
@@ -33,11 +33,11 @@ namespace DiabloII.Domain.Repositories
 
         Suggestion AddComment(Guid suggestionId, SuggestionComment suggestionComment);
 
-        void RemoveSuggestion(Guid suggestionId, string userIp);
+        void RemoveSuggestion(Guid suggestionId, string userId);
 
         void RemoveVote(Suggestion suggestion, SuggestionVote suggestionVote);
 
-        Suggestion RemoveComment(Guid suggestionId, Guid commentId, string userIp);
+        Suggestion RemoveComment(Guid suggestionId, Guid commentId, string userId);
 
         void RemoveComment(Suggestion suggestion, SuggestionComment suggestionComment);
         #endregion

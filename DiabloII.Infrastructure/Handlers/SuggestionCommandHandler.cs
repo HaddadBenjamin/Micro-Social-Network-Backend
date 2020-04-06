@@ -67,7 +67,7 @@ namespace DiabloII.Infrastructure.Handlers
             _voteToASuggestionValidator.Validate(validationContext);
 
             var suggestion = _repository.GetFirstSuggestion(voteToASuggestionCommand.SuggestionId);
-            var suggestionVote = _repository.GetUserVoteOrDefault(suggestion, voteToASuggestionCommand.Ip);
+            var suggestionVote = _repository.GetUserVoteOrDefault(suggestion, voteToASuggestionCommand.UserId);
             var suggestionVoteExists = suggestionVote != null;
 
             if (suggestionVoteExists)
@@ -104,7 +104,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             _deleteASuggestionValidator.Validate(validationContext);
 
-            _repository.RemoveSuggestion(deleteASuggestion.Id, deleteASuggestion.Ip);
+            _repository.RemoveSuggestion(deleteASuggestion.Id, deleteASuggestion.UserId);
             _dbContext.SaveChanges();
 
             return deleteASuggestion.Id;
@@ -116,7 +116,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             _deleteASuggestionCommentValidator.Validate(validationContext);
 
-            var suggestion = _repository.RemoveComment(deleteASuggestionComment.SuggestionId, deleteASuggestionComment.Id, deleteASuggestionComment.Ip);
+            var suggestion = _repository.RemoveComment(deleteASuggestionComment.SuggestionId, deleteASuggestionComment.Id, deleteASuggestionComment.UserId);
 
             _dbContext.SaveChanges();
 

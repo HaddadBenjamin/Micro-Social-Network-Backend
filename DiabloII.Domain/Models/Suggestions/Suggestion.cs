@@ -9,7 +9,7 @@ namespace DiabloII.Domain.Models.Suggestions
         
         public string Content { get; set; }
 
-        public string Ip { get; set; }
+        public string CreatedBy { get; set; }
 
         public virtual ICollection<SuggestionVote> Votes { get; set; } = new List<SuggestionVote>();
        

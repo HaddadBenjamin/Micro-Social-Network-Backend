@@ -25,29 +25,29 @@ namespace DiabloII.Infrastructure.Repositories
         public Suggestion GetFirstSuggestion(Guid suggestionId) =>
             GetQueryableSuggestions().First(vote => vote.Id == suggestionId);
 
-        public Suggestion GetUserSuggestion(Guid suggestionId, string userIp) =>
-            GetQueryableSuggestions().FirstOrDefault(suggestion => suggestion.Id == suggestionId && suggestion.Ip == userIp);
+        public Suggestion GetUserSuggestion(Guid suggestionId, string userId) =>
+            GetQueryableSuggestions().FirstOrDefault(suggestion => suggestion.Id == suggestionId && suggestion.CreatedBy == userId);
 
-        public SuggestionVote GetUserVoteOrDefault(Suggestion suggestion, string userIp) => suggestion
+        public SuggestionVote GetUserVoteOrDefault(Suggestion suggestion, string userId) => suggestion
             .Votes
-            .FirstOrDefault(vote => vote.Ip == userIp);
+            .FirstOrDefault(vote => vote.CreatedBy == userId);
 
-        public SuggestionComment GetUserComment(Suggestion suggestion, Guid commentId, string userIp) => suggestion
+        public SuggestionComment GetUserComment(Suggestion suggestion, Guid commentId, string userId) => suggestion
             .Comments
-            .First(comment => comment.Ip == userIp && comment.Id == commentId);
+            .First(comment => comment.CreatedBy == userId && comment.Id == commentId);
 
         public bool DoesSuggestionExists(Guid suggestionId) =>
             _dbContext.Suggestions.Any(suggestion => suggestion.Id == suggestionId);
        
-        public bool DoesSuggestionExists(Guid suggestionId, string userIp) =>
-            _dbContext.Suggestions.Any(suggestion => suggestion.Id == suggestionId && suggestion.Ip == userIp);
+        public bool DoesSuggestionExists(Guid suggestionId, string userId) =>
+            _dbContext.Suggestions.Any(suggestion => suggestion.Id == suggestionId && suggestion.CreatedBy == userId);
 
         public bool DoesCommentExists(Guid commentId) =>
             _dbContext.SuggestionComments.Any(comment => comment.Id == commentId);
 
-        public bool DoesUserCommentExists(Guid suggestionId, Guid commentId, string userIp) => _dbContext.Suggestions
+        public bool DoesUserCommentExists(Guid suggestionId, Guid commentId, string userId) => _dbContext.Suggestions
             .Any(suggestion => suggestion.Id == suggestionId &&
-                               suggestion.Comments.Any(comment => comment.Id == commentId && comment.Ip == userIp));
+                               suggestion.Comments.Any(comment => comment.Id == commentId && comment.CreatedBy == userId));
 
         public bool DoesSuggestionContentIsUnique(string suggestionContent) =>
             _dbContext.Suggestions.All(suggestion => suggestion.Content != suggestionContent);
@@ -70,9 +70,9 @@ namespace DiabloII.Infrastructure.Repositories
             return suggestion;
         }
 
-        public void RemoveSuggestion(Guid suggestionId, string userIp)
+        public void RemoveSuggestion(Guid suggestionId, string userId)
         {
-            var userSuggestion = GetUserSuggestion(suggestionId, userIp);
+            var userSuggestion = GetUserSuggestion(suggestionId, userId);
 
             _dbContext.Remove(userSuggestion);
         }
@@ -83,10 +83,10 @@ namespace DiabloII.Infrastructure.Repositories
             _dbContext.SuggestionVotes.Remove(suggestionVote);
         }
 
-        public Suggestion RemoveComment(Guid suggestionId, Guid commentId, string userIp)
+        public Suggestion RemoveComment(Guid suggestionId, Guid commentId, string userId)
         {
             var suggestion = GetFirstSuggestion(suggestionId);
-            var userComment = GetUserComment(suggestion, commentId, userIp);
+            var userComment = GetUserComment(suggestion, commentId, userId);
 
             RemoveComment(suggestion, userComment);
 
