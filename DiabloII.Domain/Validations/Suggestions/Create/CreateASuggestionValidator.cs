@@ -12,7 +12,7 @@ namespace DiabloII.Domain.Validations.Suggestions.Create
                 .ShouldNotBeNullOrEmpty("Content")
                 .ShouldBeShorterThan("Content");
            
-            RuleFor(context => context.DbContextValidationContext).SuggestionContentShouldBeUnique();
+            RuleFor(context => context.RepositoryValidationContext).SuggestionContentShouldBeUnique();
         }
     }
 }

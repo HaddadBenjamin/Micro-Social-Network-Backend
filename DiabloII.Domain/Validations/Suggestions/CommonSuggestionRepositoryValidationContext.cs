@@ -3,7 +3,7 @@ using DiabloII.Domain.Repositories;
 
 namespace DiabloII.Domain.Validations.Suggestions
 {
-    public class SuggestionDbContextValidationContext
+    public class CommonSuggestionRepositoryValidationContext
     {
         public ISuggestionRepository Repository { get; }
       
@@ -15,9 +15,9 @@ namespace DiabloII.Domain.Validations.Suggestions
 
         public string UserId { get; set; }
 
-        public SuggestionDbContextValidationContext(ISuggestionRepository repository) => Repository = repository;
+        public CommonSuggestionRepositoryValidationContext(ISuggestionRepository repository) => Repository = repository;
 
-        public SuggestionDbContextValidationContext(ISuggestionRepository repository, Guid id)
+        public CommonSuggestionRepositoryValidationContext(ISuggestionRepository repository, Guid id)
         {
             Id = id;
             Repository = repository;

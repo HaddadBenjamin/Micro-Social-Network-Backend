@@ -95,7 +95,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
             var suggestion = new Suggestion
             {
                 Id = _validationContext.Command.SuggestionId,
-                CreatedBy = _validationContext.DbContextValidationContext.UserId
+                CreatedBy = _validationContext.RepositoryValidationContext.UserId
             };
 
             _dbContext.Suggestions.Add(suggestion);

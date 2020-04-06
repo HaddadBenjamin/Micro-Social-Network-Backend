@@ -12,7 +12,7 @@ namespace DiabloII.Domain.Validations.Suggestions.Comment
                 .ShouldNotBeNullOrEmpty("Comment")
                 .ShouldBeShorterThan("Comment");
            
-            RuleFor(context => context.DbContextValidationContext).SuggestionShouldExists();
+            RuleFor(context => context.RepositoryValidationContext).SuggestionShouldExists();
         }
     }
 }

@@ -7,12 +7,12 @@ namespace DiabloII.Domain.Validations.Suggestions.Delete
     {
         public DeleteASuggestionCommand Command { get; set; }
 
-        public SuggestionDbContextValidationContext DbContextValidationContext { get; set; }
+        public CommonSuggestionRepositoryValidationContext RepositoryValidationContext { get; set; }
 
         public DeleteASuggestionValidationContext(DeleteASuggestionCommand command, ISuggestionRepository repository)
         {
             Command = command;
-            DbContextValidationContext = new SuggestionDbContextValidationContext(repository, Command.Id)
+            RepositoryValidationContext = new CommonSuggestionRepositoryValidationContext(repository, Command.Id)
             {
                 UserId = Command.UserId
             };

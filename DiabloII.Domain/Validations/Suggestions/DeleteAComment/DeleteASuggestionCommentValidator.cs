@@ -8,7 +8,7 @@ namespace DiabloII.Domain.Validations.Suggestions.DeleteAComment
         {
             RuleFor(context => context.Command.UserId).ShouldNotBeNullOrEmpty("UserId");
             
-            RuleFor(context => context.DbContextValidationContext)
+            RuleFor(context => context.RepositoryValidationContext)
                 .SuggestionShouldExists()
                 .SuggestionCommentShouldExists();
           
