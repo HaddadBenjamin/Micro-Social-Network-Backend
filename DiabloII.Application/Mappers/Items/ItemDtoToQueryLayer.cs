@@ -12,7 +12,7 @@ namespace DiabloII.Application.Mappers.Items
             CreateMap<SearchUniquesDto, SearchUniquesQuery>()
                 .AfterMap((dto, query) =>
                 {
-                    query.SubCategories = dto.SubCategories?.Split(", ")
+                    query.SubCategories = dto.SubCategories?.Split(",")
                         .Select(_ => _
                             .Replace("Two_Handed_Sword", "Two-Handed Sword")
                             .Replace("Wirt_s_Leg", "Wirt's Leg")

@@ -13,7 +13,6 @@ namespace DiabloII.Items.Generator
                 GenerationEnvironment.Development,
             };
             ItemsGenerator.Generate(generationEnvironments);
-
             Console.WriteLine("Item generation is done");
         }
     }
