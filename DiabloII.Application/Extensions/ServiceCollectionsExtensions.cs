@@ -53,21 +53,26 @@ namespace DiabloII.Application.Extensions
             return services;
         }
 
-        public static void RegisterMyDependencies(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection RegisterTheDbContextDependency(this IServiceCollection services, IConfiguration configuration)
         {
-            var assemblyTypes = new[] {Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType};
-            var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
             var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
 
-            services
+            return services
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder =>
                     optionsBuilder.UseSqlServer(connectionString,
                         sqlServerOptions =>
                         {
                             sqlServerOptions.MigrationsAssembly("DiabloII.Application");
                             sqlServerOptions.EnableRetryOnFailure();
-                        }))
-                .Scan(scan =>
+                        }));
+        }
+
+        public static IServiceCollection RegisterTheApplicationDependencies(this IServiceCollection services)
+        {
+            var assemblyTypes = new[] {Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType};
+            var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
+ 
+            return services.Scan(scan =>
                 {
                     scan.FromAssemblies(assemblies)
                         .AddClasses()

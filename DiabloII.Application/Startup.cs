@@ -26,7 +26,7 @@ namespace DiabloII.Application
             .AddMyMvc()
             .AddCors()
             .AddRouting(options => options.LowercaseUrls = true)
-            .RegisterDbContDbContextDependency(_configuration)
+            .RegisterTheDbContextDependency(_configuration)
             .RegisterTheApplicationDependencies();
 
         public void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment environment) => applicationBuilder

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiabloII.Application.Tests
+namespace DiabloII.Application.Tests.Extensions
 {
     public static class ServiceCollectionExtensions
     {
