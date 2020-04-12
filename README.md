@@ -1,6 +1,6 @@
 # Diablo II - Items Documentation - API
 
-Cette applications offre deux services :
+Cette application offre deux services :
 - Pouvoir rechercher une liste d’objets pour le jeu Diablo II avec des filtres.
 - Pouvoir créer des suggestions, de les commenter et d'y voter afin que nos utilisateurs puissent prendre une place stratégique dans le développement de nos produits.
 
