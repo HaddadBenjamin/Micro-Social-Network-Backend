@@ -1,11 +1,10 @@
 # Diablo II - Items Documentation - API
 
+Lien pour tester avec l'application sur PC ou mobile : https://diablo-2-enriched-documentation.netlify.com/
+
 Cette application offre deux services :
 - Pouvoir rechercher une liste d’objets pour le jeu Diablo II avec des filtres.
 - Pouvoir créer des suggestions, de les commenter et d'y voter afin que nos utilisateurs puissent prendre une place stratégique dans le développement de nos produits.
-
-
-Vous pouvez tester l'application si vous le souhaitez https://diablo-2-enriched-documentation.netlify.com/
 
 ![Image of Yaktocat](https://imgur.com/NE1abk7.png)
 ![Image of Yaktocat](https://imgur.com/YcfceVE.png)
@@ -18,3 +17,10 @@ Vous pouvez tester l'application si vous le souhaitez https://diablo-2-enriched-
 ![Image of Yaktocat](https://imgur.com/V6KM3Gq.png)
 ![Image of Yaktocat](https://imgur.com/eAGkKb1.png)
 ![Image of Yaktocat](https://imgur.com/Q7zQnzJ.png)
+
+Contexte technologique :
+• Clean code : TDD, BDD, DDD, RESTFUL, SOLID, architecture héxagonal.
+• Technologies : .NET Core 3.1, C#8, Entity Framework Core, Swagger.
+• Tests : NUnit, Shoudly, Moq, Specflow.
+• Azure : Azure Key Vault, Azure Sql Server, Azure Web App.
+• Librairies : Fluent Validation, Demistify, AutoMapper, Scrutor, Bulk Extensions.
