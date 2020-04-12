@@ -24,16 +24,26 @@ namespace DiabloII.Application.Controllers
 
         [Route("items")]
         [HttpGet]
-        public IReadOnlyCollection<ItemDto> GetAllUniques() => _reader
-            .GetAllUniques()
-            .Select(_mapper.Map<ItemDto>)
-            .ToList();
+        public ActionResult<IReadOnlyCollection<ItemDto>> GetAllUniques()
+        {
+            var responseDto = _reader
+                .GetAllUniques()
+                .Select(_mapper.Map<ItemDto>)
+                .ToList();
+
+            return Ok(responseDto);
+        }
 
         [Route("items/search")]
         [HttpGet]
-        public IReadOnlyCollection<ItemDto> SearchUniques(SearchUniquesDto searchDto) => _reader
-            .SearchUniques(_mapper.Map<SearchUniquesQuery>(searchDto))
-            .Select(_mapper.Map<ItemDto>)
-            .ToList();
+        public ActionResult<IReadOnlyCollection<ItemDto>> SearchUniques(SearchUniquesDto searchDto)
+        {
+            var responseDto = _reader
+                .SearchUniques(_mapper.Map<SearchUniquesQuery>(searchDto))
+                .Select(_mapper.Map<ItemDto>)
+                .ToList();
+
+            return Ok(responseDto);
+        }
     }
 }

@@ -22,9 +22,14 @@ namespace DiabloII.Application.Controllers
 
         [Route("errorlogs")]
         [HttpGet]
-        public IReadOnlyCollection<ErrorLogDto> GetAll() => _reader
-            .GetAll()
-            .Select(_mapper.Map<ErrorLogDto>)
-            .ToList();
+        public ActionResult<IReadOnlyCollection<ErrorLogDto>> GetAll()
+        {
+            var responseDto = _reader
+                .GetAll()
+                .Select(_mapper.Map<ErrorLogDto>)
+                .ToList();
+
+            return Ok(responseDto);
+        }
     }
 }
