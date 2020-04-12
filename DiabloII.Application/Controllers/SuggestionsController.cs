@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 
 namespace DiabloII.Application.Controllers
 {
@@ -26,8 +27,12 @@ namespace DiabloII.Application.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all the suggestions
+        /// </summary>
         [Route("suggestions")]
         [HttpGet]
+        [ProducesResponseType(typeof(IReadOnlyCollection<SuggestionDto>), StatusCodes.Status200OK)]
         public ActionResult<IReadOnlyCollection<SuggestionDto>> GetAll()
         {
             var responseDto = _reader
@@ -38,8 +43,13 @@ namespace DiabloII.Application.Controllers
             return Ok(responseDto);
         }
 
+        /// <summary>
+        /// Create a suggestion
+        /// </summary>
         [Route("suggestions")]
         [HttpPost]
+        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public ActionResult<SuggestionDto> Create([FromBody] CreateASuggestionDto createASuggestion)
         {
             var command = _mapper.Map<CreateASuggestionCommand>(createASuggestion);
@@ -49,8 +59,15 @@ namespace DiabloII.Application.Controllers
             return this.CreatedByUsingTheRequestRoute(responseDto);
         }
 
+        /// <summary>
+        /// Vote to a suggestion
+        /// </summary>
         [Route("suggestions/{suggestionId:guid}/votes")]
         [HttpPost]
+        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<SuggestionDto> Vote([FromBody] VoteToASuggestionDto voteToASuggestion, Guid suggestionId)
         {
             voteToASuggestion.SuggestionId = suggestionId;
@@ -62,8 +79,15 @@ namespace DiabloII.Application.Controllers
             return this.CreatedByUsingTheRequestRoute(responseDto);
         }
 
+        /// <summary>
+        /// Comment a suggestion
+        /// </summary>
         [Route("suggestions/{suggestionId:guid}/comments")]
         [HttpPost]
+        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<SuggestionDto> Comment([FromBody] CommentASuggestionDto commentASuggestion, Guid suggestionId)
         {
             commentASuggestion.SuggestionId = suggestionId;
@@ -75,8 +99,15 @@ namespace DiabloII.Application.Controllers
             return this.CreatedByUsingTheRequestRoute(responseDto);
         }
 
+        /// <summary>
+        /// Delete a suggestion
+        /// </summary>
         [Route("suggestions/{suggestionId:guid}")]
         [HttpDelete]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Guid> Delete([FromBody] DeleteASuggestionDto deleteASuggestion, Guid suggestionId)
         {
             deleteASuggestion.Id = suggestionId;
@@ -87,8 +118,15 @@ namespace DiabloII.Application.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Delete a comment from a suggestion
+        /// </summary>
         [Route("suggestions/{suggestionId:guid}/comments/{commentId:guid}")]
         [HttpDelete]
+        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<SuggestionDto> DeleteComment([FromBody] DeleteASuggestionCommentDto deleteASuggestionComment, Guid suggestionId, Guid commentId)
         {
             deleteASuggestionComment.SuggestionId = suggestionId;

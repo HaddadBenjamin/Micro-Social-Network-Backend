@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using DiabloII.Application.Responses.ErrorLogs;
 using DiabloII.Domain.Readers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Application.Controllers
@@ -20,6 +21,10 @@ namespace DiabloII.Application.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all the error logs.
+        /// </summary>
+        [ProducesResponseType(typeof(IReadOnlyCollection<ErrorLogDto>), StatusCodes.Status200OK)]
         [Route("errorlogs")]
         [HttpGet]
         public ActionResult<IReadOnlyCollection<ErrorLogDto>> GetAll()
