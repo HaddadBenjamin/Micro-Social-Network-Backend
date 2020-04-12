@@ -19,8 +19,8 @@ Cette application offre deux services :
 ![Image of Yaktocat](https://imgur.com/Q7zQnzJ.png)
 
 Contexte technologique :
-• Clean code : TDD, BDD, DDD, RESTFUL, SOLID, architecture héxagonal.
-• Technologies : .NET Core 3.1, C#8, Entity Framework Core, Swagger.
-• Tests : NUnit, Shoudly, Moq, Specflow.
-• Azure : Azure Key Vault, Azure Sql Server, Azure Web App.
-• Librairies : Fluent Validation, Demistify, AutoMapper, Scrutor, Bulk Extensions.
+- Clean code : TDD, BDD, DDD, RESTFUL, SOLID, architecture héxagonal.
+- Technologies : .NET Core 3.1, C#8, Entity Framework Core, Swagger.
+- Tests : NUnit, Shoudly, Moq, Specflow.
+- Azure : Azure Key Vault, Azure Sql Server, Azure Web App.
+- Librairies : Fluent Validation, Demistify, AutoMapper, Scrutor, Bulk Extensions.
