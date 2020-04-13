@@ -13,6 +13,17 @@ namespace DiabloII.Application.Tests.Startup
 
         public MyHttpClient(HttpClient httpClient) => _flurlClient = new FlurlClient(httpClient);
 
+        public async Task<TResponse> GetAsync<TResponse>(string endpoint)
+        {
+            var flurlResponse = await _flurlClient
+                .Request(endpoint)
+                .GetAsync();
+
+            StatusCode = flurlResponse.StatusCode;
+
+            return await flurlResponse.GetJsonAsync<TResponse>();
+        }
+
         public async Task<TResponse> PostAsync<TResponse>(string endpoint, object dto)
         {
             var flurlResponse = await _flurlClient

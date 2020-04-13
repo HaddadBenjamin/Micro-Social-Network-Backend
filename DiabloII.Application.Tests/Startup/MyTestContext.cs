@@ -9,15 +9,21 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DiabloII.Application.Tests.Startup
 {
-    public sealed class TestContext : IDisposable
+    public sealed class MyTestContext : IDisposable
     {
-        public MyHttpClient HttpClient;
-        private TestServer _server;
+        public static MyHttpClient HttpClient;
 
-        private static TestContext instance = null;
+        private static MyTestContext instance = null;
+
         private static readonly object padlock = new object();
 
-        public TestContext()
+        public MyApis Apis { get; private set; }
+
+        public MyTestsContexts Contexts { get; private set; }
+
+        private TestServer _server;
+
+        public MyTestContext()
         {
             var webHostBuilder = new WebHostBuilder()
                 .ConfigureServices(InitializeServices)
@@ -47,7 +53,7 @@ namespace DiabloII.Application.Tests.Startup
             services.AddSingleton(manager);
         }
 
-        public static TestContext Instance
+        public static MyTestContext Instance
         {
             get
             {
@@ -56,7 +62,11 @@ namespace DiabloII.Application.Tests.Startup
                     lock (padlock)
                     {
                         if (instance == null)
-                            instance = new TestContext();
+                            instance = new MyTestContext
+                            {
+                                Apis = new MyApis(HttpClient),
+                                Contexts = new MyTestsContexts()
+                            };
                     }
                 }
 

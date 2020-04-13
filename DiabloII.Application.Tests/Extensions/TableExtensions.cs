@@ -11,10 +11,50 @@ namespace DiabloII.Application.Tests.Extensions
 {
     public static class TableExtensions
     {
-        public static void ShouldBeEquals<TCompareType>(this Table expectedTable, TCompareType actual, bool ignoreNotSpecifiedMembers = true)
+        public static void ShouldBeEqualsTo<TCompareType>(this Table expectedTable, TCompareType actual, bool ignoreNotSpecifiedMembers = true)
         {
             var compareLogic = CreateTheCompareLogic<TCompareType>(expectedTable, ignoreNotSpecifiedMembers);
-            var differences = GetTheDifferences(expectedTable, actual, compareLogic);
+            var expected = expectedTable.CreateInstance<TCompareType>();
+            var differences = GetTheDifferences(expectedTable, actual, expected, compareLogic);
+
+            if (differences.Any())
+            {
+                var exceptionMessage = GetTheDifferencesMessage<TCompareType>(differences);
+
+                throw new NotEqualsException(exceptionMessage);
+            }
+        }
+
+        public static void ShouldAllExistsIn<TCompareType>(this Table expectedTable, IReadOnlyCollection<TCompareType> actuals, bool ignoreNotSpecifiedMembers = true)
+        {
+            var compareLogic = CreateTheCompareLogic<TCompareType>(expectedTable, ignoreNotSpecifiedMembers);
+            var allExpected = expectedTable.CreateSet<TCompareType>();
+
+            var differences = allExpected
+                .SelectMany(expected => actuals
+                    .Select(actual => GetTheDifferences(expectedTable, actual, expected, compareLogic))
+                    .OrderBy(actual => actual.Count())
+                    .FirstOrDefault()
+                    .ToList())
+                .ToList();
+
+            if (differences.Any())
+            {
+                var exceptionMessage = GetTheDifferencesMessage<TCompareType>(differences);
+
+                throw new NotEqualsException(exceptionMessage);
+            }
+        }
+
+        public static void ShouldExistsIn<TCompareType>(this Table expectedTable, IReadOnlyCollection<TCompareType> actuals, bool ignoreNotSpecifiedMembers = true)
+        {
+            var compareLogic = CreateTheCompareLogic<TCompareType>(expectedTable, ignoreNotSpecifiedMembers);
+            var expected = expectedTable.CreateInstance<TCompareType>();
+            var differences = actuals
+                .Select(actual => GetTheDifferences(expectedTable, actual, expected, compareLogic))
+                .OrderBy(actual => actual.Count())
+                .FirstOrDefault()
+                .ToList();
 
             if (differences.Any())
             {
@@ -35,19 +75,19 @@ namespace DiabloII.Application.Tests.Extensions
                 .Except(tableHeaders)
                 .ToList();
             
-            return new CompareLogic()
+            return new CompareLogic
             {
                 Config = new ComparisonConfig
                 {
                     IgnoreCollectionOrder = true,
+                    MaxDifferences =  int.MaxValue,
                     MembersToIgnore = ignoreNotSpecifiedMembers ? membersToIgnore : new List<string>()
                 }
             };
         }
 
-        private static IEnumerable<dynamic> GetTheDifferences<TCompareType>(Table expectedTable, TCompareType actual, CompareLogic compareLogic)
+        private static IEnumerable<dynamic> GetTheDifferences<TCompareType>(Table expectedTable, TCompareType actual, TCompareType expected, CompareLogic compareLogic)
         {
-            var expected = expectedTable.CreateInstance<TCompareType>();
             var compareResult = compareLogic.Compare(expected, actual);
             
             return compareResult.Differences.Select(difference =>
@@ -63,6 +103,6 @@ namespace DiabloII.Application.Tests.Extensions
         }
 
         private static string GetTheDifferencesMessage<TCompareType>(IEnumerable<dynamic> differences) =>
-            $"Type : {typeof(TCompareType)}{Environment.NewLine}Differences Count : {differences.Count()}{Environment.NewLine}Differences : {string.Join(Environment.NewLine, differences)}";
+            $"{Environment.NewLine}Type : {typeof(TCompareType)}{Environment.NewLine}Differences Count : {differences.Count()}{Environment.NewLine}Differences : {string.Join(Environment.NewLine, differences)}";
     }
 }

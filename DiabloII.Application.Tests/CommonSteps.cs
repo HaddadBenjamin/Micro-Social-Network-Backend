@@ -9,6 +9,6 @@ namespace DiabloII.Application.Tests
     {
         [Then(@"the http status code should be (.*)")]
         public void ThenTheHttpStatusCodeShouldBe(int statusCode) =>
-            TestContext.Instance.HttpClient.StatusCode.ShouldBe(statusCode);
+            MyTestContext.HttpClient.StatusCode.ShouldBe(statusCode);
     }
 }

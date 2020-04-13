@@ -3,7 +3,7 @@
 	As a user
 	I want to call the suggestions API
 
-@suggestion, @common
+@suggestion
 Scenario: Create a suggestion happy path
 	When I create a suggestion with the following informations
 	| Content                   | UserId      |

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Tests.Extensions;
+using DiabloII.Application.Tests.Startup;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -11,19 +11,21 @@ namespace DiabloII.Application.Tests.Suggestions.Create
     [Scope(Tag = "suggestion")]
     public class CreateASuggestionSteps
     {
-        private readonly SuggestionApi _suggestionApi = new SuggestionApi();
-        private readonly SuggestionTestContext _suggestionContext = new SuggestionTestContext();
+        private readonly SuggestionApi _suggestionApi = MyTestContext.Instance.Apis.Suggestions;
+        private readonly SuggestionTestContext _suggestionContext = MyTestContext.Instance.Contexts.Suggestions;
 
+        [Given(@"I create a suggestion with the following informations")]
         [When(@"I create a suggestion with the following informations")]
         public async Task WhenICreateASuggestionWithTheFollowingInformations(Table table)
         {
-            var dto = table.CreateInstance<CreateASuggestionDto>();
+            var dtos = table.CreateSet<CreateASuggestionDto>();
 
-            _suggestionContext.CreatedSuggestion = await _suggestionApi.Create(dto);
+            foreach(var dto in dtos)
+                _suggestionContext.CreatedSuggestion = await _suggestionApi.Create(dto);
         }
 
         [Then(@"the created suggestion should be")]
         public void ThenTheCreatedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEquals<SuggestionDto>(_suggestionContext.CreatedSuggestion);
+            table.ShouldBeEqualsTo(_suggestionContext.CreatedSuggestion);
     }
 }
