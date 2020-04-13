@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
-using Shouldly;
+using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -23,11 +23,7 @@ namespace DiabloII.Application.Tests.Suggestions.Create
         }
 
         [Then(@"the created suggestion should be")]
-        public void ThenTheCreatedSuggestionShouldBe(Table table)
-        {
-            var expectedCreatedSuggestion = table.CreateInstance<SuggestionDto>();
-
-            _suggestionContext.CreatedSuggestion.ShouldBe(expectedCreatedSuggestion);
-        }
+        public void ThenTheCreatedSuggestionShouldBe(Table table) =>
+            table.ShouldBeEquals<SuggestionDto>(_suggestionContext.CreatedSuggestion);
     }
 }

@@ -5,7 +5,6 @@ using TechTalk.SpecFlow;
 namespace DiabloII.Application.Tests
 {
     [Binding]
-    [Scope(Tag = "common")]
     public class CommonSteps
     {
         [Then(@"the http status code should be (.*)")]
