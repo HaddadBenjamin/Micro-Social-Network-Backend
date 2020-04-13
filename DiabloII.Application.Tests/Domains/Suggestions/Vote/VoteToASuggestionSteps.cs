@@ -12,26 +12,26 @@ namespace DiabloII.Application.Tests.Domains.Suggestions.Vote
     [Scope(Tag = "suggestion")]
     public class VoteToASuggestionSteps
     {
-        private readonly SuggestionApi _suggestionApi;
+        private readonly SuggestionsApi _suggestionsApi;
         private readonly SuggestionTestContext _suggestionContext;
 
         public VoteToASuggestionSteps(MyTestContext testContext, SuggestionTestContext suggestionContext)
         {
-            _suggestionApi = testContext.Apis.Suggestions;
+            _suggestionsApi = testContext.Apis.Suggestions;
             _suggestionContext = suggestionContext;
         }
 
         [When(@"I vote to the suggestion ""(.*)""")]
         public async Task WhenIVoteToTheSuggestion(string suggestionContent, Table table)
         {
-            var suggestionId = (await _suggestionApi.GetAll())
+            var suggestionId = (await _suggestionsApi.GetAll())
                 .Single(suggestion => suggestion.Content == suggestionContent)
                 .Id; 
             var dto = table.CreateInstance<VoteToASuggestionDto>();
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionContext.VotedSuggestion = await _suggestionApi.Vote(dto);
+            _suggestionContext.VotedSuggestion = await _suggestionsApi.Vote(dto);
         }
 
         [Then(@"the voted suggestion should be")]

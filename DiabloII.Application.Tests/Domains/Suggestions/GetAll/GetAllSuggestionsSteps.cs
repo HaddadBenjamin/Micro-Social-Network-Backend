@@ -9,18 +9,18 @@ namespace DiabloII.Application.Tests.Domains.Suggestions.GetAll
     [Scope(Tag = "suggestion")]
     public class GetAllSuggestionsSteps
     {
-        private readonly SuggestionApi _suggestionApi;
+        private readonly SuggestionsApi _suggestionsApi;
         private readonly SuggestionTestContext _suggestionContext;
 
         public GetAllSuggestionsSteps(MyTestContext testContext, SuggestionTestContext suggestionContext)
         {
-            _suggestionApi = testContext.Apis.Suggestions;
+            _suggestionsApi = testContext.Apis.Suggestions;
             _suggestionContext = suggestionContext;
         }
 
         [When(@"I get all the suggestions")]
         public async Task WhenIGetAllTheSuggestions() =>
-            _suggestionContext.AllSuggestions = await _suggestionApi.GetAll();
+            _suggestionContext.AllSuggestions = await _suggestionsApi.GetAll();
         
         [Then(@"all the suggestions should be")]
         public void WhenAllTheSuggestionsShouldBe(Table table) =>

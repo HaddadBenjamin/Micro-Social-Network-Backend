@@ -7,13 +7,13 @@ using DiabloII.Application.Tests.Startup;
 
 namespace DiabloII.Application.Tests.Domains.Suggestions
 {
-    public class SuggestionApi
+    public class SuggestionsApi
     {
         private readonly MyHttpClient _httpClient;
 
         private static readonly string BaseUrl = "suggestions";
 
-        public SuggestionApi(MyHttpClient httpClient) => _httpClient = httpClient;
+        public SuggestionsApi(MyHttpClient httpClient) => _httpClient = httpClient;
 
         public async Task<IReadOnlyCollection<SuggestionDto>> GetAll() =>
             await _httpClient.GetAsync<IReadOnlyCollection<SuggestionDto>>(BaseUrl);

@@ -11,14 +11,14 @@ namespace DiabloII.Application.Tests.Domains.Suggestions.DeleteComment
     [Scope(Tag = "suggestion")]
     public class DeleteASuggestionCommentSteps
     {
-        private readonly SuggestionApi _suggestionApi;
+        private readonly SuggestionsApi _suggestionsApi;
 
-        public DeleteASuggestionCommentSteps(MyTestContext testContext) => _suggestionApi = testContext.Apis.Suggestions;
+        public DeleteASuggestionCommentSteps(MyTestContext testContext) => _suggestionsApi = testContext.Apis.Suggestions;
 
         [When(@"I delete the suggestion comment ""(.*)"" from the suggestion ""(.*)""")]
         public async Task WhenIDeleteTheSuggestionCommentFromTheSuggestion(string suggestionCommentContent, string suggestionContent, Table table)
         {
-            var suggestionDto = (await _suggestionApi.GetAll())
+            var suggestionDto = (await _suggestionsApi.GetAll())
                 .Single(suggestion => suggestion.Content == suggestionContent);
             var (suggestionId, suggestionCommentId) = (
                 suggestionDto.Id,
@@ -28,7 +28,7 @@ namespace DiabloII.Application.Tests.Domains.Suggestions.DeleteComment
             dto.Id = suggestionCommentId;
             dto.SuggestionId = suggestionId;
 
-            await _suggestionApi.DeleteComment(dto);
+            await _suggestionsApi.DeleteComment(dto);
         }
     }
 }

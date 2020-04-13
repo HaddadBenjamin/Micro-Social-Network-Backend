@@ -12,12 +12,12 @@ namespace DiabloII.Application.Tests.Domains.Suggestions.Comment
     [Scope(Tag = "suggestion")]
     public class CommentASuggestionSteps
     {
-        private readonly SuggestionApi _suggestionApi;
+        private readonly SuggestionsApi _suggestionsApi;
         private readonly SuggestionTestContext _suggestionContext;
 
         public CommentASuggestionSteps(MyTestContext testContext, SuggestionTestContext suggestionContext)
         {
-            _suggestionApi = testContext.Apis.Suggestions;
+            _suggestionsApi = testContext.Apis.Suggestions;
             _suggestionContext = suggestionContext;
         }
 
@@ -25,14 +25,14 @@ namespace DiabloII.Application.Tests.Domains.Suggestions.Comment
         [When(@"I comment the suggestion ""(.*)""")]
         public async Task WhenICommentTheSuggestion(string suggestionContent, Table table)
         {
-            var suggestionId = (await _suggestionApi.GetAll())
+            var suggestionId = (await _suggestionsApi.GetAll())
                 .Single(suggestion => suggestion.Content == suggestionContent)
                 .Id;
             var dto = table.CreateInstance<CommentASuggestionDto>();
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionContext.VotedSuggestion = await _suggestionApi.Comment(dto);
+            _suggestionContext.VotedSuggestion = await _suggestionsApi.Comment(dto);
         }
 
         [Then(@"the commented suggestion should be")]
