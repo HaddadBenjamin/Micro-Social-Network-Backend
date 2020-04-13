@@ -1,11 +1,18 @@
-﻿using DiabloII.Application.Tests.Domains.Suggestions;
+﻿using DiabloII.Application.Tests.Domains.Items;
+using DiabloII.Application.Tests.Domains.Suggestions;
 
 namespace DiabloII.Application.Tests.Startup
 {
     public class MyApis
     {
-        public SuggestionApi Suggestions { get; set; }
+        public readonly SuggestionsApi Suggestions;
+        
+        public readonly ItemsApi Items;
 
-        public MyApis(MyHttpClient httpClient) => Suggestions = new SuggestionApi(httpClient);
+        public MyApis(MyHttpClient httpClient)
+        {
+            Suggestions = new SuggestionsApi(httpClient);
+            Items = new ItemsApi(httpClient);
+        }
     }
 }

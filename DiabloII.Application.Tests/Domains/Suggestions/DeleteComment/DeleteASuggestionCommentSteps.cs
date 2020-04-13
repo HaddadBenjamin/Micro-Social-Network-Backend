@@ -8,7 +8,7 @@ using TechTalk.SpecFlow.Assist;
 namespace DiabloII.Application.Tests.Domains.Suggestions.DeleteComment
 {
     [Binding]
-    [Scope(Tag = "suggestion")]
+    [Scope(Tag = "suggestions")]
     public class DeleteASuggestionCommentSteps
     {
         private readonly SuggestionsApi _suggestionsApi;

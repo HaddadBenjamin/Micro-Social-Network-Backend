@@ -3,7 +3,7 @@
 	As a developper
 	I want to call the suggestions API
 
-@suggestion
+@suggestions
 Scenario: Get all the suggestions happy path
 	Given I create the suggestions with the following informations
 		| Content                   | UserId      |

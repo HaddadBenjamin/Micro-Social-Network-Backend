@@ -3,7 +3,7 @@
 	As a developer
 	I want my users comment their suggestions
 
-@suggestion
+@suggestions
 Scenario: Comment a suggestion happy path
 	Given I create the suggestions with the following informations
 		| Content                   | UserId      |

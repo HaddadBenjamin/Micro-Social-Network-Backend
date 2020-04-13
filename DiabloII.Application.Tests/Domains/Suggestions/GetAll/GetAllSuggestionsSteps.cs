@@ -6,7 +6,7 @@ using TechTalk.SpecFlow;
 namespace DiabloII.Application.Tests.Domains.Suggestions.GetAll
 {
     [Binding]
-    [Scope(Tag = "suggestion")]
+    [Scope(Tag = "suggestions")]
     public class GetAllSuggestionsSteps
     {
         private readonly SuggestionsApi _suggestionsApi;

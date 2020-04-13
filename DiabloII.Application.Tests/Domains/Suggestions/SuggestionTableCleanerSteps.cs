@@ -5,7 +5,7 @@ using TechTalk.SpecFlow;
 namespace DiabloII.Application.Tests.Domains.Suggestions
 {
     [Binding]
-    [Scope(Tag = "suggestion")]
+    [Scope(Tag = "suggestions")]
     public class SuggestionTableCleanerSteps
     {
         private readonly ApplicationDbContext _dbContext;

@@ -9,7 +9,7 @@ using TechTalk.SpecFlow.Assist;
 namespace DiabloII.Application.Tests.Domains.Suggestions.Comment
 {
     [Binding]
-    [Scope(Tag = "suggestion")]
+    [Scope(Tag = "suggestions")]
     public class CommentASuggestionSteps
     {
         private readonly SuggestionsApi _suggestionsApi;

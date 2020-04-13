@@ -3,7 +3,7 @@
 	As a user
 	I want to call the suggestions API
 
-@suggestion
+@suggestions
 Scenario: Delete a suggestion comment happy path
 	Given I create the suggestions with the following informations
 		| Content                   | UserId      |

@@ -3,7 +3,7 @@
 	As a user
 	I want to vote to a suggestion
 
-@suggestion
+@suggestions
 Scenario: Vote to a suggestion happy path
 	Given I create the suggestions with the following informations
 		| Content                   | UserId      |

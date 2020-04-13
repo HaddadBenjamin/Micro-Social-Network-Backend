@@ -8,7 +8,7 @@ using TechTalk.SpecFlow.Assist;
 namespace DiabloII.Application.Tests.Domains.Suggestions.Create
 {
     [Binding]
-    [Scope(Tag = "suggestion")]
+    [Scope(Tag = "suggestions")]
     public class CreateASuggestionSteps
     {
         private readonly SuggestionsApi _suggestionsApi;
