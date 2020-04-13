@@ -1,4 +1,4 @@
-﻿namespace DiabloII.Application.Tests.Suggestions
+﻿namespace DiabloII.Application.Tests
 {
     public class Program
     {

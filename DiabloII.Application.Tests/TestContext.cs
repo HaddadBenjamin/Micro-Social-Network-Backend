@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Net.Http.Headers;
 using System.Reflection;
-using Flurl.Http;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
