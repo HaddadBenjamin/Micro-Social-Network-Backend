@@ -10,6 +10,7 @@ namespace DiabloII.Application.Tests.Suggestions
     public class SuggestionApi
     {
         private readonly MyHttpClient _httpClient;
+
         private static readonly string BaseUrl = "suggestions";
 
         public SuggestionApi(MyHttpClient httpClient) => _httpClient = httpClient;

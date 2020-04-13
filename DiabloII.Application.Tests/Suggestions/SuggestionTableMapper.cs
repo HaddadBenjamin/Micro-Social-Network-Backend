@@ -33,6 +33,5 @@ namespace DiabloII.Application.Tests.Suggestions
                 })
                 .ToList()
         };
-
     }
 }

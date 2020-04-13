@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Tests.Startup;
@@ -14,10 +13,7 @@ namespace DiabloII.Application.Tests.Suggestions.Create
     {
         private readonly SuggestionApi _suggestionApi;
 
-        public DeleteASuggestionCommentSteps(MyTestContext testContext)
-        {
-            _suggestionApi = testContext.Apis.Suggestions;
-        }
+        public DeleteASuggestionCommentSteps(MyTestContext testContext) => _suggestionApi = testContext.Apis.Suggestions;
 
         [When(@"I delete the suggestion comment ""(.*)"" from the suggestion ""(.*)""")]
         public async Task WhenIDeleteTheSuggestionCommentFromTheSuggestion(string suggestionCommentContent, string suggestionContent, Table table)

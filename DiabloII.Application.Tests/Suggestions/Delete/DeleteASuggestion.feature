@@ -3,7 +3,6 @@
 	As a user
 	I want to call the suggestions API
 
-
 @suggestion
 Scenario: Delete a suggestion happy path
 	Given I create the suggestions with the following informations
