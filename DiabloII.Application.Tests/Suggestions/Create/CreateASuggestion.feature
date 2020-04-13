@@ -1,6 +1,6 @@
 ﻿Feature: CreateASuggestion
 	In order to create suggestion to drive the development of the application
-	As a user of the application
+	As a user
 	I want to call the suggestions API
 
 @suggestion, @common
