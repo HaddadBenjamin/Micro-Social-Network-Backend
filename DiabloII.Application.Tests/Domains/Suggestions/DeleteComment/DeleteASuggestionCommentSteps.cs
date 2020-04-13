@@ -5,7 +5,7 @@ using DiabloII.Application.Tests.Startup;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace DiabloII.Application.Tests.Suggestions.Create
+namespace DiabloII.Application.Tests.Domains.Suggestions.DeleteComment
 {
     [Binding]
     [Scope(Tag = "suggestion")]

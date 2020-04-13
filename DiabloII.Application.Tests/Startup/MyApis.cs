@@ -1,4 +1,4 @@
-﻿using DiabloII.Application.Tests.Suggestions;
+﻿using DiabloII.Application.Tests.Domains.Suggestions;
 
 namespace DiabloII.Application.Tests.Startup
 {

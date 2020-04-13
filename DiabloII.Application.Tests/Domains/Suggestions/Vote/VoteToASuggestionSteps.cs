@@ -6,7 +6,7 @@ using DiabloII.Application.Tests.Startup;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace DiabloII.Application.Tests.Suggestions.Vote
+namespace DiabloII.Application.Tests.Domains.Suggestions.Vote
 {
     [Binding]
     [Scope(Tag = "suggestion")]

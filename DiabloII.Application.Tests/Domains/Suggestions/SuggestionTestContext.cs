@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Application.Responses.Suggestions;
 
-namespace DiabloII.Application.Tests.Suggestions
+namespace DiabloII.Application.Tests.Domains.Suggestions
 {
     public class SuggestionTestContext
     {
