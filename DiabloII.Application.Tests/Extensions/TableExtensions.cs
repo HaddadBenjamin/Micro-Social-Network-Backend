@@ -11,11 +11,15 @@ namespace DiabloII.Application.Tests.Extensions
 {
     public static class TableExtensions
     {
-        public static void ShouldBeEqualsTo<TCompareType>(this Table expectedTable, TCompareType actual, bool ignoreNotSpecifiedMembers = true)
+        public static void ShouldBeEqualsTo<TCompareType>(
+            this Table expectedTable,
+            TCompareType actual,
+            Func<TableRow, TCompareType> mapper = null,
+            bool ignoreNotSpecifiedMembers = true)
         {
             var compareLogic = CreateTheCompareLogic<TCompareType>(expectedTable, ignoreNotSpecifiedMembers);
-            var expected = expectedTable.CreateInstance<TCompareType>();
-            var differences = GetTheDifferences(expectedTable, actual, expected, compareLogic);
+            var expected = mapper == null ? expectedTable.CreateInstance<TCompareType>() : mapper(expectedTable.Rows.First());
+            var differences = GetTheDifferences(actual, expected, compareLogic);
 
             if (differences.Any())
             {
@@ -32,7 +36,7 @@ namespace DiabloII.Application.Tests.Extensions
 
             var differences = allExpected
                 .SelectMany(expected => actuals
-                    .Select(actual => GetTheDifferences(expectedTable, actual, expected, compareLogic))
+                    .Select(actual => GetTheDifferences(actual, expected, compareLogic))
                     .OrderBy(actual => actual.Count())
                     .FirstOrDefault()
                     .ToList())
@@ -51,7 +55,7 @@ namespace DiabloII.Application.Tests.Extensions
             var compareLogic = CreateTheCompareLogic<TCompareType>(expectedTable, ignoreNotSpecifiedMembers);
             var expected = expectedTable.CreateInstance<TCompareType>();
             var differences = actuals
-                .Select(actual => GetTheDifferences(expectedTable, actual, expected, compareLogic))
+                .Select(actual => GetTheDifferences(actual, expected, compareLogic))
                 .OrderBy(actual => actual.Count())
                 .FirstOrDefault()
                 .ToList();
@@ -86,20 +90,22 @@ namespace DiabloII.Application.Tests.Extensions
             };
         }
 
-        private static IEnumerable<dynamic> GetTheDifferences<TCompareType>(Table expectedTable, TCompareType actual, TCompareType expected, CompareLogic compareLogic)
+        private static IEnumerable<dynamic> GetTheDifferences<TCompareType>(TCompareType actual, TCompareType expected, CompareLogic compareLogic)
         {
             var compareResult = compareLogic.Compare(expected, actual);
-            
-            return compareResult.Differences.Select(difference =>
-            {
-                dynamic jObject = new JObject();
 
-                jObject.PropertyName = difference.PropertyName;
-                jObject.Actual = difference.Object2Value;
-                jObject.Expected = difference.Object1Value;
+            return compareResult.Differences
+                .Where(difference => difference.PropertyName != string.Empty)
+                .Select(difference =>
+                {
+                    dynamic jObject = new JObject();
 
-                return jObject.ToString();
-            });
+                    jObject.PropertyName = difference.PropertyName;
+                    jObject.Actual = difference.Object2Value;
+                    jObject.Expected = difference.Object1Value;
+
+                    return jObject.ToString();
+                });
         }
 
         private static string GetTheDifferencesMessage<TCompareType>(IEnumerable<dynamic> differences) =>

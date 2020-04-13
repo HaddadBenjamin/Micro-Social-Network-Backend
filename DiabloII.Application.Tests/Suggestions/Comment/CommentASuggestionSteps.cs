@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Startup;
+using DiabloII.Infrastructure.DbContext.Mappers.Suggestions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -36,6 +37,6 @@ namespace DiabloII.Application.Tests.Suggestions.Comment
 
         [Then(@"the commented suggestion should be")]
         public void ThenTheCommentedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_suggestionContext.CommentedSuggestion);
+            table.ShouldBeEqualsTo(_suggestionContext.CommentedSuggestion, SuggestionTableMapper.ToSuggestionDto);
     }
 }

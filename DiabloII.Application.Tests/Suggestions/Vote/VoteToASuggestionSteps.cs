@@ -36,6 +36,6 @@ namespace DiabloII.Application.Tests.Suggestions.Vote
 
         [Then(@"the voted suggestion should be")]
         public void ThenTheVotedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_suggestionContext.VotedSuggestion);
+            table.ShouldBeEqualsTo(_suggestionContext.VotedSuggestion, SuggestionTableMapper.ToSuggestionDto);
     }
 }

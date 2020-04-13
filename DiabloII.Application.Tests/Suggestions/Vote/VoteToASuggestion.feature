@@ -9,8 +9,8 @@ Scenario: Vote to a suggestion happy path
 	| Content                   | UserId      |
 	| You should add more items | any user id |
 	When I vote to the suggestion "You should add more items"
-	| IsPositive | UserId      |
-	| true       | any user id |
+	| IsPositive | UserId        |
+	| true       | other user id |
 	Then the http status code should be 201
 	And the voted suggestion should be
 	| Content                   | CreatedBy   | PositiveVoteCount | NegativeVoteCount |

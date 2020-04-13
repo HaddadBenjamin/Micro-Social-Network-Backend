@@ -21,6 +21,8 @@ namespace DiabloII.Application.Tests.Suggestions
             _dbContext.SuggestionVotes.RemoveRange(_dbContext.SuggestionVotes);
             _dbContext.SuggestionComments.RemoveRange(_dbContext.SuggestionComments);
             _dbContext.Suggestions.RemoveRange(_dbContext.Suggestions);
+
+            _dbContext.SaveChanges();
         }
     }
 }

@@ -12,6 +12,6 @@ Scenario: Comment a suggestion happy path
 	| Comment                                            | UserId      |
 	| I'm getting bored of the current items of the game | any user id |
 	Then the http status code should be 201
-	And the voted suggestion should be
-	| Content                   | CreatedBy   | Comments                                           |
-	| You should add more items | any user id | I'm getting bored of the current items of the game |
+	And the commented suggestion should be
+	| Content                   | CreatedBy   | Comments                                                       |
+	| You should add more items | any user id | I'm getting bored of the current items of the game,any user id |

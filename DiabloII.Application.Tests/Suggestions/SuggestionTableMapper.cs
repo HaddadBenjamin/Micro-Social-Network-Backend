@@ -6,29 +6,33 @@ using TechTalk.SpecFlow.Assist;
 
 namespace DiabloII.Application.Tests.Suggestions
 {
-    public class SuggestionTableMapper
+    public static class SuggestionTableMapper
     {
-        public IReadOnlyCollection<SuggestionDto> ToSuggestionDtos(Table table) => table.Rows
-            .Select(row => new SuggestionDto
-            {
-                Id = row.GetGuid("Id"),
-                Content = row.GetString("Content"),
-                CreatedBy = row.GetString("CreatedBy"),
-                PositiveVoteCount = row.GetInt32("PositiveVoteCount"),
-                NegativeVoteCount = row.GetInt32("NegativeVoteCount"),
-                Comments = row.GetString("Comments")
-                    .Split(';')
-                    .Select(comment =>
-                    {
-                        var commentData = comment.Split(",");
-
-                        return new SuggestionCommentDto
-                        {
-                            Comment = commentData[0],
-                            CreatedBy = commentData[1]
-                        };
-                    })
-            })
+        public static IReadOnlyCollection<SuggestionDto> ToSuggestionDtos(Table table) => table.Rows
+            .Select(ToSuggestionDto)
             .ToList();
+
+        public static SuggestionDto ToSuggestionDto(TableRow row) => new SuggestionDto
+        {
+            Id = row.GetGuid("Id"),
+            Content = row.GetString("Content"),
+            CreatedBy = row.GetString("CreatedBy"),
+            PositiveVoteCount = row.GetInt32("PositiveVoteCount"),
+            NegativeVoteCount = row.GetInt32("NegativeVoteCount"),
+            Comments = row.GetString("Comments")
+                ?.Split(';')
+                .Select(comment =>
+                {
+                    var commentData = comment.Split(",");
+
+                    return new SuggestionCommentDto
+                    {
+                        Comment = commentData[0],
+                        CreatedBy = commentData[1]
+                    };
+                })
+                .ToList()
+        };
+
     }
 }
