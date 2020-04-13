@@ -8,6 +8,5 @@ namespace DiabloII.Application.Tests.Extensions
     {
         public static IServiceCollection RegisterTestDbContDbContextDependency(this IServiceCollection services, string databaseName = "Application.Tests") => services
             .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseInMemoryDatabase(databaseName));
-
     }
 }

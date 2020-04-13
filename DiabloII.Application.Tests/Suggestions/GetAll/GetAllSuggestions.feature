@@ -5,7 +5,7 @@
 
 @suggestion
 Scenario: Get all the suggestions happy path
-	Given I create a suggestion with the following informations
+	Given I create the suggestions with the following informations
 	| Content                   | UserId      |
 	| You should add more items | any user id |
 	| You should add more areas | any user id |
