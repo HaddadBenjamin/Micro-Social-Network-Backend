@@ -5,9 +5,8 @@
 
 @suggestion
 Scenario: Create a suggestion happy path
-	Given I am a client
-	#When I create a suggestion with the following informations
-	#| Content                   | UserId      |
-	#| You should add more items | any user id |
-	#Then the status should be 201
-	#Then the suggestion should 
+	When I create a suggestion with the following informations
+		| Content                   | UserId      |
+		| You should add more items | any user id |
+	Then the http status should be 201
+	Then the suggestion created should be

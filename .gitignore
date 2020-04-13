@@ -25,3 +25,5 @@ DiabloII.Items/.vs
 
 .idea
 .idea/workspace.xml
+
+*.feature.cs

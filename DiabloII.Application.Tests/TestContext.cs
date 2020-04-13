@@ -1,8 +1,9 @@
 ﻿using System;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using Flurl.Http;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
@@ -10,10 +11,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DiabloII.Application.Tests
 {
-    public class TestContext : IDisposable
+    public sealed class TestContext : IDisposable
     {
-        public HttpClient Client;
+        public MyHttpClient HttpClient;
         private TestServer _server;
+
+        private static TestContext instance = null;
+        private static readonly object padlock = new object();
 
         public TestContext()
         {
@@ -24,30 +28,48 @@ namespace DiabloII.Application.Tests
 
             _server = new TestServer(webHostBuilder);
 
-            Client = _server.CreateClient();
-            Client.BaseAddress = new Uri("http://localhost:56205/api/v1/");
-            Client.DefaultRequestHeaders.Accept.Clear();
-            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var httpClient = _server.CreateClient();
+            httpClient.BaseAddress = new Uri("http://localhost:56205/api/v1/");
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpClient = new MyHttpClient(httpClient);
         }
 
-        private void InitializeServices(IServiceCollection services)
+        private static void InitializeServices(IServiceCollection services)
         {
             var startupAssembly = typeof(Startup).GetTypeInfo().Assembly;
 
             var manager = new ApplicationPartManager
             {
-                ApplicationParts = { new AssemblyPart(startupAssembly) },
-                FeatureProviders = { new ControllerFeatureProvider() }
+                ApplicationParts = {new AssemblyPart(startupAssembly)},
+                FeatureProviders = {new ControllerFeatureProvider()}
             };
 
             services.AddSingleton(manager);
-        }   
+        }
+
+        public static TestContext Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                            instance = new TestContext();
+                    }
+                }
+
+                return instance;
+            }
+        }
 
         public void Dispose()
         {
-            Client.Dispose();
+            HttpClient.Dispose();
             _server.Dispose();
         }
-
     }
 }
