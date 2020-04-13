@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
@@ -24,5 +25,11 @@ namespace DiabloII.Application.Tests.Suggestions
 
         public async Task<SuggestionDto> Comment(CommentASuggestionDto dto) =>
             await _httpClient.PostAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/comments", dto);
+
+        public async Task Delete(DeleteASuggestionDto dto) =>
+            await _httpClient.DeleteAsync<Guid>($"{BaseUrl}/{dto.Id}", dto);
+
+        public async Task DeleteComment(DeleteASuggestionCommentDto dto) =>
+            await _httpClient.DeleteAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/comments/{dto.Id}", dto);
     }
 }

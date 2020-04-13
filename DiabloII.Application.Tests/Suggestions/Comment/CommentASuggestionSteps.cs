@@ -22,6 +22,7 @@ namespace DiabloII.Application.Tests.Suggestions.Comment
             _suggestionContext = suggestionContext;
         }
 
+        [Given(@"I comment the suggestion ""(.*)""")]
         [When(@"I comment the suggestion ""(.*)""")]
         public async Task WhenICommentTheSuggestion(string suggestionContent, Table table)
         {

@@ -1,6 +1,10 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Flurl.Http;
+using Flurl.Http.Content;
+using Newtonsoft.Json;
 
 namespace DiabloII.Application.Tests.Startup
 {
@@ -28,6 +32,17 @@ namespace DiabloII.Application.Tests.Startup
             var flurlResponse = await _flurlClient
                 .Request(endpoint)
                 .PostJsonAsync(dto);
+
+            StatusCode = flurlResponse.StatusCode;
+
+            return await flurlResponse.GetJsonAsync<TResponse>();
+        }
+
+        public async Task<TResponse> DeleteAsync<TResponse>(string endpoint, object dto)
+        {
+            var flurlResponse = await _flurlClient
+                .Request(endpoint)
+                .SendAsync(HttpMethod.Delete, new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json"));
 
             StatusCode = flurlResponse.StatusCode;
 
