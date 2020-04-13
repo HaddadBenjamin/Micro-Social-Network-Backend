@@ -9,8 +9,14 @@ namespace DiabloII.Application.Tests.Suggestions.GetAll
     [Scope(Tag = "suggestion")]
     public class GetAllSuggestionsSteps
     {
-        private readonly SuggestionApi _suggestionApi = MyTestContext.Instance.Apis.Suggestions;
-        private readonly SuggestionTestContext _suggestionContext = MyTestContext.Instance.Contexts.Suggestions;
+        private readonly SuggestionApi _suggestionApi;
+        private readonly SuggestionTestContext _suggestionContext;
+
+        public GetAllSuggestionsSteps(MyTestContext testContext, SuggestionTestContext suggestionContext)
+        {
+            _suggestionApi = testContext.Apis.Suggestions;
+            _suggestionContext = suggestionContext;
+        }
 
         [When(@"I get all the suggestions")]
         public async Task WhenIGetAllTheSuggestions() =>

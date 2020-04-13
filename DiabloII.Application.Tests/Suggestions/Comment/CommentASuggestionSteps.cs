@@ -12,8 +12,14 @@ namespace DiabloII.Application.Tests.Suggestions.Comment
     [Scope(Tag = "suggestion")]
     public class CommentASuggestionSteps
     {
-        private readonly SuggestionApi _suggestionApi = MyTestContext.Instance.Apis.Suggestions;
-        private readonly SuggestionTestContext _suggestionContext = MyTestContext.Instance.Contexts.Suggestions;
+        private readonly SuggestionApi _suggestionApi;
+        private readonly SuggestionTestContext _suggestionContext;
+
+        public CommentASuggestionSteps(MyTestContext testContext, SuggestionTestContext suggestionContext)
+        {
+            _suggestionApi = testContext.Apis.Suggestions;
+            _suggestionContext = suggestionContext;
+        }
 
         [When(@"I comment the suggestion ""(.*)""")]
         public async Task WhenICommentTheSuggestion(string suggestionContent, Table table)

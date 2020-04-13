@@ -11,8 +11,14 @@ namespace DiabloII.Application.Tests.Suggestions.Create
     [Scope(Tag = "suggestion")]
     public class CreateASuggestionSteps
     {
-        private readonly SuggestionApi _suggestionApi = MyTestContext.Instance.Apis.Suggestions;
-        private readonly SuggestionTestContext _suggestionContext = MyTestContext.Instance.Contexts.Suggestions;
+        private readonly SuggestionApi _suggestionApi;
+        private readonly SuggestionTestContext _suggestionContext;
+
+        public CreateASuggestionSteps(MyTestContext testContext, SuggestionTestContext suggestionContext)
+        {
+            _suggestionApi = testContext.Apis.Suggestions;
+            _suggestionContext = suggestionContext;
+        }
 
         [Given(@"I create the suggestions with the following informations")]
         [When(@"I create the suggestions with the following informations")]
@@ -20,7 +26,7 @@ namespace DiabloII.Application.Tests.Suggestions.Create
         {
             var dtos = table.CreateSet<CreateASuggestionDto>();
 
-            foreach(var dto in dtos)
+            foreach (var dto in dtos)
                 _suggestionContext.CreatedSuggestion = await _suggestionApi.Create(dto);
         }
 

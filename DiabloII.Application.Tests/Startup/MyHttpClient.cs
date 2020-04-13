@@ -5,7 +5,7 @@ using Flurl.Http;
 
 namespace DiabloII.Application.Tests.Startup
 {
-    public class MyHttpClient : IDisposable
+    public class MyHttpClient
     {
         private readonly FlurlClient _flurlClient;
 

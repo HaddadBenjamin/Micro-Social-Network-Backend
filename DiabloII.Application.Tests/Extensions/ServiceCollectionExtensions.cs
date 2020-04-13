@@ -1,4 +1,7 @@
-﻿using DiabloII.Infrastructure.DbContext;
+﻿using System.Linq;
+using System.Reflection;
+using DiabloII.Application.Tests.Startup;
+using DiabloII.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,5 +11,20 @@ namespace DiabloII.Application.Tests.Extensions
     {
         public static IServiceCollection RegisterTestDbContDbContextDependency(this IServiceCollection services, string databaseName = "Application.Tests") => services
             .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseInMemoryDatabase(databaseName));
+
+        public static IServiceCollection RegisterTheTestApplicationDependencies(this IServiceCollection services)
+        {
+            var assemblyTypes = new[]  {MyTestStartup.ApplicationType, MyTestStartup.InfrastructureType, MyTestStartup.DomainType, MyTestStartup.ApplicationType};
+            var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
+
+            return services.Scan(scan =>
+            {
+                scan.FromAssemblies(assemblies)
+                    .AddClasses()
+                    .AsMatchingInterface()
+                    .AsSelf()
+                    .WithScopedLifetime();
+            });
+        }
     }
 }

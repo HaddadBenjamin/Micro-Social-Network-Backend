@@ -6,68 +6,42 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DiabloII.Application.Tests.Startup
 {
     public sealed class MyTestContext : IDisposable
     {
-        public static MyHttpClient HttpClient;
+        public readonly MyHttpClient HttpClient;
 
-        private static MyTestContext instance = null;
+        public readonly MyApis Apis;
 
-        private static readonly object padlock = new object();
-
-        public MyApis Apis { get; private set; }
-
-        public MyTestsContexts Contexts { get; private set; }
-
-        public ApplicationDbContext DbContext { get; private set; }
+        public readonly ApplicationDbContext DbContext;
 
         private TestServer _server;
 
-        private IWebHost _webHost;
+        private IServiceProvider _serviceProvider;
 
-        public static MyTestContext Instance
+        public MyTestContext()
         {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (padlock)
-                    {
-                        if (instance == null)
-                        {
-                            var webHostBuilder = new WebHostBuilder()
-                                .ConfigureServices(InitializeServices)
-                                .UseEnvironment("Development")
-                                .UseStartup(typeof(MyTestStartup));
+            var webHostBuilder = new WebHostBuilder()
+                .ConfigureServices(InitializeServices)
+                .UseEnvironment("Development")
+                .UseStartup(typeof(MyTestStartup));
 
-                            var server = new TestServer(webHostBuilder);
+            _server = new TestServer(webHostBuilder);
+            _serviceProvider = _server.Services;
 
-                            var httpClient = server.CreateClient();
-                            httpClient.BaseAddress = new Uri("http://localhost:56205/api/v1/");
-                            httpClient.DefaultRequestHeaders.Accept.Clear();
-                            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var httpClient = _server.CreateClient();
+            httpClient.BaseAddress = new Uri("http://localhost:56205/api/v1/");
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                            HttpClient = new MyHttpClient(httpClient);
+            HttpClient = new MyHttpClient(httpClient);
 
-                            var webHost = webHostBuilder.Build();
-
-                            instance = new MyTestContext
-                            {
-                                _webHost = webHost,
-                                _server = server,
-                                Apis = new MyApis(HttpClient),
-                                Contexts = new MyTestsContexts(),
-                                DbContext = GetDbContext(webHost)
-                            };
-                        }
-                    }
-                }
-
-                return instance;
-            }
+            Apis = new MyApis(HttpClient);
+            DbContext = _serviceProvider.GetService<ApplicationDbContext>();
         }
 
         private static void InitializeServices(IServiceCollection services)

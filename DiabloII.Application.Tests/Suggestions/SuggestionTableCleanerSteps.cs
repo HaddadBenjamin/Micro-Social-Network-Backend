@@ -1,6 +1,5 @@
 ﻿using DiabloII.Application.Tests.Startup;
-using Microsoft.EntityFrameworkCore;
-using NUnit.Framework;
+using DiabloII.Infrastructure.DbContext;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests.Suggestions
@@ -9,14 +8,19 @@ namespace DiabloII.Application.Tests.Suggestions
     [Scope(Tag = "suggestion")]
     public class SuggestionTableCleanerSteps
     {
-        [SetUp]
+        private readonly ApplicationDbContext _dbContext;
+
+        public SuggestionTableCleanerSteps(MyTestContext testContext)
+        {
+            _dbContext = testContext.DbContext;
+        }
+
+        [BeforeScenario]
         public void EmptyTheSuggestionTables()
         {
-            var dbContext = MyTestContext.Instance.DbContext;
-
-            dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE SuggestionVotes");
-            dbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE SuggestionComments");
-            dbContext.Database.ExecuteSqlCommand("DELETE FROM Suggestions");
+            _dbContext.SuggestionVotes.RemoveRange(_dbContext.SuggestionVotes);
+            _dbContext.SuggestionComments.RemoveRange(_dbContext.SuggestionComments);
+            _dbContext.Suggestions.RemoveRange(_dbContext.Suggestions);
         }
     }
 }

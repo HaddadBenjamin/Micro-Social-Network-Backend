@@ -12,8 +12,14 @@ namespace DiabloII.Application.Tests.Suggestions.Vote
     [Scope(Tag = "suggestion")]
     public class VoteToASuggestionSteps
     {
-        private readonly SuggestionApi _suggestionApi = MyTestContext.Instance.Apis.Suggestions;
-        private readonly SuggestionTestContext _suggestionContext = MyTestContext.Instance.Contexts.Suggestions;
+        private readonly SuggestionApi _suggestionApi;
+        private readonly SuggestionTestContext _suggestionContext;
+
+        public VoteToASuggestionSteps(MyTestContext testContext, SuggestionTestContext suggestionContext)
+        {
+            _suggestionApi = testContext.Apis.Suggestions;
+            _suggestionContext = suggestionContext;
+        }
 
         [When(@"I vote to the suggestion ""(.*)""")]
         public async Task WhenIVoteToTheSuggestion(string suggestionContent, Table table)
