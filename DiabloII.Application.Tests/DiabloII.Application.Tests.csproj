@@ -37,15 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Suggestions\Vote\VoteToASuggestion.feature.cs">
-      <DependentUpon>VoteToASuggestion.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Suggestions\GetAll\GetAllSuggestions.feature.cs">
-      <DependentUpon>GetAllSuggestions.feature</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
     <SpecFlowFeatureFiles Update="Suggestions\Comment\CommentASuggestion.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
