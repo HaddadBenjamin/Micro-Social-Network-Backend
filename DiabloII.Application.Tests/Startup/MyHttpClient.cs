@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Flurl.Http;
 
-namespace DiabloII.Application.Tests
+namespace DiabloII.Application.Tests.Startup
 {
     public class MyHttpClient : IDisposable
     {

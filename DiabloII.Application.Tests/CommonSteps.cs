@@ -1,4 +1,5 @@
-﻿using Shouldly;
+﻿using DiabloII.Application.Tests.Startup;
+using Shouldly;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiabloII.Application.Tests
+namespace DiabloII.Application.Tests.Startup
 {
     public sealed class TestContext : IDisposable
     {
@@ -36,7 +36,7 @@ namespace DiabloII.Application.Tests
 
         private static void InitializeServices(IServiceCollection services)
         {
-            var startupAssembly = typeof(Startup).GetTypeInfo().Assembly;
+            var startupAssembly = typeof(Application.Startup).GetTypeInfo().Assembly;
 
             var manager = new ApplicationPartManager
             {

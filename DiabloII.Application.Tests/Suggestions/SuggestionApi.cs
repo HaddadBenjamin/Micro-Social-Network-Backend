@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Tests.Startup;
 
 namespace DiabloII.Application.Tests.Suggestions
 {
