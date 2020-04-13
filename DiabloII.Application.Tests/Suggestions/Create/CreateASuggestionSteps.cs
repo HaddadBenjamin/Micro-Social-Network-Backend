@@ -14,9 +14,9 @@ namespace DiabloII.Application.Tests.Suggestions.Create
         private readonly SuggestionApi _suggestionApi = MyTestContext.Instance.Apis.Suggestions;
         private readonly SuggestionTestContext _suggestionContext = MyTestContext.Instance.Contexts.Suggestions;
 
-        [Given(@"I create a suggestion with the following informations")]
-        [When(@"I create a suggestion with the following informations")]
-        public async Task WhenICreateASuggestionWithTheFollowingInformations(Table table)
+        [Given(@"I create the suggestions with the following informations")]
+        [When(@"I create the suggestions with the following informations")]
+        public async Task WhenICreateTheSuggestionsWithTheFollowingInformations(Table table)
         {
             var dtos = table.CreateSet<CreateASuggestionDto>();
 

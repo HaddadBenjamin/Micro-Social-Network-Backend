@@ -4,13 +4,14 @@
 	I want to call the suggestions API
 
 @suggestion
-Scenario: Get all suggestions happy path
+Scenario: Get all the suggestions happy path
 	Given I create a suggestion with the following informations
 	| Content                   | UserId      |
 	| You should add more items | any user id |
 	| You should add more areas | any user id |
 	When I get all the suggestions
+	Then the http status code should be 200
 	And all the suggestions should be
 	| Content                   | CreatedBy   |
 	| You should add more items | any user id |
-	| You should add more areas | any user 2d |
+	| You should add more areas | any user id |

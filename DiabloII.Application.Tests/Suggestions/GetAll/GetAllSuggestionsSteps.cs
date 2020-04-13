@@ -19,7 +19,7 @@ namespace DiabloII.Application.Tests.Suggestions.GetAll
         public async Task WhenIGetAllTheSuggestions() =>
             _suggestionContext.AllSuggestions = await _suggestionApi.GetAll();
         
-        [When(@"all the suggestions should be")]
+        [Then(@"all the suggestions should be")]
         public void WhenAllTheSuggestionsShouldBe(Table table) =>
             table.ShouldAllExistsIn(_suggestionContext.AllSuggestions);
     }
