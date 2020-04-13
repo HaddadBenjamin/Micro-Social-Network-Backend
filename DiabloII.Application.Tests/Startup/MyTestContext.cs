@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http.Headers;
 using System.Reflection;
+using DiabloII.Infrastructure.DbContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -21,23 +22,52 @@ namespace DiabloII.Application.Tests.Startup
 
         public MyTestsContexts Contexts { get; private set; }
 
+        public ApplicationDbContext DbContext { get; private set; }
+
         private TestServer _server;
 
-        public MyTestContext()
+        private IWebHost _webHost;
+
+        public static MyTestContext Instance
         {
-            var webHostBuilder = new WebHostBuilder()
-                .ConfigureServices(InitializeServices)
-                .UseEnvironment("Development")
-                .UseStartup(typeof(MyTestStartup));
+            get
+            {
+                if (instance == null)
+                {
+                    lock (padlock)
+                    {
+                        if (instance == null)
+                        {
+                            var webHostBuilder = new WebHostBuilder()
+                                .ConfigureServices(InitializeServices)
+                                .UseEnvironment("Development")
+                                .UseStartup(typeof(MyTestStartup));
 
-            _server = new TestServer(webHostBuilder);
+                            var server = new TestServer(webHostBuilder);
 
-            var httpClient = _server.CreateClient();
-            httpClient.BaseAddress = new Uri("http://localhost:56205/api/v1/");
-            httpClient.DefaultRequestHeaders.Accept.Clear();
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                            var httpClient = server.CreateClient();
+                            httpClient.BaseAddress = new Uri("http://localhost:56205/api/v1/");
+                            httpClient.DefaultRequestHeaders.Accept.Clear();
+                            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpClient = new MyHttpClient(httpClient);
+                            HttpClient = new MyHttpClient(httpClient);
+
+                            var webHost = webHostBuilder.Build();
+
+                            instance = new MyTestContext
+                            {
+                                _webHost = webHost,
+                                _server = server,
+                                Apis = new MyApis(HttpClient),
+                                Contexts = new MyTestsContexts(),
+                                DbContext = GetDbContext(webHost)
+                            };
+                        }
+                    }
+                }
+
+                return instance;
+            }
         }
 
         private static void InitializeServices(IServiceCollection services)
@@ -53,24 +83,13 @@ namespace DiabloII.Application.Tests.Startup
             services.AddSingleton(manager);
         }
 
-        public static MyTestContext Instance
+        private static ApplicationDbContext GetDbContext(IWebHost webHost)
         {
-            get
+            using (var serviceScope = webHost.Services.CreateScope())
             {
-                if (instance == null)
-                {
-                    lock (padlock)
-                    {
-                        if (instance == null)
-                            instance = new MyTestContext
-                            {
-                                Apis = new MyApis(HttpClient),
-                                Contexts = new MyTestsContexts()
-                            };
-                    }
-                }
+                var services = serviceScope.ServiceProvider;
 
-                return instance;
+                return services.GetService<ApplicationDbContext>();
             }
         }
 
