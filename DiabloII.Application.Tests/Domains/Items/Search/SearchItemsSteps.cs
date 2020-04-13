@@ -16,7 +16,7 @@ namespace DiabloII.Application.Tests.Domains.Suggestions.GetAll
         public SearchItemsSteps(MyTestContext testContext) => _itemsApi = testContext.Apis.Items;
 
         [When(@"I search the items")]
-        public async Task WhenIGetAllTheSuggestions(Table table)
+        public async Task WhenISearchTheItems(Table table)
         {
             var dto = table.CreateInstance<SearchUniquesDto>();
 

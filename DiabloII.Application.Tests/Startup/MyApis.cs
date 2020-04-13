@@ -9,10 +9,13 @@ namespace DiabloII.Application.Tests.Startup
         
         public readonly ItemsApi Items;
 
+        public readonly ErrorLogsApi ErrorLogs;
+
         public MyApis(MyHttpClient httpClient)
         {
             Suggestions = new SuggestionsApi(httpClient);
             Items = new ItemsApi(httpClient);
+            ErrorLogs = new ErrorLogsApi(httpClient);
         }
     }
 }

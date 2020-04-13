@@ -14,7 +14,7 @@ namespace DiabloII.Application.Tests.Domains.Suggestions.GetAll
         public GetAllItemsSteps(MyTestContext testContext) => _itemsApi = testContext.Apis.Items;
 
         [When(@"I get all the items")]
-        public async Task WhenIGetAllTheSuggestions() =>
+        public async Task WhenIGetAllTheItems() =>
             await _itemsApi.GetAll();
     }
 }
