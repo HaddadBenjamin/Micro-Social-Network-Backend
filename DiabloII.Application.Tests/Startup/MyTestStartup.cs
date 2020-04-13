@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DiabloII.Application.Tests.Startup
 {
-    public class TestStartup
+    public class MyTestStartup
     {
         internal static readonly Type ApplicationType = typeof(Application.Startup);
         internal static readonly Type DomainType = typeof(IErrorLogRepository);

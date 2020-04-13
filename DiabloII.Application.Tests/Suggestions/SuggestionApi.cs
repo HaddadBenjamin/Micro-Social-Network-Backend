@@ -9,13 +9,20 @@ namespace DiabloII.Application.Tests.Suggestions
     public class SuggestionApi
     {
         private readonly MyHttpClient _httpClient;
+        private static readonly string BaseUrl = "suggestions";
 
         public SuggestionApi(MyHttpClient httpClient) => _httpClient = httpClient;
 
-        public async Task<SuggestionDto> Create(CreateASuggestionDto dto) =>
-            await _httpClient.PostAsync<SuggestionDto>("suggestions", dto);
-
         public async Task<IReadOnlyCollection<SuggestionDto>> GetAll() =>
-            await _httpClient.GetAsync<IReadOnlyCollection<SuggestionDto>>("suggestions");
+            await _httpClient.GetAsync<IReadOnlyCollection<SuggestionDto>>(BaseUrl);
+
+        public async Task<SuggestionDto> Create(CreateASuggestionDto dto) =>
+            await _httpClient.PostAsync<SuggestionDto>(BaseUrl, dto);
+
+        public async Task<SuggestionDto> Vote(VoteToASuggestionDto dto) =>
+            await _httpClient.PostAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/votes", dto);
+
+        public async Task<SuggestionDto> Comment(CommentASuggestionDto dto) =>
+            await _httpClient.PostAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/comments", dto);
     }
 }

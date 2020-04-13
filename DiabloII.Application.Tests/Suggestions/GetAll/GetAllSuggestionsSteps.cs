@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DiabloII.Application.Responses.Suggestions;
+﻿using System.Threading.Tasks;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Startup;
 using TechTalk.SpecFlow;

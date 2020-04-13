@@ -28,7 +28,7 @@ namespace DiabloII.Application.Tests.Startup
             var webHostBuilder = new WebHostBuilder()
                 .ConfigureServices(InitializeServices)
                 .UseEnvironment("Development")
-                .UseStartup(typeof(TestStartup));
+                .UseStartup(typeof(MyTestStartup));
 
             _server = new TestServer(webHostBuilder);
 

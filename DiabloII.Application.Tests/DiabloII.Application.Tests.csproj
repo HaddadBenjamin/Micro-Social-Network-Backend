@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <SpecFlowObsoleteCodeBehindFiles Remove="Suggestions\Create\CreateASuggestion - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Suggestions\Vote\GetAllSuggestions.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Suggestions\Vote\VoteToASuggestion - Copy.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,12 +37,23 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Suggestions\Vote\VoteToASuggestion.feature.cs">
+      <DependentUpon>VoteToASuggestion.feature</DependentUpon>
+    </Compile>
     <Compile Update="Suggestions\GetAll\GetAllSuggestions.feature.cs">
       <DependentUpon>GetAllSuggestions.feature</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
+    <SpecFlowFeatureFiles Update="Suggestions\Comment\CommentASuggestion.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
+    <SpecFlowFeatureFiles Update="Suggestions\Vote\VoteToASuggestion.feature">
+      <Visible>$(UsingMicrosoftNETSdk)</Visible>
+      <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
+    </SpecFlowFeatureFiles>
     <SpecFlowFeatureFiles Update="Suggestions\GetAll\GetAllSuggestions.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
