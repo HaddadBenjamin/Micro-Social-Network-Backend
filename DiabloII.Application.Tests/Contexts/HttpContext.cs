@@ -17,37 +17,34 @@ namespace DiabloII.Application.Tests.Contexts
 
         public async Task<TResponse> GetAsync<TResponse>(string endpoint)
         {
-            var flurlResponse = await _flurlClient
-                .Request(endpoint)
-                .GetAsync();
+            var flurlResponse = await GetFlurlRequest(endpoint).GetAsync();
 
-            StatusCode = flurlResponse.StatusCode;
-
-            return await flurlResponse.GetJsonAsync<TResponse>();
+            return await SetStatusCodeAndGetJsonResponse<TResponse>(flurlResponse);
         }
 
         public async Task<TResponse> PostAsync<TResponse>(string endpoint, object dto)
         {
-            var flurlResponse = await _flurlClient
-                .Request(endpoint)
-                .PostJsonAsync(dto);
+            var flurlResponse = await GetFlurlRequest(endpoint).PostJsonAsync(dto);
 
-            StatusCode = flurlResponse.StatusCode;
-
-            return await flurlResponse.GetJsonAsync<TResponse>();
+            return await SetStatusCodeAndGetJsonResponse<TResponse>(flurlResponse);
         }
 
         public async Task<TResponse> DeleteAsync<TResponse>(string endpoint, object dto)
         {
-            var flurlResponse = await _flurlClient
-                .Request(endpoint)
-                .SendAsync(HttpMethod.Delete, new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json"));
+            var flurlResponse = await GetFlurlRequest(endpoint).SendAsync(HttpMethod.Delete, new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json"));
 
+            return await SetStatusCodeAndGetJsonResponse<TResponse>(flurlResponse);
+        }
+
+        public void Dispose() => _flurlClient.Dispose();
+
+        private IFlurlRequest GetFlurlRequest(string endpoint) => _flurlClient.Request(endpoint);
+
+        private async Task<TResponse> SetStatusCodeAndGetJsonResponse<TResponse>(IFlurlResponse flurlResponse)
+        {
             StatusCode = flurlResponse.StatusCode;
 
             return await flurlResponse.GetJsonAsync<TResponse>();
         }
-
-        public void Dispose() => _flurlClient.Dispose();
     }
 }
