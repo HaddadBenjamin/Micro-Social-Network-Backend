@@ -1,6 +1,6 @@
 # Diablo II - Items Documentation - API
 
-Lien pour tester avec l'application sur PC ou mobile : https://diablo-2-enriched-documentation.netlify.com/
+Vous pouvez tester avec l'application sur PC ou mobile : https://diablo-2-enriched-documentation.netlify.com/
 </br>
 
 __Cette application propose deux services :__
