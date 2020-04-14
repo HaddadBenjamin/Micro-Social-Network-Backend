@@ -13,7 +13,6 @@ namespace DiabloII.Application.Tests.Steps.Items.GetAll
         public GetAllItemsSteps(TestContext testContext) => _itemsApi = testContext.ApiContext.Items;
 
         [When(@"I get all the items")]
-        public async Task WhenIGetAllTheItems() =>
-            await _itemsApi.GetAll();
+        public async Task WhenIGetAllTheItems() => await _itemsApi.GetAll();
     }
 }

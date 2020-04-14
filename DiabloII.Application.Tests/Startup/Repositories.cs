@@ -6,7 +6,6 @@ namespace DiabloII.Application.Tests.Startup
     {
         public SuggestionsRepository Suggestions { get; set; }
 
-        public Repositories(ApiContext apiContext) =>
-            Suggestions = new SuggestionsRepository(apiContext.Suggestions);
+        public Repositories(ApiContext apiContext) => Suggestions = new SuggestionsRepository(apiContext.Suggestions);
     }
 }
