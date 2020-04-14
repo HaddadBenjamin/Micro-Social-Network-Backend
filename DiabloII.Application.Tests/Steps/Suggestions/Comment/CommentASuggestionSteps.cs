@@ -13,11 +13,13 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
     public class CommentASuggestionSteps
     {
         private readonly SuggestionsApi _suggestionsApi;
+        private readonly SuggestionsRepository _suggestionsRepository;
         private readonly SuggestionTestContext _suggestionContext;
 
         public CommentASuggestionSteps(TestContext testContext, SuggestionTestContext suggestionContext)
         {
             _suggestionsApi = testContext.ApiContext.Suggestions;
+            _suggestionsRepository = testContext.Repositories.Suggestions;
             _suggestionContext = suggestionContext;
         }
 
@@ -25,9 +27,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
         [When(@"I comment the suggestion ""(.*)""")]
         public async Task WhenICommentTheSuggestion(string suggestionContent, Table table)
         {
-            var suggestionId = (await _suggestionsApi.GetAll())
-                .Single(suggestion => suggestion.Content == suggestionContent)
-                .Id;
+            var suggestionId = await _suggestionsRepository.GetSuggestionId(suggestionContent);
             var dto = table.CreateInstance<CommentASuggestionDto>();
 
             dto.SuggestionId = suggestionId;

@@ -13,20 +13,20 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
     public class VoteToASuggestionSteps
     {
         private readonly SuggestionsApi _suggestionsApi;
+        private readonly SuggestionsRepository _suggestionsRepository;
         private readonly SuggestionTestContext _suggestionContext;
 
         public VoteToASuggestionSteps(TestContext testContext, SuggestionTestContext suggestionContext)
         {
             _suggestionsApi = testContext.ApiContext.Suggestions;
+            _suggestionsRepository = testContext.Repositories.Suggestions;
             _suggestionContext = suggestionContext;
         }
 
         [When(@"I vote to the suggestion ""(.*)""")]
         public async Task WhenIVoteToTheSuggestion(string suggestionContent, Table table)
         {
-            var suggestionId = (await _suggestionsApi.GetAll())
-                .Single(suggestion => suggestion.Content == suggestionContent)
-                .Id; 
+            var suggestionId = await _suggestionsRepository.GetSuggestionId(suggestionContent);
             var dto = table.CreateInstance<VoteToASuggestionDto>();
 
             dto.SuggestionId = suggestionId;

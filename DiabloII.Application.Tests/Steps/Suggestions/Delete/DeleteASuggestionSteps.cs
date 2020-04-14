@@ -11,18 +11,21 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Delete
     [Scope(Tag = "suggestions")]
     public class DeleteASuggestionSteps
     {
+        private readonly SuggestionsRepository _suggestionsRepository;
         private readonly SuggestionsApi _suggestionsApi;
 
-        public DeleteASuggestionSteps(TestContext testContext) => _suggestionsApi = testContext.ApiContext.Suggestions;
+        public DeleteASuggestionSteps(TestContext testContext)
+        {
+            _suggestionsRepository = testContext.Repositories.Suggestions;
+            _suggestionsApi = testContext.ApiContext.Suggestions;
+        }
 
         [When(@"I delete the suggestion ""(.*)""")]
         public async Task WhenIDeleteTheSuggestion(string suggestionContent, Table table)
         {
-            var suggestionId = (await _suggestionsApi.GetAll())
-                .Single(suggestion => suggestion.Content == suggestionContent)
-                .Id;
-            
+            var suggestionId = await _suggestionsRepository.GetSuggestionId(suggestionContent);
             var dto = table.CreateInstance<DeleteASuggestionDto>();
+            
             dto.Id = suggestionId;
 
             await _suggestionsApi.Delete(dto);
