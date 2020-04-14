@@ -22,8 +22,8 @@ namespace DiabloII.Application.Extensions
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Diablo II - items and suggestions API",
-                    Description = "Allow to search Diablo II items and crud suggestions and votes",
+                    Title = "Diablo II - Enriched API",
+                    Description = "Allow to search Diablo II items, create suggestions, vote and comment them to drive our development.",
                     Contact = new OpenApiContact
                     {
                         Name = "Un passionné dans la foule (alias Firefouks)",
