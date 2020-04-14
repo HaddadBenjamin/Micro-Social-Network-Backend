@@ -11,12 +11,12 @@ namespace DiabloII.Application.Tests.Extensions
         public static IServiceCollection RegisterTestDbContDbContextDependency(this IServiceCollection services, string databaseName = "Application.Tests") => services
             .AddDbContextPool<ApplicationDbContext>(optionsBuilder => optionsBuilder.UseInMemoryDatabase(databaseName));
 
-        public static IServiceCollection RegisterTheTestApplicationDependencies(this IServiceCollection services)
+        public static void RegisterTheTestApplicationDependencies(this IServiceCollection services)
         {
             var assemblyTypes = new[]  {TestStartup.ApplicationType, TestStartup.InfrastructureType, TestStartup.DomainType, TestStartup.ApplicationType};
             var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
 
-            return services.Scan(scan =>
+            services.Scan(scan =>
             {
                 scan.FromAssemblies(assemblies)
                     .AddClasses()
