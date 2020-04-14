@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloII.Application.Responses.Suggestions;
-using DiabloII.Application.Tests.Steps.Suggestions;
 
-namespace DiabloII.Application.Tests.Startup
+namespace DiabloII.Application.Tests.Steps.Suggestions
 {
     public class SuggestionsRepository
     {
