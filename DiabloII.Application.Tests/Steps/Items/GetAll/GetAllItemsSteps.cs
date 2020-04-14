@@ -10,7 +10,7 @@ namespace DiabloII.Application.Tests.Steps.Items.GetAll
     {
         private readonly ItemsApi _itemsApi;
 
-        public GetAllItemsSteps(MyTestContext testContext) => _itemsApi = testContext.Apis.Items;
+        public GetAllItemsSteps(TestContext testContext) => _itemsApi = testContext.ApiContext.Items;
 
         [When(@"I get all the items")]
         public async Task WhenIGetAllTheItems() =>

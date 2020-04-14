@@ -9,28 +9,28 @@ namespace DiabloII.Application.Tests.Steps.Suggestions
 {
     public class SuggestionsApi
     {
-        private readonly MyHttpClient _httpClient;
+        private readonly HttpContext _httpContext;
 
         private static readonly string BaseUrl = "suggestions";
 
-        public SuggestionsApi(MyHttpClient httpClient) => _httpClient = httpClient;
+        public SuggestionsApi(HttpContext httpContext) => _httpContext = httpContext;
 
         public async Task<IReadOnlyCollection<SuggestionDto>> GetAll() =>
-            await _httpClient.GetAsync<IReadOnlyCollection<SuggestionDto>>(BaseUrl);
+            await _httpContext.GetAsync<IReadOnlyCollection<SuggestionDto>>(BaseUrl);
 
         public async Task<SuggestionDto> Create(CreateASuggestionDto dto) =>
-            await _httpClient.PostAsync<SuggestionDto>(BaseUrl, dto);
+            await _httpContext.PostAsync<SuggestionDto>(BaseUrl, dto);
 
         public async Task<SuggestionDto> Vote(VoteToASuggestionDto dto) =>
-            await _httpClient.PostAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/votes", dto);
+            await _httpContext.PostAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/votes", dto);
 
         public async Task<SuggestionDto> Comment(CommentASuggestionDto dto) =>
-            await _httpClient.PostAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/comments", dto);
+            await _httpContext.PostAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/comments", dto);
 
         public async Task Delete(DeleteASuggestionDto dto) =>
-            await _httpClient.DeleteAsync<Guid>($"{BaseUrl}/{dto.Id}", dto);
+            await _httpContext.DeleteAsync<Guid>($"{BaseUrl}/{dto.Id}", dto);
 
         public async Task DeleteComment(DeleteASuggestionCommentDto dto) =>
-            await _httpClient.DeleteAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/comments/{dto.Id}", dto);
+            await _httpContext.DeleteAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/comments/{dto.Id}", dto);
     }
 }

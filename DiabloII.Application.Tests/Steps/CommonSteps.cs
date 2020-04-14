@@ -7,16 +7,16 @@ namespace DiabloII.Application.Tests.Steps
     [Binding]
     public class CommonSteps
     {
-        private readonly MyHttpClient _httpClient;
-        private static MyTestContext TestContext;
+        private readonly HttpContext _httpContext;
+        private static TestContext TestContext;
 
-        public CommonSteps(MyTestContext testContext)
+        public CommonSteps(TestContext testContext)
         {
-            _httpClient = testContext.HttpClient;
+            _httpContext = testContext.HttpContext;
         }
 
         [Then(@"the http status code should be (.*)")]
         public void ThenTheHttpStatusCodeShouldBe(int statusCode) =>
-            _httpClient.StatusCode.ShouldBe(statusCode);
+            _httpContext.StatusCode.ShouldBe(statusCode);
     }
 }

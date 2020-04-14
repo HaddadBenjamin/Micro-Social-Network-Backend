@@ -7,13 +7,13 @@ namespace DiabloII.Application.Tests.Steps.ErrorLogs
 {
     public class ErrorLogsApi
     {
-        private readonly MyHttpClient _httpClient;
+        private readonly HttpContext _httpContext;
 
         private static readonly string BaseUrl = "errorlogs";
 
-        public ErrorLogsApi(MyHttpClient httpClient) => _httpClient = httpClient;
+        public ErrorLogsApi(HttpContext httpContext) => _httpContext = httpContext;
 
         public async Task<IReadOnlyCollection<ErrorLogDto>> GetAll() =>
-            await _httpClient.GetAsync<IReadOnlyCollection<ErrorLogDto>>(BaseUrl);
+            await _httpContext.GetAsync<IReadOnlyCollection<ErrorLogDto>>(BaseUrl);
     }
 }

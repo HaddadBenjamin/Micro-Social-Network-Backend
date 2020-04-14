@@ -14,7 +14,7 @@ namespace DiabloII.Application.Tests.Extensions
 
         public static IServiceCollection RegisterTheTestApplicationDependencies(this IServiceCollection services)
         {
-            var assemblyTypes = new[]  {MyTestStartup.ApplicationType, MyTestStartup.InfrastructureType, MyTestStartup.DomainType, MyTestStartup.ApplicationType};
+            var assemblyTypes = new[]  {TestStartup.ApplicationType, TestStartup.InfrastructureType, TestStartup.DomainType, TestStartup.ApplicationType};
             var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
 
             return services.Scan(scan =>

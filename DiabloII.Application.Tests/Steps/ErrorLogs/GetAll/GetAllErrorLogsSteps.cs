@@ -10,7 +10,7 @@ namespace DiabloII.Application.Tests.Steps.ErrorLogs.GetAll
     {
         private readonly ErrorLogsApi _errorLogsApi;
 
-        public GetAllErrorLogsSteps(MyTestContext testContext) => _errorLogsApi = testContext.Apis.ErrorLogs;
+        public GetAllErrorLogsSteps(TestContext testContext) => _errorLogsApi = testContext.ApiContext.ErrorLogs;
 
         [When(@"I get all the error logs")]
         public async Task WhenIGetAllTheErrorLogs() => await _errorLogsApi.GetAll();

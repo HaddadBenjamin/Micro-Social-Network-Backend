@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DiabloII.Application.Tests.Startup
 {
-    public class MyTestStartup
+    public class TestStartup
     {
         internal static readonly Type ApplicationType = typeof(Application.Startup);
         internal static readonly Type InfrastructureType = typeof(ErrorLogRepository);

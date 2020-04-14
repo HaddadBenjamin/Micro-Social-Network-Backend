@@ -12,7 +12,7 @@ namespace DiabloII.Application.Tests.Steps.Items.Search
     {
         private readonly ItemsApi _itemsApi;
 
-        public SearchItemsSteps(MyTestContext testContext) => _itemsApi = testContext.Apis.Items;
+        public SearchItemsSteps(TestContext testContext) => _itemsApi = testContext.ApiContext.Items;
 
         [When(@"I search the items")]
         public async Task WhenISearchTheItems(Table table)

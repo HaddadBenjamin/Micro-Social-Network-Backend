@@ -13,7 +13,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Delete
     {
         private readonly SuggestionsApi _suggestionsApi;
 
-        public DeleteASuggestionSteps(MyTestContext testContext) => _suggestionsApi = testContext.Apis.Suggestions;
+        public DeleteASuggestionSteps(TestContext testContext) => _suggestionsApi = testContext.ApiContext.Suggestions;
 
         [When(@"I delete the suggestion ""(.*)""")]
         public async Task WhenIDeleteTheSuggestion(string suggestionContent, Table table)

@@ -10,37 +10,39 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DiabloII.Application.Tests.Startup
 {
-    public sealed class MyTestContext : IDisposable
+    public sealed class TestContext : IDisposable
     {
-        public readonly MyHttpClient HttpClient;
+        public readonly HttpContext HttpContext;
 
-        public readonly MyApis Apis;
+        public readonly ApiContext ApiContext;
 
         public readonly ApplicationDbContext DbContext;
 
-        private TestServer _server;
+        private TestServer _testServer;
 
         private IServiceProvider _serviceProvider;
 
-        public MyTestContext()
+        public TestContext()
         {
             var webHostBuilder = new WebHostBuilder()
                 .ConfigureServices(InitializeServices)
                 .UseEnvironment("Development")
-                .UseStartup(typeof(MyTestStartup));
+                .UseStartup(typeof(TestStartup));
 
-            _server = new TestServer(webHostBuilder);
-            _serviceProvider = _server.Services;
+            _testServer = new TestServer(webHostBuilder);
+            _serviceProvider = _testServer.Services;
 
-            var httpClient = _server.CreateClient();
+            var httpClient = _testServer.CreateClient();
             httpClient.BaseAddress = new Uri("http://localhost:56205/api/v1/");
             httpClient.DefaultRequestHeaders.Accept.Clear();
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpClient = new MyHttpClient(httpClient);
+            HttpContext = new HttpContext(httpClient);
 
-            Apis = new MyApis(HttpClient);
+            ApiContext = new ApiContext(HttpContext);
             DbContext = _serviceProvider.GetService<ApplicationDbContext>();
+
+            webHostBuilder.ConfigureServices((services) => services.AddSingleton<IServiceProvider>(_serviceProvider));
         }
 
         private static void InitializeServices(IServiceCollection services)
@@ -68,8 +70,8 @@ namespace DiabloII.Application.Tests.Startup
 
         public void Dispose()
         {
-            HttpClient.Dispose();
-            _server.Dispose();
+            HttpContext.Dispose();
+            _testServer.Dispose();
         }
     }
 }

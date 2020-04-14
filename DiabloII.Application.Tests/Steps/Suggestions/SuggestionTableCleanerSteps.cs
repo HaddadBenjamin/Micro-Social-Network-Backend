@@ -10,7 +10,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public SuggestionTableCleanerSteps(MyTestContext testContext)
+        public SuggestionTableCleanerSteps(TestContext testContext)
         {
             _dbContext = testContext.DbContext;
         }

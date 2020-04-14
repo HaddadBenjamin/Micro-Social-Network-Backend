@@ -15,9 +15,9 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
         private readonly SuggestionsApi _suggestionsApi;
         private readonly SuggestionTestContext _suggestionContext;
 
-        public VoteToASuggestionSteps(MyTestContext testContext, SuggestionTestContext suggestionContext)
+        public VoteToASuggestionSteps(TestContext testContext, SuggestionTestContext suggestionContext)
         {
-            _suggestionsApi = testContext.Apis.Suggestions;
+            _suggestionsApi = testContext.ApiContext.Suggestions;
             _suggestionContext = suggestionContext;
         }
 

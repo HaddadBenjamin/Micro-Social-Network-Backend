@@ -4,7 +4,7 @@ using DiabloII.Application.Tests.Steps.Suggestions;
 
 namespace DiabloII.Application.Tests.Startup
 {
-    public class MyApis
+    public class ApiContext
     {
         public readonly SuggestionsApi Suggestions;
         
@@ -12,11 +12,11 @@ namespace DiabloII.Application.Tests.Startup
 
         public readonly ErrorLogsApi ErrorLogs;
 
-        public MyApis(MyHttpClient httpClient)
+        public ApiContext(HttpContext httpContext)
         {
-            Suggestions = new SuggestionsApi(httpClient);
-            Items = new ItemsApi(httpClient);
-            ErrorLogs = new ErrorLogsApi(httpClient);
+            Suggestions = new SuggestionsApi(httpContext);
+            Items = new ItemsApi(httpContext);
+            ErrorLogs = new ErrorLogsApi(httpContext);
         }
     }
 }

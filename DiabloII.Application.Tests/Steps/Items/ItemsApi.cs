@@ -8,16 +8,16 @@ namespace DiabloII.Application.Tests.Steps.Items
 {
     public class ItemsApi
     {
-        private readonly MyHttpClient _httpClient;
+        private readonly HttpContext _httpContext;
 
         private static readonly string BaseUrl = "items";
 
-        public ItemsApi(MyHttpClient httpClient) => _httpClient = httpClient;
+        public ItemsApi(HttpContext httpContext) => _httpContext = httpContext;
 
         public async Task<IReadOnlyCollection<ItemDto>> GetAll() =>
-            await _httpClient.GetAsync<IReadOnlyCollection<ItemDto>>(BaseUrl);
+            await _httpContext.GetAsync<IReadOnlyCollection<ItemDto>>(BaseUrl);
 
         public async Task<IReadOnlyCollection<ItemDto>> Search(SearchUniquesDto dto) =>
-            await _httpClient.GetAsync<IReadOnlyCollection<ItemDto>>($"{BaseUrl}/search");
+            await _httpContext.GetAsync<IReadOnlyCollection<ItemDto>>($"{BaseUrl}/search");
     }
 }

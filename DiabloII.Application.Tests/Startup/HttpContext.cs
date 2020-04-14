@@ -6,13 +6,13 @@ using Newtonsoft.Json;
 
 namespace DiabloII.Application.Tests.Startup
 {
-    public class MyHttpClient
+    public class HttpContext
     {
         private readonly FlurlClient _flurlClient;
 
         public int StatusCode { get; private set; }
 
-        public MyHttpClient(HttpClient httpClient) => _flurlClient = new FlurlClient(httpClient);
+        public HttpContext(HttpClient httpClient) => _flurlClient = new FlurlClient(httpClient);
 
         public async Task<TResponse> GetAsync<TResponse>(string endpoint)
         {
