@@ -11,22 +11,13 @@ namespace DiabloII.Application.Tests.Extensions
 {
     public static class TableExtensions
     {
-        public static void ShouldBeEqualsTo<TCompareType>(
-            this Table expectedTable,
-            TCompareType actual,
-            Func<TableRow, TCompareType> mapper = null,
-            bool ignoreNotSpecifiedMembers = true)
+        public static void ShouldBeEqualsTo<TCompareType>(this Table expectedTable, TCompareType actual, Func<TableRow, TCompareType> mapper = null, bool ignoreNotSpecifiedMembers = true)
         {
             var compareLogic = CreateTheCompareLogic<TCompareType>(expectedTable, ignoreNotSpecifiedMembers);
             var expected = mapper == null ? expectedTable.CreateInstance<TCompareType>() : mapper(expectedTable.Rows.First());
             var differences = GetTheDifferences(actual, expected, compareLogic);
 
-            if (differences.Any())
-            {
-                var exceptionMessage = GetTheDifferencesMessage<TCompareType>(differences);
-
-                throw new NotEqualsException(exceptionMessage);
-            }
+            HandleTheDifferences<TCompareType>(differences);
         }
 
         public static void ShouldAllExistsIn<TCompareType>(this Table expectedTable, IReadOnlyCollection<TCompareType> actuals, bool ignoreNotSpecifiedMembers = true)
@@ -35,37 +26,19 @@ namespace DiabloII.Application.Tests.Extensions
             var allExpected = expectedTable.CreateSet<TCompareType>();
 
             var differences = allExpected
-                .SelectMany(expected => actuals
-                    .Select(actual => GetTheDifferences(actual, expected, compareLogic))
-                    .OrderBy(actual => actual.Count())
-                    .FirstOrDefault()
-                    .ToList())
+                .SelectMany(expected => GetTheLeastDifferences(actuals, expected, compareLogic))
                 .ToList();
 
-            if (differences.Any())
-            {
-                var exceptionMessage = GetTheDifferencesMessage<TCompareType>(differences);
-
-                throw new NotEqualsException(exceptionMessage);
-            }
+            HandleTheDifferences<TCompareType>(differences);
         }
 
         public static void ShouldExistsIn<TCompareType>(this Table expectedTable, IReadOnlyCollection<TCompareType> actuals, bool ignoreNotSpecifiedMembers = true)
         {
             var compareLogic = CreateTheCompareLogic<TCompareType>(expectedTable, ignoreNotSpecifiedMembers);
             var expected = expectedTable.CreateInstance<TCompareType>();
-            var differences = actuals
-                .Select(actual => GetTheDifferences(actual, expected, compareLogic))
-                .OrderBy(actual => actual.Count())
-                .FirstOrDefault()
-                .ToList();
+            var differences = GetTheLeastDifferences(actuals, expected, compareLogic);
 
-            if (differences.Any())
-            {
-                var exceptionMessage = GetTheDifferencesMessage<TCompareType>(differences);
-
-                throw new NotEqualsException(exceptionMessage);
-            }
+            HandleTheDifferences<TCompareType>(differences);
         }
 
         private static CompareLogic CreateTheCompareLogic<TCompareType>(Table expectedTable, bool ignoreNotSpecifiedMembers = true)
@@ -90,6 +63,12 @@ namespace DiabloII.Application.Tests.Extensions
             };
         }
 
+        private static IReadOnlyCollection<dynamic> GetTheLeastDifferences<TCompareType>(IReadOnlyCollection<TCompareType> actuals, TCompareType expected, CompareLogic compareLogic) => actuals
+            .Select(actual => GetTheDifferences(actual, expected, compareLogic))
+            .OrderBy(actual => actual.Count())
+            .FirstOrDefault()
+            .ToList();
+
         private static IEnumerable<dynamic> GetTheDifferences<TCompareType>(TCompareType actual, TCompareType expected, CompareLogic compareLogic)
         {
             var compareResult = compareLogic.Compare(expected, actual);
@@ -106,6 +85,16 @@ namespace DiabloII.Application.Tests.Extensions
 
                     return jObject.ToString();
                 });
+        }
+
+        private static void HandleTheDifferences<TCompareType>(IEnumerable<dynamic> differences)
+        {
+            if (differences.Any())
+            {
+                var exceptionMessage = GetTheDifferencesMessage<TCompareType>(differences);
+
+                throw new NotEqualsException(exceptionMessage);
+            }
         }
 
         private static string GetTheDifferencesMessage<TCompareType>(IEnumerable<dynamic> differences) =>
