@@ -10,10 +10,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public SuggestionTableCleanerSteps(TestContext testContext)
-        {
-            _dbContext = testContext.DbContext;
-        }
+        public SuggestionTableCleanerSteps(TestContext testContext) => _dbContext = testContext.DbContext;
 
         [BeforeScenario]
         public void EmptyTheSuggestionTables()

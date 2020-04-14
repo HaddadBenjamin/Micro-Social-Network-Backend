@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using DiabloII.Infrastructure.DbContext;
@@ -20,30 +21,23 @@ namespace DiabloII.Application.Tests.Startup
 
         private TestServer _testServer;
 
-        private IServiceProvider _serviceProvider;
-
         public TestContext()
         {
-            var webHostBuilder = new WebHostBuilder()
-                .ConfigureServices(InitializeServices)
-                .UseEnvironment("Development")
-                .UseStartup(typeof(TestStartup));
+            var webHostBuilder = CreateTheWebHostBuilder();
 
             _testServer = new TestServer(webHostBuilder);
-            _serviceProvider = _testServer.Services;
 
-            var httpClient = _testServer.CreateClient();
-            httpClient.BaseAddress = new Uri("http://localhost:56205/api/v1/");
-            httpClient.DefaultRequestHeaders.Accept.Clear();
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var httpClient = ConfigureTheHttpClient(_testServer.CreateClient());
 
             HttpContext = new HttpContext(httpClient);
-
             ApiContext = new ApiContext(HttpContext);
-            DbContext = _serviceProvider.GetService<ApplicationDbContext>();
-
-            webHostBuilder.ConfigureServices((services) => services.AddSingleton<IServiceProvider>(_serviceProvider));
+            DbContext = _testServer.Services.GetService<ApplicationDbContext>();
         }
+
+        private static IWebHostBuilder CreateTheWebHostBuilder() => new WebHostBuilder()
+            .ConfigureServices(InitializeServices)
+            .UseEnvironment("Development")
+            .UseStartup(typeof(TestStartup));
 
         private static void InitializeServices(IServiceCollection services)
         {
@@ -58,14 +52,13 @@ namespace DiabloII.Application.Tests.Startup
             services.AddSingleton(manager);
         }
 
-        private static ApplicationDbContext GetDbContext(IWebHost webHost)
+        private static HttpClient ConfigureTheHttpClient(HttpClient httpClient)
         {
-            using (var serviceScope = webHost.Services.CreateScope())
-            {
-                var services = serviceScope.ServiceProvider;
+            httpClient.BaseAddress = new Uri("http://localhost:56205/api/v1/");
+            httpClient.DefaultRequestHeaders.Accept.Clear();
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                return services.GetService<ApplicationDbContext>();
-            }
+            return httpClient;
         }
 
         public void Dispose()
