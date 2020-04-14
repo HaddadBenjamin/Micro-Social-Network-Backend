@@ -5,7 +5,7 @@ using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Tests.Startup;
 
-namespace DiabloII.Application.Tests.Domains.Suggestions
+namespace DiabloII.Application.Tests.Steps.Suggestions
 {
     public class SuggestionsApi
     {

@@ -3,7 +3,7 @@ using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Startup;
 using TechTalk.SpecFlow;
 
-namespace DiabloII.Application.Tests.Domains.Suggestions.GetAll
+namespace DiabloII.Application.Tests.Steps.Suggestions.GetAll
 {
     [Binding]
     [Scope(Tag = "suggestions")]

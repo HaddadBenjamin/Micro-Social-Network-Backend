@@ -4,7 +4,7 @@ using DiabloII.Application.Responses.Suggestions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace DiabloII.Application.Tests.Domains.Suggestions
+namespace DiabloII.Application.Tests.Steps.Suggestions
 {
     public static class SuggestionTableMapper
     {

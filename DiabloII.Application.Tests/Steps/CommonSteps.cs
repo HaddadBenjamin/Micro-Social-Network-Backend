@@ -2,7 +2,7 @@
 using Shouldly;
 using TechTalk.SpecFlow;
 
-namespace DiabloII.Application.Tests
+namespace DiabloII.Application.Tests.Steps
 {
     [Binding]
     public class CommonSteps

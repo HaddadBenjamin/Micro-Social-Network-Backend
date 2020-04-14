@@ -2,7 +2,7 @@
 using DiabloII.Infrastructure.DbContext;
 using TechTalk.SpecFlow;
 
-namespace DiabloII.Application.Tests.Domains.Suggestions
+namespace DiabloII.Application.Tests.Steps.Suggestions
 {
     [Binding]
     [Scope(Tag = "suggestions")]

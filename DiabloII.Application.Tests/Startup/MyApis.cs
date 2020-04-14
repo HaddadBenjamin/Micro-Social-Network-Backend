@@ -1,5 +1,6 @@
-﻿using DiabloII.Application.Tests.Domains.Items;
-using DiabloII.Application.Tests.Domains.Suggestions;
+﻿using DiabloII.Application.Tests.Steps.ErrorLogs;
+using DiabloII.Application.Tests.Steps.Items;
+using DiabloII.Application.Tests.Steps.Suggestions;
 
 namespace DiabloII.Application.Tests.Startup
 {

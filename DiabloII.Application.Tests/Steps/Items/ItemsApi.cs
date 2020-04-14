@@ -4,7 +4,7 @@ using DiabloII.Application.Requests.Items;
 using DiabloII.Application.Responses.Items;
 using DiabloII.Application.Tests.Startup;
 
-namespace DiabloII.Application.Tests.Domains.Items
+namespace DiabloII.Application.Tests.Steps.Items
 {
     public class ItemsApi
     {

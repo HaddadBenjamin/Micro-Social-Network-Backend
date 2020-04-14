@@ -1,11 +1,10 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Items;
-using DiabloII.Application.Tests.Domains.Items;
 using DiabloII.Application.Tests.Startup;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace DiabloII.Application.Tests.Domains.Suggestions.GetAll
+namespace DiabloII.Application.Tests.Steps.Items.Search
 {
     [Binding]
     [Scope(Tag = "items")]
