@@ -18,7 +18,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
         public VoteToASuggestionSteps(TestContext testContext, SuggestionTestContext suggestionContext)
         {
             _suggestionsApi = testContext.ApiContext.Suggestions;
-            _suggestionsRepository = testContext.Repositories.Suggestions;
+            _suggestionsRepository = testContext.RepositoryContext.Suggestions;
             _suggestionContext = suggestionContext;
         }
 
@@ -34,7 +34,6 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
         }
 
         [Then(@"the voted suggestion should be")]
-        public void ThenTheVotedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_suggestionContext.VotedSuggestion, SuggestionTableMapper.ToSuggestionDto);
+        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionContext.VotedSuggestion, SuggestionTableMapper.ToSuggestionDto);
     }
 }

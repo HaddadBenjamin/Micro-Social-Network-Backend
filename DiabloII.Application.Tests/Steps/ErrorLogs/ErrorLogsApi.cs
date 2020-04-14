@@ -13,7 +13,6 @@ namespace DiabloII.Application.Tests.Steps.ErrorLogs
 
         public ErrorLogsApi(HttpContext httpContext) => _httpContext = httpContext;
 
-        public async Task<IReadOnlyCollection<ErrorLogDto>> GetAll() =>
-            await _httpContext.GetAsync<IReadOnlyCollection<ErrorLogDto>>(BaseUrl);
+        public async Task GetAll() => await _httpContext.GetAsync<IReadOnlyCollection<ErrorLogDto>>(BaseUrl);
     }
 }

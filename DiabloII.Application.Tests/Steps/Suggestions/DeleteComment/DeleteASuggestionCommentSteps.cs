@@ -15,7 +15,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.DeleteComment
 
         public DeleteASuggestionCommentSteps(TestContext testContext)
         {
-            _suggestionsRepository = testContext.Repositories.Suggestions;
+            _suggestionsRepository = testContext.RepositoryContext.Suggestions;
             _suggestionsApi = testContext.ApiContext.Suggestions;
         }
 
@@ -24,8 +24,8 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.DeleteComment
         {
             var suggestionDto = await _suggestionsRepository.GetSuggestion(suggestionContent);
             var suggestionCommentId = _suggestionsRepository.GetSuggestionCommentId(suggestionDto, suggestionCommentContent);
-
             var dto = table.CreateInstance<DeleteASuggestionCommentDto>();
+
             dto.Id = suggestionCommentId;
             dto.SuggestionId = suggestionDto.Id;
 

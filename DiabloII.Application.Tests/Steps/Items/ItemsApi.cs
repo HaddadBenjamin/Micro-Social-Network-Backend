@@ -14,10 +14,8 @@ namespace DiabloII.Application.Tests.Steps.Items
 
         public ItemsApi(HttpContext httpContext) => _httpContext = httpContext;
 
-        public async Task<IReadOnlyCollection<ItemDto>> GetAll() =>
-            await _httpContext.GetAsync<IReadOnlyCollection<ItemDto>>(BaseUrl);
+        public async Task GetAll() => await _httpContext.GetAsync<IReadOnlyCollection<ItemDto>>(BaseUrl);
 
-        public async Task<IReadOnlyCollection<ItemDto>> Search(SearchUniquesDto dto) =>
-            await _httpContext.GetAsync<IReadOnlyCollection<ItemDto>>($"{BaseUrl}/search");
+        public async Task Search(SearchUniquesDto dto) => await _httpContext.GetAsync<IReadOnlyCollection<ItemDto>>($"{BaseUrl}/search");
     }
 }

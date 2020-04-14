@@ -12,7 +12,6 @@ namespace DiabloII.Application.Tests.Steps
         public CommonSteps(TestContext testContext) => _httpContext = testContext.HttpContext;
 
         [Then(@"the http status code should be (.*)")]
-        public void ThenTheHttpStatusCodeShouldBe(int statusCode) =>
-            _httpContext.StatusCode.ShouldBe(statusCode);
+        public void ThenTheHttpStatusCodeShouldBe(int statusCode) => _httpContext.StatusCode.ShouldBe(statusCode);
     }
 }

@@ -15,7 +15,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Delete
 
         public DeleteASuggestionSteps(TestContext testContext)
         {
-            _suggestionsRepository = testContext.Repositories.Suggestions;
+            _suggestionsRepository = testContext.RepositoryContext.Suggestions;
             _suggestionsApi = testContext.ApiContext.Suggestions;
         }
 

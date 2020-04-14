@@ -18,7 +18,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
         public CommentASuggestionSteps(TestContext testContext, SuggestionTestContext suggestionContext)
         {
             _suggestionsApi = testContext.ApiContext.Suggestions;
-            _suggestionsRepository = testContext.Repositories.Suggestions;
+            _suggestionsRepository = testContext.RepositoryContext.Suggestions;
             _suggestionContext = suggestionContext;
         }
 

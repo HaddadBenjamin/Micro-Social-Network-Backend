@@ -19,7 +19,7 @@ namespace DiabloII.Application.Tests.Startup
 
         public readonly ApplicationDbContext DbContext;
 
-        public readonly Repositories Repositories;
+        public readonly RepositoryContext RepositoryContext;
 
         private TestServer _testServer;
 
@@ -34,7 +34,7 @@ namespace DiabloII.Application.Tests.Startup
             HttpContext = new HttpContext(httpClient);
             ApiContext = new ApiContext(HttpContext);
             DbContext = _testServer.Services.GetService<ApplicationDbContext>();
-            Repositories = new Repositories(ApiContext);
+            RepositoryContext = new RepositoryContext(ApiContext);
         }
 
         private static IWebHostBuilder CreateTheWebHostBuilder() => new WebHostBuilder()

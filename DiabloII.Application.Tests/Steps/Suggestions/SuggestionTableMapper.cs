@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using DiabloII.Application.Responses.Suggestions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -8,10 +7,6 @@ namespace DiabloII.Application.Tests.Steps.Suggestions
 {
     public static class SuggestionTableMapper
     {
-        public static IReadOnlyCollection<SuggestionDto> ToSuggestionDtos(Table table) => table.Rows
-            .Select(ToSuggestionDto)
-            .ToList();
-
         public static SuggestionDto ToSuggestionDto(TableRow row) => new SuggestionDto
         {
             Id = row.GetGuid("Id"),

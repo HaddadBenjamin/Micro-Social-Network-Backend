@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Tests.Steps.Suggestions;
 
-namespace DiabloII.Application.Tests.Steps.Suggestions
+namespace DiabloII.Application.Tests.Startup
 {
     public class SuggestionsRepository
     {
@@ -12,8 +13,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions
         public SuggestionsRepository(SuggestionsApi suggestionsApi) => _suggestionsApi = suggestionsApi;
 
         #region Read
-        public async Task<Guid> GetSuggestionId(string suggestionContent) =>
-            (await GetSuggestion(suggestionContent)).Id;
+        public async Task<Guid> GetSuggestionId(string suggestionContent) => (await GetSuggestion(suggestionContent)).Id;
 
         public async Task<SuggestionDto> GetSuggestion(string suggestionContent) => (await _suggestionsApi.GetAll())
             .Single(suggestion => suggestion.Content == suggestionContent);
