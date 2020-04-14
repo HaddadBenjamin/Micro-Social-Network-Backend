@@ -11,14 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <SpecFlowObsoleteCodeBehindFiles Remove="Steps\ErrorLogs\GetAll\GetAlIItems.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Steps\Items\Search\GetAlIItems.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Steps\Items\GetAll\GetAllSuggestions.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Suggestions\Create\CreateASuggestion - Copy.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Suggestions\DeleteComment\DeleteASuggestion.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Suggestions\Delete\CreateASuggestion.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Suggestions\Vote\GetAllSuggestions.feature.cs" />
-    <SpecFlowObsoleteCodeBehindFiles Remove="Suggestions\Vote\VoteToASuggestion - Copy.feature.cs" />
+    <SpecFlowObsoleteCodeBehindFiles Remove="Steps\*\*.feature.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -77,15 +70,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Steps\ErrorLogs\GetAll\GetAllErrorLogs.feature.cs">
-      <DependentUpon>GetAllErrorLogs.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Steps\Items\Search\SearchItems.feature.cs">
-      <DependentUpon>SearchItems.feature</DependentUpon>
-    </Compile>
-    <Compile Update="Steps\Items\GetAll\GetAlIItems.feature.cs">
-      <DependentUpon>GetAlIItems.feature</DependentUpon>
-    </Compile>
     <Compile Update="Suggestions\DeleteComment\DeleteASuggestionComment.feature.cs">
       <DependentUpon>DeleteASuggestionComment.feature</DependentUpon>
     </Compile>

@@ -8,12 +8,8 @@ namespace DiabloII.Application.Tests.Steps
     public class CommonSteps
     {
         private readonly HttpContext _httpContext;
-        private static TestContext TestContext;
-
-        public CommonSteps(TestContext testContext)
-        {
-            _httpContext = testContext.HttpContext;
-        }
+       
+        public CommonSteps(TestContext testContext) => _httpContext = testContext.HttpContext;
 
         [Then(@"the http status code should be (.*)")]
         public void ThenTheHttpStatusCodeShouldBe(int statusCode) =>
