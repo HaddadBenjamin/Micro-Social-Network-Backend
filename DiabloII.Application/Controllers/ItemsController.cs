@@ -5,6 +5,7 @@ using DiabloII.Application.Requests.Items;
 using DiabloII.Application.Responses.Items;
 using DiabloII.Domain.Queries.Items;
 using DiabloII.Domain.Readers;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Application.Controllers
@@ -22,18 +23,36 @@ namespace DiabloII.Application.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all the uniques items
+        /// </summary>
         [Route("items")]
         [HttpGet]
-        public IReadOnlyCollection<ItemDto> GetAllUniques() => _reader
-            .GetAllUniques()
-            .Select(_mapper.Map<ItemDto>)
-            .ToList();
+        [ProducesResponseType(typeof(IReadOnlyCollection<ItemDto>), StatusCodes.Status200OK)]
+        public ActionResult<IReadOnlyCollection<ItemDto>> GetAllUniques()
+        {
+            var responseDto = _reader
+                .GetAllUniques()
+                .Select(_mapper.Map<ItemDto>)
+                .ToList();
 
+            return Ok(responseDto);
+        }
+
+        /// <summary>
+        /// Search the uniques items
+        /// </summary>
         [Route("items/search")]
         [HttpGet]
-        public IReadOnlyCollection<ItemDto> SearchUniques(SearchUniquesDto searchDto) => _reader
-            .SearchUniques(_mapper.Map<SearchUniquesQuery>(searchDto))
-            .Select(_mapper.Map<ItemDto>)
-            .ToList();
+        [ProducesResponseType(typeof(IReadOnlyCollection<ItemDto>), StatusCodes.Status200OK)]
+        public ActionResult<IReadOnlyCollection<ItemDto>> SearchUniques(SearchUniquesDto searchDto)
+        {
+            var responseDto = _reader
+                .SearchUniques(_mapper.Map<SearchUniquesQuery>(searchDto))
+                .Select(_mapper.Map<ItemDto>)
+                .ToList();
+
+            return Ok(responseDto);
+        }
     }
 }

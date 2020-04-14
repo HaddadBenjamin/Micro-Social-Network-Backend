@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Infrastructure.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DiabloII.Application", "DiabloII.Application\DiabloII.Application.csproj", "{4157859C-13CD-4D0E-99B1-8F62CDEE92DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiabloII.Application.Tests", "DiabloII.Application.Tests\DiabloII.Application.Tests.csproj", "{F0BCDEBD-E464-4E46-99C4-69570FDD5535}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{4157859C-13CD-4D0E-99B1-8F62CDEE92DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4157859C-13CD-4D0E-99B1-8F62CDEE92DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4157859C-13CD-4D0E-99B1-8F62CDEE92DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0BCDEBD-E464-4E46-99C4-69570FDD5535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0BCDEBD-E464-4E46-99C4-69570FDD5535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0BCDEBD-E464-4E46-99C4-69570FDD5535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0BCDEBD-E464-4E46-99C4-69570FDD5535}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

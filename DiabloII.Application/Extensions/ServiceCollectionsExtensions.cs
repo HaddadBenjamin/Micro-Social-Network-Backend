@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using DiabloII.Application.Filters.ErrorHandling;
@@ -16,9 +17,9 @@ namespace DiabloII.Application.Extensions
     public static class ServiceCollectionsExtensions
     {
         public static IServiceCollection AddMySwagger(this IServiceCollection services) => services
-            .AddSwaggerGen(swagger =>
+            .AddSwaggerGen(options =>
             {
-                swagger.SwaggerDoc("v1", new OpenApiInfo
+                options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "Diablo II - items and suggestions API",
@@ -29,7 +30,13 @@ namespace DiabloII.Application.Extensions
                         Url = new Uri("https://github.com/HaddadBenjamin")
                     }
                 });
-                swagger.DescribeAllEnumsAsStrings();
+
+                options.DescribeAllEnumsAsStrings();
+
+                var assemblyDirectory = AppContext.BaseDirectory;
+                var swaggerConfigurationFilePath = Path.Combine(assemblyDirectory, "Swagger.xml");
+
+                options.IncludeXmlComments(swaggerConfigurationFilePath);
             });
 
         public static IServiceCollection AddMyMvc(this IServiceCollection services)
@@ -46,21 +53,26 @@ namespace DiabloII.Application.Extensions
             return services;
         }
 
-        public static void RegisterMyDependencies(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection RegisterTheDbContextDependency(this IServiceCollection services, IConfiguration configuration)
         {
-            var assemblyTypes = new[] {Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType};
-            var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
             var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
 
-            services
+            return services
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder =>
                     optionsBuilder.UseSqlServer(connectionString,
                         sqlServerOptions =>
                         {
                             sqlServerOptions.MigrationsAssembly("DiabloII.Application");
                             sqlServerOptions.EnableRetryOnFailure();
-                        }))
-                .Scan(scan =>
+                        }));
+        }
+
+        public static IServiceCollection RegisterTheApplicationDependencies(this IServiceCollection services)
+        {
+            var assemblyTypes = new[] {Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType};
+            var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
+ 
+            return services.Scan(scan =>
                 {
                     scan.FromAssemblies(assemblies)
                         .AddClasses()

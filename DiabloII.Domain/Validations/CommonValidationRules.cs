@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using DiabloII.Domain.Exceptions;
+﻿using DiabloII.Domain.Exceptions;
 using FluentValidation;
 
 namespace DiabloII.Domain.Validations

@@ -1,0 +1,39 @@
+﻿using System.Threading.Tasks;
+using DiabloII.Application.Requests.Suggestions;
+using DiabloII.Application.Tests.Contexts;
+using DiabloII.Application.Tests.Extensions;
+using TechTalk.SpecFlow;
+using TechTalk.SpecFlow.Assist;
+
+namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
+{
+    [Binding]
+    [Scope(Tag = "suggestions")]
+    public class VoteToASuggestionSteps
+    {
+        private readonly SuggestionsApi _suggestionsApi;
+        private readonly SuggestionsRepository _suggestionsRepository;
+        private readonly SuggestionTestContext _suggestionContext;
+
+        public VoteToASuggestionSteps(TestContext testContext, SuggestionTestContext suggestionContext)
+        {
+            _suggestionsApi = testContext.ApiContext.Suggestions;
+            _suggestionsRepository = testContext.RepositoryContext.Suggestions;
+            _suggestionContext = suggestionContext;
+        }
+
+        [When(@"I vote to the suggestion ""(.*)""")]
+        public async Task WhenIVoteToTheSuggestion(string suggestionContent, Table table)
+        {
+            var suggestionId = await _suggestionsRepository.GetSuggestionId(suggestionContent);
+            var dto = table.CreateInstance<VoteToASuggestionDto>();
+
+            dto.SuggestionId = suggestionId;
+
+            _suggestionContext.VotedSuggestion = await _suggestionsApi.Vote(dto);
+        }
+
+        [Then(@"the voted suggestion should be")]
+        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionContext.VotedSuggestion, SuggestionTableMapper.ToSuggestionDto);
+    }
+}
