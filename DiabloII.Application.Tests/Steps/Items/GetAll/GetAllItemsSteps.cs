@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DiabloII.Application.Tests.Startup;
+using DiabloII.Application.Tests.Contexts;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests.Steps.Items.GetAll

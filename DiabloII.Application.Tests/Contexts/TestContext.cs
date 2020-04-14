@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiabloII.Application.Tests.Startup
+namespace DiabloII.Application.Tests.Contexts
 {
     public sealed class TestContext : IDisposable
     {
@@ -25,9 +25,7 @@ namespace DiabloII.Application.Tests.Startup
 
         public TestContext()
         {
-            var webHostBuilder = CreateTheWebHostBuilder();
-
-            _testServer = new TestServer(webHostBuilder);
+            _testServer = new TestServer(CreateTheWebHostBuilder());
 
             var httpClient = ConfigureTheHttpClient(_testServer.CreateClient());
 

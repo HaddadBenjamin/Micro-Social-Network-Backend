@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloII.Application.Responses.ErrorLogs;
-using DiabloII.Application.Tests.Startup;
+using DiabloII.Application.Tests.Contexts;
 
 namespace DiabloII.Application.Tests.Steps.ErrorLogs
 {

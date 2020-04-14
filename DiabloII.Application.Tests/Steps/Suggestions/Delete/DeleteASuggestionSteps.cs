@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Tests.Startup;
+using DiabloII.Application.Tests.Contexts;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 

@@ -1,12 +1,13 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Flurl.Http;
 using Newtonsoft.Json;
 
-namespace DiabloII.Application.Tests.Startup
+namespace DiabloII.Application.Tests.Contexts
 {
-    public class HttpContext
+    public class HttpContext : IDisposable
     {
         private readonly FlurlClient _flurlClient;
 

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiabloII.Application.Tests.Startup
+namespace DiabloII.Application.Tests
 {
     public class TestStartup
     {

@@ -1,4 +1,6 @@
-﻿namespace DiabloII.Application.Tests.Startup
+﻿using DiabloII.Application.Tests.Steps.Suggestions;
+
+namespace DiabloII.Application.Tests.Contexts
 {
     public class RepositoryContext
     {

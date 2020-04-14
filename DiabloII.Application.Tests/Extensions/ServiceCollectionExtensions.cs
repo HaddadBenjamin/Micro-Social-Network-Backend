@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Reflection;
-using DiabloII.Application.Tests.Startup;
 using DiabloII.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

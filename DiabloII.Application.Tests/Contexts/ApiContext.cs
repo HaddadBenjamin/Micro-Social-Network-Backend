@@ -2,7 +2,7 @@
 using DiabloII.Application.Tests.Steps.Items;
 using DiabloII.Application.Tests.Steps.Suggestions;
 
-namespace DiabloII.Application.Tests.Startup
+namespace DiabloII.Application.Tests.Contexts
 {
     public class ApiContext
     {

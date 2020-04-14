@@ -1,4 +1,4 @@
-﻿using DiabloII.Application.Tests.Startup;
+﻿using DiabloII.Application.Tests.Contexts;
 using DiabloII.Infrastructure.DbContext;
 using TechTalk.SpecFlow;
 
