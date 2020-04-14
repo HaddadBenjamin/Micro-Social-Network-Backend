@@ -13,13 +13,13 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
     {
         private readonly SuggestionsApi _suggestionsApi;
         private readonly SuggestionsRepository _suggestionsRepository;
-        private readonly SuggestionTestContext _suggestionContext;
+        private readonly SuggestionsTestContext _suggestionsContext;
 
-        public VoteToASuggestionSteps(TestContext testContext, SuggestionTestContext suggestionContext)
+        public VoteToASuggestionSteps(TestContext testContext, SuggestionsTestContext suggestionsContext)
         {
             _suggestionsApi = testContext.ApiContext.Suggestions;
             _suggestionsRepository = testContext.RepositoryContext.Suggestions;
-            _suggestionContext = suggestionContext;
+            _suggestionsContext = suggestionsContext;
         }
 
         [When(@"I vote to the suggestion ""(.*)""")]
@@ -30,10 +30,10 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionContext.VotedSuggestion = await _suggestionsApi.Vote(dto);
+            _suggestionsContext.VotedSuggestion = await _suggestionsApi.Vote(dto);
         }
 
         [Then(@"the voted suggestion should be")]
-        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionContext.VotedSuggestion, SuggestionTableMapper.ToSuggestionDto);
+        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionsContext.VotedSuggestion, SuggestionsTableMapper.ToSuggestionDto);
     }
 }

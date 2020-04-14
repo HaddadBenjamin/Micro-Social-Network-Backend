@@ -3,7 +3,7 @@ using DiabloII.Application.Responses.Suggestions;
 
 namespace DiabloII.Application.Tests.Steps.Suggestions
 {
-    public class SuggestionTestContext
+    public class SuggestionsTestContext
     {
         public IReadOnlyCollection<SuggestionDto> AllSuggestions { get; set; }
 

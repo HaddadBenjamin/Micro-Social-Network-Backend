@@ -5,7 +5,7 @@ using TechTalk.SpecFlow.Assist;
 
 namespace DiabloII.Application.Tests.Steps.Suggestions
 {
-    public static class SuggestionTableMapper
+    public static class SuggestionsTableMapper
     {
         public static SuggestionDto ToSuggestionDto(TableRow row) => new SuggestionDto
         {

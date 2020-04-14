@@ -46,8 +46,8 @@ namespace DiabloII.Application.Tests.Contexts
 
             var manager = new ApplicationPartManager
             {
-                ApplicationParts = {new AssemblyPart(startupAssembly)},
-                FeatureProviders = {new ControllerFeatureProvider()}
+                ApplicationParts = { new AssemblyPart(startupAssembly) },
+                FeatureProviders = { new ControllerFeatureProvider() }
             };
 
             services.AddSingleton(manager);

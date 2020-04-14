@@ -13,13 +13,13 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
     {
         private readonly SuggestionsApi _suggestionsApi;
         private readonly SuggestionsRepository _suggestionsRepository;
-        private readonly SuggestionTestContext _suggestionContext;
+        private readonly SuggestionsTestContext _suggestionsContext;
 
-        public CommentASuggestionSteps(TestContext testContext, SuggestionTestContext suggestionContext)
+        public CommentASuggestionSteps(TestContext testContext, SuggestionsTestContext suggestionsContext)
         {
             _suggestionsApi = testContext.ApiContext.Suggestions;
             _suggestionsRepository = testContext.RepositoryContext.Suggestions;
-            _suggestionContext = suggestionContext;
+            _suggestionsContext = suggestionsContext;
         }
 
         [Given(@"I comment the suggestion ""(.*)""")]
@@ -31,11 +31,11 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionContext.VotedSuggestion = await _suggestionsApi.Comment(dto);
+            _suggestionsContext.VotedSuggestion = await _suggestionsApi.Comment(dto);
         }
 
         [Then(@"the commented suggestion should be")]
         public void ThenTheCommentedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_suggestionContext.CommentedSuggestion, SuggestionTableMapper.ToSuggestionDto);
+            table.ShouldBeEqualsTo(_suggestionsContext.CommentedSuggestion, SuggestionsTableMapper.ToSuggestionDto);
     }
 }
