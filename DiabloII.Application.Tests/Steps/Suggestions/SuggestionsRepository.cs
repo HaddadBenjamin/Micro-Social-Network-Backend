@@ -14,9 +14,8 @@ namespace DiabloII.Application.Tests.Startup
         public SuggestionsRepository(SuggestionsApi suggestionsApi) => _suggestionsApi = suggestionsApi;
 
         #region Read
-        public async Task<Guid> GetSuggestionId(string suggestionContent) => (await _suggestionsApi.GetAll())
-            .Single(suggestion => suggestion.Content == suggestionContent)
-            .Id;
+        public async Task<Guid> GetSuggestionId(string suggestionContent) =>
+            (await GetSuggestion(suggestionContent)).Id;
 
         public async Task<SuggestionDto> GetSuggestion(string suggestionContent) => (await _suggestionsApi.GetAll())
             .Single(suggestion => suggestion.Content == suggestionContent);
