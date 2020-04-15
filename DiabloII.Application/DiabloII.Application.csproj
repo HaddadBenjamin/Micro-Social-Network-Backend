@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DiabloII.Domain\DiabloII.Domain.csproj" />
     <ProjectReference Include="..\DiabloII.Infrastructure\DiabloII.Infrastructure.csproj" />
   </ItemGroup>
 
