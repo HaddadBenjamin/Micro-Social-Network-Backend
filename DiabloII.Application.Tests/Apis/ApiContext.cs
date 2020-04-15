@@ -1,8 +1,4 @@
-﻿using DiabloII.Application.Tests.Steps.ErrorLogs;
-using DiabloII.Application.Tests.Steps.Items;
-using DiabloII.Application.Tests.Steps.Suggestions;
-
-namespace DiabloII.Application.Tests.Contexts
+﻿namespace DiabloII.Application.Tests.Apis
 {
     public class ApiContext
     {

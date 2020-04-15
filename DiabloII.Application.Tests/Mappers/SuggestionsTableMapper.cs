@@ -3,7 +3,7 @@ using DiabloII.Application.Responses.Suggestions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace DiabloII.Application.Tests.Steps.Suggestions
+namespace DiabloII.Application.Tests.Mappers
 {
     public static class SuggestionsTableMapper
     {

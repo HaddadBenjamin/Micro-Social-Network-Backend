@@ -1,6 +1,6 @@
-﻿using DiabloII.Application.Tests.Steps.Suggestions;
+﻿using DiabloII.Application.Tests.Apis;
 
-namespace DiabloII.Application.Tests.Contexts
+namespace DiabloII.Application.Tests.Repositories
 {
     public class RepositoryContext
     {

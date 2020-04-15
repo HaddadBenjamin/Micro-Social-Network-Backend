@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Flurl.Http;
 using Newtonsoft.Json;
 
-namespace DiabloII.Application.Tests.Contexts
+namespace DiabloII.Application.Tests.Apis
 {
     public class HttpContext : IDisposable
     {

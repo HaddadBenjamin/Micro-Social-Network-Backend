@@ -2,6 +2,8 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using DiabloII.Application.Tests.Apis;
+using DiabloII.Application.Tests.Repositories;
 using DiabloII.Infrastructure.DbContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
@@ -9,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiabloII.Application.Tests.Contexts
+namespace DiabloII.Application.Tests
 {
     public sealed class TestContext : IDisposable
     {

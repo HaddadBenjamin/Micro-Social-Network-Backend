@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
-using DiabloII.Application.Tests.Contexts;
 
-namespace DiabloII.Application.Tests.Steps.Suggestions
+namespace DiabloII.Application.Tests.Apis
 {
     public class SuggestionsApi
     {

@@ -2,9 +2,8 @@
 using System.Threading.Tasks;
 using DiabloII.Application.Requests.Items;
 using DiabloII.Application.Responses.Items;
-using DiabloII.Application.Tests.Contexts;
 
-namespace DiabloII.Application.Tests.Steps.Items
+namespace DiabloII.Application.Tests.Apis
 {
     public class ItemsApi
     {

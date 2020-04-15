@@ -1,5 +1,4 @@
-﻿using DiabloII.Application.Tests.Contexts;
-using DiabloII.Infrastructure.DbContext;
+﻿using DiabloII.Infrastructure.DbContext;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests.Steps.Suggestions

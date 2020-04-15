@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Tests.Apis;
 
-namespace DiabloII.Application.Tests.Steps.Suggestions
+namespace DiabloII.Application.Tests.Repositories
 {
     public class SuggestionsRepository
     {
