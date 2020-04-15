@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Flurl.Http;
 using Newtonsoft.Json;
 
-namespace DiabloII.Application.Tests.Apis
+namespace DiabloII.Application.Tests.Startup
 {
-    public class HttpContext : IDisposable
+    public class HttpContext : IDisposable, IHttpContext
     {
         private readonly FlurlClient _flurlClient;
 

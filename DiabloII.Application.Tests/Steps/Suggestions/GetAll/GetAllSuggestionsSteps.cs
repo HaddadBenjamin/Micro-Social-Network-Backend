@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using DiabloII.Application.Tests.Apis;
-using DiabloII.Application.Tests.Contexts;
+using DiabloII.Application.Tests.Apis.Suggestions;
+using DiabloII.Application.Tests.Contexts.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;
 
@@ -10,12 +10,12 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.GetAll
     [Scope(Tag = "suggestions")]
     public class GetAllSuggestionsSteps
     {
-        private readonly SuggestionsApi _suggestionsApi;
-        private readonly SuggestionsTestContext _suggestionsContext;
+        private readonly ISuggestionsApi _suggestionsApi;
+        private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public GetAllSuggestionsSteps(TestContext testContext, SuggestionsTestContext suggestionsContext)
+        public GetAllSuggestionsSteps(ISuggestionsApi suggestionsApi, ISuggestionsTestContext suggestionsContext)
         {
-            _suggestionsApi = testContext.ApiContext.Suggestions;
+            _suggestionsApi = suggestionsApi;
             _suggestionsContext = suggestionsContext;
         }
 

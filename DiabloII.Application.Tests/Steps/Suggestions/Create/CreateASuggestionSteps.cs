@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Tests.Apis;
-using DiabloII.Application.Tests.Contexts;
+using DiabloII.Application.Tests.Apis.Suggestions;
+using DiabloII.Application.Tests.Contexts.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -12,12 +12,12 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Create
     [Scope(Tag = "suggestions")]
     public class CreateASuggestionSteps
     {
-        private readonly SuggestionsApi _suggestionsApi;
-        private readonly SuggestionsTestContext _suggestionsContext;
+        private readonly ISuggestionsApi _suggestionsApi;
+        private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public CreateASuggestionSteps(TestContext testContext, SuggestionsTestContext suggestionsContext)
+        public CreateASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsTestContext suggestionsContext)
         {
-            _suggestionsApi = testContext.ApiContext.Suggestions;
+            _suggestionsApi = suggestionsApi;
             _suggestionsContext = suggestionsContext;
         }
 

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Items;
-using DiabloII.Application.Tests.Apis;
+using DiabloII.Application.Tests.Apis.Items;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -10,9 +10,9 @@ namespace DiabloII.Application.Tests.Steps.Items.Search
     [Scope(Tag = "items")]
     public class SearchItemsSteps
     {
-        private readonly ItemsApi _itemsApi;
+        private readonly IItemsApi _itemsApi;
 
-        public SearchItemsSteps(TestContext testContext) => _itemsApi = testContext.ApiContext.Items;
+        public SearchItemsSteps(IItemsApi itemsApi) => _itemsApi = itemsApi;
 
         [When(@"I search the items")]
         public async Task WhenISearchTheItems(Table table)

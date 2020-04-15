@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Tests.Apis;
-using DiabloII.Application.Tests.Contexts;
+using DiabloII.Application.Tests.Apis.Suggestions;
+using DiabloII.Application.Tests.Contexts.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Mappers;
 using DiabloII.Application.Tests.Repositories;
@@ -14,14 +14,14 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
     [Scope(Tag = "suggestions")]
     public class CommentASuggestionSteps
     {
-        private readonly SuggestionsApi _suggestionsApi;
-        private readonly SuggestionsRepository _suggestionsRepository;
-        private readonly SuggestionsTestContext _suggestionsContext;
+        private readonly ISuggestionsApi _suggestionsApi;
+        private readonly ISuggestionsRepository _suggestionsRepository;
+        private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public CommentASuggestionSteps(TestContext testContext, SuggestionsTestContext suggestionsContext)
+        public CommentASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
         {
-            _suggestionsApi = testContext.ApiContext.Suggestions;
-            _suggestionsRepository = testContext.RepositoryContext.Suggestions;
+            _suggestionsApi = suggestionsApi;
+            _suggestionsRepository = suggestionsRepository;
             _suggestionsContext = suggestionsContext;
         }
 

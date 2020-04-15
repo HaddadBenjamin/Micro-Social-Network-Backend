@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Tests.Apis;
+using DiabloII.Application.Tests.Apis.Suggestions;
 using DiabloII.Application.Tests.Repositories;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -11,13 +11,13 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.DeleteComment
     [Scope(Tag = "suggestions")]
     public class DeleteASuggestionCommentSteps
     {
-        private readonly SuggestionsRepository _suggestionsRepository;
-        private readonly SuggestionsApi _suggestionsApi;
+        private readonly ISuggestionsRepository _suggestionsRepository;
+        private readonly ISuggestionsApi _suggestionsApi;
 
-        public DeleteASuggestionCommentSteps(TestContext testContext)
+        public DeleteASuggestionCommentSteps(ISuggestionsRepository suggestionsRepository, ISuggestionsApi suggestionsApi)
         {
-            _suggestionsRepository = testContext.RepositoryContext.Suggestions;
-            _suggestionsApi = testContext.ApiContext.Suggestions;
+            _suggestionsRepository = suggestionsRepository;
+            _suggestionsApi = suggestionsApi;
         }
 
         [When(@"I delete the suggestion comment ""(.*)"" from the suggestion ""(.*)""")]

@@ -2,15 +2,15 @@
 using System.Linq;
 using System.Threading.Tasks;
 using DiabloII.Application.Responses.Suggestions;
-using DiabloII.Application.Tests.Apis;
+using DiabloII.Application.Tests.Apis.Suggestions;
 
 namespace DiabloII.Application.Tests.Repositories
 {
-    public class SuggestionsRepository
+    public class SuggestionsRepository : ISuggestionsRepository
     {
-        private readonly SuggestionsApi _suggestionsApi;
+        private readonly ISuggestionsApi _suggestionsApi;
 
-        public SuggestionsRepository(SuggestionsApi suggestionsApi) => _suggestionsApi = suggestionsApi;
+        public SuggestionsRepository(ISuggestionsApi suggestionsApi) => _suggestionsApi = suggestionsApi;
 
         #region Read
         public async Task<Guid> GetSuggestionId(string suggestionContent) => (await GetSuggestion(suggestionContent)).Id;

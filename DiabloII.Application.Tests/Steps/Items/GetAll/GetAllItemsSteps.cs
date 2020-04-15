@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DiabloII.Application.Tests.Apis;
+using DiabloII.Application.Tests.Apis.Items;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests.Steps.Items.GetAll
@@ -8,9 +8,9 @@ namespace DiabloII.Application.Tests.Steps.Items.GetAll
     [Scope(Tag = "items")]
     public class GetAllItemsSteps
     {
-        private readonly ItemsApi _itemsApi;
+        private readonly IItemsApi _itemsApi;
 
-        public GetAllItemsSteps(TestContext testContext) => _itemsApi = testContext.ApiContext.Items;
+        public GetAllItemsSteps(IItemsApi itemsApi) => _itemsApi = itemsApi;
 
         [When(@"I get all the items")]
         public async Task WhenIGetAllTheItems() => await _itemsApi.GetAll();

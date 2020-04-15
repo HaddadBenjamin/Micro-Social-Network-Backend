@@ -2,8 +2,6 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
-using DiabloII.Application.Tests.Apis;
-using DiabloII.Application.Tests.Repositories;
 using DiabloII.Infrastructure.DbContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
@@ -11,38 +9,34 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiabloII.Application.Tests
+namespace DiabloII.Application.Tests.Startup
 {
     public sealed class TestContext : IDisposable
     {
         public readonly HttpContext HttpContext;
 
-        public readonly ApiContext ApiContext;
-
         public readonly ApplicationDbContext DbContext;
 
-        public readonly RepositoryContext RepositoryContext;
+        public IServiceCollection Services;
 
-        private TestServer _testServer;
+        public readonly TestServer TestServer;
 
         public TestContext()
         {
-            _testServer = new TestServer(CreateTheWebHostBuilder());
+            TestServer = new TestServer(CreateTheWebHostBuilder());
 
-            var httpClient = ConfigureTheHttpClient(_testServer.CreateClient());
+            var httpClient = ConfigureTheHttpClient(TestServer.CreateClient());
 
             HttpContext = new HttpContext(httpClient);
-            ApiContext = new ApiContext(HttpContext);
-            DbContext = _testServer.Services.GetService<ApplicationDbContext>();
-            RepositoryContext = new RepositoryContext(ApiContext);
+            DbContext = TestServer.Services.GetService<ApplicationDbContext>();
         }
 
-        private static IWebHostBuilder CreateTheWebHostBuilder() => new WebHostBuilder()
+        private IWebHostBuilder CreateTheWebHostBuilder() => new WebHostBuilder()
             .ConfigureServices(InitializeServices)
             .UseEnvironment("Development")
             .UseStartup(typeof(TestStartup));
 
-        private static void InitializeServices(IServiceCollection services)
+        private void InitializeServices(IServiceCollection services)
         {
             var startupAssembly = typeof(Application.Startup).GetTypeInfo().Assembly;
 
@@ -53,6 +47,8 @@ namespace DiabloII.Application.Tests
             };
 
             services.AddSingleton(manager);
+
+            Services = services;
         }
 
         private static HttpClient ConfigureTheHttpClient(HttpClient httpClient)
@@ -67,7 +63,7 @@ namespace DiabloII.Application.Tests
         public void Dispose()
         {
             HttpContext.Dispose();
-            _testServer.Dispose();
+            TestServer.Dispose();
         }
     }
 }

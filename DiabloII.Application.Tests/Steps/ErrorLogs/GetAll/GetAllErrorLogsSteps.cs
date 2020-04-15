@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DiabloII.Application.Tests.Apis;
+using DiabloII.Application.Tests.Apis.ErrorLogs;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests.Steps.ErrorLogs.GetAll
@@ -8,9 +8,9 @@ namespace DiabloII.Application.Tests.Steps.ErrorLogs.GetAll
     [Scope(Tag = "errorlogs")]
     public class GetAllErrorLogsSteps
     {
-        private readonly ErrorLogsApi _errorLogsApi;
+        private readonly IErrorLogsApi _errorLogsApi;
 
-        public GetAllErrorLogsSteps(TestContext testContext) => _errorLogsApi = testContext.ApiContext.ErrorLogs;
+        public GetAllErrorLogsSteps(IErrorLogsApi errorLogsApi) => _errorLogsApi = errorLogsApi;
 
         [When(@"I get all the error logs")]
         public async Task WhenIGetAllTheErrorLogs() => await _errorLogsApi.GetAll();

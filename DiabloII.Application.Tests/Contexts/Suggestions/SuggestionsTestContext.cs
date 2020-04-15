@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Application.Responses.Suggestions;
 
-namespace DiabloII.Application.Tests.Contexts
+namespace DiabloII.Application.Tests.Contexts.Suggestions
 {
-    public class SuggestionsTestContext
+    public class SuggestionsTestContext : ISuggestionsTestContext
     {
         public IReadOnlyCollection<SuggestionDto> AllSuggestions { get; set; }
 

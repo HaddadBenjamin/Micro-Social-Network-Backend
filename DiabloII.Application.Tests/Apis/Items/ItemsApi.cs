@@ -2,16 +2,17 @@
 using System.Threading.Tasks;
 using DiabloII.Application.Requests.Items;
 using DiabloII.Application.Responses.Items;
+using DiabloII.Application.Tests.Startup;
 
-namespace DiabloII.Application.Tests.Apis
+namespace DiabloII.Application.Tests.Apis.Items
 {
-    public class ItemsApi
+    public class ItemsApi : IItemsApi
     {
-        private readonly HttpContext _httpContext;
+        private readonly IHttpContext _httpContext;
 
         private static readonly string BaseUrl = "items";
 
-        public ItemsApi(HttpContext httpContext) => _httpContext = httpContext;
+        public ItemsApi(IHttpContext httpContext) => _httpContext = httpContext;
 
         public async Task GetAll() => await _httpContext.GetAsync<IReadOnlyCollection<ItemDto>>(BaseUrl);
 

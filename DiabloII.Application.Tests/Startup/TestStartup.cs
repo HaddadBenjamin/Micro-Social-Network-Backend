@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiabloII.Application.Tests
+namespace DiabloII.Application.Tests.Startup
 {
     public class TestStartup
     {
-        internal static readonly Type ApplicationType = typeof(Startup);
+        internal static readonly Type ApplicationType = typeof(Application.Startup);
         internal static readonly Type InfrastructureType = typeof(ErrorLogRepository);
         internal static readonly Type DomainType = typeof(IErrorLogRepository);
 
