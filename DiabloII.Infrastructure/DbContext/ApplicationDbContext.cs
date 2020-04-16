@@ -1,6 +1,7 @@
 ﻿using DiabloII.Domain.Models.ErrorLogs;
 using DiabloII.Domain.Models.Items;
 using DiabloII.Domain.Models.Suggestions;
+using DiabloII.Domain.Models.Users;
 using DiabloII.Infrastructure.DbContext.Mappers.Items;
 using DiabloII.Infrastructure.DbContext.Mappers.Suggestions;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +21,10 @@ namespace DiabloII.Infrastructure.DbContext
         public DbSet<Item> Items{ get; set; }
         
         public DbSet<ItemProperty> ItemProperties{ get; set; }
+
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<UserNotification> UserNotifications { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         
