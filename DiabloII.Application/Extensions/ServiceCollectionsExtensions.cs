@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using DiabloII.Application.Filters.ErrorHandling;
+using DiabloII.Domain.Configurations;
 using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Helpers;
 using FluentValidation.AspNetCore;
@@ -49,6 +50,15 @@ namespace DiabloII.Application.Extensions
                 })
                 .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
                 .AddFluentValidation();
+
+            return services;
+        }
+
+        public static IServiceCollection AddMySmtpServer(this IServiceCollection services, SmtpConfiguration smtpConfiguration)
+        {
+            services
+                .AddFluentEmail(smtpConfiguration.FromEmail)
+                .AddSmtpSender(smtpConfiguration.Host, smtpConfiguration.Port, smtpConfiguration.FromEmail, smtpConfiguration.FromPassword);
 
             return services;
         }
