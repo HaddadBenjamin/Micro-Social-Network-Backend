@@ -7,5 +7,7 @@ namespace DiabloII.Domain.Models.Users
         public Guid Id { get; set; }
 
         public string Email { get; set; }
+
+        public UserNotificationSetting NotificationSetting { get; set; }
     }
 }

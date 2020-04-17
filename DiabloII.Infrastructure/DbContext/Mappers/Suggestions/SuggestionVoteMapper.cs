@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Infrastructure.DbContext.Mappers.Suggestions
 {
-    public static class SuggestionVoteDbMapper
+    public static class SuggestionVoteMapper
     {
         private static readonly int Ipv4Length = 15;
 

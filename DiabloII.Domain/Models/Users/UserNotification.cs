@@ -1,4 +1,5 @@
 ﻿using System;
+using DiabloII.Domain.Models.Notifications;
 
 namespace DiabloII.Domain.Models.Users
 {
@@ -6,16 +7,14 @@ namespace DiabloII.Domain.Models.Users
     {
         public Guid Id { get; set; }
 
-        public Guid UserId { get; set; }
+        public Guid UserNotificationSettingId { get; set; }
 
-        public virtual User User { get; set; }
+        public UserNotificationSetting UserNotificationSetting { get; set; }
 
-        public bool NewPatchNotes { get; set; }
+        public Guid NotificationId { get; set; }
 
-        public bool NewSuggestions { get; set; }
+        public Notification Notification { get; set; }
 
-        public bool NewSuggestionComments { get; set; }
-
-        public bool NewInformationRelativeToTheMod { get; set; }
+        public bool HaveBeenRead { get; set; }
     }
 }

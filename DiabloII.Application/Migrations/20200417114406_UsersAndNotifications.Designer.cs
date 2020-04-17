@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DiabloII.Application.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200416200023_UserNotification")]
-    partial class UserNotification
+    [Migration("20200417114406_UsersAndNotifications")]
+    partial class UsersAndNotifications
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -238,6 +238,32 @@ namespace DiabloII.Application.Migrations
                     b.ToTable("SuggestionVotes");
                 });
 
+            modelBuilder.Entity("DiabloII.Domain.Models.Users.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.ToTable("Notifications");
+                });
+
             modelBuilder.Entity("DiabloII.Domain.Models.Users.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -258,26 +284,45 @@ namespace DiabloII.Application.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("NewInformationRelativeToTheMod")
+                    b.Property<bool>("HaveBeenRead")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("NewPatchNotes")
-                        .HasColumnType("bit");
+                    b.Property<Guid>("NotificationId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("NewSuggestionComments")
-                        .HasColumnType("bit");
+                    b.Property<Guid>("UserNotificationSettingId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("NewSuggestions")
-                        .HasColumnType("bit");
+                    b.HasKey("Id");
+
+                    b.HasIndex("NotificationId");
+
+                    b.HasIndex("UserNotificationSettingId");
+
+                    b.ToTable("UserNotifications");
+                });
+
+            modelBuilder.Entity("DiabloII.Domain.Models.Users.UserNotificationSetting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("AcceptedNotifications")
+                        .HasColumnType("int");
+
+                    b.Property<int>("AcceptedNotifiers")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
-                    b.ToTable("UserNotifications");
+                    b.ToTable("UserNotificationSettings");
                 });
 
             modelBuilder.Entity("DiabloII.Domain.Models.Items.ItemProperty", b =>
@@ -309,9 +354,24 @@ namespace DiabloII.Application.Migrations
 
             modelBuilder.Entity("DiabloII.Domain.Models.Users.UserNotification", b =>
                 {
+                    b.HasOne("DiabloII.Domain.Models.Users.Notification", "Notification")
+                        .WithMany("UserNotifications")
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DiabloII.Domain.Models.Users.UserNotificationSetting", "UserNotificationSetting")
+                        .WithMany("UserNotifications")
+                        .HasForeignKey("UserNotificationSettingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DiabloII.Domain.Models.Users.UserNotificationSetting", b =>
+                {
                     b.HasOne("DiabloII.Domain.Models.Users.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                        .WithOne("NotificationSetting")
+                        .HasForeignKey("DiabloII.Domain.Models.Users.UserNotificationSetting", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

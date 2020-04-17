@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Infrastructure.DbContext.Mappers.Suggestions
 {
-    public static class SuggestionCommentDbMapper
+    public static class SuggestionCommentMapper
     {
         public static void Map(ModelBuilder modelBuilder)
         {
