@@ -12,9 +12,10 @@ namespace DiabloII.Application.Filters.ErrorHandling
     {
         private static readonly Dictionary<string, HttpStatusCode?> _exceptionTypeNameToHttpStatusMapper = new Dictionary<string, HttpStatusCode?>()
         {
-            {nameof(BadRequestException), HttpStatusCode.BadRequest},
-            {nameof(NotFoundException), HttpStatusCode.NotFound},
-            {nameof(UnauthorizedException), HttpStatusCode.Unauthorized}
+            { nameof(BadRequestException), HttpStatusCode.BadRequest },
+            { nameof(UnauthorizedException), HttpStatusCode.Unauthorized },
+            { nameof(AlreadyExistsException), HttpStatusCode.Forbidden },
+            { nameof(NotFoundException), HttpStatusCode.NotFound },
         };
 
         public override void OnException(ExceptionContext exceptionContext)

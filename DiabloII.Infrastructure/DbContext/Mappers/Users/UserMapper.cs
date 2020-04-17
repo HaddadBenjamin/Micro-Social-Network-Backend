@@ -14,13 +14,12 @@ namespace DiabloII.Infrastructure.DbContext.Mappers.Users
                 .HasIndex(user => user.Id)
                 .IsUnique();
 
-            userBuilder
-                .Property(user => user.Email)
-                .IsRequired();
+            userBuilder.Property(user => user.Email);
 
             userBuilder
                 .HasOne(user => user.NotificationSetting)
                 .WithOne(userNotificationSetting => userNotificationSetting.User)
+                .HasForeignKey<User>(user => user.UserNotificationSettingId)
                 .IsRequired();
         }
     }
