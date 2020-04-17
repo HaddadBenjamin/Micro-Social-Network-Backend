@@ -19,7 +19,6 @@ namespace DiabloII.Infrastructure.DbContext.Mappers.Users
             userBuilder
                 .HasOne(user => user.NotificationSetting)
                 .WithOne(userNotificationSetting => userNotificationSetting.User)
-                .HasForeignKey<User>(user => user.UserNotificationSettingId)
                 .IsRequired();
         }
     }

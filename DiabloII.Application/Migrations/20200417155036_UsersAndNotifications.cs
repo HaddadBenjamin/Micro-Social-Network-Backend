@@ -26,8 +26,7 @@ namespace DiabloII.Application.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    UserNotificationSettingId = table.Column<Guid>(nullable: false)
+                    Email = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,7 +38,7 @@ namespace DiabloII.Application.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
                     AcceptedNotifications = table.Column<int>(nullable: false),
                     AcceptedNotifiers = table.Column<int>(nullable: false)
                 },
@@ -112,8 +111,7 @@ namespace DiabloII.Application.Migrations
                 name: "IX_UserNotificationSettings_UserId",
                 table: "UserNotificationSettings",
                 column: "UserId",
-                unique: true,
-                filter: "[UserId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Id",
