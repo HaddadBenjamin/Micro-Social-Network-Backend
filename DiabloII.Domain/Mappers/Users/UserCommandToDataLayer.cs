@@ -11,6 +11,11 @@ namespace DiabloII.Domain.Mappers.Suggestions
             CreateMap<CreateAUserCommand, User>().AfterMap((command, dataModel) =>
             {
                 dataModel.Id = command.UserId;
+                dataModel.NotificationSetting = new UserNotificationSetting
+                {
+                    User = dataModel,
+                    UserId = dataModel.Id
+                };
             });
         }
     }
