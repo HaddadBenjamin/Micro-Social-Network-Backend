@@ -6,6 +6,7 @@ using DiabloII.Domain.Models.Users;
 using DiabloII.Infrastructure.DbContext.Mappers.Items;
 using DiabloII.Infrastructure.DbContext.Mappers.Notifications;
 using DiabloII.Infrastructure.DbContext.Mappers.Suggestions;
+using DiabloII.Infrastructure.DbContext.Mappers.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace DiabloII.Infrastructure.DbContext
@@ -44,6 +45,10 @@ namespace DiabloII.Infrastructure.DbContext
             ItemPropertyMapper.Map(modelBuilder);
 
             NotificationMapper.Map(modelBuilder);
+
+            UserMapper.Map(modelBuilder);
+            UserNotificationSettingMapper.Map(modelBuilder);
+            UserNotificationMapper.Map(modelBuilder);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Requests.Users;
-using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Responses.Users;
 using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Handlers;
@@ -27,7 +26,7 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("users")]
         [HttpPost]
-        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public ActionResult<UserDto> Create([FromBody] CreateAUserDto dto)

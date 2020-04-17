@@ -22,17 +22,36 @@ namespace DiabloII.Application.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
+                    UserNotificationSettingId = table.Column<Guid>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserNotificationSettings",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     AcceptedNotifications = table.Column<int>(nullable: false),
                     AcceptedNotifiers = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserNotificationSettings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserNotificationSettings_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -61,28 +80,15 @@ namespace DiabloII.Application.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    UserNotificationSettingId = table.Column<Guid>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Users_UserNotificationSettings_UserNotificationSettingId",
-                        column: x => x.UserNotificationSettingId,
-                        principalTable: "UserNotificationSettings",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_Id",
                 table: "Notifications",
+                column: "Id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserNotifications_Id",
+                table: "UserNotifications",
                 column: "Id",
                 unique: true);
 
@@ -97,9 +103,22 @@ namespace DiabloII.Application.Migrations
                 column: "UserNotificationSettingId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_UserNotificationSettingId",
+                name: "IX_UserNotificationSettings_Id",
+                table: "UserNotificationSettings",
+                column: "Id",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserNotificationSettings_UserId",
+                table: "UserNotificationSettings",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Id",
                 table: "Users",
-                column: "UserNotificationSettingId",
+                column: "Id",
                 unique: true);
         }
 
@@ -109,13 +128,13 @@ namespace DiabloII.Application.Migrations
                 name: "UserNotifications");
 
             migrationBuilder.DropTable(
-                name: "Users");
-
-            migrationBuilder.DropTable(
                 name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "UserNotificationSettings");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }
