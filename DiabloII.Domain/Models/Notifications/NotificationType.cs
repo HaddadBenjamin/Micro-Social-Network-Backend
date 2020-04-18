@@ -9,6 +9,6 @@ namespace DiabloII.Domain.Models.Notifications
         Other = 1,
         PatchNotes = 1 << 1,
         CreatedSuggestion = 1 << 2,
-        CreatedComment = 1 << 3
+        NewCommentOnYourSuggestion = 1 << 3
     }
 }

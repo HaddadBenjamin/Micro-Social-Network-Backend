@@ -1,5 +1,6 @@
 ﻿using System;
 using AutoMapper;
+using DiabloII.Domain.Commands.Notifications;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Models.Suggestions;
@@ -18,30 +19,33 @@ namespace DiabloII.Infrastructure.Handlers
         private readonly ApplicationDbContext _dbContext;
         private readonly ISuggestionRepository _repository;
         private readonly IMapper _mapper;
-        private readonly CreateASuggestionValidator _createASuggestionValidator;
-        private readonly VoteToASuggestionValidator _voteToASuggestionValidator;
-        private readonly CommentASuggestionValidator _commentASuggestionValidator;
-        private readonly DeleteASuggestionValidator _deleteASuggestionValidator;
-        private readonly DeleteASuggestionCommentValidator _deleteASuggestionCommentValidator;
+        private readonly INotificationCommandHandler _notificationHandler;
+        private readonly CreateASuggestionValidator _createValidator;
+        private readonly VoteToASuggestionValidator _voteValidator;
+        private readonly CommentASuggestionValidator _commentValidator;
+        private readonly DeleteASuggestionValidator _deleteValidator;
+        private readonly DeleteASuggestionCommentValidator _deleteCommentValidator;
 
         public SuggestionCommandHandler(
-            ApplicationDbContext dbContext,
             ISuggestionRepository repository,
             IMapper mapper,
-            CreateASuggestionValidator createASuggestionValidator,
-            VoteToASuggestionValidator voteToASuggestionValidator,
-            CommentASuggestionValidator commentASuggestionValidator,
-            DeleteASuggestionValidator deleteASuggestionValidator,
-            DeleteASuggestionCommentValidator deleteASuggestionCommentValidator)
+            INotificationCommandHandler notificationHandler,
+            ApplicationDbContext dbContext,
+            CreateASuggestionValidator createValidator,
+            VoteToASuggestionValidator voteValidator,
+            CommentASuggestionValidator commentValidator,
+            DeleteASuggestionValidator deleteValidator,
+            DeleteASuggestionCommentValidator deleteCommentValidator)
         {
             _dbContext = dbContext;
             _repository = repository;
             _mapper = mapper;
-            _createASuggestionValidator = createASuggestionValidator;
-            _voteToASuggestionValidator = voteToASuggestionValidator;
-            _commentASuggestionValidator = commentASuggestionValidator;
-            _deleteASuggestionValidator = deleteASuggestionValidator;
-            _deleteASuggestionCommentValidator = deleteASuggestionCommentValidator;
+            _notificationHandler = notificationHandler;
+            _createValidator = createValidator;
+            _voteValidator = voteValidator;
+            _commentValidator = commentValidator;
+            _deleteValidator = deleteValidator;
+            _deleteCommentValidator = deleteCommentValidator;
         }
 
 
@@ -49,13 +53,17 @@ namespace DiabloII.Infrastructure.Handlers
         public Suggestion Create(CreateASuggestionCommand createASugestion)
         {
             var validationContext = new CreateASuggestionValidationContext(createASugestion, _repository);
-
-            _createASuggestionValidator.Validate(validationContext);
+            
+            _createValidator.Validate(validationContext);
 
             var suggestion = _mapper.Map<Suggestion>(createASugestion);
 
             _dbContext.Suggestions.Add(suggestion);
             _dbContext.SaveChanges();
+
+            var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestion);
+            
+            _notificationHandler.CreateANotification(createANotificationCommand);
 
             return suggestion;
         }
@@ -64,7 +72,7 @@ namespace DiabloII.Infrastructure.Handlers
         {
             var validationContext = new VoteToASuggestionValidationContext(voteToASuggestionCommand, _repository);
 
-            _voteToASuggestionValidator.Validate(validationContext);
+            _voteValidator.Validate(validationContext);
 
             var suggestion = _repository.GetFirstSuggestion(voteToASuggestionCommand.SuggestionId);
             var suggestionVote = _repository.GetUserVoteOrDefault(suggestion, voteToASuggestionCommand.UserId);
@@ -88,12 +96,17 @@ namespace DiabloII.Infrastructure.Handlers
         {
             var validationContext = new CommentASuggestionValidationContext(commentASuggestion, _repository);
 
-            _commentASuggestionValidator.Validate(validationContext);
+            _commentValidator.Validate(validationContext);
 
             var suggestionComment = _mapper.Map<SuggestionComment>(commentASuggestion);
             var suggestion = _repository.AddComment(commentASuggestion.SuggestionId, suggestionComment);
 
             _dbContext.SaveChanges();
+
+            var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestionComment);
+            createANotificationCommand.ConcernedUserIds = new [] { suggestion.CreatedBy };
+
+            _notificationHandler.CreateANotification(createANotificationCommand);
 
             return suggestion;
         }
@@ -102,7 +115,7 @@ namespace DiabloII.Infrastructure.Handlers
         {
             var validationContext = new DeleteASuggestionValidationContext(deleteASuggestion, _repository);
 
-            _deleteASuggestionValidator.Validate(validationContext);
+            _deleteValidator.Validate(validationContext);
 
             _repository.RemoveUserSuggestion(deleteASuggestion.Id, deleteASuggestion.UserId);
             _dbContext.SaveChanges();
@@ -114,7 +127,7 @@ namespace DiabloII.Infrastructure.Handlers
         {
             var validationContext = new DeleteASuggestionCommentValidationContext(deleteASuggestionComment, _repository);
 
-            _deleteASuggestionCommentValidator.Validate(validationContext);
+            _deleteCommentValidator.Validate(validationContext);
 
             var suggestion = _repository.RemoveUserComment(deleteASuggestionComment.SuggestionId, deleteASuggestionComment.Id, deleteASuggestionComment.UserId);
 

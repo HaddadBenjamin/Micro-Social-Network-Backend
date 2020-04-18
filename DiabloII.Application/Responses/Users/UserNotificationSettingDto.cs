@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using DiabloII.Domain.Models.Notifications;
 
 namespace DiabloII.Application.Responses.Users
 {
