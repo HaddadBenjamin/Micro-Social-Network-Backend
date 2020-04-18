@@ -2,7 +2,7 @@
 using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Models.Users;
 
-namespace DiabloII.Domain.Mappers.Suggestions
+namespace DiabloII.Domain.Mappers.Users
 {
     public class UserCommandToDataLayer : Profile
     {

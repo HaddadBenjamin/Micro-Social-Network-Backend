@@ -33,9 +33,27 @@ namespace DiabloII.Application.Controllers
         {
             var command = _mapper.Map<CreateAUserCommand>(dto);
             var model = _handler.Create(command);
-            var responseDto = _mapper.Map<UserDto>(model);
+            var response = _mapper.Map<UserDto>(model);
 
-            return this.CreatedByUsingTheRequestRoute(responseDto);
+            return this.CreatedByUsingTheRequestRoute(response);
+        }
+
+        /// <summary>
+        /// Update a user
+        /// </summary>
+        [Route("users/{userId:guid}")]
+        [HttpPut]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public ActionResult<UserDto> Update([FromBody] UpdateAUserDto dto, string userId)
+        {
+            dto.UserId = userId;
+
+            var command = _mapper.Map<UpdateAUserCommand>(dto);
+            var model = _handler.Update(command);
+            var response = _mapper.Map<UserDto>(model);
+
+            return Ok(response);
         }
     }
 }

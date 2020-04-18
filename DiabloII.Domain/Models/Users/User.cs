@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DiabloII.Domain.Models.Users
+﻿namespace DiabloII.Domain.Models.Users
 {
     public class User
     {

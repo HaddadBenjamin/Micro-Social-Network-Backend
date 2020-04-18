@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DiabloII.Domain.Models.Users;
 using DiabloII.Domain.Repositories;
 using DiabloII.Infrastructure.DbContext;
 
@@ -11,5 +12,7 @@ namespace DiabloII.Infrastructure.Repositories
         public UserRepository(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
         public bool DoesUserExists(string userId) => _dbContext.Users.Any(user => user.Id == userId);
+
+        public User GetUser(string userId) => _dbContext.Users.Single(user => user.Id == userId);
     }
 }

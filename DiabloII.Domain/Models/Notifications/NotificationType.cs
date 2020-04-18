@@ -6,10 +6,9 @@ namespace DiabloII.Domain.Models.Notifications
     public enum NotificationType
     {
         None = 0,
-        All = 1,
-        Other = 1 << 1,
-        PatchNotes = 1 << 2,
-        CreatedSuggestion = 1 << 3,
-        CreatedComment = 1 << 4
+        Other = 1,
+        PatchNotes = 1 << 1,
+        CreatedSuggestion = 1 << 2,
+        CreatedComment = 1 << 3
     }
 }

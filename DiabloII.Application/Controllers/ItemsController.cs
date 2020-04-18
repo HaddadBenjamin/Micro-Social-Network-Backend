@@ -31,12 +31,12 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(typeof(IReadOnlyCollection<ItemDto>), StatusCodes.Status200OK)]
         public ActionResult<IReadOnlyCollection<ItemDto>> GetAllUniques()
         {
-            var responseDto = _reader
+            var response = _reader
                 .GetAllUniques()
                 .Select(_mapper.Map<ItemDto>)
                 .ToList();
 
-            return Ok(responseDto);
+            return Ok(response);
         }
 
         /// <summary>
@@ -47,12 +47,12 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(typeof(IReadOnlyCollection<ItemDto>), StatusCodes.Status200OK)]
         public ActionResult<IReadOnlyCollection<ItemDto>> SearchUniques(SearchUniquesDto searchDto)
         {
-            var responseDto = _reader
+            var response = _reader
                 .SearchUniques(_mapper.Map<SearchUniquesQuery>(searchDto))
                 .Select(_mapper.Map<ItemDto>)
                 .ToList();
 
-            return Ok(responseDto);
+            return Ok(response);
         }
     }
 }

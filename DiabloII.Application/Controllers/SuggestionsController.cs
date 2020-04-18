@@ -35,12 +35,12 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(typeof(IReadOnlyCollection<SuggestionDto>), StatusCodes.Status200OK)]
         public ActionResult<IReadOnlyCollection<SuggestionDto>> GetAll()
         {
-            var responseDto = _reader
+            var response = _reader
                 .GetAll()
                 .Select(_mapper.Map<SuggestionDto>)
                 .ToList();
 
-            return Ok(responseDto);
+            return Ok(response);
         }
 
         /// <summary>
@@ -54,9 +54,9 @@ namespace DiabloII.Application.Controllers
         {
             var command = _mapper.Map<CreateASuggestionCommand>(createASuggestion);
             var model = _handler.Create(command);
-            var responseDto = _mapper.Map<SuggestionDto>(model);
+            var response = _mapper.Map<SuggestionDto>(model);
 
-            return this.CreatedByUsingTheRequestRoute(responseDto);
+            return this.CreatedByUsingTheRequestRoute(response);
         }
 
         /// <summary>
@@ -74,9 +74,9 @@ namespace DiabloII.Application.Controllers
 
             var command = _mapper.Map<VoteToASuggestionCommand>(voteToASuggestion);
             var model = _handler.Vote(command);
-            var responseDto = _mapper.Map<SuggestionDto>(model);
+            var response = _mapper.Map<SuggestionDto>(model);
 
-            return this.CreatedByUsingTheRequestRoute(responseDto);
+            return this.CreatedByUsingTheRequestRoute(response);
         }
 
         /// <summary>
@@ -94,9 +94,9 @@ namespace DiabloII.Application.Controllers
 
             var command = _mapper.Map<CommentASuggestionCommand>(commentASuggestion);
             var model = _handler.Comment(command);
-            var responseDto = _mapper.Map<SuggestionDto>(model);
+            var response = _mapper.Map<SuggestionDto>(model);
 
-            return this.CreatedByUsingTheRequestRoute(responseDto);
+            return this.CreatedByUsingTheRequestRoute(response);
         }
 
         /// <summary>

@@ -6,5 +6,7 @@ namespace DiabloII.Domain.Handlers
     public interface IUserCommandHandler
     {
         User Create(CreateAUserCommand command);
+
+        User Update(UpdateAUserCommand command);
     }
 }
