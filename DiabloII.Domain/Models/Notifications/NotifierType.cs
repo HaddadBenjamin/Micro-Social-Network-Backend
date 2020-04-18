@@ -1,8 +1,5 @@
-﻿using System;
-
-namespace DiabloII.Domain.Models.Notifications
+﻿namespace DiabloII.Domain.Models.Notifications
 {
-    [Flags]
     public enum NotifierType
     {
         None = 0,

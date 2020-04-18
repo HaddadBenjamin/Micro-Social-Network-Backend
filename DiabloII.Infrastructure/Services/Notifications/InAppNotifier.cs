@@ -28,6 +28,7 @@ namespace DiabloII.Infrastructure.Services.Notifications
             {
                 var userNotification = UserCrossDomainMapper.ToUserNotification(user, notification);
 
+                _dbContext.UserNotifications.Add(userNotification);
                 user.NotificationSetting.UserNotifications.Add(userNotification);
             }
 

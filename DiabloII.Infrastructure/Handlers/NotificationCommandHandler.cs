@@ -8,7 +8,7 @@ using DiabloII.Infrastructure.DbContext;
 
 namespace DiabloII.Infrastructure.Handlers
 {
-    public class NotificationHandler : INotificationCommandHandler
+    public class NotificationCommandHandler : INotificationCommandHandler
     {
         private readonly IMapper _mapper;
 
@@ -18,7 +18,7 @@ namespace DiabloII.Infrastructure.Handlers
        
         private readonly CreateANotificationValidator _createValidator;
 
-        public NotificationHandler(
+        public NotificationCommandHandler(
             INotificationService service,
             IMapper mapper,
             ApplicationDbContext dbContext,

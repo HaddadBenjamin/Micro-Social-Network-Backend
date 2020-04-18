@@ -13,29 +13,29 @@ namespace DiabloII.Infrastructure.Handlers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-        private readonly CreateAUserValidator _createAUserValidator;
-        private readonly UpdateAUserValidator _updateAUserValidator;
+        private readonly CreateAUserValidator _createValidator;
+        private readonly UpdateAUserValidator _updateValidator;
         private readonly IUserRepository _repository;
 
         public UserCommandHandler(
             ApplicationDbContext dbContext,
             IUserRepository repository,
             IMapper mapper,
-            CreateAUserValidator createAUserValidator,
-            UpdateAUserValidator updateAUserValidator)
+            CreateAUserValidator createValidator,
+            UpdateAUserValidator updateValidator)
         {
             _dbContext = dbContext;
             _repository = repository;
             _mapper = mapper;
-            _createAUserValidator = createAUserValidator;
-            _updateAUserValidator = updateAUserValidator;
+            _createValidator = createValidator;
+            _updateValidator = updateValidator;
         }
 
         public User Create(CreateAUserCommand command)
         {
             var validationContext = new CreateAUserValidationContext(command, _repository);
 
-            _createAUserValidator.Validate(validationContext);
+            _createValidator.Validate(validationContext);
 
             var user = _mapper.Map<User>(command);
 
@@ -49,7 +49,7 @@ namespace DiabloII.Infrastructure.Handlers
         {
             var validationContext = new UpdateAUserValidationContext(command, _repository);
 
-            _updateAUserValidator.Validate(validationContext);
+            _updateValidator.Validate(validationContext);
 
             var user = _repository.GetUser(command.UserId);
 

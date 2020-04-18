@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Models.Users;
 using DiabloII.Domain.Repositories;
 using DiabloII.Infrastructure.DbContext;
@@ -14,8 +15,10 @@ namespace DiabloII.Infrastructure.Repositories
 
         public UserRepository(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
-        public IIncludableQueryable<User, UserNotificationSetting> GetQueryableUsers() => _dbContext.Users
-            .Include(user => user.NotificationSetting);
+        public IIncludableQueryable<User, Notification> GetQueryableUsers() => _dbContext.Users
+            .Include(user => user.NotificationSetting)
+            .ThenInclude(UserNotificationSetting => UserNotificationSetting.UserNotifications)
+            .ThenInclude(userNotification => userNotification.Notification);
 
         public bool DoesUserExists(string userId) => _dbContext.Users.Any(user => user.Id == userId);
 
