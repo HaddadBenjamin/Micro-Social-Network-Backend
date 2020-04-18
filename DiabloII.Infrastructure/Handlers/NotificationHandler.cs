@@ -30,7 +30,7 @@ namespace DiabloII.Infrastructure.Handlers
             _service = service;
         }
 
-        public Notification CreateANotification(CreateANotificationCommand command)
+        public Notification Create(CreateANotificationCommand command)
         {
             var validationContext = new CreateANotificationValidationContext(command);
 

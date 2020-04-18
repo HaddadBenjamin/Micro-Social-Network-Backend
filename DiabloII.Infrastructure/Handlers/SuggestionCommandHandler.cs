@@ -63,7 +63,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestion);
             
-            _notificationHandler.CreateANotification(createANotificationCommand);
+            _notificationHandler.Create(createANotificationCommand);
 
             return suggestion;
         }
@@ -106,7 +106,7 @@ namespace DiabloII.Infrastructure.Handlers
             var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestionComment);
             createANotificationCommand.ConcernedUserIds = new [] { suggestion.CreatedBy };
 
-            _notificationHandler.CreateANotification(createANotificationCommand);
+            _notificationHandler.Create(createANotificationCommand);
 
             return suggestion;
         }

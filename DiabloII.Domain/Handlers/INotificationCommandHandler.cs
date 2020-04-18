@@ -5,6 +5,6 @@ namespace DiabloII.Domain.Handlers
 {
     public interface INotificationCommandHandler
     {
-        Notification CreateANotification(CreateANotificationCommand command);
+        Notification Create(CreateANotificationCommand command);
     }
 }
