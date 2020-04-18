@@ -41,10 +41,11 @@ namespace DiabloII.Application.Controllers
         /// <summary>
         /// Update a user
         /// </summary>
-        [Route("users/{userId:guid}")]
+        [Route("users/{userId}")]
         [HttpPut]
         [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<UserDto> Update([FromBody] UpdateAUserDto dto, string userId)
         {
             dto.UserId = userId;

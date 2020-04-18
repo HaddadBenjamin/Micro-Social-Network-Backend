@@ -8,9 +8,9 @@ namespace DiabloII.Application.Responses.Users
     {
         public Guid Id { get; set; }
 
-        public IEnumerable<NotificationType> AcceptedNotifications { get; set; }
+        public IEnumerable<string> AcceptedNotifications { get; set; }
 
-        public IEnumerable<NotifierType> AcceptedNotifiers { get; set; }
+        public IEnumerable<string> AcceptedNotifiers { get; set; }
 
         public ICollection<UserNotificationDto> UserNotifications { get; set; } = new List<UserNotificationDto>();
     }

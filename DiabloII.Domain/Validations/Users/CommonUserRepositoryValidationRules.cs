@@ -8,5 +8,9 @@ namespace DiabloII.Domain.Validations.Users
         public static IRuleBuilder<T, CommonUserRepositoryValidationContext> UserShouldNotExists<T>(this IRuleBuilder<T, CommonUserRepositoryValidationContext> ruleBuilder) => ruleBuilder
             .Must(context => !context.Repository.DoesUserExists(context.Id))
             .OnFailure(context => throw new AlreadyExistsException("User"));
+
+        public static IRuleBuilder<T, CommonUserRepositoryValidationContext> UserShouldExists<T>(this IRuleBuilder<T, CommonUserRepositoryValidationContext> ruleBuilder) => ruleBuilder
+            .Must(context => context.Repository.DoesUserExists(context.Id))
+            .OnFailure(context => throw new NotFoundException("User"));
     }
 }

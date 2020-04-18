@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DiabloII.Application.Responses.Users;
+using DiabloII.Domain.Extensions;
 using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Models.Users;
@@ -12,10 +13,13 @@ namespace DiabloII.Application.Mappers.Users
         {
             CreateMap<User, UserDto>();
 
-            CreateMap<UserNotificationSetting, UserNotificationSettingDto>().AfterMap((dataModel, dto) =>
+            CreateMap<UserNotificationSetting, UserNotificationSettingDto>()
+                .Ignore(dto => dto.AcceptedNotifications)
+                .Ignore(dto => dto.AcceptedNotifiers)
+                .AfterMap((dataModel, dto) =>
             {
-                dto.AcceptedNotifications = EnumerationFlagsHelper.ToEnumerations<NotificationType>(dataModel.AcceptedNotifications);
-                dto.AcceptedNotifiers = EnumerationFlagsHelper.ToEnumerations<NotifierType>(dataModel.AcceptedNotifiers);
+                dto.AcceptedNotifications = EnumerationFlagsHelper.ToStrings<NotificationType>(dataModel.AcceptedNotifications);
+                dto.AcceptedNotifiers = EnumerationFlagsHelper.ToStrings<NotifierType>(dataModel.AcceptedNotifiers);
             });
 
             CreateMap<UserNotification, UserNotificationDto>().AfterMap((dataModel, dto) =>
