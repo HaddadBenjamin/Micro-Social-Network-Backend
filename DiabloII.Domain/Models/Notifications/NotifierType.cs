@@ -4,7 +4,6 @@
     {
         None = 0,
         InApp = 1,
-        Mail = 1 << 1,
-        Sms = 1 << 2,
+        Mail = 1 << 1
     }
 }
