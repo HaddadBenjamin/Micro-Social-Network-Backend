@@ -6,7 +6,7 @@ namespace DiabloII.Domain.Repositories
 {
     public interface INotificationCrossDomainRepository
     {
-        IReadOnlyCollection<User> GetUsersConcernedByThisNotification(NotificationType notificationType, IEnumerable<User> users);
+        IEnumerable<User> GetUsersConcernedByThisNotification(NotificationType notificationType, IEnumerable<User> users);
 
         IEnumerable<User> GetUsersConcernedByThisNotifier(NotifierType notifierType, IEnumerable<User> users);
     }

@@ -20,7 +20,7 @@ namespace DiabloII.Infrastructure.Services.Notifications
             _notificationCrossDomainRepository = notificationCrossDomainRepository;
         }
 
-        public void Notify(Notification notification, IReadOnlyCollection<User> users)
+        public void Notify(Notification notification, IEnumerable<User> users)
         {
             var usersConcernedByThisNotifier = _notificationCrossDomainRepository.GetUsersConcernedByThisNotifier(NotifierType.InApp, users);
 

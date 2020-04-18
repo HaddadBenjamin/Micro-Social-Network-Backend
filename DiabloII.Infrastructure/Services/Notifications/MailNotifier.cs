@@ -20,7 +20,7 @@ namespace DiabloII.Infrastructure.Services.Notifications
             this._email = _email;
         }
 
-        public void Notify(Notification notification, IReadOnlyCollection<User> users)
+        public void Notify(Notification notification, IEnumerable<User> users)
         {
             var userEmails = _notificationCrossDomainRepository
                 .GetUsersConcernedByThisNotifier(NotifierType.Mail, users)

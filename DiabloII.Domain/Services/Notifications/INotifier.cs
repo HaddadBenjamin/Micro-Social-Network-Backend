@@ -6,6 +6,6 @@ namespace DiabloII.Domain.Services.Notifications
 {
     public interface INotifier
     {
-        void Notify(Notification notification, IReadOnlyCollection<User> users);
+        void Notify(Notification notification, IEnumerable<User> users);
     }
 }
