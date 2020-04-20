@@ -5,7 +5,6 @@ using DiabloII.Application.Responses.Notifications;
 
 namespace DiabloII.Application.Tests.Apis.Notifications
 {
-
     public interface INotificationsApi
     {
         #region Read

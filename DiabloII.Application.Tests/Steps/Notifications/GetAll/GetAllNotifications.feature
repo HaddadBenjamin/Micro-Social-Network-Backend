@@ -12,5 +12,6 @@ Scenario: Get all the notifications happy path
 	When I get all the notifications
 	Then the http status code should be 200
 	And all the notifications should be
+		| Title            | Content                                                   | Type              |
 		| Patch note 1.863 | A new map have bene created and some mobs have been added | PatchNotes        |
 		| New suggestion   | You should add more maps in this game                     | CreatedSuggestion |
