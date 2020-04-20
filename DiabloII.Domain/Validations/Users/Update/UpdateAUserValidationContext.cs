@@ -14,7 +14,8 @@ namespace DiabloII.Domain.Validations.Users.Update
             Command = command;
             RepositoryValidationContext = new CommonUserRepositoryValidationContext(repository)
             {
-                Id = Command.UserId
+                Id = Command.UserId,
+                Email = Command.Email
             };
         }
     }

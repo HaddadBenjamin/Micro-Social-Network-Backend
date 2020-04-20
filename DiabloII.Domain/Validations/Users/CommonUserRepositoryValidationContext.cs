@@ -8,6 +8,8 @@ namespace DiabloII.Domain.Validations.Users
 
         public string Id { get; set; }
 
+        public string Email { get; set; }
+
         public CommonUserRepositoryValidationContext(IUserRepository repository) => Repository = repository;
     }
 }

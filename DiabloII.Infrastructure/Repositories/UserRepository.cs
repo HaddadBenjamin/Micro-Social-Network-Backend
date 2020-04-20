@@ -21,6 +21,8 @@ namespace DiabloII.Infrastructure.Repositories
             .ThenInclude(userNotification => userNotification.Notification);
 
         public bool DoesUserExists(string userId) => _dbContext.Users.Any(user => user.Id == userId);
+      
+        public bool DoesEmailIsUnique(string email) => !_dbContext.Users.Any(user => user.Email == email);
 
         public User GetUser(string userId) => GetQueryableUsers().Single(user => user.Id == userId);
 
