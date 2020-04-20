@@ -10,6 +10,8 @@ namespace DiabloII.Application.Tests.Services.Http
 
         Task<TResponse> PostAsync<TResponse>(string endpoint, object dto);
 
+        Task<TResponse> PutAsync<TResponse>(string endpoint, object dto);
+
         Task<TResponse> DeleteAsync<TResponse>(string endpoint, object dto);
     }
 }

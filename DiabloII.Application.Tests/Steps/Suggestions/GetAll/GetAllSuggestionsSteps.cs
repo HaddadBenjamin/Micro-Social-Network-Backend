@@ -11,6 +11,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.GetAll
     public class GetAllSuggestionsSteps
     {
         private readonly ISuggestionsApi _suggestionsApi;
+        
         private readonly ISuggestionsTestContext _suggestionsContext;
 
         public GetAllSuggestionsSteps(ISuggestionsApi suggestionsApi, ISuggestionsTestContext suggestionsContext)

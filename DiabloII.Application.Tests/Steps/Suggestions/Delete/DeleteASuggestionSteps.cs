@@ -12,6 +12,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Delete
     public class DeleteASuggestionSteps
     {
         private readonly ISuggestionsRepository _suggestionsRepository;
+     
         private readonly ISuggestionsApi _suggestionsApi;
 
         public DeleteASuggestionSteps(ISuggestionsRepository suggestionsRepository, ISuggestionsApi suggestionsApi)

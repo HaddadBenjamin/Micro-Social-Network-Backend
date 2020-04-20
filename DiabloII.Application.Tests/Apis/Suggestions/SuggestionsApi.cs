@@ -14,14 +14,11 @@ namespace DiabloII.Application.Tests.Apis.Suggestions
         public SuggestionsApi(IHttpService httpService) : base(httpService) { }
 
         #region Read
-
         public async Task<IReadOnlyCollection<SuggestionDto>> GetAll() =>
             await _httpService.GetAsync<IReadOnlyCollection<SuggestionDto>>(BaseUrl);
-
         #endregion
 
         #region Write
-
         public async Task<SuggestionDto> Create(CreateASuggestionDto dto) =>
             await _httpService.PostAsync<SuggestionDto>(BaseUrl, dto);
 
@@ -36,7 +33,6 @@ namespace DiabloII.Application.Tests.Apis.Suggestions
 
         public async Task DeleteComment(DeleteASuggestionCommentDto dto) =>
             await _httpService.DeleteAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/comments/{dto.Id}", dto);
-
         #endregion
     }
 }

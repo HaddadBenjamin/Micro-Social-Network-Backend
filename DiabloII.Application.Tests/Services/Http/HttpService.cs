@@ -29,6 +29,13 @@ namespace DiabloII.Application.Tests.Services.Http
             return await SetStatusCodeAndGetJsonResponse<TResponse>(flurlResponse);
         }
 
+        public async Task<TResponse> PutAsync<TResponse>(string endpoint, object dto)
+        {
+            var flurlResponse = await GetFlurlRequest(endpoint).PutJsonAsync(dto);
+
+            return await SetStatusCodeAndGetJsonResponse<TResponse>(flurlResponse);
+        }
+
         public async Task<TResponse> DeleteAsync<TResponse>(string endpoint, object dto)
         {
             var flurlResponse = await GetFlurlRequest(endpoint).SendAsync(HttpMethod.Delete, new StringContent(JsonConvert.SerializeObject(dto), Encoding.UTF8, "application/json"));

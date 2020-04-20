@@ -18,8 +18,8 @@ namespace DiabloII.Application.Mappers.Users
                 .Ignore(dto => dto.AcceptedNotifiers)
                 .AfterMap((dataModel, dto) =>
             {
-                dto.AcceptedNotifications = EnumerationFlagsHelper.ToStrings<NotificationType>(dataModel.AcceptedNotifications);
-                dto.AcceptedNotifiers = EnumerationFlagsHelper.ToStrings<NotifierType>(dataModel.AcceptedNotifiers);
+                dto.AcceptedNotifications = EnumerationFlagsHelpers.ToStrings<NotificationType>(dataModel.AcceptedNotifications);
+                dto.AcceptedNotifiers = EnumerationFlagsHelpers.ToStrings<NotifierType>(dataModel.AcceptedNotifiers);
             });
 
             CreateMap<UserNotification, UserNotificationDto>().AfterMap((dataModel, dto) =>

@@ -17,8 +17,8 @@ namespace DiabloII.Application.Mappers.Users
                 .Ignore(command => command.AcceptedNotifiers)
                 .AfterMap((dto, command) =>
             {
-                command.AcceptedNotifications = EnumerationFlagsHelper.ToInteger(dto.AcceptedNotifications);
-                command.AcceptedNotifiers = EnumerationFlagsHelper.ToInteger(dto.AcceptedNotifiers);
+                command.AcceptedNotifications = EnumerationFlagsHelpers.ToInteger(dto.AcceptedNotifications);
+                command.AcceptedNotifiers = EnumerationFlagsHelpers.ToInteger(dto.AcceptedNotifiers);
             });
         }
     }

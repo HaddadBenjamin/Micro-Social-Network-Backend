@@ -11,7 +11,9 @@ namespace DiabloII.Domain.Repositories
         IEnumerable<User> GetUsers(IReadOnlyCollection<string> userIds);
        
         User GetUser(string user);
-   
+
+        string GetUserIdByItsEmail(string email);
+
         bool DoesUserExists(string userId);
 
         bool DoesEmailIsUnique(string email);

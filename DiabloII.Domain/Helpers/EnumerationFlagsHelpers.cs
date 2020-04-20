@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DiabloII.Domain.Helpers
 {
-    public static class EnumerationFlagsHelper
+    public static class EnumerationFlagsHelpers
     {
         public static int ToInteger<EnumerationType>(IEnumerable<EnumerationType> enumerations) where EnumerationType : struct, IConvertible => enumerations
             .Select(enumeration => (int)(object)enumeration)

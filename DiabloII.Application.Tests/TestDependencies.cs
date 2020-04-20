@@ -6,6 +6,8 @@ using DiabloII.Application.Tests.Contexts.Suggestions;
 using DiabloII.Application.Tests.Contexts.Users;
 using DiabloII.Application.Tests.Repositories;
 using DiabloII.Application.Tests.Services.Http;
+using DiabloII.Domain.Repositories;
+using DiabloII.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using SolidToken.SpecFlow.DependencyInjection;
 
@@ -24,6 +26,8 @@ namespace DiabloII.Application.Tests
             services.AddSingleton<IUsersTestContext, UsersTestContext>();
             services.AddSingleton<ISuggestionsTestContext, SuggestionsTestContext>();
             services.AddSingleton<ISuggestionsRepository, SuggestionsRepository>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<INotificationRepository, NotificationRepository>();
             services.AddSingleton<ISuggestionsApi, SuggestionsApi>();
             services.AddSingleton<IItemsApi, ItemsApi>();
             services.AddSingleton<IErrorLogsApi, ErrorLogsApi>();
