@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloII.Application.Responses.ErrorLogs;
-using DiabloII.Application.Tests.Startup;
+using DiabloII.Application.Tests.Services.Http;
 
 namespace DiabloII.Application.Tests.Apis.ErrorLogs
 {
-    public class ErrorLogsApi : IErrorLogsApi
+    public class ErrorLogsApi : AApi, IErrorLogsApi
     {
-        private readonly IHttpContext _httpContext;
+        protected override string BaseUrl { get; } = "errorlogs";
 
-        private static readonly string BaseUrl = "errorlogs";
+        public ErrorLogsApi(IHttpService httpService) : base(httpService) { }
 
-        public ErrorLogsApi(IHttpContext httpContext) => _httpContext = httpContext;
-
-        public async Task GetAll() => await _httpContext.GetAsync<IReadOnlyCollection<ErrorLogDto>>(BaseUrl);
+        public async Task GetAll() => await _httpService.GetAsync<IReadOnlyCollection<ErrorLogDto>>(BaseUrl);
     }
 }

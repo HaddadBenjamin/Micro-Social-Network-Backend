@@ -1,9 +1,11 @@
 ﻿using DiabloII.Application.Tests.Apis.ErrorLogs;
 using DiabloII.Application.Tests.Apis.Items;
 using DiabloII.Application.Tests.Apis.Suggestions;
+using DiabloII.Application.Tests.Apis.Users;
 using DiabloII.Application.Tests.Contexts.Suggestions;
+using DiabloII.Application.Tests.Contexts.Users;
 using DiabloII.Application.Tests.Repositories;
-using DiabloII.Application.Tests.Startup;
+using DiabloII.Application.Tests.Services.Http;
 using Microsoft.Extensions.DependencyInjection;
 using SolidToken.SpecFlow.DependencyInjection;
 
@@ -18,12 +20,14 @@ namespace DiabloII.Application.Tests
             var services = testContext.Services;
 
             services.AddSingleton(testContext.DbContext);
-            services.AddSingleton<IHttpContext>(testContext.HttpContext);
+            services.AddSingleton<IHttpService>(testContext.HttpService);
+            services.AddSingleton<IUsersTestContext, UsersTestContext>();
             services.AddSingleton<ISuggestionsTestContext, SuggestionsTestContext>();
             services.AddSingleton<ISuggestionsRepository, SuggestionsRepository>();
             services.AddSingleton<ISuggestionsApi, SuggestionsApi>();
             services.AddSingleton<IItemsApi, ItemsApi>();
             services.AddSingleton<IErrorLogsApi, ErrorLogsApi>();
+            services.AddSingleton<IUsersApi, UsersApi>();
 
             return testContext.Services;
         }

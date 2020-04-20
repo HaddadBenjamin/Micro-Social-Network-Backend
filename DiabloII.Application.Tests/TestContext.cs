@@ -2,18 +2,22 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using DiabloII.Application.Tests.Services.Http;
+using DiabloII.Application.Tests.Startup;
 using DiabloII.Infrastructure.DbContext;
+using DiabloII.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DiabloII.Application.Tests.Startup
+namespace DiabloII.Application.Tests
 {
     public sealed class TestContext : IDisposable
     {
-        public readonly HttpContext HttpContext;
+        public readonly HttpService HttpService;
 
         public readonly ApplicationDbContext DbContext;
 
@@ -27,13 +31,13 @@ namespace DiabloII.Application.Tests.Startup
 
             var httpClient = ConfigureTheHttpClient(TestServer.CreateClient());
 
-            HttpContext = new HttpContext(httpClient);
+            HttpService = new HttpService(httpClient);
             DbContext = TestServer.Services.GetService<ApplicationDbContext>();
         }
 
         private IWebHostBuilder CreateTheWebHostBuilder() => new WebHostBuilder()
             .ConfigureServices(InitializeServices)
-            .UseEnvironment("Development")
+            .ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) => configurationBuilder.AddAMyAzureKeyVault())
             .UseStartup(typeof(TestStartup));
 
         private void InitializeServices(IServiceCollection services)
@@ -62,7 +66,7 @@ namespace DiabloII.Application.Tests.Startup
 
         public void Dispose()
         {
-            HttpContext.Dispose();
+            HttpService.Dispose();
             TestServer.Dispose();
         }
     }

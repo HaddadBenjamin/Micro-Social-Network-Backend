@@ -6,7 +6,6 @@ using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Services.Notifications;
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DiabloII.Infrastructure.Services.Notifications
 {

@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace DiabloII.Application.Tests.Startup
+namespace DiabloII.Application.Tests.Services.Http
 {
-    public interface IHttpContext
+    public interface IHttpService
     {
         int StatusCode { get; }
 

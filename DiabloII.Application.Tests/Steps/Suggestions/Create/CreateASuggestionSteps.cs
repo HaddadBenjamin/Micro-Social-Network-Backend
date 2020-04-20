@@ -10,12 +10,12 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Create
 {
     [Binding]
     [Scope(Tag = "suggestions")]
-    public class CreateASuggestionSteps
+    public class CreateAUserSteps
     {
         private readonly ISuggestionsApi _suggestionsApi;
         private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public CreateASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsTestContext suggestionsContext)
+        public CreateAUserSteps(ISuggestionsApi suggestionsApi, ISuggestionsTestContext suggestionsContext)
         {
             _suggestionsApi = suggestionsApi;
             _suggestionsContext = suggestionsContext;

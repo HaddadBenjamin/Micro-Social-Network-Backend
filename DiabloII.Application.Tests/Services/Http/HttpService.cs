@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Flurl.Http;
 using Newtonsoft.Json;
 
-namespace DiabloII.Application.Tests.Startup
+namespace DiabloII.Application.Tests.Services.Http
 {
-    public class HttpContext : IDisposable, IHttpContext
+    public class HttpService : IDisposable, IHttpService
     {
         private readonly FlurlClient _flurlClient;
 
         public int StatusCode { get; private set; }
 
-        public HttpContext(HttpClient httpClient) => _flurlClient = new FlurlClient(httpClient);
+        public HttpService(HttpClient httpClient) => _flurlClient = new FlurlClient(httpClient);
 
         public async Task<TResponse> GetAsync<TResponse>(string endpoint)
         {
