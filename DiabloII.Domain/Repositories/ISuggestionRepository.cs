@@ -9,7 +9,7 @@ namespace DiabloII.Domain.Repositories
         #region Read
         IReadOnlyCollection<Suggestion> GetAll();
 
-        Suggestion GetFirstSuggestion(Guid suggestionId);
+        Suggestion GetSuggestion(Guid suggestionId);
 
         Suggestion GetUserSuggestion(Guid suggestionId, string userId);
 

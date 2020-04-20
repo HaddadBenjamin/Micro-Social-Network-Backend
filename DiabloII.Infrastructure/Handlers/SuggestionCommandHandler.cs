@@ -74,7 +74,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             _voteValidator.Validate(validationContext);
 
-            var suggestion = _repository.GetFirstSuggestion(voteToASuggestionCommand.SuggestionId);
+            var suggestion = _repository.GetSuggestion(voteToASuggestionCommand.SuggestionId);
             var suggestionVote = _repository.GetUserVoteOrDefault(suggestion, voteToASuggestionCommand.UserId);
             var suggestionVoteExists = suggestionVote != null;
 
@@ -100,6 +100,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             var suggestionComment = _mapper.Map<SuggestionComment>(commentASuggestion);
             var suggestion = _repository.AddComment(commentASuggestion.SuggestionId, suggestionComment);
+            suggestionComment.Suggestion = suggestion;
 
             _dbContext.SaveChanges();
 

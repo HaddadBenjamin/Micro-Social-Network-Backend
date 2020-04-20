@@ -6,6 +6,7 @@ using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Services.Notifications;
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace DiabloII.Infrastructure.Services.Notifications
 {
@@ -29,11 +30,14 @@ namespace DiabloII.Infrastructure.Services.Notifications
                 .Select(email => new Address(email))
                 .ToList();
 
-            _email
-                .To(userEmails)
-                .Subject(notification.Title)
-                .Body(notification.Content)
-                .Send();
+            if (userEmails.Any())
+            {
+                _email
+                    .To(userEmails)
+                    .Subject(notification.Title)
+                    .Body(notification.Content)
+                    .Send();
+            }
         }
     }
 }

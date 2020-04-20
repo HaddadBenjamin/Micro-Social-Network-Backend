@@ -22,7 +22,7 @@ namespace DiabloII.Infrastructure.Repositories
 
         public IReadOnlyCollection<Suggestion> GetAll() => GetQueryableSuggestions().ToList();
 
-        public Suggestion GetFirstSuggestion(Guid suggestionId) =>
+        public Suggestion GetSuggestion(Guid suggestionId) =>
             GetQueryableSuggestions().First(vote => vote.Id == suggestionId);
 
         public Suggestion GetUserSuggestion(Guid suggestionId, string userId) =>
@@ -61,7 +61,7 @@ namespace DiabloII.Infrastructure.Repositories
 
         public Suggestion AddComment(Guid suggestionId, SuggestionComment suggestionComment)
         {
-            var suggestion = GetFirstSuggestion(suggestionId);
+            var suggestion = GetSuggestion(suggestionId);
 
             suggestion.Comments.Add(suggestionComment);
             _dbContext.SuggestionComments.Add(suggestionComment);
@@ -84,7 +84,7 @@ namespace DiabloII.Infrastructure.Repositories
 
         public Suggestion RemoveUserComment(Guid suggestionId, Guid commentId, string userId)
         {
-            var suggestion = GetFirstSuggestion(suggestionId);
+            var suggestion = GetSuggestion(suggestionId);
             var userComment = GetUserComment(suggestion, commentId, userId);
 
             RemoveComment(suggestion, userComment);
