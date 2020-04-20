@@ -16,6 +16,7 @@ namespace DiabloII.Application.Controllers
     public class UsersController : Controller
     {
         private readonly IUserCommandHandler _handler;
+     
         private readonly IUserReader _reader;
 
         private readonly IMapper _mapper;

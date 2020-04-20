@@ -17,7 +17,9 @@ namespace DiabloII.Application.Controllers
     public class SuggestionsController : Controller
     {
         private readonly ISuggestionReader _reader;
+      
         private readonly ISuggestionCommandHandler _handler;
+      
         private readonly IMapper _mapper;
 
         public SuggestionsController(ISuggestionReader reader, ISuggestionCommandHandler handler, IMapper mapper)
