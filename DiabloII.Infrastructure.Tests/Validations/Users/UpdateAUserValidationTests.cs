@@ -1,8 +1,10 @@
 using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Exceptions;
+using DiabloII.Domain.Helpers;
+using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Models.Users;
 using DiabloII.Domain.Repositories;
-using DiabloII.Domain.Validations.Users.Create;
+using DiabloII.Domain.Validations.Users.Update;
 using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Repositories;
 using DiabloII.Infrastructure.Tests.Helpers;
@@ -12,27 +14,33 @@ using Shouldly;
 namespace DiabloII.Infrastructure.Tests.Validations.Users
 {
     [TestFixture]
-    public class CreateAUserValidationTests
+    public class UpdateAUserValidationTests
     {
         private ApplicationDbContext _dbContext;
-        private CreateAUserValidator _validator;
-        private CreateAUserValidationContext _validationContext;
+        private UpdateAUserValidator _validator;
+        private UpdateAUserValidationContext _validationContext;
         private IUserRepository _repository;
 
         [SetUp]
         public void Setup()
         {
-            var validCommand = new CreateAUserCommand
+            var acceptedNotifiers = new[] { NotifierType.InApp, NotifierType.Mail };
+            var acceptedNotifications = new[] { NotificationType.CreatedSuggestion, NotificationType.NewCommentOnYourSuggestion};
+            var validCommand = new UpdateAUserCommand
             {
                 UserId = "any value",
                 Email = "DiabloIIEnriched@gmail.com",
+                AcceptedNotifications = EnumerationFlagsHelpers.ToInteger(acceptedNotifications),
+                AcceptedNotifiers = EnumerationFlagsHelpers.ToInteger(acceptedNotifiers)
             };
 
             _dbContext = DatabaseHelpers.CreateMyTestDbContext();
             _repository = new UserRepository(_dbContext);
 
-            _validator = new CreateAUserValidator();
-            _validationContext = new CreateAUserValidationContext(validCommand, _repository);
+            _validator = new UpdateAUserValidator();
+            _validationContext = new UpdateAUserValidationContext(validCommand, _repository);
+
+            CreateTheUser();
         }
 
         [Test]
@@ -60,21 +68,11 @@ namespace DiabloII.Infrastructure.Tests.Validations.Users
         }
 
         [Test]
-        public void WhenEmailIsNotUnique_ShouldThrowABadRequestException()
+        public void WhenUserNotExists_ShouldThrowANotFoundException()
         {
-            CreateTheUser();
-
             _validationContext.RepositoryValidationContext.Id = "other user id";
 
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
-
-        [Test]
-        public void WhenUserIsNotUnique_ShouldThrowAAlreadyExistsException()
-        {
-            CreateTheUser();
-
-            Should.Throw<AlreadyExistsException>(() => _validator.Validate(_validationContext));
+            Should.Throw<NotFoundException>(() => _validator.Validate(_validationContext));
         }
 
         [Test]
