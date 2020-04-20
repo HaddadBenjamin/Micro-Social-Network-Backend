@@ -1,9 +1,12 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Requests.Users;
 using DiabloII.Application.Responses.Users;
 using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Handlers;
+using DiabloII.Domain.Readers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,13 +16,31 @@ namespace DiabloII.Application.Controllers
     public class UsersController : Controller
     {
         private readonly IUserCommandHandler _handler;
+        private readonly IUserReader _reader;
 
         private readonly IMapper _mapper;
 
-        public UsersController(IUserCommandHandler handler, IMapper mapper)
+        public UsersController(IUserCommandHandler handler, IUserReader reader, IMapper mapper)
         {
             _handler = handler;
+            _reader = reader;
             _mapper = mapper;
+        }
+
+        /// <summary>
+        /// Get all the users
+        /// </summary>
+        [Route("users")]
+        [HttpGet]
+        [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), StatusCodes.Status200OK)]
+        public ActionResult<IReadOnlyCollection<UserDto>> GetAll()
+        {
+            var response = _reader
+                .GetAll()
+                .Select(_mapper.Map<UserDto>)
+                .ToList();
+
+            return Ok(response);
         }
 
         /// <summary>
