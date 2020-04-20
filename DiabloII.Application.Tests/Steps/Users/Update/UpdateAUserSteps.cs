@@ -30,9 +30,7 @@ namespace DiabloII.Application.Tests.Steps.Users.Update
         public async Task WhenIUpdateTheUserWithTheFollowingInformations(string email, Table table)
         {
             var userId = _repository.GetUserIdByItsEmail(email);
-            var dto = UsersTableMapper.ToUpdateAUserDto(table.Rows.First());
-
-            dto.UserId = userId;
+            var dto = UsersTableMapper.ToUpdateAUserDto(table.Rows.First(), userId);
 
             _userContext.UpdatedUser = await _usersApi.Update(dto);
         }

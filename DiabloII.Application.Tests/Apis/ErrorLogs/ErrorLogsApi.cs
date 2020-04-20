@@ -5,7 +5,7 @@ using DiabloII.Application.Tests.Services.Http;
 
 namespace DiabloII.Application.Tests.Apis.ErrorLogs
 {
-    public class ErrorLogsApi : AApi, IErrorLogsApi
+    public class ErrorLogsApi : BaseApi, IErrorLogsApi
     {
         protected override string BaseUrl { get; } = "errorlogs";
 

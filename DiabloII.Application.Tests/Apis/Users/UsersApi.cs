@@ -6,7 +6,7 @@ using DiabloII.Application.Tests.Services.Http;
 
 namespace DiabloII.Application.Tests.Apis.Users
 {
-    public class UsersApi : AApi, IUsersApi
+    public class UsersApi : BaseApi, IUsersApi
     {
         protected override string BaseUrl { get; } = "users";
      

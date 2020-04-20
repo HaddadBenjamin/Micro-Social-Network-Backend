@@ -2,12 +2,12 @@
 
 namespace DiabloII.Application.Tests.Apis
 {
-    public abstract class AApi
+    public abstract class BaseApi
     {
         protected readonly IHttpService _httpService;
 
         protected abstract string BaseUrl { get; }
 
-        public AApi(IHttpService httpService) => _httpService = httpService;
+        public BaseApi(IHttpService httpService) => _httpService = httpService;
     }
 }

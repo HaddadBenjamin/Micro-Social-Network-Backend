@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DiabloII.Application.Requests.Notifications;
 using DiabloII.Application.Requests.Users;
-using DiabloII.Application.Responses.Notifications;
 using DiabloII.Application.Responses.Users;
 
 namespace DiabloII.Application.Tests.Apis.Users

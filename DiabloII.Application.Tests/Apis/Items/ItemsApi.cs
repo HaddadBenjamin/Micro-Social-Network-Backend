@@ -6,7 +6,7 @@ using DiabloII.Application.Tests.Services.Http;
 
 namespace DiabloII.Application.Tests.Apis.Items
 {
-    public class ItemsApi : AApi, IItemsApi
+    public class ItemsApi : BaseApi, IItemsApi
     {
         protected override string BaseUrl { get; } = "items";
 

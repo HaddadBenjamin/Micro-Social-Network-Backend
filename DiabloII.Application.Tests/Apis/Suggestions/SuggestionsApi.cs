@@ -7,7 +7,7 @@ using DiabloII.Application.Tests.Services.Http;
 
 namespace DiabloII.Application.Tests.Apis.Suggestions
 {
-    public class SuggestionsApi : AApi, ISuggestionsApi
+    public class SuggestionsApi : BaseApi, ISuggestionsApi
     {
         protected override string BaseUrl { get; } = "suggestions";
 

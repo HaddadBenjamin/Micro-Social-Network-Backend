@@ -12,7 +12,7 @@ namespace DiabloII.Application.Tests.Steps.Users
         public UsersTableCleanerSteps(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
         [BeforeScenario]
-        public void EmptyTheSuggestionTables()
+        public void EmptyTheUserTables()
         {
             _dbContext.UserNotifications.RemoveRange(_dbContext.UserNotifications);
             _dbContext.UserNotificationSettings.RemoveRange(_dbContext.UserNotificationSettings);
