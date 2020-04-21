@@ -51,7 +51,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             _updateValidator.Validate(validationContext);
 
-            var user = _repository.GetUser(command.UserId);
+            var user = _repository.Get(command.UserId);
 
             user.Email = command.Email;
             user.NotificationSetting.AcceptedNotifications = command.AcceptedNotifications;

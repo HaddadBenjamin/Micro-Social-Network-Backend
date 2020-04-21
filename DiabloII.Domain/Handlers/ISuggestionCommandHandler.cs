@@ -1,19 +1,16 @@
 ﻿using System;
 using DiabloII.Domain.Commands.Suggestions;
+using DiabloII.Domain.Handlers.Bases;
 using DiabloII.Domain.Models.Suggestions;
 
 namespace DiabloII.Domain.Handlers
 {
-    public interface ISuggestionCommandHandler
+    public interface ISuggestionCommandHandler :
+        ICreateCommandHandler<CreateASuggestionCommand, Suggestion>,
+        ICreateCommandHandler<VoteToASuggestionCommand, Suggestion>,
+        ICreateCommandHandler<CommentASuggestionCommand, Suggestion>,
+        IDeleteCommandHandler<DeleteASuggestionCommand, Guid>,
+        IDeleteCommandHandler<DeleteASuggestionCommentCommand, Suggestion>
     {
-        Suggestion Create(CreateASuggestionCommand createASugestion);
-
-        Suggestion Vote(VoteToASuggestionCommand voteToASuggestion);
-
-        Suggestion Comment(CommentASuggestionCommand commentASuggestion);
-
-        Guid Delete(DeleteASuggestionCommand deleteASuggestion);
-
-        Suggestion DeleteAComment(DeleteASuggestionCommentCommand deleteASuggestionComment);
     }
 }

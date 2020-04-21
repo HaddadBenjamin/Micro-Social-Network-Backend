@@ -68,13 +68,39 @@ namespace DiabloII.Infrastructure.Handlers
             return suggestion;
         }
 
-        public Suggestion Vote(VoteToASuggestionCommand voteToASuggestionCommand)
+        public Guid Delete(DeleteASuggestionCommand deleteASuggestion)
+        {
+            var validationContext = new DeleteASuggestionValidationContext(deleteASuggestion, _repository);
+
+            _deleteValidator.Validate(validationContext);
+
+            _repository.RemoveUserSuggestion(deleteASuggestion.Id, deleteASuggestion.UserId);
+            _dbContext.SaveChanges();
+
+            return deleteASuggestion.Id;
+        }
+
+        public Suggestion Delete(DeleteASuggestionCommentCommand deleteASuggestionComment)
+        {
+            var validationContext = new DeleteASuggestionCommentValidationContext(deleteASuggestionComment, _repository);
+
+            _deleteCommentValidator.Validate(validationContext);
+
+            var suggestion = _repository.RemoveUserComment(deleteASuggestionComment.SuggestionId, deleteASuggestionComment.Id, deleteASuggestionComment.UserId);
+
+            _dbContext.SaveChanges();
+
+            return suggestion;
+        }
+        #endregion
+
+        public Suggestion Create(VoteToASuggestionCommand voteToASuggestionCommand)
         {
             var validationContext = new VoteToASuggestionValidationContext(voteToASuggestionCommand, _repository);
 
             _voteValidator.Validate(validationContext);
 
-            var suggestion = _repository.GetSuggestion(voteToASuggestionCommand.SuggestionId);
+            var suggestion = _repository.Get(voteToASuggestionCommand.SuggestionId);
             var suggestionVote = _repository.GetUserVoteOrDefault(suggestion, voteToASuggestionCommand.UserId);
             var suggestionVoteExists = suggestionVote != null;
 
@@ -92,7 +118,7 @@ namespace DiabloII.Infrastructure.Handlers
             return suggestion;
         }
 
-        public Suggestion Comment(CommentASuggestionCommand commentASuggestion)
+        public Suggestion Create(CommentASuggestionCommand commentASuggestion)
         {
             var validationContext = new CommentASuggestionValidationContext(commentASuggestion, _repository);
 
@@ -105,37 +131,11 @@ namespace DiabloII.Infrastructure.Handlers
             _dbContext.SaveChanges();
 
             var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestionComment);
-            createANotificationCommand.ConcernedUserIds = new [] { suggestion.CreatedBy };
+            createANotificationCommand.ConcernedUserIds = new[] { suggestion.CreatedBy };
 
             _notificationHandler.Create(createANotificationCommand);
 
             return suggestion;
         }
-
-        public Guid Delete(DeleteASuggestionCommand deleteASuggestion)
-        {
-            var validationContext = new DeleteASuggestionValidationContext(deleteASuggestion, _repository);
-
-            _deleteValidator.Validate(validationContext);
-
-            _repository.RemoveUserSuggestion(deleteASuggestion.Id, deleteASuggestion.UserId);
-            _dbContext.SaveChanges();
-
-            return deleteASuggestion.Id;
-        }
-
-        public Suggestion DeleteAComment(DeleteASuggestionCommentCommand deleteASuggestionComment)
-        {
-            var validationContext = new DeleteASuggestionCommentValidationContext(deleteASuggestionComment, _repository);
-
-            _deleteCommentValidator.Validate(validationContext);
-
-            var suggestion = _repository.RemoveUserComment(deleteASuggestionComment.SuggestionId, deleteASuggestionComment.Id, deleteASuggestionComment.UserId);
-
-            _dbContext.SaveChanges();
-
-            return suggestion;
-        }
-        #endregion
     }
 }
