@@ -13,7 +13,7 @@ namespace DiabloII.Application.Controllers
     public class ItemsController : BaseController<Item, ItemDto>
     {
         private readonly IItemReader _reader;
-      
+
         private readonly IMapper _mapper;
 
         public ItemsController(IItemReader reader, IMapper mapper)

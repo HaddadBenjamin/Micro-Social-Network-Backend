@@ -15,9 +15,9 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
     public class VoteToASuggestionSteps
     {
         private readonly ISuggestionsApi _suggestionsApi;
-     
+
         private readonly ISuggestionsRepository _suggestionsRepository;
-     
+
         private readonly ISuggestionsTestContext _suggestionsContext;
 
         public VoteToASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)

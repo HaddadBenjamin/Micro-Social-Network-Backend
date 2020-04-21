@@ -8,7 +8,7 @@ namespace DiabloII.Application.Tests.Steps
     public class CommonSteps
     {
         private readonly IHttpService _httpService;
-       
+
         public CommonSteps(IHttpService httpService) => _httpService = httpService;
 
         [Then(@"the http status code should be (.*)")]

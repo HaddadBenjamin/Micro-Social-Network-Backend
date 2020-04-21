@@ -13,7 +13,7 @@ namespace DiabloII.Application.Controllers
     public class ErrorLogsController : BaseController<ErrorLog, ErrorLogDto>
     {
         private readonly IErrorLogReader _reader;
-   
+
         private readonly IMapper _mapper;
 
         public ErrorLogsController(IErrorLogReader reader, IMapper mapper)

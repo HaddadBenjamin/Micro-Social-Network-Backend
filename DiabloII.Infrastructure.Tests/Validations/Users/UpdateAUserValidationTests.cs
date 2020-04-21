@@ -20,7 +20,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Users
         public void Setup()
         {
             var acceptedNotifiers = new[] { NotifierType.InApp, NotifierType.Mail };
-            var acceptedNotifications = new[] { NotificationType.CreatedSuggestion, NotificationType.NewCommentOnYourSuggestion};
+            var acceptedNotifications = new[] { NotificationType.CreatedSuggestion, NotificationType.NewCommentOnYourSuggestion };
             var validCommand = new UpdateAUserCommand
             {
                 UserId = "any user id",

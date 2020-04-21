@@ -11,7 +11,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.GetAll
     public class GetAllSuggestionsSteps
     {
         private readonly ISuggestionsApi _suggestionsApi;
-        
+
         private readonly ISuggestionsTestContext _suggestionsContext;
 
         public GetAllSuggestionsSteps(ISuggestionsApi suggestionsApi, ISuggestionsTestContext suggestionsContext)
@@ -22,7 +22,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.GetAll
 
         [When(@"I get all the suggestions")]
         public async Task WhenIGetAllTheSuggestions() => _suggestionsContext.AllResources = await _suggestionsApi.GetAll();
-        
+
         [Then(@"all the suggestions should be")]
         public void WhenAllTheSuggestionsShouldBe(Table table) => table.ShouldAllExistsIn(_suggestionsContext.AllResources);
     }

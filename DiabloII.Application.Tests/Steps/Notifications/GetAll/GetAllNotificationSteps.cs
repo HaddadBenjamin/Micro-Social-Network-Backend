@@ -11,7 +11,7 @@ namespace DiabloII.Application.Tests.Steps.Notifications.GetAll
     public class GetAllNotificationSteps
     {
         private readonly INotificationsApi _notificationsApi;
-        
+
         private readonly INotificationsTestContext _notificationsContext;
 
         public GetAllNotificationSteps(INotificationsApi notificationsApi, INotificationsTestContext notificationsContext)

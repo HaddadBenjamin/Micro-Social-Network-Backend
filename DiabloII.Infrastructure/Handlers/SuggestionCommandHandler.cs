@@ -62,7 +62,7 @@ namespace DiabloII.Infrastructure.Handlers
             _dbContext.SaveChanges();
 
             var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestion);
-            
+
             _notificationHandler.Create(createANotificationCommand);
 
             return suggestion;

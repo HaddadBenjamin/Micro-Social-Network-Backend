@@ -10,7 +10,7 @@ namespace DiabloII.Application.Tests.Apis.Domains.Users
     public class UsersApi : BaseApi, IUsersApi
     {
         protected override string BaseUrl { get; } = "users";
-     
+
         public UsersApi(IHttpService httpService) : base(httpService) { }
 
         #region Read

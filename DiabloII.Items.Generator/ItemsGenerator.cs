@@ -1,5 +1,4 @@
-﻿using DiabloII.Items.Reader;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,6 +7,7 @@ using DiabloII.Domain.Models.Items;
 using DiabloII.Infrastructure.Handlers;
 using DiabloII.Infrastructure.Helpers;
 using DiabloII.Infrastructure.Repositories;
+using DiabloII.Items.Reader;
 using DiabloII.Items.Reader.Items;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;

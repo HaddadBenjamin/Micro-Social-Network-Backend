@@ -8,7 +8,7 @@ namespace DiabloII.Infrastructure.DbContext.Mappers.Users
         public static void Map(ModelBuilder modelBuilder)
         {
             var userNotificationSettingBuilder = modelBuilder.Entity<UserNotificationSetting>();
-        
+
             userNotificationSettingBuilder.HasKey(userNotificationSetting => userNotificationSetting.Id);
             userNotificationSettingBuilder
                 .HasIndex(userNotificationSetting => userNotificationSetting.Id)

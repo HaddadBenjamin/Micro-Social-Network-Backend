@@ -30,7 +30,7 @@ namespace DiabloII.Infrastructure.Repositories
         public string GetUserIdByItsEmail(string email) => GetQueryableUsers().Single(user => user.Email == email).Id;
 
         public bool DoesUserExists(string userId) => _dbContext.Users.Any(user => user.Id == userId);
-      
+
         public bool DoesEmailIsUnique(string email) => !_dbContext.Users.Any(user => user.Email == email);
         #endregion
     }

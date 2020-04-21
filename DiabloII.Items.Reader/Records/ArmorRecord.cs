@@ -7,7 +7,7 @@
 
         public double MinimumDefense { get; set; }
         public double MaximumDefense { get; set; }
-		public double StrengthRequired { get; set; }
-		public string ImageName { get; set; }
+        public double StrengthRequired { get; set; }
+        public string ImageName { get; set; }
     }
 }

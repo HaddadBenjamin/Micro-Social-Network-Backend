@@ -14,7 +14,7 @@ namespace DiabloII.Domain.Helpers
             where EnumerationType : struct, IConvertible =>
             Enum.GetValues(typeof(EnumerationType))
                 .Cast<EnumerationType>()
-                .Where(enumeration => (enumerationValue & (int) (object) enumeration) != 0)
+                .Where(enumeration => (enumerationValue & (int)(object)enumeration) != 0)
                 .Select(enumeration => enumeration.ToString());
     }
 }

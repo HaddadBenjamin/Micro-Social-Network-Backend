@@ -11,7 +11,7 @@ namespace DiabloII.Application.Tests.Steps.Users.GetAll
     public class GetAllUsersSteps
     {
         private readonly IUsersApi _usersApi;
-       
+
         private readonly IUsersTestContext _usersContext;
 
         public GetAllUsersSteps(IUsersApi usersApi, IUsersTestContext usersContext)

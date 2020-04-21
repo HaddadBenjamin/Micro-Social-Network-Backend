@@ -19,7 +19,7 @@ namespace DiabloII.Application.Tests
     {
         [ScenarioDependencies]
         public static IServiceCollection CreateServices()
-        { 
+        {
             var testContext = new TestContext();
             var services = testContext.Services;
 

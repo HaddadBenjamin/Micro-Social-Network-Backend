@@ -19,7 +19,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Notifications
                 Content = "A new area and some monsters have been added",
                 Type = NotificationType.PatchNotes
             };
-            
+
             _validationContext = new CreateANotificationValidationContext(validCommand);
         }
 

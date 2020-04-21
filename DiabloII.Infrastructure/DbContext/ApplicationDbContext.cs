@@ -21,9 +21,9 @@ namespace DiabloII.Infrastructure.DbContext
 
         public DbSet<ErrorLog> ErrorLogs { get; set; }
 
-        public DbSet<Item> Items{ get; set; }
-        
-        public DbSet<ItemProperty> ItemProperties{ get; set; }
+        public DbSet<Item> Items { get; set; }
+
+        public DbSet<ItemProperty> ItemProperties { get; set; }
 
         public DbSet<User> Users { get; set; }
 
@@ -34,7 +34,7 @@ namespace DiabloII.Infrastructure.DbContext
         public DbSet<Notification> Notifications { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             SuggestionMapper.Map(modelBuilder);

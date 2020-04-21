@@ -47,7 +47,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Users
             ShouldThrowDuringTheValidation<BadRequestException>(() =>
             {
                 CreateTheUser();
-        
+
                 _validationContext.RepositoryValidationContext.Id = "other user id";
             });
 

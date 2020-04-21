@@ -11,13 +11,13 @@ namespace DiabloII.Application.Requests.Items
         [JsonConverter(typeof(StringEnumConverter))]
         public ItemQuality? Quality { get; set; }
 
-		/// <summary>
-		/// Filter items by it's sub category. ("A", "B", "C"), I'll have to split this.
-		/// </summary>
-		public string SubCategories { get; set; }
+        /// <summary>
+        /// Filter items by it's sub category. ("A", "B", "C"), I'll have to split this.
+        /// </summary>
+        public string SubCategories { get; set; }
 
         public int? MinimumLevel { get; set; }
-       
+
         public int? MaximumLevel { get; set; }
     }
 }

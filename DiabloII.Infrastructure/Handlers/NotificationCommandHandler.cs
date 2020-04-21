@@ -13,9 +13,9 @@ namespace DiabloII.Infrastructure.Handlers
         private readonly IMapper _mapper;
 
         private readonly INotificationService _service;
-       
+
         private readonly ApplicationDbContext _dbContext;
-       
+
         private readonly CreateANotificationValidator _createValidator;
 
         public NotificationCommandHandler(

@@ -15,9 +15,9 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
     public class CommentASuggestionSteps
     {
         private readonly ISuggestionsApi _suggestionsApi;
-      
+
         private readonly ISuggestionsRepository _suggestionsRepository;
-       
+
         private readonly ISuggestionsTestContext _suggestionsContext;
 
         public CommentASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)

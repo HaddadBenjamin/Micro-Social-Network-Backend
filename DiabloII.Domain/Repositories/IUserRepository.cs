@@ -10,7 +10,7 @@ namespace DiabloII.Domain.Repositories
     {
         #region Read
         IEnumerable<User> GetUsers(IReadOnlyCollection<string> userIds);
-       
+
         string GetUserIdByItsEmail(string email);
 
         bool DoesUserExists(string userId);

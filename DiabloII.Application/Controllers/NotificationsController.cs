@@ -15,9 +15,9 @@ namespace DiabloII.Application.Controllers
     public class NotificationsController : BaseController<Notification, NotificationDto>
     {
         private readonly INotificationCommandHandler _handler;
-       
+
         private readonly INotificationReader _reader;
-        
+
         private readonly IMapper _mapper;
 
         public NotificationsController(INotificationCommandHandler handler, INotificationReader reader, IMapper mapper)

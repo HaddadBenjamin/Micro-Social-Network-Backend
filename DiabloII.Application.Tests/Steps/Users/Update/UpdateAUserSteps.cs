@@ -14,9 +14,9 @@ namespace DiabloII.Application.Tests.Steps.Users.Update
     public class UpdateAUserSteps
     {
         private readonly IUsersApi _usersApi;
-      
+
         private readonly IUsersTestContext _userContext;
-        
+
         private readonly IUserRepository _repository;
 
         public UpdateAUserSteps(IUsersApi usersApi, IUsersTestContext userContext, IUserRepository repository)

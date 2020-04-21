@@ -1,14 +1,14 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using AutoMapper;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Handlers;
-using DiabloII.Domain.Readers;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using DiabloII.Domain.Models.Suggestions;
+using DiabloII.Domain.Readers;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Application.Controllers
 {
@@ -16,9 +16,9 @@ namespace DiabloII.Application.Controllers
     public class SuggestionsController : BaseController<Suggestion, SuggestionDto>
     {
         private readonly ISuggestionReader _reader;
-      
+
         private readonly ISuggestionCommandHandler _handler;
-      
+
         private readonly IMapper _mapper;
 
         public SuggestionsController(ISuggestionReader reader, ISuggestionCommandHandler handler, IMapper mapper)

@@ -56,7 +56,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
 
                 _validationContext.Command.Content = suggestionContent;
 
-                _dbContext.Suggestions.Add(new Suggestion {Id = Guid.NewGuid(), Content = suggestionContent});
+                _dbContext.Suggestions.Add(new Suggestion { Id = Guid.NewGuid(), Content = suggestionContent });
                 _dbContext.SaveChanges();
             });
 

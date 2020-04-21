@@ -13,7 +13,7 @@ namespace DiabloII.Application.Tests.Steps.Notifications.Create
     public class CreateANotificationSteps
     {
         private readonly INotificationsApi _notificationsApi;
-      
+
         private readonly INotificationsTestContext _notificationContext;
 
         public CreateANotificationSteps(INotificationsApi notificationsApi, INotificationsTestContext notificationContext)

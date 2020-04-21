@@ -8,7 +8,7 @@ namespace DiabloII.Infrastructure.DbContext.Mappers.Suggestions
         public static void Map(ModelBuilder modelBuilder)
         {
             var suggestionVoteBuilder = modelBuilder.Entity<SuggestionVote>();
-            
+
             suggestionVoteBuilder.HasKey(suggestionVote => suggestionVote.Id);
             suggestionVoteBuilder
                 .HasIndex(suggestion => suggestion.Id)

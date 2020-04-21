@@ -9,7 +9,7 @@ namespace DiabloII.Infrastructure.Handlers
     public class ItemCommandHandler : IItemCommandHandler
     {
         private readonly IItemRepository _repository;
-       
+
         private readonly ApplicationDbContext _dbContext;
 
         public ItemCommandHandler(IItemRepository repository, ApplicationDbContext dbContext)

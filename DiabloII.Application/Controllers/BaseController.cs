@@ -80,7 +80,7 @@ namespace DiabloII.Application.Controllers
             var command = mapper.Map<DeleteCommand>(dto);
             var model = handlerDelete.Delete(command);
             var response = mapper.Map<ResponseDto>(model);
-            
+
             return Ok(response);
         }
     }

@@ -13,7 +13,7 @@ namespace DiabloII.Application.Tests.Steps.Users.Create
     public class CreateAUserSteps
     {
         private readonly IUsersApi _usersApi;
-      
+
         private readonly IUsersTestContext _userContext;
 
         public CreateAUserSteps(IUsersApi usersApi, IUsersTestContext userContext)
@@ -33,6 +33,6 @@ namespace DiabloII.Application.Tests.Steps.Users.Create
         }
 
         [Then(@"the created user should be")]
-        public void ThenTheCreatedUserShouldBe(Table table) =>  table.ShouldBeEqualsTo(_userContext.CreatedResource);
+        public void ThenTheCreatedUserShouldBe(Table table) => table.ShouldBeEqualsTo(_userContext.CreatedResource);
     }
 }

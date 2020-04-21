@@ -17,7 +17,7 @@ namespace DiabloII.Application.Tests.Startup
         internal static readonly Type ApplicationType = typeof(Application.Startup);
         internal static readonly Type InfrastructureType = typeof(ErrorLogRepository);
         internal static readonly Type DomainType = typeof(IErrorLogRepository);
-       
+
         private readonly IConfiguration _configuration;
 
         public TestStartup(IConfiguration configuration) => _configuration = configuration;

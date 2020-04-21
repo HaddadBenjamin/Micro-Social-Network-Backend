@@ -16,7 +16,7 @@ namespace DiabloII.Domain.Validations.Suggestions
         public static void SuggestionContentShouldBeUnique<T>(this IRuleBuilder<T, CommonSuggestionRepositoryValidationContext> ruleBuilder) => ruleBuilder
             .Must(context => context.Repository.DoesSuggestionContentIsUnique(context.Content))
             .OnFailure(context => throw new BadRequestException("Content should be unique"));
-      
+
         public static void ShouldBeOwnerOfTheSuggestion<T>(this IRuleBuilder<T, CommonSuggestionRepositoryValidationContext> ruleBuilder) => ruleBuilder
             .Must(context => context.Repository.IsOwnerOfTheSuggestion(context.Id, context.UserId))
             .OnFailure(context => throw new UnauthorizedException("Suggestion"));

@@ -77,9 +77,9 @@ namespace DiabloII.Application.Extensions
 
         public static IServiceCollection RegisterTheApplicationDependencies(this IServiceCollection services)
         {
-            var assemblyTypes = new[] {Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType};
+            var assemblyTypes = new[] { Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType };
             var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
- 
+
             return services.Scan(scan =>
                 {
                     scan.FromAssemblies(assemblies)

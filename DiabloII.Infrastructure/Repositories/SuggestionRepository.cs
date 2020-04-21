@@ -26,7 +26,7 @@ namespace DiabloII.Infrastructure.Repositories
         public Suggestion Get(Guid suggestionId) =>
             GetQueryableSuggestions().First(vote => vote.Id == suggestionId);
 
-        public Suggestion GetUserSuggestion(Guid suggestionId, string userId) =>  GetQueryableSuggestions()
+        public Suggestion GetUserSuggestion(Guid suggestionId, string userId) => GetQueryableSuggestions()
             .FirstOrDefault(suggestion => suggestion.Id == suggestionId && suggestion.CreatedBy == userId);
 
         public SuggestionVote GetUserVoteOrDefault(Suggestion suggestion, string userId) => suggestion
