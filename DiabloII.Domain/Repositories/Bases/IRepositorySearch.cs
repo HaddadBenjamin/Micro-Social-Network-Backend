@@ -2,8 +2,8 @@
 
 namespace DiabloII.Domain.Repositories.Bases
 {
-    public interface IRepositorySearch<Query, DomainType>
+    public interface IRepositorySearch<Query, DataModel>
     {
-        IReadOnlyCollection<DomainType> Search(Query query);
+        IReadOnlyCollection<DataModel> Search(Query query);
     }
 }

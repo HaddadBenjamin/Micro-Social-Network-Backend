@@ -33,6 +33,6 @@ namespace DiabloII.Application.Tests.Steps.Notifications.Create
         }
 
         [Then(@"the created notification should be")]
-        public void ThenTheCreatedNotificationShouldBe(Table table) => table.ShouldBeEqualsTo(_notificationContext.AllResources);
+        public void ThenTheCreatedNotificationShouldBe(Table table) => table.ShouldBeEqualsTo(_notificationContext.CreatedResource);
     }
 }

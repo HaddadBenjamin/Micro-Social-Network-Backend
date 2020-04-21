@@ -1,7 +1,7 @@
 ﻿namespace DiabloII.Domain.Repositories.Bases
 {
-    public interface IRepositoryGet<DomainType, Id>
+    public interface IRepositoryGet<DataModel, Id>
     {
-        DomainType Get(Id id);
+        DataModel Get(Id id);
     }
 }

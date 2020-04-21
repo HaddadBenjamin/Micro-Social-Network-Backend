@@ -53,7 +53,7 @@ namespace DiabloII.Infrastructure.Handlers
         public Suggestion Create(CreateASuggestionCommand createASugestion)
         {
             var validationContext = new CreateASuggestionValidationContext(createASugestion, _repository);
-            
+
             _createValidator.Validate(validationContext);
 
             var suggestion = _mapper.Map<Suggestion>(createASugestion);
