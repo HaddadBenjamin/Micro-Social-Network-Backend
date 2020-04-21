@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using AutoMapper;
 using DiabloII.Domain.Models.Items;
+using DiabloII.Infrastructure.Handlers;
 using DiabloII.Infrastructure.Helpers;
-using DiabloII.Infrastructure.Readers;
 using DiabloII.Infrastructure.Repositories;
 using DiabloII.Items.Reader.Items;
 using Microsoft.EntityFrameworkCore;
@@ -55,7 +55,7 @@ namespace DiabloII.Items.Generator
 
                     var itemRepository = new ItemRepository(dbContext);
 
-                    new ItemReader(dbContext, itemRepository).ResetTheItems(items, itemProperties);
+                    new ItemCommandHandler(itemRepository, dbContext).Reset(items, itemProperties);
                 }
             }
         }

@@ -14,19 +14,18 @@ namespace DiabloII.Infrastructure.Services.Notifications
         private readonly INotificationCrossDomainRepository _notificationCrossDomainRepository;
         private readonly IFluentEmail _email;
 
-        public MailNotifier(INotificationCrossDomainRepository notificationCrossDomainRepository, IFluentEmail _email)
+        public MailNotifier(INotificationCrossDomainRepository notificationCrossDomainRepository, IFluentEmail email)
         {
             _notificationCrossDomainRepository = notificationCrossDomainRepository;
-            this._email = _email;
+            _email = email;
         }
 
         public void Notify(Notification notification, IEnumerable<User> users)
         {
             var userEmails = _notificationCrossDomainRepository
                 .GetUsersConcernedByThisNotifier(NotifierType.Mail, users)
-                .Select(user => user.Email)
-                .Where(email => !string.IsNullOrEmpty(email))
-                .Select(email => new Address(email))
+                .Where(user => !string.IsNullOrEmpty(user.Email))
+                .Select(user => new Address(user.Email))
                 .ToList();
 
             if (userEmails.Any())

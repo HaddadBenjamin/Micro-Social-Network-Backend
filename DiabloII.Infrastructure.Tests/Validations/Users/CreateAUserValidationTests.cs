@@ -24,7 +24,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Users
         {
             var validCommand = new CreateAUserCommand
             {
-                UserId = "any value",
+                UserId = "any user id",
                 Email = "DiabloIIEnriched@gmail.com",
             };
 

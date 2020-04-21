@@ -28,7 +28,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Users
             var acceptedNotifications = new[] { NotificationType.CreatedSuggestion, NotificationType.NewCommentOnYourSuggestion};
             var validCommand = new UpdateAUserCommand
             {
-                UserId = "any value",
+                UserId = "any user id",
                 Email = "DiabloIIEnriched@gmail.com",
                 AcceptedNotifications = EnumerationFlagsHelpers.ToInteger(acceptedNotifications),
                 AcceptedNotifiers = EnumerationFlagsHelpers.ToInteger(acceptedNotifiers)

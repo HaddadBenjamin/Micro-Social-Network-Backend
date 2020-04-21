@@ -5,8 +5,6 @@ namespace DiabloII.Infrastructure.DbContext.Mappers.Suggestions
 {
     public static class SuggestionVoteMapper
     {
-        private static readonly int Ipv4Length = 15;
-
         public static void Map(ModelBuilder modelBuilder)
         {
             var suggestionVoteBuilder = modelBuilder.Entity<SuggestionVote>();

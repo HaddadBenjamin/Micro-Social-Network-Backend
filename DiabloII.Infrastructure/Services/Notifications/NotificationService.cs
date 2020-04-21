@@ -29,7 +29,7 @@ namespace DiabloII.Infrastructure.Services.Notifications
 
         public void Notify(Notification notification, IReadOnlyCollection<string> concernedUserIds = null)
         {
-            var users = concernedUserIds == null ? _userRepository.GetAllUsers() : _userRepository.GetUsers(concernedUserIds);
+            var users = concernedUserIds == null ? _userRepository.GetAll() : _userRepository.GetUsers(concernedUserIds);
             var usersConcernedByThisNotification = _notificationCrossDomainRepository.GetUsersConcernedByThisNotification(notification.Type, users);
 
             foreach (var notifier in Notifiers)
