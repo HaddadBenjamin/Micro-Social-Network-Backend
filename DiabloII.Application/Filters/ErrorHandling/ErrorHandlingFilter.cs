@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using DiabloII.Domain.Exceptions;
-using DiabloII.Domain.Readers;
+using DiabloII.Domain.Handlers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -29,11 +29,11 @@ namespace DiabloII.Application.Filters.ErrorHandling
 
             exceptionContext.ExceptionHandled = true;
 
-            var errorLogReader = (IErrorLogReader)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogReader));
+            var errorLogCommandHandler = (IErrorLogCommandHandler)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogCommandHandler));
             var errorLogCreator = new ErrorLoggerCreator(exceptionContext, responseHttpStatus);
             var errorLog = errorLogCreator.Create();
 
-            errorLogReader.Log(errorLog);
+            errorLogCommandHandler.Create(errorLog);
         }
 
         private static void SetExceptionResult(ExceptionContext exceptionContext, Exception exception, HttpStatusCode code) =>

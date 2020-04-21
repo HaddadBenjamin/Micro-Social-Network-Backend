@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using DiabloII.Application.Requests.Items;
 using DiabloII.Application.Responses.Items;
-using DiabloII.Domain.Queries.Items;
+using DiabloII.Domain.Models.Items;
 using DiabloII.Domain.Readers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Application.Controllers
 {
-    // Remember : dotnet run watch.
     [Route("api/v1/")]
-    public class ItemsController : Controller
+    public class ItemsController : BaseController<Item, ItemDto>
     {
         private readonly IItemReader _reader;
       
@@ -30,15 +28,8 @@ namespace DiabloII.Application.Controllers
         [Route("items")]
         [HttpGet]
         [ProducesResponseType(typeof(IReadOnlyCollection<ItemDto>), StatusCodes.Status200OK)]
-        public ActionResult<IReadOnlyCollection<ItemDto>> GetAllUniques()
-        {
-            var response = _reader
-                .GetAllUniques()
-                .Select(_mapper.Map<ItemDto>)
-                .ToList();
-
-            return Ok(response);
-        }
+        public ActionResult<IReadOnlyCollection<ItemDto>> GetAllUniques() =>
+            GetAll(_reader, _mapper);
 
         /// <summary>
         /// Search the uniques items
@@ -46,14 +37,7 @@ namespace DiabloII.Application.Controllers
         [Route("items/search")]
         [HttpGet]
         [ProducesResponseType(typeof(IReadOnlyCollection<ItemDto>), StatusCodes.Status200OK)]
-        public ActionResult<IReadOnlyCollection<ItemDto>> SearchUniques(SearchUniquesDto searchDto)
-        {
-            var response = _reader
-                .SearchUniques(_mapper.Map<SearchUniquesQuery>(searchDto))
-                .Select(_mapper.Map<ItemDto>)
-                .ToList();
-
-            return Ok(response);
-        }
+        public ActionResult<IReadOnlyCollection<ItemDto>> SearchUniques(SearchUniquesDto dto) =>
+            Search(dto, _reader, _mapper);
     }
 }
