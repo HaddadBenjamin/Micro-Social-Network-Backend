@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using DiabloII.Domain.Models.ErrorLogs;
+﻿using DiabloII.Domain.Models.ErrorLogs;
+using DiabloII.Domain.Readers.Bases;
 
 namespace DiabloII.Domain.Readers
 {
-    public interface IErrorLogReader
+    public interface IErrorLogReader : IGetAllReader<ErrorLog>
     {
-        void Log(ErrorLog errorLog);
-
-        IReadOnlyCollection<ErrorLog> GetAll();
     }
 }

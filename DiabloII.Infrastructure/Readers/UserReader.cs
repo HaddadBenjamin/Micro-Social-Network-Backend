@@ -11,6 +11,6 @@ namespace DiabloII.Infrastructure.Readers
 
         public UserReader(IUserRepository repository) => _repository = repository;
 
-        public IReadOnlyCollection<User> GetAll() => _repository.GetAllUsers();
+        public IReadOnlyCollection<User> GetAll() => _repository.GetAll();
     }
 }
