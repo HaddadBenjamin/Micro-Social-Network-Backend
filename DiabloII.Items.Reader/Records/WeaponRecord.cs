@@ -9,10 +9,10 @@
 
 
         public double MinimumOneHandedDamage { get; set; }
-		public double MaximumOneHandedDamage { get; set; }
-		public double MinimumTwoHandedDamage { get; set; }
-		public double MaximumTwoHandedDamage { get; set; }
-		public double StrengthRequired { get; set; }
-		public double DexterityRequired { get; set; }
-	}
+        public double MaximumOneHandedDamage { get; set; }
+        public double MinimumTwoHandedDamage { get; set; }
+        public double MaximumTwoHandedDamage { get; set; }
+        public double StrengthRequired { get; set; }
+        public double DexterityRequired { get; set; }
+    }
 }

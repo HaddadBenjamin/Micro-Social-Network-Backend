@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using DiabloII.Domain.Exceptions;
-using DiabloII.Domain.Readers;
+using DiabloII.Domain.Handlers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -12,9 +12,10 @@ namespace DiabloII.Application.Filters.ErrorHandling
     {
         private static readonly Dictionary<string, HttpStatusCode?> _exceptionTypeNameToHttpStatusMapper = new Dictionary<string, HttpStatusCode?>()
         {
-            {nameof(BadRequestException), HttpStatusCode.BadRequest},
-            {nameof(NotFoundException), HttpStatusCode.NotFound},
-            {nameof(UnauthorizedException), HttpStatusCode.Unauthorized}
+            { nameof(BadRequestException), HttpStatusCode.BadRequest },
+            { nameof(UnauthorizedException), HttpStatusCode.Unauthorized },
+            { nameof(AlreadyExistsException), HttpStatusCode.Forbidden },
+            { nameof(NotFoundException), HttpStatusCode.NotFound },
         };
 
         public override void OnException(ExceptionContext exceptionContext)
@@ -28,11 +29,11 @@ namespace DiabloII.Application.Filters.ErrorHandling
 
             exceptionContext.ExceptionHandled = true;
 
-            var errorLogReader = (IErrorLogReader)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogReader));
+            var errorLogCommandHandler = (IErrorLogCommandHandler)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogCommandHandler));
             var errorLogCreator = new ErrorLoggerCreator(exceptionContext, responseHttpStatus);
             var errorLog = errorLogCreator.Create();
 
-            errorLogReader.Log(errorLog);
+            errorLogCommandHandler.Create(errorLog);
         }
 
         private static void SetExceptionResult(ExceptionContext exceptionContext, Exception exception, HttpStatusCode code) =>

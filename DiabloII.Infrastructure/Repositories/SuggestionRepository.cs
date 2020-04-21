@@ -16,17 +16,18 @@ namespace DiabloII.Infrastructure.Repositories
         public SuggestionRepository(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
         #region Read
-        public IIncludableQueryable<Suggestion, ICollection<SuggestionComment>> GetQueryableSuggestions() => _dbContext.Suggestions
+        public IIncludableQueryable<Suggestion, ICollection<SuggestionComment>> GetQueryableSuggestions() => _dbContext
+            .Suggestions
             .Include(suggestion => suggestion.Votes)
             .Include(suggestion => suggestion.Comments);
 
         public IReadOnlyCollection<Suggestion> GetAll() => GetQueryableSuggestions().ToList();
 
-        public Suggestion GetFirstSuggestion(Guid suggestionId) =>
+        public Suggestion Get(Guid suggestionId) =>
             GetQueryableSuggestions().First(vote => vote.Id == suggestionId);
 
-        public Suggestion GetUserSuggestion(Guid suggestionId, string userId) =>
-            GetQueryableSuggestions().FirstOrDefault(suggestion => suggestion.Id == suggestionId && suggestion.CreatedBy == userId);
+        public Suggestion GetUserSuggestion(Guid suggestionId, string userId) => GetQueryableSuggestions()
+            .FirstOrDefault(suggestion => suggestion.Id == suggestionId && suggestion.CreatedBy == userId);
 
         public SuggestionVote GetUserVoteOrDefault(Suggestion suggestion, string userId) => suggestion
             .Votes
@@ -38,15 +39,17 @@ namespace DiabloII.Infrastructure.Repositories
 
         public bool DoesSuggestionExists(Guid suggestionId) =>
             _dbContext.Suggestions.Any(suggestion => suggestion.Id == suggestionId);
-       
-        public bool IsOwnerOfTheSuggestion(Guid suggestionId, string userId) => _dbContext.Suggestions.Any(suggestion => suggestion.Id == suggestionId && suggestion.CreatedBy == userId);
+
+        public bool IsOwnerOfTheSuggestion(Guid suggestionId, string userId) => _dbContext.Suggestions.Any(suggestion =>
+            suggestion.Id == suggestionId && suggestion.CreatedBy == userId);
 
         public bool DoesCommentExists(Guid commentId) =>
             _dbContext.SuggestionComments.Any(comment => comment.Id == commentId);
 
         public bool IsOwnerOfTheComment(Guid suggestionId, Guid commentId, string userId) => _dbContext.Suggestions
             .Any(suggestion => suggestion.Id == suggestionId &&
-                               suggestion.Comments.Any(comment => comment.Id == commentId && comment.CreatedBy == userId));
+                               suggestion.Comments.Any(
+                                   comment => comment.Id == commentId && comment.CreatedBy == userId));
 
         public bool DoesSuggestionContentIsUnique(string suggestionContent) =>
             _dbContext.Suggestions.All(suggestion => suggestion.Content != suggestionContent);
@@ -61,7 +64,7 @@ namespace DiabloII.Infrastructure.Repositories
 
         public Suggestion AddComment(Guid suggestionId, SuggestionComment suggestionComment)
         {
-            var suggestion = GetFirstSuggestion(suggestionId);
+            var suggestion = Get(suggestionId);
 
             suggestion.Comments.Add(suggestionComment);
             _dbContext.SuggestionComments.Add(suggestionComment);
@@ -84,7 +87,7 @@ namespace DiabloII.Infrastructure.Repositories
 
         public Suggestion RemoveUserComment(Guid suggestionId, Guid commentId, string userId)
         {
-            var suggestion = GetFirstSuggestion(suggestionId);
+            var suggestion = Get(suggestionId);
             var userComment = GetUserComment(suggestion, commentId, userId);
 
             RemoveComment(suggestion, userComment);

@@ -1,4 +1,5 @@
 ﻿using DiabloII.Infrastructure.DbContext;
+using DiabloII.Infrastructure.Extensions;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests.Steps.Suggestions
@@ -14,9 +15,9 @@ namespace DiabloII.Application.Tests.Steps.Suggestions
         [BeforeScenario]
         public void EmptyTheSuggestionTables()
         {
-            _dbContext.SuggestionVotes.RemoveRange(_dbContext.SuggestionVotes);
-            _dbContext.SuggestionComments.RemoveRange(_dbContext.SuggestionComments);
-            _dbContext.Suggestions.RemoveRange(_dbContext.Suggestions);
+            _dbContext.EmptyTheTable(_dbContext.SuggestionVotes);
+            _dbContext.EmptyTheTable(_dbContext.SuggestionComments);
+            _dbContext.EmptyTheTable(_dbContext.Suggestions);
 
             _dbContext.SaveChanges();
         }

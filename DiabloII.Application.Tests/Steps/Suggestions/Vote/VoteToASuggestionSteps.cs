@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Tests.Apis.Suggestions;
-using DiabloII.Application.Tests.Contexts.Suggestions;
+using DiabloII.Application.Tests.Apis.Domains.Suggestions;
+using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Mappers;
-using DiabloII.Application.Tests.Repositories;
+using DiabloII.Application.Tests.Repositories.Suggestions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -15,7 +15,9 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
     public class VoteToASuggestionSteps
     {
         private readonly ISuggestionsApi _suggestionsApi;
+
         private readonly ISuggestionsRepository _suggestionsRepository;
+
         private readonly ISuggestionsTestContext _suggestionsContext;
 
         public VoteToASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
@@ -33,10 +35,10 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedSuggestion = await _suggestionsApi.Vote(dto);
+            _suggestionsContext.VotedResource = await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the voted suggestion should be")]
-        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionsContext.VotedSuggestion, SuggestionsTableMapper.ToSuggestionDto);
+        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionsContext.VotedResource, SuggestionsTableMapper.ToSuggestionDto);
     }
 }

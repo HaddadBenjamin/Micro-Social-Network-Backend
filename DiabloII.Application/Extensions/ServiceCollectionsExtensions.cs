@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using DiabloII.Application.Filters.ErrorHandling;
+using DiabloII.Domain.Configurations;
 using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Helpers;
 using FluentValidation.AspNetCore;
@@ -53,6 +54,13 @@ namespace DiabloII.Application.Extensions
             return services;
         }
 
+        public static void AddMySmtpServer(this IServiceCollection services, SmtpConfiguration smtpConfiguration)
+        {
+            services
+                .AddFluentEmail(smtpConfiguration.FromEmail)
+                .AddSmtpSender(smtpConfiguration.Host, smtpConfiguration.Port, smtpConfiguration.FromEmail, smtpConfiguration.FromPassword);
+        }
+
         public static IServiceCollection RegisterTheDbContextDependency(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
@@ -69,9 +77,9 @@ namespace DiabloII.Application.Extensions
 
         public static IServiceCollection RegisterTheApplicationDependencies(this IServiceCollection services)
         {
-            var assemblyTypes = new[] {Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType};
+            var assemblyTypes = new[] { Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType };
             var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
- 
+
             return services.Scan(scan =>
                 {
                     scan.FromAssemblies(assemblies)

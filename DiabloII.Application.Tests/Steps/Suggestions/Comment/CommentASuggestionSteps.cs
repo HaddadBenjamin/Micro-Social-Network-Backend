@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Tests.Apis.Suggestions;
-using DiabloII.Application.Tests.Contexts.Suggestions;
+using DiabloII.Application.Tests.Apis.Domains.Suggestions;
+using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Mappers;
-using DiabloII.Application.Tests.Repositories;
+using DiabloII.Application.Tests.Repositories.Suggestions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -15,7 +15,9 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
     public class CommentASuggestionSteps
     {
         private readonly ISuggestionsApi _suggestionsApi;
+
         private readonly ISuggestionsRepository _suggestionsRepository;
+
         private readonly ISuggestionsTestContext _suggestionsContext;
 
         public CommentASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
@@ -34,11 +36,11 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedSuggestion = await _suggestionsApi.Comment(dto);
+            _suggestionsContext.VotedResource = await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the commented suggestion should be")]
         public void ThenTheCommentedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_suggestionsContext.CommentedSuggestion, SuggestionsTableMapper.ToSuggestionDto);
+            table.ShouldBeEqualsTo(_suggestionsContext.CommentedResource, SuggestionsTableMapper.ToSuggestionDto);
     }
 }

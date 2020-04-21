@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using DiabloII.Domain.Models.Items;
+﻿using DiabloII.Domain.Models.Items;
 using DiabloII.Domain.Queries.Items;
+using DiabloII.Domain.Readers.Bases;
 
 namespace DiabloII.Domain.Readers
 {
-    public interface IItemReader
+    public interface IItemReader :
+        IReaderGetAll<Item>,
+        IReaderSearch<SearchUniquesQuery, Item>
     {
-        void ResetTheItems(IList<Item> items, IList<ItemProperty> itemProperties);
-
-        IReadOnlyCollection<Item> GetAllUniques();
-
-        IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query);
     }
 }

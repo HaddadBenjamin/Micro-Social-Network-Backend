@@ -1,17 +1,17 @@
-﻿using DiabloII.Items.Reader.Extensions;
-using DiabloII.Items.Reader.Records;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using DiabloII.Items.Reader.Extensions;
 using DiabloII.Items.Reader.Items;
+using DiabloII.Items.Reader.Records;
 
 namespace DiabloII.Items.Reader
 {
     /// <summary>
     /// !!!! SHIT CODE HERE !!!!
     /// </summary>
-                    public class DiabloIIFilesReader
+    public class DiabloIIFilesReader
     {
         private List<(string Name, string Type)> _missingItemTypes = new List<(string, string)>();
         private List<(string Name, string ItemName, double Id)> _missingSkills = new List<(string, string, double)>();
@@ -67,7 +67,7 @@ namespace DiabloII.Items.Reader
         }
 
         public IEnumerable<ItemFromFile> ReadUniques(
-            string uniquesCsv, 
+            string uniquesCsv,
             List<ItemCategoryRecord> itemCategories,
             List<PropertyRecord> propertyRecords,
             List<SkillRecord> skillRecords,
@@ -527,9 +527,9 @@ namespace DiabloII.Items.Reader
                              }
 
                              properties.RemoveAll(_ => new[] { elem + "-min", elem + "-max" }.Contains(_.Name));
-                        }
+                         }
                      });
-                    
+
 
                     var minimumDamageMin = GetPropertyValueOrDefault(properties, "dmg-min") + GetPropertyValueOrDefault(properties, "dmg-norm");
                     var maximumDamageMax = GetPropertyValueOrDefault(properties, "dmg-max") + GetPropertyValueOrDefault(properties, "dmg-norm", ItemPropertyType.Maximum);
@@ -543,7 +543,7 @@ namespace DiabloII.Items.Reader
                     var defensePercentMinimum = GetPropertyValueOrDefault(properties, "Armor Class %");
                     var defensePercentMaximum = GetPropertyValueOrDefault(properties, "Armor Class %", ItemPropertyType.Maximum);
 
-                        return new ItemFromFile
+                    return new ItemFromFile
                     {
                         Id = Guid.NewGuid(),
                         Name = name,
@@ -572,7 +572,7 @@ namespace DiabloII.Items.Reader
                         StrengthRequired = (itemCategory?.StrengthRequired * (requirementPercent + 100)) / 100,
                         DexterityRequired = (itemCategory?.DexterityRequired * (requirementPercent + 100)) / 100,
                         ImageName = GetItemImageName(type, name, itemCategory, itemData)
-                        };
+                    };
                 })
                 .Where(ItemFilter)
                 .ToList();
@@ -675,7 +675,7 @@ namespace DiabloII.Items.Reader
                 .Where(item => item != null)
                 .ToList();
 
-        private List<WeaponRecord> ReadWeapons(string weaponsCsv) 
+        private List<WeaponRecord> ReadWeapons(string weaponsCsv)
             => weaponsCsv
                 .Split('\n')
                 .Skip(1)
@@ -819,7 +819,7 @@ namespace DiabloII.Items.Reader
 
             if (skill == null)
                 skill = skills.FirstOrDefault(_ => _.Name == name.ToTitleCase());
-            
+
             if (skill == null)
                 _missingSkills.Add((name, _currentItemName, id));
 
@@ -840,8 +840,8 @@ namespace DiabloII.Items.Reader
         }
 
         private string NormalizeMinMax(
-            double mini, 
-            double maxi, 
+            double mini,
+            double maxi,
             string firstChar = "+",
             string separator = "-")
         {
@@ -893,9 +893,9 @@ namespace DiabloII.Items.Reader
                 .Replace("0", string.Empty);
             uniqueItemImageName = uniqueItemImageName == string.Empty ? null : uniqueItemImageName;
 
-            return  uniqueItemImageName ??
+            return uniqueItemImageName ??
                     itemCategory?.ImageName ??
-                    itemTypeToItemImageName.GetValueOrDefault(itemType) ?? 
+                    itemTypeToItemImageName.GetValueOrDefault(itemType) ??
                     itemNameToItemImageName.GetValueOrDefault(itemName);
         }
 
@@ -912,7 +912,7 @@ namespace DiabloII.Items.Reader
 
         private static bool ItemFilter(ItemFromFile itemFromFile)
         {
-            var itemNamesToRemove = new[] {"Darkfear", "Dawn Warden", "Thousand Screams" };
+            var itemNamesToRemove = new[] { "Darkfear", "Dawn Warden", "Thousand Screams" };
 
             return itemFromFile != null && !itemNamesToRemove.Contains(itemFromFile.Name);
         }

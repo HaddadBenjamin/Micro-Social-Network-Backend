@@ -51,13 +51,13 @@ namespace DiabloII.Application.Tests.Extensions
             var membersToIgnore = clastMemberNames
                 .Except(tableHeaders)
                 .ToList();
-            
+
             return new CompareLogic
             {
                 Config = new ComparisonConfig
                 {
                     IgnoreCollectionOrder = true,
-                    MaxDifferences =  int.MaxValue,
+                    MaxDifferences = int.MaxValue,
                     MembersToIgnore = ignoreNotSpecifiedMembers ? membersToIgnore : new List<string>()
                 }
             };

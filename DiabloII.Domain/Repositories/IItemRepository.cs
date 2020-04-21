@@ -1,17 +1,14 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Domain.Models.Items;
 using DiabloII.Domain.Queries.Items;
+using DiabloII.Domain.Repositories.Bases;
 
 namespace DiabloII.Domain.Repositories
 {
-    public interface IItemRepository
+    public interface IItemRepository :
+        IRepositoryGetAll<Item>,
+        IRepositorySearch<SearchUniquesQuery, Item>
     {
-        #region Read
-        IReadOnlyCollection<Item> GetAllUniques();
-
-        IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query);
-        #endregion
-
         #region Write
         void ResetTheItems(IList<Item> items, IList<ItemProperty> itemProperties);
         #endregion

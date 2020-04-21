@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DiabloII.Application.Tests.Apis.ErrorLogs;
+using DiabloII.Application.Tests.Apis.Domains.ErrorLogs;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests.Steps.ErrorLogs.GetAll

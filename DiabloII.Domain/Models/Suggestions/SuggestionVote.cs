@@ -7,7 +7,7 @@ namespace DiabloII.Domain.Models.Suggestions
         public Guid Id { get; set; }
 
         public Guid SuggestionId { get; set; }
-       
+
         public virtual Suggestion Suggestion { get; set; }
 
         public bool IsPositive { get; set; }

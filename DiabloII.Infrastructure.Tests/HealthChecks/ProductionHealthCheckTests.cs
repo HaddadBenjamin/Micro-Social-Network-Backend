@@ -42,7 +42,7 @@ namespace DiabloII.Infrastructure.Tests.HealthChecks
                 dbContext.Database.SetCommandTimeout(5);
 
                 var canConnectToTheDatabase = dbContext.Database.CanConnect();
-                    
+
                 canConnectToTheDatabase.ShouldBe(true, "The production database don't respond.");
             }
         }

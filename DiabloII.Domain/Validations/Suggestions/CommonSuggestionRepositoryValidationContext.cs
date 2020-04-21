@@ -6,9 +6,9 @@ namespace DiabloII.Domain.Validations.Suggestions
     public class CommonSuggestionRepositoryValidationContext
     {
         public ISuggestionRepository Repository { get; }
-      
+
         public Guid Id { get; set; }
-        
+
         public Guid CommentId { get; set; }
 
         public string Content { get; set; }

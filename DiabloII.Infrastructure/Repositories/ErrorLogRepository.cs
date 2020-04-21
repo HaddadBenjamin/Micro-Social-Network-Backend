@@ -10,7 +10,7 @@ namespace DiabloII.Infrastructure.Repositories
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public ErrorLogRepository(ApplicationDbContext dbContext) =>_dbContext = dbContext;
+        public ErrorLogRepository(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
         #region Read
         public IReadOnlyCollection<ErrorLog> GetAll() => _dbContext.ErrorLogs

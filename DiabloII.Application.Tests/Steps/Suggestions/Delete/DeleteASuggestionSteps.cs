@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Tests.Apis.Suggestions;
-using DiabloII.Application.Tests.Repositories;
+using DiabloII.Application.Tests.Apis.Domains.Suggestions;
+using DiabloII.Application.Tests.Repositories.Suggestions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -12,6 +12,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Delete
     public class DeleteASuggestionSteps
     {
         private readonly ISuggestionsRepository _suggestionsRepository;
+
         private readonly ISuggestionsApi _suggestionsApi;
 
         public DeleteASuggestionSteps(ISuggestionsRepository suggestionsRepository, ISuggestionsApi suggestionsApi)
