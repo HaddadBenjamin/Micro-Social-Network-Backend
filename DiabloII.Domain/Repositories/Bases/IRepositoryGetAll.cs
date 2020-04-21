@@ -2,7 +2,7 @@
 
 namespace DiabloII.Domain.Repositories.Bases
 {
-    public interface IGetAllRepository<DomainType>
+    public interface IRepositoryGetAll<DomainType>
     {
         IReadOnlyCollection<DomainType> GetAll();
     }

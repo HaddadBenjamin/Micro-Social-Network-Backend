@@ -6,11 +6,11 @@ using DiabloII.Domain.Models.Suggestions;
 namespace DiabloII.Domain.Handlers
 {
     public interface ISuggestionCommandHandler :
-        ICreateCommandHandler<CreateASuggestionCommand, Suggestion>,
-        ICreateCommandHandler<VoteToASuggestionCommand, Suggestion>,
-        ICreateCommandHandler<CommentASuggestionCommand, Suggestion>,
-        IDeleteCommandHandler<DeleteASuggestionCommand, Guid>,
-        IDeleteCommandHandler<DeleteASuggestionCommentCommand, Suggestion>
+        ICommandHandlerCreate<CreateASuggestionCommand, Suggestion>,
+        ICommandHandlerCreate<VoteToASuggestionCommand, Suggestion>,
+        ICommandHandlerCreate<CommentASuggestionCommand, Suggestion>,
+        ICommandHandlerDelete<DeleteASuggestionCommand, Guid>,
+        ICommandHandlerDelete<DeleteASuggestionCommentCommand, Suggestion>
     {
     }
 }

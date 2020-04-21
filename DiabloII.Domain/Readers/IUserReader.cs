@@ -3,7 +3,7 @@ using DiabloII.Domain.Readers.Bases;
 
 namespace DiabloII.Domain.Readers
 {
-    public interface IUserReader : IGetAllReader<User>
+    public interface IUserReader : IReaderGetAll<User>
     {
     }
 }

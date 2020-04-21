@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using DiabloII.Application.Responses.Suggestions;
 
-namespace DiabloII.Application.Tests.Repositories
+namespace DiabloII.Application.Tests.Repositories.Suggestions
 {
     public interface ISuggestionsRepository
     {

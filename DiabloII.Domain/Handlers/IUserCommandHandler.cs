@@ -5,8 +5,8 @@ using DiabloII.Domain.Models.Users;
 namespace DiabloII.Domain.Handlers
 {
     public interface IUserCommandHandler :
-        ICreateCommandHandler<CreateAUserCommand, User>,
-        IUpdateCommandHandler<UpdateAUserCommand, User>
+        ICommandHandlerCreate<CreateAUserCommand, User>,
+        ICommandHandlerUpdate<UpdateAUserCommand, User>
     {
     }
 }

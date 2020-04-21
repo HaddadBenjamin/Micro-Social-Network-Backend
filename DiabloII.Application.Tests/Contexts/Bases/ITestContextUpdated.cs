@@ -2,6 +2,6 @@
 {
     public interface ITestContextUpdated<RestResource>
     {
-        public RestResource UpdatedResource { get; set; }
+        RestResource UpdatedResource { get; set; }
     }
 }

@@ -5,8 +5,8 @@ using DiabloII.Domain.Readers.Bases;
 namespace DiabloII.Domain.Readers
 {
     public interface IItemReader :
-        IGetAllReader<Item>,
-        ISearchReader<SearchUniquesQuery, Item>
+        IReaderGetAll<Item>,
+        IReaderSearch<SearchUniquesQuery, Item>
     {
     }
 }

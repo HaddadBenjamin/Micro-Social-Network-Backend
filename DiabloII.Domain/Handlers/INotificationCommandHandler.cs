@@ -5,7 +5,7 @@ using DiabloII.Domain.Models.Notifications;
 namespace DiabloII.Domain.Handlers
 {
     public interface INotificationCommandHandler :
-        ICreateCommandHandler<CreateANotificationCommand, Notification>
+        ICommandHandlerCreate<CreateANotificationCommand, Notification>
     {
     }
 }

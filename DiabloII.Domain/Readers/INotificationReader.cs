@@ -3,7 +3,7 @@ using DiabloII.Domain.Readers.Bases;
 
 namespace DiabloII.Domain.Readers
 {
-    public interface INotificationReader : IGetAllReader<Notification>
+    public interface INotificationReader : IReaderGetAll<Notification>
     {
     }
 }

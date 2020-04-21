@@ -4,7 +4,7 @@ using DiabloII.Application.Tests.Apis.Domains.Suggestions;
 using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Mappers;
-using DiabloII.Application.Tests.Repositories;
+using DiabloII.Application.Tests.Repositories.Suggestions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 

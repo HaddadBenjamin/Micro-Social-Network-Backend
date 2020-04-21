@@ -2,7 +2,7 @@
 
 namespace DiabloII.Domain.Readers.Bases
 {
-    public interface IGetAllReader<DataModel>
+    public interface IReaderGetAll<DataModel>
     {
         IReadOnlyCollection<DataModel> GetAll();
     }

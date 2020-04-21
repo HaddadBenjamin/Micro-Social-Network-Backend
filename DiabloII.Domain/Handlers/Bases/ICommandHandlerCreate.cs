@@ -1,6 +1,6 @@
 ﻿namespace DiabloII.Domain.Handlers.Bases
 {
-    public interface ICreateCommandHandler<CreateCommand, DataModel>
+    public interface ICommandHandlerCreate<CreateCommand, DataModel>
     {
         DataModel Create(CreateCommand command);
     }

@@ -3,7 +3,7 @@ using DiabloII.Domain.Readers.Bases;
 
 namespace DiabloII.Domain.Readers
 {
-    public interface IErrorLogReader : IGetAllReader<ErrorLog>
+    public interface IErrorLogReader : IReaderGetAll<ErrorLog>
     {
     }
 }

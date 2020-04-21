@@ -5,8 +5,8 @@ using DiabloII.Domain.Repositories.Bases;
 namespace DiabloII.Domain.Repositories
 {
     public interface IUserRepository :
-        IGetAllRepository<User>,
-        IGetRepository<User, string>
+        IRepositoryGetAll<User>,
+        IRepositoryGet<User, string>
     {
         #region Read
         IEnumerable<User> GetUsers(IReadOnlyCollection<string> userIds);

@@ -5,8 +5,8 @@ using DiabloII.Domain.Repositories.Bases;
 namespace DiabloII.Domain.Repositories
 {
     public interface ISuggestionRepository :
-        IGetAllRepository<Suggestion>,
-        IGetRepository<Suggestion, Guid>
+        IRepositoryGetAll<Suggestion>,
+        IRepositoryGet<Suggestion, Guid>
     {
         #region Read
         Suggestion GetUserSuggestion(Guid suggestionId, string userId);

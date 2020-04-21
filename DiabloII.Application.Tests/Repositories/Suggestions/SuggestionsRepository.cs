@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Tests.Apis.Domains.Suggestions;
 
-namespace DiabloII.Application.Tests.Repositories
+namespace DiabloII.Application.Tests.Repositories.Suggestions
 {
     public class SuggestionsRepository : ISuggestionsRepository
     {

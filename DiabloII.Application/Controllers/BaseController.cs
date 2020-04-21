@@ -14,10 +14,10 @@ namespace DiabloII.Application.Controllers
         where ResponseDto : class
     {
         protected ActionResult<IReadOnlyCollection<ResponseDto>> GetAll(
-            IGetAllReader<DataModel> getAllReader,
+            IReaderGetAll<DataModel> readerGetAll,
             IMapper mapper)
         {
-            var response = getAllReader
+            var response = readerGetAll
                 .GetAll()
                 .Select(mapper.Map<ResponseDto>)
                 .ToList();
@@ -27,10 +27,10 @@ namespace DiabloII.Application.Controllers
 
         protected ActionResult<IReadOnlyCollection<ResponseDto>> Search<RequestDto, Query>(
             RequestDto searchDto,
-            ISearchReader<Query, DataModel> searchReader,
+            IReaderSearch<Query, DataModel> readerSearch,
             IMapper mapper)
         {
-            var response = searchReader
+            var response = readerSearch
                 .Search(mapper.Map<Query>(searchDto))
                 .Select(mapper.Map<ResponseDto>)
                 .ToList();
@@ -40,11 +40,11 @@ namespace DiabloII.Application.Controllers
 
         protected ActionResult<ResponseDto> Create<CreateDto, CreateCommand>(
             CreateDto dto,
-            ICreateCommandHandler<CreateCommand, DataModel> createCommandHandler,
+            ICommandHandlerCreate<CreateCommand, DataModel> handlerCreate,
             IMapper mapper)
         {
             var command = mapper.Map<CreateCommand>(dto);
-            var model = createCommandHandler.Create(command);
+            var model = handlerCreate.Create(command);
             var response = mapper.Map<ResponseDto>(model);
 
             return this.CreatedByUsingTheRequestRoute(response);
@@ -52,11 +52,11 @@ namespace DiabloII.Application.Controllers
 
         protected ActionResult<ResponseDto> Update<UpdateDto, UpdateCommand>(
             UpdateDto dto,
-            IUpdateCommandHandler<UpdateCommand, DataModel> updateCommandHandler,
+            ICommandHandlerUpdate<UpdateCommand, DataModel> handlerUpdate,
             IMapper mapper)
         {
             var command = mapper.Map<UpdateCommand>(dto);
-            var model = updateCommandHandler.Update(command);
+            var model = handlerUpdate.Update(command);
             var response = mapper.Map<ResponseDto>(model);
 
             return Ok(response);
@@ -64,21 +64,21 @@ namespace DiabloII.Application.Controllers
 
         protected ActionResult<Guid> Delete<DeleteDto, DeleteCommand>(
             DeleteDto dto,
-            IDeleteCommandHandler<DeleteCommand, Guid> deleteCommandHandler,
+            ICommandHandlerDelete<DeleteCommand, Guid> handlerDelete,
             IMapper mapper)
         {
             var command = mapper.Map<DeleteCommand>(dto);
-            var response = deleteCommandHandler.Delete(command);
+            var response = handlerDelete.Delete(command);
 
             return Ok(response);
         }
         protected ActionResult<Response> DeleteWithMap<DeleteDto, DeleteCommand, CommandResponse, Response>(
             DeleteDto dto,
-            IDeleteCommandHandler<DeleteCommand, CommandResponse> deleteCommandHandler,
+            ICommandHandlerDelete<DeleteCommand, CommandResponse> handlerDelete,
             IMapper mapper)
         {
             var command = mapper.Map<DeleteCommand>(dto);
-            var model = deleteCommandHandler.Delete(command);
+            var model = handlerDelete.Delete(command);
             var response = mapper.Map<ResponseDto>(model);
             
             return Ok(response);

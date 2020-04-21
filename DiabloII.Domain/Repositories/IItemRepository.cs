@@ -6,8 +6,8 @@ using DiabloII.Domain.Repositories.Bases;
 namespace DiabloII.Domain.Repositories
 {
     public interface IItemRepository :
-        IGetAllRepository<Item>,
-        ISearchRepository<SearchUniquesQuery, Item>
+        IRepositoryGetAll<Item>,
+        IRepositorySearch<SearchUniquesQuery, Item>
     {
         #region Write
         void ResetTheItems(IList<Item> items, IList<ItemProperty> itemProperties);

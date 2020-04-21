@@ -1,6 +1,6 @@
 ﻿namespace DiabloII.Domain.Handlers.Bases
 {
-    public interface IUpdateCommandHandler<UpdateCommand, DataModel>
+    public interface ICommandHandlerUpdate<UpdateCommand, DataModel>
     {
         DataModel Update(UpdateCommand command);
     }

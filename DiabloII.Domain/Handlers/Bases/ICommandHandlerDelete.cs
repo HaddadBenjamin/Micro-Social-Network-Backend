@@ -1,6 +1,6 @@
 ﻿namespace DiabloII.Domain.Handlers.Bases
 {
-    public interface IDeleteCommandHandler<DeleteCommand, CommandHandlerResponse>
+    public interface ICommandHandlerDelete<DeleteCommand, CommandHandlerResponse>
     {
         CommandHandlerResponse Delete(DeleteCommand command);
     }

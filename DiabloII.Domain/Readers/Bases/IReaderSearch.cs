@@ -2,7 +2,7 @@
 
 namespace DiabloII.Domain.Readers.Bases
 {
-    public interface ISearchReader<Query, DataModel>
+    public interface IReaderSearch<Query, DataModel>
     {
         IReadOnlyCollection<DataModel> Search(Query query);
     }
