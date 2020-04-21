@@ -14,15 +14,15 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
     [Scope(Tag = "suggestions")]
     public class CommentASuggestionSteps
     {
-        private readonly ISuggestions _suggestions;
+        private readonly ISuggestionsApi _suggestionsApi;
       
         private readonly ISuggestionsRepository _suggestionsRepository;
        
         private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public CommentASuggestionSteps(ISuggestions suggestions, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
+        public CommentASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
         {
-            _suggestions = suggestions;
+            _suggestionsApi = suggestionsApi;
             _suggestionsRepository = suggestionsRepository;
             _suggestionsContext = suggestionsContext;
         }
@@ -36,7 +36,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedResource = await _suggestions.Create(dto);
+            _suggestionsContext.VotedResource = await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the commented suggestion should be")]

@@ -12,13 +12,13 @@ namespace DiabloII.Application.Tests.Steps.Notifications.Create
     [Scope(Tag = "notifications")]
     public class CreateANotificationSteps
     {
-        private readonly INotifications _notifications;
+        private readonly INotificationsApi _notificationsApi;
       
         private readonly INotificationsTestContext _notificationContext;
 
-        public CreateANotificationSteps(INotifications notifications, INotificationsTestContext notificationContext)
+        public CreateANotificationSteps(INotificationsApi notificationsApi, INotificationsTestContext notificationContext)
         {
-            _notifications = notifications;
+            _notificationsApi = notificationsApi;
             _notificationContext = notificationContext;
         }
 
@@ -29,7 +29,7 @@ namespace DiabloII.Application.Tests.Steps.Notifications.Create
             var dtos = table.CreateSet<CreateANotificationDto>();
 
             foreach (var dto in dtos)
-                _notificationContext.CreatedResource = await _notifications.Create(dto);
+                _notificationContext.CreatedResource = await _notificationsApi.Create(dto);
         }
 
         [Then(@"the created notification should be")]

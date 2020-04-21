@@ -12,13 +12,13 @@ namespace DiabloII.Application.Tests.Steps.Users.Create
     [Scope(Tag = "users")]
     public class CreateAUserSteps
     {
-        private readonly IUsers _users;
+        private readonly IUsersApi _usersApi;
       
         private readonly IUsersTestContext _userContext;
 
-        public CreateAUserSteps(IUsers users, IUsersTestContext userContext)
+        public CreateAUserSteps(IUsersApi usersApi, IUsersTestContext userContext)
         {
-            _users = users;
+            _usersApi = usersApi;
             _userContext = userContext;
         }
 
@@ -29,7 +29,7 @@ namespace DiabloII.Application.Tests.Steps.Users.Create
             var dtos = table.CreateSet<CreateAUserDto>();
 
             foreach (var dto in dtos)
-                _userContext.CreatedResource = await _users.Create(dto);
+                _userContext.CreatedResource = await _usersApi.Create(dto);
         }
 
         [Then(@"the created user should be")]

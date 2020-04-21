@@ -14,15 +14,15 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
     [Scope(Tag = "suggestions")]
     public class VoteToASuggestionSteps
     {
-        private readonly ISuggestions _suggestions;
+        private readonly ISuggestionsApi _suggestionsApi;
      
         private readonly ISuggestionsRepository _suggestionsRepository;
      
         private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public VoteToASuggestionSteps(ISuggestions suggestions, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
+        public VoteToASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
         {
-            _suggestions = suggestions;
+            _suggestionsApi = suggestionsApi;
             _suggestionsRepository = suggestionsRepository;
             _suggestionsContext = suggestionsContext;
         }
@@ -35,7 +35,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedResource = await _suggestions.Create(dto);
+            _suggestionsContext.VotedResource = await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the voted suggestion should be")]

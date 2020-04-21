@@ -4,10 +4,10 @@ using DiabloII.Application.Tests.Apis.Bases;
 
 namespace DiabloII.Application.Tests.Apis.Domains.Users
 {
-    public interface IUsers :
+    public interface IUsersApi :
         IApiGetAll<UserDto>,
         IApiCreate<CreateAUserDto, UserDto>,
-        IApiUpdate<UpdateAUserDto, UserDto>
+        IUpdateApi<UpdateAUserDto, UserDto>
     {
     }
 }

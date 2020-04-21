@@ -7,11 +7,11 @@ using DiabloII.Application.Tests.Services.Http;
 
 namespace DiabloII.Application.Tests.Apis.Domains.Notifications
 {
-    public class Notifications : BaseApi, INotifications
+    public class NotificationsApi : BaseApi, INotificationsApi
     {
         protected override string BaseUrl { get; } = "notifications";
 
-        public Notifications(IHttpService httpService) : base(httpService) { }
+        public NotificationsApi(IHttpService httpService) : base(httpService) { }
 
         #region Read
         public async Task<IReadOnlyCollection<NotificationDto>> GetAll() =>

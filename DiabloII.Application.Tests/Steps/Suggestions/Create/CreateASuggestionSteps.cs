@@ -12,13 +12,13 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Create
     [Scope(Tag = "suggestions")]
     public class CreateASuggestionSteps
     {
-        private readonly ISuggestions _suggestions;
+        private readonly ISuggestionsApi _suggestionsApi;
        
         private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public CreateASuggestionSteps(ISuggestions suggestions, ISuggestionsTestContext suggestionsContext)
+        public CreateASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsTestContext suggestionsContext)
         {
-            _suggestions = suggestions;
+            _suggestionsApi = suggestionsApi;
             _suggestionsContext = suggestionsContext;
         }
 
@@ -29,7 +29,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Create
             var dtos = table.CreateSet<CreateASuggestionDto>();
 
             foreach (var dto in dtos)
-                _suggestionsContext.CreatedResource = await _suggestions.Create(dto);
+                _suggestionsContext.CreatedResource = await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the created suggestion should be")]

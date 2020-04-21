@@ -13,15 +13,15 @@ namespace DiabloII.Application.Tests.Steps.Users.Update
     [Scope(Tag = "users")]
     public class UpdateAUserSteps
     {
-        private readonly IUsers _users;
+        private readonly IUsersApi _usersApi;
       
         private readonly IUsersTestContext _userContext;
         
         private readonly IUserRepository _repository;
 
-        public UpdateAUserSteps(IUsers users, IUsersTestContext userContext, IUserRepository repository)
+        public UpdateAUserSteps(IUsersApi usersApi, IUsersTestContext userContext, IUserRepository repository)
         {
-            _users = users;
+            _usersApi = usersApi;
             _userContext = userContext;
             _repository = repository;
         }
@@ -32,7 +32,7 @@ namespace DiabloII.Application.Tests.Steps.Users.Update
             var userId = _repository.GetUserIdByItsEmail(email);
             var dto = UsersTableMapper.ToUpdateAUserDto(table.Rows.First(), userId);
 
-            _userContext.UpdatedResource = await _users.Update(dto);
+            _userContext.UpdatedResource = await _usersApi.Update(dto);
         }
 
         [Then(@"the updated user should be")]

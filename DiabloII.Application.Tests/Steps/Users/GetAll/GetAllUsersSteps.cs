@@ -10,18 +10,18 @@ namespace DiabloII.Application.Tests.Steps.Users.GetAll
     [Scope(Tag = "users")]
     public class GetAllUsersSteps
     {
-        private readonly IUsers _users;
+        private readonly IUsersApi _usersApi;
        
         private readonly IUsersTestContext _usersContext;
 
-        public GetAllUsersSteps(IUsers users, IUsersTestContext usersContext)
+        public GetAllUsersSteps(IUsersApi usersApi, IUsersTestContext usersContext)
         {
-            _users = users;
+            _usersApi = usersApi;
             _usersContext = usersContext;
         }
 
         [When(@"I get all the users")]
-        public async Task WhenIGetAllTheUsers() => _usersContext.AllResources = await _users.GetAll();
+        public async Task WhenIGetAllTheUsers() => _usersContext.AllResources = await _usersApi.GetAll();
 
         [Then(@"all the users should be")]
         public void ThenAllTheUsersShouldBe(Table table) => table.ShouldAllExistsIn(_usersContext.AllResources);

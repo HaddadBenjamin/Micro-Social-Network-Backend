@@ -10,19 +10,19 @@ namespace DiabloII.Application.Tests.Steps.Notifications.GetAll
     [Scope(Tag = "notifications")]
     public class GetAllNotificationSteps
     {
-        private readonly INotifications _notifications;
+        private readonly INotificationsApi _notificationsApi;
         
         private readonly INotificationsTestContext _notificationsContext;
 
-        public GetAllNotificationSteps(INotifications notifications, INotificationsTestContext notificationsContext)
+        public GetAllNotificationSteps(INotificationsApi notificationsApi, INotificationsTestContext notificationsContext)
         {
-            _notifications = notifications;
+            _notificationsApi = notificationsApi;
             _notificationsContext = notificationsContext;
         }
 
         [When(@"I get all the notifications")]
         public async Task WhenIGetAllTheNotifications() =>
-            _notificationsContext.AllResources = await _notifications.GetAll();
+            _notificationsContext.AllResources = await _notificationsApi.GetAll();
 
         [Then(@"all the notifications should be")]
         public void ThenAllTheNotificationsShouldBe(Table table) =>

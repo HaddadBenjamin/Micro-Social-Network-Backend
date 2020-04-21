@@ -31,11 +31,11 @@ namespace DiabloII.Application.Tests
             services.AddSingleton<ISuggestionsRepository, SuggestionsRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<INotificationRepository, NotificationRepository>();
-            services.AddSingleton<ISuggestions, Suggestions>();
-            services.AddSingleton<IItems, Items>();
+            services.AddSingleton<ISuggestionsApi, SuggestionsApi>();
+            services.AddSingleton<IItemsApi, ItemsApi>();
             services.AddSingleton<IErrorLogsApi, ErrorLogsApi>();
-            services.AddSingleton<IUsers, Users>();
-            services.AddSingleton<INotifications, Notifications>();
+            services.AddSingleton<IUsersApi, UsersApi>();
+            services.AddSingleton<INotificationsApi, NotificationsApi>();
 
             return testContext.Services;
         }
