@@ -25,9 +25,9 @@ namespace DiabloII.Infrastructure.Repositories
             _dbContext.BulkInsert(itemProperties);
         }
 
-        public IReadOnlyCollection<Item> GetAllUniques() => UniqueItems.ToList();
+        public IReadOnlyCollection<Item> GetAll() => UniqueItems.ToList();
 
-        public IReadOnlyCollection<Item> SearchUniques(SearchUniquesQuery query) => UniqueItems
+        public IReadOnlyCollection<Item> Search(SearchUniquesQuery query) => UniqueItems
             .Where(unique =>
                 (query.MinimumLevel == null || unique.Level >= query.MinimumLevel) &&
                 (query.MaximumLevel == null || unique.Level >= query.MaximumLevel) &&

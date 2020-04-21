@@ -16,7 +16,6 @@ namespace DiabloII.Infrastructure.Repositories
         public SuggestionRepository(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
         #region Read
-
         public IIncludableQueryable<Suggestion, ICollection<SuggestionComment>> GetQueryableSuggestions() => _dbContext
             .Suggestions
             .Include(suggestion => suggestion.Votes)
@@ -24,7 +23,7 @@ namespace DiabloII.Infrastructure.Repositories
 
         public IReadOnlyCollection<Suggestion> GetAll() => GetQueryableSuggestions().ToList();
 
-        public Suggestion GetSuggestion(Guid suggestionId) =>
+        public Suggestion Get(Guid suggestionId) =>
             GetQueryableSuggestions().First(vote => vote.Id == suggestionId);
 
         public Suggestion GetUserSuggestion(Guid suggestionId, string userId) =>  GetQueryableSuggestions()
@@ -65,7 +64,7 @@ namespace DiabloII.Infrastructure.Repositories
 
         public Suggestion AddComment(Guid suggestionId, SuggestionComment suggestionComment)
         {
-            var suggestion = GetSuggestion(suggestionId);
+            var suggestion = Get(suggestionId);
 
             suggestion.Comments.Add(suggestionComment);
             _dbContext.SuggestionComments.Add(suggestionComment);
@@ -88,7 +87,7 @@ namespace DiabloII.Infrastructure.Repositories
 
         public Suggestion RemoveUserComment(Guid suggestionId, Guid commentId, string userId)
         {
-            var suggestion = GetSuggestion(suggestionId);
+            var suggestion = Get(suggestionId);
             var userComment = GetUserComment(suggestion, commentId, userId);
 
             RemoveComment(suggestion, userComment);

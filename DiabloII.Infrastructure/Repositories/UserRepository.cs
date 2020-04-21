@@ -21,11 +21,11 @@ namespace DiabloII.Infrastructure.Repositories
             .ThenInclude(UserNotificationSetting => UserNotificationSetting.UserNotifications)
             .ThenInclude(userNotification => userNotification.Notification);
 
-        public IReadOnlyCollection<User> GetAllUsers() => GetQueryableUsers().ToList();
+        public IReadOnlyCollection<User> GetAll() => GetQueryableUsers().ToList();
 
         public IEnumerable<User> GetUsers(IReadOnlyCollection<string> userIds) => GetQueryableUsers().Where(user => userIds.Contains(user.Id));
 
-        public User GetUser(string userId) => GetQueryableUsers().Single(user => user.Id == userId);
+        public User Get(string userId) => GetQueryableUsers().Single(user => user.Id == userId);
 
         public string GetUserIdByItsEmail(string email) => GetQueryableUsers().Single(user => user.Email == email).Id;
 

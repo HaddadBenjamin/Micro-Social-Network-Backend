@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using DiabloII.Domain.Models.Suggestions;
+using DiabloII.Domain.Repositories.Bases;
 
 namespace DiabloII.Domain.Repositories
 {
-    public interface ISuggestionRepository
+    public interface ISuggestionRepository :
+        IGetAllRepository<Suggestion>,
+        IGetRepository<Suggestion, Guid>
     {
         #region Read
-        IReadOnlyCollection<Suggestion> GetAll();
-
-        Suggestion GetSuggestion(Guid suggestionId);
-
         Suggestion GetUserSuggestion(Guid suggestionId, string userId);
 
         SuggestionVote GetUserVoteOrDefault(Suggestion suggestion, string userId);

@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using DiabloII.Domain.Models.ErrorLogs;
+﻿using DiabloII.Domain.Models.ErrorLogs;
+using DiabloII.Domain.Repositories.Bases;
 
 namespace DiabloII.Domain.Repositories
 {
-    public interface IErrorLogRepository
+    public interface IErrorLogRepository : IGetAllRepository<ErrorLog>
     {
-        #region Read
-        IReadOnlyCollection<ErrorLog> GetAll();
-        #endregion
     }
 }

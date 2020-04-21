@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Domain.Models.Users;
+using DiabloII.Domain.Repositories.Bases;
 
 namespace DiabloII.Domain.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository :
+        IGetAllRepository<User>,
+        IGetRepository<User, string>
     {
         #region Read
-        IReadOnlyCollection<User> GetAllUsers();
-        
         IEnumerable<User> GetUsers(IReadOnlyCollection<string> userIds);
        
-        User GetUser(string user);
-
         string GetUserIdByItsEmail(string email);
 
         bool DoesUserExists(string userId);
