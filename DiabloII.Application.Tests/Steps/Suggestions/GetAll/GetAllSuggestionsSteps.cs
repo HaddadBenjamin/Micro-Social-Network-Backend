@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DiabloII.Application.Tests.Apis.Suggestions;
+using DiabloII.Application.Tests.Apis.Domains.Suggestions;
 using DiabloII.Application.Tests.Contexts.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;

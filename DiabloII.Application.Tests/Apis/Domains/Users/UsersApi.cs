@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using DiabloII.Application.Requests.Users;
 using DiabloII.Application.Responses.Users;
+using DiabloII.Application.Tests.Apis.Bases;
 using DiabloII.Application.Tests.Services.Http;
 
-namespace DiabloII.Application.Tests.Apis.Users
+namespace DiabloII.Application.Tests.Apis.Domains.Users
 {
     public class UsersApi : BaseApi, IUsersApi
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Tests.Apis.Suggestions;
+using DiabloII.Application.Tests.Apis.Domains.Suggestions;
 using DiabloII.Application.Tests.Contexts.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Mappers;
@@ -35,7 +35,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedSuggestion = await _suggestionsApi.Vote(dto);
+            _suggestionsContext.VotedSuggestion = await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the voted suggestion should be")]

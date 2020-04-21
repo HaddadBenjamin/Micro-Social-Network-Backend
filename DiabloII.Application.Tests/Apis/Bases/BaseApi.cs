@@ -1,6 +1,6 @@
 ﻿using DiabloII.Application.Tests.Services.Http;
 
-namespace DiabloII.Application.Tests.Apis
+namespace DiabloII.Application.Tests.Apis.Bases
 {
     public abstract class BaseApi
     {

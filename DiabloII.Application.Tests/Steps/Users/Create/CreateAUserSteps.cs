@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Users;
-using DiabloII.Application.Tests.Apis.Users;
+using DiabloII.Application.Tests.Apis.Domains.Users;
 using DiabloII.Application.Tests.Contexts.Users;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;

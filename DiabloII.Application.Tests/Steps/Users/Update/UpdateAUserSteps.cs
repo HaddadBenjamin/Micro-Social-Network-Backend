@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using DiabloII.Application.Tests.Apis.Users;
+using DiabloII.Application.Tests.Apis.Domains.Users;
 using DiabloII.Application.Tests.Contexts.Users;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Mappers;

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Notifications;
-using DiabloII.Application.Tests.Apis.Notifications;
+using DiabloII.Application.Tests.Apis.Domains.Notifications;
 using DiabloII.Application.Tests.Contexts.Notifications;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;

@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using DiabloII.Application.Requests.Notifications;
 using DiabloII.Application.Responses.Notifications;
+using DiabloII.Application.Tests.Apis.Bases;
 using DiabloII.Application.Tests.Services.Http;
 
-namespace DiabloII.Application.Tests.Apis.Notifications
+namespace DiabloII.Application.Tests.Apis.Domains.Notifications
 {
     public class NotificationsApi : BaseApi, INotificationsApi
     {

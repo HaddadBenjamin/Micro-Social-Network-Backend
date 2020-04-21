@@ -1,8 +1,8 @@
-﻿using DiabloII.Application.Tests.Apis.ErrorLogs;
-using DiabloII.Application.Tests.Apis.Items;
-using DiabloII.Application.Tests.Apis.Notifications;
-using DiabloII.Application.Tests.Apis.Suggestions;
-using DiabloII.Application.Tests.Apis.Users;
+﻿using DiabloII.Application.Tests.Apis.Domains.ErrorLogs;
+using DiabloII.Application.Tests.Apis.Domains.Items;
+using DiabloII.Application.Tests.Apis.Domains.Notifications;
+using DiabloII.Application.Tests.Apis.Domains.Suggestions;
+using DiabloII.Application.Tests.Apis.Domains.Users;
 using DiabloII.Application.Tests.Contexts.Notifications;
 using DiabloII.Application.Tests.Contexts.Suggestions;
 using DiabloII.Application.Tests.Contexts.Users;

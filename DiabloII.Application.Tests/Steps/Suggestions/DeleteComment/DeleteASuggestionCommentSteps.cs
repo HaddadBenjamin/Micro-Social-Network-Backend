@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Tests.Apis.Suggestions;
+using DiabloII.Application.Tests.Apis.Domains.Suggestions;
 using DiabloII.Application.Tests.Repositories;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -31,7 +31,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.DeleteComment
             dto.Id = suggestionCommentId;
             dto.SuggestionId = suggestionDto.Id;
 
-            await _suggestionsApi.DeleteComment(dto);
+            await _suggestionsApi.Delete(dto);
         }
     }
 }
