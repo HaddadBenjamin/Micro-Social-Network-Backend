@@ -1,4 +1,5 @@
 ﻿using DiabloII.Infrastructure.DbContext;
+using DiabloII.Infrastructure.Extensions;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests.Steps.Users
@@ -14,9 +15,9 @@ namespace DiabloII.Application.Tests.Steps.Users
         [BeforeScenario]
         public void EmptyTheUserTables()
         {
-            _dbContext.UserNotifications.RemoveRange(_dbContext.UserNotifications);
-            _dbContext.UserNotificationSettings.RemoveRange(_dbContext.UserNotificationSettings);
-            _dbContext.Users.RemoveRange(_dbContext.Users);
+            _dbContext.EmptyTheTable(_dbContext.UserNotifications);
+            _dbContext.EmptyTheTable(_dbContext.UserNotificationSettings);
+            _dbContext.EmptyTheTable(_dbContext.Users);
 
             _dbContext.SaveChanges();
         }

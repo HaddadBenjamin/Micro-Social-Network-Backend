@@ -8,7 +8,6 @@ namespace DiabloII.Application.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
-
         public static IApplicationBuilder UseMyExceptionPages(this IApplicationBuilder applicationBuilder, IHostingEnvironment environment)
         {
             if (environment.IsDevelopment())

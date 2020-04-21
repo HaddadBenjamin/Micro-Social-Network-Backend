@@ -1,7 +1,8 @@
 ﻿using DiabloII.Infrastructure.DbContext;
+using DiabloII.Infrastructure.Extensions;
 using TechTalk.SpecFlow;
 
-namespace DiabloII.Application.Tests.Steps.Suggestions
+namespace DiabloII.Application.Tests.Steps.Notifications
 {
     [Binding]
     [Scope(Tag = "notifications")]
@@ -14,7 +15,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions
         [BeforeScenario]
         public void EmptyTheNotificationTables()
         {
-            _dbContext.Notifications.RemoveRange(_dbContext.Notifications);
+            _dbContext.EmptyTheTable(_dbContext.Notifications);
 
             _dbContext.SaveChanges();
         }
