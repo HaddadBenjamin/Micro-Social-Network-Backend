@@ -4,20 +4,15 @@ using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Validations.Suggestions.Comment;
-using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Repositories;
-using DiabloII.Infrastructure.Tests.Helpers;
 using NUnit.Framework;
 using Shouldly;
 
 namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
 {
     [TestFixture]
-    public class CommentASuggestionValidationTests
+    public class CommentASuggestionValidationTests : BaseValidationTests<CommentASuggestionValidator, CommentASuggestionValidationContext>
     {
-        private ApplicationDbContext _dbContext;
-        private CommentASuggestionValidator _validator;
-        private CommentASuggestionValidationContext _validationContext;
         private ISuggestionRepository _repository;
 
         [SetUp]
@@ -30,57 +25,33 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
                 Comment = "any value"
             };
 
-            _dbContext = DatabaseHelpers.CreateMyTestDbContext();
             _repository = new SuggestionRepository(_dbContext);
-
-            _validator = new CommentASuggestionValidator();
             _validationContext = new CommentASuggestionValidationContext(validCommand, _repository);
         }
 
         [Test]
-        public void WhenCommentIsNull_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Comment = null;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenCommentIsNull_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.Comment = null);
 
         [Test]
-        public void WhenCommentIsEmpty_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Comment = string.Empty;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenCommentIsEmpty_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.Comment = string.Empty);
 
         [Test]
-        public void WhenCommentIsLongerThan500Characters_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Comment = new String('x', 501);
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenCommentIsLongerThan500Characters_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.Comment = new String('x', 501));
 
         [Test]
-        public void WhenUserIdIsNull_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.UserId = null;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenUserIdIsNull_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.UserId = null);
 
         [Test]
-        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.UserId = string.Empty;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
-
+        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.UserId = string.Empty);
 
         [Test]
         public void WhenSuggestionDoesNotExists_ShouldThrowANotFoundException() =>
-            Should.Throw<NotFoundException>(() => _validator.Validate(_validationContext));
+            ShouldThrowDuringTheValidation<NotFoundException>();
 
         [Test]
         public void WhenCommandIsValid_ShouldSuccess()

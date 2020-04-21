@@ -3,12 +3,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace DiabloII.Application.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseMyExceptionPages(this IApplicationBuilder applicationBuilder, IHostingEnvironment environment)
+        public static IApplicationBuilder UseMyExceptionPages(this IApplicationBuilder applicationBuilder, IWebHostEnvironment environment)
         {
             if (environment.IsDevelopment())
                 applicationBuilder.UseDeveloperExceptionPage();

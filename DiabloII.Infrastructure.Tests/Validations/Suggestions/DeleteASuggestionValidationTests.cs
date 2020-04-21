@@ -4,20 +4,15 @@ using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Validations.Suggestions.Delete;
-using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Repositories;
-using DiabloII.Infrastructure.Tests.Helpers;
 using NUnit.Framework;
 using Shouldly;
 
 namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
 {
     [TestFixture]
-    public class DeleteASuggestionValidationTests
+    public class DeleteASuggestionValidationTests : BaseValidationTests<DeleteASuggestionValidator, DeleteASuggestionValidationContext>
     {
-        private ApplicationDbContext _dbContext;
-        private DeleteASuggestionValidator _validator;
-        private DeleteASuggestionValidationContext _validationContext;
         private ISuggestionRepository _repository;
 
         [SetUp]
@@ -29,42 +24,30 @@ namespace DiabloII.Infrastructure.Tests.Validations.Suggestions
                 Id = Guid.NewGuid()
             };
 
-            _dbContext = DatabaseHelpers.CreateMyTestDbContext();
             _repository = new SuggestionRepository(_dbContext);
-
-            _validator = new DeleteASuggestionValidator();
             _validationContext = new DeleteASuggestionValidationContext(validCommand, _repository);
         }
 
         [Test]
-        public void WhenUserIdIsNull_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.UserId = null;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenUserIdIsNull_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.UserId = null);
 
         [Test]
-        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.UserId = string.Empty;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.UserId = string.Empty);
 
         [Test]
         public void WhenSuggestionDoesNotExists_ShouldThrowANotFoundException() =>
-            Should.Throw<NotFoundException>(() => _validator.Validate(_validationContext));
+            ShouldThrowDuringTheValidation<NotFoundException>();
 
         [Test]
-        public void WhenUserIsNotTheOwnerOsTheSuggestion_ShouldThrowAUnauthorizedException()
-        {
-            _validationContext.Command.UserId = "other user id";
+        public void WhenUserIsNotTheOwnerOsTheSuggestion_ShouldThrowAUnauthorizedException() =>
+            ShouldThrowDuringTheValidation<UnauthorizedException>(() =>
+            {
+                _validationContext.Command.UserId = "other user id";
 
-            AddTheValidSuggestion();
-          
-            Should.Throw<UnauthorizedException>(() => _validator.Validate(_validationContext));
-        }
+                AddTheValidSuggestion();
+            });
 
         [Test]
         public void WhenCommandIsValid_ShouldSuccess()

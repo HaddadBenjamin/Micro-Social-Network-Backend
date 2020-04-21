@@ -3,20 +3,15 @@ using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Models.Users;
 using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Validations.Users.Create;
-using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Repositories;
-using DiabloII.Infrastructure.Tests.Helpers;
 using NUnit.Framework;
 using Shouldly;
 
 namespace DiabloII.Infrastructure.Tests.Validations.Users
 {
     [TestFixture]
-    public class CreateAUserValidationTests
+    public class CreateAUserValidationTests : BaseValidationTests<CreateAUserValidator, CreateAUserValidationContext>
     {
-        private ApplicationDbContext _dbContext;
-        private CreateAUserValidator _validator;
-        private CreateAUserValidationContext _validationContext;
         private IUserRepository _repository;
 
         [SetUp]
@@ -28,54 +23,37 @@ namespace DiabloII.Infrastructure.Tests.Validations.Users
                 Email = "DiabloIIEnriched@gmail.com",
             };
 
-            _dbContext = DatabaseHelpers.CreateMyTestDbContext();
             _repository = new UserRepository(_dbContext);
-
-            _validator = new CreateAUserValidator();
             _validationContext = new CreateAUserValidationContext(validCommand, _repository);
         }
 
         [Test]
-        public void WhenUserIdIsNull_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.UserId = null;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenUserIdIsNull_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() =>
+                _validationContext.Command.UserId = null);
 
         [Test]
-        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.UserId = string.Empty;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenUserIdIsEmpty_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() =>
+                _validationContext.Command.UserId = string.Empty);
 
         [Test]
-        public void WhenEmailIsNotValid_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Email = "not valid email";
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenEmailIsNotValid_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() =>
+                _validationContext.Command.Email = "not valid email");
 
         [Test]
-        public void WhenEmailIsNotUnique_ShouldThrowABadRequestException()
-        {
-            CreateTheUser();
-
-            _validationContext.RepositoryValidationContext.Id = "other user id";
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenEmailIsNotUnique_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() =>
+            {
+                CreateTheUser();
+        
+                _validationContext.RepositoryValidationContext.Id = "other user id";
+            });
 
         [Test]
-        public void WhenUserIsNotUnique_ShouldThrowAAlreadyExistsException()
-        {
-            CreateTheUser();
-
-            Should.Throw<AlreadyExistsException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenUserIsNotUnique_ShouldThrowAAlreadyExistsException() =>
+            ShouldThrowDuringTheValidation<AlreadyExistsException>(() => CreateTheUser());
 
         [Test]
         public void WhenCommandIsValid_ShouldSuccess() => Should.NotThrow(() => _validator.Validate(_validationContext));

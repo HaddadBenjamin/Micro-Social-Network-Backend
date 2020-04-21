@@ -2,20 +2,14 @@ using DiabloII.Domain.Commands.Notifications;
 using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Validations.Notifications.Create;
-using DiabloII.Infrastructure.DbContext;
-using DiabloII.Infrastructure.Tests.Helpers;
 using NUnit.Framework;
 using Shouldly;
 
 namespace DiabloII.Infrastructure.Tests.Validations.Notifications
 {
     [TestFixture]
-    public class CreateANotificationValidationTests
+    public class CreateANotificationValidationTests : BaseValidationTests<CreateANotificationValidator, CreateANotificationValidationContext>
     {
-        private ApplicationDbContext _dbContext;
-        private CreateANotificationValidator _validator;
-        private CreateANotificationValidationContext _validationContext;
-
         [SetUp]
         public void Setup()
         {
@@ -25,52 +19,29 @@ namespace DiabloII.Infrastructure.Tests.Validations.Notifications
                 Content = "A new area and some monsters have been added",
                 Type = NotificationType.PatchNotes
             };
-
-            _dbContext = DatabaseHelpers.CreateMyTestDbContext();
-
-            _validator = new CreateANotificationValidator();
+            
             _validationContext = new CreateANotificationValidationContext(validCommand);
         }
 
         [Test]
-        public void WhenTitleIsNull_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Title = null;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenTitleIsNull_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.Title = null);
 
         [Test]
-        public void WhenTitleIsEmpty_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Title = string.Empty;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenTitleIsEmpty_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.Title = string.Empty);
 
         [Test]
-        public void WhenContentIsNull_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Content = null;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenContentIsNull_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.Content = null);
 
         [Test]
-        public void WhenContentIsEmpty_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Content = string.Empty;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenContentIsEmpty_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.Content = string.Empty);
 
         [Test]
-        public void WhenNotificationTypeIsNone_ShouldThrowABadRequestException()
-        {
-            _validationContext.Command.Type = NotificationType.None;
-
-            Should.Throw<BadRequestException>(() => _validator.Validate(_validationContext));
-        }
+        public void WhenNotificationTypeIsNone_ShouldThrowABadRequestException() =>
+            ShouldThrowDuringTheValidation<BadRequestException>(() => _validationContext.Command.Type = NotificationType.None);
 
         [Test]
         public void WhenCommandIsValid_ShouldSuccess() => Should.NotThrow(() => _validator.Validate(_validationContext));

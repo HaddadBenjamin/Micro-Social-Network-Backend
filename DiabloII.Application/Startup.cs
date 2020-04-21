@@ -31,7 +31,7 @@ namespace DiabloII.Application
             .RegisterTheApplicationDependencies()
             .AddMySmtpServer(_configuration.GetSection("Smtp").Get<SmtpConfiguration>());
 
-        public void Configure(IApplicationBuilder applicationBuilder, IHostingEnvironment environment) => applicationBuilder
+        public void Configure(IApplicationBuilder applicationBuilder, IWebHostEnvironment environment) => applicationBuilder
             .UseMyExceptionPages(environment)
             .PlayAllTheDatabaseMigrations()
             .UseMyCors()
