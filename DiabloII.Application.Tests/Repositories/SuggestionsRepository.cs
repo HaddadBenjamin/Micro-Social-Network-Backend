@@ -8,14 +8,14 @@ namespace DiabloII.Application.Tests.Repositories
 {
     public class SuggestionsRepository : ISuggestionsRepository
     {
-        private readonly ISuggestionsApi _suggestionsApi;
+        private readonly ISuggestions _suggestions;
 
-        public SuggestionsRepository(ISuggestionsApi suggestionsApi) => _suggestionsApi = suggestionsApi;
+        public SuggestionsRepository(ISuggestions suggestions) => _suggestions = suggestions;
 
         #region Read
         public async Task<Guid> GetSuggestionId(string suggestionContent) => (await GetSuggestion(suggestionContent)).Id;
 
-        public async Task<SuggestionDto> GetSuggestion(string suggestionContent) => (await _suggestionsApi.GetAll())
+        public async Task<SuggestionDto> GetSuggestion(string suggestionContent) => (await _suggestions.GetAll())
             .Single(suggestion => suggestion.Content == suggestionContent);
 
         public Guid GetSuggestionCommentId(SuggestionDto suggestionDto, string suggestionCommentContent) => suggestionDto.Comments

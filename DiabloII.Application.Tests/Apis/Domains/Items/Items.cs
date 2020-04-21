@@ -7,11 +7,11 @@ using DiabloII.Application.Tests.Services.Http;
 
 namespace DiabloII.Application.Tests.Apis.Domains.Items
 {
-    public class ItemsApi : BaseApi, IItemsApi
+    public class Items : BaseApi, IItems
     {
         protected override string BaseUrl { get; } = "items";
 
-        public ItemsApi(IHttpService httpService) : base(httpService) { }
+        public Items(IHttpService httpService) : base(httpService) { }
 
         public async Task<IReadOnlyCollection<ItemDto>> GetAll() =>
             await _httpService.GetAsync<IReadOnlyCollection<ItemDto>>(BaseUrl);

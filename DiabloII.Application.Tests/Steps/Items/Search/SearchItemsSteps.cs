@@ -10,16 +10,16 @@ namespace DiabloII.Application.Tests.Steps.Items.Search
     [Scope(Tag = "items")]
     public class SearchItemsSteps
     {
-        private readonly IItemsApi _itemsApi;
+        private readonly IItems _items;
 
-        public SearchItemsSteps(IItemsApi itemsApi) => _itemsApi = itemsApi;
+        public SearchItemsSteps(IItems items) => _items = items;
 
         [When(@"I search the items")]
         public async Task WhenISearchTheItems(Table table)
         {
             var dto = table.CreateInstance<SearchUniquesDto>();
 
-            await _itemsApi.Search(dto);
+            await _items.Search(dto);
         }
     }
 }

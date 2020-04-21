@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Tests.Apis.Domains.Notifications;
-using DiabloII.Application.Tests.Contexts.Notifications;
+using DiabloII.Application.Tests.Contexts.Domains.Notifications;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;
 
@@ -10,22 +10,22 @@ namespace DiabloII.Application.Tests.Steps.Notifications.GetAll
     [Scope(Tag = "notifications")]
     public class GetAllNotificationSteps
     {
-        private readonly INotificationsApi _notificationsApi;
+        private readonly INotifications _notifications;
         
         private readonly INotificationsTestContext _notificationsContext;
 
-        public GetAllNotificationSteps(INotificationsApi notificationsApi, INotificationsTestContext notificationsContext)
+        public GetAllNotificationSteps(INotifications notifications, INotificationsTestContext notificationsContext)
         {
-            _notificationsApi = notificationsApi;
+            _notifications = notifications;
             _notificationsContext = notificationsContext;
         }
 
         [When(@"I get all the notifications")]
         public async Task WhenIGetAllTheNotifications() =>
-            _notificationsContext.AllNotifications = await _notificationsApi.GetAll();
+            _notificationsContext.AllResources = await _notifications.GetAll();
 
         [Then(@"all the notifications should be")]
         public void ThenAllTheNotificationsShouldBe(Table table) =>
-            table.ShouldAllExistsIn(_notificationsContext.AllNotifications);
+            table.ShouldAllExistsIn(_notificationsContext.AllResources);
     }
 }

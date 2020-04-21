@@ -7,11 +7,11 @@ using DiabloII.Application.Tests.Services.Http;
 
 namespace DiabloII.Application.Tests.Apis.Domains.Users
 {
-    public class UsersApi : BaseApi, IUsersApi
+    public class Users : BaseApi, IUsers
     {
         protected override string BaseUrl { get; } = "users";
      
-        public UsersApi(IHttpService httpService) : base(httpService) { }
+        public Users(IHttpService httpService) : base(httpService) { }
 
         #region Read
         public async Task<IReadOnlyCollection<UserDto>> GetAll() =>

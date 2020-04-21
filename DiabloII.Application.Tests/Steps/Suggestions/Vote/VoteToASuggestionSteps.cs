@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Tests.Apis.Domains.Suggestions;
-using DiabloII.Application.Tests.Contexts.Suggestions;
+using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Mappers;
 using DiabloII.Application.Tests.Repositories;
@@ -14,15 +14,15 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
     [Scope(Tag = "suggestions")]
     public class VoteToASuggestionSteps
     {
-        private readonly ISuggestionsApi _suggestionsApi;
+        private readonly ISuggestions _suggestions;
      
         private readonly ISuggestionsRepository _suggestionsRepository;
      
         private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public VoteToASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
+        public VoteToASuggestionSteps(ISuggestions suggestions, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
         {
-            _suggestionsApi = suggestionsApi;
+            _suggestions = suggestions;
             _suggestionsRepository = suggestionsRepository;
             _suggestionsContext = suggestionsContext;
         }
@@ -35,10 +35,10 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedSuggestion = await _suggestionsApi.Create(dto);
+            _suggestionsContext.VotedResource = await _suggestions.Create(dto);
         }
 
         [Then(@"the voted suggestion should be")]
-        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionsContext.VotedSuggestion, SuggestionsTableMapper.ToSuggestionDto);
+        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionsContext.VotedResource, SuggestionsTableMapper.ToSuggestionDto);
     }
 }

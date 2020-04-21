@@ -8,11 +8,11 @@ using DiabloII.Application.Tests.Services.Http;
 
 namespace DiabloII.Application.Tests.Apis.Domains.Suggestions
 {
-    public class SuggestionsApi : BaseApi, ISuggestionsApi
+    public class Suggestions : BaseApi, ISuggestions
     {
         protected override string BaseUrl { get; } = "suggestions";
 
-        public SuggestionsApi(IHttpService httpService) : base(httpService) { }
+        public Suggestions(IHttpService httpService) : base(httpService) { }
 
         #region Read
         public async Task<IReadOnlyCollection<SuggestionDto>> GetAll() =>

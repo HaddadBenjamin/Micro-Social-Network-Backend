@@ -13,12 +13,12 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.DeleteComment
     {
         private readonly ISuggestionsRepository _suggestionsRepository;
        
-        private readonly ISuggestionsApi _suggestionsApi;
+        private readonly ISuggestions _suggestions;
 
-        public DeleteASuggestionCommentSteps(ISuggestionsRepository suggestionsRepository, ISuggestionsApi suggestionsApi)
+        public DeleteASuggestionCommentSteps(ISuggestionsRepository suggestionsRepository, ISuggestions suggestions)
         {
             _suggestionsRepository = suggestionsRepository;
-            _suggestionsApi = suggestionsApi;
+            _suggestions = suggestions;
         }
 
         [When(@"I delete the suggestion comment ""(.*)"" from the suggestion ""(.*)""")]
@@ -31,7 +31,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.DeleteComment
             dto.Id = suggestionCommentId;
             dto.SuggestionId = suggestionDto.Id;
 
-            await _suggestionsApi.Delete(dto);
+            await _suggestions.Delete(dto);
         }
     }
 }

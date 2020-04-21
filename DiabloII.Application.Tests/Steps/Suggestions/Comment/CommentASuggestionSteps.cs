@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Tests.Apis.Domains.Suggestions;
-using DiabloII.Application.Tests.Contexts.Suggestions;
+using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Mappers;
 using DiabloII.Application.Tests.Repositories;
@@ -14,15 +14,15 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
     [Scope(Tag = "suggestions")]
     public class CommentASuggestionSteps
     {
-        private readonly ISuggestionsApi _suggestionsApi;
+        private readonly ISuggestions _suggestions;
       
         private readonly ISuggestionsRepository _suggestionsRepository;
        
         private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public CommentASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
+        public CommentASuggestionSteps(ISuggestions suggestions, ISuggestionsRepository suggestionsRepository, ISuggestionsTestContext suggestionsContext)
         {
-            _suggestionsApi = suggestionsApi;
+            _suggestions = suggestions;
             _suggestionsRepository = suggestionsRepository;
             _suggestionsContext = suggestionsContext;
         }
@@ -36,11 +36,11 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedSuggestion = await _suggestionsApi.Create(dto);
+            _suggestionsContext.VotedResource = await _suggestions.Create(dto);
         }
 
         [Then(@"the commented suggestion should be")]
         public void ThenTheCommentedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_suggestionsContext.CommentedSuggestion, SuggestionsTableMapper.ToSuggestionDto);
+            table.ShouldBeEqualsTo(_suggestionsContext.CommentedResource, SuggestionsTableMapper.ToSuggestionDto);
     }
 }

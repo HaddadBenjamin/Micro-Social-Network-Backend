@@ -13,12 +13,12 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Delete
     {
         private readonly ISuggestionsRepository _suggestionsRepository;
      
-        private readonly ISuggestionsApi _suggestionsApi;
+        private readonly ISuggestions _suggestions;
 
-        public DeleteASuggestionSteps(ISuggestionsRepository suggestionsRepository, ISuggestionsApi suggestionsApi)
+        public DeleteASuggestionSteps(ISuggestionsRepository suggestionsRepository, ISuggestions suggestions)
         {
             _suggestionsRepository = suggestionsRepository;
-            _suggestionsApi = suggestionsApi;
+            _suggestions = suggestions;
         }
 
         [When(@"I delete the suggestion ""(.*)""")]
@@ -29,7 +29,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Delete
 
             dto.Id = suggestionId;
 
-            await _suggestionsApi.Delete(dto);
+            await _suggestions.Delete(dto);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Notifications;
 using DiabloII.Application.Tests.Apis.Domains.Notifications;
-using DiabloII.Application.Tests.Contexts.Notifications;
+using DiabloII.Application.Tests.Contexts.Domains.Notifications;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -12,13 +12,13 @@ namespace DiabloII.Application.Tests.Steps.Notifications.Create
     [Scope(Tag = "notifications")]
     public class CreateANotificationSteps
     {
-        private readonly INotificationsApi _notificationsApi;
+        private readonly INotifications _notifications;
       
         private readonly INotificationsTestContext _notificationContext;
 
-        public CreateANotificationSteps(INotificationsApi notificationsApi, INotificationsTestContext notificationContext)
+        public CreateANotificationSteps(INotifications notifications, INotificationsTestContext notificationContext)
         {
-            _notificationsApi = notificationsApi;
+            _notifications = notifications;
             _notificationContext = notificationContext;
         }
 
@@ -29,10 +29,10 @@ namespace DiabloII.Application.Tests.Steps.Notifications.Create
             var dtos = table.CreateSet<CreateANotificationDto>();
 
             foreach (var dto in dtos)
-                _notificationContext.CreatedNotification = await _notificationsApi.Create(dto);
+                _notificationContext.CreatedResource = await _notifications.Create(dto);
         }
 
         [Then(@"the created notification should be")]
-        public void ThenTheCreatedNotificationShouldBe(Table table) => table.ShouldBeEqualsTo(_notificationContext.CreatedNotification);
+        public void ThenTheCreatedNotificationShouldBe(Table table) => table.ShouldBeEqualsTo(_notificationContext.AllResources);
     }
 }

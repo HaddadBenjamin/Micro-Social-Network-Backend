@@ -8,11 +8,11 @@ namespace DiabloII.Application.Tests.Steps.Items.GetAll
     [Scope(Tag = "items")]
     public class GetAllItemsSteps
     {
-        private readonly IItemsApi _itemsApi;
+        private readonly IItems _items;
 
-        public GetAllItemsSteps(IItemsApi itemsApi) => _itemsApi = itemsApi;
+        public GetAllItemsSteps(IItems items) => _items = items;
 
         [When(@"I get all the items")]
-        public async Task WhenIGetAllTheItems() => await _itemsApi.GetAll();
+        public async Task WhenIGetAllTheItems() => await _items.GetAll();
     }
 }

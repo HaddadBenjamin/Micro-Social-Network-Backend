@@ -4,9 +4,9 @@ using DiabloII.Application.Tests.Apis.Bases;
 
 namespace DiabloII.Application.Tests.Apis.Domains.Notifications
 {
-    public interface INotificationsApi :
-        IGetAllApi<NotificationDto>,
-        ICreateApi<CreateANotificationDto, NotificationDto>
+    public interface INotifications :
+        IApiGetAll<NotificationDto>,
+        IApiCreate<CreateANotificationDto, NotificationDto>
     {
     }
 }

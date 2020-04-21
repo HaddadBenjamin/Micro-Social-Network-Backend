@@ -2,7 +2,7 @@
 
 namespace DiabloII.Application.Tests.Apis.Bases
 {
-    public interface ICreateApi<CreateDto, ResponseDto>
+    public interface IApiCreate<CreateDto, ResponseDto>
     {
         Task<ResponseDto> Create(CreateDto dto);
     }

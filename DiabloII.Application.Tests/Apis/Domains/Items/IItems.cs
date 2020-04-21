@@ -4,9 +4,9 @@ using DiabloII.Application.Tests.Apis.Bases;
 
 namespace DiabloII.Application.Tests.Apis.Domains.Items
 {
-    public interface IItemsApi :
-        IGetAllApi<ItemDto>,
-        ISearchApi<SearchUniquesDto, ItemDto>
+    public interface IItems :
+        IApiGetAll<ItemDto>,
+        IApiSearch<SearchUniquesDto, ItemDto>
     {
     }
 }

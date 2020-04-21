@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Tests.Apis.Domains.Suggestions;
-using DiabloII.Application.Tests.Contexts.Suggestions;
+using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;
 
@@ -10,20 +10,20 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.GetAll
     [Scope(Tag = "suggestions")]
     public class GetAllSuggestionsSteps
     {
-        private readonly ISuggestionsApi _suggestionsApi;
+        private readonly ISuggestions _suggestions;
         
         private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public GetAllSuggestionsSteps(ISuggestionsApi suggestionsApi, ISuggestionsTestContext suggestionsContext)
+        public GetAllSuggestionsSteps(ISuggestions suggestions, ISuggestionsTestContext suggestionsContext)
         {
-            _suggestionsApi = suggestionsApi;
+            _suggestions = suggestions;
             _suggestionsContext = suggestionsContext;
         }
 
         [When(@"I get all the suggestions")]
-        public async Task WhenIGetAllTheSuggestions() => _suggestionsContext.AllSuggestions = await _suggestionsApi.GetAll();
+        public async Task WhenIGetAllTheSuggestions() => _suggestionsContext.AllResources = await _suggestions.GetAll();
         
         [Then(@"all the suggestions should be")]
-        public void WhenAllTheSuggestionsShouldBe(Table table) => table.ShouldAllExistsIn(_suggestionsContext.AllSuggestions);
+        public void WhenAllTheSuggestionsShouldBe(Table table) => table.ShouldAllExistsIn(_suggestionsContext.AllResources);
     }
 }

@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 
 namespace DiabloII.Application.Tests.Apis.Bases
 {
-    public interface ISearchApi<RequestDto, ResponseDto>
+    public interface IApiGetAll<ResponseDto>
     {
-        Task<IReadOnlyCollection<ResponseDto>> Search(RequestDto dto);
+        Task<IReadOnlyCollection<ResponseDto>> GetAll();
     }
 }

@@ -3,9 +3,9 @@ using DiabloII.Application.Tests.Apis.Domains.Items;
 using DiabloII.Application.Tests.Apis.Domains.Notifications;
 using DiabloII.Application.Tests.Apis.Domains.Suggestions;
 using DiabloII.Application.Tests.Apis.Domains.Users;
-using DiabloII.Application.Tests.Contexts.Notifications;
-using DiabloII.Application.Tests.Contexts.Suggestions;
-using DiabloII.Application.Tests.Contexts.Users;
+using DiabloII.Application.Tests.Contexts.Domains.Notifications;
+using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
+using DiabloII.Application.Tests.Contexts.Domains.Users;
 using DiabloII.Application.Tests.Repositories;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Domain.Repositories;
@@ -31,11 +31,11 @@ namespace DiabloII.Application.Tests
             services.AddSingleton<ISuggestionsRepository, SuggestionsRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<INotificationRepository, NotificationRepository>();
-            services.AddSingleton<ISuggestionsApi, SuggestionsApi>();
-            services.AddSingleton<IItemsApi, ItemsApi>();
+            services.AddSingleton<ISuggestions, Suggestions>();
+            services.AddSingleton<IItems, Items>();
             services.AddSingleton<IErrorLogsApi, ErrorLogsApi>();
-            services.AddSingleton<IUsersApi, UsersApi>();
-            services.AddSingleton<INotificationsApi, NotificationsApi>();
+            services.AddSingleton<IUsers, Users>();
+            services.AddSingleton<INotifications, Notifications>();
 
             return testContext.Services;
         }

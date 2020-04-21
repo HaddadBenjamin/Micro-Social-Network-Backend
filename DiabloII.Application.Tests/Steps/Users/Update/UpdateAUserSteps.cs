@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using DiabloII.Application.Tests.Apis.Domains.Users;
-using DiabloII.Application.Tests.Contexts.Users;
+using DiabloII.Application.Tests.Contexts.Domains.Users;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Mappers;
 using DiabloII.Domain.Repositories;
@@ -13,15 +13,15 @@ namespace DiabloII.Application.Tests.Steps.Users.Update
     [Scope(Tag = "users")]
     public class UpdateAUserSteps
     {
-        private readonly IUsersApi _usersApi;
+        private readonly IUsers _users;
       
         private readonly IUsersTestContext _userContext;
         
         private readonly IUserRepository _repository;
 
-        public UpdateAUserSteps(IUsersApi usersApi, IUsersTestContext userContext, IUserRepository repository)
+        public UpdateAUserSteps(IUsers users, IUsersTestContext userContext, IUserRepository repository)
         {
-            _usersApi = usersApi;
+            _users = users;
             _userContext = userContext;
             _repository = repository;
         }
@@ -32,11 +32,11 @@ namespace DiabloII.Application.Tests.Steps.Users.Update
             var userId = _repository.GetUserIdByItsEmail(email);
             var dto = UsersTableMapper.ToUpdateAUserDto(table.Rows.First(), userId);
 
-            _userContext.UpdatedUser = await _usersApi.Update(dto);
+            _userContext.UpdatedResource = await _users.Update(dto);
         }
 
         [Then(@"the updated user should be")]
         public void ThenTheUpdatedUserShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_userContext.UpdatedUser, UsersTableMapper.ToUserDto);
+            table.ShouldBeEqualsTo(_userContext.UpdatedResource, UsersTableMapper.ToUserDto);
     }
 }

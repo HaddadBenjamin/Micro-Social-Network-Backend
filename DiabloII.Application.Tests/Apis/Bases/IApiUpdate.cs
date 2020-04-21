@@ -2,7 +2,7 @@
 
 namespace DiabloII.Application.Tests.Apis.Bases
 {
-    public interface IUpdateApi<UpdateDto, ResponseDto>
+    public interface IApiUpdate<UpdateDto, ResponseDto>
     {
         Task<ResponseDto> Update(UpdateDto dto);
     }

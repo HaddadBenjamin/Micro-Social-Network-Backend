@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Tests.Apis.Domains.Suggestions;
-using DiabloII.Application.Tests.Contexts.Suggestions;
+using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -12,13 +12,13 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Create
     [Scope(Tag = "suggestions")]
     public class CreateASuggestionSteps
     {
-        private readonly ISuggestionsApi _suggestionsApi;
+        private readonly ISuggestions _suggestions;
        
         private readonly ISuggestionsTestContext _suggestionsContext;
 
-        public CreateASuggestionSteps(ISuggestionsApi suggestionsApi, ISuggestionsTestContext suggestionsContext)
+        public CreateASuggestionSteps(ISuggestions suggestions, ISuggestionsTestContext suggestionsContext)
         {
-            _suggestionsApi = suggestionsApi;
+            _suggestions = suggestions;
             _suggestionsContext = suggestionsContext;
         }
 
@@ -29,11 +29,11 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Create
             var dtos = table.CreateSet<CreateASuggestionDto>();
 
             foreach (var dto in dtos)
-                _suggestionsContext.CreatedSuggestion = await _suggestionsApi.Create(dto);
+                _suggestionsContext.CreatedResource = await _suggestions.Create(dto);
         }
 
         [Then(@"the created suggestion should be")]
         public void ThenTheCreatedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_suggestionsContext.CreatedSuggestion);
+            table.ShouldBeEqualsTo(_suggestionsContext.CreatedResource);
     }
 }

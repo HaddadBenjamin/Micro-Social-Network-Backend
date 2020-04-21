@@ -2,7 +2,7 @@
 
 namespace DiabloII.Application.Tests.Apis.Bases
 {
-    public interface IDeleteApi<DeleteDto, ResponseDto>
+    public interface IApiDelete<DeleteDto, ResponseDto>
     {
         Task<ResponseDto> Delete(DeleteDto dto);
     }

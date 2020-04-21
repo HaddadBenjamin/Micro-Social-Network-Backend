@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Tests.Apis.Domains.Users;
-using DiabloII.Application.Tests.Contexts.Users;
+using DiabloII.Application.Tests.Contexts.Domains.Users;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;
 
@@ -10,20 +10,20 @@ namespace DiabloII.Application.Tests.Steps.Users.GetAll
     [Scope(Tag = "users")]
     public class GetAllUsersSteps
     {
-        private readonly IUsersApi _usersApi;
+        private readonly IUsers _users;
        
         private readonly IUsersTestContext _usersContext;
 
-        public GetAllUsersSteps(IUsersApi usersApi, IUsersTestContext usersContext)
+        public GetAllUsersSteps(IUsers users, IUsersTestContext usersContext)
         {
-            _usersApi = usersApi;
+            _users = users;
             _usersContext = usersContext;
         }
 
         [When(@"I get all the users")]
-        public async Task WhenIGetAllTheUsers() => _usersContext.AllUsers = await _usersApi.GetAll();
+        public async Task WhenIGetAllTheUsers() => _usersContext.AllResources = await _users.GetAll();
 
         [Then(@"all the users should be")]
-        public void ThenAllTheUsersShouldBe(Table table) => table.ShouldAllExistsIn(_usersContext.AllUsers);
+        public void ThenAllTheUsersShouldBe(Table table) => table.ShouldAllExistsIn(_usersContext.AllResources);
     }
 }

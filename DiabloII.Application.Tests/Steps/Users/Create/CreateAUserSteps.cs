@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Users;
 using DiabloII.Application.Tests.Apis.Domains.Users;
-using DiabloII.Application.Tests.Contexts.Users;
+using DiabloII.Application.Tests.Contexts.Domains.Users;
 using DiabloII.Application.Tests.Extensions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -12,13 +12,13 @@ namespace DiabloII.Application.Tests.Steps.Users.Create
     [Scope(Tag = "users")]
     public class CreateAUserSteps
     {
-        private readonly IUsersApi _usersApi;
+        private readonly IUsers _users;
       
         private readonly IUsersTestContext _userContext;
 
-        public CreateAUserSteps(IUsersApi usersApi, IUsersTestContext userContext)
+        public CreateAUserSteps(IUsers users, IUsersTestContext userContext)
         {
-            _usersApi = usersApi;
+            _users = users;
             _userContext = userContext;
         }
 
@@ -29,10 +29,10 @@ namespace DiabloII.Application.Tests.Steps.Users.Create
             var dtos = table.CreateSet<CreateAUserDto>();
 
             foreach (var dto in dtos)
-                _userContext.CreatedUser = await _usersApi.Create(dto);
+                _userContext.CreatedResource = await _users.Create(dto);
         }
 
         [Then(@"the created user should be")]
-        public void ThenTheCreatedUserShouldBe(Table table) =>  table.ShouldBeEqualsTo(_userContext.CreatedUser);
+        public void ThenTheCreatedUserShouldBe(Table table) =>  table.ShouldBeEqualsTo(_userContext.CreatedResource);
     }
 }
