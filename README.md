@@ -14,6 +14,7 @@ __Contexte technologique :__
 - __Tests :__ NUnit, Shoudly, Moq, Specflow.
 - __Azure :__ Azure Key Vault, Azure Sql Server, Azure Web App.
 - __Librairies :__ Fluent Validation, Demistify, AutoMapper, Flurl, Scrutor, Bulk Extensions, CompareNetObjects.
+- __CI :__ Github Actions.
 </br>
 
 ![Image of Yaktocat](https://imgur.com/NE1abk7.png)
