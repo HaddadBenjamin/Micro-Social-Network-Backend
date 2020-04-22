@@ -6,7 +6,7 @@ namespace DiabloII.Domain.Services.Notifications
 
     public interface INotificationService
     {
-        IList<INotifier> Notifiers { get; }
+        IReadOnlyCollection<INotifier> Notifiers { get; }
 
         void Notify(Notification notification, IReadOnlyCollection<string> concernedUserIds = null);
     }

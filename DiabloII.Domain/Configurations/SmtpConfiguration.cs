@@ -9,5 +9,7 @@
         public string FromEmail { get; set; }
 
         public string FromPassword { get; set; }
+
+        public bool EnableService { get; set; }
     }
 }

@@ -56,9 +56,10 @@ namespace DiabloII.Application.Extensions
 
         public static void AddMySmtpServer(this IServiceCollection services, SmtpConfiguration smtpConfiguration)
         {
-            services
-                .AddFluentEmail(smtpConfiguration.FromEmail)
-                .AddSmtpSender(smtpConfiguration.Host, smtpConfiguration.Port, smtpConfiguration.FromEmail, smtpConfiguration.FromPassword);
+            if (smtpConfiguration.EnableService)
+                services
+                    .AddFluentEmail(smtpConfiguration.FromEmail)
+                    .AddSmtpSender(smtpConfiguration.Host, smtpConfiguration.Port, smtpConfiguration.FromEmail, smtpConfiguration.FromPassword);
         }
 
         public static IServiceCollection RegisterTheDbContextDependency(this IServiceCollection services, IConfiguration configuration)

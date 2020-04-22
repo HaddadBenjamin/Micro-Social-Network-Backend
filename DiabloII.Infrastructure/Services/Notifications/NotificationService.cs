@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using DiabloII.Domain.Configurations;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Services.Notifications;
@@ -14,17 +15,22 @@ namespace DiabloII.Infrastructure.Services.Notifications
 
         private readonly IServiceProvider _serviceProvider;
 
-        public IList<INotifier> Notifiers => new List<INotifier>
-        {
-            (InAppNotifier)_serviceProvider.GetService(typeof(InAppNotifier)),
-            (MailNotifier)_serviceProvider.GetService(typeof(MailNotifier)),
-        };
+        private readonly List<INotifier> _notifiers;
 
-        public NotificationService(INotificationCrossDomainRepository notificationCrossDomainRepository, IUserRepository userRepository, IServiceProvider serviceProvider)
+        public IReadOnlyCollection<INotifier> Notifiers => _notifiers;
+
+
+        public NotificationService(INotificationCrossDomainRepository notificationCrossDomainRepository, IUserRepository userRepository, IServiceProvider serviceProvider, SmtpConfiguration smtpConfiguration)
         {
             _notificationCrossDomainRepository = notificationCrossDomainRepository;
             _userRepository = userRepository;
             _serviceProvider = serviceProvider;
+
+            _notifiers = new List<INotifier>();
+            _notifiers.Add((InAppNotifier)_serviceProvider.GetService(typeof(InAppNotifier)));
+            if (smtpConfiguration.EnableService)
+                _notifiers.Add((MailNotifier)_serviceProvider.GetService(typeof(MailNotifier)));
+
         }
 
         public void Notify(Notification notification, IReadOnlyCollection<string> concernedUserIds = null)

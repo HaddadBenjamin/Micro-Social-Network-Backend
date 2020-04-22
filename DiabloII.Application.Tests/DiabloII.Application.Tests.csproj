@@ -15,6 +15,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="appsettings.Test.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.Test.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CompareNETObjects" Version="4.66.0" />
     <PackageReference Include="Flurl.Http" Version="3.0.0-pre3" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.3" />

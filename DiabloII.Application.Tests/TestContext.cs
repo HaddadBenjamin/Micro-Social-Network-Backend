@@ -5,11 +5,11 @@ using System.Reflection;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Application.Tests.Startup;
 using DiabloII.Infrastructure.DbContext;
-using DiabloII.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DiabloII.Application.Tests
@@ -36,7 +36,8 @@ namespace DiabloII.Application.Tests
 
         private IWebHostBuilder CreateTheWebHostBuilder() => new WebHostBuilder()
             .ConfigureServices(InitializeServices)
-            .ConfigureAppConfiguration((webHostBuilderContext, configurationBuilder) => configurationBuilder.AddAMyAzureKeyVault())
+            .UseEnvironment("Test")
+            .ConfigureAppConfiguration((builder => builder.AddJsonFile("appsettings.Test.json")))
             .UseStartup(typeof(TestStartup));
 
         private void InitializeServices(IServiceCollection services)
