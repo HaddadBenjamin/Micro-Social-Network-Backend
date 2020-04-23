@@ -1,4 +1,4 @@
-![.NET Core](https://github.com/HaddadBenjamin/Diablo-II-Items/workflows/.NET%20Core/badge.svg)
+![.NET Core & Azure](https://github.com/HaddadBenjamin/Diablo-II-Items/workflows/.NET%20Core%20&%20Azure/badge.svg)
 
 # Diablo II - Items Documentation - API
 
