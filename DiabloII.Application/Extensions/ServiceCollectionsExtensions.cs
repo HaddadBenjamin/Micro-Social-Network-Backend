@@ -24,7 +24,7 @@ namespace DiabloII.Application.Extensions
                 {
                     Version = "v1",
                     Title = "Diablo II - Enriched API",
-                    Description = "Allow to search Diablo II items, create suggestions, vote and comment them to drive our development.",
+                    Description = "Allow to search Diablo II items, create suggestions, vote and comment them to drive our development, to create and search users, notify our users by email and in the application when something happened.",
                     Contact = new OpenApiContact
                     {
                         Name = "Un passionné dans la foule (alias Firefouks)",
