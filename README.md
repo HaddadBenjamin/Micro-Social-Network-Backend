@@ -1,3 +1,5 @@
+![.NET Core](https://github.com/HaddadBenjamin/Diablo-II-Items/workflows/.NET%20Core/badge.svg)
+
 # Diablo II - Items Documentation - API
 
 Vous pouvez tester avec l'application sur PC ou mobile : https://diablo-2-enriched-documentation.netlify.com/
