@@ -37,6 +37,9 @@ namespace DiabloII.Infrastructure.Handlers
 
             _createValidator.Validate(validationContext);
 
+            if (_repository.DoesUserExists(command.UserId))
+                return _repository.Get(command.UserId);
+
             var user = _mapper.Map<User>(command);
 
             _dbContext.Users.Add(user);

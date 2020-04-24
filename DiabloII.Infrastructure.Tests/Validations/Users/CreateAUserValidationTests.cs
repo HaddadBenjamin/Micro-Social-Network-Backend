@@ -52,10 +52,6 @@ namespace DiabloII.Infrastructure.Tests.Validations.Users
             });
 
         [Test]
-        public void WhenUserIsNotUnique_ShouldThrowAAlreadyExistsException() =>
-            ShouldThrowDuringTheValidation<AlreadyExistsException>(() => CreateTheUser());
-
-        [Test]
         public void WhenCommandIsValid_ShouldSuccess() => Should.NotThrow(() => _validator.Validate(_validationContext));
 
         private void CreateTheUser()

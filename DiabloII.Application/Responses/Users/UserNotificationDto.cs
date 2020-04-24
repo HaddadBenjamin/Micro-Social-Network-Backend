@@ -11,7 +11,7 @@ namespace DiabloII.Application.Responses.Users
 
         public string Content { get; set; }
 
-        public NotificationType Type { get; set; }
+        public string Type { get; set; }
 
         public bool HaveBeenRead { get; set; }
     }

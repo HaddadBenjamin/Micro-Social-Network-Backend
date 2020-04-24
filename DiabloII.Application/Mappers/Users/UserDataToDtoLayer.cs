@@ -26,7 +26,7 @@ namespace DiabloII.Application.Mappers.Users
             {
                 dto.Content = dataModel.Notification.Content;
                 dto.Title = dataModel.Notification.Title;
-                dto.Type = dataModel.Notification.Type;
+                dto.Type = dataModel.Notification.Type.ToString();
             });
         }
     }
