@@ -8,7 +8,7 @@ Vous pouvez tester avec l'application sur PC ou mobile : https://diablo-2-enrich
 __Cette application propose trois services :__
 - Pouvoir rechercher une liste d’objets pour le jeu Diablo II avec des filtres.
 - Pouvoir créer des suggestions, de les commenter et d'y voter afin que nos utilisateurs puissent prendre une place décisionnelle durant le développement de nos produits.
-- Définir des alertes lorsque qu'un évènement a été délcenchée telle qu'une nouvelle version de nos produits a été délivrée ou bien qu'une personne a commentée une de vos suggestions afin d'être notifié par mail ou directement dans l'application.
+- Définir des alertes lorsque qu'un évènement a été délcenché tel qu'une nouvelle version de nos produits a été délivrée ou bien qu'une personne a commenté une de vos suggestions afin d'être notifié par mail ou directement dans l'application.
 </br>
 
 __Contexte technologique :__
