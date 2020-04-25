@@ -22,6 +22,7 @@ __Contexte technologique :__
 
 ![Image of Yaktocat](https://imgur.com/WKETGh9.png)
 ![Image of Yaktocat](https://imgur.com/tpPXX4P.png)
+![Image of Yaktocat](https://imgur.com/saQ8mag.png)
 ![Image of Yaktocat](https://imgur.com/REP8ljs.png)
 ![Image of Yaktocat](https://imgur.com/88CS50D.png)
 ![Image of Yaktocat](https://imgur.com/xSGUc6w.png)
