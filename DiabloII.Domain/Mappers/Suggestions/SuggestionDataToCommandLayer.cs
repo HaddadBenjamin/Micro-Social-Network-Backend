@@ -13,7 +13,7 @@ namespace DiabloII.Domain.Mappers.Suggestions
             CreateMap<Suggestion, CreateANotificationCommand>().AfterMap((dataModel, command) =>
             {
                 command.Type = NotificationType.CreatedSuggestion;
-                command.Title = "A new suggestion have been created";
+                command.Title = "A new suggestion has been created";
             });
 
             CreateMap<SuggestionComment, CreateANotificationCommand>().AfterMap((dataModel, command) =>
