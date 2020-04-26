@@ -6,9 +6,9 @@ Vous pouvez tester l'application sur PC ou mobile grâce à ce lien https://diab
 </br>
 
 __L'application propose trois services :__
-- Pouvoir rechercher une liste d’objets pour le jeu Diablo II avec des filtres.
 - Pouvoir créer des suggestions, de les commenter et d'y voter afin que nos utilisateurs puissent prendre une place décisionnelle durant le développement de nos produits.
 - Lancer des alertes lorsque qu'un évènement a été délcenché tel qu'une nouvelle version de nos produits a été délivrée ou bien qu'une personne a commenté une de vos suggestions afin d'être notifié par mail ou directement dans l'application.
+- Pouvoir rechercher une liste d’objets pour le jeu Diablo II avec des filtres.
 </br>
 
 __Contexte technologique :__
