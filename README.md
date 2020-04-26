@@ -1,6 +1,6 @@
 ![.NET Core & Azure](https://github.com/HaddadBenjamin/Diablo-II-Items/workflows/.NET%20Core%20&%20Azure/badge.svg)
 
-# Réseau social - API
+# Micro réseau social - API
 
 Vous pouvez tester l'application sur PC ou mobile grâce à ce lien https://diablo-2-enriched-documentation.netlify.com/
 </br>
