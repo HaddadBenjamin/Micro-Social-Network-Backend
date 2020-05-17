@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using AutoMapper;
+using DiabloII.Application.Mappers.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Services.UserIdResolver;
 using Halcyon.HAL;
@@ -11,18 +12,14 @@ namespace DiabloII.Application.Services.Hals.Suggestions
 {
     public class SuggestionHalService : BaseHalService, ISuggestionHalService
     {
-        private readonly IMapper _mapper;
         private readonly string _userId;
 
-        public SuggestionHalService(IUserIdResolverService userIdResolver, IHttpContextAccessor httpContextAccessor, IMapper mapper) : base (httpContextAccessor)
-        {
-            _mapper = mapper;
+        public SuggestionHalService(IUserIdResolverService userIdResolver, IHttpContextAccessor httpContextAccessor) : base (httpContextAccessor) =>
             _userId = userIdResolver.Resolve();
-        }
 
         public HALResponse AddLinks(SuggestionDto suggestion)
         {
-            var suggestionHalResponse = ToSuggestionHalResponse(suggestion);
+            var suggestionHalResponse = SuggestionDtoToHalLayer.Map(suggestion, this);
             var canEditSuggestion = _userId == suggestion.CreatedBy;
             var halResponse = ToHalResponse(suggestionHalResponse);
 
@@ -34,18 +31,7 @@ namespace DiabloII.Application.Services.Hals.Suggestions
             return halResponse;
         }
 
-        // This logic mapping should be extracted, in better case should go in configuration of automapper.
-        private SuggestionHalResponse ToSuggestionHalResponse(SuggestionDto suggestion)
-        {
-            var suggestionHalResponse = _mapper.Map<SuggestionHalResponse>(suggestion);
-
-            suggestionHalResponse.Votes = suggestion.Votes.Select(vote => AddLinks(vote, suggestion.Id)).ToList();
-            suggestionHalResponse.Comments = suggestion.Comments.Select(comment => AddLinks(comment, suggestion.Id)).ToList();
-
-            return suggestionHalResponse;
-        }
-
-        private HALResponse AddLinks(SuggestionVoteDto vote, Guid suggestionId)
+        public HALResponse AddLinks(SuggestionVoteDto vote, Guid suggestionId)
         {
             var halResponse = ToHalResponse(vote);
             var canVote = _userId != vote.CreatedBy;
@@ -57,7 +43,7 @@ namespace DiabloII.Application.Services.Hals.Suggestions
             return halResponse;
         }
 
-        private HALResponse AddLinks(SuggestionCommentDto comment, Guid suggestionId)
+        public HALResponse AddLinks(SuggestionCommentDto comment, Guid suggestionId)
         {
             var halResponse = ToHalResponse(comment);
             var canEditComment = _userId == comment.CreatedBy;
