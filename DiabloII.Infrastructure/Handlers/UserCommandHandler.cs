@@ -56,9 +56,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             var user = _repository.Get(command.UserId);
 
-            user.Email = command.Email;
-            user.NotificationSetting.AcceptedNotifications = command.AcceptedNotifications;
-            user.NotificationSetting.AcceptedNotifiers = command.AcceptedNotifiers;
+            user.Update(command);
 
             _dbContext.Users.Update(user);
             _dbContext.SaveChanges();

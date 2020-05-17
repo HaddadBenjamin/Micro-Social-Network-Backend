@@ -1,5 +1,7 @@
 ﻿using System.Linq;
 using System.Reflection;
+using DiabloII.Application.Services.IpResolver;
+using DiabloII.Application.Tests.Mocks;
 using DiabloII.Application.Tests.Startup;
 using DiabloII.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
@@ -26,5 +28,8 @@ namespace DiabloII.Application.Tests.Extensions
                     .WithScopedLifetime();
             });
         }
+
+        public static IServiceCollection RegisterTheApplicationMocks(this IServiceCollection services) => services
+            .AddSingleton<IIpV4Resolver, IpV4ResolverMock>();
     }
 }

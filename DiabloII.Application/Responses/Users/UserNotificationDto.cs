@@ -1,5 +1,4 @@
 ﻿using System;
-using DiabloII.Domain.Models.Notifications;
 
 namespace DiabloII.Application.Responses.Users
 {

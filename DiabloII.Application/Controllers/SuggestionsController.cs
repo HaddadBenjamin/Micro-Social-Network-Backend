@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using AutoMapper;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Services.Hals.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Readers;
+using Halcyon.HAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,11 +23,14 @@ namespace DiabloII.Application.Controllers
 
         private readonly IMapper _mapper;
 
-        public SuggestionsController(ISuggestionReader reader, ISuggestionCommandHandler handler, IMapper mapper)
+        private readonly ISuggestionHalService _halService;
+
+        public SuggestionsController(ISuggestionReader reader, ISuggestionCommandHandler handler, IMapper mapper, ISuggestionHalService halService)
         {
             _reader = reader;
             _handler = handler;
             _mapper = mapper;
+            _halService = halService;
         }
 
         /// <summary>
@@ -34,8 +39,8 @@ namespace DiabloII.Application.Controllers
         [Route("suggestions")]
         [HttpGet]
         [ProducesResponseType(typeof(IReadOnlyCollection<SuggestionDto>), StatusCodes.Status200OK)]
-        public ActionResult<IReadOnlyCollection<SuggestionDto>> GetAll() =>
-            GetAll(_reader, _mapper);
+        public ActionResult<IReadOnlyCollection<HALResponse>> GetAll() =>
+            GetAll(_reader, _mapper, _halService);
 
         /// <summary>
         /// Create a suggestion
