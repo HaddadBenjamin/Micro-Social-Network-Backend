@@ -68,7 +68,6 @@ namespace DiabloII.Application.Extensions
             var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
 
             return services
-                .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder =>
                     optionsBuilder.UseSqlServer(connectionString,
                         sqlServerOptions =>
