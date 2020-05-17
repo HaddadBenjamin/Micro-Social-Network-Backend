@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
 using System.Net.Http;
-using AutoMapper;
 using DiabloII.Application.Mappers.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Services.UserIdResolver;

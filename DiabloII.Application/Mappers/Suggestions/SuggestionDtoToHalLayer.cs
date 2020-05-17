@@ -8,6 +8,7 @@ namespace DiabloII.Application.Mappers.Suggestions
 {
     public static class SuggestionDtoToHalLayer
     {
+        /// TODO : simplify this part by finding a way to resolve dependencies in automapper profile
         public static SuggestionHalResponse Map(SuggestionDto suggestion, ISuggestionHalService suggestionHalService)
         {
             var mapper = new MapperConfiguration(configuration => configuration

@@ -6,7 +6,6 @@ using DiabloII.Domain.Repositories;
 using DiabloII.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,7 +27,6 @@ namespace DiabloII.Application
             .AddMyMvc()
             .AddCors()
             .AddRouting(options => options.LowercaseUrls = true)
-            .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
             .RegisterTheDbContextDependency(_configuration)
             .RegisterTheApplicationDependencies()
             .AddMySmtpServer(_configuration.GetSection("Smtp").Get<SmtpConfiguration>());

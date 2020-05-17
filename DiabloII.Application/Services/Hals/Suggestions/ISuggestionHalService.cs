@@ -4,10 +4,8 @@ using Halcyon.HAL;
 
 namespace DiabloII.Application.Services.Hals.Suggestions
 {
-    public interface ISuggestionHalService
+    public interface ISuggestionHalService : IHalService<SuggestionDto>
     {
-        HALResponse AddLinks(SuggestionDto dto);
-
         HALResponse AddLinks(SuggestionVoteDto vote, Guid suggestionId);
 
         HALResponse AddLinks(SuggestionCommentDto comment, Guid suggestionId);

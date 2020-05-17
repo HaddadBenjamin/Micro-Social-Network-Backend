@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
 using DiabloII.Application.Extensions;
+using DiabloII.Application.Services.Hals;
 using DiabloII.Domain.Handlers.Bases;
 using DiabloII.Domain.Readers.Bases;
+using Halcyon.HAL;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Application.Controllers
@@ -20,6 +22,24 @@ namespace DiabloII.Application.Controllers
             var response = readerGetAll
                 .GetAll()
                 .Select(mapper.Map<ResponseDto>)
+                .ToList();
+
+            return Ok(response);
+        }
+
+        protected ActionResult<IReadOnlyCollection<HALResponse>> GetAll(
+            IReaderGetAll<DataModel> readerGetAll,
+            IMapper mapper,
+            IHalService<ResponseDto> halService)
+        {
+            var response = readerGetAll
+                .GetAll()
+                .Select(dataModel =>
+                {
+                    var dto = mapper.Map<ResponseDto>(dataModel);
+
+                    return halService.AddLinks(dto);
+                })
                 .ToList();
 
             return Ok(response);
