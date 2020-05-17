@@ -23,14 +23,14 @@ namespace DiabloII.Application.Controllers
 
         private readonly IMapper _mapper;
 
-        private readonly ISuggestionHalService _suggestionHalService;
+        private readonly ISuggestionHalService _halService;
 
-        public SuggestionsController(ISuggestionReader reader, ISuggestionCommandHandler handler, IMapper mapper, ISuggestionHalService suggestionHalService)
+        public SuggestionsController(ISuggestionReader reader, ISuggestionCommandHandler handler, IMapper mapper, ISuggestionHalService halService)
         {
             _reader = reader;
             _handler = handler;
             _mapper = mapper;
-            _suggestionHalService = suggestionHalService;
+            _halService = halService;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace DiabloII.Application.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(IReadOnlyCollection<SuggestionDto>), StatusCodes.Status200OK)]
         public ActionResult<IReadOnlyCollection<HALResponse>> GetAll() =>
-            GetAll(_reader, _mapper, _suggestionHalService);
+            GetAll(_reader, _mapper, _halService);
 
         /// <summary>
         /// Create a suggestion
