@@ -10,12 +10,12 @@ namespace DiabloII.Application.Extensions
         public static HALResponse AddLink(this HALResponse halResponse, ControllerBase controller, string linkName, HttpMethod httpMethod,
             string subUrl = null)
         {
-            var url = GetUrl(controller, subUrl);
+            var linkUrl = GetLinkUrl(controller, subUrl);
 
-            return halResponse.AddLinks(new Link(linkName, url, null, httpMethod.ToString()));
+            return halResponse.AddLinks(new Link(linkName, linkUrl, null, httpMethod.ToString()));
         }
 
-        private static string GetUrl(ControllerBase controller, string subUrl = null)
+        private static string GetLinkUrl(ControllerBase controller, string subUrl = null)
         {
             var baseUrl = controller.Request.GetDisplayUrl();
 
