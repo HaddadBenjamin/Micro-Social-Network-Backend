@@ -1,20 +1,19 @@
-﻿using DiabloII.Application.Helpers;
-using Microsoft.AspNetCore.Http;
+﻿using System;
+using DiabloII.Application.Helpers;
+using DiabloII.Application.Services.IpResolver;
 
 namespace DiabloII.Application.Services.UserIdResolver
 {
     public class UserIdResolverService : IUserIdResolverService
     {
-        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IIpV4Resolver _ipV4Resolver;
 
-        public UserIdResolverService(IHttpContextAccessor httpContextAccessor) => _httpContextAccessor = httpContextAccessor;
+        public UserIdResolverService(IIpV4Resolver ipV4Resolver) => _ipV4Resolver = ipV4Resolver;
 
         public string Resolve()
         {
-            // Is always ip v4 ?
-            var ipAddress = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress.ToString();
-            // does the hash algorithm is correct ?
-            var userIp = SecurityAlgorithmHelpers.GenerateSha1Hash(ipAddress);
+            var requestIp = _ipV4Resolver.ResolveRequestIp();
+            var userIp = SecurityAlgorithmHelpers.GenerateSha1Hash(requestIp);
 
             return userIp;
         }

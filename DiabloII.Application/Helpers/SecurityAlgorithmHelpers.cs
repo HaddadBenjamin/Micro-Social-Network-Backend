@@ -8,12 +8,12 @@ namespace DiabloII.Application.Helpers
     {
         public static string GenerateSha1Hash(string text)
         {
-            var data = Encoding.ASCII.GetBytes(text);
-            var hashBytes = new SHA1Managed().ComputeHash(data);
+            var textBytes = Encoding.ASCII.GetBytes(text);
+            var hashBytes = new SHA1Managed().ComputeHash(textBytes);
             var hashStringBuilder = new StringBuilder();
 
             foreach (var hashByte in hashBytes)
-                hashStringBuilder.Append(hashByte.ToString("X2"));
+                hashStringBuilder.Append(hashByte.ToString("x2"));
             
             return hashStringBuilder.ToString();
         }

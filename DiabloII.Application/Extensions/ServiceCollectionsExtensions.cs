@@ -7,6 +7,7 @@ using DiabloII.Domain.Configurations;
 using DiabloII.Infrastructure.DbContext;
 using DiabloII.Infrastructure.Helpers;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -67,6 +68,7 @@ namespace DiabloII.Application.Extensions
             var connectionString = DatabaseHelpers.GetMyConnectionString(configuration);
 
             return services
+                .AddSingleton<IActionContextAccessor, ActionContextAccessor>()
                 .AddDbContextPool<ApplicationDbContext>(optionsBuilder =>
                     optionsBuilder.UseSqlServer(connectionString,
                         sqlServerOptions =>

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Application.Services.Hals.Suggestions
 {
-    public class SuggestionHalService : BaseHalService
+    public class SuggestionHalService : BaseHalService, ISuggestionHalService
     {
         private readonly string _userId;
 
