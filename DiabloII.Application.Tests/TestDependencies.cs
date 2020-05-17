@@ -6,7 +6,6 @@ using DiabloII.Application.Tests.Apis.Domains.Users;
 using DiabloII.Application.Tests.Contexts.Domains.Notifications;
 using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Contexts.Domains.Users;
-using DiabloII.Application.Tests.Mocks;
 using DiabloII.Application.Tests.Repositories.Suggestions;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Domain.Repositories;

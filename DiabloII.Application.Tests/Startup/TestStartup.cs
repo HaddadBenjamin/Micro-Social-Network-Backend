@@ -1,9 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using DiabloII.Application.Extensions;
-using DiabloII.Application.Services.IpResolver;
 using DiabloII.Application.Tests.Extensions;
-using DiabloII.Application.Tests.Mocks;
 using DiabloII.Domain.Configurations;
 using DiabloII.Domain.Repositories;
 using DiabloII.Infrastructure.Repositories;
@@ -32,7 +30,6 @@ namespace DiabloII.Application.Tests.Startup
             .AddRouting(options => options.LowercaseUrls = true)
             .RegisterTestDbContDbContextDependency()
             .RegisterTheTestApplicationDependencies()
-            .AddSingleton<IIpV4Resolver, IpV4ResolverMock>()
             .AddMySmtpServer(_configuration.GetSection("Smtp").Get<SmtpConfiguration>());
 
         public void Configure(IApplicationBuilder applicationBuilder, IWebHostEnvironment environment) => applicationBuilder
