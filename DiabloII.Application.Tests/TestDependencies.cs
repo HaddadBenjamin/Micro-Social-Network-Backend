@@ -1,4 +1,5 @@
-﻿using DiabloII.Application.Tests.Apis.Domains.ErrorLogs;
+﻿using DiabloII.Application.Services.IpResolver;
+using DiabloII.Application.Tests.Apis.Domains.ErrorLogs;
 using DiabloII.Application.Tests.Apis.Domains.Items;
 using DiabloII.Application.Tests.Apis.Domains.Notifications;
 using DiabloII.Application.Tests.Apis.Domains.Suggestions;
@@ -6,6 +7,7 @@ using DiabloII.Application.Tests.Apis.Domains.Users;
 using DiabloII.Application.Tests.Contexts.Domains.Notifications;
 using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Contexts.Domains.Users;
+using DiabloII.Application.Tests.Mocks;
 using DiabloII.Application.Tests.Repositories.Suggestions;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Domain.Repositories;
@@ -36,6 +38,7 @@ namespace DiabloII.Application.Tests
             services.AddSingleton<IErrorLogsApi, ErrorLogsApi>();
             services.AddSingleton<IUsersApi, UsersApi>();
             services.AddSingleton<INotificationsApi, NotificationsApi>();
+            services.AddSingleton<IIpV4Resolver, IpV4ResolverMock>();
 
             return testContext.Services;
         }
