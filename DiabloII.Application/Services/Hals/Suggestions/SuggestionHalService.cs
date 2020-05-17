@@ -1,10 +1,10 @@
 ﻿using System.Net.Http;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Responses.Suggestions;
-using Microsoft.AspNetCore.Mvc;
 using Halcyon.HAL;
+using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Application.Services.Hals
+namespace DiabloII.Application.Services.Hals.Suggestions
 {
     public class SuggestionHalService : BaseHalService
     {

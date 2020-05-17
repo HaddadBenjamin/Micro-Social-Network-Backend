@@ -2,7 +2,7 @@
 using Halcyon.HAL;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Application.Services.Hals
+namespace DiabloII.Application.Services.Hals.Suggestions
 {
     public interface ISuggestionHalService
     {

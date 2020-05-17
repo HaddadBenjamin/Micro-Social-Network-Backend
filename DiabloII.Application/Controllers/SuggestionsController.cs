@@ -4,7 +4,7 @@ using System.Linq;
 using AutoMapper;
 using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
-using DiabloII.Application.Services.Hals;
+using DiabloII.Application.Services.Hals.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Models.Suggestions;
@@ -27,10 +27,10 @@ namespace DiabloII.Application.Controllers
 
         public SuggestionsController(ISuggestionReader reader, ISuggestionCommandHandler handler, IMapper mapper, ISuggestionHalService suggestionHalService)
         {
-            _suggestionHalService = suggestionHalService;
             _reader = reader;
             _handler = handler;
             _mapper = mapper;
+            _suggestionHalService = suggestionHalService;
         }
 
         /// <summary>

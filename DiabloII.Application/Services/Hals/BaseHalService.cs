@@ -9,13 +9,13 @@ namespace DiabloII.Application.Services.Hals
         protected static HALResponse ToHalResponse(ControllerBase controller, object model)
         {
             var url = controller.Request.GetDisplayUrl();
-            var halResponse = new HALResponse(model, new HALModelConfig
+            var halModelConfig = new HALModelConfig
             {
                 LinkBase = url,
                 ForceHAL = false
-            });
+            };
 
-            return halResponse;
+            return new HALResponse(model, halModelConfig);
         }
     }
 }
