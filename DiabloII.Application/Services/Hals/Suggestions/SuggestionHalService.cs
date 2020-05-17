@@ -66,7 +66,7 @@ namespace DiabloII.Application.Services.Hals.Suggestions
             AddLink(halResponse, "comment_create", HttpMethod.Post, subUrl);
 
             if (canEditComment)
-                AddLink(halResponse, "comment_remove", HttpMethod.Delete, $"{subUrl}/{comment.Id}");
+                AddLink(halResponse, "comment_delete", HttpMethod.Delete, $"{subUrl}/{comment.Id}");
 
             return halResponse;
         }
