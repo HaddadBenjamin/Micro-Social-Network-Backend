@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Application.Controllers
 {
-    public class BaseController<DataModel, ResponseDto> : Controller
+    public class BaseController<DataModel, ResponseDto> : ControllerBase
         where DataModel : class
         where ResponseDto : class
     {

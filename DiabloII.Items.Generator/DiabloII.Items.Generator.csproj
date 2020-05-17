@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DiabloII.Infrastructure\DiabloII.Infrastructure.csproj" />
-    <ProjectReference Include="..\DiabloII.Items.Api\DiabloII.Application.csproj" />
     <ProjectReference Include="..\DiabloII.Items.Reader\DiabloII.Items.Reader.csproj" />
   </ItemGroup>
 
