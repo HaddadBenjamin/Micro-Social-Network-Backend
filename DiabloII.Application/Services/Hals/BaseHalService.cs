@@ -19,25 +19,26 @@ namespace DiabloII.Application.Services.Hals
                 LinkBase = linkUrl,
                 ForceHAL = false
             };
+            var halResponse = new HALResponse(model, halModelConfig);
 
-            return new HALResponse(model, halModelConfig);
+            return halResponse;
         }
 
         protected HALResponse AddLink(HALResponse halResponse, string linkName, HttpMethod httpMethod,
             string subUrl = null)
         {
             var linkUrl = GetLinkUrl(subUrl);
+            var link = new Link(linkName, linkUrl, null, httpMethod.ToString());
 
-            return halResponse.AddLinks(new Link(linkName, linkUrl, null, httpMethod.ToString()));
+            return halResponse.AddLinks(link);
         }
 
         protected string GetLinkUrl(string subUrl = null)
         {
             var baseUrl = _httpContextAccessor.HttpContext.Request.GetDisplayUrl();
+            var normalizedSubUrl = subUrl is null ? string.Empty : $"/{subUrl}";
 
-            subUrl = subUrl is null ? string.Empty : $"/{subUrl}";
-
-            return $"{baseUrl}{subUrl}";
+            return $"{baseUrl}{normalizedSubUrl}";
         }
     }
 }

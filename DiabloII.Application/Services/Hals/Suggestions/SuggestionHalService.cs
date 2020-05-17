@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using DiabloII.Application.Extensions;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Services.UserIdResolver;
 using Halcyon.HAL;
