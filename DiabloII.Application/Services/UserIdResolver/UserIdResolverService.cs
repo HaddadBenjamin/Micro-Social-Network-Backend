@@ -1,5 +1,4 @@
-﻿using System;
-using DiabloII.Application.Helpers;
+﻿using DiabloII.Application.Helpers;
 using DiabloII.Application.Services.IpResolver;
 
 namespace DiabloII.Application.Services.UserIdResolver

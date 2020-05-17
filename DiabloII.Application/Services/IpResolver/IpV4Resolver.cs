@@ -4,22 +4,20 @@ using Microsoft.AspNetCore.Http;
 
 namespace DiabloII.Application.Services.IpResolver
 {
-    public class IpV4Resolver
+    public class IpV4Resolver : IIpV4Resolver
     {
-        private readonly HttpContext _httpContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public IpV4Resolver(IHttpContextAccessor httpContextAccessor) => _httpContext = httpContextAccessor.HttpContext;
+        public IpV4Resolver(IHttpContextAccessor httpContextAccessor) => _httpContextAccessor = httpContextAccessor;
 
         public string ResolveRequestIp()
         {
-            var remoteIpAddress = _httpContext.Connection.RemoteIpAddress;
-            var requestIp = remoteIpAddress.IsIPv4MappedToIPv6
+            var remoteIpAddress = _httpContextAccessor.HttpContext.Connection.RemoteIpAddress;
+            var remoteIp = remoteIpAddress.IsIPv4MappedToIPv6
                 ? remoteIpAddress.MapToIPv4().ToString()
                 : remoteIpAddress.ToString();
-            var isLocalHost = requestIp == "::1";
-
-            if (isLocalHost)
-                requestIp = ResolveMyIp();
+            var isLocalHost = remoteIp == "::1";
+            var requestIp = isLocalHost ? ResolveMyIp() : remoteIp;
 
             return requestIp;
         }
