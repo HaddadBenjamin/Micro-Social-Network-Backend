@@ -21,9 +21,7 @@ namespace DiabloII.Application.Extensions
 
             subUrl = subUrl is null ? string.Empty : $"/{subUrl}";
 
-            var url = $"{baseUrl}{subUrl}";
-
-            return url;
+            return $"{baseUrl}{subUrl}";
         }
     }
 }
