@@ -24,13 +24,13 @@ namespace DiabloII.Application.Services.Hals
             return halResponse;
         }
 
-        protected HALResponse AddLink(HALResponse halResponse, string linkName, HttpMethod httpMethod,
+        protected void AddLink(HALResponse halResponse, string linkName, HttpMethod httpMethod,
             string subUrl = null)
         {
             var linkUrl = GetLinkUrl(subUrl);
             var link = new Link(linkName, linkUrl, null, httpMethod.ToString());
 
-            return halResponse.AddLinks(link);
+            halResponse.AddLinks(link);
         }
 
         protected string GetLinkUrl(string subUrl = null)

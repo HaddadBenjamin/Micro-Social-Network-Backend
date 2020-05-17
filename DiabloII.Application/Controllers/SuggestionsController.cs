@@ -47,7 +47,7 @@ namespace DiabloII.Application.Controllers
                 {
                     var dto = _mapper.Map<SuggestionDto>(dataModel);
 
-                    return _suggestionHalService.AddLinks(dto, this);
+                    return _suggestionHalService.AddLinks(dto);
                 })
                 .ToList();
 
