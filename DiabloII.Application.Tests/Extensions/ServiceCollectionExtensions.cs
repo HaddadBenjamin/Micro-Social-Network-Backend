@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Reflection;
-using DiabloII.Application.Services.IpResolver;
+using DiabloII.Application.Resolvers.Ip;
 using DiabloII.Application.Tests.Mocks;
 using DiabloII.Application.Tests.Startup;
 using DiabloII.Infrastructure.DbContext;
@@ -30,6 +30,6 @@ namespace DiabloII.Application.Tests.Extensions
         }
 
         public static IServiceCollection RegisterTheApplicationMocks(this IServiceCollection services) => services
-            .AddSingleton<IIpV4Resolver, IpV4ResolverMock>();
+            .AddSingleton<IRequestIpV4Resolver, IpV4ResolverMock>();
     }
 }

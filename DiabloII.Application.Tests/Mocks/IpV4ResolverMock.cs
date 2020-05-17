@@ -1,12 +1,9 @@
-﻿using System;
-using DiabloII.Application.Services.IpResolver;
+﻿using DiabloII.Application.Resolvers.Ip;
 
 namespace DiabloII.Application.Tests.Mocks
 {
-    public class IpV4ResolverMock : IIpV4Resolver
+    public class IpV4ResolverMock : IRequestIpV4Resolver
     {
-        public string ResolveRequestIp() => "94.174.157.14";
-
-        public string ResolveMyIp() => throw new NotImplementedException();
+        public string Resolve() => "94.174.157.14";
     }
 }

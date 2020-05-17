@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using DiabloII.Application.Mappers.Suggestions;
+using DiabloII.Application.Resolvers.UserId;
 using DiabloII.Application.Responses.Suggestions;
-using DiabloII.Application.Services.UserIdResolver;
 using Halcyon.HAL;
 using Microsoft.AspNetCore.Http;
 
