@@ -23,8 +23,11 @@ namespace DiabloII.Application.Controllers
 
         private readonly IMapper _mapper;
 
-        public SuggestionsController(ISuggestionReader reader, ISuggestionCommandHandler handler, IMapper mapper)
+        private readonly ISuggestionHalService _suggestionHalService;
+
+        public SuggestionsController(ISuggestionReader reader, ISuggestionCommandHandler handler, IMapper mapper, ISuggestionHalService suggestionHalService)
         {
+            _suggestionHalService = suggestionHalService;
             _reader = reader;
             _handler = handler;
             _mapper = mapper;
@@ -44,7 +47,7 @@ namespace DiabloII.Application.Controllers
                 {
                     var dto = _mapper.Map<SuggestionDto>(dataModel);
 
-                    return SuggestionHalDecorator.DecorateSuggestionLinks(dto, this);
+                    return _suggestionHalService.AddLinks(dto, this);
                 })
                 .ToList();
 

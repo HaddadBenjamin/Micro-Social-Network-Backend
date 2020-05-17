@@ -6,11 +6,11 @@ using Halcyon.HAL;
 
 namespace DiabloII.Application.Services.Hals
 {
-    public static class SuggestionHalDecorator
+    public class SuggestionHalService : BaseHalService
     {
-        public static HALResponse DecorateSuggestionLinks(SuggestionDto dto, ControllerBase controller)
+        public HALResponse AddLinks(SuggestionDto dto, ControllerBase controller)
         {
-            var halResponse = controller.ToHalResponse(dto);
+            var halResponse = ToHalResponse(controller, dto);
 
             return halResponse.AddLink(controller, "suggestion_create", HttpMethod.Post);
         }

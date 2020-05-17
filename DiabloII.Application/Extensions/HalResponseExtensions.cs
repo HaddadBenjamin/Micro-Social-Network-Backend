@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using Halcyon.HAL;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Application.Extensions
@@ -9,9 +10,20 @@ namespace DiabloII.Application.Extensions
         public static HALResponse AddLink(this HALResponse halResponse, ControllerBase controller, string linkName, HttpMethod httpMethod,
             string subUrl = null)
         {
-            var url = controller.GetUrl(subUrl);
+            var url = GetUrl(controller, subUrl);
 
             return halResponse.AddLinks(new Link(linkName, url, null, httpMethod.ToString()));
+        }
+
+        private static string GetUrl(ControllerBase controller, string subUrl = null)
+        {
+            var baseUrl = controller.Request.GetDisplayUrl();
+
+            subUrl = subUrl is null ? string.Empty : $"/{subUrl}";
+
+            var url = $"{baseUrl}{subUrl}";
+
+            return url;
         }
     }
 }
