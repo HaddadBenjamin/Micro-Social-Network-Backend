@@ -3,11 +3,11 @@ using DiabloII.Application.Resolvers.Ip;
 
 namespace DiabloII.Application.Resolvers.UserId
 {
-    public class UserIdResolverService : IUserIdResolverService
+    public class UserIdResolver : IUserIdResolver
     {
         private readonly IRequestIpV4Resolver _requestIpV4Resolver;
 
-        public UserIdResolverService(IRequestIpV4Resolver requestIpV4Resolver) => _requestIpV4Resolver = requestIpV4Resolver;
+        public UserIdResolver(IRequestIpV4Resolver requestIpV4Resolver) => _requestIpV4Resolver = requestIpV4Resolver;
 
         public string Resolve()
         {

@@ -30,6 +30,6 @@ namespace DiabloII.Application.Tests.Extensions
         }
 
         public static IServiceCollection RegisterTheApplicationMocks(this IServiceCollection services) => services
-            .AddSingleton<IRequestIpV4Resolver, IpV4ResolverMock>();
+            .AddSingleton<IRequestIpV4Resolver, RequestIpV4ResolverMock>();
     }
 }
