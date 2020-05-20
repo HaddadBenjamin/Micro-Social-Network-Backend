@@ -39,7 +39,7 @@ namespace DiabloII.Application.Controllers
         [Route("suggestions")]
         [HttpGet]
         [ProducesResponseType(typeof(IReadOnlyCollection<SuggestionDto>), StatusCodes.Status200OK)]
-        public ActionResult<IReadOnlyCollection<HALResponse>> GetAll() =>
+        public ActionResult<HALResponse> GetAll() =>
             GetAll(_reader, _mapper, _halService);
 
         /// <summary>
@@ -49,8 +49,8 @@ namespace DiabloII.Application.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<SuggestionDto> Create([FromBody] CreateASuggestionDto dto) =>
-            Create<CreateASuggestionDto, CreateASuggestionCommand>(dto, _handler, _mapper);
+        public ActionResult<HALResponse> Create([FromBody] CreateASuggestionDto dto) =>
+            Create<CreateASuggestionDto, CreateASuggestionCommand>(dto, _handler, _mapper, _halService);
 
         /// <summary>
         /// Vote to a suggestion
@@ -61,11 +61,11 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<SuggestionDto> Vote([FromBody] VoteToASuggestionDto dto, Guid suggestionId)
+        public ActionResult<HALResponse> Vote([FromBody] VoteToASuggestionDto dto, Guid suggestionId)
         {
             dto.SuggestionId = suggestionId;
 
-            return Create<VoteToASuggestionDto, VoteToASuggestionCommand>(dto, _handler, _mapper);
+            return Create<VoteToASuggestionDto, VoteToASuggestionCommand>(dto, _handler, _mapper, _halService);
         }
 
         /// <summary>
@@ -77,11 +77,11 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<SuggestionDto> Comment([FromBody] CommentASuggestionDto dto, Guid suggestionId)
+        public ActionResult<HALResponse> Comment([FromBody] CommentASuggestionDto dto, Guid suggestionId)
         {
             dto.SuggestionId = suggestionId;
 
-            return Create<CommentASuggestionDto, CommentASuggestionCommand>(dto, _handler, _mapper);
+            return Create<CommentASuggestionDto, CommentASuggestionCommand>(dto, _handler, _mapper, _halService);
         }
 
         /// <summary>
@@ -109,12 +109,12 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<SuggestionDto> DeleteComment([FromBody] DeleteASuggestionCommentDto dto, Guid suggestionId, Guid commentId)
+        public ActionResult<HALResponse> DeleteComment([FromBody] DeleteASuggestionCommentDto dto, Guid suggestionId, Guid commentId)
         {
             dto.SuggestionId = suggestionId;
             dto.Id = commentId;
 
-            return DeleteWithMap<DeleteASuggestionCommentDto, DeleteASuggestionCommentCommand, Suggestion, SuggestionDto>(dto, _handler, _mapper);
+            return DeleteWithMap<DeleteASuggestionCommentDto, DeleteASuggestionCommentCommand, Suggestion, SuggestionDto>(dto, _handler, _mapper, _halService);
         }
     }
 }

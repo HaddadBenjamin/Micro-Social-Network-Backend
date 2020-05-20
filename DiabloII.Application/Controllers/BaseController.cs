@@ -27,12 +27,12 @@ namespace DiabloII.Application.Controllers
             return Ok(response);
         }
 
-        protected ActionResult<IReadOnlyCollection<HALResponse>> GetAll(
+        protected ActionResult<HALResponse> GetAll(
             IReaderGetAll<DataModel> readerGetAll,
             IMapper mapper,
             IHalService<ResponseDto> halService)
         {
-            var response = readerGetAll
+            var halResponses = readerGetAll
                 .GetAll()
                 .Select(dataModel =>
                 {
@@ -41,6 +41,7 @@ namespace DiabloII.Application.Controllers
                     return halService.AddLinks(dto);
                 })
                 .ToList();
+            var response = halService.AddLinks(halResponses);
 
             return Ok(response);
         }
@@ -70,6 +71,20 @@ namespace DiabloII.Application.Controllers
             return this.CreatedByUsingTheRequestRoute(response);
         }
 
+        protected ActionResult<HALResponse> Create<CreateDto, CreateCommand>(
+            CreateDto requestDto,
+            ICommandHandlerCreate<CreateCommand, DataModel> handlerCreate,
+            IMapper mapper,
+            IHalService<ResponseDto> halService)
+        {
+            var command = mapper.Map<CreateCommand>(requestDto);
+            var model = handlerCreate.Create(command);
+            var responseDto = mapper.Map<ResponseDto>(model);
+            var halResponse = halService.AddLinks(responseDto);
+
+            return this.CreatedByUsingTheRequestRoute(halResponse);
+        }
+
         protected ActionResult<ResponseDto> Update<UpdateDto, UpdateCommand>(
             UpdateDto dto,
             ICommandHandlerUpdate<UpdateCommand, DataModel> handlerUpdate,
@@ -92,16 +107,18 @@ namespace DiabloII.Application.Controllers
 
             return Ok(response);
         }
-        protected ActionResult<Response> DeleteWithMap<DeleteDto, DeleteCommand, CommandResponse, Response>(
-            DeleteDto dto,
+        protected ActionResult<HALResponse> DeleteWithMap<DeleteDto, DeleteCommand, CommandResponse, ResponseDto>(
+            DeleteDto requestDto,
             ICommandHandlerDelete<DeleteCommand, CommandResponse> handlerDelete,
-            IMapper mapper)
+            IMapper mapper,
+            IHalService<ResponseDto> halService)
         {
-            var command = mapper.Map<DeleteCommand>(dto);
+            var command = mapper.Map<DeleteCommand>(requestDto);
             var model = handlerDelete.Delete(command);
-            var response = mapper.Map<ResponseDto>(model);
+            var responseDto = mapper.Map<ResponseDto>(model);
+            var halResponse = halService.AddLinks(responseDto);
 
-            return Ok(response);
+            return Ok(halResponse);
         }
     }
 }
