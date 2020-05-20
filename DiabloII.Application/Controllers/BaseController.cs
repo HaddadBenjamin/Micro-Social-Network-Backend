@@ -32,7 +32,7 @@ namespace DiabloII.Application.Controllers
             IMapper mapper,
             IHalService<ResponseDto> halService)
         {
-            var halResponses = readerGetAll
+            var halResponseList = readerGetAll
                 .GetAll()
                 .Select(dataModel =>
                 {
@@ -41,9 +41,9 @@ namespace DiabloII.Application.Controllers
                     return halService.AddLinks(dto);
                 })
                 .ToList();
-            var response = halService.AddLinks(halResponses);
+            var halResponse = halService.AddLinks(halResponseList);
 
-            return Ok(response);
+            return Ok(halResponse);
         }
 
         protected ActionResult<IReadOnlyCollection<ResponseDto>> Search<RequestDto, Query>(
