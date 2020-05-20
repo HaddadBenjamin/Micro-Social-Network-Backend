@@ -13,11 +13,9 @@ namespace DiabloII.Application.Mappers.Suggestions
         {
             var mapper = new MapperConfiguration(configuration => configuration
                 .CreateMap<SuggestionDto, SuggestionHalResponse>()
-                .Ignore(suggestion => suggestion.Votes)
                 .Ignore(suggestion => suggestion.Comments)
                 .AfterMap((dto, suggestionHalResponse) =>
                 {
-                    suggestionHalResponse.Votes = suggestion.Votes.Select(vote => suggestionHalService.AddLinks(vote, suggestion.Id)).ToList();
                     suggestionHalResponse.Comments = suggestion.Comments.Select(comment => suggestionHalService.AddLinks(comment, suggestion.Id)).ToList();
                 })
             ).CreateMapper();

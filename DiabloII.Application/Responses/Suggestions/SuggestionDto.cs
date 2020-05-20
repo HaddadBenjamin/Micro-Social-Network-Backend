@@ -19,7 +19,6 @@ namespace DiabloII.Application.Responses.Suggestions
         public IReadOnlyCollection<SuggestionVoteDto> Votes { get; set; }
 
         public IReadOnlyCollection<SuggestionCommentDto> Comments { get; set; }
-
     }
 
     public class SuggestionHalResponse
@@ -34,9 +33,8 @@ namespace DiabloII.Application.Responses.Suggestions
 
         public int NegativeVoteCount { get; set; }
 
-        public IReadOnlyCollection<HALResponse> Votes { get; set; }
+        public IReadOnlyCollection<SuggestionVoteDto> Votes { get; set; }
 
         public IReadOnlyCollection<HALResponse> Comments { get; set; }
-
     }
 }
