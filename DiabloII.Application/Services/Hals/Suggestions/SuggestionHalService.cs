@@ -14,6 +14,7 @@ namespace DiabloII.Application.Services.Hals.Suggestions
     public class SuggestionHalService : BaseHalService, ISuggestionHalService
     {
         private readonly string _userId;
+        private static readonly string _domain = "suggestions";
 
         public SuggestionHalService(IUserIdResolver userIdResolver, IHttpContextAccessor httpContextAccessor) : base (httpContextAccessor) =>
             _userId = userIdResolver.Resolve();
@@ -26,7 +27,7 @@ namespace DiabloII.Application.Services.Hals.Suggestions
             };
             var halResponse = ToHalResponse(responses);
 
-            AddLink(halResponse, "suggestion_create", HttpMethod.Post);
+            AddLink(halResponse, "suggestion_create", HttpMethod.Post, _domain);
 
             return halResponse;
         }
@@ -36,13 +37,14 @@ namespace DiabloII.Application.Services.Hals.Suggestions
             var suggestionHalResponse = SuggestionDtoToHalLayer.Map(suggestion, this);
             var canEditSuggestion = _userId == suggestion.CreatedBy;
             var halResponse = ToHalResponse(suggestionHalResponse);
-           
-            AddLink(halResponse, "comment_create", HttpMethod.Post, $"{suggestion.Id}/comments");
+            var baseUrl = $"{_domain}/{suggestion.Id}";
+
+            AddLink(halResponse, "comment_create", HttpMethod.Post, $"{baseUrl}/comments");
 
             if (canEditSuggestion)
-                AddLink(halResponse, "suggestion_delete", HttpMethod.Delete, suggestion.Id.ToString());
+                AddLink(halResponse, "suggestion_delete", HttpMethod.Delete, baseUrl);
             else
-                AddLink(halResponse, "vote_create", HttpMethod.Post, $"{suggestion.Id}/votes");
+                AddLink(halResponse, "vote_create", HttpMethod.Post, $"{baseUrl}/votes");
 
 
             return halResponse;
@@ -55,7 +57,7 @@ namespace DiabloII.Application.Services.Hals.Suggestions
 
 
             if (canEditComment)
-                AddLink(halResponse, "comment_delete", HttpMethod.Delete, $"{suggestionId}/comments/{comment.Id}");
+                AddLink(halResponse, "comment_delete", HttpMethod.Delete, $"{_domain}/{suggestionId}/comments/{comment.Id}");
 
             return halResponse;
         }

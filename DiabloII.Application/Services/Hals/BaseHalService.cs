@@ -13,7 +13,7 @@ namespace DiabloII.Application.Services.Hals
 
         protected HALResponse ToHalResponse(object model)
         {
-            var linkUrl = _httpContextAccessor.HttpContext.Request.GetDisplayUrl();
+            var linkUrl = GetBaseUrl();
             var halModelConfig = new HALModelConfig
             {
                 LinkBase = linkUrl,
@@ -35,10 +35,17 @@ namespace DiabloII.Application.Services.Hals
 
         protected string GetLinkUrl(string subUrl = null)
         {
-            var baseUrl = _httpContextAccessor.HttpContext.Request.GetDisplayUrl();
+            var baseUrl = GetBaseUrl();
             var normalizedSubUrl = subUrl is null ? string.Empty : $"/{subUrl}";
 
             return $"{baseUrl}{normalizedSubUrl}";
+        }
+
+        protected string GetBaseUrl()
+        {
+            var httpRequest = _httpContextAccessor.HttpContext.Request;
+
+            return $"{httpRequest.Scheme}://{httpRequest.Host}{httpRequest.PathBase}";
         }
     }
 }
