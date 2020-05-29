@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
+using DiabloII.Application.Extensions;
 using DiabloII.Application.Requests.Users;
 using DiabloII.Application.Responses.Users;
-using DiabloII.Domain.Handlers;
+using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Models.Users;
 using DiabloII.Domain.Readers;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,15 +16,15 @@ namespace DiabloII.Application.Controllers
     [Route("api/v1/")]
     public class UsersController : BaseController<User, UserDto>
     {
-        private readonly IUserCommandHandler _handler;
-
+        private readonly IMediator _mediator;
+        
         private readonly IUserReader _reader;
 
         private readonly IMapper _mapper;
 
-        public UsersController(IUserCommandHandler handler, IUserReader reader, IMapper mapper)
+        public UsersController(IMediator mediator, IUserReader reader, IMapper mapper)
         {
-            _handler = handler;
+            _mediator = mediator;
             _reader = reader;
             _mapper = mapper;
         }
@@ -44,8 +47,14 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public ActionResult<UserDto> Create([FromBody] CreateAUserDto dto) =>
-            Create(dto, _handler, _mapper);
+        public async Task<ActionResult<UserDto>> Create([FromBody] CreateAUserDto dto)
+        {
+            var command = _mapper.Map<CreateAUserCommand>(dto);
+            var model = await _mediator.Send( command);
+            var response = _mapper.Map<User>(model);
+
+            return this.CreatedByUsingTheRequestRoute(response);
+        }
 
         /// <summary>
         /// Update a user
@@ -56,11 +65,15 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public ActionResult<UserDto> Update([FromBody] UpdateAUserDto dto, string userId)
+        public async Task<ActionResult<UserDto>> Update([FromBody] UpdateAUserDto dto, string userId)
         {
             dto.UserId = userId;
 
-            return Update(dto, _handler, _mapper);
+            var command = _mapper.Map<UpdateAUserCommand>(dto);
+            var model = await _mediator.Send(command);
+            var response = _mapper.Map<User>(model);
+
+            return Ok(response);
         }
     }
 }
