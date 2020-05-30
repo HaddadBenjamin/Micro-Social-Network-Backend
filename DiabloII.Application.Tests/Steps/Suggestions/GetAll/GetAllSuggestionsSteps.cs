@@ -21,9 +21,9 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.GetAll
         }
 
         [When(@"I get all the suggestions")]
-        public async Task WhenIGetAllTheSuggestions() => _suggestionsContext.AllResources = await _suggestionsApi.GetAll();
+        public async Task WhenIGetAllTheSuggestions() => _suggestionsContext.Resources = await _suggestionsApi.GetAll();
 
         [Then(@"all the suggestions should be")]
-        public void WhenAllTheSuggestionsShouldBe(Table table) => table.ShouldAllExistsIn(_suggestionsContext.AllResources);
+        public void WhenAllTheSuggestionsShouldBe(Table table) => table.ShouldAllExistsIn(_suggestionsContext.Resources.Elements);
     }
 }

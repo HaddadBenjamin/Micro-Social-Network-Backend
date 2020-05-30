@@ -6,7 +6,7 @@ using DiabloII.Application.Tests.Apis.Bases;
 namespace DiabloII.Application.Tests.Apis.Domains.Suggestions
 {
     public interface ISuggestionsApi :
-        IApiGetAll<SuggestionDto>,
+        IApiGetResponses<SuggestionDto>,
         IApiCreate<CreateASuggestionDto, SuggestionDto>,
         IApiCreate<VoteToASuggestionDto, SuggestionDto>,
         IApiCreate<CommentASuggestionDto, SuggestionDto>,

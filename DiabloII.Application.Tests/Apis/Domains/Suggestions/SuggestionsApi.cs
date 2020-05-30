@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
+using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Tests.Apis.Bases;
 using DiabloII.Application.Tests.Services.Http;
@@ -15,8 +16,8 @@ namespace DiabloII.Application.Tests.Apis.Domains.Suggestions
         public SuggestionsApi(IHttpService httpService) : base(httpService) { }
 
         #region Read
-        public async Task<IReadOnlyCollection<SuggestionDto>> GetAll() =>
-            await _httpService.GetAsync<IReadOnlyCollection<SuggestionDto>>(BaseUrl);
+        public async Task<ApiResponses<SuggestionDto>> GetAll() =>
+            await _httpService.GetAsync<ApiResponses<SuggestionDto>>(BaseUrl);
         #endregion
 
         #region Write

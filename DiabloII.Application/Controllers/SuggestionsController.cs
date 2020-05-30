@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Requests.Suggestions;
+using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Services.Hals.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
@@ -39,7 +40,7 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("suggestions")]
         [HttpGet]
-        [ProducesResponseType(typeof(IReadOnlyCollection<SuggestionDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponses<SuggestionDto>), StatusCodes.Status200OK)]
         public ActionResult<HALResponse> GetAll() =>
             GetAll(_reader, _mapper, _halService);
 
