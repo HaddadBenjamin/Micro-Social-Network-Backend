@@ -16,7 +16,7 @@ __Contexte technologique :__
 - __Technologies :__ .NET Core 3.1, C#8, Entity Framework Core, Swagger.
 - __Tests :__ NUnit, Shoudly, Moq, Specflow.
 - __Azure :__ Azure Key Vault, Azure Sql Server, Azure Web App.
-- __Librairies :__ Fluent Validation, Demistify, AutoMapper, Flurl, Scrutor, Bulk Extensions, CompareNetObjects.
+- __Librairies :__ Fluent Validation, Demistify, AutoMapper, Flurl, MediatR, Scrutor, Bulk Extensions, CompareNetObjects, Halcyon.
 - __CI & CD :__ Github Actions, Docker, Azure.
 </br>
 
