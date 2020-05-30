@@ -48,7 +48,6 @@ namespace DiabloII.Application.Controllers
         [Route("users/identifyme")]
         [HttpGet]
         [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
-        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<ActionResult<UserDto>> IdentifyMe()
         {
             var user = await _userResolver.ResolveAsync();
@@ -65,6 +64,7 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<ActionResult<UserDto>> Create([FromBody] CreateAUserDto dto) =>
             await Create<CreateAUserDto, CreateAUserCommand>(dto, _mediator, _mapper);
 
