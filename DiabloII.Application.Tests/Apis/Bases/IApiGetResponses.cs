@@ -5,6 +5,6 @@ namespace DiabloII.Application.Tests.Apis.Bases
 {
     public interface IApiGetResponses<ResponseDto>
     {
-        Task<ApiResponses<ResponseDto>> GetAll();
+        Task<ApiResponses<ResponseDto>> GetResponses();
     }
 }

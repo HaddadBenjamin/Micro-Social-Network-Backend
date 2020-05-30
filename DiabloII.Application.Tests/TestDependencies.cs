@@ -9,9 +9,7 @@ using DiabloII.Application.Tests.Contexts.Domains.Users;
 using DiabloII.Application.Tests.Repositories.Suggestions;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Domain.Repositories;
-using DiabloII.Infrastructure.Handlers;
 using DiabloII.Infrastructure.Repositories;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using SolidToken.SpecFlow.DependencyInjection;
 

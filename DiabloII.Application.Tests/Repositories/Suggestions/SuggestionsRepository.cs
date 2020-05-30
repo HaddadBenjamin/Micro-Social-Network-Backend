@@ -15,7 +15,7 @@ namespace DiabloII.Application.Tests.Repositories.Suggestions
         #region Read
         public async Task<Guid> GetSuggestionId(string suggestionContent) => (await GetSuggestion(suggestionContent)).Id;
 
-        public async Task<SuggestionDto> GetSuggestion(string suggestionContent) => (await _suggestionsApi.GetAll()).Elements
+        public async Task<SuggestionDto> GetSuggestion(string suggestionContent) => (await _suggestionsApi.GetResponses()).Elements
             .Single(suggestion => suggestion.Content == suggestionContent);
 
         public Guid GetSuggestionCommentId(SuggestionDto suggestionDto, string suggestionCommentContent) => suggestionDto.Comments
