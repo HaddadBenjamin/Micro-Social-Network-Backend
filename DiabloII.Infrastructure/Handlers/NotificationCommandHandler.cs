@@ -1,16 +1,14 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using DiabloII.Domain.Commands.Notifications;
+using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Services.Notifications;
 using DiabloII.Domain.Validations.Notifications.Create;
 using DiabloII.Infrastructure.DbContext;
-using MediatR;
 
 namespace DiabloII.Infrastructure.Handlers
 {
-    public class NotificationCommandHandler : IRequestHandler<CreateANotificationCommand, Notification>
+    public class NotificationCommandHandler : INotificationCommandHandler
     {
         private readonly IMapper _mapper;
 
@@ -32,7 +30,7 @@ namespace DiabloII.Infrastructure.Handlers
             _service = service;
         }
 
-        public Task<Notification> Handle(CreateANotificationCommand command, CancellationToken cancellationToken = default)
+        public Notification Create(CreateANotificationCommand command)
         {
             var validationContext = new CreateANotificationValidationContext(command);
 
@@ -45,7 +43,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             _service.Notify(notification, command.ConcernedUserIds);
 
-            return Task.FromResult(notification);
+            return notification;
         }
     }
 }

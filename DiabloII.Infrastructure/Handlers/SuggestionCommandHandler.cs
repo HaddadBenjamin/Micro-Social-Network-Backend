@@ -19,6 +19,7 @@ namespace DiabloII.Infrastructure.Handlers
         private readonly ApplicationDbContext _dbContext;
         private readonly ISuggestionRepository _repository;
         private readonly IMapper _mapper;
+        private readonly INotificationCommandHandler _notificationHandler;
         private readonly CreateASuggestionValidator _createValidator;
         private readonly VoteToASuggestionValidator _voteValidator;
         private readonly CommentASuggestionValidator _commentValidator;
@@ -28,6 +29,7 @@ namespace DiabloII.Infrastructure.Handlers
         public SuggestionCommandHandler(
             ISuggestionRepository repository,
             IMapper mapper,
+            INotificationCommandHandler notificationHandler,
             ApplicationDbContext dbContext,
             CreateASuggestionValidator createValidator,
             VoteToASuggestionValidator voteValidator,
@@ -38,6 +40,7 @@ namespace DiabloII.Infrastructure.Handlers
             _dbContext = dbContext;
             _repository = repository;
             _mapper = mapper;
+            _notificationHandler = notificationHandler;
             _createValidator = createValidator;
             _voteValidator = voteValidator;
             _commentValidator = commentValidator;
@@ -58,9 +61,9 @@ namespace DiabloII.Infrastructure.Handlers
             _dbContext.Suggestions.Add(suggestion);
             _dbContext.SaveChanges();
 
-            //var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestion);
+            var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestion);
 
-            //_notificationHandler.Create(createANotificationCommand);
+            _notificationHandler.Create(createANotificationCommand);
 
             return suggestion;
         }
@@ -127,10 +130,10 @@ namespace DiabloII.Infrastructure.Handlers
 
             _dbContext.SaveChanges();
 
-            //var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestionComment);
-            //createANotificationCommand.ConcernedUserIds = new[] { suggestion.CreatedBy };
+            var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestionComment);
+            createANotificationCommand.ConcernedUserIds = new[] { suggestion.CreatedBy };
 
-            //_notificationHandler.Create(createANotificationCommand);
+            _notificationHandler.Create(createANotificationCommand);
 
             return suggestion;
         }

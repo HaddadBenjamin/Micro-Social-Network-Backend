@@ -1,13 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Requests.Notifications;
 using DiabloII.Application.Responses.Notifications;
-using DiabloII.Domain.Commands.Notifications;
 using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Readers;
-using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,17 +14,17 @@ namespace DiabloII.Application.Controllers
     [ApiExplorerSettings(IgnoreApi = true)]
     public class NotificationsController : BaseController<Notification, NotificationDto>
     {
+        private readonly INotificationCommandHandler _handler;
+
         private readonly INotificationReader _reader;
 
         private readonly IMapper _mapper;
 
-        private readonly IMediator _mediator;
-
-        public NotificationsController(INotificationReader reader, IMapper mapper, IMediator mediator)
+        public NotificationsController(INotificationCommandHandler handler, INotificationReader reader, IMapper mapper)
         {
+            _handler = handler;
             _reader = reader;
             _mapper = mapper;
-            _mediator = mediator;
         }
 
         /// <summary>
@@ -46,7 +43,7 @@ namespace DiabloII.Application.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(NotificationDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<NotificationDto>> Create([FromBody] CreateANotificationDto dto) =>
-            await CreateWithMediator<CreateANotificationDto, CreateANotificationCommand>(dto, _mapper, _mediator);
+        public ActionResult<NotificationDto> Create([FromBody] CreateANotificationDto dto) =>
+            Create(dto, _handler, _mapper);
     }
 }

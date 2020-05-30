@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Services.Hals;
 using DiabloII.Domain.Handlers.Bases;
 using DiabloII.Domain.Readers.Bases;
 using Halcyon.HAL;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DiabloII.Application.Controllers
@@ -61,10 +59,13 @@ namespace DiabloII.Application.Controllers
             return Ok(response);
         }
 
-        protected async Task<ActionResult<ResponseDto>> CreateWithMediator<CreateDto, CreateCommand>(CreateDto dto, IMapper mapper, IMediator mediator)
+        protected ActionResult<ResponseDto> Create<CreateDto, CreateCommand>(
+            CreateDto dto,
+            ICommandHandlerCreate<CreateCommand, DataModel> handlerCreate,
+            IMapper mapper)
         {
             var command = mapper.Map<CreateCommand>(dto);
-            var model = await mediator.Send(command);
+            var model = handlerCreate.Create(command);
             var response = mapper.Map<ResponseDto>(model);
 
             return this.CreatedByUsingTheRequestRoute(response);
