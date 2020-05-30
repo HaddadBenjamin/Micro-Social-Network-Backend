@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Extensions;
+using DiabloII.Application.Responses;
 using DiabloII.Application.Services.Hals;
 using DiabloII.Domain.Readers.Bases;
 using Halcyon.HAL;
@@ -15,16 +15,20 @@ namespace DiabloII.Application.Controllers
         where DataModel : class
         where ResponseDto : class
     {
-        protected ActionResult<IReadOnlyCollection<ResponseDto>> GetAll(
+        protected ActionResult<ApiResponses<ResponseDto>> GetAll(
             IReaderGetAll<DataModel> readerGetAll,
             IMapper mapper)
         {
-            var response = readerGetAll
+            var responseDtos = readerGetAll
                 .GetAll()
                 .Select(mapper.Map<ResponseDto>)
                 .ToList();
+            var responseDto = new ApiResponses<ResponseDto>
+            {
+                Elements = responseDtos
+            };
 
-            return Ok(response);
+            return Ok(responseDto);
         }
 
         protected ActionResult<HALResponse> GetAll(
@@ -32,40 +36,44 @@ namespace DiabloII.Application.Controllers
             IMapper mapper,
             IHalService<ResponseDto> halService)
         {
-            var halResponseList = readerGetAll
+            var halResponses = readerGetAll
                 .GetAll()
                 .Select(dataModel =>
                 {
-                    var dto = mapper.Map<ResponseDto>(dataModel);
+                    var responseDto = mapper.Map<ResponseDto>(dataModel);
 
-                    return halService.AddLinks(dto);
+                    return halService.AddLinks(responseDto);
                 })
                 .ToList();
-            var halResponse = halService.AddLinks(halResponseList);
+            var halResponse = halService.AddLinks(halResponses);
 
             return Ok(halResponse);
         }
 
-        protected ActionResult<IReadOnlyCollection<ResponseDto>> Search<RequestDto, Query>(
+        protected ActionResult<ApiResponses<ResponseDto>> Search<RequestDto, Query>(
             RequestDto searchDto,
             IReaderSearch<Query, DataModel> readerSearch,
             IMapper mapper)
         {
-            var response = readerSearch
+            var responseDtos = readerSearch
                 .Search(mapper.Map<Query>(searchDto))
                 .Select(mapper.Map<ResponseDto>)
                 .ToList();
+            var responseDto = new ApiResponses<ResponseDto>
+            {
+                Elements = responseDtos
+            };
 
-            return Ok(response);
+            return Ok(responseDto);
         }
 
         protected async Task<ActionResult<ResponseDto>> Create<CreateDto, CreateCommand>(CreateDto dto, IMediator mediator, IMapper mapper)
         {
             var command = mapper.Map<CreateCommand>(dto);
             var model = await mediator.Send(command);
-            var response = mapper.Map<ResponseDto>(model);
+            var responseDto = mapper.Map<ResponseDto>(model);
 
-            return this.CreatedByUsingTheRequestRoute(response);
+            return this.CreatedByUsingTheRequestRoute(responseDto);
         }
 
         protected async Task<ActionResult<HALResponse>> Create<CreateDto, CreateCommand>(
@@ -89,9 +97,9 @@ namespace DiabloII.Application.Controllers
         {
             var command = mapper.Map<UpdateCommand>(dto);
             var model = await mediator.Send(command);
-            var response = mapper.Map<ResponseDto>(model);
+            var responseDto = mapper.Map<ResponseDto>(model);
 
-            return Ok(response);
+            return Ok(responseDto);
         }
 
         protected async Task<ActionResult<ResponseDto>> Delete<DeleteDto, DeleteCommand, ResponseDto>(
@@ -100,9 +108,9 @@ namespace DiabloII.Application.Controllers
             IMapper mapper)
         {
             var command = mapper.Map<DeleteCommand>(dto);
-            var response = await mediator.Send(command);
+            var responseDto = await mediator.Send(command);
 
-            return Ok(response);
+            return Ok(responseDto);
         }
 
         protected async Task<ActionResult<HALResponse>> DeleteWithMap<DeleteDto, DeleteCommand, ResponseDto>(

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Requests.Users;
+using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Users;
 using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Models.Users;
@@ -33,9 +33,9 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("users")]
         [HttpGet]
-        [ProducesResponseType(typeof(IReadOnlyCollection<UserDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponses<UserDto>), StatusCodes.Status200OK)]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public ActionResult<IReadOnlyCollection<UserDto>> GetAll() =>
+        public ActionResult<ApiResponses<UserDto>> GetAll() =>
             GetAll(_reader, _mapper);
 
         /// <summary>

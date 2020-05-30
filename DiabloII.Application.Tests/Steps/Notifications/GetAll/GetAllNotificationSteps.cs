@@ -22,10 +22,10 @@ namespace DiabloII.Application.Tests.Steps.Notifications.GetAll
 
         [When(@"I get all the notifications")]
         public async Task WhenIGetAllTheNotifications() =>
-            _notificationsContext.AllResources = await _notificationsApi.GetAll();
+            _notificationsContext.Resources = await _notificationsApi.GetAll();
 
         [Then(@"all the notifications should be")]
         public void ThenAllTheNotificationsShouldBe(Table table) =>
-            table.ShouldAllExistsIn(_notificationsContext.AllResources);
+            table.ShouldAllExistsIn(_notificationsContext.Resources.Elements);
     }
 }

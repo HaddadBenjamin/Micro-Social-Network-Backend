@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Users;
+using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Users;
 using DiabloII.Application.Tests.Apis.Bases;
 using DiabloII.Application.Tests.Services.Http;
@@ -14,8 +14,8 @@ namespace DiabloII.Application.Tests.Apis.Domains.Users
         public UsersApi(IHttpService httpService) : base(httpService) { }
 
         #region Read
-        public async Task<IReadOnlyCollection<UserDto>> GetAll() =>
-            await _httpService.GetAsync<IReadOnlyCollection<UserDto>>(BaseUrl);
+        public async Task<ApiResponses<UserDto>> GetAll() =>
+            await _httpService.GetAsync<ApiResponses<UserDto>>(BaseUrl);
         #endregion
 
         #region Write

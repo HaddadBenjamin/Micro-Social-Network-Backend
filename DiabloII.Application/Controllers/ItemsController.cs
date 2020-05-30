@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
 using DiabloII.Application.Requests.Items;
+using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Items;
 using DiabloII.Domain.Models.Items;
 using DiabloII.Domain.Readers;
@@ -27,8 +27,8 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("items")]
         [HttpGet]
-        [ProducesResponseType(typeof(IReadOnlyCollection<ItemDto>), StatusCodes.Status200OK)]
-        public ActionResult<IReadOnlyCollection<ItemDto>> GetAllUniques() =>
+        [ProducesResponseType(typeof(ApiResponses<ItemDto>), StatusCodes.Status200OK)]
+        public ActionResult<ApiResponses<ItemDto>> GetAllUniques() =>
             GetAll(_reader, _mapper);
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("items/search")]
         [HttpGet]
-        [ProducesResponseType(typeof(IReadOnlyCollection<ItemDto>), StatusCodes.Status200OK)]
-        public ActionResult<IReadOnlyCollection<ItemDto>> SearchUniques(SearchUniquesDto dto) =>
+        [ProducesResponseType(typeof(ApiResponses<ItemDto>), StatusCodes.Status200OK)]
+        public ActionResult<ApiResponses<ItemDto>> SearchUniques(SearchUniquesDto dto) =>
             Search(dto, _reader, _mapper);
     }
 }

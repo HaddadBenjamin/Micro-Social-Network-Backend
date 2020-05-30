@@ -15,7 +15,7 @@ namespace DiabloII.Application.Tests.Apis.Domains.Suggestions
         public SuggestionsApi(IHttpService httpService) : base(httpService) { }
 
         #region Read
-        public async Task<ApiResponses<SuggestionDto>> GetResponses() =>
+        public async Task<ApiResponses<SuggestionDto>> GetAll() =>
             await _httpService.GetAsync<ApiResponses<SuggestionDto>>(BaseUrl);
         #endregion
 

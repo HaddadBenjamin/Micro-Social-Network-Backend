@@ -4,7 +4,7 @@ using DiabloII.Application.Tests.Contexts.Bases;
 namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
 {
     public interface ISuggestionsTestContext :
-        ITestContextResponses<SuggestionDto>,
+        ITestContextAll<SuggestionDto>,
         ITestContextCreated<SuggestionDto>
     {
         SuggestionDto VotedResource { get; set; }

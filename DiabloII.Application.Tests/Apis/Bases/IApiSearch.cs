@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using DiabloII.Application.Responses;
 
 namespace DiabloII.Application.Tests.Apis.Bases
 {
     public interface IApiSearch<RequestDto, ResponseDto>
     {
-        Task<IReadOnlyCollection<ResponseDto>> Search(RequestDto dto);
+        Task<ApiResponses<ResponseDto>> Search(RequestDto dto);
     }
 }

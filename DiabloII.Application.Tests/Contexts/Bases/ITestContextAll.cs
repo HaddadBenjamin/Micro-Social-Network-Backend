@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using DiabloII.Application.Responses;
 
 namespace DiabloII.Application.Tests.Contexts.Bases
 {
     public interface ITestContextAll<RestResource>
     {
-        IReadOnlyCollection<RestResource> AllResources { get; set; }
+        ApiResponses<RestResource> Resources { get; set; }
     }
 }

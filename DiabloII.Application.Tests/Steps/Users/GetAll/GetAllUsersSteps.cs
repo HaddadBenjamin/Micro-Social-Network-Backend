@@ -21,9 +21,9 @@ namespace DiabloII.Application.Tests.Steps.Users.GetAll
         }
 
         [When(@"I get all the users")]
-        public async Task WhenIGetAllTheUsers() => _usersContext.AllResources = await _usersApi.GetAll();
+        public async Task WhenIGetAllTheUsers() => _usersContext.Resources = await _usersApi.GetAll();
 
         [Then(@"all the users should be")]
-        public void ThenAllTheUsersShouldBe(Table table) => table.ShouldAllExistsIn(_usersContext.AllResources);
+        public void ThenAllTheUsersShouldBe(Table table) => table.ShouldAllExistsIn(_usersContext.Resources.Elements);
     }
 }

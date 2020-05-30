@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Users;
 
 namespace DiabloII.Application.Tests.Contexts.Domains.Users
 {
     public class UsersTestContext : IUsersTestContext
     {
-        public IReadOnlyCollection<UserDto> AllResources { get; set; }
+        public ApiResponses<UserDto> Resources { get; set; }
 
         public UserDto CreatedResource { get; set; }
 

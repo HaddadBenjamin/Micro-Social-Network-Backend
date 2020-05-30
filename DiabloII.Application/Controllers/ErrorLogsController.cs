@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using AutoMapper;
+﻿using AutoMapper;
+using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.ErrorLogs;
 using DiabloII.Domain.Models.ErrorLogs;
 using DiabloII.Domain.Readers;
@@ -25,10 +25,10 @@ namespace DiabloII.Application.Controllers
         /// <summary>
         /// Get all the error logs.
         /// </summary>
-        [ProducesResponseType(typeof(IReadOnlyCollection<ErrorLogDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponses<ErrorLogDto>), StatusCodes.Status200OK)]
         [Route("errorlogs")]
         [HttpGet]
-        public ActionResult<IReadOnlyCollection<ErrorLogDto>> GetAll() =>
+        public ActionResult<ApiResponses<ErrorLogDto>> GetAll() =>
             GetAll(_reader, _mapper);
     }
 }

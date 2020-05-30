@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Requests.Notifications;
+using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Notifications;
 using DiabloII.Domain.Commands.Notifications;
 using DiabloII.Domain.Models.Notifications;
@@ -34,8 +34,8 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("notifications")]
         [HttpGet]
-        [ProducesResponseType(typeof(IReadOnlyCollection<NotificationDto>), StatusCodes.Status200OK)]
-        public ActionResult<IReadOnlyCollection<NotificationDto>> GetAll() =>
+        [ProducesResponseType(typeof(ApiResponses<NotificationDto>), StatusCodes.Status200OK)]
+        public ActionResult<ApiResponses<NotificationDto>> GetAll() =>
             GetAll(_reader, _mapper);
 
         /// <summary>
