@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
+using DiabloII.Domain.Commands.Notifications;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories;
@@ -25,6 +26,7 @@ namespace DiabloII.Infrastructure.Handlers
         private readonly ApplicationDbContext _dbContext;
         private readonly ISuggestionRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
         private readonly CreateASuggestionValidator _createValidator;
         private readonly VoteToASuggestionValidator _voteValidator;
         private readonly CommentASuggestionValidator _commentValidator;
@@ -34,6 +36,7 @@ namespace DiabloII.Infrastructure.Handlers
         public SuggestionCommandHandler(
             ISuggestionRepository repository,
             IMapper mapper,
+            IMediator mediator,
             ApplicationDbContext dbContext,
             CreateASuggestionValidator createValidator,
             VoteToASuggestionValidator voteValidator,
@@ -44,6 +47,7 @@ namespace DiabloII.Infrastructure.Handlers
             _dbContext = dbContext;
             _repository = repository;
             _mapper = mapper;
+            _mediator = mediator;
             _createValidator = createValidator;
             _voteValidator = voteValidator;
             _commentValidator = commentValidator;
@@ -64,9 +68,9 @@ namespace DiabloII.Infrastructure.Handlers
             _dbContext.Suggestions.Add(suggestion);
             await _dbContext.SaveChangesAsync();
 
-            //var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestion);
+            var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestion);
 
-            //_notificationHandler.Create(createANotificationCommand);
+            await _mediator.Send(createANotificationCommand);
 
             return suggestion;
         }
@@ -133,10 +137,10 @@ namespace DiabloII.Infrastructure.Handlers
 
             await _dbContext.SaveChangesAsync();
 
-            //var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestionComment);
-            //createANotificationCommand.ConcernedUserIds = new[] { suggestion.CreatedBy };
+            var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestionComment);
+            createANotificationCommand.ConcernedUserIds = new[] { suggestion.CreatedBy };
 
-            //_notificationHandler.Create(createANotificationCommand);
+            await _mediator.Send(createANotificationCommand);
 
             return suggestion;
         }

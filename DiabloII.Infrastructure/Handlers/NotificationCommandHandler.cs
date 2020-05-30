@@ -32,7 +32,7 @@ namespace DiabloII.Infrastructure.Handlers
             _service = service;
         }
 
-        public Task<Notification> Handle(CreateANotificationCommand command, CancellationToken cancellationToken = default)
+        public async Task<Notification> Handle(CreateANotificationCommand command, CancellationToken cancellationToken = default)
         {
             var validationContext = new CreateANotificationValidationContext(command);
 
@@ -41,11 +41,11 @@ namespace DiabloII.Infrastructure.Handlers
             var notification = _mapper.Map<Notification>(command);
 
             _dbContext.Notifications.Add(notification);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             _service.Notify(notification, command.ConcernedUserIds);
 
-            return Task.FromResult(notification);
+            return notification;
         }
     }
 }
