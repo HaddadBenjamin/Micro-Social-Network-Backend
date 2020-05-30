@@ -21,7 +21,6 @@ namespace DiabloII.Infrastructure.Handlers
         IRequestHandler<DeleteASuggestionCommentCommand, Suggestion>,
         IRequestHandler<VoteToASuggestionCommand, Suggestion>,
         IRequestHandler<CommentASuggestionCommand, Suggestion>
-
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ISuggestionRepository _repository;

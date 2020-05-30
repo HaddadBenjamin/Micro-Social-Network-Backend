@@ -1,6 +1,9 @@
-﻿namespace DiabloII.Domain.Commands.Users
+﻿using DiabloII.Domain.Models.Users;
+using MediatR;
+
+namespace DiabloII.Domain.Commands.Users
 {
-    public class UpdateAUserCommand
+    public class UpdateAUserCommand : IRequest<User>
     {
         public string UserId { get; set; }
 

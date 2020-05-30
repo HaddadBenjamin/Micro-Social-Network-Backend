@@ -11,7 +11,9 @@ using MediatR;
 
 namespace DiabloII.Infrastructure.Handlers
 {
-    public class UserCommandHandler : IRequestHandler<CreateAUserCommand, User>
+    public class UserCommandHandler :
+        IRequestHandler<CreateAUserCommand, User>,
+        IRequestHandler<UpdateAUserCommand, User>
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -50,7 +52,7 @@ namespace DiabloII.Infrastructure.Handlers
             return user;
         }
 
-        public User Update(UpdateAUserCommand command)
+        public async Task<User> Handle(UpdateAUserCommand command, CancellationToken cancellationToken = default)
         {
             var validationContext = new UpdateAUserValidationContext(command, _repository);
 
@@ -61,7 +63,7 @@ namespace DiabloII.Infrastructure.Handlers
             user.Update(command);
 
             _dbContext.Users.Update(user);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return user;
         }
