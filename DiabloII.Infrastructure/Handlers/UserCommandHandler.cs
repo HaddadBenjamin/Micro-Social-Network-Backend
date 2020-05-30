@@ -1,15 +1,17 @@
-﻿using AutoMapper;
+﻿using System.Threading;
+using System.Threading.Tasks;
+using AutoMapper;
 using DiabloII.Domain.Commands.Users;
-using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Models.Users;
 using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Validations.Users.Create;
 using DiabloII.Domain.Validations.Users.Update;
 using DiabloII.Infrastructure.DbContext;
+using MediatR;
 
 namespace DiabloII.Infrastructure.Handlers
 {
-    public class UserCommandHandler : IUserCommandHandler
+    public class UserCommandHandler : IRequestHandler<CreateAUserCommand, User>
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -31,7 +33,7 @@ namespace DiabloII.Infrastructure.Handlers
             _updateValidator = updateValidator;
         }
 
-        public User Create(CreateAUserCommand command)
+        public async Task<User> Handle(CreateAUserCommand command, CancellationToken cancellationToken = default)
         {
             var validationContext = new CreateAUserValidationContext(command, _repository);
 
@@ -43,7 +45,7 @@ namespace DiabloII.Infrastructure.Handlers
             var user = _mapper.Map<User>(command);
 
             _dbContext.Users.Add(user);
-            _dbContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
 
             return user;
         }

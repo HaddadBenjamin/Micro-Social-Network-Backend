@@ -84,13 +84,13 @@ namespace DiabloII.Application.Controllers
             return this.CreatedByUsingTheRequestRoute(halResponse);
         }
 
-        protected ActionResult<ResponseDto> Update<UpdateDto, UpdateCommand>(
+        protected async Task<ActionResult<ResponseDto>> UpdateWithMediator<UpdateDto, UpdateCommand>(
             UpdateDto dto,
-            ICommandHandlerUpdate<UpdateCommand, DataModel> handlerUpdate,
-            IMapper mapper)
+            IMapper mapper,
+            IMediator mediator)
         {
             var command = mapper.Map<UpdateCommand>(dto);
-            var model = handlerUpdate.Update(command);
+            var model = await mediator.Send(command);
             var response = mapper.Map<ResponseDto>(model);
 
             return Ok(response);
