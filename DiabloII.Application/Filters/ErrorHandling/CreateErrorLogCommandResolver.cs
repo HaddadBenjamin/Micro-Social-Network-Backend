@@ -5,7 +5,6 @@ using System.Linq;
 using System.Net;
 using DiabloII.Application.Resolvers;
 using DiabloII.Domain.Commands.ErrorLogs;
-using DiabloII.Domain.Models.ErrorLogs;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
@@ -14,7 +13,6 @@ namespace DiabloII.Application.Filters.ErrorHandling
 {
     public class CreateErrorLogCommandResolver : IResolver<CreateErrorLogCommand>
     {
-
         private readonly ExceptionContext _exceptionContext;
 
         private readonly HttpStatusCode _httpResponseStatus;

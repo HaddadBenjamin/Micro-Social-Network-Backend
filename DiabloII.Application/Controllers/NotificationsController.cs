@@ -46,6 +46,6 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(typeof(NotificationDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<NotificationDto>> Create([FromBody] CreateANotificationDto dto) =>
-            await Create<CreateANotificationDto, CreateANotificationCommand>(dto, _mediator, _mapper); 
+            await Create<CreateANotificationDto, CreateANotificationCommand>(dto, _mediator, _mapper);
     }
 }

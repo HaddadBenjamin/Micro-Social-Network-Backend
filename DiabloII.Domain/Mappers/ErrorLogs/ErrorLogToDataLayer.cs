@@ -1,5 +1,4 @@
-﻿using System;
-using AutoMapper;
+﻿using AutoMapper;
 using DiabloII.Domain.Commands.ErrorLogs;
 using DiabloII.Domain.Models.ErrorLogs;
 

@@ -15,7 +15,7 @@ namespace DiabloII.Application.Services.Hals.Suggestions
         private readonly string _userId;
         private static readonly string _domain = "suggestions";
 
-        public SuggestionHalService(IUserIdResolver userIdResolver, IHttpContextAccessor httpContextAccessor) : base (httpContextAccessor) =>
+        public SuggestionHalService(IUserIdResolver userIdResolver, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor) =>
             _userId = userIdResolver.Resolve();
 
         public HALResponse AddLinks(IReadOnlyCollection<HALResponse> halResponses)
