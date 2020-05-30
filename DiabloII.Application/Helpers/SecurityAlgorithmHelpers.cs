@@ -13,7 +13,7 @@ namespace DiabloII.Application.Helpers
 
             foreach (var hashByte in hashBytes)
                 hashStringBuilder.Append(hashByte.ToString("x2"));
-            
+
             return hashStringBuilder.ToString();
         }
     }

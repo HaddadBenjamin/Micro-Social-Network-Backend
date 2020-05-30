@@ -5,6 +5,7 @@ using DiabloII.Application.Tests.Extensions;
 using DiabloII.Domain.Configurations;
 using DiabloII.Domain.Repositories;
 using DiabloII.Infrastructure.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,7 +31,8 @@ namespace DiabloII.Application.Tests.Startup
             .AddRouting(options => options.LowercaseUrls = true)
             .RegisterTestDbContDbContextDependency()
             .RegisterTheTestApplicationDependencies()
-            .AddMySmtpServer(_configuration.GetSection("Smtp").Get<SmtpConfiguration>());
+            .AddMySmtpServer(_configuration.GetSection("Smtp").Get<SmtpConfiguration>())
+            .AddMediatR(InfrastructureType);
 
         public void Configure(IApplicationBuilder applicationBuilder, IWebHostEnvironment environment) => applicationBuilder
             .UseMyExceptionPages(environment)

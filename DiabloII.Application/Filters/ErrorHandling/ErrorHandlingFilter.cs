@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
+using DiabloII.Application.Resolvers.CreateErrorLogCommand;
 using DiabloII.Domain.Exceptions;
-using DiabloII.Domain.Handlers;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
@@ -18,7 +20,7 @@ namespace DiabloII.Application.Filters.ErrorHandling
             { nameof(NotFoundException), HttpStatusCode.NotFound },
         };
 
-        public override void OnException(ExceptionContext exceptionContext)
+        public override async Task OnExceptionAsync(ExceptionContext exceptionContext)
         {
             var exception = exceptionContext.Exception;
             var exceptionTypeName = exception.GetType().Name;
@@ -29,11 +31,11 @@ namespace DiabloII.Application.Filters.ErrorHandling
 
             exceptionContext.ExceptionHandled = true;
 
-            var errorLogCommandHandler = (IErrorLogCommandHandler)exceptionContext.HttpContext.RequestServices.GetService(typeof(IErrorLogCommandHandler));
-            var errorLogCreator = new ErrorLoggerCreator(exceptionContext, responseHttpStatus);
-            var errorLog = errorLogCreator.Create();
+            var mediator = (IMediator)exceptionContext.HttpContext.RequestServices.GetService(typeof(IMediator));
+            var commandResolver = new CreateErrorLogCommandResolver(exceptionContext, responseHttpStatus);
+            var command = commandResolver.Resolve();
 
-            errorLogCommandHandler.Create(errorLog);
+            await mediator.Send(command);
         }
 
         private static void SetExceptionResult(ExceptionContext exceptionContext, Exception exception, HttpStatusCode code) =>

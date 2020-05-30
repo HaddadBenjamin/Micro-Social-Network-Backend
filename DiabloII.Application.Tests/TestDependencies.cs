@@ -23,19 +23,20 @@ namespace DiabloII.Application.Tests
             var testContext = new TestContext();
             var services = testContext.Services;
 
-            services.AddSingleton(testContext.DbContext);
-            services.AddSingleton<IHttpService>(testContext.HttpService);
-            services.AddSingleton<IUsersTestContext, UsersTestContext>();
-            services.AddSingleton<ISuggestionsTestContext, SuggestionsTestContext>();
-            services.AddSingleton<INotificationsTestContext, NotificationsTestContext>();
-            services.AddSingleton<ISuggestionsRepository, SuggestionsRepository>();
-            services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<INotificationRepository, NotificationRepository>();
-            services.AddSingleton<ISuggestionsApi, SuggestionsApi>();
-            services.AddSingleton<IItemsApi, ItemsApi>();
-            services.AddSingleton<IErrorLogsApi, ErrorLogsApi>();
-            services.AddSingleton<IUsersApi, UsersApi>();
-            services.AddSingleton<INotificationsApi, NotificationsApi>();
+            services
+                .AddSingleton(testContext.DbContext)
+                .AddSingleton<IHttpService>(testContext.HttpService)
+                .AddSingleton<IUsersTestContext, UsersTestContext>()
+                .AddSingleton<ISuggestionsTestContext, SuggestionsTestContext>()
+                .AddSingleton<INotificationsTestContext, NotificationsTestContext>()
+                .AddSingleton<ISuggestionsRepository, SuggestionsRepository>()
+                .AddSingleton<IUserRepository, UserRepository>()
+                .AddSingleton<INotificationRepository, NotificationRepository>()
+                .AddSingleton<ISuggestionsApi, SuggestionsApi>()
+                .AddSingleton<IItemsApi, ItemsApi>()
+                .AddSingleton<IErrorLogsApi, ErrorLogsApi>()
+                .AddSingleton<IUsersApi, UsersApi>()
+                .AddSingleton<INotificationsApi, NotificationsApi>();
 
             return testContext.Services;
         }

@@ -3,32 +3,31 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using DiabloII.Domain.Models.ErrorLogs;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
+using CreateErrorLog = DiabloII.Domain.Commands.ErrorLogs.CreateErrorLogCommand;
 
-namespace DiabloII.Application.Filters.ErrorHandling
+namespace DiabloII.Application.Resolvers.CreateErrorLogCommand
 {
-    public class ErrorLoggerCreator
+    public class CreateErrorLogCommandResolver : ICreateErrorLogCommandResolver
     {
-
         private readonly ExceptionContext _exceptionContext;
 
         private readonly HttpStatusCode _httpResponseStatus;
 
-        public ErrorLoggerCreator(ExceptionContext exceptionContext, HttpStatusCode httpResponseStatus)
+        public CreateErrorLogCommandResolver(ExceptionContext exceptionContext, HttpStatusCode httpResponseStatus)
         {
             _exceptionContext = exceptionContext;
             _httpResponseStatus = httpResponseStatus;
         }
 
-        public ErrorLog Create()
+        public CreateErrorLog Resolve()
         {
             var errorLogContentObject = CreateTheErrorLogContentObject();
             var errorLogContent = JsonConvert.SerializeObject(errorLogContentObject, Formatting.Indented);
 
-            return new ErrorLog
+            return new CreateErrorLog
             {
                 Id = Guid.NewGuid(),
                 CreationDateUtc = DateTime.UtcNow,

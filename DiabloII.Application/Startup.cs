@@ -31,7 +31,7 @@ namespace DiabloII.Application
             .RegisterTheDbContextDependency(_configuration)
             .RegisterTheApplicationDependencies()
             .AddMySmtpServer(_configuration.GetSection("Smtp").Get<SmtpConfiguration>())
-            .AddMediatR(typeof(Startup));
+            .AddMediatR(InfrastructureType);
 
         public void Configure(IApplicationBuilder applicationBuilder, IWebHostEnvironment environment) => applicationBuilder
             .UseMyExceptionPages(environment)

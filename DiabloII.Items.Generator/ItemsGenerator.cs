@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
+using DiabloII.Domain.Commands.Items;
 using DiabloII.Domain.Models.Items;
 using DiabloII.Infrastructure.Handlers;
 using DiabloII.Infrastructure.Helpers;
@@ -20,12 +22,12 @@ namespace DiabloII.Items.Generator
     {
         private static readonly int CommandTimeout = 600;
 
-        public static void Generate(GenerationEnvironment[] environments)
+        public static async Task Generate(GenerationEnvironment[] environments)
         {
             var uniqueItems = new DiabloIIFilesReader().Read();
 
             InsertTheUniqueItemsInAJsonFile(uniqueItems);
-            UpdateTheItemsFromDatabase(environments, uniqueItems);
+            await UpdateTheItemsFromDatabase(environments, uniqueItems);
         }
 
         private static void InsertTheUniqueItemsInAJsonFile(IEnumerable<ItemFromFile> uniqueItems)
@@ -36,7 +38,7 @@ namespace DiabloII.Items.Generator
             File.WriteAllText(uniqueItemDestinationPath, uniqueItemsAsJson);
         }
 
-        private static void UpdateTheItemsFromDatabase(GenerationEnvironment[] environments, IEnumerable<ItemFromFile> uniqueItems)
+        private static async Task UpdateTheItemsFromDatabase(GenerationEnvironment[] environments, IEnumerable<ItemFromFile> uniqueItems)
         {
             var mapper = GetMapper();
             var items = uniqueItems.Select(item => mapper.Map<Item>(item)).ToList();
@@ -54,8 +56,13 @@ namespace DiabloII.Items.Generator
                     dbContext.Database.Migrate();
 
                     var itemRepository = new ItemRepository(dbContext);
+                    var command = new ResetItemsCommand
+                    {
+                        Items = items,
+                        ItemProperties = itemProperties
+                    };
 
-                    new ItemCommandHandler(itemRepository, dbContext).Reset(items, itemProperties);
+                    await new ItemCommandHandler(itemRepository, dbContext).Handle(command);
                 }
             }
         }

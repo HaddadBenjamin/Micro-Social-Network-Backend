@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using DiabloII.Application.Mappers.Suggestions;
-using DiabloII.Application.Migrations;
 using DiabloII.Application.Resolvers.UserId;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Suggestions;
@@ -16,7 +15,7 @@ namespace DiabloII.Application.Services.Hals.Suggestions
         private readonly string _userId;
         private static readonly string _domain = "suggestions";
 
-        public SuggestionHalService(IUserIdResolver userIdResolver, IHttpContextAccessor httpContextAccessor) : base (httpContextAccessor) =>
+        public SuggestionHalService(IUserIdResolver userIdResolver, IHttpContextAccessor httpContextAccessor) : base(httpContextAccessor) =>
             _userId = userIdResolver.Resolve();
 
         public HALResponse AddLinks(IReadOnlyCollection<HALResponse> halResponses)

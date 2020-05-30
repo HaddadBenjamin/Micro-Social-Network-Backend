@@ -1,14 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Requests.Suggestions;
+using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Services.Hals.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
-using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Readers;
 using Halcyon.HAL;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,16 +20,16 @@ namespace DiabloII.Application.Controllers
     {
         private readonly ISuggestionReader _reader;
 
-        private readonly ISuggestionCommandHandler _handler;
+        private readonly IMediator _mediator;
 
         private readonly IMapper _mapper;
 
         private readonly ISuggestionHalService _halService;
 
-        public SuggestionsController(ISuggestionReader reader, ISuggestionCommandHandler handler, IMapper mapper, ISuggestionHalService halService)
+        public SuggestionsController(ISuggestionReader reader, IMediator mediator, IMapper mapper, ISuggestionHalService halService)
         {
             _reader = reader;
-            _handler = handler;
+            _mediator = mediator;
             _mapper = mapper;
             _halService = halService;
         }
@@ -38,7 +39,7 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("suggestions")]
         [HttpGet]
-        [ProducesResponseType(typeof(IReadOnlyCollection<SuggestionDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponses<SuggestionDto>), StatusCodes.Status200OK)]
         public ActionResult<HALResponse> GetAll() =>
             GetAll(_reader, _mapper, _halService);
 
@@ -49,8 +50,8 @@ namespace DiabloII.Application.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult<HALResponse> Create([FromBody] CreateASuggestionDto dto) =>
-            Create<CreateASuggestionDto, CreateASuggestionCommand>(dto, _handler, _mapper, _halService);
+        public async Task<ActionResult<HALResponse>> Create([FromBody] CreateASuggestionDto dto) =>
+            await Create<CreateASuggestionDto, CreateASuggestionCommand>(dto, _mediator, _mapper, _halService);
 
         /// <summary>
         /// Vote to a suggestion
@@ -61,11 +62,11 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<HALResponse> Vote([FromBody] VoteToASuggestionDto dto, Guid suggestionId)
+        public async Task<ActionResult<HALResponse>> Vote([FromBody] VoteToASuggestionDto dto, Guid suggestionId)
         {
             dto.SuggestionId = suggestionId;
 
-            return Create<VoteToASuggestionDto, VoteToASuggestionCommand>(dto, _handler, _mapper, _halService);
+            return await Create<VoteToASuggestionDto, VoteToASuggestionCommand>(dto, _mediator, _mapper, _halService);
         }
 
         /// <summary>
@@ -77,11 +78,11 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<HALResponse> Comment([FromBody] CommentASuggestionDto dto, Guid suggestionId)
+        public async Task<ActionResult<HALResponse>> Comment([FromBody] CommentASuggestionDto dto, Guid suggestionId)
         {
             dto.SuggestionId = suggestionId;
 
-            return Create<CommentASuggestionDto, CommentASuggestionCommand>(dto, _handler, _mapper, _halService);
+            return await Create<CommentASuggestionDto, CommentASuggestionCommand>(dto, _mediator, _mapper, _halService);
         }
 
         /// <summary>
@@ -93,11 +94,11 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<Guid> Delete([FromBody] DeleteASuggestionDto dto, Guid suggestionId)
+        public async Task<ActionResult<Guid>> Delete([FromBody] DeleteASuggestionDto dto, Guid suggestionId)
         {
             dto.Id = suggestionId;
 
-            return Delete<DeleteASuggestionDto, DeleteASuggestionCommand>(dto, _handler, _mapper);
+            return await Delete<DeleteASuggestionDto, DeleteASuggestionCommand, Guid>(dto, _mediator, _mapper);
         }
 
         /// <summary>
@@ -109,12 +110,12 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<HALResponse> DeleteComment([FromBody] DeleteASuggestionCommentDto dto, Guid suggestionId, Guid commentId)
+        public async Task<ActionResult<HALResponse>> DeleteComment([FromBody] DeleteASuggestionCommentDto dto, Guid suggestionId, Guid commentId)
         {
             dto.SuggestionId = suggestionId;
             dto.Id = commentId;
 
-            return DeleteWithMap<DeleteASuggestionCommentDto, DeleteASuggestionCommentCommand, Suggestion, SuggestionDto>(dto, _handler, _mapper, _halService);
+            return await DeleteWithMap<DeleteASuggestionCommentDto, DeleteASuggestionCommentCommand, SuggestionDto>(dto, _mediator, _mapper, _halService);
         }
     }
 }

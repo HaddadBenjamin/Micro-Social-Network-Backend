@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Items;
+using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Items;
 using DiabloII.Application.Tests.Apis.Bases;
 using DiabloII.Application.Tests.Services.Http;
@@ -13,10 +13,10 @@ namespace DiabloII.Application.Tests.Apis.Domains.Items
 
         public ItemsApi(IHttpService httpService) : base(httpService) { }
 
-        public async Task<IReadOnlyCollection<ItemDto>> GetAll() =>
-            await _httpService.GetAsync<IReadOnlyCollection<ItemDto>>(BaseUrl);
+        public async Task<ApiResponses<ItemDto>> GetAll() =>
+            await _httpService.GetAsync<ApiResponses<ItemDto>>(BaseUrl);
 
-        public async Task<IReadOnlyCollection<ItemDto>> Search(SearchUniquesDto dto) =>
-            await _httpService.GetAsync<IReadOnlyCollection<ItemDto>>($"{BaseUrl}/search");
+        public async Task<ApiResponses<ItemDto>> Search(SearchUniquesDto dto) =>
+            await _httpService.GetAsync<ApiResponses<ItemDto>>($"{BaseUrl}/search");
     }
 }
