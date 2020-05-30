@@ -4,7 +4,6 @@ using AutoMapper;
 using DiabloII.Application.Requests.Notifications;
 using DiabloII.Application.Responses.Notifications;
 using DiabloII.Domain.Commands.Notifications;
-using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Readers;
 using MediatR;
@@ -47,6 +46,6 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(typeof(NotificationDto), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<NotificationDto>> Create([FromBody] CreateANotificationDto dto) =>
-            await CreateWithMediator<CreateANotificationDto, CreateANotificationCommand>(dto, _mapper, _mediator);
+            await Create<CreateANotificationDto, CreateANotificationCommand>(dto, _mediator, _mapper); 
     }
 }

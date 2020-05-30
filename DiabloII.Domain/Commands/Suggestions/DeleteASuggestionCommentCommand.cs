@@ -1,8 +1,10 @@
 ﻿using System;
+using DiabloII.Domain.Models.Suggestions;
+using MediatR;
 
 namespace DiabloII.Domain.Commands.Suggestions
 {
-    public class DeleteASuggestionCommentCommand
+    public class DeleteASuggestionCommentCommand : IRequest<Suggestion>
     {
         public Guid Id { get; set; }
 

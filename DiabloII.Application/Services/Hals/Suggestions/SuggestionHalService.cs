@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using DiabloII.Application.Mappers.Suggestions;
-using DiabloII.Application.Migrations;
 using DiabloII.Application.Resolvers.UserId;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Suggestions;

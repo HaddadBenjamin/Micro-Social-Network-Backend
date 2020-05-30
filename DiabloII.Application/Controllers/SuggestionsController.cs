@@ -6,7 +6,6 @@ using DiabloII.Application.Requests.Suggestions;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Services.Hals.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
-using DiabloII.Domain.Handlers;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Readers;
 using Halcyon.HAL;
@@ -20,7 +19,7 @@ namespace DiabloII.Application.Controllers
     public class SuggestionsController : BaseController<Suggestion, SuggestionDto>
     {
         private readonly ISuggestionReader _reader;
-     
+
         private readonly IMediator _mediator;
 
         private readonly IMapper _mapper;

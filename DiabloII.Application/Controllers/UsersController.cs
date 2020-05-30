@@ -62,7 +62,7 @@ namespace DiabloII.Application.Controllers
         {
             dto.UserId = userId;
 
-            return await UpdateWithMediator<UpdateAUserDto, UpdateAUserCommand>(dto, _mediator, _mapper);
+            return await Update<UpdateAUserDto, UpdateAUserCommand>(dto, _mediator, _mapper);
         }
     }
 }
