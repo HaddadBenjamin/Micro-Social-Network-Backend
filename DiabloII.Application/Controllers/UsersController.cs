@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Requests.Users;
+using DiabloII.Application.Resolvers.User;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Users;
 using DiabloII.Domain.Commands.Users;
@@ -21,11 +22,14 @@ namespace DiabloII.Application.Controllers
 
         private readonly IMapper _mapper;
 
-        public UsersController(IMediator mediator, IUserReader reader, IMapper mapper)
+        private readonly IUserResolver _userResolver;
+
+        public UsersController(IMediator mediator, IUserReader reader, IMapper mapper, IUserResolver userResolver)
         {
             _mediator = mediator;
             _reader = reader;
             _mapper = mapper;
+            _userResolver = userResolver;
         }
 
         /// <summary>
@@ -37,6 +41,21 @@ namespace DiabloII.Application.Controllers
         [ApiExplorerSettings(IgnoreApi = true)]
         public ActionResult<ApiResponses<UserDto>> GetAll() =>
             GetAll(_reader, _mapper);
+
+        /// <summary>
+        /// Identify the current user.
+        /// </summary>
+        [Route("users/identifyme")]
+        [HttpGet]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<ActionResult<UserDto>> IdentifyMe()
+        {
+            var user = await _userResolver.ResolveAsync();
+            var userResponseDto = _mapper.Map<UserDto>(user);
+
+            return Ok(userResponseDto);
+        }
 
         /// <summary>
         /// Create a user

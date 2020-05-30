@@ -10,5 +10,7 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Users
         public UserDto CreatedResource { get; set; }
 
         public UserDto UpdatedResource { get; set; }
+
+        public UserDto IdentifiedUser { get; set; }
     }
 }

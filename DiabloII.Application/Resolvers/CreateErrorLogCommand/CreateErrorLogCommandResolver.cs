@@ -6,6 +6,7 @@ using System.Net;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
+using CreateErrorLog = DiabloII.Domain.Commands.ErrorLogs.CreateErrorLogCommand;
 
 namespace DiabloII.Application.Resolvers.CreateErrorLogCommand
 {
@@ -21,12 +22,12 @@ namespace DiabloII.Application.Resolvers.CreateErrorLogCommand
             _httpResponseStatus = httpResponseStatus;
         }
 
-        public Domain.Commands.ErrorLogs.CreateErrorLogCommand Resolve()
+        public CreateErrorLog Resolve()
         {
             var errorLogContentObject = CreateTheErrorLogContentObject();
             var errorLogContent = JsonConvert.SerializeObject(errorLogContentObject, Formatting.Indented);
 
-            return new Domain.Commands.ErrorLogs.CreateErrorLogCommand
+            return new CreateErrorLog
             {
                 Id = Guid.NewGuid(),
                 CreationDateUtc = DateTime.UtcNow,

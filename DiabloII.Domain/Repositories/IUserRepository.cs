@@ -13,6 +13,8 @@ namespace DiabloII.Domain.Repositories
 
         string GetUserIdByItsEmail(string email);
 
+        User GetUserOrDefaultByItsId(string userId);
+
         bool DoesUserExists(string userId);
 
         bool DoesEmailIsUnique(string email);

@@ -16,6 +16,9 @@ namespace DiabloII.Application.Tests.Apis.Domains.Users
         #region Read
         public async Task<ApiResponses<UserDto>> GetAll() =>
             await _httpService.GetAsync<ApiResponses<UserDto>>(BaseUrl);
+
+        public async Task<UserDto> IdentifyMe() =>
+            await _httpService.GetAsync<UserDto>($"{BaseUrl}/identifyme");
         #endregion
 
         #region Write

@@ -8,5 +8,6 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Users
         ITestContextCreated<UserDto>,
         ITestContextUpdated<UserDto>
     {
+        UserDto IdentifiedUser { get; set; }
     }
 }
