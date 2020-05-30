@@ -3,15 +3,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using DiabloII.Application.Resolvers;
-using DiabloII.Domain.Commands.ErrorLogs;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 
-namespace DiabloII.Application.Filters.ErrorHandling
+namespace DiabloII.Application.Resolvers.CreateErrorLogCommand
 {
-    public class CreateErrorLogCommandResolver : IResolver<CreateErrorLogCommand>
+    public class CreateErrorLogCommandResolver : ICreateErrorLogCommandResolver
     {
         private readonly ExceptionContext _exceptionContext;
 
@@ -23,12 +21,12 @@ namespace DiabloII.Application.Filters.ErrorHandling
             _httpResponseStatus = httpResponseStatus;
         }
 
-        public CreateErrorLogCommand Resolve()
+        public Domain.Commands.ErrorLogs.CreateErrorLogCommand Resolve()
         {
             var errorLogContentObject = CreateTheErrorLogContentObject();
             var errorLogContent = JsonConvert.SerializeObject(errorLogContentObject, Formatting.Indented);
 
-            return new CreateErrorLogCommand
+            return new Domain.Commands.ErrorLogs.CreateErrorLogCommand
             {
                 Id = Guid.NewGuid(),
                 CreationDateUtc = DateTime.UtcNow,
