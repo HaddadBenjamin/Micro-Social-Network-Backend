@@ -1,6 +1,9 @@
-﻿namespace DiabloII.Domain.Commands.Suggestions
+﻿using DiabloII.Domain.Models.Suggestions;
+using MediatR;
+
+namespace DiabloII.Domain.Commands.Suggestions
 {
-    public class CreateASuggestionCommand
+    public class CreateASuggestionCommand : IRequest<Suggestion>
     {
         public string Content { get; set; }
 

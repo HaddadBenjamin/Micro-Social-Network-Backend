@@ -47,7 +47,7 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<UserDto>> Create([FromBody] CreateAUserDto dto) =>
-            await CreateWithMediator<CreateAUserDto, CreateAUserCommand>(dto, _mapper, _mediator);
+            await Create<CreateAUserDto, CreateAUserCommand>(dto, _mediator, _mapper);
 
         /// <summary>
         /// Update a user
@@ -62,7 +62,7 @@ namespace DiabloII.Application.Controllers
         {
             dto.UserId = userId;
 
-            return await UpdateWithMediator<UpdateAUserDto, UpdateAUserCommand>(dto, _mapper, _mediator);
+            return await UpdateWithMediator<UpdateAUserDto, UpdateAUserCommand>(dto, _mediator, _mapper);
         }
     }
 }

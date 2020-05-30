@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Services.Hals;
-using DiabloII.Domain.Handlers.Bases;
 using DiabloII.Domain.Readers.Bases;
 using Halcyon.HAL;
 using MediatR;
@@ -61,7 +60,7 @@ namespace DiabloII.Application.Controllers
             return Ok(response);
         }
 
-        protected async Task<ActionResult<ResponseDto>> CreateWithMediator<CreateDto, CreateCommand>(CreateDto dto, IMapper mapper, IMediator mediator)
+        protected async Task<ActionResult<ResponseDto>> Create<CreateDto, CreateCommand>(CreateDto dto, IMediator mediator, IMapper mapper)
         {
             var command = mapper.Map<CreateCommand>(dto);
             var model = await mediator.Send(command);
@@ -70,24 +69,24 @@ namespace DiabloII.Application.Controllers
             return this.CreatedByUsingTheRequestRoute(response);
         }
 
-        protected ActionResult<HALResponse> Create<CreateDto, CreateCommand>(
+        protected async Task<ActionResult<HALResponse>> Create<CreateDto, CreateCommand>(
             CreateDto requestDto,
-            ICommandHandlerCreate<CreateCommand, DataModel> handlerCreate,
+            IMediator mediator,
             IMapper mapper,
             IHalService<ResponseDto> halService)
         {
             var command = mapper.Map<CreateCommand>(requestDto);
-            var model = handlerCreate.Create(command);
+            var model = await mediator.Send(command);
             var responseDto = mapper.Map<ResponseDto>(model);
             var halResponse = halService.AddLinks(responseDto);
 
             return this.CreatedByUsingTheRequestRoute(halResponse);
         }
 
-        protected async Task<ActionResult<ResponseDto>> UpdateWithMediator<UpdateDto, UpdateCommand>(
+        protected async Task<ActionResult<ResponseDto>> Update<UpdateDto, UpdateCommand>(
             UpdateDto dto,
-            IMapper mapper,
-            IMediator mediator)
+            IMediator mediator,
+            IMapper mapper)
         {
             var command = mapper.Map<UpdateCommand>(dto);
             var model = await mediator.Send(command);
@@ -96,24 +95,25 @@ namespace DiabloII.Application.Controllers
             return Ok(response);
         }
 
-        protected ActionResult<Guid> Delete<DeleteDto, DeleteCommand>(
+        protected async Task<ActionResult<ResponseDto>> Delete<DeleteDto, DeleteCommand, ResponseDto>(
             DeleteDto dto,
-            ICommandHandlerDelete<DeleteCommand, Guid> handlerDelete,
+            IMediator mediator,
             IMapper mapper)
         {
             var command = mapper.Map<DeleteCommand>(dto);
-            var response = handlerDelete.Delete(command);
+            var response = await mediator.Send(command);
 
             return Ok(response);
         }
-        protected ActionResult<HALResponse> DeleteWithMap<DeleteDto, DeleteCommand, CommandResponse, ResponseDto>(
+
+        protected async Task<ActionResult<HALResponse>> DeleteWithMap<DeleteDto, DeleteCommand, ResponseDto>(
             DeleteDto requestDto,
-            ICommandHandlerDelete<DeleteCommand, CommandResponse> handlerDelete,
+            IMediator mediator,
             IMapper mapper,
             IHalService<ResponseDto> halService)
         {
             var command = mapper.Map<DeleteCommand>(requestDto);
-            var model = handlerDelete.Delete(command);
+            var model = await mediator.Send(command);
             var responseDto = mapper.Map<ResponseDto>(model);
             var halResponse = halService.AddLinks(responseDto);
 
