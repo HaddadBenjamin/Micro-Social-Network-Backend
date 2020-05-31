@@ -11,17 +11,15 @@ namespace DiabloII.Application.Tests.Steps
     public class CommonSteps
     {
         private readonly IHttpService _httpService;
-        private readonly IServiceCollection _services;
 
-        public CommonSteps(IHttpService httpService, IServiceCollection services)
+        public CommonSteps(IHttpService httpService)
         {
             _httpService = httpService;
-            _services = services;
         }
 
-        [Given(@"I am ""(.*)""")]
-        public void WhenIAm(string userId) =>
-            _services.AddSingleton<IUserIdResolver>(new UserIdResolverMock(userId));
+        //[Given(@"I am ""(.*)""")]
+        //public void WhenIAm(string userId) =>
+        //    _services.AddSingleton<IUserIdResolver>(new UserIdResolverMock(userId));
 
 
         [Then(@"the http status code should be (.*)")]

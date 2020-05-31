@@ -1,4 +1,9 @@
-﻿using DiabloII.Application.Tests.Apis.Domains.ErrorLogs;
+﻿using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
+using Autofac;
+using DiabloII.Application.Extensions;
+using DiabloII.Application.Tests.Apis.Domains.ErrorLogs;
 using DiabloII.Application.Tests.Apis.Domains.Items;
 using DiabloII.Application.Tests.Apis.Domains.Notifications;
 using DiabloII.Application.Tests.Apis.Domains.Suggestions;
@@ -8,39 +13,38 @@ using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Contexts.Domains.Users;
 using DiabloII.Application.Tests.Repositories.Suggestions;
 using DiabloII.Application.Tests.Services.Http;
-using DiabloII.Domain.Repositories;
-using DiabloII.Infrastructure.Repositories;
-using Microsoft.Extensions.DependencyInjection;
-using SolidToken.SpecFlow.DependencyInjection;
+using DiabloII.Application.Tests.Startup;
+using SpecFlow.Autofac;
 
 namespace DiabloII.Application.Tests
 {
     public static class TestDependencies
     {
         [ScenarioDependencies]
-        public static IServiceCollection CreateServices()
+        public static ContainerBuilder CreateContainerBuilder()
         {
             var testContext = new TestContext();
-            var services = testContext.Services;
+            var builder = new ContainerBuilder();
 
-            services
-                .AddSingleton(services)
-                .AddSingleton(testContext.DbContext)
-                .AddSingleton<IHttpService>(testContext.HttpService)
-                .AddSingleton<IUsersTestContext, UsersTestContext>()
-                .AddSingleton<ISuggestionsTestContext, SuggestionsTestContext>()
-                .AddSingleton<IHalSuggestionsTestContext, HalSuggestionsTestContext>()
-                .AddSingleton<INotificationsTestContext, NotificationsTestContext>()
-                .AddSingleton<ISuggestionsRepository, SuggestionsRepository>()
-                .AddSingleton<IUserRepository, UserRepository>()
-                .AddSingleton<INotificationRepository, NotificationRepository>()
-                .AddSingleton<ISuggestionsApi, SuggestionsApi>()
-                .AddSingleton<IItemsApi, ItemsApi>()
-                .AddSingleton<IErrorLogsApi, ErrorLogsApi>()
-                .AddSingleton<IUsersApi, UsersApi>()
-                .AddSingleton<INotificationsApi, NotificationsApi>();
+            builder.RegisterAllImplementedInterfaceAndSelfFromAssemblies(type =>
+            {
+                var typeName = type.Name;
 
-            return testContext.Services;
+                return typeName.EndsWith("Api") ||
+                       typeName.EndsWith("Context") ||
+                       typeName.EndsWith("Repository") ||
+                       typeName.EndsWith("Steps");
+            },
+            TestStartup.ApplicationTestsType);
+
+            builder.RegisterInstance(testContext.DbContext);
+            builder.RegisterInstance(testContext.HttpService).As<IHttpService>();
+
+            //HttpResponseMessage response = await testContext.HttpClient.GetAsync("/suggestions");
+
+            //// Fail the test if non-success result
+            //response.EnsureSuccessStatusCode();
+            return builder;
         }
     }
 }
