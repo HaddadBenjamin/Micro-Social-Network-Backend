@@ -29,7 +29,6 @@ namespace DiabloII.Application
             .AddCors()
             .AddRouting(options => options.LowercaseUrls = true)
             .RegisterTheDbContextDependency(_configuration)
-            .RegisterTheApplicationDependencies()
             .AddMySmtpServer(_configuration.GetSection("Smtp").Get<SmtpConfiguration>())
             .AddMediatR(InfrastructureType);
 
