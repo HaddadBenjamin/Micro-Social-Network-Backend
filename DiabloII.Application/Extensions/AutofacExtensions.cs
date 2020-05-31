@@ -12,10 +12,12 @@ namespace DiabloII.Application.Extensions
         public static ContainerBuilder RegisterAllImplementedInterfaceAndSelfFromAssemblies(this ContainerBuilder containerBuilder, Func<Type, bool> typeFilters = default, params Type[] types)
         {
             var assemblies = types.Select(t => t.Assembly).ToArray();
+            var registrationBuilder = containerBuilder.RegisterAssemblyTypes(assemblies);
 
-            containerBuilder
-                .RegisterAssemblyTypes(assemblies)
-                .Where(type => typeFilters is null ? true : typeFilters.Invoke(type))
+            if (typeFilters is null)
+                registrationBuilder = registrationBuilder.Where(type => typeFilters is null ? true : typeFilters.Invoke(type));
+
+            registrationBuilder
                 .AsImplementedInterfaces()
                 .AsSelf()
                 .SingleInstance();
