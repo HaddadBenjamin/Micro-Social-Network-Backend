@@ -14,6 +14,8 @@ using DiabloII.Application.Tests.Contexts.Domains.Users;
 using DiabloII.Application.Tests.Repositories.Suggestions;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Application.Tests.Startup;
+using DiabloII.Domain.Repositories;
+using DiabloII.Infrastructure.Repositories;
 using SpecFlow.Autofac;
 
 namespace DiabloII.Application.Tests
@@ -40,6 +42,7 @@ namespace DiabloII.Application.Tests
 
             builder.RegisterInstance(testContext.DbContext);
             builder.RegisterInstance(testContext.HttpService).As<IHttpService>();
+            builder.RegisterType<UserRepository>().As<IUserRepository>();
 
             return builder;
         }
