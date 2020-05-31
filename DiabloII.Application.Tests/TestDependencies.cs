@@ -10,6 +10,9 @@ namespace DiabloII.Application.Tests
 {
     public static class TestDependencies
     {
+        /// TODO :
+        /// - J'utilise dans mes tests 2 startup : Startup & TestStartup.
+        /// - Je n'arrive pas à mocker les dépendances de Startup.
         [ScenarioDependencies]
         public static ContainerBuilder CreateContainerBuilder()
         {
