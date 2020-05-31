@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using Autofac;
-using DiabloII.Infrastructure.DbContext;
+﻿using DiabloII.Infrastructure.DbContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -44,18 +41,5 @@ namespace DiabloII.Application.Extensions
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 options.RoutePrefix = string.Empty;
             });
-    }
-
-    public static class AutoFacExtensions
-    {
-        public static void RegisterAllImplementedInterfaceAndSelfFromAssemblies(this ContainerBuilder containerBuilder, params Type[] types)
-        {
-            var assemblies = types.Select(t => t.Assembly).ToArray();
-
-            containerBuilder
-                .RegisterAssemblyTypes(assemblies)
-                .AsImplementedInterfaces()
-                .AsSelf();
-        }
     }
 }
