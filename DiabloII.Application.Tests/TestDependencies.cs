@@ -33,17 +33,14 @@ namespace DiabloII.Application.Tests
                 return typeName.EndsWith("Api") ||
                        typeName.EndsWith("Context") ||
                        typeName.EndsWith("Repository") ||
-                       typeName.EndsWith("Steps");
+                       typeName.EndsWith("Steps") ||
+                       typeName.EndsWith("Resolver");
             },
             TestStartup.ApplicationTestsType);
 
             builder.RegisterInstance(testContext.DbContext);
             builder.RegisterInstance(testContext.HttpService).As<IHttpService>();
 
-            //HttpResponseMessage response = await testContext.HttpClient.GetAsync("/suggestions");
-
-            //// Fail the test if non-success result
-            //response.EnsureSuccessStatusCode();
             return builder;
         }
     }

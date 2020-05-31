@@ -17,7 +17,8 @@ namespace DiabloII.Application.Extensions
                 .RegisterAssemblyTypes(assemblies)
                 .Where(type => typeFilters is null ? true : typeFilters.Invoke(type))
                 .AsImplementedInterfaces()
-                .AsSelf();
+                .AsSelf()
+                .SingleInstance();
 
             return containerBuilder;
         }

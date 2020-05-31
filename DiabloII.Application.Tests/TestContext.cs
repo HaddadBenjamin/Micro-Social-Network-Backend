@@ -28,15 +28,13 @@ namespace DiabloII.Application.Tests
 
         public IServiceCollection Services;
 
-        public readonly HttpClient HttpClient;
-
         public TestContext()
         {
             var hostBuilder = CreateHostBuilder();
             var host = hostBuilder.Start();
+            var httpClient = ConfigureTheHttpClient(host.GetTestClient());
 
-            HttpClient = ConfigureTheHttpClient(host.GetTestClient());
-            HttpService = new HttpService(HttpClient);
+            HttpService = new HttpService(httpClient);
             DbContext = host.Services.GetService<ApplicationDbContext>();
         }
 

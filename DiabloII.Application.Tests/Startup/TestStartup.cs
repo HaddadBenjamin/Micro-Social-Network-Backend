@@ -43,6 +43,5 @@ namespace DiabloII.Application.Tests.Startup
 
         public void ConfigureContainer(ContainerBuilder builder) =>
             builder.RegisterAllImplementedInterfaceAndSelfFromAssemblies(ApplicationType, InfrastructureType, DomainType);
-
     }
 }
