@@ -54,7 +54,6 @@ namespace DiabloII.Application.Services.Hals.Suggestions
             var halResponse = ToHalResponse(comment);
             var canEditComment = _userId == comment.CreatedBy;
 
-
             if (canEditComment)
                 AddLink(halResponse, "comment_delete", HttpMethod.Delete, $"{_domain}/{suggestionId}/comments/{comment.Id}");
 
