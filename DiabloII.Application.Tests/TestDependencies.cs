@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System.Text.RegularExpressions;
+using Autofac;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Application.Tests.Startup;
@@ -18,16 +19,14 @@ namespace DiabloII.Application.Tests
         {
             var testContext = new TestContext();
             var builder = new ContainerBuilder();
+            var typeNameRegex = new Regex(@"(Api|Resolver|Context|Steps|Repository)$");
 
             builder.RegisterAllImplementedInterfaceAndSelfFromAssemblies(type =>
             {
                 var typeName = type.Name;
+                var mustRegisterType = typeNameRegex.IsMatch(typeName);
 
-                return typeName.EndsWith("Api") ||
-                       typeName.EndsWith("Context") ||
-                       typeName.EndsWith("Repository") ||
-                       typeName.EndsWith("Steps") ||
-                       typeName.EndsWith("Resolver");
+                return mustRegisterType;
             },
             TestStartup.ApplicationTestsType);
 
