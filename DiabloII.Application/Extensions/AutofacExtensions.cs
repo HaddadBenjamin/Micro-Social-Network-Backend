@@ -14,8 +14,8 @@ namespace DiabloII.Application.Extensions
             var assemblies = types.Select(t => t.Assembly).ToArray();
             var registrationBuilder = containerBuilder.RegisterAssemblyTypes(assemblies);
 
-            if (typeFilters is null)
-                registrationBuilder = registrationBuilder.Where(type => typeFilters is null ? true : typeFilters.Invoke(type));
+            if (typeFilters != null)
+                registrationBuilder = registrationBuilder.Where(typeFilters.Invoke);
 
             registrationBuilder
                 .AsImplementedInterfaces()
