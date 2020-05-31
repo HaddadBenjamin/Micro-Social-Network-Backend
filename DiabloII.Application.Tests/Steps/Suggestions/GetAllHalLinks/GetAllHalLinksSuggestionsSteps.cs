@@ -5,14 +5,14 @@ using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using Shouldly;
 using TechTalk.SpecFlow;
 
-namespace DiabloII.Application.Tests
+namespace DiabloII.Application.Tests.Steps.Suggestions.GetAllHalLinks
 {
     [Binding]
     [Scope(Tag = "suggestions")]
     public class GetAllHalLinksSuggestionsSteps
     {
         private readonly ISuggestionsApi _suggestionsApi;
-      
+
         private readonly IHalSuggestionsTestContext _halSuggestionsContext;
 
         public GetAllHalLinksSuggestionsSteps(ISuggestionsApi suggestionsApi, IHalSuggestionsTestContext halSuggestionsContext)
@@ -34,7 +34,7 @@ namespace DiabloII.Application.Tests
             var actualCommentHalLinks = halResources.Elements.SelectMany(e => e.Comments).SelectMany(comment => comment._Links.Keys);
 
             var actualHalLinks = actualSuggestionHalLinks.Union(actualVoteHalLinks).Union(actualCommentHalLinks).ToArray();
-            var expectedHalLinks = halLinks.Split(';').Where(h => !string.IsNullOrEmpty(h));
+            var expectedHalLinks = halLinks.Split(';').Where(h => !string.IsNullOrEmpty(h)).ToArray();
 
             actualHalLinks.ShouldBe(expectedHalLinks, true);
         }

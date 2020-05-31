@@ -1,7 +1,4 @@
-﻿using DiabloII.Application.Resolvers.UserId;
-using DiabloII.Application.Tests.Mocks;
-using DiabloII.Application.Tests.Services.Http;
-using Microsoft.Extensions.DependencyInjection;
+﻿using DiabloII.Application.Tests.Services.Http;
 using Shouldly;
 using TechTalk.SpecFlow;
 

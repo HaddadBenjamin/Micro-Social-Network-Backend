@@ -1,6 +1,5 @@
 ﻿using System;
 using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using DiabloII.Application.Extensions;
 using DiabloII.Domain.Configurations;

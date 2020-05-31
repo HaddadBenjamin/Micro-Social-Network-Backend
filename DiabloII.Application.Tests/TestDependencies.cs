@@ -1,17 +1,5 @@
-﻿using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using Autofac;
+﻿using Autofac;
 using DiabloII.Application.Extensions;
-using DiabloII.Application.Tests.Apis.Domains.ErrorLogs;
-using DiabloII.Application.Tests.Apis.Domains.Items;
-using DiabloII.Application.Tests.Apis.Domains.Notifications;
-using DiabloII.Application.Tests.Apis.Domains.Suggestions;
-using DiabloII.Application.Tests.Apis.Domains.Users;
-using DiabloII.Application.Tests.Contexts.Domains.Notifications;
-using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
-using DiabloII.Application.Tests.Contexts.Domains.Users;
-using DiabloII.Application.Tests.Repositories.Suggestions;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Application.Tests.Startup;
 using DiabloII.Domain.Repositories;
@@ -40,6 +28,7 @@ namespace DiabloII.Application.Tests
             },
             TestStartup.ApplicationTestsType);
 
+            builder.RegisterInstance(builder);
             builder.RegisterInstance(testContext.DbContext);
             builder.RegisterInstance(testContext.HttpService).As<IHttpService>();
             builder.RegisterType<UserRepository>().As<IUserRepository>();
