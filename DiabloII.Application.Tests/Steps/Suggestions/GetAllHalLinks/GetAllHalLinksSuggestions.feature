@@ -23,4 +23,4 @@ Scenario: Get all suggestions should get hal links
 	Examples:
 		| SearchUser    | HalLinks                                                                      |
 		| any user id   | suggestion_create;suggestion_delete;vote_create;comment_create;comment_delete |
-		| other user id | suggestion_create;comment_create                                              |
+		| other user id | suggestion_create                                                             |
