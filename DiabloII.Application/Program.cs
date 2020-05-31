@@ -13,7 +13,6 @@ namespace DiabloII.Application
 
     public static IHost BuildHost(string[] arguments) => Host
         .CreateDefaultBuilder(arguments)
-        .ConfigureContainer<ContainerBuilder>(builder =>  builder.RegisterAllImplementedInterfaceAndSelfFromAssemblies(Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType))
         .UseServiceProviderFactory(new AutofacServiceProviderFactory())
         .ConfigureWebHostDefaults(webHostBuilder =>
         {
