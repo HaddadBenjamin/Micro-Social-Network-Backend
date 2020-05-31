@@ -24,10 +24,12 @@ namespace DiabloII.Application.Tests
             var services = testContext.Services;
 
             services
+                .AddSingleton(services)
                 .AddSingleton(testContext.DbContext)
                 .AddSingleton<IHttpService>(testContext.HttpService)
                 .AddSingleton<IUsersTestContext, UsersTestContext>()
                 .AddSingleton<ISuggestionsTestContext, SuggestionsTestContext>()
+                .AddSingleton<IHalSuggestionsTestContext, HalSuggestionsTestContext>()
                 .AddSingleton<INotificationsTestContext, NotificationsTestContext>()
                 .AddSingleton<ISuggestionsRepository, SuggestionsRepository>()
                 .AddSingleton<IUserRepository, UserRepository>()
