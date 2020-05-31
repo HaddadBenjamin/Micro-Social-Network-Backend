@@ -33,7 +33,7 @@ namespace DiabloII.Application.Tests
             var actualVoteHalLinks = halResources.Elements.SelectMany(e => e.Votes).SelectMany(vote => vote._Links.Keys);
             var actualCommentHalLinks = halResources.Elements.SelectMany(e => e.Comments).SelectMany(comment => comment._Links.Keys);
 
-            var actualHalLinks = actualSuggestionHalLinks.Union(actualVoteHalLinks).Union(actualCommentHalLinks);
+            var actualHalLinks = actualSuggestionHalLinks.Union(actualVoteHalLinks).Union(actualCommentHalLinks).ToArray();
             var expectedHalLinks = halLinks.Split(';').Where(h => !string.IsNullOrEmpty(h));
 
             actualHalLinks.ShouldBe(expectedHalLinks, true);
