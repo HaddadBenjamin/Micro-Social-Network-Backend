@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using DiabloII.Application.Requests.Notifications;
+using DiabloII.Application.Requests.Write.Notifications;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Notifications;
 using DiabloII.Domain.Commands.Notifications;

@@ -1,4 +1,4 @@
-﻿namespace DiabloII.Application.Requests.Suggestions
+﻿namespace DiabloII.Application.Requests.Write.Suggestions
 {
     public class CreateASuggestionDto
     {

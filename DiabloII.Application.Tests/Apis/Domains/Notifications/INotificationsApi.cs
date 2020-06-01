@@ -1,4 +1,4 @@
-﻿using DiabloII.Application.Requests.Notifications;
+﻿using DiabloII.Application.Requests.Write.Notifications;
 using DiabloII.Application.Responses.Notifications;
 using DiabloII.Application.Tests.Apis.Bases;
 

@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
-using DiabloII.Application.Requests.Suggestions;
+using DiabloII.Application.Requests.Read.Domains.Suggestions;
+using DiabloII.Application.Requests.Write.Suggestions;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Services.Hals.Suggestions;
@@ -42,6 +43,20 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(typeof(ApiResponses<SuggestionDto>), StatusCodes.Status200OK)]
         public ActionResult<HALResponse> GetAll() =>
             GetAll(_reader, _mapper, _halService);
+
+        /// <summary>
+        /// Get a suggestion
+        /// </summary>
+        [Route("suggestions/{suggestionId:guid}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<HALResponse> Get(Guid suggestionId)
+        {
+            var dto = new GetASuggestionDto { Id = suggestionId };
+
+            return Get(dto, _reader, _mapper, _halService);
+        }
 
         /// <summary>
         /// Create a suggestion

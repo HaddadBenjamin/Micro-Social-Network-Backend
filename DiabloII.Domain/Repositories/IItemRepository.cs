@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Domain.Models.Items;
-using DiabloII.Domain.Queries.Items;
+using DiabloII.Domain.Queries.Domains.Items;
 using DiabloII.Domain.Repositories.Bases;
 
 namespace DiabloII.Domain.Repositories

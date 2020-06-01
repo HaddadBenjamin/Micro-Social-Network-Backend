@@ -3,7 +3,7 @@ using DiabloII.Domain.Models.Items;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace DiabloII.Application.Requests.Items
+namespace DiabloII.Application.Requests.Read.Domains.Items
 {
     public class SearchUniquesDto
     {

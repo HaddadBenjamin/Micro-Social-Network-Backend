@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DiabloII.Application.Requests.Users;
+using DiabloII.Application.Requests.Write.Users;
 using DiabloII.Application.Tests.Apis.Domains.Users;
 using DiabloII.Application.Tests.Contexts.Domains.Users;
 using DiabloII.Application.Tests.Extensions;

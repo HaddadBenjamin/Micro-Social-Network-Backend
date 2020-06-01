@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DiabloII.Application.Requests.Suggestions;
+using DiabloII.Application.Requests.Write.Suggestions;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Suggestions;
 using DiabloII.Application.Tests.Apis.Bases;

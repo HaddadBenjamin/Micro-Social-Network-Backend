@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Domain.Models.Notifications;
 
-namespace DiabloII.Application.Requests.Users
+namespace DiabloII.Application.Requests.Write.Users
 {
     public class UpdateAUserDto
     {

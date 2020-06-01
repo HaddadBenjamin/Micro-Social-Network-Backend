@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DiabloII.Application.Requests.Suggestions;
+using DiabloII.Application.Requests.Write.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
 
 namespace DiabloII.Application.Mappers.Suggestions

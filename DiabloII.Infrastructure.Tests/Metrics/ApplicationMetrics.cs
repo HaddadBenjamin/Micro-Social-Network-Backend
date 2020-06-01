@@ -11,9 +11,11 @@ namespace DiabloII.Infrastructure.Tests.Metrics
         [Test]
         public void CountCSharpFilesVolumetry()
         {
-            var csharpFiles = Directory.EnumerateFiles(@"C:\Users\hadda\OneDrive\Bureau\Travaux\Diablo-II-Items", "*.cs", SearchOption.AllDirectories);
+            var csharpFiles = Directory.EnumerateFiles(@"C:\Users\Benjamin Haddad\Desktop\Projets\Diablo-II-Items", "*.cs", SearchOption.AllDirectories);
             var csharpFilesCount = csharpFiles.Count();
-            var csharpLinesCount = csharpFiles.Select(file => File.ReadAllLines(file).Length).Sum();
+            var csharpLinesCount = csharpFiles.Sum(file => File.ReadAllLines(file).Length);
+            var csharpCharactersCount = csharpFiles
+                .Sum(file => File.ReadAllLines(file).Select(f => f.Length).Sum());
         }
     }
 }

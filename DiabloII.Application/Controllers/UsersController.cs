@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
-using DiabloII.Application.Requests.Users;
+using DiabloII.Application.Requests.Write.Users;
 using DiabloII.Application.Resolvers.User;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Users;

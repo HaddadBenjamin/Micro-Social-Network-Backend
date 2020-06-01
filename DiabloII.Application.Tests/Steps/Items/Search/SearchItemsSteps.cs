@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DiabloII.Application.Requests.Items;
+using DiabloII.Application.Requests.Read.Domains.Items;
 using DiabloII.Application.Tests.Apis.Domains.Items;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;

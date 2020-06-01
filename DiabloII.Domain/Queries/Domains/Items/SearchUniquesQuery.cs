@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Domain.Models.Items;
 
-namespace DiabloII.Domain.Queries.Items
+namespace DiabloII.Domain.Queries.Domains.Items
 {
     public class SearchUniquesQuery
     {

@@ -1,6 +1,6 @@
 ﻿using DiabloII.Domain.Models.Notifications;
 
-namespace DiabloII.Application.Requests.Notifications
+namespace DiabloII.Application.Requests.Write.Notifications
 {
     public class CreateANotificationDto
     {
