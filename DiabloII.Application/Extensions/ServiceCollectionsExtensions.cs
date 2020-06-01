@@ -1,7 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 using DiabloII.Application.Filters.ErrorHandling;
 using DiabloII.Domain.Configurations;
 using DiabloII.Infrastructure.DbContext;
@@ -76,21 +74,6 @@ namespace DiabloII.Application.Extensions
                             sqlServerOptions.MigrationsAssembly("DiabloII.Application");
                             sqlServerOptions.EnableRetryOnFailure();
                         }));
-        }
-
-        public static IServiceCollection RegisterTheApplicationDependencies(this IServiceCollection services)
-        {
-            var assemblyTypes = new[] { Startup.ApplicationType, Startup.InfrastructureType, Startup.DomainType };
-            var assemblies = assemblyTypes.Select(Assembly.GetAssembly);
-
-            return services.Scan(scan =>
-                {
-                    scan.FromAssemblies(assemblies)
-                        .AddClasses()
-                        .AsMatchingInterface()
-                        .AsSelf()
-                        .WithScopedLifetime();
-                });
         }
     }
 }

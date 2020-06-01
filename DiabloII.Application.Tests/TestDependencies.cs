@@ -1,44 +1,41 @@
-﻿using DiabloII.Application.Tests.Apis.Domains.ErrorLogs;
-using DiabloII.Application.Tests.Apis.Domains.Items;
-using DiabloII.Application.Tests.Apis.Domains.Notifications;
-using DiabloII.Application.Tests.Apis.Domains.Suggestions;
-using DiabloII.Application.Tests.Apis.Domains.Users;
-using DiabloII.Application.Tests.Contexts.Domains.Notifications;
-using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
-using DiabloII.Application.Tests.Contexts.Domains.Users;
-using DiabloII.Application.Tests.Repositories.Suggestions;
+﻿using System.Text.RegularExpressions;
+using Autofac;
+using DiabloII.Application.Extensions;
 using DiabloII.Application.Tests.Services.Http;
+using DiabloII.Application.Tests.Startup;
 using DiabloII.Domain.Repositories;
 using DiabloII.Infrastructure.Repositories;
-using Microsoft.Extensions.DependencyInjection;
-using SolidToken.SpecFlow.DependencyInjection;
+using SpecFlow.Autofac;
 
 namespace DiabloII.Application.Tests
 {
     public static class TestDependencies
     {
+        /// TODO :
+        /// - J'utilise dans mes tests 2 startup : Startup & TestStartup.
+        /// - Je n'arrive pas à mocker les dépendances de Startup.
         [ScenarioDependencies]
-        public static IServiceCollection CreateServices()
+        public static ContainerBuilder CreateContainerBuilder()
         {
             var testContext = new TestContext();
-            var services = testContext.Services;
+            var builder = new ContainerBuilder();
+            var typeNameRegex = new Regex(@"(Api|Resolver|Context|Steps|Repository)$");
 
-            services
-                .AddSingleton(testContext.DbContext)
-                .AddSingleton<IHttpService>(testContext.HttpService)
-                .AddSingleton<IUsersTestContext, UsersTestContext>()
-                .AddSingleton<ISuggestionsTestContext, SuggestionsTestContext>()
-                .AddSingleton<INotificationsTestContext, NotificationsTestContext>()
-                .AddSingleton<ISuggestionsRepository, SuggestionsRepository>()
-                .AddSingleton<IUserRepository, UserRepository>()
-                .AddSingleton<INotificationRepository, NotificationRepository>()
-                .AddSingleton<ISuggestionsApi, SuggestionsApi>()
-                .AddSingleton<IItemsApi, ItemsApi>()
-                .AddSingleton<IErrorLogsApi, ErrorLogsApi>()
-                .AddSingleton<IUsersApi, UsersApi>()
-                .AddSingleton<INotificationsApi, NotificationsApi>();
+            builder.RegisterAllImplementedInterfaceAndSelfFromAssemblies(type =>
+            {
+                var typeName = type.Name;
+                var mustRegisterType = typeNameRegex.IsMatch(typeName);
 
-            return testContext.Services;
+                return mustRegisterType;
+            },
+            TestStartup.ApplicationTestsType);
+
+            builder.RegisterInstance(builder);
+            builder.RegisterInstance(testContext.DbContext);
+            builder.RegisterInstance(testContext.HttpService).As<IHttpService>();
+            builder.RegisterType<UserRepository>().As<IUserRepository>();
+
+            return builder;
         }
     }
 }

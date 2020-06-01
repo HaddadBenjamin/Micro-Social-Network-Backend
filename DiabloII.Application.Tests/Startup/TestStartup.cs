@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using AutoMapper;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Tests.Extensions;
@@ -18,6 +19,7 @@ namespace DiabloII.Application.Tests.Startup
         internal static readonly Type ApplicationType = typeof(Application.Startup);
         internal static readonly Type InfrastructureType = typeof(ErrorLogRepository);
         internal static readonly Type DomainType = typeof(IErrorLogRepository);
+        internal static readonly Type ApplicationTestsType = typeof(TestStartup);
 
         private readonly IConfiguration _configuration;
 
@@ -30,7 +32,6 @@ namespace DiabloII.Application.Tests.Startup
             .AddCors()
             .AddRouting(options => options.LowercaseUrls = true)
             .RegisterTestDbContDbContextDependency()
-            .RegisterTheTestApplicationDependencies()
             .AddMySmtpServer(_configuration.GetSection("Smtp").Get<SmtpConfiguration>())
             .AddMediatR(InfrastructureType);
 
@@ -39,5 +40,8 @@ namespace DiabloII.Application.Tests.Startup
             .UseMyCors()
             .UseMvc()
             .UseMySwagger();
+
+        public void ConfigureContainer(ContainerBuilder builder) =>
+            builder.RegisterAllImplementedInterfaceAndSelfFromAssemblies(ApplicationType, InfrastructureType, DomainType);
     }
 }

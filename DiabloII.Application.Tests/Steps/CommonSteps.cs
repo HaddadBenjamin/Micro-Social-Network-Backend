@@ -9,7 +9,15 @@ namespace DiabloII.Application.Tests.Steps
     {
         private readonly IHttpService _httpService;
 
-        public CommonSteps(IHttpService httpService) => _httpService = httpService;
+        public CommonSteps(IHttpService httpService)
+        {
+            _httpService = httpService;
+        }
+
+        //[Given(@"I am ""(.*)""")]
+        //public void WhenIAm(string userId) =>
+        //    _services.AddSingleton<IUserIdResolver>(new UserIdResolverMock(userId));
+
 
         [Then(@"the http status code should be (.*)")]
         public void ThenTheHttpStatusCodeShouldBe(int statusCode) => _httpService.StatusCode.ShouldBe(statusCode);

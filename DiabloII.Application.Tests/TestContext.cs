@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
+using Autofac.Extensions.DependencyInjection;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Application.Tests.Startup;
 using DiabloII.Infrastructure.DbContext;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace DiabloII.Application.Tests
 {
@@ -20,25 +22,34 @@ namespace DiabloII.Application.Tests
 
         public readonly ApplicationDbContext DbContext;
 
-        public IServiceCollection Services;
-
         public readonly TestServer TestServer;
+
+        public IServiceCollection Services;
 
         public TestContext()
         {
-            TestServer = new TestServer(CreateTheWebHostBuilder());
-
-            var httpClient = ConfigureTheHttpClient(TestServer.CreateClient());
+            var hostBuilder = CreateHostBuilder();
+            var host = hostBuilder.Start();
+            var httpClient = ConfigureTheHttpClient(host.GetTestClient());
 
             HttpService = new HttpService(httpClient);
-            DbContext = TestServer.Services.GetService<ApplicationDbContext>();
+            DbContext = host.Services.GetService<ApplicationDbContext>();
         }
 
-        private IWebHostBuilder CreateTheWebHostBuilder() => new WebHostBuilder()
-            .ConfigureServices(InitializeServices)
-            .UseEnvironment("Test")
-            .ConfigureAppConfiguration((builder => builder.AddJsonFile("appsettings.Test.json")))
-            .UseStartup(typeof(TestStartup));
+        private IHostBuilder CreateHostBuilder()
+        {
+            return new HostBuilder()
+                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+                .ConfigureWebHost(webHost =>
+                {
+                    webHost
+                        .UseTestServer()
+                        .ConfigureServices(InitializeServices)
+                        .UseEnvironment("Test")
+                        .ConfigureAppConfiguration((builder => builder.AddJsonFile("appsettings.Test.json")))
+                        .UseStartup<TestStartup>();
+                });
+        }
 
         private void InitializeServices(IServiceCollection services)
         {

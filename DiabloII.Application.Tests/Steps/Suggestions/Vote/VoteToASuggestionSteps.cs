@@ -27,6 +27,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
             _suggestionsContext = suggestionsContext;
         }
 
+        [Given(@"I vote to the suggestion ""(.*)""")]
         [When(@"I vote to the suggestion ""(.*)""")]
         public async Task WhenIVoteToTheSuggestion(string suggestionContent, Table table)
         {

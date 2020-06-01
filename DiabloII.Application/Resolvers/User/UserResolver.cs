@@ -11,7 +11,7 @@ namespace DiabloII.Application.Resolvers.User
         private readonly IUserIdResolver _userIdResolver;
 
         private readonly IUserRepository _userRepository;
-  
+
         private readonly IMediator _mediator;
 
         public UserResolver(IUserIdResolver userIdResolver, IUserRepository userRepository, IMediator mediator)
@@ -34,7 +34,7 @@ namespace DiabloII.Application.Resolvers.User
                 UserId = userId
             };
             var createdUser = await _mediator.Send(createUserCommand);
-            
+
             return createdUser;
         }
     }

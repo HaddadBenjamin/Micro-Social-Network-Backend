@@ -1,4 +1,5 @@
 ﻿using System;
+using Autofac;
 using AutoMapper;
 using DiabloII.Application.Extensions;
 using DiabloII.Domain.Configurations;
@@ -29,9 +30,11 @@ namespace DiabloII.Application
             .AddCors()
             .AddRouting(options => options.LowercaseUrls = true)
             .RegisterTheDbContextDependency(_configuration)
-            .RegisterTheApplicationDependencies()
             .AddMySmtpServer(_configuration.GetSection("Smtp").Get<SmtpConfiguration>())
             .AddMediatR(InfrastructureType);
+
+        public void ConfigureContainer(ContainerBuilder builder) =>
+            builder.RegisterAllImplementedInterfaceAndSelfFromAssemblies(ApplicationType, InfrastructureType, DomainType);
 
         public void Configure(IApplicationBuilder applicationBuilder, IWebHostEnvironment environment) => applicationBuilder
             .UseMyExceptionPages(environment)
