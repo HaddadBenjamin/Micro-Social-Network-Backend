@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiabloII.Application.Responses.Users
+namespace DiabloII.Application.Responses.Read.Users
 {
     public class UserNotificationDto
     {

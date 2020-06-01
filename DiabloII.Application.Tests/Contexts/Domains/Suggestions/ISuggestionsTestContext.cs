@@ -1,4 +1,4 @@
-﻿using DiabloII.Application.Responses.Suggestions;
+﻿using DiabloII.Application.Responses.Read.Suggestions;
 using DiabloII.Application.Tests.Contexts.Bases;
 
 namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions

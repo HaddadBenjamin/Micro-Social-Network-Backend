@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiabloII.Application.Responses.Items
+namespace DiabloII.Application.Responses.Read.Items
 {
     public class ItemPropertyDto
     {

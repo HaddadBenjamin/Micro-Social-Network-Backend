@@ -1,8 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Extensions;
-using DiabloII.Application.Responses;
+using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Services.Hals;
 using DiabloII.Domain.Readers.Bases;
 using Halcyon.HAL;
@@ -67,27 +68,15 @@ namespace DiabloII.Application.Controllers
             return Ok(responseDto);
         }
 
-        protected async Task<ActionResult<ResponseDto>> Create<CreateDto, CreateCommand>(CreateDto dto, IMediator mediator, IMapper mapper)
-        {
-            var command = mapper.Map<CreateCommand>(dto);
-            var model = await mediator.Send(command);
-            var responseDto = mapper.Map<ResponseDto>(model);
-
-            return this.CreatedByUsingTheRequestRoute(responseDto);
-        }
-
-        protected async Task<ActionResult<HALResponse>> Create<CreateDto, CreateCommand>(
+        protected async Task<ActionResult<Guid>> Create<CreateDto, CreateCommand>(
             CreateDto requestDto,
             IMediator mediator,
-            IMapper mapper,
-            IHalService<ResponseDto> halService)
+            IMapper mapper)
         {
             var command = mapper.Map<CreateCommand>(requestDto);
-            var model = await mediator.Send(command);
-            var responseDto = mapper.Map<ResponseDto>(model);
-            var halResponse = halService.AddLinks(responseDto);
+            var createdId = await mediator.Send(command);
 
-            return this.CreatedByUsingTheRequestRoute(halResponse);
+            return this.CreatedByUsingTheRequestRoute(createdId);
         }
 
         protected async Task<ActionResult<ResponseDto>> Update<UpdateDto, UpdateCommand>(

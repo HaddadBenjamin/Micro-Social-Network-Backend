@@ -1,8 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Requests.Notifications;
-using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Notifications;
+using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Notifications;
 using DiabloII.Domain.Commands.Notifications;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Readers;
@@ -43,9 +44,9 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("notifications")]
         [HttpPost]
-        [ProducesResponseType(typeof(NotificationDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<NotificationDto>> Create([FromBody] CreateANotificationDto dto) =>
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateANotificationDto dto) =>
             await Create<CreateANotificationDto, CreateANotificationCommand>(dto, _mediator, _mapper);
     }
 }

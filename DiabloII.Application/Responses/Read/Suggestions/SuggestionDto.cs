@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Halcyon.HAL;
 
-namespace DiabloII.Application.Responses.Suggestions
+namespace DiabloII.Application.Responses.Read.Suggestions
 {
     public class SuggestionDto
     {

@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Suggestions;
 using DiabloII.Application.Services.Hals.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Models.Suggestions;
@@ -48,25 +48,25 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("suggestions")]
         [HttpPost]
-        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<HALResponse>> Create([FromBody] CreateASuggestionDto dto) =>
-            await Create<CreateASuggestionDto, CreateASuggestionCommand>(dto, _mediator, _mapper, _halService);
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateASuggestionDto dto) =>
+            await Create<CreateASuggestionDto, CreateASuggestionCommand>(dto, _mediator, _mapper);
 
         /// <summary>
         /// Vote to a suggestion
         /// </summary>
         [Route("suggestions/{suggestionId:guid}/votes")]
         [HttpPost]
-        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<HALResponse>> Vote([FromBody] VoteToASuggestionDto dto, Guid suggestionId)
+        public async Task<ActionResult<Guid>> Vote([FromBody] VoteToASuggestionDto dto, Guid suggestionId)
         {
             dto.SuggestionId = suggestionId;
 
-            return await Create<VoteToASuggestionDto, VoteToASuggestionCommand>(dto, _mediator, _mapper, _halService);
+            return await Create<VoteToASuggestionDto, VoteToASuggestionCommand>(dto, _mediator, _mapper);
         }
 
         /// <summary>
@@ -74,15 +74,15 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("suggestions/{suggestionId:guid}/comments")]
         [HttpPost]
-        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<HALResponse>> Comment([FromBody] CommentASuggestionDto dto, Guid suggestionId)
+        public async Task<ActionResult<Guid>> Comment([FromBody] CommentASuggestionDto dto, Guid suggestionId)
         {
             dto.SuggestionId = suggestionId;
 
-            return await Create<CommentASuggestionDto, CommentASuggestionCommand>(dto, _mediator, _mapper, _halService);
+            return await Create<CommentASuggestionDto, CommentASuggestionCommand>(dto, _mediator, _mapper);
         }
 
         /// <summary>

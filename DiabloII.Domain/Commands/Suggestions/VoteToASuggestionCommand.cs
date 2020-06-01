@@ -1,10 +1,9 @@
 ﻿using System;
-using DiabloII.Domain.Models.Suggestions;
 using MediatR;
 
 namespace DiabloII.Domain.Commands.Suggestions
 {
-    public class VoteToASuggestionCommand : IRequest<Suggestion>
+    public class VoteToASuggestionCommand : IRequest<Guid>
     {
         public Guid SuggestionId { get; set; }
 

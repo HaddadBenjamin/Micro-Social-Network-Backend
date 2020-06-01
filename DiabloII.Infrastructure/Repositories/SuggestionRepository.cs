@@ -62,14 +62,12 @@ namespace DiabloII.Infrastructure.Repositories
             _dbContext.SuggestionVotes.Add(suggestionVote);
         }
 
-        public Suggestion AddComment(Guid suggestionId, SuggestionComment suggestionComment)
+        public void AddComment(Guid suggestionId, SuggestionComment suggestionComment)
         {
             var suggestion = Get(suggestionId);
 
             suggestion.Comments.Add(suggestionComment);
             _dbContext.SuggestionComments.Add(suggestionComment);
-
-            return suggestion;
         }
 
         public void RemoveUserSuggestion(Guid suggestionId, string userId)
@@ -85,14 +83,12 @@ namespace DiabloII.Infrastructure.Repositories
             _dbContext.SuggestionVotes.Remove(suggestionVote);
         }
 
-        public Suggestion RemoveUserComment(Guid suggestionId, Guid commentId, string userId)
+        public void RemoveUserComment(Guid suggestionId, Guid commentId, string userId)
         {
             var suggestion = Get(suggestionId);
             var userComment = GetUserComment(suggestion, commentId, userId);
 
             RemoveComment(suggestion, userComment);
-
-            return suggestion;
         }
 
         public void RemoveComment(Suggestion suggestion, SuggestionComment suggestionComment)

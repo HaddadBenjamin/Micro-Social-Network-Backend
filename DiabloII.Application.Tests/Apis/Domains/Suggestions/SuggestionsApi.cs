@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Suggestions;
 using DiabloII.Application.Tests.Apis.Bases;
 using DiabloII.Application.Tests.Models.Hals.Domains.Suggestions;
 using DiabloII.Application.Tests.Services.Http;

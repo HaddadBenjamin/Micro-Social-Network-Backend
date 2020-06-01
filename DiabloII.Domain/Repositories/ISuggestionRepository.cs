@@ -29,13 +29,13 @@ namespace DiabloII.Domain.Repositories
         #region Write
         void AddVote(Suggestion suggestion, SuggestionVote suggestionVote);
 
-        Suggestion AddComment(Guid suggestionId, SuggestionComment suggestionComment);
+        void AddComment(Guid suggestionId, SuggestionComment suggestionComment);
 
         void RemoveUserSuggestion(Guid suggestionId, string userId);
 
         void RemoveVote(Suggestion suggestion, SuggestionVote suggestionVote);
 
-        Suggestion RemoveUserComment(Guid suggestionId, Guid commentId, string userId);
+        void RemoveUserComment(Guid suggestionId, Guid commentId, string userId);
 
         void RemoveComment(Suggestion suggestion, SuggestionComment suggestionComment);
         #endregion

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiabloII.Application.Responses.Suggestions
+namespace DiabloII.Application.Responses.Read.Suggestions
 {
     public class SuggestionCommentDto
     {

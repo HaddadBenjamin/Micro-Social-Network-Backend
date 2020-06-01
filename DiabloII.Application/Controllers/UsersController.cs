@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Requests.Users;
 using DiabloII.Application.Resolvers.User;
-using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Users;
+using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Users;
 using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Models.Users;
 using DiabloII.Domain.Readers;
@@ -61,11 +62,11 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("users")]
         [HttpPost]
-        [ProducesResponseType(typeof(UserDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public async Task<ActionResult<UserDto>> Create([FromBody] CreateAUserDto dto) =>
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateAUserDto dto) =>
             await Create<CreateAUserDto, CreateAUserCommand>(dto, _mediator, _mapper);
 
         /// <summary>

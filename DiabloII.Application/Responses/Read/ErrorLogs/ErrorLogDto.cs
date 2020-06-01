@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DiabloII.Application.Responses.ErrorLogs
+namespace DiabloII.Application.Responses.Read.ErrorLogs
 {
     public class ErrorLogDto
     {

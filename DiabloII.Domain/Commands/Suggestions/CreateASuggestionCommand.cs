@@ -1,9 +1,9 @@
-﻿using DiabloII.Domain.Models.Suggestions;
+﻿using System;
 using MediatR;
 
 namespace DiabloII.Domain.Commands.Suggestions
 {
-    public class CreateASuggestionCommand : IRequest<Suggestion>
+    public class CreateASuggestionCommand : IRequest<Guid>
     {
         public string Content { get; set; }
 

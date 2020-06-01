@@ -17,11 +17,11 @@ using MediatR;
 namespace DiabloII.Infrastructure.Handlers
 {
     public class SuggestionCommandHandler :
-        IRequestHandler<CreateASuggestionCommand, Suggestion>,
+        IRequestHandler<CreateASuggestionCommand, Guid>,
         IRequestHandler<DeleteASuggestionCommand, Guid>,
-        IRequestHandler<DeleteASuggestionCommentCommand, Suggestion>,
-        IRequestHandler<VoteToASuggestionCommand, Suggestion>,
-        IRequestHandler<CommentASuggestionCommand, Suggestion>
+        IRequestHandler<DeleteASuggestionCommentCommand, Guid>,
+        IRequestHandler<VoteToASuggestionCommand, Guid>,
+        IRequestHandler<CommentASuggestionCommand, Guid>
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ISuggestionRepository _repository;
@@ -57,28 +57,24 @@ namespace DiabloII.Infrastructure.Handlers
 
 
         #region Write
-        public async Task<Suggestion> Handle(CreateASuggestionCommand createASugestion, CancellationToken cancellationToken = default)
+        public async Task<Guid> Handle(CreateASuggestionCommand createASugestion, CancellationToken cancellationToken = default)
         {
             var validationContext = new CreateASuggestionValidationContext(createASugestion, _repository);
-
             _createValidator.Validate(validationContext);
 
             var suggestion = _mapper.Map<Suggestion>(createASugestion);
-
             _dbContext.Suggestions.Add(suggestion);
             await _dbContext.SaveChangesAsync();
 
             var createANotificationCommand = _mapper.Map<CreateANotificationCommand>(suggestion);
-
             await _mediator.Send(createANotificationCommand);
 
-            return suggestion;
+            return suggestion.Id;
         }
 
         public async Task<Guid> Handle(DeleteASuggestionCommand deleteASuggestion, CancellationToken cancellationToken = default)
         {
             var validationContext = new DeleteASuggestionValidationContext(deleteASuggestion, _repository);
-
             _deleteValidator.Validate(validationContext);
 
             _repository.RemoveUserSuggestion(deleteASuggestion.Id, deleteASuggestion.UserId);
@@ -87,24 +83,21 @@ namespace DiabloII.Infrastructure.Handlers
             return deleteASuggestion.Id;
         }
 
-        public async Task<Suggestion> Handle(DeleteASuggestionCommentCommand deleteASuggestionComment, CancellationToken cancellationToken = default)
+        public async Task<Guid> Handle(DeleteASuggestionCommentCommand deleteASuggestionComment, CancellationToken cancellationToken = default)
         {
             var validationContext = new DeleteASuggestionCommentValidationContext(deleteASuggestionComment, _repository);
-
             _deleteCommentValidator.Validate(validationContext);
 
-            var suggestion = _repository.RemoveUserComment(deleteASuggestionComment.SuggestionId, deleteASuggestionComment.Id, deleteASuggestionComment.UserId);
-
+            _repository.RemoveUserComment(deleteASuggestionComment.SuggestionId, deleteASuggestionComment.Id, deleteASuggestionComment.UserId);
             await _dbContext.SaveChangesAsync();
 
-            return suggestion;
+            return deleteASuggestionComment.Id;
         }
         #endregion
 
-        public async Task<Suggestion> Handle(VoteToASuggestionCommand voteToASuggestionCommand, CancellationToken cancellationToken = default)
+        public async Task<Guid> Handle(VoteToASuggestionCommand voteToASuggestionCommand, CancellationToken cancellationToken = default)
         {
             var validationContext = new VoteToASuggestionValidationContext(voteToASuggestionCommand, _repository);
-
             _voteValidator.Validate(validationContext);
 
             var suggestion = _repository.Get(voteToASuggestionCommand.SuggestionId);
@@ -116,23 +109,23 @@ namespace DiabloII.Infrastructure.Handlers
             else
             {
                 suggestionVote = _mapper.Map<SuggestionVote>(voteToASuggestionCommand);
-
                 _repository.AddVote(suggestion, suggestionVote);
             }
 
             await _dbContext.SaveChangesAsync();
 
-            return suggestion;
+            return suggestionVote.Id;
         }
 
-        public async Task<Suggestion> Handle(CommentASuggestionCommand commentASuggestion, CancellationToken cancellationToken = default)
+        public async Task<Guid> Handle(CommentASuggestionCommand commentASuggestion, CancellationToken cancellationToken = default)
         {
             var validationContext = new CommentASuggestionValidationContext(commentASuggestion, _repository);
-
             _commentValidator.Validate(validationContext);
 
             var suggestionComment = _mapper.Map<SuggestionComment>(commentASuggestion);
-            var suggestion = _repository.AddComment(commentASuggestion.SuggestionId, suggestionComment);
+            _repository.AddComment(commentASuggestion.SuggestionId, suggestionComment);
+            
+            var suggestion = _repository.Get(commentASuggestion.SuggestionId);
             suggestionComment.Suggestion = suggestion;
 
             await _dbContext.SaveChangesAsync();
@@ -142,7 +135,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             await _mediator.Send(createANotificationCommand);
 
-            return suggestion;
+            return suggestionComment.Id;
         }
     }
 }

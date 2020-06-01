@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.ErrorLogs;
+using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.ErrorLogs;
 using DiabloII.Domain.Models.ErrorLogs;
 using DiabloII.Domain.Readers;
 using Microsoft.AspNetCore.Http;

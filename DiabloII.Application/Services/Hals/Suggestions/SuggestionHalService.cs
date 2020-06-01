@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Net.Http;
 using DiabloII.Application.Mappers.Suggestions;
 using DiabloII.Application.Resolvers.UserId;
-using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Suggestions;
 using Halcyon.HAL;
 using Microsoft.AspNetCore.Http;
 

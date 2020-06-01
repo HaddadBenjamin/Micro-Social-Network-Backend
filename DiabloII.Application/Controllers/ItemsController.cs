@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DiabloII.Application.Requests.Items;
-using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Items;
+using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Items;
 using DiabloII.Domain.Models.Items;
 using DiabloII.Domain.Readers;
 using Microsoft.AspNetCore.Http;

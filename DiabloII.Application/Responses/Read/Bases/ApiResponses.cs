@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DiabloII.Application.Responses
+namespace DiabloII.Application.Responses.Read.Bases
 {
     public class ApiResponses<Element>
     {
