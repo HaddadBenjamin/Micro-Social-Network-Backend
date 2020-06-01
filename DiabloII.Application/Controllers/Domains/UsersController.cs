@@ -65,6 +65,18 @@ namespace DiabloII.Application.Controllers.Domains
         }
 
         /// <summary>
+        /// Create a user
+        /// </summary>
+        [Route("users")]
+        [HttpPost]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateAUserDto dto) =>
+            await Create<CreateAUserDto, CreateAUserCommand>(dto);
+
+        /// <summary>
         /// Update a user
         /// </summary>
         [Route("users/{userId}")]

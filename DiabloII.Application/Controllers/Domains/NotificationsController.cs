@@ -33,7 +33,7 @@ namespace DiabloII.Application.Controllers.Domains
             GetAll(_reader);
 
         /// <summary>
-        /// Get a user
+        /// Get a notification
         /// </summary>
         [Route("notifications/{notificationId:guid}")]
         [HttpGet]
