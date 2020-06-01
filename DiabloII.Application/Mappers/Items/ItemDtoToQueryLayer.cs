@@ -1,14 +1,13 @@
 ﻿using System.Linq;
 using AutoMapper;
 using DiabloII.Application.Requests.Items;
-using DiabloII.Domain.Queries.Items;
+using DiabloII.Domain.Queries.Domains.Items;
 
 namespace DiabloII.Application.Mappers.Items
 {
     public class ItemDtoToQueryLayer : Profile
     {
-        public ItemDtoToQueryLayer()
-        {
+        public ItemDtoToQueryLayer() =>
             CreateMap<SearchUniquesDto, SearchUniquesQuery>()
                 .AfterMap((dto, query) =>
                 {
@@ -23,6 +22,5 @@ namespace DiabloII.Application.Mappers.Items
                             .Replace("Silver_Edged_Axe", "Silver-Edged Axe")
                             .Replace("_", " "));
                 });
-        }
     }
 }

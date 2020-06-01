@@ -4,7 +4,7 @@ using DiabloII.Application.Requests.Items;
 using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Responses.Read.Items;
 using DiabloII.Domain.Models.Items;
-using DiabloII.Domain.Readers;
+using DiabloII.Domain.Readers.Domains;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

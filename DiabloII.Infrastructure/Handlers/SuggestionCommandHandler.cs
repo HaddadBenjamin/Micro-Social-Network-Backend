@@ -124,7 +124,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             var suggestionComment = _mapper.Map<SuggestionComment>(commentASuggestion);
             _repository.AddComment(commentASuggestion.SuggestionId, suggestionComment);
-            
+
             var suggestion = _repository.Get(commentASuggestion.SuggestionId);
             suggestionComment.Suggestion = suggestion;
 

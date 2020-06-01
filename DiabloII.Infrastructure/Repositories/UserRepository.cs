@@ -25,7 +25,7 @@ namespace DiabloII.Infrastructure.Repositories
 
         public IEnumerable<User> GetUsers(IReadOnlyCollection<string> userIds) => GetQueryableUsers().Where(user => userIds.Contains(user.Id));
 
-        public User Get(string userId) => GetQueryableUsers().Single(user => user.Id == userId);
+        public User Get(string userId) => GetQueryableUsers().SingleOrDefault(user => user.Id == userId);
 
         public string GetUserIdByItsEmail(string email) => GetQueryableUsers().Single(user => user.Email == email).Id;
 

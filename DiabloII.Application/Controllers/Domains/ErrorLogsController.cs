@@ -3,7 +3,7 @@ using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Responses.Read.ErrorLogs;
 using DiabloII.Domain.Models.ErrorLogs;
-using DiabloII.Domain.Readers;
+using DiabloII.Domain.Readers.Domains;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -8,7 +8,7 @@ using DiabloII.Application.Responses.Read.Suggestions;
 using DiabloII.Application.Services.Hals.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Models.Suggestions;
-using DiabloII.Domain.Readers;
+using DiabloII.Domain.Readers.Domains;
 using Halcyon.HAL;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +38,17 @@ namespace DiabloII.Application.Controllers.Domains
         [ProducesResponseType(typeof(ApiResponses<SuggestionDto>), StatusCodes.Status200OK)]
         public ActionResult<HALResponse> GetAll() =>
             GetAll(_reader, _halService);
+
+        /// <summary>
+        /// Get a user
+        /// </summary>
+        [Route("suggestions/{suggestionId:guid}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status200OK)]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<HALResponse> Get(Guid suggestionId) =>
+            Get(suggestionId, _reader, _halService);
 
         /// <summary>
         /// Create a suggestion

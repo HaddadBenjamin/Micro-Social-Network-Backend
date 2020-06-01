@@ -26,6 +26,7 @@ namespace DiabloII.Application.Controllers.Bases
             _mapper = mapper;
         }
 
+        #region Read
         protected ActionResult<ApiResponses<ResponseDto>> GetAll(IReaderGetAll<DataModel> readerGetAll)
         {
             var responseDtos = readerGetAll
@@ -70,6 +71,27 @@ namespace DiabloII.Application.Controllers.Bases
             return Ok(responseDto);
         }
 
+        protected ActionResult<HALResponse> Get<RequestDto, Query>(RequestDto requestDto, IReaderGet<DataModel, Query> readerGet, IHalService<ResponseDto> halService)
+        {
+            var query = _mapper.Map<Query>(requestDto);
+            var dataModel = readerGet.Get(query);
+            var responseDto = _mapper.Map<ResponseDto>(dataModel);
+            var halResponse = halService.AddLinks(responseDto);
+
+            return Ok(halResponse);
+        }
+
+        protected ActionResult<ResponseDto> Get<RequestDto, Query>(RequestDto requestDto, IReaderGet<DataModel, Query> readerGet)
+        {
+            var query = _mapper.Map<Query>(requestDto);
+            var dataModel = readerGet.Get(query);
+            var responseDto = _mapper.Map<ResponseDto>(dataModel);
+
+            return Ok(responseDto);
+        }
+        #endregion
+
+        #region Write
         protected async Task<ActionResult<Guid>> Create<CreateDto, CreateCommand>(CreateDto requestDto)
         {
             var command = _mapper.Map<CreateCommand>(requestDto);
@@ -93,5 +115,6 @@ namespace DiabloII.Application.Controllers.Bases
 
             return Ok(deletedResourceId);
         }
+        #endregion
     }
 }

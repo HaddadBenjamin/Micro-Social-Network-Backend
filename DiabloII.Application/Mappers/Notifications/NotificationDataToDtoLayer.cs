@@ -6,9 +6,7 @@ namespace DiabloII.Application.Mappers.Notifications
 {
     public class NotificationDataToDtoLayer : Profile
     {
-        public NotificationDataToDtoLayer()
-        {
+        public NotificationDataToDtoLayer() =>
             CreateMap<Notification, NotificationDto>();
-        }
     }
 }

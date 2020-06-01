@@ -8,7 +8,7 @@ using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Responses.Read.Users;
 using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Models.Users;
-using DiabloII.Domain.Readers;
+using DiabloII.Domain.Readers.Domains;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -38,6 +38,17 @@ namespace DiabloII.Application.Controllers.Domains
         [ApiExplorerSettings(IgnoreApi = true)]
         public ActionResult<ApiResponses<UserDto>> GetAll() =>
             GetAll(_reader);
+
+        /// <summary>
+        /// Get a user
+        /// </summary>
+        [Route("users/{userId}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<UserDto> Get(string userId) =>
+            Get(userId, _reader);
 
         /// <summary>
         /// Identify the current user.

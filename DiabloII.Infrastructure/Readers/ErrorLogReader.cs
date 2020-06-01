@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Domain.Models.ErrorLogs;
-using DiabloII.Domain.Readers;
+using DiabloII.Domain.Readers.Domains;
 using DiabloII.Domain.Repositories;
 
 namespace DiabloII.Infrastructure.Readers
