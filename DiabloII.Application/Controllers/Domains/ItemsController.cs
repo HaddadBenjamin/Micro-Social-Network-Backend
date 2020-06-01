@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Requests.Read.Domains.Items;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Items;
@@ -7,7 +8,7 @@ using DiabloII.Domain.Readers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Application.Controllers
+namespace DiabloII.Application.Controllers.Domains
 {
     [Route("api/v1/")]
     public class ItemsController : BaseController<Item, ItemDto>
