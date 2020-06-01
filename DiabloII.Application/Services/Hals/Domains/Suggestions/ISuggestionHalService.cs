@@ -1,5 +1,5 @@
 ﻿using System;
-using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Responses.Read.Domains.Suggestions;
 using DiabloII.Application.Services.Hals.Bases;
 using Halcyon.HAL;
 

@@ -1,4 +1,4 @@
-﻿namespace DiabloII.Application.Responses.Users
+﻿namespace DiabloII.Application.Responses.Read.Domains.Users
 {
     public class UserDto
     {

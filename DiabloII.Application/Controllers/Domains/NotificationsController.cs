@@ -2,8 +2,8 @@
 using AutoMapper;
 using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Requests.Write.Notifications;
-using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Notifications;
+using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Domains.Notifications;
 using DiabloII.Domain.Commands.Notifications;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Readers.Domains;

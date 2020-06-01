@@ -1,5 +1,5 @@
-﻿using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Notifications;
+﻿using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Domains.Notifications;
 
 namespace DiabloII.Application.Tests.Contexts.Domains.Notifications
 {

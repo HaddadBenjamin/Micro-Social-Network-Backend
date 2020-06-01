@@ -2,8 +2,9 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Extensions;
-using DiabloII.Application.Responses;
+using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Services.Hals.Bases;
+using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Readers.Bases;
 using Halcyon.HAL;
 using MediatR;
@@ -87,6 +88,10 @@ namespace DiabloII.Application.Controllers.Bases
         {
             var query = mapper.Map<Query>(requestDto);
             var dataModel = readerGet.Get(query);
+
+            if (dataModel is null)
+                throw new NotFoundException("suggestion");
+
             var responseDto = mapper.Map<ResponseDto>(dataModel);
             var halResponse = halService.AddLinks(responseDto);
 

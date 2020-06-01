@@ -1,6 +1,6 @@
 ﻿using System;
 using DiabloII.Application.Requests.Write.Suggestions;
-using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Responses.Read.Domains.Suggestions;
 using DiabloII.Application.Tests.Apis.Bases;
 using DiabloII.Application.Tests.Models.Hals.Domains.Suggestions;
 

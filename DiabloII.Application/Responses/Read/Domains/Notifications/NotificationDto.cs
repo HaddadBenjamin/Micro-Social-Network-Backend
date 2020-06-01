@@ -1,7 +1,7 @@
 ﻿using System;
 using DiabloII.Domain.Models.Notifications;
 
-namespace DiabloII.Application.Responses.Notifications
+namespace DiabloII.Application.Responses.Read.Domains.Notifications
 {
     public class NotificationDto
     {

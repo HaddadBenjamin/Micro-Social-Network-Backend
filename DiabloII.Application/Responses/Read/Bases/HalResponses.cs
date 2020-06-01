@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Halcyon.HAL;
 
-namespace DiabloII.Application.Responses
+namespace DiabloII.Application.Responses.Read.Bases
 {
     public class HalResponses
     {

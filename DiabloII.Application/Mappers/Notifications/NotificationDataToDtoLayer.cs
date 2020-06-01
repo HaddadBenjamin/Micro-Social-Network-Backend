@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DiabloII.Application.Responses.Notifications;
+using DiabloII.Application.Responses.Read.Domains.Notifications;
 using DiabloII.Domain.Models.Notifications;
 
 namespace DiabloII.Application.Mappers.Notifications

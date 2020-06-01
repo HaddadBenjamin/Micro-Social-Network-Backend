@@ -1,4 +1,4 @@
-﻿namespace DiabloII.Application.Responses.Suggestions
+﻿namespace DiabloII.Application.Responses.Read.Domains.Suggestions
 {
     public class SuggestionVoteDto
     {

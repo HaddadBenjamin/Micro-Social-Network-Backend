@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Responses.Read.Domains.Suggestions;
 
 namespace DiabloII.Application.Tests.Repositories.Suggestions
 {
