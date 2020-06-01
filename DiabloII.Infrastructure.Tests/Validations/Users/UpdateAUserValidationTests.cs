@@ -3,7 +3,7 @@ using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Models.Users;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Domain.Validations.Users.Update;
 using DiabloII.Infrastructure.Repositories;
 using NUnit.Framework;

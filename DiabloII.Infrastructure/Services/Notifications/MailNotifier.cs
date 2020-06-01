@@ -2,7 +2,7 @@
 using System.Linq;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Models.Users;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Domain.Services.Notifications;
 using FluentEmail.Core;
 using FluentEmail.Core.Models;

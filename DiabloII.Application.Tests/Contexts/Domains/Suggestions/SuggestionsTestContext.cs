@@ -1,5 +1,5 @@
-﻿using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Suggestions;
+﻿using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Domains.Suggestions;
 
 namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
 {
@@ -12,5 +12,7 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
         public SuggestionDto VotedResource { get; set; }
 
         public SuggestionDto CommentedResource { get; set; }
+
+        public SuggestionDto GetResource { get; set; }
     }
 }

@@ -1,5 +1,5 @@
-﻿using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Users;
+﻿using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Domains.Users;
 
 namespace DiabloII.Application.Tests.Contexts.Domains.Users
 {

@@ -4,7 +4,7 @@ using DiabloII.Application.Tests.Apis.Domains.Users;
 using DiabloII.Application.Tests.Contexts.Domains.Users;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Mappers;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests.Steps.Users.Update

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using DiabloII.Application.Resolvers.CreateErrorLogCommand;
+using DiabloII.Application.Resolvers.Implementations.CreateErrorLogCommand;
 using DiabloII.Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Domain.Models.Suggestions;
-using DiabloII.Domain.Readers;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Queries.Domains.Suggestions;
+using DiabloII.Domain.Readers.Domains;
+using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Infrastructure.Readers
 {
@@ -12,5 +13,7 @@ namespace DiabloII.Infrastructure.Readers
         public SuggestionReader(ISuggestionRepository repository) => _repository = repository;
 
         public IReadOnlyCollection<Suggestion> GetAll() => _repository.GetAll();
+
+        public Suggestion Get(GetASuggestionQuery query) => _repository.Get(query.Id);
     }
 }

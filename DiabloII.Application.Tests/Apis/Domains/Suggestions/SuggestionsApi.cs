@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DiabloII.Application.Requests.Suggestions;
-using DiabloII.Application.Responses;
-using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Requests.Write.Suggestions;
+using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Domains.Suggestions;
 using DiabloII.Application.Tests.Apis.Bases;
 using DiabloII.Application.Tests.Models.Hals.Domains.Suggestions;
 using DiabloII.Application.Tests.Services.Http;
@@ -21,6 +21,9 @@ namespace DiabloII.Application.Tests.Apis.Domains.Suggestions
 
         public async Task<HalSuggestionsDto> GetAllWithHals() =>
             await _httpService.GetAsync<HalSuggestionsDto>(BaseUrl);
+
+        public async Task<SuggestionDto> Get(Guid suggestionId) =>
+            await _httpService.GetAsync<SuggestionDto>($"{BaseUrl}/{suggestionId}");
         #endregion
 
         #region Write

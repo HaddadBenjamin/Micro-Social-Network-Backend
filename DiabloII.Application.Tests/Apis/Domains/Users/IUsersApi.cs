@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using DiabloII.Application.Requests.Users;
-using DiabloII.Application.Responses.Users;
+using DiabloII.Application.Requests.Write.Users;
+using DiabloII.Application.Responses.Read.Domains.Users;
 using DiabloII.Application.Tests.Apis.Bases;
 
 namespace DiabloII.Application.Tests.Apis.Domains.Users

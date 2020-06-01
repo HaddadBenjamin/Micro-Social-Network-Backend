@@ -4,7 +4,7 @@ using AutoMapper;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Domain.Configurations;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Infrastructure.Repositories;
 using MediatR;
 using Microsoft.AspNetCore.Builder;

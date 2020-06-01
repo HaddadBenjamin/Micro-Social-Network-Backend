@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using DiabloII.Application.Requests.Users;
-using DiabloII.Application.Responses.Users;
+using DiabloII.Application.Requests.Write.Users;
+using DiabloII.Application.Responses.Read.Domains.Users;
 using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Notifications;
 using TechTalk.SpecFlow;

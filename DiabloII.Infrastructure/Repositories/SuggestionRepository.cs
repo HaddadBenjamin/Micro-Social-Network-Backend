@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DiabloII.Domain.Models.Suggestions;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
@@ -24,7 +24,7 @@ namespace DiabloII.Infrastructure.Repositories
         public IReadOnlyCollection<Suggestion> GetAll() => GetQueryableSuggestions().ToList();
 
         public Suggestion Get(Guid suggestionId) =>
-            GetQueryableSuggestions().First(vote => vote.Id == suggestionId);
+            GetQueryableSuggestions().SingleOrDefault(suggestion => suggestion.Id == suggestionId);
 
         public Suggestion GetUserSuggestion(Guid suggestionId, string userId) => GetQueryableSuggestions()
             .FirstOrDefault(suggestion => suggestion.Id == suggestionId && suggestion.CreatedBy == userId);

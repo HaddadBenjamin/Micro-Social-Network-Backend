@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using DiabloII.Application.Responses.Suggestions;
+using DiabloII.Application.Responses.Read.Domains.Suggestions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 

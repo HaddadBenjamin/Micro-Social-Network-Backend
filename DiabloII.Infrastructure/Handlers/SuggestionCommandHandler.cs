@@ -5,7 +5,7 @@ using AutoMapper;
 using DiabloII.Domain.Commands.Notifications;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Models.Suggestions;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Domain.Validations.Suggestions.Comment;
 using DiabloII.Domain.Validations.Suggestions.Create;
 using DiabloII.Domain.Validations.Suggestions.Delete;
