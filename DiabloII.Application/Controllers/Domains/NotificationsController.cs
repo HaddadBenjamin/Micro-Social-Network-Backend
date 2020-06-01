@@ -6,7 +6,6 @@ using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Notifications;
 using DiabloII.Domain.Commands.Notifications;
 using DiabloII.Domain.Models.Notifications;
-using DiabloII.Domain.Readers;
 using DiabloII.Domain.Readers.Domains;
 using MediatR;
 using Microsoft.AspNetCore.Http;

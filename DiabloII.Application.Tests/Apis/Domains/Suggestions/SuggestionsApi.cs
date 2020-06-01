@@ -21,6 +21,9 @@ namespace DiabloII.Application.Tests.Apis.Domains.Suggestions
 
         public async Task<HalSuggestionsDto> GetAllWithHals() =>
             await _httpService.GetAsync<HalSuggestionsDto>(BaseUrl);
+
+        public async Task<SuggestionDto> Get(Guid suggestionId) =>
+            await _httpService.GetAsync<SuggestionDto>($"{BaseUrl}/{suggestionId}");
         #endregion
 
         #region Write

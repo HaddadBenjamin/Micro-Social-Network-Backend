@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DiabloII.Domain.Models.ErrorLogs;
-using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Infrastructure.DbContext;
 

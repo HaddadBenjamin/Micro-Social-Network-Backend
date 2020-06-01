@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using DiabloII.Domain.Configurations;
 using DiabloII.Domain.Models.Notifications;
-using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Domain.Services.Notifications;
 

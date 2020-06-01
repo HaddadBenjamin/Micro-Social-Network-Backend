@@ -1,7 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using DiabloII.Domain.Commands.Items;
-using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Infrastructure.DbContext;
 using MediatR;

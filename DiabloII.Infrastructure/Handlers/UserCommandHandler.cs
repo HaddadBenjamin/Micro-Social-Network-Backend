@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Models.Users;
-using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Domain.Validations.Users.Create;
 using DiabloII.Domain.Validations.Users.Update;

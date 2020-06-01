@@ -2,7 +2,6 @@
 using System.Linq;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Models.Users;
-using DiabloII.Domain.Repositories;
 using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Infrastructure.Repositories

@@ -5,6 +5,7 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
 {
     public interface ISuggestionsTestContext :
         ITestContextAll<SuggestionDto>,
+        ITestContextGet<SuggestionDto>,
         ITestContextCreated<SuggestionDto>
     {
         SuggestionDto VotedResource { get; set; }
