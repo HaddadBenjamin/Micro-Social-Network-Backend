@@ -67,6 +67,32 @@ namespace DiabloII.Application.Controllers
             return Ok(responseDto);
         }
 
+        protected ActionResult<ResponseDto> Get<RequestDto, Query>(
+            RequestDto requestDto,
+            IReaderGet<DataModel, Query> readerGet,
+            IMapper mapper)
+        {
+            var query = mapper.Map<Query>(requestDto);
+            var dataModel = readerGet.Get(query);
+            var responseDto = mapper.Map<ResponseDto>(dataModel);
+
+            return Ok(responseDto);
+        }
+
+        protected ActionResult<HALResponse> Get<RequestDto, Query>(
+            RequestDto requestDto,
+            IReaderGet<DataModel, Query> readerGet,
+            IMapper mapper,
+            IHalService<ResponseDto> halService)
+        {
+            var query = mapper.Map<Query>(requestDto);
+            var dataModel = readerGet.Get(query);
+            var responseDto = mapper.Map<ResponseDto>(dataModel);
+            var halResponse = halService.AddLinks(responseDto);
+
+            return Ok(halResponse);
+        }
+
         protected async Task<ActionResult<ResponseDto>> Create<CreateDto, CreateCommand>(CreateDto dto, IMediator mediator, IMapper mapper)
         {
             var command = mapper.Map<CreateCommand>(dto);
