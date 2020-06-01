@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Controllers.Bases;
-using DiabloII.Application.Requests.Users;
-using DiabloII.Application.Resolvers.User;
+using DiabloII.Application.Requests.Write.Users;
+using DiabloII.Application.Resolvers.Implementations.User;
 using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Responses.Read.Users;
 using DiabloII.Domain.Commands.Users;

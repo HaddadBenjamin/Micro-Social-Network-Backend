@@ -6,9 +6,6 @@ namespace DiabloII.Domain.Mappers.ErrorLogs
 {
     public class ErrorLogToDataLayer : Profile
     {
-        public ErrorLogToDataLayer()
-        {
-            CreateMap<CreateErrorLogCommand, ErrorLog>();
-        }
+        public ErrorLogToDataLayer() => CreateMap<CreateErrorLogCommand, ErrorLog>();
     }
 }

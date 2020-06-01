@@ -2,7 +2,7 @@
 using DiabloII.Domain.Models.Users;
 using DiabloII.Domain.Queries.Domains.Users;
 using DiabloII.Domain.Readers.Domains;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Infrastructure.Readers
 {

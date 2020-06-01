@@ -12,5 +12,7 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
         public SuggestionDto VotedResource { get; set; }
 
         public SuggestionDto CommentedResource { get; set; }
+
+        public SuggestionDto GetResource { get; set; }
     }
 }

@@ -31,5 +31,9 @@
     <ProjectReference Include="..\DiabloII.Infrastructure\DiabloII.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Responses\Write\Bases\" />
+  </ItemGroup>
+
 
 </Project>

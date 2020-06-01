@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using DiabloII.Application.Requests.Notifications;
+using DiabloII.Application.Requests.Write.Notifications;
 using DiabloII.Application.Tests.Apis.Domains.Notifications;
 using DiabloII.Application.Tests.Contexts.Domains.Notifications;
 using DiabloII.Application.Tests.Extensions;

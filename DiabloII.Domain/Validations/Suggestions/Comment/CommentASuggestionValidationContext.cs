@@ -1,5 +1,5 @@
 ﻿using DiabloII.Domain.Commands.Suggestions;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Domain.Validations.Suggestions.Comment
 {

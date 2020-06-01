@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Controllers.Bases;
-using DiabloII.Application.Requests.Suggestions;
+using DiabloII.Application.Requests.Write.Suggestions;
 using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Responses.Read.Suggestions;
 using DiabloII.Application.Services.Hals.Suggestions;

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DiabloII.Application.Requests.Users;
+using DiabloII.Application.Requests.Write.Users;
 using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Extensions;
 using DiabloII.Domain.Helpers;

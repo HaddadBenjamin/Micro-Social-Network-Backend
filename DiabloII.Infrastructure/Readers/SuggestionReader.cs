@@ -2,7 +2,7 @@
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Queries.Domains.Notifications;
 using DiabloII.Domain.Readers.Domains;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Infrastructure.Readers
 {

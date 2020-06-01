@@ -5,6 +5,7 @@ using AutoMapper;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Services.Hals;
+using DiabloII.Application.Services.Hals.Bases;
 using DiabloII.Domain.Readers.Bases;
 using Halcyon.HAL;
 using MediatR;

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Controllers.Bases;
-using DiabloII.Application.Requests.Notifications;
+using DiabloII.Application.Requests.Write.Notifications;
 using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Responses.Read.Notifications;
 using DiabloII.Domain.Commands.Notifications;

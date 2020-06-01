@@ -1,4 +1,4 @@
-﻿using DiabloII.Application.Resolvers.Ip;
+﻿using DiabloII.Application.Resolvers.Implementations.Ip;
 
 namespace DiabloII.Application.Tests.Mocks
 {

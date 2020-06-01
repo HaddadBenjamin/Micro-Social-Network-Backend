@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DiabloII.Domain.Models.Suggestions;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;

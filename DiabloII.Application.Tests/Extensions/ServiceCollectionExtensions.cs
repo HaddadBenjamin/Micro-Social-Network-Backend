@@ -1,4 +1,4 @@
-﻿using DiabloII.Application.Resolvers.Ip;
+﻿using DiabloII.Application.Resolvers.Implementations.Ip;
 using DiabloII.Application.Tests.Mocks;
 using DiabloII.Infrastructure.DbContext;
 using Microsoft.EntityFrameworkCore;

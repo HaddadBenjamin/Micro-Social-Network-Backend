@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
-using DiabloII.Application.Requests.Items;
+using DiabloII.Application.Requests.Read.Domains.Items;
 using DiabloII.Domain.Queries.Domains.Items;
 
 namespace DiabloII.Application.Mappers.Items

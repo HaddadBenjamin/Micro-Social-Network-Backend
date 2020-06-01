@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DiabloII.Application.Controllers.Bases;
-using DiabloII.Application.Requests.Items;
+using DiabloII.Application.Requests.Read.Domains.Items;
 using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Responses.Read.Items;
 using DiabloII.Domain.Models.Items;
