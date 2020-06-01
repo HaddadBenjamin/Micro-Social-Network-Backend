@@ -20,17 +20,12 @@ namespace DiabloII.Application.Controllers
     {
         private readonly ISuggestionReader _reader;
 
-        private readonly IMediator _mediator;
-
-        private readonly IMapper _mapper;
-
         private readonly ISuggestionHalService _halService;
 
-        public SuggestionsController(ISuggestionReader reader, IMediator mediator, IMapper mapper, ISuggestionHalService halService)
+        public SuggestionsController(ISuggestionReader reader, IMediator mediator, IMapper mapper, ISuggestionHalService halService) :
+            base(mediator, mapper)
         {
             _reader = reader;
-            _mediator = mediator;
-            _mapper = mapper;
             _halService = halService;
         }
 
@@ -41,7 +36,7 @@ namespace DiabloII.Application.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponses<SuggestionDto>), StatusCodes.Status200OK)]
         public ActionResult<HALResponse> GetAll() =>
-            GetAll(_reader, _mapper, _halService);
+            GetAll(_reader, _halService);
 
         /// <summary>
         /// Create a suggestion
@@ -51,7 +46,7 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateASuggestionDto dto) =>
-            await Create<CreateASuggestionDto, CreateASuggestionCommand>(dto, _mediator, _mapper);
+            await Create<CreateASuggestionDto, CreateASuggestionCommand>(dto);
 
         /// <summary>
         /// Vote to a suggestion
@@ -66,7 +61,7 @@ namespace DiabloII.Application.Controllers
         {
             dto.SuggestionId = suggestionId;
 
-            return await Create<VoteToASuggestionDto, VoteToASuggestionCommand>(dto, _mediator, _mapper);
+            return await Create<VoteToASuggestionDto, VoteToASuggestionCommand>(dto);
         }
 
         /// <summary>
@@ -82,7 +77,7 @@ namespace DiabloII.Application.Controllers
         {
             dto.SuggestionId = suggestionId;
 
-            return await Create<CommentASuggestionDto, CommentASuggestionCommand>(dto, _mediator, _mapper);
+            return await Create<CommentASuggestionDto, CommentASuggestionCommand>(dto);
         }
 
         /// <summary>
@@ -98,7 +93,7 @@ namespace DiabloII.Application.Controllers
         {
             dto.Id = suggestionId;
 
-            return await Delete<DeleteASuggestionDto, DeleteASuggestionCommand, Guid>(dto, _mediator, _mapper);
+            return await Delete<DeleteASuggestionDto, DeleteASuggestionCommand>(dto);
         }
 
         /// <summary>
@@ -106,16 +101,16 @@ namespace DiabloII.Application.Controllers
         /// </summary>
         [Route("suggestions/{suggestionId:guid}/comments/{commentId:guid}")]
         [HttpDelete]
-        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<HALResponse>> DeleteComment([FromBody] DeleteASuggestionCommentDto dto, Guid suggestionId, Guid commentId)
+        public async Task<ActionResult<Guid>> DeleteComment([FromBody] DeleteASuggestionCommentDto dto, Guid suggestionId, Guid commentId)
         {
             dto.SuggestionId = suggestionId;
             dto.Id = commentId;
 
-            return await DeleteWithMap<DeleteASuggestionCommentDto, DeleteASuggestionCommentCommand, SuggestionDto>(dto, _mediator, _mapper, _halService);
+            return await Delete<DeleteASuggestionCommentDto, DeleteASuggestionCommentCommand>(dto);
         }
     }
 }

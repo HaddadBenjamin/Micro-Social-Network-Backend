@@ -12,8 +12,8 @@ using MediatR;
 namespace DiabloII.Infrastructure.Handlers
 {
     public class UserCommandHandler :
-        IRequestHandler<CreateAUserCommand, User>,
-        IRequestHandler<UpdateAUserCommand, User>
+        IRequestHandler<CreateAUserCommand, string>,
+        IRequestHandler<UpdateAUserCommand, string>
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -35,24 +35,24 @@ namespace DiabloII.Infrastructure.Handlers
             _updateValidator = updateValidator;
         }
 
-        public async Task<User> Handle(CreateAUserCommand command, CancellationToken cancellationToken = default)
+        public async Task<string> Handle(CreateAUserCommand command, CancellationToken cancellationToken = default)
         {
             var validationContext = new CreateAUserValidationContext(command, _repository);
 
             _createValidator.Validate(validationContext);
 
             if (_repository.DoesUserExists(command.UserId))
-                return _repository.Get(command.UserId);
+                return _repository.Get(command.UserId).Id;
 
             var user = _mapper.Map<User>(command);
 
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
 
-            return user;
+            return user.Id;
         }
 
-        public async Task<User> Handle(UpdateAUserCommand command, CancellationToken cancellationToken = default)
+        public async Task<string> Handle(UpdateAUserCommand command, CancellationToken cancellationToken = default)
         {
             var validationContext = new UpdateAUserValidationContext(command, _repository);
 
@@ -65,7 +65,7 @@ namespace DiabloII.Infrastructure.Handlers
             _dbContext.Users.Update(user);
             await _dbContext.SaveChangesAsync();
 
-            return user;
+            return user.Id;
         }
     }
 }

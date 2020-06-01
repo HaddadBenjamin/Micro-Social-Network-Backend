@@ -3,7 +3,7 @@ using MediatR;
 
 namespace DiabloII.Domain.Commands.ErrorLogs
 {
-    public class CreateErrorLogCommand : IRequest
+    public class CreateErrorLogCommand : IRequest<Guid>
     {
         public Guid Id { get; set; }
 

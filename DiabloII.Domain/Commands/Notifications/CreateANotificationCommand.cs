@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DiabloII.Domain.Models.Notifications;
 using MediatR;
 
 namespace DiabloII.Domain.Commands.Notifications
 {
-    public class CreateANotificationCommand : IRequest<Notification>
+    public class CreateANotificationCommand : IRequest<Guid>
     {
         public string Title { get; set; }
 

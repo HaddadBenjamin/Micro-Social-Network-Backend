@@ -16,13 +16,21 @@ namespace DiabloII.Application.Controllers
         where DataModel : class
         where ResponseDto : class
     {
-        protected ActionResult<ApiResponses<ResponseDto>> GetAll(
-            IReaderGetAll<DataModel> readerGetAll,
-            IMapper mapper)
+        protected readonly IMediator _mediator;
+
+        protected readonly IMapper _mapper;
+
+        public BaseController(IMediator mediator, IMapper mapper)
+        {
+            _mediator = mediator;
+            _mapper = mapper;
+        }
+
+        protected ActionResult<ApiResponses<ResponseDto>> GetAll(IReaderGetAll<DataModel> readerGetAll)
         {
             var responseDtos = readerGetAll
                 .GetAll()
-                .Select(mapper.Map<ResponseDto>)
+                .Select(_mapper.Map<ResponseDto>)
                 .ToList();
             var responseDto = new ApiResponses<ResponseDto>
             {
@@ -32,16 +40,13 @@ namespace DiabloII.Application.Controllers
             return Ok(responseDto);
         }
 
-        protected ActionResult<HALResponse> GetAll(
-            IReaderGetAll<DataModel> readerGetAll,
-            IMapper mapper,
-            IHalService<ResponseDto> halService)
+        protected ActionResult<HALResponse> GetAll(IReaderGetAll<DataModel> readerGetAll, IHalService<ResponseDto> halService)
         {
             var halResponses = readerGetAll
                 .GetAll()
                 .Select(dataModel =>
                 {
-                    var responseDto = mapper.Map<ResponseDto>(dataModel);
+                    var responseDto = _mapper.Map<ResponseDto>(dataModel);
 
                     return halService.AddLinks(responseDto);
                 })
@@ -51,14 +56,11 @@ namespace DiabloII.Application.Controllers
             return Ok(halResponse);
         }
 
-        protected ActionResult<ApiResponses<ResponseDto>> Search<RequestDto, Query>(
-            RequestDto searchDto,
-            IReaderSearch<Query, DataModel> readerSearch,
-            IMapper mapper)
+        protected ActionResult<ApiResponses<ResponseDto>> Search<RequestDto, Query>(RequestDto searchDto, IReaderSearch<Query, DataModel> readerSearch)
         {
             var responseDtos = readerSearch
-                .Search(mapper.Map<Query>(searchDto))
-                .Select(mapper.Map<ResponseDto>)
+                .Search(_mapper.Map<Query>(searchDto))
+                .Select(_mapper.Map<ResponseDto>)
                 .ToList();
             var responseDto = new ApiResponses<ResponseDto>
             {
@@ -68,52 +70,28 @@ namespace DiabloII.Application.Controllers
             return Ok(responseDto);
         }
 
-        protected async Task<ActionResult<Guid>> Create<CreateDto, CreateCommand>(
-            CreateDto requestDto,
-            IMediator mediator,
-            IMapper mapper)
+        protected async Task<ActionResult<Guid>> Create<CreateDto, CreateCommand>(CreateDto requestDto)
         {
-            var command = mapper.Map<CreateCommand>(requestDto);
-            var createdId = await mediator.Send(command);
+            var command = _mapper.Map<CreateCommand>(requestDto);
+            var createdResourceId = await _mediator.Send(command);
 
-            return this.CreatedByUsingTheRequestRoute(createdId);
+            return this.CreatedByUsingTheRequestRoute(createdResourceId);
         }
 
-        protected async Task<ActionResult<ResponseDto>> Update<UpdateDto, UpdateCommand>(
-            UpdateDto dto,
-            IMediator mediator,
-            IMapper mapper)
+        protected async Task<ActionResult<Guid>> Update<UpdateDto, UpdateCommand>(UpdateDto dto)
         {
-            var command = mapper.Map<UpdateCommand>(dto);
-            var model = await mediator.Send(command);
-            var responseDto = mapper.Map<ResponseDto>(model);
+            var command = _mapper.Map<UpdateCommand>(dto);
+            var updatedResourceId = await _mediator.Send(command);
 
-            return Ok(responseDto);
+            return Ok(updatedResourceId);
         }
 
-        protected async Task<ActionResult<ResponseDto>> Delete<DeleteDto, DeleteCommand, ResponseDto>(
-            DeleteDto dto,
-            IMediator mediator,
-            IMapper mapper)
+        protected async Task<ActionResult<Guid>> Delete<DeleteDto, DeleteCommand>(DeleteDto dto)
         {
-            var command = mapper.Map<DeleteCommand>(dto);
-            var responseDto = await mediator.Send(command);
+            var command = _mapper.Map<DeleteCommand>(dto);
+            var deletedResourceId = await _mediator.Send(command);
 
-            return Ok(responseDto);
-        }
-
-        protected async Task<ActionResult<HALResponse>> DeleteWithMap<DeleteDto, DeleteCommand, ResponseDto>(
-            DeleteDto requestDto,
-            IMediator mediator,
-            IMapper mapper,
-            IHalService<ResponseDto> halService)
-        {
-            var command = mapper.Map<DeleteCommand>(requestDto);
-            var model = await mediator.Send(command);
-            var responseDto = mapper.Map<ResponseDto>(model);
-            var halResponse = halService.AddLinks(responseDto);
-
-            return Ok(halResponse);
+            return Ok(deletedResourceId);
         }
     }
 }

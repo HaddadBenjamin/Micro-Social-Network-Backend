@@ -1,9 +1,8 @@
-﻿using DiabloII.Domain.Models.Users;
-using MediatR;
+﻿using MediatR;
 
 namespace DiabloII.Domain.Commands.Users
 {
-    public class CreateAUserCommand : IRequest<User>
+    public class CreateAUserCommand : IRequest<string>
     {
         public string UserId { get; set; }
 

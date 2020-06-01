@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Domain.Commands.Notifications;
@@ -10,7 +11,7 @@ using MediatR;
 
 namespace DiabloII.Infrastructure.Handlers
 {
-    public class NotificationCommandHandler : IRequestHandler<CreateANotificationCommand, Notification>
+    public class NotificationCommandHandler : IRequestHandler<CreateANotificationCommand, Guid>
     {
         private readonly IMapper _mapper;
 
@@ -32,7 +33,7 @@ namespace DiabloII.Infrastructure.Handlers
             _service = service;
         }
 
-        public async Task<Notification> Handle(CreateANotificationCommand command, CancellationToken cancellationToken = default)
+        public async Task<Guid> Handle(CreateANotificationCommand command, CancellationToken cancellationToken = default)
         {
             var validationContext = new CreateANotificationValidationContext(command);
 
@@ -45,7 +46,7 @@ namespace DiabloII.Infrastructure.Handlers
 
             _service.Notify(notification, command.ConcernedUserIds);
 
-            return notification;
+            return notification.Id;
         }
     }
 }

@@ -19,16 +19,8 @@ namespace DiabloII.Application.Controllers
     {
         private readonly INotificationReader _reader;
 
-        private readonly IMapper _mapper;
-
-        private readonly IMediator _mediator;
-
-        public NotificationsController(INotificationReader reader, IMapper mapper, IMediator mediator)
-        {
+        public NotificationsController(INotificationReader reader, IMapper mapper, IMediator mediator) : base(mediator, mapper) =>
             _reader = reader;
-            _mapper = mapper;
-            _mediator = mediator;
-        }
 
         /// <summary>
         /// Get all the notifications
@@ -37,7 +29,7 @@ namespace DiabloII.Application.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponses<NotificationDto>), StatusCodes.Status200OK)]
         public ActionResult<ApiResponses<NotificationDto>> GetAll() =>
-            GetAll(_reader, _mapper);
+            GetAll(_reader);
 
         /// <summary>
         /// Create a notification
@@ -47,6 +39,6 @@ namespace DiabloII.Application.Controllers
         [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Guid>> Create([FromBody] CreateANotificationDto dto) =>
-            await Create<CreateANotificationDto, CreateANotificationCommand>(dto, _mediator, _mapper);
+            await Create<CreateANotificationDto, CreateANotificationCommand>(dto);
     }
 }

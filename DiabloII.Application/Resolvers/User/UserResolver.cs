@@ -33,7 +33,8 @@ namespace DiabloII.Application.Resolvers.User
             {
                 UserId = userId
             };
-            var createdUser = await _mediator.Send(createUserCommand);
+            var createdUserId = await _mediator.Send(createUserCommand);
+            var createdUser = _userRepository.Get(createdUserId);
 
             return createdUser;
         }
