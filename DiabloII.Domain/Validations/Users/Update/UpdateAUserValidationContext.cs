@@ -1,5 +1,6 @@
 ﻿using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Domain.Validations.Users.Update
 {

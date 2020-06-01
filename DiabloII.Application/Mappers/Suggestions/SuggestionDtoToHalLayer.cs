@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using AutoMapper;
 using DiabloII.Application.Responses.Suggestions;
-using DiabloII.Application.Services.Hals.Suggestions;
+using DiabloII.Application.Services.Hals.Domains.Suggestions;
 using DiabloII.Domain.Extensions;
 
 namespace DiabloII.Application.Mappers.Suggestions

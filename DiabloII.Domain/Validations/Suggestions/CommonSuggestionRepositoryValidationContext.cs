@@ -1,5 +1,6 @@
 ﻿using System;
 using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Domain.Validations.Suggestions
 {

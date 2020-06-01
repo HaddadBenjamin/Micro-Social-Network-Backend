@@ -3,7 +3,7 @@ using Autofac;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Application.Tests.Startup;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Infrastructure.Repositories;
 using SpecFlow.Autofac;
 

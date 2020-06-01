@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Queries.Domains.Suggestions;
-using DiabloII.Domain.Readers;
-using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Readers.Domains;
+using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Infrastructure.Readers
 {

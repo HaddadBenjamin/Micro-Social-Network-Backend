@@ -1,17 +1,18 @@
 ﻿using System.Threading.Tasks;
 using AutoMapper;
+using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Requests.Write.Users;
-using DiabloII.Application.Resolvers.User;
+using DiabloII.Application.Resolvers.Implementations.User;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Users;
 using DiabloII.Domain.Commands.Users;
 using DiabloII.Domain.Models.Users;
-using DiabloII.Domain.Readers;
+using DiabloII.Domain.Readers.Domains;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Application.Controllers
+namespace DiabloII.Application.Controllers.Domains
 {
     [Route("api/v1/")]
     public class UsersController : BaseController<User, UserDto>

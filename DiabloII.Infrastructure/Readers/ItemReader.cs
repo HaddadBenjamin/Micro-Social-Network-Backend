@@ -2,7 +2,9 @@
 using DiabloII.Domain.Models.Items;
 using DiabloII.Domain.Queries.Domains.Items;
 using DiabloII.Domain.Readers;
+using DiabloII.Domain.Readers.Domains;
 using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Infrastructure.Readers
 {

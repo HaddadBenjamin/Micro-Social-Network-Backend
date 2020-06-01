@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Requests.Read.Domains.Suggestions;
 using DiabloII.Application.Requests.Write.Suggestions;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Suggestions;
-using DiabloII.Application.Services.Hals.Suggestions;
+using DiabloII.Application.Services.Hals.Domains.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Models.Suggestions;
-using DiabloII.Domain.Readers;
+using DiabloII.Domain.Readers.Domains;
 using Halcyon.HAL;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Application.Controllers
+namespace DiabloII.Application.Controllers.Domains
 {
     [Route("api/v1/")]
     public class SuggestionsController : BaseController<Suggestion, SuggestionDto>

@@ -1,12 +1,13 @@
 ﻿using AutoMapper;
+using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.ErrorLogs;
 using DiabloII.Domain.Models.ErrorLogs;
-using DiabloII.Domain.Readers;
+using DiabloII.Domain.Readers.Domains;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Application.Controllers
+namespace DiabloII.Application.Controllers.Domains
 {
     [Route("api/v1/")]
     [ApiExplorerSettings(IgnoreApi = true)]

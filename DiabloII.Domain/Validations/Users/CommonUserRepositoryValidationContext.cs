@@ -1,4 +1,5 @@
 ﻿using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Domain.Validations.Users
 {

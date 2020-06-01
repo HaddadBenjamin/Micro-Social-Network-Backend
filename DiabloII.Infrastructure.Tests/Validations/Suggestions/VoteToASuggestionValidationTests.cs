@@ -3,6 +3,7 @@ using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Domain.Validations.Suggestions.Vote;
 using DiabloII.Infrastructure.Repositories;
 using NUnit.Framework;

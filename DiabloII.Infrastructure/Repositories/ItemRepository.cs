@@ -4,6 +4,7 @@ using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Items;
 using DiabloII.Domain.Queries.Domains.Items;
 using DiabloII.Domain.Repositories;
+using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Infrastructure.DbContext;
 using EFCore.BulkExtensions;
 using Microsoft.EntityFrameworkCore;

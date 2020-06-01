@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Extensions;
 using DiabloII.Application.Responses;
-using DiabloII.Application.Services.Hals;
+using DiabloII.Application.Services.Hals.Bases;
 using DiabloII.Domain.Readers.Bases;
 using Halcyon.HAL;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Application.Controllers
+namespace DiabloII.Application.Controllers.Bases
 {
     public class BaseController<DataModel, ResponseDto> : ControllerBase
         where DataModel : class

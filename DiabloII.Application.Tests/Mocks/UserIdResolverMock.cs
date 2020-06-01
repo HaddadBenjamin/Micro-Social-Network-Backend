@@ -1,4 +1,4 @@
-﻿using DiabloII.Application.Resolvers.UserId;
+﻿using DiabloII.Application.Resolvers.Implementations.UserId;
 
 namespace DiabloII.Application.Tests.Mocks
 {
