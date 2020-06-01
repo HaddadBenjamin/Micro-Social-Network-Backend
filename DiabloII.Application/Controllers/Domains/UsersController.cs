@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using AutoMapper;
+using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Requests.Users;
 using DiabloII.Application.Resolvers.User;
 using DiabloII.Application.Responses.Read.Bases;
@@ -12,7 +13,7 @@ using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Application.Controllers
+namespace DiabloII.Application.Controllers.Domains
 {
     [Route("api/v1/")]
     public class UsersController : BaseController<User, UserDto>

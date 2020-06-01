@@ -10,7 +10,7 @@ using Halcyon.HAL;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DiabloII.Application.Controllers
+namespace DiabloII.Application.Controllers.Bases
 {
     public class BaseController<DataModel, ResponseDto> : ControllerBase
         where DataModel : class
