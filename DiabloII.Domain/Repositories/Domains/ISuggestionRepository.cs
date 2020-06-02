@@ -9,6 +9,8 @@ namespace DiabloII.Domain.Repositories.Domains
         IRepositoryGet<Suggestion, Guid>
     {
         #region Read
+        Suggestion GetByContent(string content);
+
         Suggestion GetUserSuggestion(Guid suggestionId, string userId);
 
         SuggestionVote GetUserVoteOrDefault(Suggestion suggestion, string userId);

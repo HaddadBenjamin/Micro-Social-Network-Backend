@@ -31,15 +31,16 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
         [When(@"I vote to the suggestion ""(.*)""")]
         public async Task WhenIVoteToTheSuggestion(string suggestionContent, Table table)
         {
-            var suggestionId = await _suggestionsRepository.GetSuggestionId(suggestionContent);
+            var suggestionId = await _suggestionsRepository.GetIdByItsContent(suggestionContent);
             var dto = table.CreateInstance<VoteToASuggestionDto>();
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedResourceId = await _suggestionsApi.Create(dto);
+            await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the voted suggestion should be")]
-        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionsContext.GetResource, SuggestionsTableMapper.ToSuggestionDto);
+        public void ThenTheVotedSuggestionShouldBe(Table table) =>
+            table.ShouldBeEqualsTo(_suggestionsContext.Vote, SuggestionsTableMapper.ToSuggestionVoteDto);
     }
 }

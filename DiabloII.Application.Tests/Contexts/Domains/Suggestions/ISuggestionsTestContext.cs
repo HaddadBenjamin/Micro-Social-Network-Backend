@@ -1,5 +1,4 @@
-﻿using System;
-using DiabloII.Application.Responses.Read.Suggestions;
+﻿using DiabloII.Application.Responses.Read.Suggestions;
 using DiabloII.Application.Tests.Contexts.Bases;
 
 namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
@@ -9,8 +8,8 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
         ITestContextGet<SuggestionDto>,
         ITestContextCreated
     {
-        Guid VotedResourceId { get; set; }
+        SuggestionVoteDto Vote { get; set; }
 
-        Guid CommentedResourceId { get; set; }
+        SuggestionCommentDto Comment { get; set; }
     }
 }

@@ -24,7 +24,10 @@ namespace DiabloII.Infrastructure.Repositories
         public IReadOnlyCollection<Suggestion> GetAll() => GetQueryableSuggestions().ToList();
 
         public Suggestion Get(Guid suggestionId) =>
-            GetQueryableSuggestions().SingleOrDefault(vote => vote.Id == suggestionId);
+            GetQueryableSuggestions().SingleOrDefault(suggestion => suggestion.Id == suggestionId);
+
+        public Suggestion GetByContent(string content) =>
+            GetQueryableSuggestions().SingleOrDefault(suggestion => suggestion.Content == content);
 
         public Suggestion GetUserSuggestion(Guid suggestionId, string userId) => GetQueryableSuggestions()
             .FirstOrDefault(suggestion => suggestion.Id == suggestionId && suggestion.CreatedBy == userId);

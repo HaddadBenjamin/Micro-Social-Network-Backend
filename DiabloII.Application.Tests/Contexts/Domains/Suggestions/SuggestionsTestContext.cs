@@ -10,10 +10,10 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
 
         public Guid CreatedResourceId { get; set; }
 
-        public Guid VotedResourceId { get; set; }
-
-        public Guid CommentedResourceId { get; set; }
-
         public SuggestionDto GetResource { get; set; }
+
+        public SuggestionVoteDto Vote { get; set; }
+
+        public SuggestionCommentDto Comment { get; set; }
     }
 }

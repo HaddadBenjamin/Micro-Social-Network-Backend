@@ -13,13 +13,19 @@ namespace DiabloII.Application.Tests.Repositories.Suggestions
         public SuggestionsRepository(ISuggestionsApi suggestionsApi) => _suggestionsApi = suggestionsApi;
 
         #region Read
-        public async Task<Guid> GetSuggestionId(string suggestionContent) => (await GetSuggestion(suggestionContent)).Id;
+        public async Task<Guid> GetIdByItsContent(string content) => (await GetByItsContent(content)).Id;
 
-        public async Task<SuggestionDto> GetSuggestion(string suggestionContent) => (await _suggestionsApi.GetAll()).Elements
-            .Single(suggestion => suggestion.Content == suggestionContent);
+        public async Task<SuggestionDto> GetByItsContent(string content) => (await _suggestionsApi.GetAll()).Elements
+            .Single(suggestion => suggestion.Content == content);
 
-        public Guid GetSuggestionCommentId(SuggestionDto suggestionDto, string suggestionCommentContent) => suggestionDto.Comments
-            .Single(comment => comment.Comment == suggestionCommentContent).Id;
+        public SuggestionCommentDto GetCommentByItsContent(SuggestionDto suggestion, string commentContent) => suggestion.Comments
+            .Single(comment => comment.Comment == commentContent);
+
+        public Guid GetCommentIdByItsContent(SuggestionDto suggestion, string commentContent) =>
+            GetCommentByItsContent(suggestion, commentContent).Id;
+
+        public SuggestionVoteDto GetVoteCreatedBy(SuggestionDto suggestion, string createdBy) => suggestion.Votes
+            .Single(vote => vote.CreatedBy == createdBy);
         #endregion
     }
 }

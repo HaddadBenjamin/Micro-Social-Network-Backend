@@ -8,9 +8,10 @@ Scenario: Update a user happy path
 	Given I create the users with the following informations
 		| Email                      | UserId      |
 		| DiabloIIenriched@gmail.com | any user id |
-	When I update the user "DiabloIIenriched@gmail.com" with the following informations
+	And I update the user "DiabloIIenriched@gmail.com" with the following informations
 		| Email               | AcceptedNotifications                                         | AcceptedNotifiers |
 		| firefouks@gmail.com | Other,PatchNotes,CreatedSuggestion,NewCommentOnYourSuggestion | InApp,Mail        |
+	When I get the updated user
 	Then the http status code should be 200
 	And the updated user should be
 		| Email               | AcceptedNotifications                                         | AcceptedNotifiers |

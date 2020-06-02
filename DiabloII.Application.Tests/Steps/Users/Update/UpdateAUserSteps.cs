@@ -26,7 +26,7 @@ namespace DiabloII.Application.Tests.Steps.Users.Update
             _repository = repository;
         }
 
-        [When(@"I update the user ""(.*)"" with the following informations")]
+        [Given(@"I update the user ""(.*)"" with the following informations")]
         public async Task WhenIUpdateTheUserWithTheFollowingInformations(string email, Table table)
         {
             var userId = _repository.GetUserIdByItsEmail(email);

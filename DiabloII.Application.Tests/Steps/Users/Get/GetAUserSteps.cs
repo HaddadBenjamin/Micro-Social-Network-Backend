@@ -28,6 +28,15 @@ namespace DiabloII.Application.Tests.Steps.Users.Get
             _usersContext.GetResource = await _usersApi.Get(createdUserId);
         }
 
+        [When(@"I get the updated user")]
+        public async Task WhenIGetTheUpdatedUser()
+        {
+            var updatedUserId = _usersContext.UpdatedResourceId;
+
+            _usersContext.GetResource = await _usersApi.Get(updatedUserId);
+        }
+
+
         [Then(@"the user should be")]
         public void ThenTheUserShouldBe(Table table) =>
             table.ShouldBeEqualsTo(_usersContext.GetResource);
