@@ -9,7 +9,7 @@ using DiabloII.Application.Services.Hals.Bases;
 using Halcyon.HAL;
 using Microsoft.AspNetCore.Http;
 
-namespace DiabloII.Application.Services.Hals.Suggestions
+namespace DiabloII.Application.Services.Hals.Domains.Suggestions
 {
     public class SuggestionHalService : BaseHalService, ISuggestionHalService
     {

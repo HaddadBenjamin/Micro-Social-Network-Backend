@@ -9,11 +9,11 @@ namespace DiabloII.Application.Tests.Apis.Domains.Suggestions
     public interface ISuggestionsApi :
         IApiGetAll<SuggestionDto>,
         IApiGet<SuggestionDto, Guid>,
-        IApiCreate<CreateASuggestionDto, SuggestionDto>,
-        IApiCreate<VoteToASuggestionDto, SuggestionDto>,
-        IApiCreate<CommentASuggestionDto, SuggestionDto>,
-        IApiDelete<DeleteASuggestionDto, Guid>,
-        IApiDelete<DeleteASuggestionCommentDto, SuggestionDto>,
+        IApiCreate<CreateASuggestionDto>,
+        IApiCreate<VoteToASuggestionDto>,
+        IApiCreate<CommentASuggestionDto>,
+        IApiDelete<DeleteASuggestionDto>,
+        IApiDelete<DeleteASuggestionCommentDto>,
         IApiGetAllWithHals<HalSuggestionsDto>
     {
     }

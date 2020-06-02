@@ -17,16 +17,19 @@ namespace DiabloII.Application.Tests.Apis.Domains.Users
         public async Task<ApiResponses<UserDto>> GetAll() =>
             await _httpService.GetAsync<ApiResponses<UserDto>>(BaseUrl);
 
+        public async Task<UserDto> Get(string userId) =>
+            await _httpService.GetAsync<UserDto>($"{BaseUrl}/{userId}");
+
         public async Task<UserDto> IdentifyMe() =>
             await _httpService.GetAsync<UserDto>($"{BaseUrl}/identifyme");
         #endregion
 
         #region Write
-        public async Task<UserDto> Create(CreateAUserDto dto) =>
-            await _httpService.PostAsync<UserDto>(BaseUrl, dto);
+        public async Task<string> Create(CreateAUserDto dto) =>
+            await _httpService.PostAsync<string>(BaseUrl, dto);
 
-        public async Task<UserDto> Update(UpdateAUserDto dto) =>
-            await _httpService.PutAsync<UserDto>($"{BaseUrl}/{dto.UserId}", dto);
+        public async Task<string> Update(UpdateAUserDto dto) =>
+            await _httpService.PutAsync<string>($"{BaseUrl}/{dto.UserId}", dto);
         #endregion
     }
 }

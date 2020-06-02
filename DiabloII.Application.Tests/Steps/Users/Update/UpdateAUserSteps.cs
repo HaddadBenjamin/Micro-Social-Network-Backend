@@ -32,11 +32,11 @@ namespace DiabloII.Application.Tests.Steps.Users.Update
             var userId = _repository.GetUserIdByItsEmail(email);
             var dto = UsersTableMapper.ToUpdateAUserDto(table.Rows.First(), userId);
 
-            _userContext.UpdatedResource = await _usersApi.Update(dto);
+            _userContext.UpdatedResourceId = await _usersApi.Update(dto);
         }
 
         [Then(@"the updated user should be")]
         public void ThenTheUpdatedUserShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_userContext.UpdatedResource, UsersTableMapper.ToUserDto);
+            table.ShouldBeEqualsTo(_userContext.GetResource, UsersTableMapper.ToUserDto);
     }
 }

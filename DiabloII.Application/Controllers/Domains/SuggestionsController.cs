@@ -5,7 +5,7 @@ using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Requests.Write.Suggestions;
 using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Responses.Read.Suggestions;
-using DiabloII.Application.Services.Hals.Suggestions;
+using DiabloII.Application.Services.Hals.Domains.Suggestions;
 using DiabloII.Domain.Commands.Suggestions;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Readers.Domains;

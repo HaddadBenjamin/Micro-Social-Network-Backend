@@ -36,10 +36,10 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Vote
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedResource = await _suggestionsApi.Create(dto);
+            _suggestionsContext.VotedResourceId = await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the voted suggestion should be")]
-        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionsContext.VotedResource, SuggestionsTableMapper.ToSuggestionDto);
+        public void ThenTheVotedSuggestionShouldBe(Table table) => table.ShouldBeEqualsTo(_suggestionsContext.GetResource, SuggestionsTableMapper.ToSuggestionDto);
     }
 }

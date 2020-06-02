@@ -22,25 +22,25 @@ namespace DiabloII.Application.Tests.Apis.Domains.Suggestions
         public async Task<HalSuggestionsDto> GetAllWithHals() =>
             await _httpService.GetAsync<HalSuggestionsDto>(BaseUrl);
 
-        public async Task<SuggestionDto> Get(Guid id) =>
-            await _httpService.GetAsync<SuggestionDto>($"{BaseUrl}/{id}");
+        public async Task<SuggestionDto> Get(Guid suggestionId) =>
+            await _httpService.GetAsync<SuggestionDto>($"{BaseUrl}/{suggestionId}");
         #endregion
 
         #region Write
-        public async Task<SuggestionDto> Create(CreateASuggestionDto dto) =>
-            await _httpService.PostAsync<SuggestionDto>(BaseUrl, dto);
+        public async Task<Guid> Create(CreateASuggestionDto dto) =>
+            await _httpService.PostAsync<Guid>(BaseUrl, dto);
 
-        public async Task<SuggestionDto> Create(VoteToASuggestionDto dto) =>
-            await _httpService.PostAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/votes", dto);
+        public async Task<Guid> Create(VoteToASuggestionDto dto) =>
+            await _httpService.PostAsync<Guid>($"{BaseUrl}/{dto.SuggestionId}/votes", dto);
 
-        public async Task<SuggestionDto> Create(CommentASuggestionDto dto) =>
-            await _httpService.PostAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/comments", dto);
+        public async Task<Guid> Create(CommentASuggestionDto dto) =>
+            await _httpService.PostAsync<Guid>($"{BaseUrl}/{dto.SuggestionId}/comments", dto);
 
         public async Task<Guid> Delete(DeleteASuggestionDto dto) =>
             await _httpService.DeleteAsync<Guid>($"{BaseUrl}/{dto.Id}", dto);
 
-        public async Task<SuggestionDto> Delete(DeleteASuggestionCommentDto dto) =>
-            await _httpService.DeleteAsync<SuggestionDto>($"{BaseUrl}/{dto.SuggestionId}/comments/{dto.Id}", dto);
+        public async Task<Guid> Delete(DeleteASuggestionCommentDto dto) =>
+            await _httpService.DeleteAsync<Guid>($"{BaseUrl}/{dto.SuggestionId}/comments/{dto.Id}", dto);
         #endregion
     }
 }

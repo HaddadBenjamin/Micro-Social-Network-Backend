@@ -36,11 +36,11 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedResource = await _suggestionsApi.Create(dto);
+            _suggestionsContext.VotedResourceId = await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the commented suggestion should be")]
         public void ThenTheCommentedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_suggestionsContext.CommentedResource, SuggestionsTableMapper.ToSuggestionDto);
+            table.ShouldBeEqualsTo(_suggestionsContext.GetResource, SuggestionsTableMapper.ToSuggestionDto);
     }
 }

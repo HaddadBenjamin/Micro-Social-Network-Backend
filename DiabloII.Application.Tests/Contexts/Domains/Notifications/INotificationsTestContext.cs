@@ -5,7 +5,8 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Notifications
 {
     public interface INotificationsTestContext :
         ITestContextAll<NotificationDto>,
-        ITestContextCreated<NotificationDto>
+        ITestContextGet<NotificationDto>,
+        ITestContextCreated
     {
     }
 }

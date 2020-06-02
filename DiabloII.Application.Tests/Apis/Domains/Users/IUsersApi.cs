@@ -7,8 +7,9 @@ namespace DiabloII.Application.Tests.Apis.Domains.Users
 {
     public interface IUsersApi :
         IApiGetAll<UserDto>,
-        IApiCreate<CreateAUserDto, UserDto>,
-        IUpdateApi<UpdateAUserDto, UserDto>
+        IApiGet<UserDto, string>,
+        IApiCreate<CreateAUserDto, string>,
+        IUpdateApi<UpdateAUserDto, string>
     {
         Task<UserDto> IdentifyMe();
     }

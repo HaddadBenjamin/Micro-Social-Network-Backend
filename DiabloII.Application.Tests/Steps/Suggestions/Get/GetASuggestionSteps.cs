@@ -23,7 +23,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Get
         [When(@"I get the last created suggestion")]
         public async Task WhenIGetTheLastCreatedSuggestion()
         {
-            var suggestionId = _suggestionsContext.CreatedResource.Id;
+            var suggestionId = _suggestionsContext.CreatedResourceId;
 
             _suggestionsContext.GetResource = await _suggestionsApi.Get(suggestionId);
         }

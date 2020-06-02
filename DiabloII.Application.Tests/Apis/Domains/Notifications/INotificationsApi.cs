@@ -6,7 +6,8 @@ namespace DiabloII.Application.Tests.Apis.Domains.Notifications
 {
     public interface INotificationsApi :
         IApiGetAll<NotificationDto>,
-        IApiCreate<CreateANotificationDto, NotificationDto>
+        IApiGet<NotificationDto>,
+        IApiCreate<CreateANotificationDto>
     {
     }
 }

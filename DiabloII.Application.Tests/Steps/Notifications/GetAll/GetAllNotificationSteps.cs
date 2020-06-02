@@ -8,13 +8,13 @@ namespace DiabloII.Application.Tests.Steps.Notifications.GetAll
 {
     [Binding]
     [Scope(Tag = "notifications")]
-    public class GetAllNotificationSteps
+    public class GetAllANotificationsSteps
     {
         private readonly INotificationsApi _notificationsApi;
 
         private readonly INotificationsTestContext _notificationsContext;
 
-        public GetAllNotificationSteps(INotificationsApi notificationsApi, INotificationsTestContext notificationsContext)
+        public GetAllANotificationsSteps(INotificationsApi notificationsApi, INotificationsTestContext notificationsContext)
         {
             _notificationsApi = notificationsApi;
             _notificationsContext = notificationsContext;
