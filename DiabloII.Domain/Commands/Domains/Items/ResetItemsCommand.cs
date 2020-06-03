@@ -2,7 +2,7 @@
 using DiabloII.Domain.Models.Items;
 using MediatR;
 
-namespace DiabloII.Domain.Commands.Items
+namespace DiabloII.Domain.Commands.Domains.Items
 {
     public class ResetItemsCommand : IRequest
     {

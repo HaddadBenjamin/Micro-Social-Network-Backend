@@ -3,8 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Extensions;
+using DiabloII.Application.Hals.Bases;
 using DiabloII.Application.Responses.Read.Bases;
-using DiabloII.Application.Services.Hals.Bases;
+using DiabloII.Domain.Commands.Bases;
 using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Readers.Bases;
 using Halcyon.HAL;
@@ -42,7 +43,7 @@ namespace DiabloII.Application.Controllers.Bases
             return Ok(responseDto);
         }
 
-        protected ActionResult<HALResponse> GetAll(IReaderGetAll<DataModel> readerGetAll, IHalService<ResponseDto> halService)
+        protected ActionResult<HALResponse> GetAll(IReaderGetAll<DataModel> readerGetAll, IHalDecorator<ResponseDto> halDecorator)
         {
             var halResponses = readerGetAll
                 .GetAll()
@@ -50,10 +51,10 @@ namespace DiabloII.Application.Controllers.Bases
                 {
                     var responseDto = _mapper.Map<ResponseDto>(dataModel);
 
-                    return halService.AddLinks(responseDto);
+                    return halDecorator.AddLinks(responseDto);
                 })
                 .ToList();
-            var halResponse = halService.AddLinks(halResponses);
+            var halResponse = halDecorator.AddLinks(halResponses);
 
             return Ok(halResponse);
         }
@@ -72,7 +73,7 @@ namespace DiabloII.Application.Controllers.Bases
             return Ok(responseDto);
         }
 
-        protected ActionResult<HALResponse> Get<RequestDto, Query>(RequestDto requestDto, IReaderGet<DataModel, Query> readerGet, IHalService<ResponseDto> halService)
+        protected ActionResult<HALResponse> Get<RequestDto, Query>(RequestDto requestDto, IReaderGet<DataModel, Query> readerGet, IHalDecorator<ResponseDto> halDecorator)
         {
             var query = _mapper.Map<Query>(requestDto);
             var dataModel = readerGet.Get(query);
@@ -81,7 +82,7 @@ namespace DiabloII.Application.Controllers.Bases
                 throw new NotFoundException("suggestion");
 
             var responseDto = _mapper.Map<ResponseDto>(dataModel);
-            var halResponse = halService.AddLinks(responseDto);
+            var halResponse = halDecorator.AddLinks(responseDto);
 
             return Ok(halResponse);
         }
@@ -102,27 +103,45 @@ namespace DiabloII.Application.Controllers.Bases
 
         #region Write
         protected async Task<ActionResult<Guid>> Create<CreateDto, CreateCommand>(CreateDto requestDto)
+            where  CreateCommand : ICreateCommand<Guid> =>
+            await Create<CreateDto, CreateCommand, Guid>(requestDto);
+       
+        protected async Task<ActionResult<CreatedtResourceId>> Create<CreateDto, CreateCommand, CreatedtResourceId>(CreateDto requestDto)
+            where  CreateCommand : ICreateCommand<CreatedtResourceId>
         {
             var command = _mapper.Map<CreateCommand>(requestDto);
-            var createdResourceId = await _mediator.Send(command);
+            
+            await _mediator.Send(command);
 
-            return this.CreatedByUsingTheRequestRoute(createdResourceId);
+            return this.CreatedByUsingTheRequestRoute(command.Id);
         }
 
         protected async Task<ActionResult<Guid>> Update<UpdateDto, UpdateCommand>(UpdateDto dto)
+            where UpdateCommand : IUpdateCommand =>
+            await Update<UpdateDto, UpdateCommand, Guid>(dto);
+
+        protected async Task<ActionResult<UpdatedResourceId>> Update<UpdateDto, UpdateCommand, UpdatedResourceId>(UpdateDto dto)
+            where UpdateCommand : IUpdateCommand<UpdatedResourceId>
         {
             var command = _mapper.Map<UpdateCommand>(dto);
-            var updatedResourceId = await _mediator.Send(command);
+            
+            await _mediator.Send(command);
 
-            return Ok(updatedResourceId);
+            return Ok(command.Id);
         }
 
         protected async Task<ActionResult<Guid>> Delete<DeleteDto, DeleteCommand>(DeleteDto dto)
+            where DeleteCommand : IDeleteCommand<Guid> =>
+            await Delete<DeleteDto, DeleteCommand, Guid>(dto);
+
+        protected async Task<ActionResult<DeletedResourceId>> Delete<DeleteDto, DeleteCommand, DeletedResourceId>(DeleteDto dto)
+            where DeleteCommand : IDeleteCommand<DeletedResourceId>
         {
             var command = _mapper.Map<DeleteCommand>(dto);
-            var deletedResourceId = await _mediator.Send(command);
+            
+            await _mediator.Send(command);
 
-            return Ok(deletedResourceId);
+            return Ok(command.Id);
         }
         #endregion
     }

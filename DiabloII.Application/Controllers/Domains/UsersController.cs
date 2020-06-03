@@ -6,7 +6,7 @@ using DiabloII.Application.Requests.Write.Users;
 using DiabloII.Application.Resolvers.Implementations.User;
 using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Responses.Read.Users;
-using DiabloII.Domain.Commands.Users;
+using DiabloII.Domain.Commands.Domains.Users;
 using DiabloII.Domain.Models.Users;
 using DiabloII.Domain.Readers.Domains;
 using MediatR;
@@ -73,26 +73,27 @@ namespace DiabloII.Application.Controllers.Domains
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public async Task<ActionResult<Guid>> Create([FromBody] CreateAUserDto dto) =>
-            await Create<CreateAUserDto, CreateAUserCommand>(dto);
+        public async Task<ActionResult<string>> Create([FromBody] CreateAUserDto dto) =>
+            await Create<CreateAUserDto, CreateAUserCommand, string>(dto);
 
         /// <summary>
         /// Update a user
         /// </summary>
-        [Route("users/{userId}")]
+        [Route("users/{id}")]
         [HttpPut]
         [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public async Task<ActionResult<Guid>> Update([FromBody] UpdateAUserDto dto, string userId)
+        public async Task<ActionResult<Guid>> Update([FromBody] UpdateAUserDto dto, string id)
         {
-            dto.UserId = userId;
+            dto.Id = id;
 
             var command = _mapper.Map<UpdateAUserCommand>(dto);
-            var updatedResourceId = await _mediator.Send(command);
+            
+            await _mediator.Send(command);
 
-            return Ok(updatedResourceId);
+            return Ok(command.Id);
         }
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using DiabloII.Domain.Commands.Suggestions;
+using DiabloII.Domain.Commands.Domains.Suggestions;
 using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories.Domains;

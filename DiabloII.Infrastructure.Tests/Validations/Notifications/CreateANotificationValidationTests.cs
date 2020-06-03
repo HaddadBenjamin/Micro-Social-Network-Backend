@@ -1,4 +1,4 @@
-using DiabloII.Domain.Commands.Notifications;
+using DiabloII.Domain.Commands.Domains.Notifications;
 using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Validations.Notifications.Create;

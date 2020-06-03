@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DiabloII.Domain.Commands.Users;
+using DiabloII.Domain.Commands.Domains.Users;
 using DiabloII.Domain.Models.Users;
 
 namespace DiabloII.Domain.Mappers.Users
@@ -10,7 +10,7 @@ namespace DiabloII.Domain.Mappers.Users
         {
             CreateMap<CreateAUserCommand, User>().AfterMap((command, dataModel) =>
             {
-                dataModel.Id = command.UserId;
+                dataModel.Id = command.Id;
                 dataModel.NotificationSetting = new UserNotificationSetting
                 {
                     User = dataModel,

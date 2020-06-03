@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
-using DiabloII.Domain.Commands.Users;
+using DiabloII.Domain.Commands.Domains.Users;
 using DiabloII.Domain.Models.Users;
 using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Domain.Validations.Users.Create;
@@ -12,8 +12,8 @@ using MediatR;
 namespace DiabloII.Infrastructure.Handlers
 {
     public class UserCommandHandler :
-        IRequestHandler<CreateAUserCommand, string>,
-        IRequestHandler<UpdateAUserCommand, string>
+        IRequestHandler<CreateAUserCommand>,
+        IRequestHandler<UpdateAUserCommand>
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -35,37 +35,37 @@ namespace DiabloII.Infrastructure.Handlers
             _updateValidator = updateValidator;
         }
 
-        public async Task<string> Handle(CreateAUserCommand command, CancellationToken cancellationToken = default)
+        public async Task<Unit> Handle(CreateAUserCommand command, CancellationToken cancellationToken = default)
         {
             var validationContext = new CreateAUserValidationContext(command, _repository);
 
             _createValidator.Validate(validationContext);
 
-            if (_repository.DoesUserExists(command.UserId))
-                return _repository.Get(command.UserId).Id;
+            if (_repository.DoesUserExists(command.Id))
+                return Unit.Value;
 
             var user = _mapper.Map<User>(command);
 
             _dbContext.Users.Add(user);
             await _dbContext.SaveChangesAsync();
 
-            return user.Id;
+            return Unit.Value;
         }
 
-        public async Task<string> Handle(UpdateAUserCommand command, CancellationToken cancellationToken = default)
+        public async Task<Unit> Handle(UpdateAUserCommand command, CancellationToken cancellationToken = default)
         {
             var validationContext = new UpdateAUserValidationContext(command, _repository);
 
             _updateValidator.Validate(validationContext);
 
-            var user = _repository.Get(command.UserId);
+            var user = _repository.Get(command.Id);
 
             user.Update(command);
 
             _dbContext.Users.Update(user);
             await _dbContext.SaveChangesAsync();
 
-            return user.Id;
+            return Unit.Value;
         }
     }
 }

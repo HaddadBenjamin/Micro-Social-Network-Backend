@@ -36,7 +36,6 @@ namespace DiabloII.Application.Tests.Steps.Users.Get
             _usersContext.GetResource = await _usersApi.Get(updatedUserId);
         }
 
-
         [Then(@"the user should be")]
         public void ThenTheUserShouldBe(Table table) =>
             table.ShouldBeEqualsTo(_usersContext.GetResource);

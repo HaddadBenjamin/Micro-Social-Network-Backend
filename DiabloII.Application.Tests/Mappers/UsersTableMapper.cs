@@ -10,9 +10,9 @@ namespace DiabloII.Application.Tests.Mappers
 {
     public static class UsersTableMapper
     {
-        public static UpdateAUserDto ToUpdateAUserDto(TableRow row, string userId) => new UpdateAUserDto
+        public static UpdateAUserDto ToUpdateAUserDto(TableRow row, string id) => new UpdateAUserDto
         {
-            UserId = userId,
+            Id = id,
             Email = row.GetString("Email"),
             AcceptedNotifications = row.GetString("AcceptedNotifications")
                 ?.Split(",")

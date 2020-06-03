@@ -6,7 +6,7 @@ namespace DiabloII.Domain.Validations.Users.Create
     {
         public CreateAUserValidator()
         {
-            RuleFor(context => context.Command.UserId).ShouldNotBeNullOrEmpty("UserId");
+            RuleFor(context => context.Command.Id).ShouldNotBeNullOrEmpty("Id");
             RuleFor(context => context.Command.Email).ShouldBeNullOrAValidEmail("Email");
 
             RuleFor(context => context.RepositoryValidationContext).EmailShouldBeNullOrUnique();

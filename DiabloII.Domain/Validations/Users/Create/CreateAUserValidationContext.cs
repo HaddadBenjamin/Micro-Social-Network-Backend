@@ -1,4 +1,4 @@
-﻿using DiabloII.Domain.Commands.Users;
+﻿using DiabloII.Domain.Commands.Domains.Users;
 using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Domain.Validations.Users.Create
@@ -14,7 +14,7 @@ namespace DiabloII.Domain.Validations.Users.Create
             Command = command;
             RepositoryValidationContext = new CommonUserRepositoryValidationContext(repository)
             {
-                Id = Command.UserId,
+                Id = Command.Id,
                 Email = Command.Email
             };
         }

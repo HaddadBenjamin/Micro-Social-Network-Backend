@@ -1,12 +1,8 @@
-﻿
-
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using DiabloII.Application.Tests.Apis.Domains.Suggestions;
 using DiabloII.Application.Tests.Contexts.Domains.Suggestions;
 using DiabloII.Application.Tests.Extensions;
 using DiabloII.Application.Tests.Repositories.Suggestions;
-using DiabloII.Domain.Repositories.Domains;
 using TechTalk.SpecFlow;
 
 namespace DiabloII.Application.Tests.Steps.Suggestions.Get

@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using DiabloII.Domain.Commands.Notifications;
+using DiabloII.Domain.Commands.Domains.Notifications;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Models.Suggestions;
 

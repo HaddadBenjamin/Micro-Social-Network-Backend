@@ -1,9 +1,10 @@
 ﻿using System;
+using DiabloII.Domain.Commands.Bases;
 using MediatR;
 
-namespace DiabloII.Domain.Commands.ErrorLogs
+namespace DiabloII.Domain.Commands.Domains.ErrorLogs
 {
-    public class CreateErrorLogCommand : IRequest<Guid>
+    public class CreateErrorLogCommand : IRequest, ICreateCommand
     {
         public Guid Id { get; set; }
 

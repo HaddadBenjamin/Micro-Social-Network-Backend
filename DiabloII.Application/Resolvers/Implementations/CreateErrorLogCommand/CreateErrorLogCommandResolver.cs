@@ -6,7 +6,7 @@ using System.Net;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
-using CreateErrorLog = DiabloII.Domain.Commands.ErrorLogs.CreateErrorLogCommand;
+using CreateErrorLog = DiabloII.Domain.Commands.Domains.ErrorLogs.CreateErrorLogCommand;
 
 namespace DiabloII.Application.Resolvers.Implementations.CreateErrorLogCommand
 {

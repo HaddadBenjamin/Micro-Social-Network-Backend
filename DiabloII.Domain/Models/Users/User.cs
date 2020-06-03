@@ -1,4 +1,4 @@
-﻿using DiabloII.Domain.Commands.Users;
+﻿using DiabloII.Domain.Commands.Domains.Users;
 
 namespace DiabloII.Domain.Models.Users
 {

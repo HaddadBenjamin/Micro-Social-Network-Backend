@@ -1,9 +1,10 @@
 ﻿using System;
+using DiabloII.Domain.Commands.Bases;
 using MediatR;
 
-namespace DiabloII.Domain.Commands.Suggestions
+namespace DiabloII.Domain.Commands.Domains.Suggestions
 {
-    public class DeleteASuggestionCommentCommand : IRequest<Guid>
+    public class DeleteASuggestionCommentCommand : IRequest, IDeleteCommand
     {
         public Guid Id { get; set; }
 

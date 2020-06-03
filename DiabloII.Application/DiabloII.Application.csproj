@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Decorators\" />
     <Folder Include="Responses\Write\Bases\" />
   </ItemGroup>
 

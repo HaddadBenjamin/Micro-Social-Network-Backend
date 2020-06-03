@@ -4,14 +4,14 @@ using Halcyon.HAL;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 
-namespace DiabloII.Application.Services.Hals.Bases
+namespace DiabloII.Application.Hals.Bases
 {
-    public class BaseHalService
+    public class BaseHalDecorator
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private static readonly Regex _baseUrlRegex = new Regex(@".*api/v(\d)");
 
-        public BaseHalService(IHttpContextAccessor httpContextAccessor) => _httpContextAccessor = httpContextAccessor;
+        public BaseHalDecorator(IHttpContextAccessor httpContextAccessor) => _httpContextAccessor = httpContextAccessor;
 
         protected HALResponse ToHalResponse(object model)
         {

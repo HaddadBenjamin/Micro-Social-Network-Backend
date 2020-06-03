@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Resolvers.Implementations.UserId;
-using DiabloII.Domain.Commands.Users;
+using DiabloII.Domain.Commands.Domains.Users;
 using DiabloII.Domain.Repositories.Domains;
 using MediatR;
 
@@ -31,10 +31,12 @@ namespace DiabloII.Application.Resolvers.Implementations.User
 
             var createUserCommand = new CreateAUserCommand
             {
-                UserId = userId
+                Id = userId
             };
-            var createdUserId = await _mediator.Send(createUserCommand);
-            var createdUser = _userRepository.Get(createdUserId);
+
+            await _mediator.Send(createUserCommand);
+
+            var createdUser = _userRepository.Get(createUserCommand.Id);
 
             return createdUser;
         }

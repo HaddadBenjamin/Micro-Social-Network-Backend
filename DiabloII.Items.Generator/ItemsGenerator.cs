@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using DiabloII.Domain.Commands.Items;
+using DiabloII.Domain.Commands.Domains.Items;
 using DiabloII.Domain.Models.Items;
 using DiabloII.Infrastructure.Handlers;
 using DiabloII.Infrastructure.Helpers;

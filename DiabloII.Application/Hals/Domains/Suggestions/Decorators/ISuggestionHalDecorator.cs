@@ -1,11 +1,11 @@
 ﻿using System;
+using DiabloII.Application.Hals.Bases;
 using DiabloII.Application.Responses.Read.Suggestions;
-using DiabloII.Application.Services.Hals.Bases;
 using Halcyon.HAL;
 
-namespace DiabloII.Application.Services.Hals.Domains.Suggestions
+namespace DiabloII.Application.Hals.Domains.Suggestions.Decorators
 {
-    public interface ISuggestionHalService : IHalService<SuggestionDto>
+    public interface ISuggestionHalDecorator : IHalDecorator<SuggestionDto>
     {
         HALResponse AddLinks(SuggestionCommentDto comment, Guid suggestionId);
     }

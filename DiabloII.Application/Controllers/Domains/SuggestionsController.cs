@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Controllers.Bases;
+using DiabloII.Application.Hals.Domains.Suggestions.Decorators;
 using DiabloII.Application.Requests.Write.Suggestions;
 using DiabloII.Application.Responses.Read.Bases;
 using DiabloII.Application.Responses.Read.Suggestions;
-using DiabloII.Application.Services.Hals.Domains.Suggestions;
-using DiabloII.Domain.Commands.Suggestions;
+using DiabloII.Domain.Commands.Domains.Suggestions;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Readers.Domains;
 using Halcyon.HAL;
@@ -21,13 +21,13 @@ namespace DiabloII.Application.Controllers.Domains
     {
         private readonly ISuggestionReader _reader;
 
-        private readonly ISuggestionHalService _halService;
+        private readonly ISuggestionHalDecorator _halDecorator;
 
-        public SuggestionsController(ISuggestionReader reader, IMediator mediator, IMapper mapper, ISuggestionHalService halService) :
+        public SuggestionsController(ISuggestionReader reader, IMediator mediator, IMapper mapper, ISuggestionHalDecorator halDecorator) :
             base(mediator, mapper)
         {
             _reader = reader;
-            _halService = halService;
+            _halDecorator = halDecorator;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace DiabloII.Application.Controllers.Domains
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponses<SuggestionDto>), StatusCodes.Status200OK)]
         public ActionResult<HALResponse> GetAll() =>
-            GetAll(_reader, _halService);
+            GetAll(_reader, _halDecorator);
 
         /// <summary>
         /// Get a user
@@ -48,7 +48,7 @@ namespace DiabloII.Application.Controllers.Domains
         [ApiExplorerSettings(IgnoreApi = true)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<HALResponse> Get(Guid suggestionId) =>
-            Get(suggestionId, _reader, _halService);
+            Get(suggestionId, _reader, _halDecorator);
 
         /// <summary>
         /// Create a suggestion

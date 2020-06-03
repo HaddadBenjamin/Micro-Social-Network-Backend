@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Halcyon.HAL;
 
-namespace DiabloII.Application.Services.Hals.Bases
+namespace DiabloII.Application.Hals.Bases
 {
-    public interface IHalService<Dto>
+    public interface IHalDecorator<Dto>
     {
         HALResponse AddLinks(Dto dto);
 
