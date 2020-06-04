@@ -10,7 +10,6 @@ namespace DiabloII.Domain.Mappers.Users
         {
             CreateMap<CreateAUserCommand, User>().AfterMap((command, dataModel) =>
             {
-                dataModel.Id = command.Id;
                 dataModel.NotificationSetting = new UserNotificationSetting
                 {
                     User = dataModel,

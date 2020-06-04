@@ -6,7 +6,7 @@
 @users
 Scenario: Update a user happy path
 	Given I create the users with the following informations
-		| Email                      | UserId      |
+		| Email                      | Id          |
 		| DiabloIIenriched@gmail.com | any user id |
 	And I update the user "DiabloIIenriched@gmail.com" with the following informations
 		| Email               | AcceptedNotifications                                         | AcceptedNotifiers |
