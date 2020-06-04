@@ -24,8 +24,6 @@ namespace DiabloII.Application.Tests
 
         public readonly TestServer TestServer;
 
-        public IServiceCollection Services;
-
         public TestContext()
         {
             var hostBuilder = CreateHostBuilder();
@@ -44,26 +42,10 @@ namespace DiabloII.Application.Tests
                 {
                     webHost
                         .UseTestServer()
-                        .ConfigureServices(InitializeServices)
                         .UseEnvironment("Test")
                         .ConfigureAppConfiguration((builder => builder.AddJsonFile("appsettings.Test.json")))
                         .UseStartup<TestStartup>();
                 });
-        }
-
-        private void InitializeServices(IServiceCollection services)
-        {
-            var startupAssembly = typeof(Application.Startup).GetTypeInfo().Assembly;
-
-            var manager = new ApplicationPartManager
-            {
-                ApplicationParts = { new AssemblyPart(startupAssembly) },
-                FeatureProviders = { new ControllerFeatureProvider() }
-            };
-
-            services.AddSingleton(manager);
-
-            Services = services;
         }
 
         private static HttpClient ConfigureTheHttpClient(HttpClient httpClient)

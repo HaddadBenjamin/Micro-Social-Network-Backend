@@ -4,7 +4,7 @@ using DiabloII.Application.Tests.Models.Hals.Common;
 
 namespace DiabloII.Application.Tests.Models.Hals.Domains.Suggestions
 {
-    public class HalSuggestionsDto
+    public class HalSuggestions
     {
         public IEnumerable<HalSuggestion> Elements { get; set; } = Enumerable.Empty<HalSuggestion>();
 

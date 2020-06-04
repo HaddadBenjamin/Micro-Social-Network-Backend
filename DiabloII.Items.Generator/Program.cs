@@ -5,7 +5,7 @@ namespace DiabloII.Items.Generator
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
             Console.WriteLine("Item generation in progres...");
 
@@ -13,7 +13,7 @@ namespace DiabloII.Items.Generator
             {
                 GenerationEnvironment.Development,
             };
-            await ItemsGenerator.Generate(generationEnvironments);
+            ItemsGenerator.Generate(generationEnvironments);
             Console.WriteLine("Item generation is done");
         }
     }

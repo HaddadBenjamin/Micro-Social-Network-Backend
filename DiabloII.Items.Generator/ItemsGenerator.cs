@@ -22,12 +22,12 @@ namespace DiabloII.Items.Generator
     {
         private static readonly int CommandTimeout = 600;
 
-        public static async Task Generate(GenerationEnvironment[] environments)
+        public static void Generate(GenerationEnvironment[] environments)
         {
             var uniqueItems = new DiabloIIFilesReader().Read();
 
             InsertTheUniqueItemsInAJsonFile(uniqueItems);
-            await UpdateTheItemsFromDatabase(environments, uniqueItems);
+            UpdateTheItemsFromDatabase(environments, uniqueItems);
         }
 
         private static void InsertTheUniqueItemsInAJsonFile(IEnumerable<ItemFromFile> uniqueItems)
@@ -38,7 +38,7 @@ namespace DiabloII.Items.Generator
             File.WriteAllText(uniqueItemDestinationPath, uniqueItemsAsJson);
         }
 
-        private static async Task UpdateTheItemsFromDatabase(GenerationEnvironment[] environments, IEnumerable<ItemFromFile> uniqueItems)
+        private static void UpdateTheItemsFromDatabase(GenerationEnvironment[] environments, IEnumerable<ItemFromFile> uniqueItems)
         {
             var mapper = GetMapper();
             var items = uniqueItems.Select(item => mapper.Map<Item>(item)).ToList();
@@ -62,7 +62,7 @@ namespace DiabloII.Items.Generator
                         ItemProperties = itemProperties
                     };
 
-                    await new ItemCommandHandler(itemRepository, dbContext).Handle(command);
+                    new ItemCommandHandler(itemRepository, dbContext).Handle(command);
                 }
             }
         }
