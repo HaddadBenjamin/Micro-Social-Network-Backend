@@ -6,7 +6,7 @@ namespace DiabloII.Application.Tests.Models.Hals.Domains.Suggestions
 {
     public class HalSuggestionsDto
     {
-        public IEnumerable<HalSuggestionDto> Elements { get; set; } = Enumerable.Empty<HalSuggestionDto>();
+        public IEnumerable<HalSuggestion> Elements { get; set; } = Enumerable.Empty<HalSuggestion>();
 
         public IDictionary<string, HalLink> _Links { get; set; } = new Dictionary<string, HalLink>();
     }

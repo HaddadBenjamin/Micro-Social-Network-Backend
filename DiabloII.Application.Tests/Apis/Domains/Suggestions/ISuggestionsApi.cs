@@ -13,7 +13,7 @@ namespace DiabloII.Application.Tests.Apis.Domains.Suggestions
         IApiCreate<CommentASuggestionDto>,
         IApiDelete<DeleteASuggestionDto>,
         IApiDelete<DeleteASuggestionCommentDto>,
-        IApiGetAllWithHals<HalSuggestionsDto>
+        IApiGetAllWithHals<HalSuggestions>
     {
     }
 }
