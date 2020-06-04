@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Domain.Commands.Domains.Items;
 using DiabloII.Domain.Models.Items;
-using DiabloII.Infrastructure.Handlers;
+using DiabloII.Infrastructure.Handlers.Domains;
 using DiabloII.Infrastructure.Helpers;
 using DiabloII.Infrastructure.Repositories;
 using DiabloII.Items.Reader;

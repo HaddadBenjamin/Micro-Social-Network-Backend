@@ -1,14 +1,12 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using DiabloII.Domain.Commands.Domains.ErrorLogs;
 using DiabloII.Domain.Models.ErrorLogs;
 using DiabloII.Infrastructure.DbContext;
 using MediatR;
 
-namespace DiabloII.Infrastructure.Handlers
+namespace DiabloII.Infrastructure.Handlers.Domains
 {
-    public class ErrorLogCommandHandler : IRequestHandler<CreateErrorLogCommand>
+    public class ErrorLogCommandHandler : RequestHandler<CreateErrorLogCommand>
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -20,14 +18,12 @@ namespace DiabloII.Infrastructure.Handlers
             _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(CreateErrorLogCommand command, CancellationToken cancellationToken = default)
+        protected override void Handle(CreateErrorLogCommand command)
         {
             var errorLog = _mapper.Map<ErrorLog>(command);
 
             _dbContext.ErrorLogs.Add(errorLog);
-            await _dbContext.SaveChangesAsync();
-
-            return Unit.Value;
+            _dbContext.SaveChanges();
         }
     }
 }

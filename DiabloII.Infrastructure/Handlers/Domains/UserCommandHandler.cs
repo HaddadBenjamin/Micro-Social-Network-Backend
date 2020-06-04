@@ -7,12 +7,13 @@ using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Domain.Validations.Users.Create;
 using DiabloII.Domain.Validations.Users.Update;
 using DiabloII.Infrastructure.DbContext;
+using DiabloII.Infrastructure.Handlers.Bases;
 using MediatR;
 
-namespace DiabloII.Infrastructure.Handlers
+namespace DiabloII.Infrastructure.Handlers.Domains
 {
     public class UserCommandHandler :
-        IRequestHandler<CreateAUserCommand>,
+        CommandHandler<CreateAUserCommand>,
         IRequestHandler<UpdateAUserCommand>
     {
         private readonly ApplicationDbContext _dbContext;
@@ -35,21 +36,19 @@ namespace DiabloII.Infrastructure.Handlers
             _updateValidator = updateValidator;
         }
 
-        public async Task<Unit> Handle(CreateAUserCommand command, CancellationToken cancellationToken = default)
+        public override void Handle(CreateAUserCommand command)
         {
             var validationContext = new CreateAUserValidationContext(command, _repository);
 
             _createValidator.Validate(validationContext);
 
             if (_repository.DoesUserExists(command.Id))
-                return Unit.Value;
+                return;
 
             var user = _mapper.Map<User>(command);
 
             _dbContext.Users.Add(user);
-            await _dbContext.SaveChangesAsync();
-
-            return Unit.Value;
+            _dbContext.SaveChanges();
         }
 
         public async Task<Unit> Handle(UpdateAUserCommand command, CancellationToken cancellationToken = default)

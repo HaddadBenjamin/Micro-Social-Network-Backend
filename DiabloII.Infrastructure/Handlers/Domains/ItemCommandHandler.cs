@@ -1,13 +1,11 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using DiabloII.Domain.Commands.Domains.Items;
+﻿using DiabloII.Domain.Commands.Domains.Items;
 using DiabloII.Domain.Repositories.Domains;
 using DiabloII.Infrastructure.DbContext;
-using MediatR;
+using DiabloII.Infrastructure.Handlers.Bases;
 
-namespace DiabloII.Infrastructure.Handlers
+namespace DiabloII.Infrastructure.Handlers.Domains
 {
-    public class ItemCommandHandler : IRequestHandler<ResetItemsCommand>
+    public class ItemCommandHandler : CommandHandler<ResetItemsCommand>
     {
         private readonly IItemRepository _repository;
 
@@ -19,13 +17,11 @@ namespace DiabloII.Infrastructure.Handlers
             _dbContext = dbContext;
         }
 
-        public async Task<Unit> Handle(ResetItemsCommand command, CancellationToken cancellationToken = default)
+        public override void Handle(ResetItemsCommand command)
         {
             _repository.ResetTheItems(command.Items, command.ItemProperties);
 
-            await _dbContext.SaveChangesAsync(cancellationToken);
-
-            return Unit.Value;
+            _dbContext.SaveChanges();
         }
     }
 }

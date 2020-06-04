@@ -11,13 +11,14 @@ using DiabloII.Domain.Validations.Suggestions.Delete;
 using DiabloII.Domain.Validations.Suggestions.DeleteAComment;
 using DiabloII.Domain.Validations.Suggestions.Vote;
 using DiabloII.Infrastructure.DbContext;
+using DiabloII.Infrastructure.Handlers.Bases;
 using MediatR;
 
-namespace DiabloII.Infrastructure.Handlers
+namespace DiabloII.Infrastructure.Handlers.Domains
 {
     public class SuggestionCommandHandler :
+        CommandHandler<DeleteASuggestionCommand>,
         IRequestHandler<CreateASuggestionCommand>,
-        IRequestHandler<DeleteASuggestionCommand>,
         IRequestHandler<DeleteASuggestionCommentCommand>,
         IRequestHandler<VoteToASuggestionCommand>,
         IRequestHandler<CommentASuggestionCommand>
@@ -70,15 +71,13 @@ namespace DiabloII.Infrastructure.Handlers
             return Unit.Value;
         }
 
-        public async Task<Unit> Handle(DeleteASuggestionCommand deleteASuggestion, CancellationToken cancellationToken = default)
+        public override void Handle(DeleteASuggestionCommand deleteASuggestion)
         {
             var validationContext = new DeleteASuggestionValidationContext(deleteASuggestion, _repository);
             _deleteValidator.Validate(validationContext);
 
             _repository.RemoveUserSuggestion(deleteASuggestion.Id, deleteASuggestion.UserId);
-            await _dbContext.SaveChangesAsync();
-
-            return Unit.Value;
+            _dbContext.SaveChanges();
         }
 
         public async Task<Unit> Handle(DeleteASuggestionCommentCommand deleteASuggestionComment, CancellationToken cancellationToken = default)
