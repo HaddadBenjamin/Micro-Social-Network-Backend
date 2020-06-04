@@ -2,7 +2,7 @@
 
 # Micro réseau social - API
 
-Vous pouvez tester l'application sur PC ou mobile grâce à ce lien https://diablo-2-documentation.netlify.app/
+Vous pouvez tester l'application sur PC ou mobile grâce à ce lien https://micro-social-network.netlify.app/
 </br>
 
 __L'application propose trois services :__
