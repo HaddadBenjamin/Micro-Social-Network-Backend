@@ -42,7 +42,7 @@ namespace DiabloII.Application.Hals.Domains.Suggestions.Decorators
 
             if (_halRules.CanEditASuggestion(suggestion))
                 AddLink(halResponse, "suggestion_delete", HttpMethod.Delete, baseUrl);
-            
+
             if (_halRules.CanAddAVote(suggestion))
                 AddLink(halResponse, "vote_create", HttpMethod.Post, $"{baseUrl}/votes");
 

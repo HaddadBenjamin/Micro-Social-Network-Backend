@@ -103,14 +103,14 @@ namespace DiabloII.Application.Controllers.Bases
 
         #region Write
         protected async Task<ActionResult<Guid>> Create<CreateDto, CreateCommand>(CreateDto requestDto)
-            where  CreateCommand : ICreateCommand<Guid> =>
+            where CreateCommand : ICreateCommand<Guid> =>
             await Create<CreateDto, CreateCommand, Guid>(requestDto);
-       
+
         protected async Task<ActionResult<CreatedtResourceId>> Create<CreateDto, CreateCommand, CreatedtResourceId>(CreateDto requestDto)
-            where  CreateCommand : ICreateCommand<CreatedtResourceId>
+            where CreateCommand : ICreateCommand<CreatedtResourceId>
         {
             var command = _mapper.Map<CreateCommand>(requestDto);
-            
+
             await _mediator.Send(command);
 
             return this.CreatedByUsingTheRequestRoute(command.Id);
@@ -124,7 +124,7 @@ namespace DiabloII.Application.Controllers.Bases
             where UpdateCommand : IUpdateCommand<UpdatedResourceId>
         {
             var command = _mapper.Map<UpdateCommand>(dto);
-            
+
             await _mediator.Send(command);
 
             return Ok(command.Id);
@@ -138,7 +138,7 @@ namespace DiabloII.Application.Controllers.Bases
             where DeleteCommand : IDeleteCommand<DeletedResourceId>
         {
             var command = _mapper.Map<DeleteCommand>(dto);
-            
+
             await _mediator.Send(command);
 
             return Ok(command.Id);

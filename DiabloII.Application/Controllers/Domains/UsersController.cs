@@ -90,7 +90,7 @@ namespace DiabloII.Application.Controllers.Domains
             dto.Id = id;
 
             var command = _mapper.Map<UpdateAUserCommand>(dto);
-            
+
             await _mediator.Send(command);
 
             return Ok(command.Id);

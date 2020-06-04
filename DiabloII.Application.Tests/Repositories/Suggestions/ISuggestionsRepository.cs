@@ -11,7 +11,7 @@ namespace DiabloII.Application.Tests.Repositories.Suggestions
         Task<SuggestionDto> GetByItsContent(string content);
 
         SuggestionCommentDto GetCommentByItsContent(SuggestionDto suggestion, string commentContent);
-     
+
         Guid GetCommentIdByItsContent(SuggestionDto suggestion, string commentContent);
 
         SuggestionVoteDto GetVoteCreatedBy(SuggestionDto suggestion, string createdBy);

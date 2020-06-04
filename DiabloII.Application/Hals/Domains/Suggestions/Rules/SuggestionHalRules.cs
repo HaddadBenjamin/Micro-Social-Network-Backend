@@ -9,7 +9,7 @@ namespace DiabloII.Application.Hals.Domains.Suggestions.Rules
 
         public SuggestionHalRules(IUserIdResolver userIdResolver) =>
             _userId = userIdResolver.Resolve();
-      
+
         public bool CanEditASuggestion(SuggestionDto suggestion) =>
             _userId == suggestion.CreatedBy;
 
