@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
 using Autofac.Extensions.DependencyInjection;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Application.Tests.Startup;
 using DiabloII.Infrastructure.DbContext;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

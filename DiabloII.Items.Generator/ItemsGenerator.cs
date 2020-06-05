@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Domain.Commands.Domains.Items;
 using DiabloII.Domain.Models.Items;

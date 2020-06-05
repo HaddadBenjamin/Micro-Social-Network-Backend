@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Runtime.InteropServices.ComTypes;
 using DiabloII.Application.Hals.Bases;
 using DiabloII.Application.Hals.Domains.Suggestions.Rules;
 using DiabloII.Application.Mappers.Suggestions;
