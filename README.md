@@ -1,7 +1,7 @@
 ![.NET Core & Azure](https://github.com/HaddadBenjamin/Diablo-II-Items/workflows/.NET%20Core%20&%20Azure/badge.svg)
 
 # Micro réseau social - API
-**Date du développement du projet :** 2020</br>
+**Année de développement :** 2020.</br>
 
 Vous pouvez tester l'application sur PC ou mobile grâce à ce lien https://micro-social-network.netlify.app/
 </br>
