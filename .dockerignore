@@ -1,0 +1,37 @@
+# directories
+**/bin/
+**/obj/
+**/out/
+
+# files
+Dockerfile*
+**/*.md
+# Build and Release Folders
+packages/
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
+
+# Other files and folders
+.settings/
+
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+
+DiabloII.Items/DiabloII.Items/Files/~$Diablo II - Enriched Data Sheet.xlsx
+DiabloII.Items/.vs/DiabloII.Items.Reader/v15
+DiabloII.Items/packages
+DiabloII.Items/.vs
+
+.vs/DiabloII.Items.Reader/v16
+.vs/DiabloII.Items.Reader/DesignTimeBuild
+.vs/DiabloII.Items.Reader/config/applicationhost.config
+
+.idea
+.idea/workspace.xml
+
+*.feature.cs
