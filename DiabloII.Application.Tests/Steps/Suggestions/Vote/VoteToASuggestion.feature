@@ -8,10 +8,11 @@ Scenario: Vote to a suggestion happy path
 	Given I create the suggestions with the following informations
 		| Content                   | UserId      |
 		| You should add more items | any user id |
-	When I vote to the suggestion "You should add more items"
+	And I vote to the suggestion "You should add more items"
 		| IsPositive | UserId        |
 		| true       | other user id |
-	Then the http status code should be 201
+	And I get the vote created by "other user id" from the suggestion "You should add more items"
+	Then the http status code should be 200
 	And the voted suggestion should be
-		| Content                   | CreatedBy   | PositiveVoteCount | NegativeVoteCount |
-		| You should add more items | any user id | 1                 | 0                 |
+		| CreatedBy     | IsPositive |
+		| other user id | true       |

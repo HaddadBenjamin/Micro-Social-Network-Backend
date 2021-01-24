@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Requests.Write.Notifications;
 using DiabloII.Application.Responses.Read.Bases;
-using DiabloII.Application.Responses.Read.Domains.Notifications;
-using DiabloII.Domain.Commands.Notifications;
+using DiabloII.Application.Responses.Read.Notifications;
+using DiabloII.Domain.Commands.Domains.Notifications;
 using DiabloII.Domain.Models.Notifications;
 using DiabloII.Domain.Readers.Domains;
 using MediatR;
@@ -19,16 +20,8 @@ namespace DiabloII.Application.Controllers.Domains
     {
         private readonly INotificationReader _reader;
 
-        private readonly IMapper _mapper;
-
-        private readonly IMediator _mediator;
-
-        public NotificationsController(INotificationReader reader, IMapper mapper, IMediator mediator)
-        {
+        public NotificationsController(INotificationReader reader, IMapper mapper, IMediator mediator) : base(mediator, mapper) =>
             _reader = reader;
-            _mapper = mapper;
-            _mediator = mediator;
-        }
 
         /// <summary>
         /// Get all the notifications
@@ -37,16 +30,27 @@ namespace DiabloII.Application.Controllers.Domains
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponses<NotificationDto>), StatusCodes.Status200OK)]
         public ActionResult<ApiResponses<NotificationDto>> GetAll() =>
-            GetAll(_reader, _mapper);
+            GetAll(_reader);
+
+        /// <summary>
+        /// Get a notification
+        /// </summary>
+        [Route("notifications/{notificationId:guid}")]
+        [HttpGet]
+        [ProducesResponseType(typeof(NotificationDto), StatusCodes.Status200OK)]
+        [ApiExplorerSettings(IgnoreApi = true)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<NotificationDto> Get(Guid notificationId) =>
+            Get(notificationId, _reader);
 
         /// <summary>
         /// Create a notification
         /// </summary>
         [Route("notifications")]
         [HttpPost]
-        [ProducesResponseType(typeof(NotificationDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<NotificationDto>> Create([FromBody] CreateANotificationDto dto) =>
-            await Create<CreateANotificationDto, CreateANotificationCommand>(dto, _mediator, _mapper);
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateANotificationDto dto) =>
+            await Create<CreateANotificationDto, CreateANotificationCommand>(dto);
     }
 }

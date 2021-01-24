@@ -5,7 +5,7 @@ namespace DiabloII.Application.Requests.Write.Users
 {
     public class UpdateAUserDto
     {
-        public string UserId { get; set; }
+        public string Id { get; set; }
 
         public string Email { get; set; }
 

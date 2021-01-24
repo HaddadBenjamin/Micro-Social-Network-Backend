@@ -29,11 +29,11 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Create
             var dtos = table.CreateSet<CreateASuggestionDto>();
 
             foreach (var dto in dtos)
-                _suggestionsContext.CreatedResource = await _suggestionsApi.Create(dto);
+                _suggestionsContext.CreatedResourceId = await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the created suggestion should be")]
         public void ThenTheCreatedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_suggestionsContext.CreatedResource);
+            table.ShouldBeEqualsTo(_suggestionsContext.CreatedResourceId);
     }
 }

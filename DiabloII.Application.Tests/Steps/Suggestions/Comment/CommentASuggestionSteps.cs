@@ -31,16 +31,16 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Comment
         [When(@"I comment the suggestion ""(.*)""")]
         public async Task WhenICommentTheSuggestion(string suggestionContent, Table table)
         {
-            var suggestionId = await _suggestionsRepository.GetSuggestionId(suggestionContent);
+            var suggestionId = await _suggestionsRepository.GetIdByItsContent(suggestionContent);
             var dto = table.CreateInstance<CommentASuggestionDto>();
 
             dto.SuggestionId = suggestionId;
 
-            _suggestionsContext.VotedResource = await _suggestionsApi.Create(dto);
+            await _suggestionsApi.Create(dto);
         }
 
         [Then(@"the commented suggestion should be")]
         public void ThenTheCommentedSuggestionShouldBe(Table table) =>
-            table.ShouldBeEqualsTo(_suggestionsContext.CommentedResource, SuggestionsTableMapper.ToSuggestionDto);
+            table.ShouldBeEqualsTo(_suggestionsContext.Comment, SuggestionsTableMapper.ToSuggestionCommentDto);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DiabloII.Application.Responses.Read.Domains.Users;
+using DiabloII.Application.Responses.Read.Users;
 using DiabloII.Domain.Extensions;
 using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Notifications;

@@ -1,7 +1,13 @@
-﻿namespace DiabloII.Application.Tests.Contexts.Bases
+﻿using System;
+
+namespace DiabloII.Application.Tests.Contexts.Bases
 {
-    public interface ITestContextUpdated<RestResource>
+    public interface ITestContextUpdated : ITestContextUpdated<Guid>
     {
-        RestResource UpdatedResource { get; set; }
+    }
+
+    public interface ITestContextUpdated<RestResourceId>
+    {
+        RestResourceId UpdatedResourceId { get; set; }
     }
 }

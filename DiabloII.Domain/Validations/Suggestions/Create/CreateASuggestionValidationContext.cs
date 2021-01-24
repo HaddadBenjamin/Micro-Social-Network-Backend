@@ -1,4 +1,4 @@
-﻿using DiabloII.Domain.Commands.Suggestions;
+﻿using DiabloII.Domain.Commands.Domains.Suggestions;
 using DiabloII.Domain.Repositories.Domains;
 
 namespace DiabloII.Domain.Validations.Suggestions.Create

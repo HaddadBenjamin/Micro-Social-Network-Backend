@@ -2,9 +2,10 @@
 using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Requests.Read.Domains.Items;
 using DiabloII.Application.Responses.Read.Bases;
-using DiabloII.Application.Responses.Read.Domains.Items;
+using DiabloII.Application.Responses.Read.Items;
 using DiabloII.Domain.Models.Items;
 using DiabloII.Domain.Readers.Domains;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,13 +16,8 @@ namespace DiabloII.Application.Controllers.Domains
     {
         private readonly IItemReader _reader;
 
-        private readonly IMapper _mapper;
-
-        public ItemsController(IItemReader reader, IMapper mapper)
-        {
+        public ItemsController(IItemReader reader, IMapper mapper, IMediator mediator) : base(mediator, mapper) =>
             _reader = reader;
-            _mapper = mapper;
-        }
 
         /// <summary>
         /// Get all the uniques items
@@ -30,7 +26,7 @@ namespace DiabloII.Application.Controllers.Domains
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponses<ItemDto>), StatusCodes.Status200OK)]
         public ActionResult<ApiResponses<ItemDto>> GetAllUniques() =>
-            GetAll(_reader, _mapper);
+            GetAll(_reader);
 
         /// <summary>
         /// Search the uniques items
@@ -39,6 +35,6 @@ namespace DiabloII.Application.Controllers.Domains
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponses<ItemDto>), StatusCodes.Status200OK)]
         public ActionResult<ApiResponses<ItemDto>> SearchUniques(SearchUniquesDto dto) =>
-            Search(dto, _reader, _mapper);
+            Search(dto, _reader);
     }
 }

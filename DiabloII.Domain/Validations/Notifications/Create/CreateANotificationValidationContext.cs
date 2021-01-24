@@ -1,4 +1,4 @@
-﻿using DiabloII.Domain.Commands.Notifications;
+﻿using DiabloII.Domain.Commands.Domains.Notifications;
 
 namespace DiabloII.Domain.Validations.Notifications.Create
 {

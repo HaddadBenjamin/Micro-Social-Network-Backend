@@ -29,10 +29,10 @@ namespace DiabloII.Application.Tests.Steps.Notifications.Create
             var dtos = table.CreateSet<CreateANotificationDto>();
 
             foreach (var dto in dtos)
-                _notificationContext.CreatedResource = await _notificationsApi.Create(dto);
+                _notificationContext.CreatedResourceId = await _notificationsApi.Create(dto);
         }
 
         [Then(@"the created notification should be")]
-        public void ThenTheCreatedNotificationShouldBe(Table table) => table.ShouldBeEqualsTo(_notificationContext.CreatedResource);
+        public void ThenTheCreatedNotificationShouldBe(Table table) => table.ShouldBeEqualsTo(_notificationContext.CreatedResourceId);
     }
 }

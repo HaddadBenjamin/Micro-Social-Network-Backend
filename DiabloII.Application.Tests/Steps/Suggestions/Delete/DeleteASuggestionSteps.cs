@@ -24,7 +24,7 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.Delete
         [When(@"I delete the suggestion ""(.*)""")]
         public async Task WhenIDeleteTheSuggestion(string suggestionContent, Table table)
         {
-            var suggestionId = await _suggestionsRepository.GetSuggestionId(suggestionContent);
+            var suggestionId = await _suggestionsRepository.GetIdByItsContent(suggestionContent);
             var dto = table.CreateInstance<DeleteASuggestionDto>();
 
             dto.Id = suggestionId;

@@ -1,4 +1,4 @@
-﻿using DiabloII.Application.Responses.Read.Domains.Suggestions;
+﻿using DiabloII.Application.Responses.Read.Suggestions;
 using DiabloII.Application.Tests.Contexts.Bases;
 
 namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
@@ -6,10 +6,10 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
     public interface ISuggestionsTestContext :
         ITestContextAll<SuggestionDto>,
         ITestContextGet<SuggestionDto>,
-        ITestContextCreated<SuggestionDto>
+        ITestContextCreated
     {
-        SuggestionDto VotedResource { get; set; }
+        SuggestionVoteDto Vote { get; set; }
 
-        SuggestionDto CommentedResource { get; set; }
+        SuggestionCommentDto Comment { get; set; }
     }
 }

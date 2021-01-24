@@ -13,6 +13,8 @@ namespace DiabloII.Application.Tests.Extensions
     {
         public static void ShouldBeEqualsTo<TCompareType>(this Table expectedTable, TCompareType actual, Func<TableRow, TCompareType> mapper = null, bool ignoreNotSpecifiedMembers = true)
         {
+            HandleTheNullCase(actual);
+
             var compareLogic = CreateTheCompareLogic<TCompareType>(expectedTable, ignoreNotSpecifiedMembers);
             var expected = mapper == null ? expectedTable.CreateInstance<TCompareType>() : mapper(expectedTable.Rows.First());
             var differences = GetTheDifferences(actual, expected, compareLogic);
@@ -22,6 +24,8 @@ namespace DiabloII.Application.Tests.Extensions
 
         public static void ShouldAllExistsIn<TCompareType>(this Table expectedTable, IReadOnlyCollection<TCompareType> actuals, bool ignoreNotSpecifiedMembers = true)
         {
+            HandleTheNullCases(actuals);
+
             var compareLogic = CreateTheCompareLogic<TCompareType>(expectedTable, ignoreNotSpecifiedMembers);
             var allExpected = expectedTable.CreateSet<TCompareType>();
 
@@ -34,11 +38,25 @@ namespace DiabloII.Application.Tests.Extensions
 
         public static void ShouldExistsIn<TCompareType>(this Table expectedTable, IReadOnlyCollection<TCompareType> actuals, bool ignoreNotSpecifiedMembers = true)
         {
+            HandleTheNullCases(actuals);
+
             var compareLogic = CreateTheCompareLogic<TCompareType>(expectedTable, ignoreNotSpecifiedMembers);
             var expected = expectedTable.CreateInstance<TCompareType>();
             var differences = GetTheLeastDifferences(actuals, expected, compareLogic);
 
             HandleTheDifferences<TCompareType>(differences);
+        }
+
+        private static void HandleTheNullCase<TCompareType>(TCompareType actual)
+        {
+            if (actual is null)
+                throw new ArgumentNullException(nameof(actual));
+        }
+
+        private static void HandleTheNullCases<TCompareType>(IReadOnlyCollection<TCompareType> actuals)
+        {
+            if (actuals is null)
+                throw new ArgumentNullException(nameof(actuals));
         }
 
         private static CompareLogic CreateTheCompareLogic<TCompareType>(Table expectedTable, bool ignoreNotSpecifiedMembers = true)

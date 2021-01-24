@@ -1,7 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace DiabloII.Application.Tests.Apis.Bases
 {
+    public interface IApiDelete<DeleteDto> : IApiDelete<DeleteDto, Guid>
+    {
+    }
+
     public interface IApiDelete<DeleteDto, ResponseDto>
     {
         Task<ResponseDto> Delete(DeleteDto dto);

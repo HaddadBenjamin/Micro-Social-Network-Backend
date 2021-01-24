@@ -1,6 +1,7 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using DiabloII.Application.Requests.Write.Suggestions;
-using DiabloII.Domain.Commands.Suggestions;
+using DiabloII.Domain.Commands.Domains.Suggestions;
 
 namespace DiabloII.Application.Mappers.Suggestions
 {
@@ -8,9 +9,9 @@ namespace DiabloII.Application.Mappers.Suggestions
     {
         public SuggestionDtoToCommandLayer()
         {
-            CreateMap<CreateASuggestionDto, CreateASuggestionCommand>();
-            CreateMap<CommentASuggestionDto, CommentASuggestionCommand>();
-            CreateMap<VoteToASuggestionDto, VoteToASuggestionCommand>();
+            CreateMap<CreateASuggestionDto, CreateASuggestionCommand>().AfterMap((dto, command) => command.Id = Guid.NewGuid());
+            CreateMap<CommentASuggestionDto, CommentASuggestionCommand>().AfterMap((dto, command) => command.Id = Guid.NewGuid());
+            CreateMap<VoteToASuggestionDto, VoteToASuggestionCommand>().AfterMap((dto, command) => command.Id = Guid.NewGuid());
             CreateMap<DeleteASuggestionDto, DeleteASuggestionCommand>();
             CreateMap<DeleteASuggestionCommentDto, DeleteASuggestionCommentCommand>();
         }

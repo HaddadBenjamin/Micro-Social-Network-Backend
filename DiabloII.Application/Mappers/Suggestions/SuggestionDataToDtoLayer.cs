@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using AutoMapper;
-using DiabloII.Application.Responses.Read.Domains.Suggestions;
+using DiabloII.Application.Responses.Read.Suggestions;
 using DiabloII.Domain.Models.Suggestions;
 
 namespace DiabloII.Application.Mappers.Suggestions

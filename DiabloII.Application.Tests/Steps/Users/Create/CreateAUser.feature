@@ -6,9 +6,9 @@
 @users
 Scenario: Create a user happy path
 	When I create the users with the following informations
-		| Email                      | UserId |
+		| Email                      | Id     |
 		| DiabloIIenriched@gmail.com | any id |
 	Then the http status code should be 201
 	And the created user should be
-		| Email                      | UserId |
+		| Email                      | Id     |
 		| DiabloIIenriched@gmail.com | any id |

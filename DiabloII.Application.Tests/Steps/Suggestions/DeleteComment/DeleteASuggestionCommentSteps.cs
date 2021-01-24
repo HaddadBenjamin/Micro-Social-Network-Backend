@@ -24,8 +24,8 @@ namespace DiabloII.Application.Tests.Steps.Suggestions.DeleteComment
         [When(@"I delete the suggestion comment ""(.*)"" from the suggestion ""(.*)""")]
         public async Task WhenIDeleteTheSuggestionCommentFromTheSuggestion(string suggestionCommentContent, string suggestionContent, Table table)
         {
-            var suggestionDto = await _suggestionsRepository.GetSuggestion(suggestionContent);
-            var suggestionCommentId = _suggestionsRepository.GetSuggestionCommentId(suggestionDto, suggestionCommentContent);
+            var suggestionDto = await _suggestionsRepository.GetByItsContent(suggestionContent);
+            var suggestionCommentId = _suggestionsRepository.GetCommentIdByItsContent(suggestionDto, suggestionCommentContent);
             var dto = table.CreateInstance<DeleteASuggestionCommentDto>();
 
             dto.Id = suggestionCommentId;

@@ -1,6 +1,5 @@
-﻿using System;
-using AutoMapper;
-using DiabloII.Domain.Commands.Notifications;
+﻿using AutoMapper;
+using DiabloII.Domain.Commands.Domains.Notifications;
 using DiabloII.Domain.Models.Notifications;
 
 namespace DiabloII.Domain.Mappers.Notifications
@@ -9,10 +8,7 @@ namespace DiabloII.Domain.Mappers.Notifications
     {
         public NotificationCommandToDataLayer()
         {
-            CreateMap<CreateANotificationCommand, Notification>().AfterMap((command, dataModel) =>
-            {
-                dataModel.Id = Guid.NewGuid();
-            });
+            CreateMap<CreateANotificationCommand, Notification>();
         }
     }
 }

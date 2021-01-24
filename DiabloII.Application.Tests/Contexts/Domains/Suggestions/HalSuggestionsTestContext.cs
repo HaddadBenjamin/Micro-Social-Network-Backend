@@ -4,6 +4,6 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Suggestions
 {
     public class HalSuggestionsTestContext : IHalSuggestionsTestContext
     {
-        public HalSuggestionsDto HalResources { get; set; }
+        public HalSuggestions HalResources { get; set; }
     }
 }

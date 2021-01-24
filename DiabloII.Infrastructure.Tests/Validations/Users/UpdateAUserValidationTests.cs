@@ -1,4 +1,4 @@
-using DiabloII.Domain.Commands.Users;
+using DiabloII.Domain.Commands.Domains.Users;
 using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Notifications;
@@ -23,7 +23,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Users
             var acceptedNotifications = new[] { NotificationType.CreatedSuggestion, NotificationType.NewCommentOnYourSuggestion };
             var validCommand = new UpdateAUserCommand
             {
-                UserId = "any user id",
+                Id = "any user id",
                 Email = "DiabloIIEnriched@gmail.com",
                 AcceptedNotifications = EnumerationFlagsHelpers.ToInteger(acceptedNotifications),
                 AcceptedNotifiers = EnumerationFlagsHelpers.ToInteger(acceptedNotifiers)
@@ -38,12 +38,12 @@ namespace DiabloII.Infrastructure.Tests.Validations.Users
         [Test]
         public void WhenUserIdIsNull_ShouldThrowABadRequestException() =>
             ShouldThrowDuringTheValidation<BadRequestException>(() =>
-                _validationContext.Command.UserId = null);
+                _validationContext.Command.Id = null);
 
         [Test]
         public void WhenUserIdIsEmpty_ShouldThrowABadRequestException() =>
             ShouldThrowDuringTheValidation<BadRequestException>(() =>
-                _validationContext.Command.UserId = string.Empty);
+                _validationContext.Command.Id = string.Empty);
 
         [Test]
         public void WhenEmailIsNotValid_ShouldThrowABadRequestException() =>
@@ -62,7 +62,7 @@ namespace DiabloII.Infrastructure.Tests.Validations.Users
         {
             var user = new User
             {
-                Id = _validationContext.Command.UserId,
+                Id = _validationContext.Command.Id,
                 Email = _validationContext.Command.Email
             };
 

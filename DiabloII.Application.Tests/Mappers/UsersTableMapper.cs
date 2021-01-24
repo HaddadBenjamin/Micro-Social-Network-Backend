@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using DiabloII.Application.Requests.Write.Users;
-using DiabloII.Application.Responses.Read.Domains.Users;
+using DiabloII.Application.Responses.Read.Users;
 using DiabloII.Domain.Helpers;
 using DiabloII.Domain.Models.Notifications;
 using TechTalk.SpecFlow;
@@ -10,9 +10,9 @@ namespace DiabloII.Application.Tests.Mappers
 {
     public static class UsersTableMapper
     {
-        public static UpdateAUserDto ToUpdateAUserDto(TableRow row, string userId) => new UpdateAUserDto
+        public static UpdateAUserDto ToUpdateAUserDto(TableRow row, string id) => new UpdateAUserDto
         {
-            UserId = userId,
+            Id = id,
             Email = row.GetString("Email"),
             AcceptedNotifications = row.GetString("AcceptedNotifications")
                 ?.Split(",")

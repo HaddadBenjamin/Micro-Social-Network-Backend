@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DiabloII.Application.Responses.Read.Domains.Items;
+using DiabloII.Application.Responses.Read.Items;
 using DiabloII.Domain.Models.Items;
 
 namespace DiabloII.Application.Mappers.Items

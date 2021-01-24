@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using DiabloII.Application.Responses.Read.Domains.Suggestions;
+using DiabloII.Application.Responses.Read.Suggestions;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -27,6 +27,18 @@ namespace DiabloII.Application.Tests.Mappers
                     };
                 })
                 .ToList()
+        };
+
+        public static SuggestionVoteDto ToSuggestionVoteDto(TableRow row) => new SuggestionVoteDto
+        {
+            CreatedBy = row.GetString("CreatedBy"),
+            IsPositive = row.GetBoolean("IsPositive")
+        };
+
+        public static SuggestionCommentDto ToSuggestionCommentDto(TableRow row) => new SuggestionCommentDto
+        {
+            CreatedBy = row.GetString("CreatedBy"),
+            Comment = row.GetString("Comment")
         };
     }
 }

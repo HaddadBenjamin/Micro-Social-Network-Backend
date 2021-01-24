@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Reflection;
 using Autofac.Extensions.DependencyInjection;
 using DiabloII.Application.Tests.Services.Http;
 using DiabloII.Application.Tests.Startup;
 using DiabloII.Infrastructure.DbContext;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,8 +20,6 @@ namespace DiabloII.Application.Tests
         public readonly ApplicationDbContext DbContext;
 
         public readonly TestServer TestServer;
-
-        public IServiceCollection Services;
 
         public TestContext()
         {
@@ -44,26 +39,10 @@ namespace DiabloII.Application.Tests
                 {
                     webHost
                         .UseTestServer()
-                        .ConfigureServices(InitializeServices)
                         .UseEnvironment("Test")
                         .ConfigureAppConfiguration((builder => builder.AddJsonFile("appsettings.Test.json")))
                         .UseStartup<TestStartup>();
                 });
-        }
-
-        private void InitializeServices(IServiceCollection services)
-        {
-            var startupAssembly = typeof(Application.Startup).GetTypeInfo().Assembly;
-
-            var manager = new ApplicationPartManager
-            {
-                ApplicationParts = { new AssemblyPart(startupAssembly) },
-                FeatureProviders = { new ControllerFeatureProvider() }
-            };
-
-            services.AddSingleton(manager);
-
-            Services = services;
         }
 
         private static HttpClient ConfigureTheHttpClient(HttpClient httpClient)

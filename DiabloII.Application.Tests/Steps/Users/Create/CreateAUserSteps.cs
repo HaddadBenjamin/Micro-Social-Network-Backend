@@ -29,10 +29,10 @@ namespace DiabloII.Application.Tests.Steps.Users.Create
             var dtos = table.CreateSet<CreateAUserDto>();
 
             foreach (var dto in dtos)
-                _userContext.CreatedResource = await _usersApi.Create(dto);
+                _userContext.CreatedResourceId = await _usersApi.Create(dto);
         }
 
         [Then(@"the created user should be")]
-        public void ThenTheCreatedUserShouldBe(Table table) => table.ShouldBeEqualsTo(_userContext.CreatedResource);
+        public void ThenTheCreatedUserShouldBe(Table table) => table.ShouldBeEqualsTo(_userContext.CreatedResourceId);
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DiabloII.Domain.Commands.Suggestions;
+using DiabloII.Domain.Commands.Domains.Suggestions;
 using DiabloII.Domain.Exceptions;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Repositories.Domains;

@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
 using DiabloII.Application.Controllers.Bases;
 using DiabloII.Application.Responses.Read.Bases;
-using DiabloII.Application.Responses.Read.Domains.ErrorLogs;
+using DiabloII.Application.Responses.Read.ErrorLogs;
 using DiabloII.Domain.Models.ErrorLogs;
 using DiabloII.Domain.Readers.Domains;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,13 +16,8 @@ namespace DiabloII.Application.Controllers.Domains
     {
         private readonly IErrorLogReader _reader;
 
-        private readonly IMapper _mapper;
-
-        public ErrorLogsController(IErrorLogReader reader, IMapper mapper)
-        {
+        public ErrorLogsController(IErrorLogReader reader, IMapper mapper, IMediator mediator) : base(mediator, mapper) =>
             _reader = reader;
-            _mapper = mapper;
-        }
 
         /// <summary>
         /// Get all the error logs.
@@ -30,6 +26,6 @@ namespace DiabloII.Application.Controllers.Domains
         [Route("errorlogs")]
         [HttpGet]
         public ActionResult<ApiResponses<ErrorLogDto>> GetAll() =>
-            GetAll(_reader, _mapper);
+            GetAll(_reader);
     }
 }

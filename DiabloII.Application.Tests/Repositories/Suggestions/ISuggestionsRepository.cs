@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
-using DiabloII.Application.Responses.Read.Domains.Suggestions;
+using DiabloII.Application.Responses.Read.Suggestions;
 
 namespace DiabloII.Application.Tests.Repositories.Suggestions
 {
     public interface ISuggestionsRepository
     {
-        Task<Guid> GetSuggestionId(string suggestionContent);
+        Task<Guid> GetIdByItsContent(string content);
 
-        Task<SuggestionDto> GetSuggestion(string suggestionContent);
+        Task<SuggestionDto> GetByItsContent(string content);
 
-        Guid GetSuggestionCommentId(SuggestionDto suggestionDto, string suggestionCommentContent);
+        SuggestionCommentDto GetCommentByItsContent(SuggestionDto suggestion, string commentContent);
+
+        Guid GetCommentIdByItsContent(SuggestionDto suggestion, string commentContent);
+
+        SuggestionVoteDto GetVoteCreatedBy(SuggestionDto suggestion, string createdBy);
     }
 }

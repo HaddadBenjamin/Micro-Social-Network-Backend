@@ -1,4 +1,4 @@
-﻿using DiabloII.Application.Responses.Read.Domains.ErrorLogs;
+﻿using DiabloII.Application.Responses.Read.ErrorLogs;
 using DiabloII.Application.Tests.Apis.Bases;
 
 namespace DiabloII.Application.Tests.Apis.Domains.ErrorLogs

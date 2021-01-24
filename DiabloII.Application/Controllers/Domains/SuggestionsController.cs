@@ -2,12 +2,11 @@
 using System.Threading.Tasks;
 using AutoMapper;
 using DiabloII.Application.Controllers.Bases;
-using DiabloII.Application.Requests.Read.Domains.Suggestions;
+using DiabloII.Application.Hals.Domains.Suggestions.Decorators;
 using DiabloII.Application.Requests.Write.Suggestions;
 using DiabloII.Application.Responses.Read.Bases;
-using DiabloII.Application.Responses.Read.Domains.Suggestions;
-using DiabloII.Application.Services.Hals.Domains.Suggestions;
-using DiabloII.Domain.Commands.Suggestions;
+using DiabloII.Application.Responses.Read.Suggestions;
+using DiabloII.Domain.Commands.Domains.Suggestions;
 using DiabloII.Domain.Models.Suggestions;
 using DiabloII.Domain.Readers.Domains;
 using Halcyon.HAL;
@@ -22,18 +21,13 @@ namespace DiabloII.Application.Controllers.Domains
     {
         private readonly ISuggestionReader _reader;
 
-        private readonly IMediator _mediator;
+        private readonly ISuggestionHalDecorator _halDecorator;
 
-        private readonly IMapper _mapper;
-
-        private readonly ISuggestionHalService _halService;
-
-        public SuggestionsController(ISuggestionReader reader, IMediator mediator, IMapper mapper, ISuggestionHalService halService)
+        public SuggestionsController(ISuggestionReader reader, IMediator mediator, IMapper mapper, ISuggestionHalDecorator halDecorator) :
+            base(mediator, mapper)
         {
             _reader = reader;
-            _mediator = mediator;
-            _mapper = mapper;
-            _halService = halService;
+            _halDecorator = halDecorator;
         }
 
         /// <summary>
@@ -43,46 +37,43 @@ namespace DiabloII.Application.Controllers.Domains
         [HttpGet]
         [ProducesResponseType(typeof(ApiResponses<SuggestionDto>), StatusCodes.Status200OK)]
         public ActionResult<HALResponse> GetAll() =>
-            GetAll(_reader, _mapper, _halService);
+            GetAll(_reader, _halDecorator);
 
         /// <summary>
-        /// Get a suggestion
+        /// Get a user
         /// </summary>
         [Route("suggestions/{suggestionId:guid}")]
         [HttpGet]
         [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status200OK)]
+        [ApiExplorerSettings(IgnoreApi = true)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public ActionResult<HALResponse> Get(Guid suggestionId)
-        {
-            var dto = new GetASuggestionDto { Id = suggestionId };
-
-            return Get(dto, _reader, _mapper, _halService);
-        }
+        public ActionResult<HALResponse> Get(Guid suggestionId) =>
+            Get(suggestionId, _reader, _halDecorator);
 
         /// <summary>
         /// Create a suggestion
         /// </summary>
         [Route("suggestions")]
         [HttpPost]
-        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<HALResponse>> Create([FromBody] CreateASuggestionDto dto) =>
-            await Create<CreateASuggestionDto, CreateASuggestionCommand>(dto, _mediator, _mapper, _halService);
+        public async Task<ActionResult<Guid>> Create([FromBody] CreateASuggestionDto dto) =>
+            await Create<CreateASuggestionDto, CreateASuggestionCommand>(dto);
 
         /// <summary>
         /// Vote to a suggestion
         /// </summary>
         [Route("suggestions/{suggestionId:guid}/votes")]
         [HttpPost]
-        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<HALResponse>> Vote([FromBody] VoteToASuggestionDto dto, Guid suggestionId)
+        public async Task<ActionResult<Guid>> Vote([FromBody] VoteToASuggestionDto dto, Guid suggestionId)
         {
             dto.SuggestionId = suggestionId;
 
-            return await Create<VoteToASuggestionDto, VoteToASuggestionCommand>(dto, _mediator, _mapper, _halService);
+            return await Create<VoteToASuggestionDto, VoteToASuggestionCommand>(dto);
         }
 
         /// <summary>
@@ -90,15 +81,15 @@ namespace DiabloII.Application.Controllers.Domains
         /// </summary>
         [Route("suggestions/{suggestionId:guid}/comments")]
         [HttpPost]
-        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<HALResponse>> Comment([FromBody] CommentASuggestionDto dto, Guid suggestionId)
+        public async Task<ActionResult<Guid>> Comment([FromBody] CommentASuggestionDto dto, Guid suggestionId)
         {
             dto.SuggestionId = suggestionId;
 
-            return await Create<CommentASuggestionDto, CommentASuggestionCommand>(dto, _mediator, _mapper, _halService);
+            return await Create<CommentASuggestionDto, CommentASuggestionCommand>(dto);
         }
 
         /// <summary>
@@ -114,7 +105,7 @@ namespace DiabloII.Application.Controllers.Domains
         {
             dto.Id = suggestionId;
 
-            return await Delete<DeleteASuggestionDto, DeleteASuggestionCommand, Guid>(dto, _mediator, _mapper);
+            return await Delete<DeleteASuggestionDto, DeleteASuggestionCommand>(dto);
         }
 
         /// <summary>
@@ -122,16 +113,16 @@ namespace DiabloII.Application.Controllers.Domains
         /// </summary>
         [Route("suggestions/{suggestionId:guid}/comments/{commentId:guid}")]
         [HttpDelete]
-        [ProducesResponseType(typeof(SuggestionDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Guid), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<HALResponse>> DeleteComment([FromBody] DeleteASuggestionCommentDto dto, Guid suggestionId, Guid commentId)
+        public async Task<ActionResult<Guid>> DeleteComment([FromBody] DeleteASuggestionCommentDto dto, Guid suggestionId, Guid commentId)
         {
             dto.SuggestionId = suggestionId;
             dto.Id = commentId;
 
-            return await DeleteWithMap<DeleteASuggestionCommentDto, DeleteASuggestionCommentCommand, SuggestionDto>(dto, _mediator, _mapper, _halService);
+            return await Delete<DeleteASuggestionCommentDto, DeleteASuggestionCommentCommand>(dto);
         }
     }
 }

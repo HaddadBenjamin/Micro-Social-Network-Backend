@@ -3,7 +3,9 @@ using DiabloII.Domain.Repositories.Bases;
 
 namespace DiabloII.Domain.Repositories.Domains
 {
-    public interface INotificationRepository : IRepositoryGetAll<Notification>
+    public interface INotificationRepository :
+        IRepositoryGetAll<Notification>,
+        IRepositoryGet<Notification>
     {
     }
 }

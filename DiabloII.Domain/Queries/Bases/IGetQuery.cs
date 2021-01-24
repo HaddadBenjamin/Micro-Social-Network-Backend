@@ -2,9 +2,7 @@
 
 namespace DiabloII.Domain.Queries.Bases
 {
-    public interface IGetQuery : IGetQuery<Guid>
-    {
-    }
+    public interface IGetQuery : IGetQuery<Guid> { }
 
     public interface IGetQuery<IdType>
     {

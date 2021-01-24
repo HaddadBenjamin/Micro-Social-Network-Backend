@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
 using DiabloII.Application.Requests.Write.Users;
-using DiabloII.Application.Responses;
 using DiabloII.Application.Responses.Read.Bases;
-using DiabloII.Application.Responses.Read.Domains.Users;
+using DiabloII.Application.Responses.Read.Users;
 using DiabloII.Application.Tests.Apis.Bases;
 using DiabloII.Application.Tests.Services.Http;
 
@@ -18,16 +17,19 @@ namespace DiabloII.Application.Tests.Apis.Domains.Users
         public async Task<ApiResponses<UserDto>> GetAll() =>
             await _httpService.GetAsync<ApiResponses<UserDto>>(BaseUrl);
 
+        public async Task<UserDto> Get(string id) =>
+            await _httpService.GetAsync<UserDto>($"{BaseUrl}/{id}");
+
         public async Task<UserDto> IdentifyMe() =>
             await _httpService.GetAsync<UserDto>($"{BaseUrl}/identifyme");
         #endregion
 
         #region Write
-        public async Task<UserDto> Create(CreateAUserDto dto) =>
-            await _httpService.PostAsync<UserDto>(BaseUrl, dto);
+        public async Task<string> Create(CreateAUserDto dto) =>
+            await _httpService.PostAsync<string>(BaseUrl, dto);
 
-        public async Task<UserDto> Update(UpdateAUserDto dto) =>
-            await _httpService.PutAsync<UserDto>($"{BaseUrl}/{dto.UserId}", dto);
+        public async Task<string> Update(UpdateAUserDto dto) =>
+            await _httpService.PutAsync<string>($"{BaseUrl}/{dto.Id}", dto);
         #endregion
     }
 }

@@ -12,11 +12,12 @@ namespace DiabloII.Application.Tests
     public static class TestDependencies
     {
         /// TODO :
-        /// - J'utilise dans mes tests 2 startup : Startup & TestStartup.
+        /// - Ce containeur builder est utilisé pour mes tests alors que la méthode RegisterContainer du TestStartup enregistre un autre containeur.
         /// - Je n'arrive pas à mocker les dépendances de Startup.
         [ScenarioDependencies]
         public static ContainerBuilder CreateContainerBuilder()
         {
+            // Il faudrait que je n'ai qu'un seul containeur de dépendances mais je ne vois pas du tout comment faire encore.
             var testContext = new TestContext();
             var builder = new ContainerBuilder();
             var typeNameRegex = new Regex(@"(Api|Resolver|Context|Steps|Repository)$");

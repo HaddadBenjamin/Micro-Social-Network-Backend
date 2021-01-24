@@ -1,12 +1,13 @@
-﻿using DiabloII.Application.Responses.Read.Domains.Users;
+﻿using DiabloII.Application.Responses.Read.Users;
 using DiabloII.Application.Tests.Contexts.Bases;
 
 namespace DiabloII.Application.Tests.Contexts.Domains.Users
 {
     public interface IUsersTestContext :
         ITestContextAll<UserDto>,
-        ITestContextCreated<UserDto>,
-        ITestContextUpdated<UserDto>
+        ITestContextGet<UserDto>,
+        ITestContextCreated<string>,
+        ITestContextUpdated<string>
     {
         UserDto IdentifiedUser { get; set; }
     }

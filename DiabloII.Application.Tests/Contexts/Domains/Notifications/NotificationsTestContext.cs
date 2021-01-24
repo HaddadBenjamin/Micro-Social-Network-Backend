@@ -1,5 +1,6 @@
-﻿using DiabloII.Application.Responses.Read.Bases;
-using DiabloII.Application.Responses.Read.Domains.Notifications;
+﻿using System;
+using DiabloII.Application.Responses.Read.Bases;
+using DiabloII.Application.Responses.Read.Notifications;
 
 namespace DiabloII.Application.Tests.Contexts.Domains.Notifications
 {
@@ -7,6 +8,8 @@ namespace DiabloII.Application.Tests.Contexts.Domains.Notifications
     {
         public ApiResponses<NotificationDto> Resources { get; set; }
 
-        public NotificationDto CreatedResource { get; set; }
+        public Guid CreatedResourceId { get; set; }
+
+        public NotificationDto GetResource { get; set; }
     }
 }
