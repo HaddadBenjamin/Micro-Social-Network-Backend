@@ -3,9 +3,6 @@
 # Micro réseau social - API
 **Année de développement :** 2020.</br>
 
-Vous pouvez tester l'application sur PC ou mobile grâce à ce lien https://micro-social-network.netlify.app/
-</br>
-
 __L'application propose trois services :__
 - Pouvoir créer des suggestions, de les commenter et d'y voter afin que nos utilisateurs puissent prendre une place décisionnelle durant le développement de nos produits.
 - Lancer des alertes lorsque qu'un événement a été déclenché tel que le lancement d'une nouvelle version de nos produits ou qu'une personne a commenté une de vos suggestions afin d'être notifiée directement dans l'application ou par mail.
